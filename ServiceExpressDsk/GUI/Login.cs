@@ -13,18 +13,14 @@ namespace ServiceExpressDsk.GUI
     public partial class Login : Form
     {
         Boolean autorizado = false;
-        //SessionManager.Session oSesion = SessionManager.Session.Instancia;
+        SessionManager.Session oSesion = SessionManager.Session.Instancia;
         public bool Autorizado { get => autorizado; }
         public Login()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            autorizado = true;
-            Close();
-        }
+        
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -33,6 +29,38 @@ namespace ServiceExpressDsk.GUI
                 Environment.Exit(0);
             }
             
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            if (txtClave.Text.Equals(""))
+            {
+                MessageBox.Show("El campo de categoria no puede estar vacío. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (oSesion.IniciarSesion(txtClave.Text))
+            {
+                autorizado = true;
+                Close();
+            }
+            else
+            {
+                autorizado = false;
+                MessageBox.Show("Datos incorrectos");
+                txtClave.Focus();
+                txtClave.SelectAll();
+            }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            CadenaConexion cadenaConexion = new CadenaConexion();
+            cadenaConexion.ShowDialog();
         }
     }
 }
