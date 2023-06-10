@@ -15,28 +15,68 @@ namespace TPV.GUI
         public PuntoVenta()
         {
             InitializeComponent();
+            flpSalones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            flpMesas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
         }
 
         private void PuntoVenta_Load(object sender, EventArgs e)
         {
-            //List<string> productos = ObtenerProductosDesdeBD();
             DataTable salones = DataManager.DBConsultas.Salones();
-            // Crear y agregar botones al FlowLayoutPanel para cada producto
+            // Crear y agregar botones al FlowLayoutPanel para cada salon
+            int fila = 0;
+            int columna = 0;
             foreach (DataRow salon in salones.Rows)
             {
-                Button button = new Button();
-                button.Text = salon["nombre"].ToString();
-                button.Click += BotonProducto_Click;
-                flpSalones.Controls.Add(button);
+                btnSalon = new Button();
+                btnSalon.Text = salon["nombre"].ToString().ToUpper();
+                btnSalon.Tag = salon["idSalon"].ToString().ToUpper();
+                btnSalon.Size = new Size(200,80);
+                btnSalon.Click += BotonSalon_Click;
+                flpSalones.Controls.Add(btnSalon);
+                columna++;
+                if (columna == 5)
+                {
+                    columna = 0;
+                    fila++;
+                }
             }
         }
 
-        private void BotonProducto_Click(object sender, EventArgs e)
+        private void BotonSalon_Click(object sender, EventArgs e)
         {
-            Button botonSalon = (Button)sender;
-            string nombreSalon = botonSalon.Text;
 
-            MessageBox.Show("Has seleccionado el salon: " + nombreSalon);
+            if (flpMesas.Controls.Count > 0)
+            {
+                flpMesas.Controls.Clear();
+            }
+
+            Button botonSalon = (Button)sender;
+
+            DataTable mesas = DataManager.DBConsultas.Mesas(botonSalon.Tag.ToString());
+            // Crear y agregar botones al FlowLayoutPanel para cada producto
+            foreach (DataRow mesa in mesas.Rows)
+            {
+                btnMesa = new Button();
+                btnMesa.Text = mesa["nombre"].ToString().ToUpper();
+                btnMesa.Tag = mesa["idMesa"].ToString().ToUpper();
+                btnMesa.BackgroundImage = Properties.Resources.mesa;
+                btnMesa.BackgroundImageLayout = ImageLayout.Stretch;
+                btnMesa.TextAlign = ContentAlignment.TopCenter;
+                Console.WriteLine(mesa["disponible"].ToString());
+                if (!Boolean.Parse(mesa["disponible"].ToString()))
+                {
+                    btnMesa.BackColor = Color.MidnightBlue;
+                    btnMesa.ForeColor = Color.White;
+                }
+                btnMesa.Size = new Size(110, 90);
+                btnMesa.Click += BotonMesa_Click;
+                flpMesas.Controls.Add(btnMesa);
+            }
+        }
+
+        private void BotonMesa_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -122,7 +122,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GUI\configuracion.xml" />
+    <Content Include="Extras\configuracion.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

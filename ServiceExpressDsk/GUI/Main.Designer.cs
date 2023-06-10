@@ -29,10 +29,12 @@ namespace ServiceExpressDsk.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tPVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.puntoDeVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productosEIngredientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salonesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +46,6 @@ namespace ServiceExpressDsk.GUI
             this.cuentasPorCobrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.puntoDeVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +96,13 @@ namespace ServiceExpressDsk.GUI
             this.tPVToolStripMenuItem.Name = "tPVToolStripMenuItem";
             this.tPVToolStripMenuItem.Size = new System.Drawing.Size(52, 27);
             this.tPVToolStripMenuItem.Text = "TPV";
+            // 
+            // puntoDeVentaToolStripMenuItem
+            // 
+            this.puntoDeVentaToolStripMenuItem.Name = "puntoDeVentaToolStripMenuItem";
+            this.puntoDeVentaToolStripMenuItem.Size = new System.Drawing.Size(187, 28);
+            this.puntoDeVentaToolStripMenuItem.Text = "Punto de Venta";
+            this.puntoDeVentaToolStripMenuItem.Click += new System.EventHandler(this.puntoDeVentaToolStripMenuItem_Click);
             // 
             // productosEIngredientesToolStripMenuItem
             // 
@@ -161,18 +169,12 @@ namespace ServiceExpressDsk.GUI
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 27);
             // 
-            // puntoDeVentaToolStripMenuItem
-            // 
-            this.puntoDeVentaToolStripMenuItem.Name = "puntoDeVentaToolStripMenuItem";
-            this.puntoDeVentaToolStripMenuItem.Size = new System.Drawing.Size(187, 28);
-            this.puntoDeVentaToolStripMenuItem.Text = "Punto de Venta";
-            this.puntoDeVentaToolStripMenuItem.Click += new System.EventHandler(this.puntoDeVentaToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1181, 453);
             this.Controls.Add(this.statusStrip);

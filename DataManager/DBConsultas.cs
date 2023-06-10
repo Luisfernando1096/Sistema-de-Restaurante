@@ -48,6 +48,25 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable Mesas(string salon)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT m.idMesa, m.numero, m.nombre, m.capacidad, m.disponible, s.idSalon, s.nombre FROM mesa m, salon s
+                                        WHERE m.idSalon=s.idSalon AND m.idSalon=" + salon + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
     }
 }
 
