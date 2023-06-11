@@ -17,10 +17,23 @@ namespace TPV.GUI
             InitializeComponent();
             flpSalones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             flpMesas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            AjustarPosicionBoton();
+        }
+        private void AjustarPosicionBoton()
+        {
+            // Obtenemos el ancho y alto de la pantalla
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            // Ajustamos la posición del botón a la esquina derecha superior
+            btnSalir.Left = screenWidth - btnSalir.Width;
+            btnSalir.Top = 0;
         }
 
         private void PuntoVenta_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
             DataTable salones = DataManager.DBConsultas.Salones();
             // Crear y agregar botones al FlowLayoutPanel para cada salon
             int fila = 0;
@@ -62,7 +75,6 @@ namespace TPV.GUI
                 btnMesa.BackgroundImage = Properties.Resources.mesa;
                 btnMesa.BackgroundImageLayout = ImageLayout.Stretch;
                 btnMesa.TextAlign = ContentAlignment.TopCenter;
-                Console.WriteLine(mesa["disponible"].ToString());
                 if (!Boolean.Parse(mesa["disponible"].ToString()))
                 {
                     btnMesa.BackColor = Color.MidnightBlue;
@@ -76,7 +88,35 @@ namespace TPV.GUI
 
         private void BotonMesa_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            Button botonMesa = (Button)sender;
+            String idMesa = botonMesa.Tag.ToString();
+            DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
+            ComandaGestion f = new ComandaGestion();
             
+            if (productoEnMesas.Rows.Count > 0)
+            {
+                
+                f.CargarProductosPorMesa(idMesa);
+                f.lblMesa.Text = botonMesa.Text.ToString();
+                f.lblMesa.Tag = botonMesa.Tag.ToString();
+                f.lblMesa.Visible = true;
+                f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                f.lblTicket.Visible = true;
+            }
+            
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void btnSalir_Resize(object sender, EventArgs e)
+        {
+            AjustarPosicionBoton();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

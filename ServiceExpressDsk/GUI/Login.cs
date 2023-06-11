@@ -18,9 +18,10 @@ namespace ServiceExpressDsk.GUI
         public Login()
         {
             InitializeComponent();
+            KeyPreview = true; // Habilitar la captura de teclas en el formulario
         }
 
-        
+
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -61,6 +62,15 @@ namespace ServiceExpressDsk.GUI
         {
             CadenaConexion cadenaConexion = new CadenaConexion();
             cadenaConexion.ShowDialog();
+        }
+
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                btnIngresar.PerformClick(); // Ejecutar el evento Click del botón
+            }
         }
     }
 }
