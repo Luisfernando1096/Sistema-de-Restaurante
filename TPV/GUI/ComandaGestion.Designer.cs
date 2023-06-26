@@ -62,11 +62,11 @@ namespace TPV.GUI
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblMesero = new System.Windows.Forms.Label();
             this.lblTicket = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnPagar = new System.Windows.Forms.Button();
             this.lblFecha = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tFecha = new System.Windows.Forms.Timer(this.components);
+            this.btnPagar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.flpFamilias.SuspendLayout();
             this.flpAcciones.SuspendLayout();
             this.flpProductos.SuspendLayout();
@@ -125,6 +125,7 @@ namespace TPV.GUI
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -418,33 +419,6 @@ namespace TPV.GUI
             this.lblTicket.Text = "Ticket # ";
             this.lblTicket.Visible = false;
             // 
-            // btnSalir
-            // 
-            this.btnSalir.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(898, -2);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(113, 58);
-            this.btnSalir.TabIndex = 14;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
-            // 
-            // btnPagar
-            // 
-            this.btnPagar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagar.Image = ((System.Drawing.Image)(resources.GetObject("btnPagar.Image")));
-            this.btnPagar.Location = new System.Drawing.Point(406, 647);
-            this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(96, 76);
-            this.btnPagar.TabIndex = 15;
-            this.btnPagar.Text = "Pagar";
-            this.btnPagar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPagar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPagar.UseVisualStyleBackColor = true;
-            // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
@@ -468,6 +442,34 @@ namespace TPV.GUI
             // 
             this.tFecha.Interval = 1000;
             this.tFecha.Tick += new System.EventHandler(this.tFecha_Tick);
+            // 
+            // btnPagar
+            // 
+            this.btnPagar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagar.Image = ((System.Drawing.Image)(resources.GetObject("btnPagar.Image")));
+            this.btnPagar.Location = new System.Drawing.Point(406, 647);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(96, 76);
+            this.btnPagar.TabIndex = 15;
+            this.btnPagar.Text = "Pagar";
+            this.btnPagar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPagar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
+            this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSalir.Location = new System.Drawing.Point(898, -2);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(113, 58);
+            this.btnSalir.TabIndex = 14;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
             // 
             // ComandaGestion
             // 

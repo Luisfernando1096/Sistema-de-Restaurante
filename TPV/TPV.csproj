@@ -84,6 +84,9 @@
     <EmbeddedResource Include="GUI\ComandaGestion.resx">
       <DependentUpon>ComandaGestion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PuntoPago.resx">
+      <DependentUpon>PuntoPago.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\PuntoVenta.resx">
       <DependentUpon>PuntoVenta.cs</DependentUpon>
     </EmbeddedResource>

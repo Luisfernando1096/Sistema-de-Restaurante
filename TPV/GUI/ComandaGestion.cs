@@ -12,12 +12,13 @@ namespace TPV.GUI
 {
     public partial class ComandaGestion : Form
     {
+        PuntoVenta punto_venta;
         BindingSource datos = new BindingSource();
-        public ComandaGestion()
+        public ComandaGestion(PuntoVenta punto_venta)
         {
             InitializeComponent();
             AjustarPosicionBoton();
-
+            this.punto_venta = punto_venta;
             lblFecha.Text = DateTime.Now.ToString();
         }
 
@@ -50,6 +51,8 @@ namespace TPV.GUI
 
         private void ComandaGestion_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
             // Creamos un Panel para envolver el FlowLayoutPanel
             Panel panelWrapper = new Panel();
             panelWrapper.Dock = DockStyle.Fill;
@@ -64,8 +67,6 @@ namespace TPV.GUI
             Controls.Add(panelWrapper);
 
             tFecha.Start();
-            WindowState = FormWindowState.Maximized;
-            FormBorderStyle = FormBorderStyle.None;
             DataTable salones = DataManager.DBConsultas.Familias();
             // Crear y agregar botones al FlowLayoutPanel para cada salon
             foreach (DataRow salon in salones.Rows)
@@ -163,6 +164,20 @@ namespace TPV.GUI
         private void tFecha_Tick(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString();
+        }
+
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            PuntoPago f = new PuntoPago();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            punto_venta.Close();
         }
     }
 }

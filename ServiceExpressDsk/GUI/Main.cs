@@ -42,5 +42,15 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
             this.Show();
         }
+
+        private void aperturaCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

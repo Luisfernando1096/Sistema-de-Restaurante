@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace TPV.GUI
 {
+
     public partial class PuntoVenta : Form
     {
         public PuntoVenta()
@@ -92,19 +93,18 @@ namespace TPV.GUI
             Button botonMesa = (Button)sender;
             String idMesa = botonMesa.Tag.ToString();
             DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
-            ComandaGestion f = new ComandaGestion();
+            ComandaGestion f = new ComandaGestion(this);
             
             if (productoEnMesas.Rows.Count > 0)
             {
-                
                 f.CargarProductosPorMesa(idMesa);
-                f.lblMesa.Text = botonMesa.Text.ToString();
-                f.lblMesa.Tag = botonMesa.Tag.ToString();
-                f.lblMesa.Visible = true;
                 f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
                 f.lblTicket.Visible = true;
             }
-            
+            f.lblMesa.Text = botonMesa.Text.ToString();
+            f.lblMesa.Tag = botonMesa.Tag.ToString();
+            f.lblMesa.Visible = true;
+
             f.ShowDialog();
             this.Show();
         }

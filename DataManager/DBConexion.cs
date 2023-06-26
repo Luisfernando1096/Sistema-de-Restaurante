@@ -11,14 +11,13 @@ using System.Xml;
 namespace DataManager
 {
     public class DBConexion
-    {//Server=localhost;Port=3306;Database=bd_service_express_dsk;Uid=root;Pwd=Pa55word;
+    {
 
         String _CadenaConexion = "";
         protected MySqlConnection conexion = new MySqlConnection();
         public Boolean Conectar()
         {
             _CadenaConexion = ObtenerCadenaConexion();
-            Console.WriteLine(_CadenaConexion);
             Boolean result = false;
             try
             {

@@ -16,5 +16,21 @@ namespace TPV.GUI
         {
             InitializeComponent();
         }
+
+        private void PuntoPago_Load(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            PuntoVenta f = new PuntoVenta();
+        }
     }
 }
