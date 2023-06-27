@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    public class PedidoDetalle
+    class PedidoDetalleLog
     {
+        int idDeleted;
         int idDetalle;
         bool cocinando;
         String extras;
@@ -20,8 +21,8 @@ namespace Mantenimiento.CLS
         double precio;
         double subTotal;
         String grupo;
-        String usuario;
-        String fecha;
+        String usuarioDelete;
+        String fechaDelete;
 
         public int IdDetalle { get => idDetalle; set => idDetalle = value; }
         public bool Cocinando { get => cocinando; set => cocinando = value; }
@@ -35,14 +36,15 @@ namespace Mantenimiento.CLS
         public double Precio { get => precio; set => precio = value; }
         public double SubTotal { get => subTotal; set => subTotal = value; }
         public string Grupo { get => grupo; set => grupo = value; }
-        public string Usuario { get => usuario; set => usuario = value; }
-        public string Fecha { get => fecha; set => fecha = value; }
+        public int IdDeleted { get => idDeleted; set => idDeleted = value; }
+        public string UsuarioDelete { get => usuarioDelete; set => usuarioDelete = value; }
+        public string FechaDelete { get => fechaDelete; set => fechaDelete = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"INSERT INTO pedido_detalle(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario, fecha) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuario + "', '" + fecha + "');";
+            sentencia = @"INSERT INTO pedido_detalle_log(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuarioDelete, fechaDelete) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuarioDelete + "', '" + fechaDelete + "');";
 
             try
             {
@@ -67,8 +69,8 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE pedido_detalle SET cocinando = " + cocinando + ", extras = '" + extras + "', horaEntregado= '" + horaEntregado + "', horaPedido = '" + horaPedido + "', idProducto = " + idProducto + ", idPedido = " + idPedido + ", cantidad = " + cantidad + ", precio = " + precio + ", subTotal = " + subTotal + ", grupo = '" + grupo + "', usuario = '" + usuario + "', fecha = '" + fecha + "' " +
-                "WHERE idDetalle = " + idDetalle + ";";
+            sentencia = @"UPDATE pedido_detalle_log SET cocinando = " + cocinando + ", extras = '" + extras + "', horaEntregado= '" + horaEntregado + "', horaPedido = '" + horaPedido + "', idProducto = " + idProducto + ", idPedido = " + idPedido + ", cantidad = " + cantidad + ", precio = " + precio + ", subTotal = " + subTotal + ", grupo = '" + grupo + "', usuarioDelete = '" + usuarioDelete + "', fechaDelete = '" + fechaDelete + "' " +
+                "WHERE idDeleted = " + idDeleted + ";";
 
             try
             {
@@ -93,8 +95,8 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"DELETE FROM pedido_detalle " +
-                "WHERE idDetalle = " + idDetalle + ";";
+            sentencia = @"DELETE FROM pedido_detalle_log " +
+                "WHERE idDeleted = " + idDeleted + ";";
 
             try
             {
