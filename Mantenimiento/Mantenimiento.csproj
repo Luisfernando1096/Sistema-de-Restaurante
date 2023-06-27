@@ -41,6 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLS\Ajuste_Stock.cs" />
+    <Compile Include="CLS\Caja.cs" />
+    <Compile Include="CLS\Cliente.cs" />
+    <Compile Include="CLS\Cocinero.cs" />
+    <Compile Include="CLS\Comando.cs" />
+    <Compile Include="CLS\Compra.cs" />
+    <Compile Include="CLS\Compra_detalle.cs" />
+    <Compile Include="CLS\Comprobante.cs" />
     <Compile Include="CLS\IngredienteProducto.cs" />
     <Compile Include="CLS\LogFile.cs" />
     <Compile Include="CLS\Mesa.cs" />
