@@ -8,6 +8,7 @@ namespace Mantenimiento.CLS
 {
     class Proveedor
     {
+        /*DECLARACION DE VARIABLES IGUAL A LA BASE DE DATOS*/
         int idProveedor;
         String nombre;
         String direccion;
@@ -17,6 +18,7 @@ namespace Mantenimiento.CLS
         String regContable;
         String contacto;
 
+        /*DECLARACION DE PROPIEDADES*/
         public int IdProveedor { get => idProveedor; set => idProveedor = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Direccion { get => direccion; set => direccion = value; }
@@ -26,7 +28,8 @@ namespace Mantenimiento.CLS
         public string RegContable { get => regContable; set => regContable = value; }
         public string Contacto { get => contacto; set => contacto = value; }
 
-        public Boolean Insertar()
+        /*OPREACIONES BASICAS*/
+        public Boolean Insertar() 
         {
             Boolean resultado = false;
             string sentencia;
@@ -51,7 +54,7 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Actualizar()
+        public Boolean Actualizar() 
         {
             Boolean resultado = false;
             string sentencia;
@@ -77,7 +80,7 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Eliminar()
+        public Boolean Eliminar() 
         {
             Boolean resultado = false;
             string sentencia;
