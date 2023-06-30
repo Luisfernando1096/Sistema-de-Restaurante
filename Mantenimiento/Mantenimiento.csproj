@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLS\Empresa.cs" />
+    <Compile Include="CLS\Factura.cs" />
+    <Compile Include="CLS\Familia.cs" />
+    <Compile Include="CLS\Ingrediente.cs" />
     <Compile Include="CLS\Pedido.cs" />
     <Compile Include="CLS\PedidoDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
