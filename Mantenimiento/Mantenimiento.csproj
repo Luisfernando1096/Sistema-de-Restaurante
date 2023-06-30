@@ -56,6 +56,10 @@
     <Compile Include="CLS\IngredienteProducto.cs" />
     <Compile Include="CLS\LogFile.cs" />
     <Compile Include="CLS\Mesa.cs" />
+    <Compile Include="CLS\Empresa.cs" />
+    <Compile Include="CLS\Factura.cs" />
+    <Compile Include="CLS\Familia.cs" />
+    <Compile Include="CLS\Ingrediente.cs" />
     <Compile Include="CLS\Pedido.cs" />
     <Compile Include="CLS\PedidoAbonos.cs" />
     <Compile Include="CLS\PedidoDetalle.cs" />
