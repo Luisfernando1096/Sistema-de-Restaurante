@@ -75,7 +75,6 @@
     <Compile Include="CLS\PedidoDetalleLog.cs" />
     <Compile Include="CLS\Permiso.cs" />
     <Compile Include="CLS\Producto.cs" />
-    <Compile Include="CLS\Proveedor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

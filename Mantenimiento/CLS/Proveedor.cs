@@ -29,7 +29,7 @@ namespace Mantenimiento.CLS
         public string Contacto { get => contacto; set => contacto = value; }
 
         /*OPREACIONES BASICAS*/
-        public Boolean Insertar() 
+        public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
@@ -54,7 +54,7 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Actualizar() 
+        public Boolean Actualizar()
         {
             Boolean resultado = false;
             string sentencia;
@@ -80,7 +80,7 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Eliminar() 
+        public Boolean Eliminar()
         {
             Boolean resultado = false;
             string sentencia;
@@ -107,3 +107,4 @@ namespace Mantenimiento.CLS
         }
     }
 }
+
