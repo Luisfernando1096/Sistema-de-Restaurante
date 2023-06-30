@@ -49,6 +49,10 @@
     <Compile Include="CLS\Compra.cs" />
     <Compile Include="CLS\Compra_detalle.cs" />
     <Compile Include="CLS\Comprobante.cs" />
+    <Compile Include="CLS\Configuracion.cs" />
+    <Compile Include="CLS\Cuenta.cs" />
+    <Compile Include="CLS\Egreso.cs" />
+    <Compile Include="CLS\Empleado.cs" />
     <Compile Include="CLS\IngredienteProducto.cs" />
     <Compile Include="CLS\LogFile.cs" />
     <Compile Include="CLS\Mesa.cs" />

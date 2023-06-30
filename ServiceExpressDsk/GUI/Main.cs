@@ -12,7 +12,7 @@ namespace ServiceExpressDsk.GUI
 {
     public partial class Main : Form
     {
-
+        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         public Main()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace ServiceExpressDsk.GUI
         private void Main_Load(object sender, EventArgs e)
         {
             //lblConexionGreen.Visible = true;
-            //lblUsuario.Text = oUsuario.Usuario.ToUpper();
+            lblUsuario.Text = "SESION DE : " + oUsuario.Usuario.ToUpper();
             //lblRol.Text = oUsuario.Rol.ToUpper();
             //timer1.Start();
         }

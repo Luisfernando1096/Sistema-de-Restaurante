@@ -106,7 +106,7 @@ namespace TPV.GUI
             this.flpAcciones.Controls.Add(this.button7);
             this.flpAcciones.Controls.Add(this.button8);
             this.flpAcciones.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpAcciones.Location = new System.Drawing.Point(5, 3);
+            this.flpAcciones.Location = new System.Drawing.Point(10, 10);
             this.flpAcciones.Margin = new System.Windows.Forms.Padding(1);
             this.flpAcciones.Name = "flpAcciones";
             this.flpAcciones.Size = new System.Drawing.Size(128, 736);
@@ -271,14 +271,14 @@ namespace TPV.GUI
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvDatos.Location = new System.Drawing.Point(136, 108);
+            this.dgvDatos.Location = new System.Drawing.Point(142, 100);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(375, 533);
+            this.dgvDatos.Size = new System.Drawing.Size(366, 541);
             this.dgvDatos.TabIndex = 5;
             // 
             // cantidad
@@ -339,7 +339,7 @@ namespace TPV.GUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(137, 13);
+            this.label1.Location = new System.Drawing.Point(143, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 20);
             this.label1.TabIndex = 6;
@@ -349,7 +349,7 @@ namespace TPV.GUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(137, 73);
+            this.label2.Location = new System.Drawing.Point(143, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 20);
             this.label2.TabIndex = 7;
@@ -359,7 +359,7 @@ namespace TPV.GUI
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(137, 53);
+            this.label3.Location = new System.Drawing.Point(143, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 20);
             this.label3.TabIndex = 8;
@@ -369,7 +369,7 @@ namespace TPV.GUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(137, 33);
+            this.label4.Location = new System.Drawing.Point(143, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 20);
             this.label4.TabIndex = 9;
@@ -379,7 +379,7 @@ namespace TPV.GUI
             // 
             this.lblMesa.AutoSize = true;
             this.lblMesa.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesa.Location = new System.Drawing.Point(203, 33);
+            this.lblMesa.Location = new System.Drawing.Point(209, 33);
             this.lblMesa.Name = "lblMesa";
             this.lblMesa.Size = new System.Drawing.Size(62, 23);
             this.lblMesa.TabIndex = 13;
@@ -390,7 +390,7 @@ namespace TPV.GUI
             // 
             this.lblCliente.AutoSize = true;
             this.lblCliente.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCliente.Location = new System.Drawing.Point(203, 53);
+            this.lblCliente.Location = new System.Drawing.Point(209, 53);
             this.lblCliente.Name = "lblCliente";
             this.lblCliente.Size = new System.Drawing.Size(77, 23);
             this.lblCliente.TabIndex = 12;
@@ -401,7 +401,7 @@ namespace TPV.GUI
             // 
             this.lblMesero.AutoSize = true;
             this.lblMesero.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesero.Location = new System.Drawing.Point(203, 73);
+            this.lblMesero.Location = new System.Drawing.Point(209, 73);
             this.lblMesero.Name = "lblMesero";
             this.lblMesero.Size = new System.Drawing.Size(80, 23);
             this.lblMesero.TabIndex = 11;
@@ -412,7 +412,7 @@ namespace TPV.GUI
             // 
             this.lblTicket.AutoSize = true;
             this.lblTicket.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTicket.Location = new System.Drawing.Point(203, 13);
+            this.lblTicket.Location = new System.Drawing.Point(209, 13);
             this.lblTicket.Name = "lblTicket";
             this.lblTicket.Size = new System.Drawing.Size(87, 23);
             this.lblTicket.TabIndex = 10;

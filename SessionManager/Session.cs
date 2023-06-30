@@ -12,7 +12,7 @@ namespace SessionManager
         //Atributos
         static Session instancia = null;
         static readonly Object codelock = new object();
-        //string usuario;
+        string usuario;
         string idUsuario;
         string rol;
         string idRol;
@@ -40,6 +40,7 @@ namespace SessionManager
         public string IdUsuario { get => idUsuario; }
         public string Rol { get => rol; }
         public string IdRol { get => idRol; }
+        public string Usuario { get => usuario; set => usuario = value; }
 
         //Metodos
         private Session()
@@ -58,7 +59,7 @@ namespace SessionManager
                 if (datosUsuario.Rows.Count == 1)
                 {
                     idUsuario = datosUsuario.Rows[0]["idUsuario"].ToString();
-                    //usuario = datosUsuario.Rows[0]["usuario"].ToString();
+                    usuario = datosUsuario.Rows[0]["nombres"].ToString();
                     idRol = datosUsuario.Rows[0]["idRol"].ToString();
                     rol = datosUsuario.Rows[0]["rol"].ToString();
                     result = true;
