@@ -49,6 +49,12 @@
     <Compile Include="GUI\CantidadProductos.Designer.cs">
       <DependentUpon>CantidadProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ClientesGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ClientesGestion.Designer.cs">
+      <DependentUpon>ClientesGestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ComandaGestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\CantidadProductos.resx">
       <DependentUpon>CantidadProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ClientesGestion.resx">
+      <DependentUpon>ClientesGestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ComandaGestion.resx">
       <DependentUpon>ComandaGestion.cs</DependentUpon>
