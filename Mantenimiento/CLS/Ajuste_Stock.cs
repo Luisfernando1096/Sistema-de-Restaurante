@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    internal class Ajuste_Stock
+    public class Ajuste_Stock
     {
         int _idAjuste;
         int _idProducto;
         int _idIngrediente;
-        String _tipoAjuste;
+        int _tipoAjuste;
         double _cantidad;
-        String _justificacion;
-        String _fecha;
+        string _justificacion;
+        string _fecha;
         int _idUsuario;
 
         public int IdAjuste { get => _idAjuste; set => _idAjuste = value; }
         public int IdProducto { get => _idProducto; set => _idProducto = value; }
         public int IdIngrediente { get => _idIngrediente; set => _idIngrediente = value; }
-        public string TipoAjuste { get => _tipoAjuste; set => _tipoAjuste = value; }
+        public int TipoAjuste { get => _tipoAjuste; set => _tipoAjuste = value; }
         public double Cantidad { get => _cantidad; set => _cantidad = value; }
         public string Justificacion { get => _justificacion; set => _justificacion = value; }
         public string Fecha { get => _fecha; set => _fecha = value; }
@@ -30,12 +30,18 @@ namespace Mantenimiento.CLS
         public Boolean Insertar()
         {
             Boolean resultado = false;
+            DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
-            sentencia = @"insert into ajuste_stock(idProducto,idIngrediente,tipoAjuste,Cantidad,justificacion,fecha,idUsuario) values("+_idProducto+","+_idIngrediente+",'"+_tipoAjuste+"',"+_cantidad+",'"+_justificacion+"','"+_fecha+"',"+_idUsuario+");";
-
+            if (_idIngrediente != 0)
+            {
+                sentencia = "INSERT INTO ajuste_stock(idIngrediente, tipoAjuste, cantidad, justificacion, fecha, idUsuario) VALUES(" + _idIngrediente + "," + _tipoAjuste + "," + _cantidad + ",'" + _justificacion + "','" + _fecha + "'," + _idUsuario + ");";
+            }
+            else
+            {
+                sentencia = "INSERT INTO ajuste_stock(idProducto, tipoAjuste, cantidad, justificacion, fecha, idUsuario) VALUES(" + _idProducto + "," + _tipoAjuste + "," + _cantidad + ",'" + _justificacion + "','" + _fecha + "'," + _idUsuario + ");";
+            }
             try
             {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
                 Int32 filasInsertadas = 0;
                 filasInsertadas = op.EjecutarSentencia(sentencia);
                 if (filasInsertadas > 0)
@@ -45,10 +51,8 @@ namespace Mantenimiento.CLS
             }
             catch (Exception)
             {
-
                 throw;
             }
-
             return resultado;
         }
 

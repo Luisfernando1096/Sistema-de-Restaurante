@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Ingrediente
+    public class Ingrediente
     {
         /*DECLARACION DE VARIABLES*/
         int idIngrediente;

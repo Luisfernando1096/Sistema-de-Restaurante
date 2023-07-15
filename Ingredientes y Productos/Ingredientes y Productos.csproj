@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC2DEB8E-2E16-4C46-86E1-25B77483BDB6}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TPV</RootNamespace>
-    <AssemblyName>TPV</AssemblyName>
+    <ProjectGuid>{5A6CD6AB-96FD-4BB3-A348-D1E87ADD4F19}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Ingredientes_y_Productos</RootNamespace>
+    <AssemblyName>Ingredientes y Productos</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,76 +35,88 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\CantidadProductos.cs">
+    <Compile Include="GUI\AjusteStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\CantidadProductos.Designer.cs">
-      <DependentUpon>CantidadProductos.cs</DependentUpon>
+    <Compile Include="GUI\AjusteStock.Designer.cs">
+      <DependentUpon>AjusteStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ClientesGestion.cs">
+    <Compile Include="GUI\BuscarIngrediente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\ClientesGestion.Designer.cs">
-      <DependentUpon>ClientesGestion.cs</DependentUpon>
+    <Compile Include="GUI\BuscarIngrediente.Designer.cs">
+      <DependentUpon>BuscarIngrediente.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ComandaGestion.cs">
+    <Compile Include="GUI\BuscarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\ComandaGestion.Designer.cs">
-      <DependentUpon>ComandaGestion.cs</DependentUpon>
+    <Compile Include="GUI\BuscarProducto.Designer.cs">
+      <DependentUpon>BuscarProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\PuntoPago.cs">
+    <Compile Include="GUI\Ingredientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\PuntoPago.Designer.cs">
-      <DependentUpon>PuntoPago.cs</DependentUpon>
+    <Compile Include="GUI\Ingredientes.Designer.cs">
+      <DependentUpon>Ingredientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\PuntoVenta.cs">
+    <Compile Include="GUI\Productos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\PuntoVenta.Designer.cs">
-      <DependentUpon>PuntoVenta.cs</DependentUpon>
+    <Compile Include="GUI\Productos.Designer.cs">
+      <DependentUpon>Productos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CLS\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="GUI\CantidadProductos.resx">
-      <DependentUpon>CantidadProductos.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\AjusteStock.resx">
+      <DependentUpon>AjusteStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ClientesGestion.resx">
-      <DependentUpon>ClientesGestion.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\BuscarIngrediente.resx">
+      <DependentUpon>BuscarIngrediente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ComandaGestion.resx">
-      <DependentUpon>ComandaGestion.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\BuscarProducto.resx">
+      <DependentUpon>BuscarProducto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\PuntoPago.resx">
-      <DependentUpon>PuntoPago.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Ingredientes.resx">
+      <DependentUpon>Ingredientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\PuntoVenta.resx">
-      <DependentUpon>PuntoVenta.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Productos.resx">
+      <DependentUpon>Productos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CLS\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
@@ -113,10 +127,10 @@
       <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
       <Name>Mantenimiento</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Resources\mesa.png" />
+    <ProjectReference Include="..\SessionManager\SessionManager.csproj">
+      <Project>{cd0bf5a6-d3b7-493c-8cc7-3368b5e6c30c}</Project>
+      <Name>SessionManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

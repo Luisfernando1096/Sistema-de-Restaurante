@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class UnidadMedida
+    public class UnidadMedida
     {
         /*DECLARACION DE VARIABLES*/
         int idUnidad;
@@ -43,7 +43,7 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
-            sentencia = "UPDATE unidadmedida SET unidadMedida = '" + unidad_Medida + "';";
+            sentencia = "UPDATE unidadmedida SET unidadMedida = '" + unidad_Medida + "' WHERE idUnidad = " + idUnidad + ";";
             try
             {
                 int filasAfectadas = 0;

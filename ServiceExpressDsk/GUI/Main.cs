@@ -52,5 +52,64 @@ namespace ServiceExpressDsk.GUI
         {
             Close();
         }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void buscarProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Ingredientes_y_Productos.GUI.BuscarProducto f = new Ingredientes_y_Productos.GUI.BuscarProducto();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void ingredientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void buscarIngredientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Ingredientes_y_Productos.GUI.BuscarIngrediente f = new Ingredientes_y_Productos.GUI.BuscarIngrediente();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
+            f.tabControl1.SelectedIndex = 1;
+            f.ShowDialog();
+        }
+        private void recetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
+            f.tabControl1.SelectedIndex = 1;
+            f.ShowDialog();
+        }
+
+        private void presentacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
+            f.tabControl1.SelectedIndex = 2;
+            f.ShowDialog();
+        }
+
+        private void ajustarStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ingredientes_y_Productos.GUI.AjusteStock f = new Ingredientes_y_Productos.GUI.AjusteStock();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }

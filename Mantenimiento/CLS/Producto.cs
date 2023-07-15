@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Producto
+    public class Producto
     {
         int idProducto;
         int idFamilia;
@@ -15,12 +15,12 @@ namespace Mantenimiento.CLS
         String descripcion;
         double precio;
         double costo;
-        String foto;
-        Boolean inventariable;
-        Boolean conIngrediente;
+        Byte[] foto;
+        int inventariable;
+        int conIngrediente;
         int stock;
         int stockMinimo;
-        Boolean activo;
+        int activo;
 
         public int IdProducto { get => idProducto; set => idProducto = value; }
         public int IdFamilia { get => idFamilia; set => idFamilia = value; }
@@ -29,12 +29,12 @@ namespace Mantenimiento.CLS
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public double Precio { get => precio; set => precio = value; }
         public double Costo { get => costo; set => costo = value; }
-        public string Foto { get => foto; set => foto = value; }
-        public bool Inventariable { get => inventariable; set => inventariable = value; }
-        public bool ConIngrediente { get => conIngrediente; set => conIngrediente = value; }
+        public byte[] Foto { get => foto; set => foto = value; }
+        public int Inventariable { get => inventariable; set => inventariable = value; }
+        public int ConIngrediente { get => conIngrediente; set => conIngrediente = value; }
         public int Stock { get => stock; set => stock = value; }
         public int StockMinimo { get => stockMinimo; set => stockMinimo = value; }
-        public bool Activo { get => activo; set => activo = value; }
+        public int Activo { get => activo; set => activo = value; }
 
         public Boolean Insertar()
         {
@@ -65,8 +65,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE producto SET idFamilia = " + idFamilia + ", idUnidad = " + idUnidad + ", nombre = '" + nombre + "', descripcion = '" + descripcion + "', precio = " + precio + ", costo = " + costo + ", foto = '" + foto + "', inventariable = " + inventariable + ", conIngrediente = " + conIngrediente + ", stock = " + stock + ", stockMinimo = " + stockMinimo + ", activo = " + activo + "" +
-                "WHERE idProducto = " + idProducto + ";";
+            sentencia = "UPDATE producto SET idFamilia = " + idFamilia + ", idUnidad = " + idUnidad + ", nombre = '" + nombre + "', descripcion = '" + descripcion + "', precio = " + precio + ", costo = " + costo + ", foto = '" + foto + "', inventariable = " + inventariable + ", conIngrediente = " + conIngrediente + ", stock = " + stock + ", stockMinimo = " + stockMinimo + ", activo = " + activo + " WHERE idProducto = " + idProducto + ";";
 
             try
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class IngredienteProducto
+    public class IngredienteProducto
     {
         int id;
         int idIngrediente;

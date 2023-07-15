@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Familia
+    public class Familia
     {
         /*DECLARACION DE VARIABLES*/
         int idFamilia;
-        bool activo;
+        int activo;
         string familia1;
         string grupoPrinter;
 
         /*DECLARACION DE PROPIEDADES*/
         public int IdFamilia { get => idFamilia; set => idFamilia = value; }
-        public bool Activo { get => activo; set => activo = value; }
+        public int Activo { get => activo; set => activo = value; }
         public string Familia1 { get => familia1; set => familia1 = value; }
         public string GrupoPrinter { get => grupoPrinter; set => grupoPrinter = value; }
 
