@@ -52,5 +52,11 @@ namespace ServiceExpressDsk.GUI
         {
             Close();
         }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
+            f.ShowDialog();
+        }
     }
 }

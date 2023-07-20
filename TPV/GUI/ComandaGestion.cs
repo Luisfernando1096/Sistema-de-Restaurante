@@ -169,7 +169,20 @@ namespace TPV.GUI
         private void btnPagar_Click(object sender, EventArgs e)
         {
             this.Hide();
+
+            String idMesa = lblMesa.Tag.ToString();
+            DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
             PuntoPago f = new PuntoPago();
+            if (productoEnMesas.Rows.Count > 0)
+            {
+                f.CargarProductosPorMesa(idMesa);
+                f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                f.lblTicket.Visible = true;
+            }
+            f.lblMesa.Text = lblMesa.Text.ToString();
+            f.lblMesa.Tag = lblMesa.Tag.ToString();
+            f.lblMesa.Visible = true;
+
             f.ShowDialog();
             this.Show();
         }
