@@ -26,6 +26,8 @@ namespace TPV.GUI
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
 
+                lblTicket.Text = dgvDatos.Rows[0].Cells["idPedido"].Value.ToString();//Accedemos a la primera posicion de la tabla
+
             }
             catch (Exception)
             {
@@ -54,12 +56,12 @@ namespace TPV.GUI
         {
             SeleccionSalonMesa f = new SeleccionSalonMesa();
             f.ShowDialog();
-            if (f.idMesa > 0)
+            if (SeleccionSalonMesa.idMesa > 0)
             {
-#pragma warning disable CS1690 // El acceso a un miembro en un campo de una clase de serialización por referencia puede causar una excepción en tiempo de ejecución.
-                CargarProductosPorMesa(f.idMesa.ToString());
-#pragma warning restore CS1690 // El acceso a un miembro en un campo de una clase de serialización por referencia puede causar una excepción en tiempo de ejecución.
+                CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
             }
+            lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
+            lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
         }
     }
 }

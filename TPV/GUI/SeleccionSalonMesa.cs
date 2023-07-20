@@ -12,12 +12,13 @@ namespace TPV.GUI
 {
     public partial class SeleccionSalonMesa : Form
     {
-        public int idMesa;
+        public static int idMesa { get; set; }
+        public static object Mesa { get; internal set; }
+
         public SeleccionSalonMesa()
         {
             InitializeComponent();
             cmbSalon.Text.ToUpper();
-            idMesa = 0;
         }
 
         public void CargarSalones()
@@ -55,7 +56,9 @@ namespace TPV.GUI
 
         private void BotonMesa_Click(object sender, EventArgs e)
         {
+            Button btnMesa = (Button)sender;
             idMesa = Int32.Parse(btnMesa.Tag.ToString());
+            Mesa = btnMesa.Text;
             Close();
         }
 
