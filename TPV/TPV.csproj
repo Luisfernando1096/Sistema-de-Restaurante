@@ -102,6 +102,9 @@
     <Folder Include="CLS\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\AnularFactura.resx">
+      <DependentUpon>AnularFactura.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\CantidadProductos.resx">
       <DependentUpon>CantidadProductos.cs</DependentUpon>
     </EmbeddedResource>

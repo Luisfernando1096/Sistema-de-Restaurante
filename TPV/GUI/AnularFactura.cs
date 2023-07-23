@@ -16,5 +16,15 @@ namespace TPV.GUI
         {
             InitializeComponent();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

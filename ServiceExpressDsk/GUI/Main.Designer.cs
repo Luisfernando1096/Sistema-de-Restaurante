@@ -178,6 +178,7 @@ namespace ServiceExpressDsk.GUI
             this.anularFacturaToolStripMenuItem.Name = "anularFacturaToolStripMenuItem";
             this.anularFacturaToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.anularFacturaToolStripMenuItem.Text = "Anular Factura";
+            this.anularFacturaToolStripMenuItem.Click += new System.EventHandler(this.anularFacturaToolStripMenuItem_Click);
             // 
             // productosEIngredientesToolStripMenuItem
             // 

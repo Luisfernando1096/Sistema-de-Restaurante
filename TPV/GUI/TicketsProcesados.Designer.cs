@@ -34,11 +34,9 @@ namespace TPV.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTicket = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.txtidPedido = new System.Windows.Forms.TextBox();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +47,8 @@ namespace TPV.GUI
             this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.propina = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtidPedido = new System.Windows.Forms.TextBox();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -69,8 +69,8 @@ namespace TPV.GUI
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnLimpiar,
             this.btnSalir,
+            this.toolStripButton6,
             this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -78,15 +78,6 @@ namespace TPV.GUI
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(114, 54);
-            this.btnLimpiar.Text = "Limpiar";
             // 
             // btnSalir
             // 
@@ -144,16 +135,6 @@ namespace TPV.GUI
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClientes.Size = new System.Drawing.Size(835, 237);
             this.dgvClientes.TabIndex = 13;
-            // 
-            // txtidPedido
-            // 
-            this.txtidPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtidPedido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtidPedido.Location = new System.Drawing.Point(265, 66);
-            this.txtidPedido.Name = "txtidPedido";
-            this.txtidPedido.Size = new System.Drawing.Size(224, 26);
-            this.txtidPedido.TabIndex = 28;
-            this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
             // 
             // idPedido
             // 
@@ -235,6 +216,26 @@ namespace TPV.GUI
             this.totalPago.ReadOnly = true;
             this.totalPago.Width = 60;
             // 
+            // txtidPedido
+            // 
+            this.txtidPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtidPedido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtidPedido.Location = new System.Drawing.Point(265, 66);
+            this.txtidPedido.Name = "txtidPedido";
+            this.txtidPedido.Size = new System.Drawing.Size(224, 26);
+            this.txtidPedido.TabIndex = 28;
+            this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
+            this.toolStripButton6.Text = "Imprimir";
+            // 
             // TicketsProcesados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,7 +262,6 @@ namespace TPV.GUI
 
         public System.Windows.Forms.Label lblTicket;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnLimpiar;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridView dgvClientes;
@@ -276,5 +276,6 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn iva;
         private System.Windows.Forms.DataGridViewTextBoxColumn propina;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPago;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
     }
 }

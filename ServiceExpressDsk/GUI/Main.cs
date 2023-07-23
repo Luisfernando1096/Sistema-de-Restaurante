@@ -78,5 +78,11 @@ namespace ServiceExpressDsk.GUI
             TPV.GUI.TicketsProcesados f = new TPV.GUI.TicketsProcesados();
             f.ShowDialog();
         }
+
+        private void anularFacturaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TPV.GUI.AnularFactura f = new TPV.GUI.AnularFactura();
+            f.ShowDialog();
+        }
     }
 }
