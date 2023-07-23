@@ -160,24 +160,28 @@ namespace ServiceExpressDsk.GUI
             this.puntoDePagoToolStripMenuItem.Name = "puntoDePagoToolStripMenuItem";
             this.puntoDePagoToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.puntoDePagoToolStripMenuItem.Text = "Punto de Pago";
+            this.puntoDePagoToolStripMenuItem.Click += new System.EventHandler(this.puntoDePagoToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.clientesToolStripMenuItem.Text = "Clientes";
+            this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // ticketsProcesadosToolStripMenuItem
             // 
             this.ticketsProcesadosToolStripMenuItem.Name = "ticketsProcesadosToolStripMenuItem";
             this.ticketsProcesadosToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.ticketsProcesadosToolStripMenuItem.Text = "Tickets Procesados";
+            this.ticketsProcesadosToolStripMenuItem.Click += new System.EventHandler(this.ticketsProcesadosToolStripMenuItem_Click);
             // 
             // anularFacturaToolStripMenuItem
             // 
             this.anularFacturaToolStripMenuItem.Name = "anularFacturaToolStripMenuItem";
             this.anularFacturaToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.anularFacturaToolStripMenuItem.Text = "Anular Factura";
+            this.anularFacturaToolStripMenuItem.Click += new System.EventHandler(this.anularFacturaToolStripMenuItem_Click);
             // 
             // productosEIngredientesToolStripMenuItem
             // 
