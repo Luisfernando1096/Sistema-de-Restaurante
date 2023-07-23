@@ -143,5 +143,29 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
             this.Show();
         }
+
+        private void comprasToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.Compras f = new Compras.GUI.Compras();
+            f.ShowDialog();
+        }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.Proveedores f = new Compras.GUI.Proveedores();
+            f.ShowDialog();
+        }
+
+        private void buscarProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.BuscarProveedor f = new Compras.GUI.BuscarProveedor();
+            f.ShowDialog();
+        }
+
+        private void tipoComprobantesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.TipoComprobante f = new Compras.GUI.TipoComprobante();
+            f.ShowDialog();
+        }
     }
 }

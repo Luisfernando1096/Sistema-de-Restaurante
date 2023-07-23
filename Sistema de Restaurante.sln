@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mantenimiento", "Mantenimie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingredientes y Productos", "Ingredientes y Productos\Ingredientes y Productos.csproj", "{5A6CD6AB-96FD-4BB3-A348-D1E87ADD4F19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compras", "Compras\Compras.csproj", "{DAAABF86-C50D-42B6-824A-7E6EEF455A86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5A6CD6AB-96FD-4BB3-A348-D1E87ADD4F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A6CD6AB-96FD-4BB3-A348-D1E87ADD4F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A6CD6AB-96FD-4BB3-A348-D1E87ADD4F19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAAABF86-C50D-42B6-824A-7E6EEF455A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAAABF86-C50D-42B6-824A-7E6EEF455A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAAABF86-C50D-42B6-824A-7E6EEF455A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAAABF86-C50D-42B6-824A-7E6EEF455A86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
