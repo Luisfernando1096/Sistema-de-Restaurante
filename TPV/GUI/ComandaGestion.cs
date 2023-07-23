@@ -106,9 +106,17 @@ namespace TPV.GUI
                 }*/
                 btnProducto.Size = new Size(130, 130);
                 btnProducto.Click += BotonProducto_Click;
+                btnProducto.DoubleClick += BotonProducto_DoubleClick;
                 flpProductos.Controls.Add(btnProducto);
             }
         }
+
+        private void BotonProducto_DoubleClick(object sender, EventArgs e)
+        {
+            CantidadProductos cp = new CantidadProductos();
+            cp.ShowDialog();
+        }
+
         private void CalcularTotal()
         {
             if (dgvDatos.Rows.Count > 0)
@@ -118,8 +126,8 @@ namespace TPV.GUI
         }
         private void BotonProducto_Click(object sender, EventArgs e)
         {
-            CantidadProductos cp = new CantidadProductos();
-            cp.ShowDialog();
+            /*CantidadProductos cp = new CantidadProductos();
+            cp.ShowDialog();*/
             String fecha = lblFecha.Text.ToString();
             Button botonProducto = (Button)sender;
             Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
@@ -182,8 +190,12 @@ namespace TPV.GUI
             f.lblMesa.Text = lblMesa.Text.ToString();
             f.lblMesa.Tag = lblMesa.Tag.ToString();
             f.lblMesa.Visible = true;
-
             f.ShowDialog();
+            //Procedimiento luego de presionar el boton regresar para traer la informacion de la orden que se ha seleccionado
+            this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
+            lblMesa.Text = f.lblMesa.Text.ToString();
+            lblMesa.Tag = f.lblMesa.Tag.ToString();
+            lblTicket.Text = f.lblTicket.Text;
             this.Show();
         }
 

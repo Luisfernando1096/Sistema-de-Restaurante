@@ -31,6 +31,29 @@ namespace DataManager
 
         }
 
+        public static DataTable PedidoPorId(int idPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT p.idPedido, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, p.fecha, p.iva, p.descuento, p.propina,
+                                     p.totalPago
+                                    FROM pedido p
+                                    LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    JOIN mesa m ON p.idMesa = m.idMesa
+                                    WHERE p.idPedido = " + idPedido + "; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable Clientes()
         {
             try

@@ -157,6 +157,7 @@ namespace ServiceExpressDsk.GUI
             this.puntoDePagoToolStripMenuItem.Name = "puntoDePagoToolStripMenuItem";
             this.puntoDePagoToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.puntoDePagoToolStripMenuItem.Text = "Punto de Pago";
+            this.puntoDePagoToolStripMenuItem.Click += new System.EventHandler(this.puntoDePagoToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
@@ -170,6 +171,7 @@ namespace ServiceExpressDsk.GUI
             this.ticketsProcesadosToolStripMenuItem.Name = "ticketsProcesadosToolStripMenuItem";
             this.ticketsProcesadosToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.ticketsProcesadosToolStripMenuItem.Text = "Tickets Procesados";
+            this.ticketsProcesadosToolStripMenuItem.Click += new System.EventHandler(this.ticketsProcesadosToolStripMenuItem_Click);
             // 
             // anularFacturaToolStripMenuItem
             // 

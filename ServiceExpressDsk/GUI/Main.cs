@@ -58,5 +58,25 @@ namespace ServiceExpressDsk.GUI
             TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
             f.ShowDialog();
         }
+
+        private void puntoDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
+            f.Hide();
+            TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f);
+            f2.Hide();
+            TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago();
+            f3.ShowDialog();
+            f2.ShowDialog();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void ticketsProcesadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TPV.GUI.TicketsProcesados f = new TPV.GUI.TicketsProcesados();
+            f.ShowDialog();
+        }
     }
 }
