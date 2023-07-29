@@ -16,5 +16,15 @@ namespace Compras.GUI
         {
             InitializeComponent();
         }
+
+        private void Proveedores_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
