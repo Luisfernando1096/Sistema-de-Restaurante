@@ -71,6 +71,78 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable UltimoPedido()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT idPedido FROM pedido order by idPedido desc limit 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable ObtenerPrecioDeProducto(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT precio FROM producto
+                                    WHERE idProducto = " + id + "; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable ObtenerDetallePedidoConId(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idDetalle, cocinando, extras, horaEntregado, horaPedido, idCocinero, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario, fecha FROM pedido_detalle
+                                    WHERE idDetalle= " + id + "; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable Configuraciones()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT idConfiguracion, controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos FROM configuracion;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
 
         public static DataTable Familias()
         {

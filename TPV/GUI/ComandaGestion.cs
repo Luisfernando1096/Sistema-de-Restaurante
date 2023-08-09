@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,59 +107,154 @@ namespace TPV.GUI
                 }*/
                 btnProducto.Size = new Size(130, 130);
                 btnProducto.Click += BotonProducto_Click;
-                btnProducto.DoubleClick += BotonProducto_DoubleClick;
                 flpProductos.Controls.Add(btnProducto);
             }
         }
 
-        private void BotonProducto_DoubleClick(object sender, EventArgs e)
+        private double CalcularTotal()
         {
-            CantidadProductos cp = new CantidadProductos();
-            cp.ShowDialog();
-        }
-
-        private void CalcularTotal()
-        {
+            double total = 0;
             if (dgvDatos.Rows.Count > 0)
             {
-
+                foreach (DataGridViewRow row in dgvDatos.Rows)
+                {
+                    if (row.Cells["subTotal"].Value != null && row.Cells["subTotal"].Value != DBNull.Value)
+                    {
+                        total += Convert.ToDouble(row.Cells["subTotal"].Value);
+                    }
+                }
             }
+            return total;
         }
         private void BotonProducto_Click(object sender, EventArgs e)
         {
-            /*CantidadProductos cp = new CantidadProductos();
-            cp.ShowDialog();*/
-            String fecha = lblFecha.Text.ToString();
+            DataTable config = DataManager.DBConsultas.Configuraciones();
             Button botonProducto = (Button)sender;
-            Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
-            pedido.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
-            pedido.IdCuenta = 1;
-            pedido.Cancelado = false;
-            pedido.Fecha = fecha;
-            pedido.Listo = false;
-            pedido.Total = 0;
-            pedido.Descuento = 0;
-            pedido.Iva = 0;
-            pedido.Propina = 0;
-            pedido.TotalPago = 0;
-            pedido.Saldo = 0;
-            pedido.NFactura = "0";
-            pedido.Anular = false;
-            pedido.Efectivo = 0;
-            pedido.Credito = 0;
-            pedido.Btc = 0;
-
-            if (dgvDatos.Rows.Count <= 0)
+            int cantidad = 0;
+            if (config.Rows.Count > 0)
             {
-                //No hay productos, se inicia el pedido
+                
+                if (bool.Parse(config.Rows[0]["muchosProductos"].ToString()))
+                {
+                    // Agregar muchos productos
+                    CantidadProductos f = new CantidadProductos();
+                    f.ShowDialog();
+                    cantidad = Int32.Parse(f.txtCantidad.Text);
+                    AgregarProductos(botonProducto, cantidad);
+                }
+                else
+                {
+                    // Agregar un producto
+                    cantidad = 1;
+                    AgregarProductos(botonProducto, cantidad);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se pudo obtener la configuración o 'muchosProductos' no está definido.");
+            }
+        }
+
+        private void AgregarProductos(Button botonProducto, int cantidad)
+        {
+            if (dgvDatos.Rows.Count > 0)
+            {
+                //Ya existe un pedido
+                bool aumentarUnProducto = false;
+                //Saber si ya existe algun producto igual en los detalles
+                foreach (DataGridViewRow row in dgvDatos.Rows)
+                {
+                    if (row.Cells["idProducto"].Value.ToString() == botonProducto.Tag.ToString())
+                    {
+                        aumentarUnProducto = true;
+                    }
+                }
+
+                if (aumentarUnProducto)
+                {
+                    //Ya existe un producto igual en el datgrid, hay que aumentar
+                    MessageBox.Show("Aumentar producto");
+                }
+                else
+                {
+                    //No existe un producto igual en el datgrid, hay que crearlo
+                    MessageBox.Show("Crear producto");
+                }
 
             }
             else
             {
-                //Ya hay productos, se actualiza el pedido
-            }
-        }
+                //Creamos un nuevo pedido
+                String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                //No hay productos, se inicia el pedido
+                //Creamos el pedido
+                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                pedido.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+                pedido.IdCuenta = 1;
+                pedido.Cancelado = false;
+                pedido.Fecha = fecha;
+                pedido.Listo = false;
+                pedido.Total = CalcularTotal();
+                pedido.Descuento = 0;
+                pedido.Iva = 0;
+                pedido.Propina = 0;
+                pedido.TotalPago = 0;
+                pedido.Saldo = 0;
+                pedido.NFactura = "0";
+                pedido.Anular = false;
+                pedido.Efectivo = 0;
+                pedido.Credito = 0;
+                pedido.Btc = 0;
 
+                //Insertamos en la base de datos el pedido
+                if (pedido.Insertar())
+                {
+                    MessageBox.Show("SE INSERTO CON EXITO");
+                }
+                else
+                {
+                    MessageBox.Show("ERROR");
+                }
+
+                //Agregamos detalles al pedido
+                Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+                pedidoDetalle.IdDetalle = 0;
+                pedidoDetalle.Cocinando = true;
+                pedidoDetalle.Extras = "";
+                pedidoDetalle.HoraEntregado = fecha;
+                pedidoDetalle.HoraPedido = fecha;
+                //pedidoDetalle.IdCocinero = null;
+                pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+                DataTable up = DataManager.DBConsultas.UltimoPedido();
+                pedidoDetalle.IdPedido = Int32.Parse(up.Rows[0]["idPedido"].ToString());
+                pedidoDetalle.Cantidad = cantidad;
+                pedidoDetalle.Precio = 0;
+                pedidoDetalle.SubTotal = 0;
+                pedidoDetalle.Grupo = "0";
+                pedidoDetalle.Usuario = null;
+                //pedidoDetalle.Fecha = null;
+
+                if (pedidoDetalle.Insertar())
+                {
+                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
+                    mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+                    if (mesa.ActualizarEstado())
+                    {
+                        MessageBox.Show("SE ACTUALIZO CON EXITO");
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR");
+                    }
+                    MessageBox.Show("SE INSERTO CON EXITO");
+                }
+                else
+                {
+                    MessageBox.Show("ERROR");
+                }
+            }
+            CargarProductosPorMesa(lblMesa.Tag.ToString());
+        }
         private void btnSalir_Click_1(object sender, EventArgs e)
         {
             Close();

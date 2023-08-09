@@ -74,6 +74,7 @@ namespace ServiceExpressDsk.GUI
 
                 if (productoEnMesas.Rows.Count > 0)
                 {
+                    //Aqui cargamos los datos en datagrid 
                     f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
                     f2.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
                     f2.lblTicket.Visible = true;

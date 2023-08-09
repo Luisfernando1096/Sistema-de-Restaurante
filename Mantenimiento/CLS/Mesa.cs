@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Mesa
+    public class Mesa
     {
         int idMesa;
         int numero;
@@ -86,6 +86,32 @@ namespace Mantenimiento.CLS
                 Int32 filasEliminadas = 0;
                 filasEliminadas = op.EjecutarSentencia(sentencia);
                 if (filasEliminadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
+        public Boolean ActualizarEstado()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"UPDATE mesa SET disponible = " + disponible + " " +
+                "WHERE idMesa = " + idMesa + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
                 {
                     resultado = true;
                 }

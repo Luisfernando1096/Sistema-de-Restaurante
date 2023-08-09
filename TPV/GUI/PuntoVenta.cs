@@ -104,9 +104,11 @@ namespace TPV.GUI
             f.lblMesa.Text = botonMesa.Text.ToString();
             f.lblMesa.Tag = botonMesa.Tag.ToString();
             f.lblMesa.Visible = true;
-
             f.ShowDialog();
-            this.Show();
+            this.Close();
+            PuntoVenta f2 = new PuntoVenta(); // Crea una nueva instancia del formulario
+            f2.ShowDialog(); // Muestra el nuevo formulario
+            
         }
 
         private void btnSalir_Resize(object sender, EventArgs e)
