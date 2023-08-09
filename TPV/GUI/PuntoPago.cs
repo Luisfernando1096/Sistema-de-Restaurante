@@ -59,9 +59,9 @@ namespace TPV.GUI
             if (SeleccionSalonMesa.idMesa > 0)
             {
                 CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
+                lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
+                lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
             }
-            lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
-            lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
         }
     }
 }

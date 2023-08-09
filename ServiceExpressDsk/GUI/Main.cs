@@ -68,6 +68,20 @@ namespace ServiceExpressDsk.GUI
             f2.Hide();
             TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago();
             f3.ShowDialog();
+            if (f3.lblMesa.Tag != null)
+            {
+                DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(f3.lblMesa.Tag.ToString());
+
+                if (productoEnMesas.Rows.Count > 0)
+                {
+                    f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
+                    f2.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                    f2.lblTicket.Visible = true;
+                }
+                f2.lblMesa.Text = f3.lblMesa.Text.ToString();
+                f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
+                f2.lblMesa.Visible = true;
+            }
             f2.ShowDialog();
             f.ShowDialog();
             this.Show();

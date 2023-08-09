@@ -177,25 +177,32 @@ namespace TPV.GUI
         private void btnPagar_Click(object sender, EventArgs e)
         {
             this.Hide();
-
-            String idMesa = lblMesa.Tag.ToString();
-            DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
             PuntoPago f = new PuntoPago();
-            if (productoEnMesas.Rows.Count > 0)
+            if (lblMesa.Tag != null)
             {
-                f.CargarProductosPorMesa(idMesa);
-                f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-                f.lblTicket.Visible = true;
+                String idMesa = lblMesa.Tag.ToString();
+                DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
+                
+                if (productoEnMesas.Rows.Count > 0)
+                {
+                    f.CargarProductosPorMesa(idMesa);
+                    f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                    f.lblTicket.Visible = true;
+                }
+                f.lblMesa.Text = lblMesa.Text.ToString();
+                f.lblMesa.Tag = lblMesa.Tag.ToString();
+                f.lblMesa.Visible = true;
             }
-            f.lblMesa.Text = lblMesa.Text.ToString();
-            f.lblMesa.Tag = lblMesa.Tag.ToString();
-            f.lblMesa.Visible = true;
             f.ShowDialog();
             //Procedimiento luego de presionar el boton regresar para traer la informacion de la orden que se ha seleccionado
-            this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
-            lblMesa.Text = f.lblMesa.Text.ToString();
-            lblMesa.Tag = f.lblMesa.Tag.ToString();
-            lblTicket.Text = f.lblTicket.Text;
+            if (f.lblMesa.Tag != null)
+            {
+                this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
+                lblMesa.Text = f.lblMesa.Text.ToString();
+                lblMesa.Tag = f.lblMesa.Tag.ToString();
+                lblTicket.Text = f.lblTicket.Text;
+            }
+            
             this.Show();
         }
 
