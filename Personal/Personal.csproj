@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF452496-63E3-4AA2-8E9A-09517B20FC50}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Personal</RootNamespace>
+    <AssemblyName>Personal</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\AdministrarSesiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\AdministrarSesiones.Designer.cs">
+      <DependentUpon>AdministrarSesiones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Asignar-roles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Asignar-roles.Designer.cs">
+      <DependentUpon>Asignar-roles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Comandos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Comandos.Designer.cs">
+      <DependentUpon>Comandos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\EmpleadosGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\EmpleadosGestion.Designer.cs">
+      <DependentUpon>EmpleadosGestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Permisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Permisos.Designer.cs">
+      <DependentUpon>Permisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\RolesGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\RolesGestion.Designer.cs">
+      <DependentUpon>RolesGestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\VisorEventos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\VisorEventos.Designer.cs">
+      <DependentUpon>VisorEventos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CLS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\AdministrarSesiones.resx">
+      <DependentUpon>AdministrarSesiones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Asignar-roles.resx">
+      <DependentUpon>Asignar-roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Comandos.resx">
+      <DependentUpon>Comandos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\EmpleadosGestion.resx">
+      <DependentUpon>EmpleadosGestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Permisos.resx">
+      <DependentUpon>Permisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\RolesGestion.resx">
+      <DependentUpon>RolesGestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\VisorEventos.resx">
+      <DependentUpon>VisorEventos.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataManager\DataManager.csproj">
+      <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
+      <Name>DataManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
+      <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
+      <Name>Mantenimiento</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

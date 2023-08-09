@@ -127,6 +127,42 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable Empleados()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idEmpleado,nombres,apellidos,telefono,email,DUI,NIT,sueldoBase,comision,direccion FROM empleado;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable Roles()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM rol;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
     }
 }
 
