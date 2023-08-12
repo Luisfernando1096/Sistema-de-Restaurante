@@ -77,6 +77,8 @@ namespace TPV.GUI
             this.Name = "CantidadProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CantidadProductos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CantidadProductos_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CantidadProductos_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

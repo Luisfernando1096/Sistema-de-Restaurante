@@ -244,10 +244,29 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT pe.idPedido, pd.idProducto, pd.cantidad, pd.precio, pro.nombre, pd.subTotal, pe.fecha
-                                     FROM pedido pe, pedido_detalle pd, producto pro
-                                     WHERE pe.idPedido=pd.idPedido AND pro.idProducto=pd.idProducto AND (pe.idMesa=" + idMesa + @" AND pe.cancelado=0)
-                                     order by pd.idpedido, pe.fecha desc;";
+                String sentencia = @"SELECT 
+                                        pd.idPedido, 
+                                        pd.idProducto, 
+                                        pd.cantidad, 
+                                        pd.precio, 
+                                        pro.nombre, 
+                                        pd.subTotal, 
+                                        pe.fecha
+                                    FROM 
+                                        pedido pe
+                                    JOIN 
+                                        pedido_detalle pd ON pe.idPedido = pd.idPedido
+                                    JOIN 
+                                        producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN 
+                                        mesa m ON pe.idMesa = m.idMesa
+                                    WHERE 
+                                        pe.idMesa = " + idMesa + @" 
+                                        AND pe.cancelado = 0 
+                                        AND m.disponible = 0
+                                    ORDER BY 
+                                        pd.idPedido, 
+                                        pe.fecha DESC;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

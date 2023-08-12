@@ -12,6 +12,8 @@ namespace TPV.GUI
 {
     public partial class CantidadProductos : Form
     {
+        private bool cerrarPorBoton = false;
+
         public CantidadProductos()
         {
             InitializeComponent();
@@ -29,7 +31,9 @@ namespace TPV.GUI
                 MessageBox.Show("Debe ingresar una cantidad valida. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            cerrarPorBoton = true;
             Close();
+            
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -38,6 +42,21 @@ namespace TPV.GUI
             {
                 e.Handled = true;
             }
+        }
+
+        private void CantidadProductos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void CantidadProductos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!cerrarPorBoton && e.CloseReason == CloseReason.UserClosing)
+            {
+                // Realizar la acción aquí cuando el usuario no cierra el diálogo
+                txtCantidad.Text = "0";
+            }
+            cerrarPorBoton = false;
         }
     }
 }

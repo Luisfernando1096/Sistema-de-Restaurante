@@ -126,6 +126,15 @@ namespace TPV.GUI
             }
             return total;
         }
+
+        private double CalcularSubTotal(int cantidad, int id, double precio)
+        {
+            
+            double subTotal = 0;
+            subTotal = precio*cantidad;
+            return subTotal;
+        }
+
         private void BotonProducto_Click(object sender, EventArgs e)
         {
             DataTable config = DataManager.DBConsultas.Configuraciones();
@@ -140,7 +149,10 @@ namespace TPV.GUI
                     CantidadProductos f = new CantidadProductos();
                     f.ShowDialog();
                     cantidad = Int32.Parse(f.txtCantidad.Text);
-                    AgregarProductos(botonProducto, cantidad);
+                    if (cantidad!=0)
+                    {
+                        AgregarProductos(botonProducto, cantidad);
+                    } 
                 }
                 else
                 {
@@ -157,35 +169,62 @@ namespace TPV.GUI
 
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
+            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             if (dgvDatos.Rows.Count > 0)
             {
                 //Ya existe un pedido
                 bool aumentarUnProducto = false;
+                double precio = 0;
                 //Saber si ya existe algun producto igual en los detalles
                 foreach (DataGridViewRow row in dgvDatos.Rows)
                 {
                     if (row.Cells["idProducto"].Value.ToString() == botonProducto.Tag.ToString())
                     {
+                        cantidad = cantidad + Int32.Parse(row.Cells["cantidad"].Value.ToString());
+                        precio = double.Parse(row.Cells["precio"].Value.ToString());
                         aumentarUnProducto = true;
                     }
                 }
-
+                Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
                 if (aumentarUnProducto)
                 {
                     //Ya existe un producto igual en el datgrid, hay que aumentar
                     MessageBox.Show("Aumentar producto");
+                    pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+                    pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+                    pedidoDetalle.Cantidad = cantidad;
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), precio);
+                    if (pedidoDetalle.ActualizarCompra())
+                    {
+
+                    }
                 }
                 else
                 {
                     //No existe un producto igual en el datgrid, hay que crearlo
                     MessageBox.Show("Crear producto");
+                    pedidoDetalle.IdDetalle = 0;
+                    pedidoDetalle.Cocinando = true;
+                    pedidoDetalle.Extras = "";
+                    pedidoDetalle.HoraEntregado = fecha;
+                    pedidoDetalle.HoraPedido = fecha;
+                    //pedidoDetalle.IdCocinero = null;
+                    pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+                    pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+                    pedidoDetalle.Cantidad = cantidad;
+                    DataTable precioProductoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(botonProducto.Tag.ToString()));
+                    pedidoDetalle.Precio = double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString());
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString()));
+                    pedidoDetalle.Grupo = "0";
+                    pedidoDetalle.Usuario = null;
+                    pedidoDetalle.Insertar();
                 }
 
             }
             else
             {
                 //Creamos un nuevo pedido
-                String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                
                 //No hay productos, se inicia el pedido
                 //Creamos el pedido
                 Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
@@ -194,7 +233,7 @@ namespace TPV.GUI
                 pedido.Cancelado = false;
                 pedido.Fecha = fecha;
                 pedido.Listo = false;
-                pedido.Total = CalcularTotal();
+                pedido.Total = 0;
                 pedido.Descuento = 0;
                 pedido.Iva = 0;
                 pedido.Propina = 0;
@@ -209,11 +248,11 @@ namespace TPV.GUI
                 //Insertamos en la base de datos el pedido
                 if (pedido.Insertar())
                 {
-                    MessageBox.Show("SE INSERTO CON EXITO");
+                    //MessageBox.Show("SE INSERTO CON EXITO");
                 }
                 else
                 {
-                    MessageBox.Show("ERROR");
+                    MessageBox.Show("ERROR AL INSERTAR");
                 }
 
                 //Agregamos detalles al pedido
@@ -228,8 +267,9 @@ namespace TPV.GUI
                 DataTable up = DataManager.DBConsultas.UltimoPedido();
                 pedidoDetalle.IdPedido = Int32.Parse(up.Rows[0]["idPedido"].ToString());
                 pedidoDetalle.Cantidad = cantidad;
-                pedidoDetalle.Precio = 0;
-                pedidoDetalle.SubTotal = 0;
+                DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(botonProducto.Tag.ToString()));
+                pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
+                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
                 pedidoDetalle.Grupo = "0";
                 pedidoDetalle.Usuario = null;
                 //pedidoDetalle.Fecha = null;
@@ -240,19 +280,27 @@ namespace TPV.GUI
                     mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
                     if (mesa.ActualizarEstado())
                     {
-                        MessageBox.Show("SE ACTUALIZO CON EXITO");
+                        //MessageBox.Show("SE ACTUALIZO CON EXITO");
                     }
                     else
                     {
-                        MessageBox.Show("ERROR");
+                        MessageBox.Show("ERROR AL ACTUALIZAR");
                     }
-                    MessageBox.Show("SE INSERTO CON EXITO");
+                    //MessageBox.Show("SE INSERTO CON EXITO");
                 }
                 else
                 {
-                    MessageBox.Show("ERROR");
+                    MessageBox.Show("ERROR AL INSERTAR");
                 }
+
             }
+            //Vamos a actualizar el total del pedido
+            Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido();
+            pedido2.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+            double total = CalcularTotal();
+            pedido2.ActualizarTotal(total); 
+
+            //Actualizar al final el datagrid
             CargarProductosPorMesa(lblMesa.Tag.ToString());
         }
         private void btnSalir_Click_1(object sender, EventArgs e)
@@ -306,6 +354,22 @@ namespace TPV.GUI
         {
             this.Close();
             punto_venta.Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //Programando boton de disminuir
+            Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+            //Ya existe un producto igual en el datgrid, hay que aumentar
+            MessageBox.Show("Aumentar producto");
+            pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+            pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+            pedidoDetalle.Cantidad = cantidad;
+            pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), precio);
+            if (pedidoDetalle.ActualizarCompra())
+            {
+
+            }
         }
     }
 }
