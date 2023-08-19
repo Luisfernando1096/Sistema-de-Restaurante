@@ -15,6 +15,10 @@ namespace TPV.GUI
     {
         PuntoVenta punto_venta;
         BindingSource datos = new BindingSource();
+        public bool cambiarMesa = false;
+        public int idPedidoCambioMesa = 0;
+        private int idMesa = 0;
+
         public ComandaGestion(PuntoVenta punto_venta)
         {
             InitializeComponent();
@@ -52,6 +56,12 @@ namespace TPV.GUI
 
         private void ComandaGestion_Load(object sender, EventArgs e)
         {
+            if (dgvDatos.Rows.Count>0)
+            {
+                btnComanda.Enabled = true;
+                btnDisminuir.Enabled = true;
+                btnExtras.Enabled = true;
+            }
             WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             // Creamos un Panel para envolver el FlowLayoutPanel
@@ -360,16 +370,30 @@ namespace TPV.GUI
         {
             //Programando boton de disminuir
             Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
-            //Ya existe un producto igual en el datgrid, hay que aumentar
-            MessageBox.Show("Aumentar producto");
-            pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
-            pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
-            pedidoDetalle.Cantidad = cantidad;
-            pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), precio);
-            if (pedidoDetalle.ActualizarCompra())
+            if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+                pedidoDetalle.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
+                pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
 
             }
+            if (pedidoDetalle.ActualizarCompra())
+            {
+                //Actualizar al final el datagrid
+                CargarProductosPorMesa(lblMesa.Tag.ToString());
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            cambiarMesa = true;
+            Close();
+        }
+
+        private void lblCliente_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
