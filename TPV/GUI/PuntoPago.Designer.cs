@@ -57,6 +57,8 @@ namespace TPV.GUI
             this.button6 = new System.Windows.Forms.Button();
             this.cbPropina = new System.Windows.Forms.CheckBox();
             this.cbDescuento = new System.Windows.Forms.CheckBox();
+            this.txtPorcentaje = new System.Windows.Forms.TextBox();
+            this.lblPorcentaje = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -102,8 +104,6 @@ namespace TPV.GUI
             this.btnPunto = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lblCambio = new System.Windows.Forms.Label();
-            this.lblPorcentaje = new System.Windows.Forms.Label();
-            this.txtPorcentaje = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -410,6 +410,28 @@ namespace TPV.GUI
             this.cbDescuento.UseVisualStyleBackColor = true;
             this.cbDescuento.CheckedChanged += new System.EventHandler(this.cbDescuento_CheckedChanged);
             // 
+            // txtPorcentaje
+            // 
+            this.txtPorcentaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPorcentaje.Location = new System.Drawing.Point(3, 603);
+            this.txtPorcentaje.Name = "txtPorcentaje";
+            this.txtPorcentaje.Size = new System.Drawing.Size(119, 26);
+            this.txtPorcentaje.TabIndex = 9;
+            this.txtPorcentaje.Visible = false;
+            this.txtPorcentaje.TextChanged += new System.EventHandler(this.txtPorcentaje_TextChanged);
+            this.txtPorcentaje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorcentaje_KeyPress);
+            // 
+            // lblPorcentaje
+            // 
+            this.lblPorcentaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorcentaje.Location = new System.Drawing.Point(3, 632);
+            this.lblPorcentaje.Name = "lblPorcentaje";
+            this.lblPorcentaje.Size = new System.Drawing.Size(120, 67);
+            this.lblPorcentaje.TabIndex = 9;
+            this.lblPorcentaje.Text = "Digite el porcentaje de descuento.";
+            this.lblPorcentaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPorcentaje.Visible = false;
+            // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
@@ -709,6 +731,8 @@ namespace TPV.GUI
             this.txtPagoRegistrar.TabIndex = 40;
             this.txtPagoRegistrar.Text = "0";
             this.txtPagoRegistrar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPagoRegistrar.TextChanged += new System.EventHandler(this.txtPagoRegistrar_TextChanged);
+            this.txtPagoRegistrar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPagoRegistrar_KeyPress);
             // 
             // label7
             // 
@@ -951,27 +975,6 @@ namespace TPV.GUI
             this.lblCambio.Size = new System.Drawing.Size(59, 23);
             this.lblCambio.TabIndex = 61;
             this.lblCambio.Text = "$0.00";
-            // 
-            // lblPorcentaje
-            // 
-            this.lblPorcentaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentaje.Location = new System.Drawing.Point(3, 632);
-            this.lblPorcentaje.Name = "lblPorcentaje";
-            this.lblPorcentaje.Size = new System.Drawing.Size(120, 67);
-            this.lblPorcentaje.TabIndex = 9;
-            this.lblPorcentaje.Text = "Digite el porcentaje de descuento.";
-            this.lblPorcentaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblPorcentaje.Visible = false;
-            // 
-            // txtPorcentaje
-            // 
-            this.txtPorcentaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje.Location = new System.Drawing.Point(3, 603);
-            this.txtPorcentaje.Name = "txtPorcentaje";
-            this.txtPorcentaje.Size = new System.Drawing.Size(119, 26);
-            this.txtPorcentaje.TabIndex = 9;
-            this.txtPorcentaje.Visible = false;
-            this.txtPorcentaje.TextChanged += new System.EventHandler(this.txtPorcentaje_TextChanged);
             // 
             // PuntoPago
             // 

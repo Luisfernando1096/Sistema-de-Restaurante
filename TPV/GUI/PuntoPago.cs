@@ -14,6 +14,9 @@ namespace TPV.GUI
     {
         BindingSource datos = new BindingSource();
         DataTable configuracion = DataManager.DBConsultas.Configuraciones();
+        private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
+        private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
+
         public PuntoPago()
         {
             InitializeComponent();
@@ -43,6 +46,8 @@ namespace TPV.GUI
 
             if(dgvDatos.Rows.Count > 0)
             {
+                lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
+                lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
                 if (configuracion.Rows.Count > 0)
                 {
                     bool incluirPropina = bool.Parse(configuracion.Rows[0]["incluirPropina"].ToString());
@@ -118,6 +123,8 @@ namespace TPV.GUI
                 lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
                 lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
             }
+            lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
+            lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
             CalcularTodo();
         }
 
@@ -244,19 +251,21 @@ namespace TPV.GUI
 
         private void btnPunto_Click(object sender, EventArgs e)
         {
-            if (txtPagoRegistrar.Text.Equals("0"))
+            if (!escritoUnPunto)
             {
-                txtPagoRegistrar.Text = btnPunto.Text;
+                if (!txtPagoRegistrar.Text.Equals("0"))
+                {
+                    txtPagoRegistrar.Text += btnPunto.Text;
+                    escritoUnPunto = true;
+                }
             }
-            else
-            {
-                txtPagoRegistrar.Text += btnPunto.Text;
-            }
+            
         }
 
         private void btnC_Click(object sender, EventArgs e)
         {
             txtPagoRegistrar.Text = "0";
+            escritoUnPunto = false;
         }
 
         private void btnUno_Click(object sender, EventArgs e)
@@ -318,6 +327,7 @@ namespace TPV.GUI
         private void button14_Click(object sender, EventArgs e)
         {
             txtPagoRegistrar.Text = "0";
+            escritoUnPunto = false;
         }
 
         private void cbDescuento_CheckedChanged(object sender, EventArgs e)
@@ -338,10 +348,10 @@ namespace TPV.GUI
 
         private void CalcularTodo()
         {
-            double totalPagar = CalcularTotal();
-            double propina = CalcularPropina();
-            double descuento = CalcularDescuento();
-            //double cambio = CalcularCambio();
+            double totalPagar = Math.Round(CalcularTotal(), 2);
+            double propina = Math.Round(CalcularPropina(), 2);
+            double descuento = Math.Round(CalcularDescuento(), 2);
+            double iva = Math.Round(CalcularIva(), 2);
 
             if (cbPropina.Checked)
             {
@@ -364,26 +374,39 @@ namespace TPV.GUI
                 //Sin descuento
                 descuento = 0;
             }
-            ActualizarCampos(CalcularTotal(),propina,descuento,totalPagar);
+            double cambio = Math.Round(CalcularCambio(totalPagar), 2);
+            ActualizarCampos(propina,descuento,totalPagar, iva, cambio);
         }
 
-        private void ActualizarCampos(double saldo, double propina, double descuento, double total)
+        private double CalcularIva()
         {
-            lblSaldo.Text = "$" + saldo.ToString("0.00");
-            lblSaldo.Tag = saldo;
+            return 0;
+        }
+
+        private void ActualizarCampos(double propina, double descuento, double total, double iva, double cambio)
+        {
             lblPropina.Text = "$" + propina.ToString("0.00");
             lblPropina.Tag = propina;
             lblDescuento.Text = "$" + descuento.ToString("0.00");
             lblDescuento.Tag = descuento;
+            lblCambio.Text = "$" + cambio.ToString("0.00");
+            lblCambio.Tag = cambio;
+            lblIva.Text = "$" + iva.ToString("0.00");
+            lblIva.Tag = iva;
 
-            txtTotalPagar.Text = total.ToString();
-            txtTotalPagar.Tag = total;
+            txtTotalPagar.Text = Math.Round(total, 2).ToString();
+            txtTotalPagar.Tag = Math.Round(total, 2);
             
         }
 
-        private double CalcularCambio()
+        private double CalcularCambio(double totalPagar)
         {
-            throw new NotImplementedException();
+            double cambio = 0;
+            if (!txtPagoRegistrar.Text.Equals(""))
+            {
+                cambio = double.Parse(txtPagoRegistrar.Text.ToString()) - totalPagar;
+            }
+            return cambio;
         }
 
         private void cbPropina_CheckedChanged(object sender, EventArgs e)
@@ -394,6 +417,72 @@ namespace TPV.GUI
         private void txtPorcentaje_TextChanged(object sender, EventArgs e)
         {
             CalcularTodo();
+        }
+
+        private void txtPagoRegistrar_TextChanged(object sender, EventArgs e)
+        {
+            CalcularTodo();
+        }
+
+        private void txtPorcentaje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter ingresado es un dígito o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar el carácter si no es un dígito ni una tecla de control
+            }
+
+            // Verificar si se ha ingresado un número
+            if (char.IsDigit(e.KeyChar))
+            {
+                // Obtener el contenido actual del TextBox
+                string currentText = txtPorcentaje.Text + e.KeyChar;
+
+                // Convertir el contenido en un número
+                if (!int.TryParse(currentText, out int number))
+                {
+                    e.Handled = true; // Ignorar el carácter si no se puede convertir a número
+                }
+
+                // Verificar si el número está fuera del rango permitido
+                if (number < 1 || number > 99)
+                {
+                    e.Handled = true; // Ignorar el carácter si el número está fuera del rango
+                }
+            }
+        }
+
+        private void txtPagoRegistrar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter ingresado no es un dígito
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar el carácter si no es un dígito ni una tecla de control
+            }
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar))
+            {
+                // Si se ingresó un dígito o una tecla de control, permitirlo siempre
+                hasEnteredNumber = true; // Marcar que se ha ingresado un número
+            }
+            else if (e.KeyChar == '.' && hasEnteredNumber && !txtPagoRegistrar.Text.Contains("."))
+            {
+                // Si se ingresó un punto y se ha ingresado un número antes, permitirlo solo si no hay otro punto en el texto
+                // Además, marcar que se ha ingresado un punto
+                hasEnteredNumber = false;
+            }
+            else
+            {
+                e.Handled = true; // Ignorar cualquier otro carácter
+            }
+            // Verificar si la tecla presionada es el retroceso (Backspace)
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                // Impedir borrar si solo hay un carácter en el TextBox
+                if (txtPagoRegistrar.Text.Length <= 1)
+                {
+                    e.Handled = true; // Indicar que el evento está manejado y no debe procesarse
+                }
+            }
         }
     }
 }

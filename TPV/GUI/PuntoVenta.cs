@@ -50,6 +50,7 @@ namespace TPV.GUI
                 btnSalon.Size = new Size(200,80);
                 btnSalon.Click += BotonSalon_Click;
                 flpSalones.Controls.Add(btnSalon);
+                flpSalones.ScrollControlIntoView(btnSalon);
                 columna++;
                 if (columna == 5)
                 {
@@ -93,6 +94,7 @@ namespace TPV.GUI
                 btnMesa.Size = new Size(110, 90);
                 btnMesa.Click += BotonMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
+                flpMesas.ScrollControlIntoView(btnMesa);
             }
         }
 
