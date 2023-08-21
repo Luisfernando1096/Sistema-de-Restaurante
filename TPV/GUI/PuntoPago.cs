@@ -122,6 +122,27 @@ namespace TPV.GUI
                 CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
                 lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
                 lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                {
+                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                }
+                else
+                {
+                    lblMesero.Text = "";
+                    lblMesero.Tag = "";
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                }
+                else
+                {
+                    lblCliente.Text = "";
+                    lblCliente.Tag = "";
+                }
             }
             lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
             lblSaldo.Tag = Math.Round(CalcularTotal(), 2);

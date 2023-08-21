@@ -36,10 +36,11 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT p.idPedido, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, p.fecha, p.iva, p.descuento, p.propina,
+                String sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
                                      p.totalPago
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
                                     JOIN mesa m ON p.idMesa = m.idMesa
                                     WHERE p.idPedido = " + idPedido + "; ";
                 DBOperacion operacion = new DBOperacion();

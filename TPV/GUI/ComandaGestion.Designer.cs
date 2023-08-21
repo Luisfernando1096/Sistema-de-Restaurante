@@ -31,8 +31,8 @@ namespace TPV.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComandaGestion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnFamilia = new System.Windows.Forms.Button();
             this.flpFamilias = new System.Windows.Forms.FlowLayoutPanel();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
@@ -156,6 +156,7 @@ namespace TPV.GUI
             this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -256,8 +257,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -270,14 +271,14 @@ namespace TPV.GUI
             this.fecha,
             this.nombre,
             this.subTotal});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDatos.Location = new System.Drawing.Point(142, 100);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -390,7 +391,6 @@ namespace TPV.GUI
             this.lblMesa.Name = "lblMesa";
             this.lblMesa.Size = new System.Drawing.Size(0, 23);
             this.lblMesa.TabIndex = 13;
-            this.lblMesa.Visible = false;
             // 
             // lblCliente
             // 
@@ -400,8 +400,6 @@ namespace TPV.GUI
             this.lblCliente.Name = "lblCliente";
             this.lblCliente.Size = new System.Drawing.Size(0, 23);
             this.lblCliente.TabIndex = 12;
-            this.lblCliente.Visible = false;
-            this.lblCliente.Click += new System.EventHandler(this.lblCliente_Click);
             // 
             // lblMesero
             // 
@@ -411,7 +409,6 @@ namespace TPV.GUI
             this.lblMesero.Name = "lblMesero";
             this.lblMesero.Size = new System.Drawing.Size(0, 23);
             this.lblMesero.TabIndex = 11;
-            this.lblMesero.Visible = false;
             // 
             // lblTicket
             // 
@@ -421,7 +418,6 @@ namespace TPV.GUI
             this.lblTicket.Name = "lblTicket";
             this.lblTicket.Size = new System.Drawing.Size(0, 23);
             this.lblTicket.TabIndex = 10;
-            this.lblTicket.Visible = false;
             // 
             // lblFecha
             // 

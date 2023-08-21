@@ -101,7 +101,7 @@ namespace TPV.GUI
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClientes.Location = new System.Drawing.Point(5, 227);
-            this.dgvClientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvClientes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
@@ -220,6 +220,7 @@ namespace TPV.GUI
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(143, 59);
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -249,6 +250,7 @@ namespace TPV.GUI
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(133, 59);
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // toolStripSeparator5
             // 
@@ -402,8 +404,8 @@ namespace TPV.GUI
             // 
             this.txtRegContable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRegContable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegContable.Location = new System.Drawing.Point(659, 164);
-            this.txtRegContable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRegContable.Location = new System.Drawing.Point(660, 169);
+            this.txtRegContable.Margin = new System.Windows.Forms.Padding(2);
             this.txtRegContable.Name = "txtRegContable";
             this.txtRegContable.Size = new System.Drawing.Size(142, 26);
             this.txtRegContable.TabIndex = 39;
@@ -455,7 +457,7 @@ namespace TPV.GUI
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientesGestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ClientesGestion";

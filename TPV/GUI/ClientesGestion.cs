@@ -69,5 +69,88 @@ namespace TPV.GUI
             txtDireccion.Text = dgvClientes.CurrentRow.Cells["direccion"].Value.ToString();
             txtRegContable.Text = dgvClientes.CurrentRow.Cells["regContable"].Value.ToString();
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            int idCliente;
+            String nombres = txtNombre.Text.ToString();
+            String telefono = txtTelefono.Text.ToString();
+            String email = txtEmail.Text.ToString();
+            String nit = txtNit.Text.ToString();
+            String direccion = txtDireccion.Text.ToString();
+            String regContable = txtRegContable.Text.ToString();
+            Mantenimiento.CLS.Cliente cliente = new Mantenimiento.CLS.Cliente();
+
+            if (txtNombre.Text.Equals(""))
+            {
+                MessageBox.Show("¡Debe digitar el nombre del cliente!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            cliente.Nombre = nombres;
+            cliente.Telefono = telefono;
+            cliente.Email = email;
+            cliente.NIT = nit;
+            cliente.Direccion = direccion;
+            cliente.RegContable = regContable;
+
+            if (txtIdCliente.Text.Equals(""))
+            {
+                //Hacer insercion
+                if (cliente.Insertar())
+                {
+                    MessageBox.Show("¡Registro insertado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarDatos();
+                }
+                else
+                {
+                    MessageBox.Show("¡Error al insertar registro!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                //Hacer actualizacion
+                idCliente = Int32.Parse(txtIdCliente.Text.ToString());
+                cliente.IdCliente = idCliente;
+
+                if (cliente.Actualizar())
+                {
+                    MessageBox.Show("¡Registro actualizado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarDatos();
+                }
+                else
+                {
+                    MessageBox.Show("¡Error al actualizar el registro!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            Limpiar();
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("¿Esta seguro que desea eliminar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Mantenimiento.CLS.Cliente cliente = new Mantenimiento.CLS.Cliente();
+                    cliente.IdCliente = int.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString());
+
+                    if (cliente.Eliminar())
+                    {
+                        MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡El registro no fue eliminado!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                CargarDatos();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

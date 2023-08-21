@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    internal class Cliente
+    public class Cliente
     {
         int _idCliente;
         String _nombre;

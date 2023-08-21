@@ -17,7 +17,6 @@ namespace TPV.GUI
         BindingSource datos = new BindingSource();
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
-        private int idMesa = 0;
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
@@ -332,26 +331,69 @@ namespace TPV.GUI
         {
             this.Hide();
             PuntoPago f = new PuntoPago();
+            String idMesa = lblMesa.Tag.ToString();
+            DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
             if (lblMesa.Tag != null)
-            {
-                String idMesa = lblMesa.Tag.ToString();
-                DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
-                
+            {   
                 if (productoEnMesas.Rows.Count > 0)
                 {
                     f.CargarProductosPorMesa(idMesa);
                     f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-                    f.lblTicket.Visible = true;
+
+                    DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));
+                    //Agregando datos mesero y cliente si los hay
+                    if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                    {
+                        f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                        f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                    }
+                    else
+                    {
+                        f.lblMesero.Text = "";
+                        f.lblMesero.Tag = "";
+                    }
+                    if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                    {
+                        f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                        f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                    }
+                    else
+                    {
+                        f.lblCliente.Text = "";
+                        f.lblCliente.Tag = "";
+                    }
                 }
                 f.lblMesa.Text = lblMesa.Text.ToString();
                 f.lblMesa.Tag = lblMesa.Tag.ToString();
-                f.lblMesa.Visible = true;
             }
             f.ShowDialog();
             //Procedimiento luego de presionar el boton regresar para traer la informacion de la orden que se ha seleccionado
             if (f.lblMesa.Tag != null)
             {
                 this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
+
+                //Obtengo el pedido que estaba abierto en el punto de pago.
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f.lblTicket.Text.ToString()));
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                {
+                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                }
+                else
+                {
+                    lblMesero.Text = "";
+                    lblMesero.Tag = "";
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                }
+                else
+                {
+                    lblCliente.Text = "";
+                    lblCliente.Tag = "";
+                }
                 lblMesa.Text = f.lblMesa.Text.ToString();
                 lblMesa.Tag = f.lblMesa.Tag.ToString();
                 lblTicket.Text = f.lblTicket.Text;
@@ -391,7 +433,7 @@ namespace TPV.GUI
             Close();
         }
 
-        private void lblCliente_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
 
         }

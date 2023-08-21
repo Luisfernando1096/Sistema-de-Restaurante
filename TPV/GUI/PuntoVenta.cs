@@ -152,11 +152,23 @@ namespace TPV.GUI
             {
                 f.CargarProductosPorMesa(idMesa);
                 f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-                f.lblTicket.Visible = true;
+                //Agregando datos mesero y cliente si los hay
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                {
+                    f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                }
             }
             f.lblMesa.Text = botonMesa.Text.ToString();
             f.lblMesa.Tag = botonMesa.Tag.ToString();
-            f.lblMesa.Visible = true;
+            
+
             f.ShowDialog();
             cambiarMesa = f.cambiarMesa;
             if (!f.lblTicket.Text.ToString().Equals(""))

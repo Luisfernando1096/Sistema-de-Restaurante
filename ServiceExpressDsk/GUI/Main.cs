@@ -77,11 +77,30 @@ namespace ServiceExpressDsk.GUI
                     //Aqui cargamos los datos en datagrid 
                     f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
                     f2.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-                    f2.lblTicket.Visible = true;
+                    DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
+                    if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                    {
+                        f2.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                        f2.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                    }
+                    else
+                    {
+                        f2.lblMesero.Text = "";
+                        f2.lblMesero.Tag = "";
+                    }
+                    if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                    {
+                        f2.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                        f2.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                    }
+                    else
+                    {
+                        f2.lblCliente.Text = "";
+                        f2.lblCliente.Tag = "";
+                    }
                 }
                 f2.lblMesa.Text = f3.lblMesa.Text.ToString();
                 f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
-                f2.lblMesa.Visible = true;
             }
             f2.ShowDialog();
             f.ShowDialog();

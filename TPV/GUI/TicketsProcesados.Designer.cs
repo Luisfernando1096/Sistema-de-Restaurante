@@ -35,8 +35,10 @@ namespace TPV.GUI
             this.lblTicket = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.txtidPedido = new System.Windows.Forms.TextBox();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +49,8 @@ namespace TPV.GUI
             this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.propina = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtidPedido = new System.Windows.Forms.TextBox();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +92,16 @@ namespace TPV.GUI
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
+            this.toolStripButton6.Text = "Imprimir";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -117,7 +129,9 @@ namespace TPV.GUI
             this.descuento,
             this.iva,
             this.propina,
-            this.totalPago});
+            this.totalPago,
+            this.nombres,
+            this.idCliente});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -135,6 +149,16 @@ namespace TPV.GUI
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClientes.Size = new System.Drawing.Size(835, 237);
             this.dgvClientes.TabIndex = 13;
+            // 
+            // txtidPedido
+            // 
+            this.txtidPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtidPedido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtidPedido.Location = new System.Drawing.Point(265, 66);
+            this.txtidPedido.Name = "txtidPedido";
+            this.txtidPedido.Size = new System.Drawing.Size(224, 26);
+            this.txtidPedido.TabIndex = 28;
+            this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
             // 
             // idPedido
             // 
@@ -216,25 +240,21 @@ namespace TPV.GUI
             this.totalPago.ReadOnly = true;
             this.totalPago.Width = 60;
             // 
-            // txtidPedido
+            // nombres
             // 
-            this.txtidPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtidPedido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtidPedido.Location = new System.Drawing.Point(265, 66);
-            this.txtidPedido.Name = "txtidPedido";
-            this.txtidPedido.Size = new System.Drawing.Size(224, 26);
-            this.txtidPedido.TabIndex = 28;
-            this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Nombres";
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            this.nombres.Visible = false;
             // 
-            // toolStripButton6
+            // idCliente
             // 
-            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
-            this.toolStripButton6.Text = "Imprimir";
+            this.idCliente.DataPropertyName = "idCliente";
+            this.idCliente.HeaderText = "IdCliente";
+            this.idCliente.Name = "idCliente";
+            this.idCliente.ReadOnly = true;
+            this.idCliente.Visible = false;
             // 
             // TicketsProcesados
             // 
@@ -266,6 +286,7 @@ namespace TPV.GUI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridView dgvClientes;
         public System.Windows.Forms.TextBox txtidPedido;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
@@ -276,6 +297,7 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn iva;
         private System.Windows.Forms.DataGridViewTextBoxColumn propina;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPago;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCliente;
     }
 }
