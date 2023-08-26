@@ -31,8 +31,8 @@ namespace TPV.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComandaGestion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnFamilia = new System.Windows.Forms.Button();
             this.flpFamilias = new System.Windows.Forms.FlowLayoutPanel();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
@@ -40,9 +40,9 @@ namespace TPV.GUI
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnDisminuir = new System.Windows.Forms.Button();
+            this.btnExtras = new System.Windows.Forms.Button();
+            this.btnComanda = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.flpProductos = new System.Windows.Forms.FlowLayoutPanel();
             this.btnProducto = new System.Windows.Forms.Button();
@@ -103,9 +103,9 @@ namespace TPV.GUI
             this.flpAcciones.Controls.Add(this.button2);
             this.flpAcciones.Controls.Add(this.button3);
             this.flpAcciones.Controls.Add(this.button4);
-            this.flpAcciones.Controls.Add(this.button5);
-            this.flpAcciones.Controls.Add(this.button6);
-            this.flpAcciones.Controls.Add(this.button7);
+            this.flpAcciones.Controls.Add(this.btnDisminuir);
+            this.flpAcciones.Controls.Add(this.btnExtras);
+            this.flpAcciones.Controls.Add(this.btnComanda);
             this.flpAcciones.Controls.Add(this.button8);
             this.flpAcciones.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpAcciones.Location = new System.Drawing.Point(10, 10);
@@ -142,6 +142,7 @@ namespace TPV.GUI
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -156,6 +157,7 @@ namespace TPV.GUI
             this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -170,48 +172,53 @@ namespace TPV.GUI
             this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // btnDisminuir
             // 
-            this.button5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(0, 360);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(122, 90);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Disminuir";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnDisminuir.Enabled = false;
+            this.btnDisminuir.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDisminuir.Image = ((System.Drawing.Image)(resources.GetObject("btnDisminuir.Image")));
+            this.btnDisminuir.Location = new System.Drawing.Point(0, 360);
+            this.btnDisminuir.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDisminuir.Name = "btnDisminuir";
+            this.btnDisminuir.Size = new System.Drawing.Size(122, 90);
+            this.btnDisminuir.TabIndex = 4;
+            this.btnDisminuir.Text = "Disminuir";
+            this.btnDisminuir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDisminuir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDisminuir.UseVisualStyleBackColor = true;
+            this.btnDisminuir.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // btnExtras
             // 
-            this.button6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(0, 450);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(122, 90);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Extras";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnExtras.Enabled = false;
+            this.btnExtras.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExtras.Image = ((System.Drawing.Image)(resources.GetObject("btnExtras.Image")));
+            this.btnExtras.Location = new System.Drawing.Point(0, 450);
+            this.btnExtras.Margin = new System.Windows.Forms.Padding(0);
+            this.btnExtras.Name = "btnExtras";
+            this.btnExtras.Size = new System.Drawing.Size(122, 90);
+            this.btnExtras.TabIndex = 5;
+            this.btnExtras.Text = "Extras";
+            this.btnExtras.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnExtras.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExtras.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btnComanda
             // 
-            this.button7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Location = new System.Drawing.Point(0, 540);
-            this.button7.Margin = new System.Windows.Forms.Padding(0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(122, 90);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Comanda";
-            this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnComanda.Enabled = false;
+            this.btnComanda.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComanda.Image = ((System.Drawing.Image)(resources.GetObject("btnComanda.Image")));
+            this.btnComanda.Location = new System.Drawing.Point(0, 540);
+            this.btnComanda.Margin = new System.Windows.Forms.Padding(0);
+            this.btnComanda.Name = "btnComanda";
+            this.btnComanda.Size = new System.Drawing.Size(122, 90);
+            this.btnComanda.TabIndex = 6;
+            this.btnComanda.Text = "Comanda";
+            this.btnComanda.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnComanda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnComanda.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
@@ -234,7 +241,7 @@ namespace TPV.GUI
             this.flpProductos.Controls.Add(this.btnProducto);
             this.flpProductos.Location = new System.Drawing.Point(700, 54);
             this.flpProductos.Name = "flpProductos";
-            this.flpProductos.Size = new System.Drawing.Size(126, 615);
+            this.flpProductos.Size = new System.Drawing.Size(126, 586);
             this.flpProductos.TabIndex = 4;
             // 
             // btnProducto
@@ -251,8 +258,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -265,14 +272,14 @@ namespace TPV.GUI
             this.fecha,
             this.nombre,
             this.subTotal});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.Location = new System.Drawing.Point(142, 100);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -383,10 +390,8 @@ namespace TPV.GUI
             this.lblMesa.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMesa.Location = new System.Drawing.Point(209, 33);
             this.lblMesa.Name = "lblMesa";
-            this.lblMesa.Size = new System.Drawing.Size(62, 23);
+            this.lblMesa.Size = new System.Drawing.Size(0, 23);
             this.lblMesa.TabIndex = 13;
-            this.lblMesa.Text = "Mesa:";
-            this.lblMesa.Visible = false;
             // 
             // lblCliente
             // 
@@ -394,10 +399,8 @@ namespace TPV.GUI
             this.lblCliente.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCliente.Location = new System.Drawing.Point(209, 53);
             this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(77, 23);
+            this.lblCliente.Size = new System.Drawing.Size(0, 23);
             this.lblCliente.TabIndex = 12;
-            this.lblCliente.Text = "Cliente:";
-            this.lblCliente.Visible = false;
             // 
             // lblMesero
             // 
@@ -405,10 +408,8 @@ namespace TPV.GUI
             this.lblMesero.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMesero.Location = new System.Drawing.Point(209, 73);
             this.lblMesero.Name = "lblMesero";
-            this.lblMesero.Size = new System.Drawing.Size(80, 23);
+            this.lblMesero.Size = new System.Drawing.Size(0, 23);
             this.lblMesero.TabIndex = 11;
-            this.lblMesero.Text = "Mesero:";
-            this.lblMesero.Visible = false;
             // 
             // lblTicket
             // 
@@ -416,10 +417,8 @@ namespace TPV.GUI
             this.lblTicket.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTicket.Location = new System.Drawing.Point(209, 13);
             this.lblTicket.Name = "lblTicket";
-            this.lblTicket.Size = new System.Drawing.Size(87, 23);
+            this.lblTicket.Size = new System.Drawing.Size(0, 23);
             this.lblTicket.TabIndex = 10;
-            this.lblTicket.Text = "Ticket # ";
-            this.lblTicket.Visible = false;
             // 
             // lblFecha
             // 
@@ -477,18 +476,17 @@ namespace TPV.GUI
             // 
             this.label5.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Location = new System.Drawing.Point(699, 672);
+            this.label5.Location = new System.Drawing.Point(699, 649);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(300, 74);
+            this.label5.Size = new System.Drawing.Size(408, 74);
             this.label5.TabIndex = 18;
-            this.label5.Text = "Nota: presione doble click si desea agregar muchos productos.";
-            this.label5.Visible = false;
+            this.label5.Text = "Nota: puede configurar para agregar muchos productos al dar un click.";
             // 
             // ComandaGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1011, 749);
+            this.ClientSize = new System.Drawing.Size(1217, 749);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.label10);
@@ -530,9 +528,9 @@ namespace TPV.GUI
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnDisminuir;
+        private System.Windows.Forms.Button btnExtras;
+        private System.Windows.Forms.Button btnComanda;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.FlowLayoutPanel flpProductos;
         private System.Windows.Forms.Button btnProducto;

@@ -36,10 +36,11 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT p.idPedido, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, p.fecha, p.iva, p.descuento, p.propina,
+                String sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
                                      p.totalPago
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
                                     JOIN mesa m ON p.idMesa = m.idMesa
                                     WHERE p.idPedido = " + idPedido + "; ";
                 DBOperacion operacion = new DBOperacion();
@@ -60,6 +61,78 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia = "SELECT idCliente, nombre, direccion, email, telefono, NIT, regContable FROM cliente;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable UltimoPedido()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT idPedido FROM pedido order by idPedido desc limit 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable ObtenerPrecioDeProducto(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT precio FROM producto
+                                    WHERE idProducto = " + id + "; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable ObtenerDetallePedidoConId(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idDetalle, cocinando, extras, horaEntregado, horaPedido, idCocinero, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario, fecha FROM pedido_detalle
+                                    WHERE idDetalle= " + id + "; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable Configuraciones()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT idConfiguracion, controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos FROM configuracion;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -172,10 +245,28 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT pe.idPedido, pd.idProducto, pd.cantidad, pd.precio, pro.nombre, pd.subTotal, pe.fecha
-                                     FROM pedido pe, pedido_detalle pd, producto pro
-                                     WHERE pe.idPedido=pd.idPedido AND pro.idProducto=pd.idProducto AND (pe.idMesa=" + idMesa + @" AND pe.cancelado=0)
-                                     order by pd.idpedido, pe.fecha desc;";
+                String sentencia = @"SELECT 
+                                        pd.idPedido, 
+                                        pd.idProducto, 
+                                        pd.cantidad, 
+                                        pd.precio, 
+                                        pro.nombre, 
+                                        pd.subTotal, 
+                                        pe.fecha
+                                    FROM 
+                                        pedido pe
+                                    JOIN 
+                                        pedido_detalle pd ON pe.idPedido = pd.idPedido
+                                    JOIN 
+                                        producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN 
+                                        mesa m ON pe.idMesa = m.idMesa
+                                    WHERE 
+                                        pe.idMesa = " + idMesa + @" 
+                                        AND pe.cancelado = 0 
+                                        AND m.disponible = 0
+                                    ORDER BY 
+                                        pd.horaPedido DESC;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

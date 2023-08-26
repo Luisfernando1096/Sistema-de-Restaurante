@@ -13,6 +13,9 @@ namespace TPV.GUI
 
     public partial class PuntoVenta : Form
     {
+        public bool cambiarMesa = false;
+        public int idPedidoCambioMesa = 0;
+        private int idMesaAnterior = 0;
         public PuntoVenta()
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace TPV.GUI
                 btnSalon.Size = new Size(200,80);
                 btnSalon.Click += BotonSalon_Click;
                 flpSalones.Controls.Add(btnSalon);
+                flpSalones.ScrollControlIntoView(btnSalon);
                 columna++;
                 if (columna == 5)
                 {
@@ -80,10 +84,17 @@ namespace TPV.GUI
                 {
                     btnMesa.BackColor = Color.MidnightBlue;
                     btnMesa.ForeColor = Color.White;
+                    //Hacer que las mesas se puedan o no seleccionar
+                    if (cambiarMesa && Int32.Parse(btnMesa.Tag.ToString()) != idMesaAnterior)
+                    {
+                        btnMesa.Enabled = false;
+
+                    }
                 }
                 btnMesa.Size = new Size(110, 90);
                 btnMesa.Click += BotonMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
+                flpMesas.ScrollControlIntoView(btnMesa);
             }
         }
 
@@ -92,21 +103,90 @@ namespace TPV.GUI
             this.Hide();
             Button botonMesa = (Button)sender;
             String idMesa = botonMesa.Tag.ToString();
+            //Hacer que las mesas se puedan o no seleccionar
+            if (cambiarMesa)
+            {
+                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                pedido.IdPedido = idPedidoCambioMesa;
+                pedido.IdMesa = Int32.Parse(botonMesa.Tag.ToString());
+
+                if (pedido.ActualizarMesa())
+                {
+                    //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                }
+                else
+                {
+                    MessageBox.Show("ERROR AL ACTUALIZAR");
+                }
+                
+                //Aqui el codigo para cambiar de mesa
+                Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
+                mesa.Disponible = false;
+                mesa.IdMesa = Int32.Parse(botonMesa.Tag.ToString());
+                if (mesa.ActualizarEstado())
+                {
+                    //Hacer disponible la mesa anterior
+                    Mantenimiento.CLS.Mesa mesa2 = new Mantenimiento.CLS.Mesa();
+                    mesa2.Disponible = true;
+                    mesa2.IdMesa = idMesaAnterior;
+                    if (mesa2.ActualizarEstado())
+                    {
+                        //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR AL ACTUALIZAR");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ERROR AL ACTUALIZAR");
+                }
+
+            }
+          
             DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
             ComandaGestion f = new ComandaGestion(this);
-            
+
             if (productoEnMesas.Rows.Count > 0)
             {
+                //Asignamos datos al futuro formulario a abrir.
                 f.CargarProductosPorMesa(idMesa);
                 f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-                f.lblTicket.Visible = true;
+                //Agregando datos mesero y cliente si los hay
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                {
+                    f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                }
             }
             f.lblMesa.Text = botonMesa.Text.ToString();
             f.lblMesa.Tag = botonMesa.Tag.ToString();
-            f.lblMesa.Visible = true;
+            
 
             f.ShowDialog();
-            this.Show();
+            cambiarMesa = f.cambiarMesa;
+            if (!f.lblTicket.Text.ToString().Equals(""))
+            {
+                idPedidoCambioMesa = Int32.Parse(f.lblTicket.Text.ToString());
+            }
+            if (f.lblMesa.Tag != null)
+            {
+                idMesaAnterior = Int32.Parse(f.lblMesa.Tag.ToString());
+            }
+            this.Close();
+
+            PuntoVenta f2 = new PuntoVenta(); // Crea una nueva instancia del formulario
+            f2.cambiarMesa = cambiarMesa;
+            f2.idPedidoCambioMesa = idPedidoCambioMesa;
+            f2.idMesaAnterior = idMesaAnterior;
+            f2.ShowDialog(); // Muestra el nuevo formulario
         }
 
         private void btnSalir_Resize(object sender, EventArgs e)

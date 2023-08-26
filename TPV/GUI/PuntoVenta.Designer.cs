@@ -42,7 +42,6 @@ namespace TPV.GUI
             // flpSalones
             // 
             this.flpSalones.AutoScroll = true;
-            this.flpSalones.AutoSize = true;
             this.flpSalones.Controls.Add(this.btnSalon);
             this.flpSalones.Location = new System.Drawing.Point(12, 98);
             this.flpSalones.Name = "flpSalones";
@@ -61,7 +60,6 @@ namespace TPV.GUI
             // flpMesas
             // 
             this.flpMesas.AutoScroll = true;
-            this.flpMesas.AutoSize = true;
             this.flpMesas.Controls.Add(this.btnMesa);
             this.flpMesas.Location = new System.Drawing.Point(12, 284);
             this.flpMesas.Name = "flpMesas";
@@ -115,7 +113,6 @@ namespace TPV.GUI
             this.flpSalones.ResumeLayout(false);
             this.flpMesas.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

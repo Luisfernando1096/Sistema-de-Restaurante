@@ -68,6 +68,40 @@ namespace ServiceExpressDsk.GUI
             f2.Hide();
             TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago();
             f3.ShowDialog();
+            if (f3.lblMesa.Tag != null)
+            {
+                DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(f3.lblMesa.Tag.ToString());
+
+                if (productoEnMesas.Rows.Count > 0)
+                {
+                    //Aqui cargamos los datos en datagrid 
+                    f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
+                    f2.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                    DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
+                    if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                    {
+                        f2.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                        f2.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                    }
+                    else
+                    {
+                        f2.lblMesero.Text = "";
+                        f2.lblMesero.Tag = "";
+                    }
+                    if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                    {
+                        f2.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                        f2.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                    }
+                    else
+                    {
+                        f2.lblCliente.Text = "";
+                        f2.lblCliente.Tag = "";
+                    }
+                }
+                f2.lblMesa.Text = f3.lblMesa.Text.ToString();
+                f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
+            }
             f2.ShowDialog();
             f.ShowDialog();
             this.Show();
@@ -142,6 +176,30 @@ namespace ServiceExpressDsk.GUI
             Ingredientes_y_Productos.GUI.AjusteStock f = new Ingredientes_y_Productos.GUI.AjusteStock();
             f.ShowDialog();
             this.Show();
+        }
+
+        private void comprasToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.Compras f = new Compras.GUI.Compras();
+            f.ShowDialog();
+        }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.Proveedores f = new Compras.GUI.Proveedores();
+            f.ShowDialog();
+        }
+
+        private void buscarProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.BuscarProveedor f = new Compras.GUI.BuscarProveedor();
+            f.ShowDialog();
+        }
+
+        private void tipoComprobantesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compras.GUI.TipoComprobante f = new Compras.GUI.TipoComprobante();
+            f.ShowDialog();
         }
 
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)

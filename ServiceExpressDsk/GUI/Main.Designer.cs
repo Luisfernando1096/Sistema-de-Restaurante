@@ -101,16 +101,16 @@ namespace ServiceExpressDsk.GUI
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUsuario});
-            this.statusStrip.Location = new System.Drawing.Point(0, 528);
+            this.statusStrip.Location = new System.Drawing.Point(0, 428);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1575, 30);
+            this.statusStrip.Size = new System.Drawing.Size(1028, 25);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
             // lblUsuario
             // 
             this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(51, 20);
             this.lblUsuario.Size = new System.Drawing.Size(60, 20);
             this.lblUsuario.Size = new System.Drawing.Size(61, 24);
             this.lblUsuario.Text = "Estado";
@@ -135,6 +135,8 @@ namespace ServiceExpressDsk.GUI
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1028, 31);
             this.menuStrip1.Size = new System.Drawing.Size(1181, 32);
             this.menuStrip1.Size = new System.Drawing.Size(1575, 37);
             this.menuStrip1.TabIndex = 4;
@@ -149,6 +151,7 @@ namespace ServiceExpressDsk.GUI
             this.ticketsProcesadosToolStripMenuItem,
             this.anularFacturaToolStripMenuItem});
             this.tPVToolStripMenuItem.Name = "tPVToolStripMenuItem";
+            this.tPVToolStripMenuItem.Size = new System.Drawing.Size(52, 27);
             this.tPVToolStripMenuItem.Size = new System.Drawing.Size(59, 28);
             this.tPVToolStripMenuItem.Size = new System.Drawing.Size(65, 33);
             this.tPVToolStripMenuItem.Text = "TPV";
@@ -156,6 +159,7 @@ namespace ServiceExpressDsk.GUI
             // puntoDeVentaToolStripMenuItem
             // 
             this.puntoDeVentaToolStripMenuItem.Name = "puntoDeVentaToolStripMenuItem";
+            this.puntoDeVentaToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.puntoDeVentaToolStripMenuItem.Size = new System.Drawing.Size(244, 28);
             this.puntoDeVentaToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.puntoDeVentaToolStripMenuItem.Text = "Punto de Venta";
@@ -164,6 +168,7 @@ namespace ServiceExpressDsk.GUI
             // puntoDePagoToolStripMenuItem
             // 
             this.puntoDePagoToolStripMenuItem.Name = "puntoDePagoToolStripMenuItem";
+            this.puntoDePagoToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.puntoDePagoToolStripMenuItem.Size = new System.Drawing.Size(244, 28);
             this.puntoDePagoToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.puntoDePagoToolStripMenuItem.Text = "Punto de Pago";
@@ -172,6 +177,7 @@ namespace ServiceExpressDsk.GUI
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(244, 28);
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.clientesToolStripMenuItem.Text = "Clientes";
@@ -180,6 +186,7 @@ namespace ServiceExpressDsk.GUI
             // ticketsProcesadosToolStripMenuItem
             // 
             this.ticketsProcesadosToolStripMenuItem.Name = "ticketsProcesadosToolStripMenuItem";
+            this.ticketsProcesadosToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.ticketsProcesadosToolStripMenuItem.Size = new System.Drawing.Size(244, 28);
             this.ticketsProcesadosToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.ticketsProcesadosToolStripMenuItem.Text = "Tickets Procesados";
@@ -188,6 +195,7 @@ namespace ServiceExpressDsk.GUI
             // anularFacturaToolStripMenuItem
             // 
             this.anularFacturaToolStripMenuItem.Name = "anularFacturaToolStripMenuItem";
+            this.anularFacturaToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
             this.anularFacturaToolStripMenuItem.Size = new System.Drawing.Size(244, 28);
             this.anularFacturaToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.anularFacturaToolStripMenuItem.Text = "Anular Factura";
@@ -205,6 +213,7 @@ namespace ServiceExpressDsk.GUI
             this.presentacionToolStripMenuItem,
             this.ajustarStockToolStripMenuItem});
             this.productosEIngredientesToolStripMenuItem.Name = "productosEIngredientesToolStripMenuItem";
+            this.productosEIngredientesToolStripMenuItem.Size = new System.Drawing.Size(194, 27);
             this.productosEIngredientesToolStripMenuItem.Size = new System.Drawing.Size(232, 28);
             this.productosEIngredientesToolStripMenuItem.Size = new System.Drawing.Size(244, 33);
             this.productosEIngredientesToolStripMenuItem.Text = "Productos e Ingredientes";
@@ -212,6 +221,7 @@ namespace ServiceExpressDsk.GUI
             // productosToolStripMenuItem
             // 
             this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            this.productosToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.productosToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.productosToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.productosToolStripMenuItem.Text = "Productos";
@@ -220,6 +230,7 @@ namespace ServiceExpressDsk.GUI
             // buscarProductosToolStripMenuItem
             // 
             this.buscarProductosToolStripMenuItem.Name = "buscarProductosToolStripMenuItem";
+            this.buscarProductosToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.buscarProductosToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.buscarProductosToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.buscarProductosToolStripMenuItem.Text = "Buscar Productos";
@@ -228,6 +239,7 @@ namespace ServiceExpressDsk.GUI
             // ingredientesToolStripMenuItem
             // 
             this.ingredientesToolStripMenuItem.Name = "ingredientesToolStripMenuItem";
+            this.ingredientesToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.ingredientesToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.ingredientesToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.ingredientesToolStripMenuItem.Text = "Ingredientes";
@@ -236,6 +248,7 @@ namespace ServiceExpressDsk.GUI
             // buscarIngredientesToolStripMenuItem
             // 
             this.buscarIngredientesToolStripMenuItem.Name = "buscarIngredientesToolStripMenuItem";
+            this.buscarIngredientesToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.buscarIngredientesToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.buscarIngredientesToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.buscarIngredientesToolStripMenuItem.Text = "Buscar Ingredientes";
@@ -244,6 +257,7 @@ namespace ServiceExpressDsk.GUI
             // recetasToolStripMenuItem
             // 
             this.recetasToolStripMenuItem.Name = "recetasToolStripMenuItem";
+            this.recetasToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.recetasToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.recetasToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.recetasToolStripMenuItem.Text = "Recetas";
@@ -252,6 +266,7 @@ namespace ServiceExpressDsk.GUI
             // categoriasToolStripMenuItem
             // 
             this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
+            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.categoriasToolStripMenuItem.Text = "Categorias";
@@ -260,6 +275,7 @@ namespace ServiceExpressDsk.GUI
             // presentacionToolStripMenuItem
             // 
             this.presentacionToolStripMenuItem.Name = "presentacionToolStripMenuItem";
+            this.presentacionToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.presentacionToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.presentacionToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.presentacionToolStripMenuItem.Text = "Presentacion";
@@ -268,6 +284,7 @@ namespace ServiceExpressDsk.GUI
             // ajustarStockToolStripMenuItem
             // 
             this.ajustarStockToolStripMenuItem.Name = "ajustarStockToolStripMenuItem";
+            this.ajustarStockToolStripMenuItem.Size = new System.Drawing.Size(218, 28);
             this.ajustarStockToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.ajustarStockToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.ajustarStockToolStripMenuItem.Text = "Ajustar stock";
@@ -281,6 +298,7 @@ namespace ServiceExpressDsk.GUI
             this.buscarProveedorToolStripMenuItem,
             this.tipoComprobantesToolStripMenuItem});
             this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
+            this.comprasToolStripMenuItem.Size = new System.Drawing.Size(86, 27);
             this.comprasToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
             this.comprasToolStripMenuItem.Size = new System.Drawing.Size(107, 33);
             this.comprasToolStripMenuItem.Text = "Compras";
@@ -288,36 +306,45 @@ namespace ServiceExpressDsk.GUI
             // comprasToolStripMenuItem1
             // 
             this.comprasToolStripMenuItem1.Name = "comprasToolStripMenuItem1";
+            this.comprasToolStripMenuItem1.Size = new System.Drawing.Size(217, 28);
             this.comprasToolStripMenuItem1.Size = new System.Drawing.Size(247, 28);
             this.comprasToolStripMenuItem1.Size = new System.Drawing.Size(272, 34);
             this.comprasToolStripMenuItem1.Text = "Compras";
+            this.comprasToolStripMenuItem1.Click += new System.EventHandler(this.comprasToolStripMenuItem1_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(217, 28);
             this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
+            this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // buscarProveedorToolStripMenuItem
             // 
             this.buscarProveedorToolStripMenuItem.Name = "buscarProveedorToolStripMenuItem";
+            this.buscarProveedorToolStripMenuItem.Size = new System.Drawing.Size(217, 28);
             this.buscarProveedorToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.buscarProveedorToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.buscarProveedorToolStripMenuItem.Text = "Buscar Proveedor";
+            this.buscarProveedorToolStripMenuItem.Click += new System.EventHandler(this.buscarProveedorToolStripMenuItem_Click);
             // 
             // tipoComprobantesToolStripMenuItem
             // 
             this.tipoComprobantesToolStripMenuItem.Name = "tipoComprobantesToolStripMenuItem";
+            this.tipoComprobantesToolStripMenuItem.Size = new System.Drawing.Size(217, 28);
             this.tipoComprobantesToolStripMenuItem.Size = new System.Drawing.Size(247, 28);
             this.tipoComprobantesToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.tipoComprobantesToolStripMenuItem.Text = "Tipo Comprobantes";
+            this.tipoComprobantesToolStripMenuItem.Click += new System.EventHandler(this.tipoComprobantesToolStripMenuItem_Click);
             // 
             // salonesToolStripMenuItem
             // 
             this.salonesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salonesYMesasToolStripMenuItem});
             this.salonesToolStripMenuItem.Name = "salonesToolStripMenuItem";
+            this.salonesToolStripMenuItem.Size = new System.Drawing.Size(79, 27);
             this.salonesToolStripMenuItem.Size = new System.Drawing.Size(90, 28);
             this.salonesToolStripMenuItem.Size = new System.Drawing.Size(98, 33);
             this.salonesToolStripMenuItem.Text = "Salones";
@@ -325,6 +352,7 @@ namespace ServiceExpressDsk.GUI
             // salonesYMesasToolStripMenuItem
             // 
             this.salonesYMesasToolStripMenuItem.Name = "salonesYMesasToolStripMenuItem";
+            this.salonesYMesasToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
             this.salonesYMesasToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.salonesYMesasToolStripMenuItem.Size = new System.Drawing.Size(249, 34);
             this.salonesYMesasToolStripMenuItem.Text = "Salones y Mesas";
@@ -337,6 +365,7 @@ namespace ServiceExpressDsk.GUI
             this.salidasEfectivoToolStripMenuItem,
             this.cuentasToolStripMenuItem});
             this.finanzasToolStripMenuItem.Name = "finanzasToolStripMenuItem";
+            this.finanzasToolStripMenuItem.Size = new System.Drawing.Size(87, 27);
             this.finanzasToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
             this.finanzasToolStripMenuItem.Size = new System.Drawing.Size(107, 33);
             this.finanzasToolStripMenuItem.Text = "Finanzas";
@@ -344,6 +373,7 @@ namespace ServiceExpressDsk.GUI
             // aperturaCajaToolStripMenuItem
             // 
             this.aperturaCajaToolStripMenuItem.Name = "aperturaCajaToolStripMenuItem";
+            this.aperturaCajaToolStripMenuItem.Size = new System.Drawing.Size(187, 28);
             this.aperturaCajaToolStripMenuItem.Size = new System.Drawing.Size(211, 28);
             this.aperturaCajaToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.aperturaCajaToolStripMenuItem.Text = "Apertura Caja";
@@ -352,6 +382,7 @@ namespace ServiceExpressDsk.GUI
             // cierreCajaToolStripMenuItem
             // 
             this.cierreCajaToolStripMenuItem.Name = "cierreCajaToolStripMenuItem";
+            this.cierreCajaToolStripMenuItem.Size = new System.Drawing.Size(187, 28);
             this.cierreCajaToolStripMenuItem.Size = new System.Drawing.Size(211, 28);
             this.cierreCajaToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.cierreCajaToolStripMenuItem.Text = "Cierre Caja";
@@ -359,6 +390,7 @@ namespace ServiceExpressDsk.GUI
             // salidasEfectivoToolStripMenuItem
             // 
             this.salidasEfectivoToolStripMenuItem.Name = "salidasEfectivoToolStripMenuItem";
+            this.salidasEfectivoToolStripMenuItem.Size = new System.Drawing.Size(187, 28);
             this.salidasEfectivoToolStripMenuItem.Size = new System.Drawing.Size(211, 28);
             this.salidasEfectivoToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.salidasEfectivoToolStripMenuItem.Text = "Salidas Efectivo";
@@ -367,6 +399,7 @@ namespace ServiceExpressDsk.GUI
             // cuentasToolStripMenuItem
             // 
             this.cuentasToolStripMenuItem.Name = "cuentasToolStripMenuItem";
+            this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(187, 28);
             this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(211, 28);
             this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.cuentasToolStripMenuItem.Text = "Cuentas";
@@ -383,6 +416,7 @@ namespace ServiceExpressDsk.GUI
             this.visorDeEventosToolStripMenuItem,
             this.administrarSesionesToolStripMenuItem});
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
+            this.personalToolStripMenuItem.Size = new System.Drawing.Size(84, 27);
             this.personalToolStripMenuItem.Size = new System.Drawing.Size(96, 28);
             this.personalToolStripMenuItem.Size = new System.Drawing.Size(105, 33);
             this.personalToolStripMenuItem.Text = "Personal";
@@ -390,6 +424,7 @@ namespace ServiceExpressDsk.GUI
             // empleadosToolStripMenuItem
             // 
             this.empleadosToolStripMenuItem.Name = "empleadosToolStripMenuItem";
+            this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.empleadosToolStripMenuItem.Text = "Empleados";
@@ -398,6 +433,7 @@ namespace ServiceExpressDsk.GUI
             // rolesToolStripMenuItem
             // 
             this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.rolesToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.rolesToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.rolesToolStripMenuItem.Text = "Roles";
@@ -406,6 +442,7 @@ namespace ServiceExpressDsk.GUI
             // asignarRolesToolStripMenuItem
             // 
             this.asignarRolesToolStripMenuItem.Name = "asignarRolesToolStripMenuItem";
+            this.asignarRolesToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.asignarRolesToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.asignarRolesToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.asignarRolesToolStripMenuItem.Text = "Asignar Roles";
@@ -414,6 +451,7 @@ namespace ServiceExpressDsk.GUI
             // comandosToolStripMenuItem
             // 
             this.comandosToolStripMenuItem.Name = "comandosToolStripMenuItem";
+            this.comandosToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.comandosToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.comandosToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.comandosToolStripMenuItem.Text = "Comandos";
@@ -421,6 +459,7 @@ namespace ServiceExpressDsk.GUI
             // permisosToolStripMenuItem
             // 
             this.permisosToolStripMenuItem.Name = "permisosToolStripMenuItem";
+            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.permisosToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.permisosToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.permisosToolStripMenuItem.Text = "Permisos";
@@ -428,6 +467,7 @@ namespace ServiceExpressDsk.GUI
             // visorDeEventosToolStripMenuItem
             // 
             this.visorDeEventosToolStripMenuItem.Name = "visorDeEventosToolStripMenuItem";
+            this.visorDeEventosToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.visorDeEventosToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.visorDeEventosToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.visorDeEventosToolStripMenuItem.Text = "Visor de Evento";
@@ -435,6 +475,7 @@ namespace ServiceExpressDsk.GUI
             // administrarSesionesToolStripMenuItem
             // 
             this.administrarSesionesToolStripMenuItem.Name = "administrarSesionesToolStripMenuItem";
+            this.administrarSesionesToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
             this.administrarSesionesToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.administrarSesionesToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.administrarSesionesToolStripMenuItem.Text = "Administrar Sesiones";
@@ -449,6 +490,7 @@ namespace ServiceExpressDsk.GUI
             this.clientesToolStripMenuItem1,
             this.proveedoresToolStripMenuItem1});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(85, 27);
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(107, 33);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -456,6 +498,7 @@ namespace ServiceExpressDsk.GUI
             // reportesFiltradosToolStripMenuItem
             // 
             this.reportesFiltradosToolStripMenuItem.Name = "reportesFiltradosToolStripMenuItem";
+            this.reportesFiltradosToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
             this.reportesFiltradosToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.reportesFiltradosToolStripMenuItem.Size = new System.Drawing.Size(254, 34);
             this.reportesFiltradosToolStripMenuItem.Text = "Reportes filtrados";
@@ -463,6 +506,7 @@ namespace ServiceExpressDsk.GUI
             // productosToolStripMenuItem1
             // 
             this.productosToolStripMenuItem1.Name = "productosToolStripMenuItem1";
+            this.productosToolStripMenuItem1.Size = new System.Drawing.Size(199, 28);
             this.productosToolStripMenuItem1.Size = new System.Drawing.Size(224, 28);
             this.productosToolStripMenuItem1.Size = new System.Drawing.Size(254, 34);
             this.productosToolStripMenuItem1.Text = "Productos";
@@ -470,6 +514,7 @@ namespace ServiceExpressDsk.GUI
             // ingredientesToolStripMenuItem1
             // 
             this.ingredientesToolStripMenuItem1.Name = "ingredientesToolStripMenuItem1";
+            this.ingredientesToolStripMenuItem1.Size = new System.Drawing.Size(199, 28);
             this.ingredientesToolStripMenuItem1.Size = new System.Drawing.Size(224, 28);
             this.ingredientesToolStripMenuItem1.Size = new System.Drawing.Size(254, 34);
             this.ingredientesToolStripMenuItem1.Text = "Ingredientes";
@@ -477,6 +522,7 @@ namespace ServiceExpressDsk.GUI
             // ventasDiariasToolStripMenuItem
             // 
             this.ventasDiariasToolStripMenuItem.Name = "ventasDiariasToolStripMenuItem";
+            this.ventasDiariasToolStripMenuItem.Size = new System.Drawing.Size(199, 28);
             this.ventasDiariasToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.ventasDiariasToolStripMenuItem.Size = new System.Drawing.Size(254, 34);
             this.ventasDiariasToolStripMenuItem.Text = "Ventas Diarias";
@@ -484,6 +530,7 @@ namespace ServiceExpressDsk.GUI
             // clientesToolStripMenuItem1
             // 
             this.clientesToolStripMenuItem1.Name = "clientesToolStripMenuItem1";
+            this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(199, 28);
             this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(224, 28);
             this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(254, 34);
             this.clientesToolStripMenuItem1.Text = "Clientes";
@@ -491,6 +538,7 @@ namespace ServiceExpressDsk.GUI
             // proveedoresToolStripMenuItem1
             // 
             this.proveedoresToolStripMenuItem1.Name = "proveedoresToolStripMenuItem1";
+            this.proveedoresToolStripMenuItem1.Size = new System.Drawing.Size(199, 28);
             this.proveedoresToolStripMenuItem1.Size = new System.Drawing.Size(224, 28);
             this.proveedoresToolStripMenuItem1.Size = new System.Drawing.Size(254, 34);
             this.proveedoresToolStripMenuItem1.Text = "Proveedores";
@@ -502,6 +550,7 @@ namespace ServiceExpressDsk.GUI
             this.restaurarBaseDeDatosToolStripMenuItem,
             this.vaciarBaseDeDatosToolStripMenuItem});
             this.respaldosToolStripMenuItem.Name = "respaldosToolStripMenuItem";
+            this.respaldosToolStripMenuItem.Size = new System.Drawing.Size(97, 27);
             this.respaldosToolStripMenuItem.Size = new System.Drawing.Size(111, 28);
             this.respaldosToolStripMenuItem.Size = new System.Drawing.Size(120, 33);
             this.respaldosToolStripMenuItem.Text = "Respaldos";
@@ -509,6 +558,7 @@ namespace ServiceExpressDsk.GUI
             // respaldarBaseDeDatosToolStripMenuItem
             // 
             this.respaldarBaseDeDatosToolStripMenuItem.Name = "respaldarBaseDeDatosToolStripMenuItem";
+            this.respaldarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(258, 28);
             this.respaldarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(291, 28);
             this.respaldarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(323, 34);
             this.respaldarBaseDeDatosToolStripMenuItem.Text = "Respaldar Base de Datos";
@@ -516,6 +566,7 @@ namespace ServiceExpressDsk.GUI
             // restaurarBaseDeDatosToolStripMenuItem
             // 
             this.restaurarBaseDeDatosToolStripMenuItem.Name = "restaurarBaseDeDatosToolStripMenuItem";
+            this.restaurarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(258, 28);
             this.restaurarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(291, 28);
             this.restaurarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(323, 34);
             this.restaurarBaseDeDatosToolStripMenuItem.Text = "Restaurar Base de Datos";
@@ -523,6 +574,7 @@ namespace ServiceExpressDsk.GUI
             // vaciarBaseDeDatosToolStripMenuItem
             // 
             this.vaciarBaseDeDatosToolStripMenuItem.Name = "vaciarBaseDeDatosToolStripMenuItem";
+            this.vaciarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(258, 28);
             this.vaciarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(291, 28);
             this.vaciarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(323, 34);
             this.vaciarBaseDeDatosToolStripMenuItem.Text = "Vaciar Base de Datos";
@@ -537,6 +589,7 @@ namespace ServiceExpressDsk.GUI
             this.tirajeFacturaToolStripMenuItem,
             this.administrarFacturasToolStripMenuItem});
             this.configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
+            this.configuracionesToolStripMenuItem.Size = new System.Drawing.Size(135, 27);
             this.configuracionesToolStripMenuItem.Size = new System.Drawing.Size(159, 28);
             this.configuracionesToolStripMenuItem.Size = new System.Drawing.Size(170, 33);
             this.configuracionesToolStripMenuItem.Text = "Configuraciones";
@@ -544,6 +597,7 @@ namespace ServiceExpressDsk.GUI
             // configurarTPVToolStripMenuItem
             // 
             this.configurarTPVToolStripMenuItem.Name = "configurarTPVToolStripMenuItem";
+            this.configurarTPVToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.configurarTPVToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
             this.configurarTPVToolStripMenuItem.Size = new System.Drawing.Size(281, 34);
             this.configurarTPVToolStripMenuItem.Text = "Configurar TPV";
@@ -551,6 +605,7 @@ namespace ServiceExpressDsk.GUI
             // empresaToolStripMenuItem
             // 
             this.empresaToolStripMenuItem.Name = "empresaToolStripMenuItem";
+            this.empresaToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.empresaToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
             this.empresaToolStripMenuItem.Size = new System.Drawing.Size(281, 34);
             this.empresaToolStripMenuItem.Text = "Empresa";
@@ -558,6 +613,7 @@ namespace ServiceExpressDsk.GUI
             // ticketsToolStripMenuItem
             // 
             this.ticketsToolStripMenuItem.Name = "ticketsToolStripMenuItem";
+            this.ticketsToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.ticketsToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
             this.ticketsToolStripMenuItem.Size = new System.Drawing.Size(281, 34);
             this.ticketsToolStripMenuItem.Text = "Tickets";
@@ -565,6 +621,7 @@ namespace ServiceExpressDsk.GUI
             // recomendadaToolStripMenuItem
             // 
             this.recomendadaToolStripMenuItem.Name = "recomendadaToolStripMenuItem";
+            this.recomendadaToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.recomendadaToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
             this.recomendadaToolStripMenuItem.Size = new System.Drawing.Size(281, 34);
             this.recomendadaToolStripMenuItem.Text = "Recomendada";
@@ -572,6 +629,7 @@ namespace ServiceExpressDsk.GUI
             // tirajeFacturaToolStripMenuItem
             // 
             this.tirajeFacturaToolStripMenuItem.Name = "tirajeFacturaToolStripMenuItem";
+            this.tirajeFacturaToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.tirajeFacturaToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
             this.tirajeFacturaToolStripMenuItem.Size = new System.Drawing.Size(281, 34);
             this.tirajeFacturaToolStripMenuItem.Text = "Tiraje Factura";
@@ -579,6 +637,7 @@ namespace ServiceExpressDsk.GUI
             // administrarFacturasToolStripMenuItem
             // 
             this.administrarFacturasToolStripMenuItem.Name = "administrarFacturasToolStripMenuItem";
+            this.administrarFacturasToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.administrarFacturasToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
             this.administrarFacturasToolStripMenuItem.Size = new System.Drawing.Size(281, 34);
             this.administrarFacturasToolStripMenuItem.Text = "Administrar Facturas";
@@ -588,6 +647,7 @@ namespace ServiceExpressDsk.GUI
             this.cuentasPorCobrarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cuentaPorCobrarToolStripMenuItem});
             this.cuentasPorCobrarToolStripMenuItem.Name = "cuentasPorCobrarToolStripMenuItem";
+            this.cuentasPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(159, 27);
             this.cuentasPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(186, 28);
             this.cuentasPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(200, 33);
             this.cuentasPorCobrarToolStripMenuItem.Text = "Cuentas por Cobrar";
@@ -595,6 +655,7 @@ namespace ServiceExpressDsk.GUI
             // cuentaPorCobrarToolStripMenuItem
             // 
             this.cuentaPorCobrarToolStripMenuItem.Name = "cuentaPorCobrarToolStripMenuItem";
+            this.cuentaPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(210, 28);
             this.cuentaPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(236, 28);
             this.cuentaPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(265, 34);
             this.cuentaPorCobrarToolStripMenuItem.Text = "Cuenta Por Cobrar";
@@ -604,6 +665,7 @@ namespace ServiceExpressDsk.GUI
             this.sesionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cerrarToolStripMenuItem});
             this.sesionToolStripMenuItem.Name = "sesionToolStripMenuItem";
+            this.sesionToolStripMenuItem.Size = new System.Drawing.Size(70, 27);
             this.sesionToolStripMenuItem.Size = new System.Drawing.Size(80, 28);
             this.sesionToolStripMenuItem.Size = new System.Drawing.Size(87, 33);
             this.sesionToolStripMenuItem.Text = "Sesion";
@@ -611,6 +673,7 @@ namespace ServiceExpressDsk.GUI
             // cerrarToolStripMenuItem
             // 
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(176, 28);
             this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
             this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(222, 34);
             this.cerrarToolStripMenuItem.Text = "Cerrar Sesion";
@@ -619,21 +682,21 @@ namespace ServiceExpressDsk.GUI
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 27);
             this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 28);
             this.toolStripMenuItem1.Size = new System.Drawing.Size(14, 33);
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1575, 558);
+            this.ClientSize = new System.Drawing.Size(1028, 453);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion";

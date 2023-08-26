@@ -51,6 +51,7 @@ namespace TPV.GUI
                 btnMesa.Size = new Size(253, 42);
                 btnMesa.Click += BotonMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
+                flpMesas.ScrollControlIntoView(btnMesa);
             }
         }
 

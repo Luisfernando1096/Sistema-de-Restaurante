@@ -42,7 +42,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"INSERT INTO pedido_detalle(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario, fecha) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuario + "', '" + fecha + "');";
+            sentencia = @"INSERT INTO pedido_detalle(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuario + "');";
 
             try
             {
@@ -63,7 +63,33 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Actualizar()
+        public Boolean ActualizarCompra()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @" 
+                            WHERE pe.idPedido=pd.idPedido AND pe.idPedido = " + idPedido + @" AND pd.idProducto = " + idProducto + @";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
+        public Boolean ActualizarDatos()
         {
             Boolean resultado = false;
             string sentencia;

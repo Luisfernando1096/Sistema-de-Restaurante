@@ -38,12 +38,11 @@ namespace TPV.GUI
             // flpMesas
             // 
             this.flpMesas.AutoScroll = true;
-            this.flpMesas.AutoSize = true;
             this.flpMesas.Controls.Add(this.btnMesa);
             this.flpMesas.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpMesas.Location = new System.Drawing.Point(12, 65);
+            this.flpMesas.Location = new System.Drawing.Point(2, 65);
             this.flpMesas.Name = "flpMesas";
-            this.flpMesas.Size = new System.Drawing.Size(259, 150);
+            this.flpMesas.Size = new System.Drawing.Size(284, 150);
             this.flpMesas.TabIndex = 2;
             this.flpMesas.WrapContents = false;
             // 
@@ -72,16 +71,16 @@ namespace TPV.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 232);
+            this.ClientSize = new System.Drawing.Size(286, 259);
             this.Controls.Add(this.cmbSalon);
             this.Controls.Add(this.flpMesas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SeleccionSalonMesa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccione Salon y Mesa";
             this.Load += new System.EventHandler(this.SeleccionSalonMesa_Load);
             this.flpMesas.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

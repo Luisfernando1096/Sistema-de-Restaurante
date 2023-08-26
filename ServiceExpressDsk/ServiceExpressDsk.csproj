@@ -108,6 +108,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Compras\Compras.csproj">
+      <Project>{daaabf86-c50d-42b6-824a-7e6eef455a86}</Project>
+      <Name>Compras</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
