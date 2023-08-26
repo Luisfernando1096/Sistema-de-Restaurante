@@ -75,12 +75,38 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Actualizar()
+        public Boolean ActualizarCliente()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE pedido SET idMesa = " + idMesa + ", idCuenta = " + idCuenta + ", cancelado = " + cancelado + ", fecha = '" + fecha + "', listo = " + listo + ", total = " + total + ", descuento = " + descuento + ", iva = " + iva + ", propina = " + propina + ", totalPago = " + totalPago + ", saldo = " + saldo + ", nFactura = '" + nFactura + "', anular = " + anular + ", efectivo = " + efectivo + ", credito = " + credito + ", btc = " + btc + " " +
-                "WHERE idPedido = " + idPedido + ";";
+            sentencia = @"UPDATE pedido SET idCliente = " + idCliente + 
+                " WHERE idPedido = " + idPedido + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
+        public Boolean ActualizarMesero()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"UPDATE pedido SET idMesero = " + idMesero +
+                " WHERE idPedido = " + idPedido + ";";
 
             try
             {

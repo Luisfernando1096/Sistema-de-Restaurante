@@ -67,6 +67,12 @@
     <Compile Include="GUI\ComandaGestion.Designer.cs">
       <DependentUpon>ComandaGestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\MeserosSeleccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MeserosSeleccion.Designer.cs">
+      <DependentUpon>MeserosSeleccion.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\PuntoPago.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ComandaGestion.resx">
       <DependentUpon>ComandaGestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MeserosSeleccion.resx">
+      <DependentUpon>MeserosSeleccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\PuntoPago.resx">
       <DependentUpon>PuntoPago.cs</DependentUpon>

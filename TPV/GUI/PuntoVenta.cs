@@ -150,6 +150,7 @@ namespace TPV.GUI
 
             if (productoEnMesas.Rows.Count > 0)
             {
+                //Asignamos datos al futuro formulario a abrir.
                 f.CargarProductosPorMesa(idMesa);
                 f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
                 //Agregando datos mesero y cliente si los hay

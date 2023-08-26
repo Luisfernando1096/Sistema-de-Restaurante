@@ -198,7 +198,6 @@ namespace TPV.GUI
                 if (aumentarUnProducto)
                 {
                     //Ya existe un producto igual en el datgrid, hay que aumentar
-                    MessageBox.Show("Aumentar producto");
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
                     pedidoDetalle.Cantidad = cantidad;
@@ -211,7 +210,6 @@ namespace TPV.GUI
                 else
                 {
                     //No existe un producto igual en el datgrid, hay que crearlo
-                    MessageBox.Show("Crear producto");
                     pedidoDetalle.IdDetalle = 0;
                     pedidoDetalle.Cocinando = true;
                     pedidoDetalle.Extras = "";
@@ -372,34 +370,39 @@ namespace TPV.GUI
             {
                 this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
 
-                //Obtengo el pedido que estaba abierto en el punto de pago.
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f.lblTicket.Text.ToString()));
-                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
-                {
-                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
-                }
-                else
-                {
-                    lblMesero.Text = "";
-                    lblMesero.Tag = "";
-                }
-                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                {
-                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                }
-                else
-                {
-                    lblCliente.Text = "";
-                    lblCliente.Tag = "";
-                }
+                ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()));
                 lblMesa.Text = f.lblMesa.Text.ToString();
                 lblMesa.Tag = f.lblMesa.Tag.ToString();
                 lblTicket.Text = f.lblTicket.Text;
             }
             
             this.Show();
+        }
+
+        private void ActualizarLabelsRetroceder(int id)
+        {
+            //Obtengo el pedido que estaba abierto en el punto de pago.
+            DataTable pedido = DataManager.DBConsultas.PedidoPorId(id);
+            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+            {
+                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+            }
+            else
+            {
+                lblMesero.Text = "";
+                lblMesero.Tag = "";
+            }
+            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+            {
+                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+            }
+            else
+            {
+                lblCliente.Text = "";
+                lblCliente.Tag = "";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -435,7 +438,42 @@ namespace TPV.GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
+            ClientesGestion cg = new ClientesGestion();
+            cg.seleccionCliente = true;
+            if (lblTicket.Text.ToString().Equals(""))
+            {
+                cg.idPedido = 0;
+            }
+            else
+            {
+                cg.idPedido = Int32.Parse(lblTicket.Text.ToString());
+            }
+            
+            cg.ShowDialog();
+            if (!lblTicket.Text.ToString().Equals(""))
+            {
+                ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()));
+            }
+            
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MeserosSeleccion m = new MeserosSeleccion();
+            if (lblTicket.Text.ToString().Equals(""))
+            {
+                m.idPedido = 0;
+            }
+            else
+            {
+                m.idPedido = Int32.Parse(lblTicket.Text.ToString());
+            }
+
+            m.ShowDialog();
+            if (!lblTicket.Text.ToString().Equals(""))
+            {
+                ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()));
+            }
         }
     }
 }

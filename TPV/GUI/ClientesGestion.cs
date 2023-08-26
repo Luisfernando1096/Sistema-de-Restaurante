@@ -13,6 +13,8 @@ namespace TPV.GUI
     public partial class ClientesGestion : Form
     {
         BindingSource datos = new BindingSource();
+        public Boolean seleccionCliente = false;
+        public int idPedido;
         public ClientesGestion()
         {
             InitializeComponent();
@@ -150,6 +152,32 @@ namespace TPV.GUI
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            //Codigo para filtrar clientes por nombre
+            MessageBox.Show("Hola estoy escribiendo");
+        }
+
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (seleccionCliente)
+            {
+                if(idPedido != 0)
+                {
+                    Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                    pedido.IdPedido = idPedido;
+                    pedido.IdCliente = Int32.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString());
+                    pedido.ActualizarCliente();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("No hay ningun pedido seleccionado para asignar un cliente");
+                }
+                
             }
         }
     }
