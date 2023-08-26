@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    public class Ajuste_Stock
+    public  class Ajuste_Stock
     {
         int _idAjuste;
         int _idProducto;

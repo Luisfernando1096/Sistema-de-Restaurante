@@ -255,6 +255,79 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable Empleados()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idEmpleado,nombres,apellidos,telefono,email,DUI,NIT,sueldoBase,comision,direccion FROM empleado;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable Roles()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM rol;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable UsuariosSinRol()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT e.idEmpleado,concat(nombres,' ',apellidos)Empleado FROM  empleado e left join usuario u On e.idEmpleado = u.idUsuario where u.idUsuario is null;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable UsuariosSegunRol(String IDROL)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"Select e.idEmpleado,concat(e.nombres,' ',e.apellidos)Empleado From empleado e, usuario u, rol r where e.idEmpleado = u.idUsuario and u.idRol = r.idRol and r.idRol = "+IDROL+";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable VerIngrediente()
         {
             try

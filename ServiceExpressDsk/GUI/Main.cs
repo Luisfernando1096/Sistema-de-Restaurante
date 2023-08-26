@@ -157,5 +157,26 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
             this.Show();
         }
+
+        private void empleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Personal.GUI.EmpleadosGestion f = new Personal.GUI.EmpleadosGestion();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Personal.GUI.RolesGestion f = new Personal.GUI.RolesGestion();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void asignarRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Personal.GUI.Asignar_roles f = new Personal.GUI.Asignar_roles();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }

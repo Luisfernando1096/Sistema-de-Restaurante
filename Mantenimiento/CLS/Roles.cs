@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Roles
+    public class Roles
     {
         /*DECLARACION DE VARIABLES*/
         int idRol;

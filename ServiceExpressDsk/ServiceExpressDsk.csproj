@@ -112,6 +112,14 @@
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Personal\Personal.csproj">
+      <Project>{df452496-63e3-4aa2-8e9a-09517b20fc50}</Project>
+      <Name>Personal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Salones\Salones.csproj">
+      <Project>{435e58e5-86e9-4574-961d-899f8a47cb27}</Project>
+      <Name>Salones</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Finanzas\Finanzas.csproj">
       <Project>{80e2accc-0b6b-491b-a4c1-e43f6c5996e1}</Project>
       <Name>Finanzas</Name>
