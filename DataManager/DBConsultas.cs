@@ -344,6 +344,240 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable Cuentas()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                string sentencia = "SELECT * FROM cuenta;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable Caja()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                string sentencia = "SELECT * FROM caja;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable Egreso()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable ConsultaFiltros1(string txtFechaDesde, string txtFechaHasta)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                DBOperacion operacion = new DBOperacion();
+
+                if (txtFechaHasta == string.Empty & txtFechaDesde == string.Empty)
+                {
+                    String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado;";
+                    resultado = operacion.Consultar(sentencia);
+
+                }
+                else if (txtFechaDesde != string.Empty & txtFechaHasta == string.Empty)
+                {
+                    if (DateTime.TryParse(txtFechaDesde, out DateTime fechaConvertida))
+                    {
+                        string fechaConvertidaString = fechaConvertida.ToString("yyyy-MM-dd");
+                        if (txtFechaDesde == fechaConvertidaString)
+                        {
+                            string sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em WHERE e.idUsuario = em.idEmpleado AND e.fecha >= '" + txtFechaDesde + "'";
+                            resultado = operacion.Consultar(sentencia);
+                        }
+                        else
+                        {
+                            return new DataTable();
+                        }
+                    }
+                    else
+                    {
+                        return new DataTable();
+                    }
+                }
+                else if (txtFechaDesde == string.Empty & txtFechaHasta != string.Empty)
+                {
+                    if (DateTime.TryParse(txtFechaHasta, out DateTime fechaConvertida))
+                    {
+                        string fechaConvertidaString = fechaConvertida.ToString("yyyy-MM-dd");
+                        if (txtFechaHasta == fechaConvertidaString)
+                        {
+                            string sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em WHERE e.idUsuario = em.idEmpleado AND e.fecha  <= '" + txtFechaHasta + "'";
+                            resultado = operacion.Consultar(sentencia);
+                        }
+                        else
+                        {
+                            return new DataTable();
+                        }
+                    }
+                    else
+                    {
+                        return new DataTable();
+                    }
+                }
+                else if (txtFechaDesde != string.Empty & txtFechaHasta != string.Empty)
+                {
+                    if (DateTime.TryParse(txtFechaDesde, out DateTime fechaConvertidaDesde) && DateTime.TryParse(txtFechaHasta, out DateTime fechaConvertidaHasta))
+                    {
+                        string fechaConvertidaStringDesde = fechaConvertidaDesde.ToString("yyyy-MM-dd");
+                        string fechaConvertidaStringHasta = fechaConvertidaHasta.ToString("yyyy-MM-dd");
+
+                        if ((txtFechaDesde == fechaConvertidaStringDesde)&&(txtFechaHasta == fechaConvertidaStringHasta))
+                        {
+                            string nuevoTxtDesde = txtFechaDesde + " 00:00:00";
+                            string nuevoTxtHasta = txtFechaHasta + " 23:59:59";
+
+                            string sentencia = "SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em WHERE e.idUsuario = em.idEmpleado AND e.fecha >= '" + txtFechaDesde + "' AND e.fecha  <= '" + nuevoTxtHasta + "'";
+                            resultado = operacion.Consultar(sentencia);
+                        }
+                        else
+                        {
+                            return new DataTable();
+                        }
+                    }
+                    else
+                    {
+                        return new DataTable();
+                    }
+                }
+                else
+                {
+                    return new DataTable();
+                }
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+            }
+        }
+        public static DataTable ConsultaFiltros2(string txtFechaDesde, string txtFechaHasta, int cmbID)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                DBOperacion operacion = new DBOperacion();
+
+                if (cmbID == 0 & txtFechaHasta == string.Empty & txtFechaDesde == string.Empty)
+                {
+                    String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado;";
+                    resultado = operacion.Consultar(sentencia);
+                }
+                else if (cmbID != 0 & txtFechaDesde == string.Empty & txtFechaHasta == string.Empty)
+                {
+                    String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado and e.idCaja = " + cmbID + ";";
+                    resultado = operacion.Consultar(sentencia);
+                }
+                else if (cmbID != 0 & txtFechaDesde != string.Empty & txtFechaHasta == string.Empty)
+                {
+                    if (DateTime.TryParse(txtFechaDesde, out DateTime fechaConvertida))
+                    {
+                        string fechaConvertidaString = fechaConvertida.ToString("yyyy-MM-dd");
+                        if (txtFechaDesde == fechaConvertidaString)
+                        {
+                            string sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em  WHERE e.idUsuario = em.idEmpleado AND e.idCaja = " + cmbID + " AND e.fecha >= '" + txtFechaDesde + "'";
+                            resultado = operacion.Consultar(sentencia);
+                        }
+                        else
+                        {
+                            return new DataTable();
+                        }
+                    }
+                    else
+                    {
+                        return new DataTable();
+                    }
+                }
+                else if (cmbID != 0 & txtFechaDesde == string.Empty & txtFechaHasta != string.Empty)
+                {
+                    if (DateTime.TryParse(txtFechaHasta, out DateTime fechaConvertida))
+                    {
+                        string fechaConvertidaString = fechaConvertida.ToString("yyyy-MM-dd");
+                        if (txtFechaHasta == fechaConvertidaString)
+                        {
+                            string sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em  WHERE e.idUsuario = em.idEmpleado AND e.idCaja = " + cmbID + " AND e.fecha  <= '" + txtFechaHasta + "'";
+                            resultado = operacion.Consultar(sentencia);
+                        }
+                        else
+                        {
+                            return new DataTable();
+                        }
+                    }
+                    else
+                    {
+                        return new DataTable();
+                    }
+                }
+                else if (cmbID != 0 & txtFechaDesde != string.Empty & txtFechaHasta != string.Empty)
+                {
+                    if (DateTime.TryParse(txtFechaDesde, out DateTime fechaConvertidaDesde) && DateTime.TryParse(txtFechaHasta, out DateTime fechaConvertidaHasta))
+                    {
+                        string fechaConvertidaStringDesde = fechaConvertidaDesde.ToString("yyyy-MM-dd");
+                        string fechaConvertidaStringHasta = fechaConvertidaHasta.ToString("yyyy-MM-dd");
+
+                        if ((txtFechaDesde == fechaConvertidaStringDesde) && (txtFechaHasta == fechaConvertidaStringHasta))
+                        {
+                            string nuevoTxtDesde = txtFechaDesde + " 00:00:00";
+                            string nuevoTxtHasta = txtFechaHasta + " 23:59:59";
+
+                            string sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em  WHERE e.idUsuario = em.idEmpleado AND e.idCaja = " + cmbID + " AND e.fecha BETWEEN '" + nuevoTxtDesde + "' AND'" + nuevoTxtHasta + "'";
+                            resultado = operacion.Consultar(sentencia);
+                        }
+                        else
+                        {
+                            return new DataTable();
+                        }
+                    }
+                    else
+                    {
+                        return new DataTable();
+                    }
+                }
+                else
+                {
+                    return new DataTable();
+                }
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+            }
+        }
     }
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Cuenta
+    public class Cuenta
     {
         int idCuenta;
         String nombreCuenta;

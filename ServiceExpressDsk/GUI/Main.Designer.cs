@@ -332,12 +332,14 @@ namespace ServiceExpressDsk.GUI
             this.salidasEfectivoToolStripMenuItem.Name = "salidasEfectivoToolStripMenuItem";
             this.salidasEfectivoToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.salidasEfectivoToolStripMenuItem.Text = "Salidas Efectivo";
+            this.salidasEfectivoToolStripMenuItem.Click += new System.EventHandler(this.salidasEfectivoToolStripMenuItem_Click);
             // 
             // cuentasToolStripMenuItem
             // 
             this.cuentasToolStripMenuItem.Name = "cuentasToolStripMenuItem";
             this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.cuentasToolStripMenuItem.Text = "Cuentas";
+            this.cuentasToolStripMenuItem.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
             // 
             // personalToolStripMenuItem
             // 

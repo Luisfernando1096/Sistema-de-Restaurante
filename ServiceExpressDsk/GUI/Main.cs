@@ -143,5 +143,19 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
             this.Show();
         }
+
+        private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Finanzas.GUI.AdministrarCuentas f = new Finanzas.GUI.AdministrarCuentas();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void salidasEfectivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Finanzas.GUI.Egresos f = new Finanzas.GUI.Egresos();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }
