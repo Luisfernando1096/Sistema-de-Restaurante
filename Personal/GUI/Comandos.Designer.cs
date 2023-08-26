@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Comandos));
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtIdComando = new System.Windows.Forms.TextBox();
             this.lblIdComando = new System.Windows.Forms.Label();
@@ -48,8 +50,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.lblComando = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +86,20 @@
             this.dgvCategorias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCategorias.Size = new System.Drawing.Size(679, 222);
             this.dgvCategorias.TabIndex = 52;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "IdComando";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 175;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Comando";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // lblEmail
             // 
@@ -228,20 +242,6 @@
             this.label1.TabIndex = 55;
             this.label1.Text = "Autogenerado";
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "IdComando";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 175;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Comando";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
             // Comandos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,6 +256,7 @@
             this.Controls.Add(this.lblIdComando);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Comandos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comandos";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.toolStrip1.ResumeLayout(false);

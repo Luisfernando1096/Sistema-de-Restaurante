@@ -35,7 +35,8 @@ namespace ServiceExpressDsk.GUI
             //timer1.Start();
         }
 
-        private void puntoDeVentaToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             this.Hide();
             TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
@@ -43,23 +44,7 @@ namespace ServiceExpressDsk.GUI
             this.Show();
         }
 
-        private void aperturaCajaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
-            f.ShowDialog();
-        }
-
-        private void puntoDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             this.Hide();
             TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
@@ -107,134 +92,138 @@ namespace ServiceExpressDsk.GUI
             this.Show();
         }
 
-        private void ticketsProcesadosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
+            f.ShowDialog();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TPV.GUI.TicketsProcesados f = new TPV.GUI.TicketsProcesados();
             f.ShowDialog();
         }
 
-        private void anularFacturaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
             TPV.GUI.AnularFactura f = new TPV.GUI.AnularFactura();
             f.ShowDialog();
         }
 
-        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void buscarProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Ingredientes_y_Productos.GUI.BuscarProducto f = new Ingredientes_y_Productos.GUI.BuscarProducto();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void ingredientesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void buscarIngredientesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Ingredientes_y_Productos.GUI.BuscarIngrediente f = new Ingredientes_y_Productos.GUI.BuscarIngrediente();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
+            f.tabControl1.SelectedIndex = 1;
+            f.ShowDialog();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
         {
             Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
             f.tabControl1.SelectedIndex = 1;
             f.ShowDialog();
         }
-        private void recetasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
-            f.tabControl1.SelectedIndex = 1;
-            f.ShowDialog();
-        }
 
-        private void presentacionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton9_Click(object sender, EventArgs e)
         {
             Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
             f.tabControl1.SelectedIndex = 2;
             f.ShowDialog();
         }
 
-        private void ajustarStockToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton8_Click(object sender, EventArgs e)
         {
             Ingredientes_y_Productos.GUI.AjusteStock f = new Ingredientes_y_Productos.GUI.AjusteStock();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void comprasToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void toolStripButton10_Click(object sender, EventArgs e)
         {
             Compras.GUI.Compras f = new Compras.GUI.Compras();
             f.ShowDialog();
         }
 
-        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton11_Click(object sender, EventArgs e)
         {
             Compras.GUI.Proveedores f = new Compras.GUI.Proveedores();
             f.ShowDialog();
         }
 
-        private void buscarProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton12_Click(object sender, EventArgs e)
         {
             Compras.GUI.BuscarProveedor f = new Compras.GUI.BuscarProveedor();
             f.ShowDialog();
         }
 
-        private void tipoComprobantesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton13_Click(object sender, EventArgs e)
         {
             Compras.GUI.TipoComprobante f = new Compras.GUI.TipoComprobante();
             f.ShowDialog();
         }
 
-        private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Finanzas.GUI.AdministrarCuentas f = new Finanzas.GUI.AdministrarCuentas();
-            f.ShowDialog();
-            this.Show();
-        }
-
-        private void salidasEfectivoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton17_Click(object sender, EventArgs e)
         {
             Finanzas.GUI.Egresos f = new Finanzas.GUI.Egresos();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void empleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton18_Click(object sender, EventArgs e)
+        {
+            Finanzas.GUI.AdministrarCuentas f = new Finanzas.GUI.AdministrarCuentas();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton19_Click(object sender, EventArgs e)
         {
             Personal.GUI.EmpleadosGestion f = new Personal.GUI.EmpleadosGestion();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton20_Click(object sender, EventArgs e)
         {
             Personal.GUI.RolesGestion f = new Personal.GUI.RolesGestion();
             f.ShowDialog();
-            this.Show();
         }
 
-        private void asignarRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton21_Click(object sender, EventArgs e)
         {
             Personal.GUI.Asignar_roles f = new Personal.GUI.Asignar_roles();
             f.ShowDialog();
-            this.Show();
+        }
+
+        private void toolStripButton41_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void toolStripButton15_Click(object sender, EventArgs e)
+        {
+            Salones.GUI.SalonesMesas f = new Salones.GUI.SalonesMesas();
+            f.ShowDialog();
         }
     }
 }

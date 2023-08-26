@@ -303,5 +303,10 @@ namespace Finanzas.GUI
         {
 
         }
+
+        private void btnSalirIngrediente_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

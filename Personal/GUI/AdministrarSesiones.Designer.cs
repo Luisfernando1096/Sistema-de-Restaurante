@@ -228,6 +228,7 @@
             this.Controls.Add(this.dgvCategorias);
             this.Controls.Add(this.toolStrip1);
             this.Name = "AdministrarSesiones";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdministrarSesiones";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.toolStrip1.ResumeLayout(false);

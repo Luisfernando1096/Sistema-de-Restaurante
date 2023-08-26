@@ -231,6 +231,7 @@
             this.Controls.Add(this.dgvCategorias);
             this.Controls.Add(this.toolStrip1);
             this.Name = "VisorEventos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VisorEventos";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

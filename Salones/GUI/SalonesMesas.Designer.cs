@@ -250,6 +250,7 @@
             this.Controls.Add(this.txtIdMesa);
             this.Controls.Add(this.toolStrip1);
             this.Name = "SalonesMesas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SalonesMesas";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.toolStrip1.ResumeLayout(false);
