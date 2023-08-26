@@ -357,6 +357,7 @@ namespace ServiceExpressDsk.GUI
             this.asignarRolesToolStripMenuItem.Name = "asignarRolesToolStripMenuItem";
             this.asignarRolesToolStripMenuItem.Size = new System.Drawing.Size(257, 28);
             this.asignarRolesToolStripMenuItem.Text = "Asignar Roles";
+            this.asignarRolesToolStripMenuItem.Click += new System.EventHandler(this.asignarRolesToolStripMenuItem_Click);
             // 
             // comandosToolStripMenuItem
             // 

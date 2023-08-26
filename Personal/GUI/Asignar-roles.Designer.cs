@@ -31,21 +31,21 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Asignar_roles));
             this.label1 = new System.Windows.Forms.Label();
             this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgtUsuarioSin = new System.Windows.Forms.DataGridView();
+            this.idEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgtUsuariosRol = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgtUsuarioSin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgtUsuariosRol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -67,34 +67,50 @@
             this.cmbRol.Name = "cmbRol";
             this.cmbRol.Size = new System.Drawing.Size(222, 21);
             this.cmbRol.TabIndex = 1;
+            this.cmbRol.SelectedValueChanged += new System.EventHandler(this.cmbRol_SelectedValueChanged);
             // 
-            // dataGridView1
+            // dgtUsuarioSin
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 130);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(280, 170);
-            this.dataGridView1.TabIndex = 2;
+            this.dgtUsuarioSin.AllowUserToAddRows = false;
+            this.dgtUsuarioSin.AllowUserToDeleteRows = false;
+            this.dgtUsuarioSin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgtUsuarioSin.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idEmpleado,
+            this.Empleado});
+            this.dgtUsuarioSin.Location = new System.Drawing.Point(12, 130);
+            this.dgtUsuarioSin.Name = "dgtUsuarioSin";
+            this.dgtUsuarioSin.ReadOnly = true;
+            this.dgtUsuarioSin.Size = new System.Drawing.Size(280, 170);
+            this.dgtUsuarioSin.TabIndex = 2;
             // 
-            // dataGridView2
+            // idEmpleado
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idEmpleado.DataPropertyName = "idEmpleado";
+            this.idEmpleado.HeaderText = "ID";
+            this.idEmpleado.Name = "idEmpleado";
+            this.idEmpleado.ReadOnly = true;
+            // 
+            // Empleado
+            // 
+            this.Empleado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Empleado.DataPropertyName = "Empleado";
+            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.ReadOnly = true;
+            // 
+            // dgtUsuariosRol
+            // 
+            this.dgtUsuariosRol.AllowUserToAddRows = false;
+            this.dgtUsuariosRol.AllowUserToDeleteRows = false;
+            this.dgtUsuariosRol.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgtUsuariosRol.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column4});
-            this.dataGridView2.Location = new System.Drawing.Point(420, 130);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(280, 170);
-            this.dataGridView2.TabIndex = 3;
+            this.dgtUsuariosRol.Location = new System.Drawing.Point(420, 130);
+            this.dgtUsuariosRol.Name = "dgtUsuariosRol";
+            this.dgtUsuariosRol.ReadOnly = true;
+            this.dgtUsuariosRol.Size = new System.Drawing.Size(280, 170);
+            this.dgtUsuariosRol.TabIndex = 3;
             // 
             // label2
             // 
@@ -146,12 +162,6 @@
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 57);
-            // 
             // btnSalir
             // 
             this.btnSalir.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -159,32 +169,30 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(109, 54);
-            this.btnSalir.Text = "Salir";
+            this.btnSalir.Size = new System.Drawing.Size(72, 54);
+            this.btnSalir.Text = " ";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // Column1
+            // toolStripSeparator2
             // 
-            this.Column1.HeaderText = "ID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Empleado";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 57);
             // 
             // Column3
             // 
+            this.Column3.DataPropertyName = "idEmpleado";
             this.Column3.HeaderText = "ID";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.DataPropertyName = "Empleado";
             this.Column4.HeaderText = "Empleado";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Asignar_roles
             // 
@@ -196,14 +204,15 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgtUsuariosRol);
+            this.Controls.Add(this.dgtUsuarioSin);
             this.Controls.Add(this.cmbRol);
             this.Controls.Add(this.label1);
             this.Name = "Asignar_roles";
             this.Text = "Asignar_roles";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.Load += new System.EventHandler(this.Asignar_roles_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgtUsuarioSin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgtUsuariosRol)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -217,8 +226,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbRol;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgtUsuarioSin;
+        private System.Windows.Forms.DataGridView dgtUsuariosRol;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -226,8 +235,8 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idEmpleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }

@@ -66,5 +66,12 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
             this.Show();
         }
+
+        private void asignarRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Personal.GUI.Asignar_roles f = new Personal.GUI.Asignar_roles();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }
