@@ -80,5 +80,38 @@ namespace Personal.GUI
         {
             CargarUsuarioRol();
         }
+
+        private void btnEnrolar_Click(object sender, EventArgs e)
+        {
+            HacerVisiblesCampos();
+        }
+
+        private void HacerVisiblesCampos()
+        {
+            lblIdEmpleado.Text = dgtUsuarioSin.CurrentRow.Cells["idEmpleado"].Value.ToString();
+            lblIdEmpleado.Visible = true;
+            lblNombre.Text = dgtUsuarioSin.CurrentRow.Cells["Empleado"].Value.ToString();
+            lblNombre.Visible = true;
+
+            lblPin.Visible = true;
+            lblRepetirPin.Visible = true;
+            txtPin.Visible = true;
+            txtPinRepetido.Visible = true;
+            btnGuardar.Visible = true;
+        }
+
+        private void OcultarCampos()
+        {
+            lblIdEmpleado.Text = "";
+            lblIdEmpleado.Visible = false;
+            lblNombre.Text = "";
+            lblNombre.Visible = false;
+
+            lblPin.Visible = false;
+            lblRepetirPin.Visible = false;
+            txtPin.Visible = false;
+            txtPinRepetido.Visible = false;
+            btnGuardar.Visible = false;
+        }
     }
 }
