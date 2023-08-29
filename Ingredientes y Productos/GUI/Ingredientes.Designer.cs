@@ -145,9 +145,10 @@ namespace Ingredientes_y_Productos.GUI
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(200, 40);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1337, 674);
+            this.tabControl1.Size = new System.Drawing.Size(1003, 548);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPageIngredientes
@@ -157,9 +158,10 @@ namespace Ingredientes_y_Productos.GUI
             this.tabPageIngredientes.Controls.Add(this.toolStrip2);
             this.tabPageIngredientes.Controls.Add(this.groupBox3);
             this.tabPageIngredientes.Location = new System.Drawing.Point(4, 44);
+            this.tabPageIngredientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageIngredientes.Name = "tabPageIngredientes";
-            this.tabPageIngredientes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIngredientes.Size = new System.Drawing.Size(1329, 626);
+            this.tabPageIngredientes.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageIngredientes.Size = new System.Drawing.Size(995, 500);
             this.tabPageIngredientes.TabIndex = 0;
             this.tabPageIngredientes.Text = "        Ingredientes        ";
             this.tabPageIngredientes.UseVisualStyleBackColor = true;
@@ -182,14 +184,15 @@ namespace Ingredientes_y_Productos.GUI
             this.Precio});
             this.dgvIngredientes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIngredientes.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvIngredientes.Location = new System.Drawing.Point(3, 114);
+            this.dgvIngredientes.Location = new System.Drawing.Point(2, 104);
+            this.dgvIngredientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvIngredientes.Name = "dgvIngredientes";
             this.dgvIngredientes.ReadOnly = true;
             this.dgvIngredientes.RowHeadersVisible = false;
             this.dgvIngredientes.RowHeadersWidth = 51;
             this.dgvIngredientes.RowTemplate.Height = 24;
             this.dgvIngredientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvIngredientes.Size = new System.Drawing.Size(1323, 447);
+            this.dgvIngredientes.Size = new System.Drawing.Size(991, 344);
             this.dgvIngredientes.TabIndex = 0;
             this.dgvIngredientes.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvIngredientes_ColumnHeaderMouseClick);
             // 
@@ -261,35 +264,40 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(3, 65);
+            this.groupBox2.Location = new System.Drawing.Point(2, 64);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1323, 49);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(991, 40);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(912, 18);
+            this.label5.Location = new System.Drawing.Point(684, 15);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 17);
+            this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 17;
             this.label5.Text = "Precio";
             // 
             // txtPrecioIngrediente
             // 
-            this.txtPrecioIngrediente.Location = new System.Drawing.Point(961, 15);
+            this.txtPrecioIngrediente.Location = new System.Drawing.Point(721, 12);
+            this.txtPrecioIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPrecioIngrediente.Name = "txtPrecioIngrediente";
-            this.txtPrecioIngrediente.Size = new System.Drawing.Size(85, 22);
+            this.txtPrecioIngrediente.Size = new System.Drawing.Size(65, 20);
             this.txtPrecioIngrediente.TabIndex = 16;
             this.txtPrecioIngrediente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioIngrediente_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(753, 18);
+            this.label4.Location = new System.Drawing.Point(565, 15);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 17);
+            this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 15;
             this.label4.Text = "Stock";
             // 
@@ -297,58 +305,65 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.cmPresentacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmPresentacion.FormattingEnabled = true;
-            this.cmPresentacion.Location = new System.Drawing.Point(570, 15);
+            this.cmPresentacion.Location = new System.Drawing.Point(428, 12);
+            this.cmPresentacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmPresentacion.Name = "cmPresentacion";
-            this.cmPresentacion.Size = new System.Drawing.Size(162, 24);
+            this.cmPresentacion.Size = new System.Drawing.Size(122, 21);
             this.cmPresentacion.TabIndex = 14;
             // 
             // txtStockIngrediente
             // 
-            this.txtStockIngrediente.Location = new System.Drawing.Point(802, 15);
+            this.txtStockIngrediente.Location = new System.Drawing.Point(602, 12);
+            this.txtStockIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtStockIngrediente.Name = "txtStockIngrediente";
-            this.txtStockIngrediente.Size = new System.Drawing.Size(85, 22);
+            this.txtStockIngrediente.Size = new System.Drawing.Size(65, 20);
             this.txtStockIngrediente.TabIndex = 13;
             this.txtStockIngrediente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStockIngrediente_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(473, 18);
+            this.label1.Location = new System.Drawing.Point(355, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 17);
+            this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 12;
             this.label1.Text = "Presentacion";
             // 
             // txtIDIngrediente
             // 
             this.txtIDIngrediente.Enabled = false;
-            this.txtIDIngrediente.Location = new System.Drawing.Point(33, 15);
+            this.txtIDIngrediente.Location = new System.Drawing.Point(25, 12);
+            this.txtIDIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIDIngrediente.Name = "txtIDIngrediente";
-            this.txtIDIngrediente.Size = new System.Drawing.Size(27, 22);
+            this.txtIDIngrediente.Size = new System.Drawing.Size(21, 20);
             this.txtIDIngrediente.TabIndex = 11;
             // 
             // txtNombreIngrediente
             // 
-            this.txtNombreIngrediente.Location = new System.Drawing.Point(247, 15);
+            this.txtNombreIngrediente.Location = new System.Drawing.Point(185, 12);
+            this.txtNombreIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNombreIngrediente.Name = "txtNombreIngrediente";
-            this.txtNombreIngrediente.Size = new System.Drawing.Size(202, 22);
+            this.txtNombreIngrediente.Size = new System.Drawing.Size(152, 20);
             this.txtNombreIngrediente.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Location = new System.Drawing.Point(4, 15);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 17);
+            this.label2.Size = new System.Drawing.Size(18, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "ID";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(85, 18);
+            this.label3.Location = new System.Drawing.Point(64, 15);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(156, 17);
+            this.label3.Size = new System.Drawing.Size(116, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Nombre del ingrediente";
             // 
@@ -369,9 +384,9 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton6,
             this.toolStripSeparator8,
             this.toolStripLabel1});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Location = new System.Drawing.Point(2, 2);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1323, 62);
+            this.toolStrip2.Size = new System.Drawing.Size(991, 62);
             this.toolStrip2.TabIndex = 11;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -386,7 +401,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(161, 59);
+            this.btnEliminar.Size = new System.Drawing.Size(143, 59);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -401,7 +416,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(115, 59);
+            this.btnEditar.Size = new System.Drawing.Size(102, 59);
             this.btnEditar.Text = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
@@ -416,7 +431,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(149, 59);
+            this.btnGuardar.Size = new System.Drawing.Size(133, 59);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -426,7 +441,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(129, 59);
+            this.btnLimpiar.Size = new System.Drawing.Size(114, 59);
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
@@ -437,7 +452,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnSalirIngrediente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalirIngrediente.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalirIngrediente.Name = "btnSalirIngrediente";
-            this.btnSalirIngrediente.Size = new System.Drawing.Size(112, 59);
+            this.btnSalirIngrediente.Size = new System.Drawing.Size(101, 59);
             this.btnSalirIngrediente.Text = "Salir";
             this.btnSalirIngrediente.Click += new System.EventHandler(this.btnSalirIngrediente_Click);
             // 
@@ -448,7 +463,7 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(144, 59);
+            this.toolStripButton6.Size = new System.Drawing.Size(126, 59);
             this.toolStripButton6.Text = "Imprimir";
             // 
             // toolStripSeparator8
@@ -470,9 +485,11 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.Controls.Add(this.rbtnIngrediente);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 561);
+            this.groupBox3.Location = new System.Drawing.Point(2, 448);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1323, 62);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(991, 50);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
@@ -480,9 +497,10 @@ namespace Ingredientes_y_Productos.GUI
             // rbtNinguno
             // 
             this.rbtNinguno.AutoSize = true;
-            this.rbtNinguno.Location = new System.Drawing.Point(19, 26);
+            this.rbtNinguno.Location = new System.Drawing.Point(14, 21);
+            this.rbtNinguno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbtNinguno.Name = "rbtNinguno";
-            this.rbtNinguno.Size = new System.Drawing.Size(80, 21);
+            this.rbtNinguno.Size = new System.Drawing.Size(62, 17);
             this.rbtNinguno.TabIndex = 31;
             this.rbtNinguno.TabStop = true;
             this.rbtNinguno.Text = "Sin filtro";
@@ -493,18 +511,20 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(329, 24);
+            this.cmbLista.Location = new System.Drawing.Point(247, 20);
+            this.cmbLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(376, 24);
+            this.cmbLista.Size = new System.Drawing.Size(283, 21);
             this.cmbLista.TabIndex = 30;
             this.cmbLista.SelectedIndexChanged += new System.EventHandler(this.cmbLista_SelectedIndexChanged);
             // 
             // rbtnPresentacion
             // 
             this.rbtnPresentacion.AutoSize = true;
-            this.rbtnPresentacion.Location = new System.Drawing.Point(211, 26);
+            this.rbtnPresentacion.Location = new System.Drawing.Point(158, 21);
+            this.rbtnPresentacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbtnPresentacion.Name = "rbtnPresentacion";
-            this.rbtnPresentacion.Size = new System.Drawing.Size(112, 21);
+            this.rbtnPresentacion.Size = new System.Drawing.Size(87, 17);
             this.rbtnPresentacion.TabIndex = 29;
             this.rbtnPresentacion.TabStop = true;
             this.rbtnPresentacion.Text = "Presentacion";
@@ -514,9 +534,10 @@ namespace Ingredientes_y_Productos.GUI
             // rbtnIngrediente
             // 
             this.rbtnIngrediente.AutoSize = true;
-            this.rbtnIngrediente.Location = new System.Drawing.Point(105, 25);
+            this.rbtnIngrediente.Location = new System.Drawing.Point(79, 20);
+            this.rbtnIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbtnIngrediente.Name = "rbtnIngrediente";
-            this.rbtnIngrediente.Size = new System.Drawing.Size(100, 21);
+            this.rbtnIngrediente.Size = new System.Drawing.Size(78, 17);
             this.rbtnIngrediente.TabIndex = 28;
             this.rbtnIngrediente.TabStop = true;
             this.rbtnIngrediente.Text = "Ingrediente";
@@ -526,12 +547,13 @@ namespace Ingredientes_y_Productos.GUI
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(850, 17);
+            this.label9.Location = new System.Drawing.Point(631, 14);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(467, 42);
+            this.label9.Size = new System.Drawing.Size(357, 34);
             this.label9.TabIndex = 26;
-            this.label9.Text = "Si desea cambiar la presentacion de un producto seleccionelo y presiona sobre MOD" +
-    "IFICAR, cambialo y Guardalo ";
+            this.label9.Text = "Si desea cambiar la presentacion de un producto seleccionelo y presiona sobre EDI" +
+    "TAR, cambialo y Guardalo ";
             // 
             // tabPageRecetas
             // 
@@ -540,9 +562,10 @@ namespace Ingredientes_y_Productos.GUI
             this.tabPageRecetas.Controls.Add(this.toolStrip1);
             this.tabPageRecetas.Controls.Add(this.groupBox9);
             this.tabPageRecetas.Location = new System.Drawing.Point(4, 44);
+            this.tabPageRecetas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageRecetas.Name = "tabPageRecetas";
-            this.tabPageRecetas.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRecetas.Size = new System.Drawing.Size(1329, 626);
+            this.tabPageRecetas.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageRecetas.Size = new System.Drawing.Size(995, 500);
             this.tabPageRecetas.TabIndex = 1;
             this.tabPageRecetas.Text = "       Recetas       ";
             this.tabPageRecetas.UseVisualStyleBackColor = true;
@@ -563,14 +586,15 @@ namespace Ingredientes_y_Productos.GUI
             this.Column1});
             this.dgvReceta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReceta.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvReceta.Location = new System.Drawing.Point(3, 146);
+            this.dgvReceta.Location = new System.Drawing.Point(2, 130);
+            this.dgvReceta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvReceta.Name = "dgvReceta";
             this.dgvReceta.ReadOnly = true;
             this.dgvReceta.RowHeadersVisible = false;
             this.dgvReceta.RowHeadersWidth = 51;
             this.dgvReceta.RowTemplate.Height = 24;
             this.dgvReceta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReceta.Size = new System.Drawing.Size(1323, 415);
+            this.dgvReceta.Size = new System.Drawing.Size(991, 318);
             this.dgvReceta.TabIndex = 5;
             // 
             // idIngredienteReceta
@@ -619,17 +643,20 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox5.Controls.Add(this.txtIDProducto);
             this.groupBox5.Controls.Add(this.label12);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 65);
+            this.groupBox5.Location = new System.Drawing.Point(2, 64);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1323, 81);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Size = new System.Drawing.Size(991, 66);
             this.groupBox5.TabIndex = 13;
             this.groupBox5.TabStop = false;
             // 
             // bntAgregar
             // 
-            this.bntAgregar.Location = new System.Drawing.Point(1136, 34);
+            this.bntAgregar.Location = new System.Drawing.Point(852, 28);
+            this.bntAgregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bntAgregar.Name = "bntAgregar";
-            this.bntAgregar.Size = new System.Drawing.Size(124, 35);
+            this.bntAgregar.Size = new System.Drawing.Size(93, 28);
             this.bntAgregar.TabIndex = 20;
             this.bntAgregar.Text = "Agregar";
             this.bntAgregar.UseVisualStyleBackColor = true;
@@ -637,26 +664,29 @@ namespace Ingredientes_y_Productos.GUI
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(920, 40);
+            this.txtCantidad.Location = new System.Drawing.Point(690, 32);
+            this.txtCantidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(69, 22);
+            this.txtCantidad.Size = new System.Drawing.Size(53, 20);
             this.txtCantidad.TabIndex = 19;
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // lblCantidad
             // 
             this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(917, 19);
+            this.lblCantidad.Location = new System.Drawing.Point(688, 15);
+            this.lblCantidad.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(182, 17);
+            this.lblCantidad.Size = new System.Drawing.Size(135, 13);
             this.lblCantidad.TabIndex = 18;
             this.lblCantidad.Text = "Cantidad (3 digitos maximo)";
             // 
             // btnBuscarIngrediente
             // 
-            this.btnBuscarIngrediente.Location = new System.Drawing.Point(736, 37);
+            this.btnBuscarIngrediente.Location = new System.Drawing.Point(552, 30);
+            this.btnBuscarIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBuscarIngrediente.Name = "btnBuscarIngrediente";
-            this.btnBuscarIngrediente.Size = new System.Drawing.Size(161, 25);
+            this.btnBuscarIngrediente.Size = new System.Drawing.Size(121, 20);
             this.btnBuscarIngrediente.TabIndex = 17;
             this.btnBuscarIngrediente.Text = "Buscar Ingrediente";
             this.btnBuscarIngrediente.UseVisualStyleBackColor = true;
@@ -665,33 +695,37 @@ namespace Ingredientes_y_Productos.GUI
             // txtNombre
             // 
             this.txtNombre.Enabled = false;
-            this.txtNombre.Location = new System.Drawing.Point(494, 38);
+            this.txtNombre.Location = new System.Drawing.Point(370, 31);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(236, 22);
+            this.txtNombre.Size = new System.Drawing.Size(178, 20);
             this.txtNombre.TabIndex = 16;
             // 
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(448, 39);
+            this.txtID.Location = new System.Drawing.Point(336, 32);
+            this.txtID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(36, 22);
+            this.txtID.Size = new System.Drawing.Size(28, 20);
             this.txtID.TabIndex = 15;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(445, 19);
+            this.label7.Location = new System.Drawing.Point(334, 15);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 17);
+            this.label7.Size = new System.Drawing.Size(136, 13);
             this.label7.TabIndex = 14;
             this.label7.Text = "Seleccione los ingredientes";
             // 
             // bntBuscarProducto
             // 
-            this.bntBuscarProducto.Location = new System.Drawing.Point(299, 36);
+            this.bntBuscarProducto.Location = new System.Drawing.Point(224, 29);
+            this.bntBuscarProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bntBuscarProducto.Name = "bntBuscarProducto";
-            this.bntBuscarProducto.Size = new System.Drawing.Size(124, 26);
+            this.bntBuscarProducto.Size = new System.Drawing.Size(93, 21);
             this.bntBuscarProducto.TabIndex = 13;
             this.bntBuscarProducto.Text = "Buscar producto";
             this.bntBuscarProducto.UseVisualStyleBackColor = true;
@@ -700,25 +734,28 @@ namespace Ingredientes_y_Productos.GUI
             // txtNombreProducto
             // 
             this.txtNombreProducto.Enabled = false;
-            this.txtNombreProducto.Location = new System.Drawing.Point(53, 37);
+            this.txtNombreProducto.Location = new System.Drawing.Point(40, 30);
+            this.txtNombreProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNombreProducto.Name = "txtNombreProducto";
-            this.txtNombreProducto.Size = new System.Drawing.Size(236, 22);
+            this.txtNombreProducto.Size = new System.Drawing.Size(178, 20);
             this.txtNombreProducto.TabIndex = 12;
             // 
             // txtIDProducto
             // 
             this.txtIDProducto.Enabled = false;
-            this.txtIDProducto.Location = new System.Drawing.Point(9, 38);
+            this.txtIDProducto.Location = new System.Drawing.Point(7, 31);
+            this.txtIDProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIDProducto.Name = "txtIDProducto";
-            this.txtIDProducto.Size = new System.Drawing.Size(36, 22);
+            this.txtIDProducto.Size = new System.Drawing.Size(28, 20);
             this.txtIDProducto.TabIndex = 11;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 18);
+            this.label12.Location = new System.Drawing.Point(4, 15);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(137, 17);
+            this.label12.Size = new System.Drawing.Size(105, 13);
             this.label12.TabIndex = 8;
             this.label12.Text = "Seleccione producto";
             // 
@@ -739,9 +776,9 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton12,
             this.toolStripSeparator4,
             this.toolStripLabel2});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Location = new System.Drawing.Point(2, 2);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1323, 62);
+            this.toolStrip1.Size = new System.Drawing.Size(991, 62);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -756,7 +793,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnEliminarReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminarReceta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminarReceta.Name = "btnEliminarReceta";
-            this.btnEliminarReceta.Size = new System.Drawing.Size(161, 59);
+            this.btnEliminarReceta.Size = new System.Drawing.Size(143, 59);
             this.btnEliminarReceta.Text = "Eliminar";
             this.btnEliminarReceta.Click += new System.EventHandler(this.btnEliminarReceta_Click);
             // 
@@ -771,7 +808,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnEditarReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditarReceta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditarReceta.Name = "btnEditarReceta";
-            this.btnEditarReceta.Size = new System.Drawing.Size(115, 59);
+            this.btnEditarReceta.Size = new System.Drawing.Size(102, 59);
             this.btnEditarReceta.Text = "Editar";
             this.btnEditarReceta.Click += new System.EventHandler(this.btnEditarReceta_Click);
             // 
@@ -786,7 +823,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnGuardarReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGuardarReceta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGuardarReceta.Name = "btnGuardarReceta";
-            this.btnGuardarReceta.Size = new System.Drawing.Size(149, 59);
+            this.btnGuardarReceta.Size = new System.Drawing.Size(133, 59);
             this.btnGuardarReceta.Text = "Guardar";
             this.btnGuardarReceta.Click += new System.EventHandler(this.btnGuardarReceta_Click);
             // 
@@ -796,7 +833,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnLimpiarReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLimpiarReceta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLimpiarReceta.Name = "btnLimpiarReceta";
-            this.btnLimpiarReceta.Size = new System.Drawing.Size(129, 59);
+            this.btnLimpiarReceta.Size = new System.Drawing.Size(114, 59);
             this.btnLimpiarReceta.Text = "Limpiar";
             this.btnLimpiarReceta.Click += new System.EventHandler(this.btnLimpiarReceta_Click);
             // 
@@ -807,7 +844,7 @@ namespace Ingredientes_y_Productos.GUI
             this.bntSalirReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bntSalirReceta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bntSalirReceta.Name = "bntSalirReceta";
-            this.bntSalirReceta.Size = new System.Drawing.Size(112, 59);
+            this.bntSalirReceta.Size = new System.Drawing.Size(101, 59);
             this.bntSalirReceta.Text = "Salir";
             this.bntSalirReceta.Click += new System.EventHandler(this.bntSalirReceta_Click);
             // 
@@ -818,7 +855,7 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(144, 59);
+            this.toolStripButton12.Size = new System.Drawing.Size(126, 59);
             this.toolStripButton12.Text = "Imprimir";
             // 
             // toolStripSeparator4
@@ -835,9 +872,11 @@ namespace Ingredientes_y_Productos.GUI
             // groupBox9
             // 
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox9.Location = new System.Drawing.Point(3, 561);
+            this.groupBox9.Location = new System.Drawing.Point(2, 448);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(1323, 62);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox9.Size = new System.Drawing.Size(991, 50);
             this.groupBox9.TabIndex = 6;
             this.groupBox9.TabStop = false;
             // 
@@ -848,9 +887,10 @@ namespace Ingredientes_y_Productos.GUI
             this.tabPageUnidadMedida.Controls.Add(this.toolStrip3);
             this.tabPageUnidadMedida.Controls.Add(this.groupBox6);
             this.tabPageUnidadMedida.Location = new System.Drawing.Point(4, 44);
+            this.tabPageUnidadMedida.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageUnidadMedida.Name = "tabPageUnidadMedida";
-            this.tabPageUnidadMedida.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUnidadMedida.Size = new System.Drawing.Size(1329, 626);
+            this.tabPageUnidadMedida.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageUnidadMedida.Size = new System.Drawing.Size(995, 500);
             this.tabPageUnidadMedida.TabIndex = 2;
             this.tabPageUnidadMedida.Text = "       Unidades de medida       ";
             this.tabPageUnidadMedida.UseVisualStyleBackColor = true;
@@ -869,14 +909,15 @@ namespace Ingredientes_y_Productos.GUI
             this.unidadMedida});
             this.dgvUnidad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUnidad.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvUnidad.Location = new System.Drawing.Point(3, 114);
+            this.dgvUnidad.Location = new System.Drawing.Point(2, 104);
+            this.dgvUnidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvUnidad.Name = "dgvUnidad";
             this.dgvUnidad.ReadOnly = true;
             this.dgvUnidad.RowHeadersVisible = false;
             this.dgvUnidad.RowHeadersWidth = 51;
             this.dgvUnidad.RowTemplate.Height = 24;
             this.dgvUnidad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUnidad.Size = new System.Drawing.Size(1323, 447);
+            this.dgvUnidad.Size = new System.Drawing.Size(991, 344);
             this.dgvUnidad.TabIndex = 6;
             // 
             // idUnidadMedida
@@ -904,42 +945,48 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox7.Controls.Add(this.txtIDUnidad);
             this.groupBox7.Controls.Add(this.label19);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox7.Location = new System.Drawing.Point(3, 65);
+            this.groupBox7.Location = new System.Drawing.Point(2, 64);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(1323, 49);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox7.Size = new System.Drawing.Size(991, 40);
             this.groupBox7.TabIndex = 14;
             this.groupBox7.TabStop = false;
             // 
             // txtPresentacion
             // 
-            this.txtPresentacion.Location = new System.Drawing.Point(425, 17);
+            this.txtPresentacion.Location = new System.Drawing.Point(319, 14);
+            this.txtPresentacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPresentacion.Name = "txtPresentacion";
-            this.txtPresentacion.Size = new System.Drawing.Size(432, 22);
+            this.txtPresentacion.Size = new System.Drawing.Size(325, 20);
             this.txtPresentacion.TabIndex = 13;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(115, 20);
+            this.label18.Location = new System.Drawing.Point(86, 16);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(304, 17);
+            this.label18.Size = new System.Drawing.Size(228, 13);
             this.label18.TabIndex = 12;
             this.label18.Text = "Unidad de medida o presentacion del producto";
             // 
             // txtIDUnidad
             // 
             this.txtIDUnidad.Enabled = false;
-            this.txtIDUnidad.Location = new System.Drawing.Point(33, 15);
+            this.txtIDUnidad.Location = new System.Drawing.Point(25, 12);
+            this.txtIDUnidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIDUnidad.Name = "txtIDUnidad";
-            this.txtIDUnidad.Size = new System.Drawing.Size(46, 22);
+            this.txtIDUnidad.Size = new System.Drawing.Size(36, 20);
             this.txtIDUnidad.TabIndex = 11;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 18);
+            this.label19.Location = new System.Drawing.Point(4, 15);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(21, 17);
+            this.label19.Size = new System.Drawing.Size(18, 13);
             this.label19.TabIndex = 8;
             this.label19.Text = "ID";
             // 
@@ -960,9 +1007,9 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton18,
             this.toolStripSeparator12,
             this.toolStripLabel3});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip3.Location = new System.Drawing.Point(2, 2);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(1323, 62);
+            this.toolStrip3.Size = new System.Drawing.Size(991, 62);
             this.toolStrip3.TabIndex = 13;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -977,7 +1024,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnEliminarUnidad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminarUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminarUnidad.Name = "btnEliminarUnidad";
-            this.btnEliminarUnidad.Size = new System.Drawing.Size(161, 59);
+            this.btnEliminarUnidad.Size = new System.Drawing.Size(143, 59);
             this.btnEliminarUnidad.Text = "Eliminar";
             this.btnEliminarUnidad.Click += new System.EventHandler(this.btnEliminarUnidad_Click);
             // 
@@ -992,7 +1039,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnEditarUnidad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditarUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditarUnidad.Name = "btnEditarUnidad";
-            this.btnEditarUnidad.Size = new System.Drawing.Size(115, 59);
+            this.btnEditarUnidad.Size = new System.Drawing.Size(102, 59);
             this.btnEditarUnidad.Text = "Editar";
             this.btnEditarUnidad.Click += new System.EventHandler(this.btnEditarUnidad_Click);
             // 
@@ -1007,7 +1054,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnGuardarUnidad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGuardarUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGuardarUnidad.Name = "btnGuardarUnidad";
-            this.btnGuardarUnidad.Size = new System.Drawing.Size(149, 59);
+            this.btnGuardarUnidad.Size = new System.Drawing.Size(133, 59);
             this.btnGuardarUnidad.Text = "Guardar";
             this.btnGuardarUnidad.Click += new System.EventHandler(this.btnGuardarUnidad_Click);
             // 
@@ -1017,7 +1064,7 @@ namespace Ingredientes_y_Productos.GUI
             this.btnLimpiarUnidad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLimpiarUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLimpiarUnidad.Name = "btnLimpiarUnidad";
-            this.btnLimpiarUnidad.Size = new System.Drawing.Size(129, 59);
+            this.btnLimpiarUnidad.Size = new System.Drawing.Size(114, 59);
             this.btnLimpiarUnidad.Text = "Limpiar";
             this.btnLimpiarUnidad.Click += new System.EventHandler(this.btnLimpiarUnidad_Click);
             // 
@@ -1028,7 +1075,7 @@ namespace Ingredientes_y_Productos.GUI
             this.bntSalirUnidad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bntSalirUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bntSalirUnidad.Name = "bntSalirUnidad";
-            this.bntSalirUnidad.Size = new System.Drawing.Size(112, 59);
+            this.bntSalirUnidad.Size = new System.Drawing.Size(101, 59);
             this.bntSalirUnidad.Text = "Salir";
             this.bntSalirUnidad.Click += new System.EventHandler(this.bntSalirUnidad_Click);
             // 
@@ -1039,7 +1086,7 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton18.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton18.Name = "toolStripButton18";
-            this.toolStripButton18.Size = new System.Drawing.Size(144, 59);
+            this.toolStripButton18.Size = new System.Drawing.Size(126, 59);
             this.toolStripButton18.Text = "Imprimir";
             // 
             // toolStripSeparator12
@@ -1056,18 +1103,21 @@ namespace Ingredientes_y_Productos.GUI
             // groupBox6
             // 
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox6.Location = new System.Drawing.Point(3, 561);
+            this.groupBox6.Location = new System.Drawing.Point(2, 448);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1323, 62);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Size = new System.Drawing.Size(991, 50);
             this.groupBox6.TabIndex = 7;
             this.groupBox6.TabStop = false;
             // 
             // Ingredientes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1337, 674);
+            this.ClientSize = new System.Drawing.Size(1003, 548);
             this.Controls.Add(this.tabControl1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Ingredientes";
             this.Text = "Ingredientes";
             this.Load += new System.EventHandler(this.Ingredientes_Load);
