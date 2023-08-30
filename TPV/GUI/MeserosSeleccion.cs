@@ -51,9 +51,24 @@ namespace TPV.GUI
 
         private void BotonMesero_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Button botonMesero = (Button)sender;
+            if (idPedido != 0)
+            {
+                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                pedido.IdPedido = idPedido;
+                pedido.IdMesero = Int32.Parse(botonMesero.Tag.ToString());
+                pedido.ActualizarMesero();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("No hay ningun pedido seleccionado para asignar un cliente");
+            }
         }
 
-        
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

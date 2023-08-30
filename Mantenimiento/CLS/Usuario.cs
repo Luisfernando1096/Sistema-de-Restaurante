@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Usuario
+    public class Usuario
     {
         /*DECLARACION DE VARIABLES*/
         int idUsuario;
@@ -24,7 +24,7 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
-            sentencia = "INSERT INTO usuario(idRol, pinCode) VALUES(" + idRol + ",'" + pinCode + "');";
+            sentencia = "INSERT INTO usuario(idUsuario, idRol, pinCode) VALUES(" + idUsuario + ", " + idRol + ", md5(" + pinCode + "));";
             try
             {
                 int filasAfectadas = 0;

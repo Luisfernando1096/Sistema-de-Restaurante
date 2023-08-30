@@ -109,9 +109,60 @@ namespace Personal.GUI
 
             lblPin.Visible = false;
             lblRepetirPin.Visible = false;
+            txtPin.Text = "";
             txtPin.Visible = false;
+            txtPinRepetido.Text = "";
             txtPinRepetido.Visible = false;
             btnGuardar.Visible = false;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            
+            if (txtPin.Text.ToString().Equals(txtPinRepetido.Text.ToString()))
+            {
+                //Es correcto, avanza
+                if (txtPin.Text.ToString().Equals(""))
+                {
+                    MessageBox.Show("Debes agregar un pin valido");
+                    return;
+                }
+
+                //Comprobar que el pin no se repita
+                DataTable usuarios = DataManager.DBConsultas.UsuariosPin(txtPin.Text.ToString());
+                if (usuarios.Rows.Count > 0)
+                {
+                    //Ya hay un pin en uso
+                    MessageBox.Show("Ya hay un pin en uso");
+                }
+                else
+                {
+                    //Correcto crear usuario
+                    Mantenimiento.CLS.Usuario usuario = new Mantenimiento.CLS.Usuario();
+                    usuario.IdUsuario = Int32.Parse(lblIdEmpleado.Text.ToString());
+                    usuario.PinCode = txtPin.Text.ToString();
+                    usuario.IdRol = Int32.Parse(cmbRol.SelectedValue.ToString());
+                    usuario.Insertar();
+                    OcultarCampos();
+                    CargarUsuarionSin();
+                    CargarUsuarioRol();
+                }
+            }
+            else
+            {
+                //No son iguales los pines
+                MessageBox.Show("Los pines no coinciden");
+            }
+        }
+
+        private void btnDesEnrolar_Click(object sender, EventArgs e)
+        {
+            Mantenimiento.CLS.Usuario usuario = new Mantenimiento.CLS.Usuario();
+            usuario.IdUsuario = Int32.Parse(dgtUsuariosRol.CurrentRow.Cells["idEmpleadoRol"].Value.ToString());
+            usuario.Eliminar();
+            OcultarCampos();
+            CargarUsuarionSin();
+            CargarUsuarioRol();
         }
     }
 }

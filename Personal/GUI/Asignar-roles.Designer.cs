@@ -39,13 +39,12 @@
             this.idEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgtUsuariosRol = new System.Windows.Forms.DataGridView();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblIdEmpleado = new System.Windows.Forms.Label();
             this.txtPin = new System.Windows.Forms.TextBox();
@@ -54,7 +53,8 @@
             this.lblRepetirPin = new System.Windows.Forms.Label();
             this.btnEnrolar = new System.Windows.Forms.Button();
             this.btnDesEnrolar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
+            this.idEmpleadoRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgtUsuarioSin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgtUsuariosRol)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -136,7 +136,7 @@
             this.dgtUsuariosRol.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgtUsuariosRol.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgtUsuariosRol.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column3,
+            this.idEmpleadoRol,
             this.Column4});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
@@ -154,21 +154,6 @@
             this.dgtUsuariosRol.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgtUsuariosRol.Size = new System.Drawing.Size(280, 170);
             this.dgtUsuariosRol.TabIndex = 3;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "idEmpleado";
-            this.Column3.HeaderText = "ID";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.DataPropertyName = "Empleado";
-            this.Column4.HeaderText = "Empleado";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
             // 
             // label2
             // 
@@ -212,8 +197,8 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(72, 54);
-            this.btnSalir.Text = " ";
+            this.btnSalir.Size = new System.Drawing.Size(115, 54);
+            this.btnSalir.Text = " Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // toolStripSeparator2
@@ -222,34 +207,45 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 57);
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(146, 56);
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Visible = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(449, 60);
+            this.lblNombre.Location = new System.Drawing.Point(387, 60);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(0, 23);
             this.lblNombre.TabIndex = 11;
-            this.lblNombre.UseWaitCursor = true;
+            this.lblNombre.Visible = false;
             // 
             // lblIdEmpleado
             // 
             this.lblIdEmpleado.AutoSize = true;
             this.lblIdEmpleado.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdEmpleado.Location = new System.Drawing.Point(416, 60);
+            this.lblIdEmpleado.Location = new System.Drawing.Point(354, 60);
             this.lblIdEmpleado.Name = "lblIdEmpleado";
             this.lblIdEmpleado.Size = new System.Drawing.Size(0, 23);
             this.lblIdEmpleado.TabIndex = 12;
-            this.lblIdEmpleado.UseWaitCursor = true;
+            this.lblIdEmpleado.Visible = false;
             // 
             // txtPin
             // 
             this.txtPin.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPin.Location = new System.Drawing.Point(420, 109);
             this.txtPin.Name = "txtPin";
+            this.txtPin.PasswordChar = '*';
             this.txtPin.Size = new System.Drawing.Size(108, 26);
             this.txtPin.TabIndex = 39;
-            this.txtPin.UseWaitCursor = true;
             this.txtPin.Visible = false;
             // 
             // lblPin
@@ -261,7 +257,6 @@
             this.lblPin.Size = new System.Drawing.Size(112, 20);
             this.lblPin.TabIndex = 38;
             this.lblPin.Text = "Pin de seguridad";
-            this.lblPin.UseWaitCursor = true;
             this.lblPin.Visible = false;
             // 
             // txtPinRepetido
@@ -269,9 +264,9 @@
             this.txtPinRepetido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPinRepetido.Location = new System.Drawing.Point(582, 109);
             this.txtPinRepetido.Name = "txtPinRepetido";
+            this.txtPinRepetido.PasswordChar = '*';
             this.txtPinRepetido.Size = new System.Drawing.Size(108, 26);
             this.txtPinRepetido.TabIndex = 41;
-            this.txtPinRepetido.UseWaitCursor = true;
             this.txtPinRepetido.Visible = false;
             // 
             // lblRepetirPin
@@ -283,7 +278,6 @@
             this.lblRepetirPin.Size = new System.Drawing.Size(69, 20);
             this.lblRepetirPin.TabIndex = 40;
             this.lblRepetirPin.Text = "Repita pin";
-            this.lblRepetirPin.UseWaitCursor = true;
             this.lblRepetirPin.Visible = false;
             // 
             // btnEnrolar
@@ -304,16 +298,22 @@
             this.btnDesEnrolar.Size = new System.Drawing.Size(75, 40);
             this.btnDesEnrolar.TabIndex = 43;
             this.btnDesEnrolar.UseVisualStyleBackColor = true;
+            this.btnDesEnrolar.Click += new System.EventHandler(this.btnDesEnrolar_Click);
             // 
-            // btnGuardar
+            // idEmpleadoRol
             // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(146, 56);
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.Visible = false;
+            this.idEmpleadoRol.DataPropertyName = "idEmpleado";
+            this.idEmpleadoRol.HeaderText = "ID";
+            this.idEmpleadoRol.Name = "idEmpleadoRol";
+            this.idEmpleadoRol.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.DataPropertyName = "Empleado";
+            this.Column4.HeaderText = "Empleado";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Asignar_roles
             // 
@@ -361,8 +361,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblIdEmpleado;
         private System.Windows.Forms.TextBox txtPin;
@@ -372,5 +370,7 @@
         private System.Windows.Forms.Button btnEnrolar;
         private System.Windows.Forms.Button btnDesEnrolar;
         private System.Windows.Forms.ToolStripButton btnGuardar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idEmpleadoRol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

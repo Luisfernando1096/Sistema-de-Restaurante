@@ -34,6 +34,7 @@ namespace ServiceExpressDsk.GUI
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer3 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
@@ -41,6 +42,7 @@ namespace ServiceExpressDsk.GUI
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer4 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
@@ -51,22 +53,25 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer5 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer6 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer7 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer8 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
@@ -77,8 +82,8 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton24 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton25 = new System.Windows.Forms.ToolStripButton();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer9 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton26 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton27 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton28 = new System.Windows.Forms.ToolStripButton();
@@ -86,12 +91,14 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton30 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton31 = new System.Windows.Forms.ToolStripButton();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer10 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton32 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton33 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton34 = new System.Windows.Forms.ToolStripButton();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer11 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip9 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton35 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton36 = new System.Windows.Forms.ToolStripButton();
@@ -100,38 +107,58 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton39 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton40 = new System.Windows.Forms.ToolStripButton();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer2 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip11 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator42 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton42 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator40 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton41 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator41 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.toolStripContainer3.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.toolStripContainer4.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer4.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.toolStripContainer5.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer5.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.toolStripContainer6.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer6.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.toolStripContainer7.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer7.SuspendLayout();
             this.toolStrip5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.toolStripContainer8.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer8.SuspendLayout();
             this.toolStrip6.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.toolStripContainer9.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer9.SuspendLayout();
             this.toolStrip7.SuspendLayout();
             this.tabPage8.SuspendLayout();
+            this.toolStripContainer10.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer10.SuspendLayout();
             this.toolStrip8.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.toolStripContainer11.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer11.SuspendLayout();
             this.toolStrip9.SuspendLayout();
             this.tabPage10.SuspendLayout();
+            this.toolStripContainer2.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer2.SuspendLayout();
             this.toolStrip11.SuspendLayout();
             this.tabPage11.SuspendLayout();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
             this.toolStrip10.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -156,7 +183,6 @@ namespace ServiceExpressDsk.GUI
             // tabControl1
             // 
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -167,28 +193,46 @@ namespace ServiceExpressDsk.GUI
             this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, -1);
+            this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1400, 689);
+            this.tabControl1.Size = new System.Drawing.Size(1370, 687);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.toolStrip1);
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.Controls.Add(this.toolStripContainer3);
             this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 37);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage1.Size = new System.Drawing.Size(1362, 646);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TPV";
             // 
+            // toolStripContainer3
+            // 
+            // 
+            // toolStripContainer3.ContentPanel
+            // 
+            this.toolStripContainer3.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer3.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer3.Name = "toolStripContainer3";
+            this.toolStripContainer3.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer3.TabIndex = 9;
+            this.toolStripContainer3.Text = "toolStripContainer3";
+            // 
+            // toolStripContainer3.TopToolStripPanel
+            // 
+            this.toolStripContainer3.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip1.BackColor = System.Drawing.Color.White;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -198,9 +242,10 @@ namespace ServiceExpressDsk.GUI
             this.btnGuardar,
             this.btnLimpiar,
             this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1386, 82);
+            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -261,19 +306,36 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.toolStrip2);
+            this.tabPage2.Controls.Add(this.toolStripContainer4);
             this.tabPage2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 37);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage2.Size = new System.Drawing.Size(1362, 646);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Productos e Ingredientes";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer4
+            // 
+            // 
+            // toolStripContainer4.ContentPanel
+            // 
+            this.toolStripContainer4.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer4.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer4.Name = "toolStripContainer4";
+            this.toolStripContainer4.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer4.TabIndex = 9;
+            this.toolStripContainer4.Text = "toolStripContainer4";
+            // 
+            // toolStripContainer4.TopToolStripPanel
+            // 
+            this.toolStripContainer4.TopToolStripPanel.Controls.Add(this.toolStrip2);
+            // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.Color.White;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip2.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -286,9 +348,9 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton7,
             this.toolStripButton9,
             this.toolStripButton8});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Location = new System.Drawing.Point(3, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1386, 82);
+            this.toolStrip2.Size = new System.Drawing.Size(966, 82);
             this.toolStrip2.TabIndex = 11;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -382,17 +444,34 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.toolStrip3);
+            this.tabPage3.Controls.Add(this.toolStripContainer5);
             this.tabPage3.Location = new System.Drawing.Point(4, 37);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage3.Size = new System.Drawing.Size(1362, 646);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Compras";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer5
+            // 
+            // 
+            // toolStripContainer5.ContentPanel
+            // 
+            this.toolStripContainer5.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer5.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer5.Name = "toolStripContainer5";
+            this.toolStripContainer5.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer5.TabIndex = 9;
+            this.toolStripContainer5.Text = "toolStripContainer5";
+            // 
+            // toolStripContainer5.TopToolStripPanel
+            // 
+            this.toolStripContainer5.TopToolStripPanel.Controls.Add(this.toolStrip3);
+            // 
             // toolStrip3
             // 
             this.toolStrip3.BackColor = System.Drawing.Color.White;
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip3.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -401,9 +480,9 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton11,
             this.toolStripButton12,
             this.toolStripButton13});
-            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip3.Location = new System.Drawing.Point(3, 0);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(1392, 82);
+            this.toolStrip3.Size = new System.Drawing.Size(562, 82);
             this.toolStrip3.TabIndex = 11;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -453,25 +532,42 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.toolStrip4);
+            this.tabPage4.Controls.Add(this.toolStripContainer6);
             this.tabPage4.Location = new System.Drawing.Point(4, 37);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage4.Size = new System.Drawing.Size(1362, 646);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Salones";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer6
+            // 
+            // 
+            // toolStripContainer6.ContentPanel
+            // 
+            this.toolStripContainer6.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer6.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer6.Name = "toolStripContainer6";
+            this.toolStripContainer6.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer6.TabIndex = 9;
+            this.toolStripContainer6.Text = "toolStripContainer6";
+            // 
+            // toolStripContainer6.TopToolStripPanel
+            // 
+            this.toolStripContainer6.TopToolStripPanel.Controls.Add(this.toolStrip4);
+            // 
             // toolStrip4
             // 
             this.toolStrip4.BackColor = System.Drawing.Color.White;
+            this.toolStrip4.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip4.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton15});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip4.Location = new System.Drawing.Point(3, 0);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(1392, 82);
+            this.toolStrip4.Size = new System.Drawing.Size(155, 82);
             this.toolStrip4.TabIndex = 11;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -488,7 +584,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.toolStrip5);
+            this.tabPage5.Controls.Add(this.toolStripContainer7);
             this.tabPage5.Location = new System.Drawing.Point(4, 37);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(1392, 648);
@@ -496,28 +592,39 @@ namespace ServiceExpressDsk.GUI
             this.tabPage5.Text = "Finanzas";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer7
+            // 
+            // 
+            // toolStripContainer7.ContentPanel
+            // 
+            this.toolStripContainer7.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer7.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer7.Name = "toolStripContainer7";
+            this.toolStripContainer7.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer7.TabIndex = 9;
+            this.toolStripContainer7.Text = "toolStripContainer7";
+            // 
+            // toolStripContainer7.TopToolStripPanel
+            // 
+            this.toolStripContainer7.TopToolStripPanel.Controls.Add(this.toolStrip5);
+            // 
             // toolStrip5
             // 
             this.toolStrip5.BackColor = System.Drawing.Color.White;
+            this.toolStrip5.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip5.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator16,
             this.toolStripButton14,
             this.toolStripButton16,
             this.toolStripButton17,
             this.toolStripButton18});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip5.Location = new System.Drawing.Point(3, 0);
             this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.Size = new System.Drawing.Size(1392, 82);
+            this.toolStrip5.Size = new System.Drawing.Size(457, 82);
             this.toolStrip5.TabIndex = 11;
             this.toolStrip5.Text = "toolStrip5";
-            // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 82);
             // 
             // toolStripButton14
             // 
@@ -563,7 +670,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.toolStrip6);
+            this.tabPage6.Controls.Add(this.toolStripContainer8);
             this.tabPage6.Location = new System.Drawing.Point(4, 37);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(1392, 648);
@@ -571,9 +678,26 @@ namespace ServiceExpressDsk.GUI
             this.tabPage6.Text = "Personal";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer8
+            // 
+            // 
+            // toolStripContainer8.ContentPanel
+            // 
+            this.toolStripContainer8.ContentPanel.Size = new System.Drawing.Size(1366, 143);
+            this.toolStripContainer8.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer8.Name = "toolStripContainer8";
+            this.toolStripContainer8.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer8.TabIndex = 9;
+            this.toolStripContainer8.Text = "toolStripContainer8";
+            // 
+            // toolStripContainer8.TopToolStripPanel
+            // 
+            this.toolStripContainer8.TopToolStripPanel.Controls.Add(this.toolStrip6);
+            // 
             // toolStrip6
             // 
             this.toolStrip6.BackColor = System.Drawing.Color.White;
+            this.toolStrip6.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip6.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -586,16 +710,16 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton23,
             this.toolStripButton24,
             this.toolStripButton25});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip6.Location = new System.Drawing.Point(3, 0);
             this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.Size = new System.Drawing.Size(1392, 32);
+            this.toolStrip6.Size = new System.Drawing.Size(811, 32);
             this.toolStrip6.TabIndex = 11;
             this.toolStrip6.Text = "toolStrip6";
             // 
             // toolStripSeparator21
             // 
             this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 82);
+            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 32);
             // 
             // toolStripButton19
             // 
@@ -665,7 +789,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.toolStrip7);
+            this.tabPage7.Controls.Add(this.toolStripContainer9);
             this.tabPage7.Location = new System.Drawing.Point(4, 37);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Size = new System.Drawing.Size(1392, 648);
@@ -673,30 +797,41 @@ namespace ServiceExpressDsk.GUI
             this.tabPage7.Text = "Reportes";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer9
+            // 
+            // 
+            // toolStripContainer9.ContentPanel
+            // 
+            this.toolStripContainer9.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer9.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer9.Name = "toolStripContainer9";
+            this.toolStripContainer9.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer9.TabIndex = 9;
+            this.toolStripContainer9.Text = "toolStripContainer9";
+            // 
+            // toolStripContainer9.TopToolStripPanel
+            // 
+            this.toolStripContainer9.TopToolStripPanel.Controls.Add(this.toolStrip7);
+            // 
             // toolStrip7
             // 
             this.toolStrip7.BackColor = System.Drawing.Color.White;
+            this.toolStrip7.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip7.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator26,
             this.toolStripButton26,
             this.toolStripButton27,
             this.toolStripButton28,
             this.toolStripButton29,
             this.toolStripButton30,
             this.toolStripButton31});
-            this.toolStrip7.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip7.Location = new System.Drawing.Point(3, 0);
             this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.Size = new System.Drawing.Size(1392, 82);
+            this.toolStrip7.Size = new System.Drawing.Size(703, 82);
             this.toolStrip7.TabIndex = 12;
             this.toolStrip7.Text = "toolStrip7";
-            // 
-            // toolStripSeparator26
-            // 
-            this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(6, 82);
             // 
             // toolStripButton26
             // 
@@ -757,7 +892,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage8
             // 
-            this.tabPage8.Controls.Add(this.toolStrip8);
+            this.tabPage8.Controls.Add(this.toolStripContainer10);
             this.tabPage8.Location = new System.Drawing.Point(4, 37);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Size = new System.Drawing.Size(1392, 648);
@@ -765,9 +900,26 @@ namespace ServiceExpressDsk.GUI
             this.tabPage8.Text = "Respaldos";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer10
+            // 
+            // 
+            // toolStripContainer10.ContentPanel
+            // 
+            this.toolStripContainer10.ContentPanel.Size = new System.Drawing.Size(1366, 143);
+            this.toolStripContainer10.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer10.Name = "toolStripContainer10";
+            this.toolStripContainer10.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer10.TabIndex = 9;
+            this.toolStripContainer10.Text = "toolStripContainer10";
+            // 
+            // toolStripContainer10.TopToolStripPanel
+            // 
+            this.toolStripContainer10.TopToolStripPanel.Controls.Add(this.toolStrip8);
+            // 
             // toolStrip8
             // 
             this.toolStrip8.BackColor = System.Drawing.Color.White;
+            this.toolStrip8.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip8.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -776,16 +928,16 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton32,
             this.toolStripButton33,
             this.toolStripButton34});
-            this.toolStrip8.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip8.Location = new System.Drawing.Point(3, 0);
             this.toolStrip8.Name = "toolStrip8";
-            this.toolStrip8.Size = new System.Drawing.Size(1392, 32);
+            this.toolStrip8.Size = new System.Drawing.Size(350, 32);
             this.toolStrip8.TabIndex = 13;
             this.toolStrip8.Text = "toolStrip8";
             // 
             // toolStripSeparator31
             // 
             this.toolStripSeparator31.Name = "toolStripSeparator31";
-            this.toolStripSeparator31.Size = new System.Drawing.Size(6, 82);
+            this.toolStripSeparator31.Size = new System.Drawing.Size(6, 32);
             // 
             // toolStripButton32
             // 
@@ -816,7 +968,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage9
             // 
-            this.tabPage9.Controls.Add(this.toolStrip9);
+            this.tabPage9.Controls.Add(this.toolStripContainer11);
             this.tabPage9.Location = new System.Drawing.Point(4, 37);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(1392, 648);
@@ -824,9 +976,26 @@ namespace ServiceExpressDsk.GUI
             this.tabPage9.Text = "Configuraciones";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer11
+            // 
+            // 
+            // toolStripContainer11.ContentPanel
+            // 
+            this.toolStripContainer11.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer11.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer11.Name = "toolStripContainer11";
+            this.toolStripContainer11.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer11.TabIndex = 9;
+            this.toolStripContainer11.Text = "toolStripContainer11";
+            // 
+            // toolStripContainer11.TopToolStripPanel
+            // 
+            this.toolStripContainer11.TopToolStripPanel.Controls.Add(this.toolStrip9);
+            // 
             // toolStrip9
             // 
             this.toolStrip9.BackColor = System.Drawing.Color.White;
+            this.toolStrip9.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip9.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip9.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip9.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -837,9 +1006,9 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton38,
             this.toolStripButton39,
             this.toolStripButton40});
-            this.toolStrip9.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip9.Location = new System.Drawing.Point(3, 0);
             this.toolStrip9.Name = "toolStrip9";
-            this.toolStrip9.Size = new System.Drawing.Size(1392, 82);
+            this.toolStrip9.Size = new System.Drawing.Size(846, 82);
             this.toolStrip9.TabIndex = 13;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -905,8 +1074,8 @@ namespace ServiceExpressDsk.GUI
             // 
             // tabPage10
             // 
-            this.tabPage10.BackColor = System.Drawing.Color.White;
-            this.tabPage10.Controls.Add(this.toolStrip11);
+            this.tabPage10.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage10.Controls.Add(this.toolStripContainer2);
             this.tabPage10.Location = new System.Drawing.Point(4, 37);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
@@ -914,26 +1083,36 @@ namespace ServiceExpressDsk.GUI
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Cuentas por cobrar";
             // 
+            // toolStripContainer2
+            // 
+            // 
+            // toolStripContainer2.ContentPanel
+            // 
+            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer2.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer2.Name = "toolStripContainer2";
+            this.toolStripContainer2.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer2.TabIndex = 9;
+            this.toolStripContainer2.Text = "toolStripContainer2";
+            // 
+            // toolStripContainer2.TopToolStripPanel
+            // 
+            this.toolStripContainer2.TopToolStripPanel.Controls.Add(this.toolStrip11);
+            // 
             // toolStrip11
             // 
-            this.toolStrip11.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip11.BackColor = System.Drawing.Color.White;
+            this.toolStrip11.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip11.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip11.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip11.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip11.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator42,
-            this.toolStripButton42,
-            this.toolStripSeparator43});
-            this.toolStrip11.Location = new System.Drawing.Point(3, 3);
+            this.toolStripButton42});
+            this.toolStrip11.Location = new System.Drawing.Point(3, 0);
             this.toolStrip11.Name = "toolStrip11";
-            this.toolStrip11.Size = new System.Drawing.Size(1386, 82);
+            this.toolStrip11.Size = new System.Drawing.Size(151, 82);
             this.toolStrip11.TabIndex = 14;
             this.toolStrip11.Text = "toolStrip11";
-            // 
-            // toolStripSeparator42
-            // 
-            this.toolStripSeparator42.Name = "toolStripSeparator42";
-            this.toolStripSeparator42.Size = new System.Drawing.Size(6, 82);
             // 
             // toolStripButton42
             // 
@@ -945,41 +1124,46 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton42.Text = "Cuenta X Cobrar";
             this.toolStripButton42.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // toolStripSeparator43
-            // 
-            this.toolStripSeparator43.Name = "toolStripSeparator43";
-            this.toolStripSeparator43.Size = new System.Drawing.Size(6, 82);
-            // 
             // tabPage11
             // 
-            this.tabPage11.BackColor = System.Drawing.Color.White;
-            this.tabPage11.Controls.Add(this.toolStrip10);
+            this.tabPage11.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage11.Controls.Add(this.toolStripContainer1);
             this.tabPage11.Location = new System.Drawing.Point(4, 37);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Size = new System.Drawing.Size(1392, 648);
             this.tabPage11.TabIndex = 10;
             this.tabPage11.Text = "Sesion";
             // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1363, 93);
+            this.toolStripContainer1.Location = new System.Drawing.Point(3, 0);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.Size = new System.Drawing.Size(1363, 175);
+            this.toolStripContainer1.TabIndex = 9;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip10);
+            // 
             // toolStrip10
             // 
-            this.toolStrip10.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip10.BackColor = System.Drawing.Color.White;
+            this.toolStrip10.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip10.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip10.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip10.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip10.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator40,
-            this.toolStripButton41,
-            this.toolStripSeparator41});
-            this.toolStrip10.Location = new System.Drawing.Point(0, 0);
+            this.toolStripButton41});
+            this.toolStrip10.Location = new System.Drawing.Point(3, 0);
             this.toolStrip10.Name = "toolStrip10";
-            this.toolStrip10.Size = new System.Drawing.Size(1392, 82);
+            this.toolStrip10.Size = new System.Drawing.Size(128, 82);
             this.toolStrip10.TabIndex = 13;
             this.toolStrip10.Text = "toolStrip10";
-            // 
-            // toolStripSeparator40
-            // 
-            this.toolStripSeparator40.Name = "toolStripSeparator40";
-            this.toolStripSeparator40.Size = new System.Drawing.Size(6, 82);
             // 
             // toolStripButton41
             // 
@@ -992,11 +1176,6 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton41.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton41.Click += new System.EventHandler(this.toolStripButton41_Click);
             // 
-            // toolStripSeparator41
-            // 
-            this.toolStripSeparator41.Name = "toolStripSeparator41";
-            this.toolStripSeparator41.Size = new System.Drawing.Size(6, 82);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1004,8 +1183,8 @@ namespace ServiceExpressDsk.GUI
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1370, 716);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.Name = "Main";
@@ -1018,47 +1197,80 @@ namespace ServiceExpressDsk.GUI
             this.statusStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.toolStripContainer3.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer3.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer3.ResumeLayout(false);
+            this.toolStripContainer3.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.toolStripContainer4.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer4.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer4.ResumeLayout(false);
+            this.toolStripContainer4.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.toolStripContainer5.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer5.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer5.ResumeLayout(false);
+            this.toolStripContainer5.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.toolStripContainer6.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer6.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer6.ResumeLayout(false);
+            this.toolStripContainer6.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
+            this.toolStripContainer7.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer7.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer7.ResumeLayout(false);
+            this.toolStripContainer7.PerformLayout();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
+            this.toolStripContainer8.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer8.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer8.ResumeLayout(false);
+            this.toolStripContainer8.PerformLayout();
             this.toolStrip6.ResumeLayout(false);
             this.toolStrip6.PerformLayout();
             this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
+            this.toolStripContainer9.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer9.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer9.ResumeLayout(false);
+            this.toolStripContainer9.PerformLayout();
             this.toolStrip7.ResumeLayout(false);
             this.toolStrip7.PerformLayout();
             this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
+            this.toolStripContainer10.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer10.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer10.ResumeLayout(false);
+            this.toolStripContainer10.PerformLayout();
             this.toolStrip8.ResumeLayout(false);
             this.toolStrip8.PerformLayout();
             this.tabPage9.ResumeLayout(false);
-            this.tabPage9.PerformLayout();
+            this.toolStripContainer11.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer11.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer11.ResumeLayout(false);
+            this.toolStripContainer11.PerformLayout();
             this.toolStrip9.ResumeLayout(false);
             this.toolStrip9.PerformLayout();
             this.tabPage10.ResumeLayout(false);
-            this.tabPage10.PerformLayout();
+            this.toolStripContainer2.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer2.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer2.ResumeLayout(false);
+            this.toolStripContainer2.PerformLayout();
             this.toolStrip11.ResumeLayout(false);
             this.toolStrip11.PerformLayout();
             this.tabPage11.ResumeLayout(false);
-            this.tabPage11.PerformLayout();
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.toolStrip10.ResumeLayout(false);
             this.toolStrip10.PerformLayout();
             this.ResumeLayout(false);
@@ -1097,7 +1309,6 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton15;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.ToolStrip toolStrip5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripButton toolStripButton14;
         private System.Windows.Forms.ToolStripButton toolStripButton16;
         private System.Windows.Forms.ToolStripButton toolStripButton17;
@@ -1114,7 +1325,6 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton25;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.ToolStrip toolStrip7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripButton toolStripButton26;
         private System.Windows.Forms.ToolStripButton toolStripButton27;
         private System.Windows.Forms.ToolStripButton toolStripButton28;
@@ -1137,14 +1347,21 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton40;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.ToolStrip toolStrip11;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator42;
         private System.Windows.Forms.ToolStripButton toolStripButton42;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator43;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.ToolStrip toolStrip10;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator40;
         private System.Windows.Forms.ToolStripButton toolStripButton41;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator41;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer3;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer2;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer4;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer5;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer6;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer7;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer8;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer9;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer10;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer11;
     }
 }
 

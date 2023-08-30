@@ -70,7 +70,6 @@ namespace TPV.GUI
             this.toolStrip1.Size = new System.Drawing.Size(834, 57);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
-//            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnSalir
             // 
@@ -81,6 +80,7 @@ namespace TPV.GUI
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(101, 54);
             this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // toolStripSeparator2
             // 
@@ -92,6 +92,7 @@ namespace TPV.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(834, 450);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.flpMeseros);

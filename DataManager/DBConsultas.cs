@@ -108,6 +108,24 @@ namespace DataManager
             }
         }
 
+        public static DataTable UsuariosPin(String pin)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT * FROM usuario WHERE pinCode=md5(" + pin + ");";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ObtenerPrecioDeProducto(int id)
         {
             try
