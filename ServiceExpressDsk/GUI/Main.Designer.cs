@@ -33,14 +33,6 @@ namespace ServiceExpressDsk.GUI
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.toolStripContainer3 = new System.Windows.Forms.ToolStripContainer();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolStripContainer4 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -114,12 +106,16 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton41 = new System.Windows.Forms.ToolStripButton();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer3 = new System.Windows.Forms.ToolStripContainer();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnEditar = new System.Windows.Forms.ToolStripButton();
+            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
+            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.toolStripContainer3.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer3.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.toolStripContainer4.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer4.SuspendLayout();
@@ -160,6 +156,10 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip10.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.toolStripContainer3.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer3.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -183,6 +183,7 @@ namespace ServiceExpressDsk.GUI
             // tabControl1
             // 
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -193,116 +194,12 @@ namespace ServiceExpressDsk.GUI
             this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1370, 687);
             this.tabControl1.TabIndex = 7;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1.Controls.Add(this.toolStripContainer3);
-            this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 37);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1362, 646);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "TPV";
-            // 
-            // toolStripContainer3
-            // 
-            // 
-            // toolStripContainer3.ContentPanel
-            // 
-            this.toolStripContainer3.ContentPanel.Size = new System.Drawing.Size(1366, 93);
-            this.toolStripContainer3.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer3.Name = "toolStripContainer3";
-            this.toolStripContainer3.Size = new System.Drawing.Size(1366, 175);
-            this.toolStripContainer3.TabIndex = 9;
-            this.toolStripContainer3.Text = "toolStripContainer3";
-            // 
-            // toolStripContainer3.TopToolStripPanel
-            // 
-            this.toolStripContainer3.TopToolStripPanel.Controls.Add(this.toolStrip1);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.White;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnEliminar,
-            this.btnEditar,
-            this.btnGuardar,
-            this.btnLimpiar,
-            this.toolStripButton1});
-            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip1.Location = new System.Drawing.Point(3, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
-            this.toolStrip1.TabIndex = 10;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(138, 79);
-            this.btnEliminar.Text = "Punto de Venta";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
-            this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(133, 79);
-            this.btnEditar.Text = "Punto de Pago";
-            this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(80, 79);
-            this.btnGuardar.Text = "Clientes";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(172, 79);
-            this.btnLimpiar.Text = "Tickets Procesados";
-            this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(133, 79);
-            this.toolStripButton1.Text = "Anular Factura";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // tabPage2
             // 
@@ -587,7 +484,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage5.Controls.Add(this.toolStripContainer7);
             this.tabPage5.Location = new System.Drawing.Point(4, 37);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage5.Size = new System.Drawing.Size(1362, 646);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Finanzas";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -673,7 +570,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage6.Controls.Add(this.toolStripContainer8);
             this.tabPage6.Location = new System.Drawing.Point(4, 37);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage6.Size = new System.Drawing.Size(1362, 646);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Personal";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -792,7 +689,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage7.Controls.Add(this.toolStripContainer9);
             this.tabPage7.Location = new System.Drawing.Point(4, 37);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage7.Size = new System.Drawing.Size(1362, 646);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Reportes";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -895,7 +792,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage8.Controls.Add(this.toolStripContainer10);
             this.tabPage8.Location = new System.Drawing.Point(4, 37);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage8.Size = new System.Drawing.Size(1362, 646);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "Respaldos";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -971,7 +868,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage9.Controls.Add(this.toolStripContainer11);
             this.tabPage9.Location = new System.Drawing.Point(4, 37);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage9.Size = new System.Drawing.Size(1362, 646);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "Configuraciones";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1079,7 +976,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage10.Location = new System.Drawing.Point(4, 37);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage10.Size = new System.Drawing.Size(1362, 646);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Cuentas por cobrar";
             // 
@@ -1130,7 +1027,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage11.Controls.Add(this.toolStripContainer1);
             this.tabPage11.Location = new System.Drawing.Point(4, 37);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1392, 648);
+            this.tabPage11.Size = new System.Drawing.Size(1362, 646);
             this.tabPage11.TabIndex = 10;
             this.tabPage11.Text = "Sesion";
             // 
@@ -1176,6 +1073,109 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton41.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton41.Click += new System.EventHandler(this.toolStripButton41_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.Controls.Add(this.toolStripContainer3);
+            this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 37);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1362, 646);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "TPV";
+            // 
+            // toolStripContainer3
+            // 
+            // 
+            // toolStripContainer3.ContentPanel
+            // 
+            this.toolStripContainer3.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer3.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer3.Name = "toolStripContainer3";
+            this.toolStripContainer3.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer3.TabIndex = 9;
+            this.toolStripContainer3.Text = "toolStripContainer3";
+            // 
+            // toolStripContainer3.TopToolStripPanel
+            // 
+            this.toolStripContainer3.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.Color.White;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnEliminar,
+            this.btnEditar,
+            this.btnGuardar,
+            this.btnLimpiar,
+            this.toolStripButton1});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip1.Location = new System.Drawing.Point(3, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
+            this.toolStrip1.TabIndex = 10;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(138, 79);
+            this.btnEliminar.Text = "Punto de Venta";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(133, 79);
+            this.btnEditar.Text = "Punto de Pago";
+            this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(80, 79);
+            this.btnGuardar.Text = "Clientes";
+            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(172, 79);
+            this.btnLimpiar.Text = "Tickets Procesados";
+            this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(133, 79);
+            this.toolStripButton1.Text = "Anular Factura";
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1183,8 +1183,8 @@ namespace ServiceExpressDsk.GUI
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1370, 716);
-            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.statusStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.Name = "Main";
@@ -1196,13 +1196,6 @@ namespace ServiceExpressDsk.GUI
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.toolStripContainer3.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer3.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer3.ResumeLayout(false);
-            this.toolStripContainer3.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.toolStripContainer4.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer4.TopToolStripPanel.PerformLayout();
@@ -1273,6 +1266,13 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1.PerformLayout();
             this.toolStrip10.ResumeLayout(false);
             this.toolStrip10.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.toolStripContainer3.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer3.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer3.ResumeLayout(false);
+            this.toolStripContainer3.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
