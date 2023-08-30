@@ -408,6 +408,7 @@ namespace TPV.GUI
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+            punto_venta.admin = true;
             punto_venta.Close();
         }
 
@@ -474,6 +475,18 @@ namespace TPV.GUI
             {
                 ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()));
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Se cerrara la sesion, ¿esta seguro que desea cerrar sesion?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                punto_venta.cerrarSesion = true;
+                punto_venta.Close();
+                this.Close();
+            }
+            
         }
     }
 }

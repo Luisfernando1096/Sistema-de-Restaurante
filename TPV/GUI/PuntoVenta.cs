@@ -16,6 +16,9 @@ namespace TPV.GUI
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
         private int idMesaAnterior = 0;
+        public bool admin;
+        public bool cerrarSesion;
+
         public PuntoVenta()
         {
             InitializeComponent();
@@ -181,12 +184,21 @@ namespace TPV.GUI
                 idMesaAnterior = Int32.Parse(f.lblMesa.Tag.ToString());
             }
             this.Close();
+            
+            //Si no di click en el formulario anterior a ir a administracion
+            if (!admin && !cerrarSesion)
+            {
+                PuntoVenta f2 = new PuntoVenta(); // Crea una nueva instancia del formulario
+                f2.cambiarMesa = cambiarMesa;
+                f2.idPedidoCambioMesa = idPedidoCambioMesa;
+                f2.idMesaAnterior = idMesaAnterior;
+                f2.ShowDialog(); // Muestra el nuevo formulario
+            }
+            else
+            {
 
-            PuntoVenta f2 = new PuntoVenta(); // Crea una nueva instancia del formulario
-            f2.cambiarMesa = cambiarMesa;
-            f2.idPedidoCambioMesa = idPedidoCambioMesa;
-            f2.idMesaAnterior = idMesaAnterior;
-            f2.ShowDialog(); // Muestra el nuevo formulario
+            }
+            
         }
 
         private void btnSalir_Resize(object sender, EventArgs e)

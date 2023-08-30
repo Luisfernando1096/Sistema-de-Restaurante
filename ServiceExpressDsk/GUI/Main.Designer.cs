@@ -73,7 +73,6 @@ namespace ServiceExpressDsk.GUI
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.toolStripContainer8 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton20 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton21 = new System.Windows.Forms.ToolStripButton();
@@ -93,7 +92,6 @@ namespace ServiceExpressDsk.GUI
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.toolStripContainer10 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton32 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton33 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton34 = new System.Windows.Forms.ToolStripButton();
@@ -724,7 +722,6 @@ namespace ServiceExpressDsk.GUI
             this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator21,
             this.toolStripButton19,
             this.toolStripButton20,
             this.toolStripButton21,
@@ -734,14 +731,9 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton25});
             this.toolStrip6.Location = new System.Drawing.Point(3, 0);
             this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.Size = new System.Drawing.Size(811, 32);
+            this.toolStrip6.Size = new System.Drawing.Size(805, 32);
             this.toolStrip6.TabIndex = 11;
             this.toolStrip6.Text = "toolStrip6";
-            // 
-            // toolStripSeparator21
-            // 
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 32);
             // 
             // toolStripButton19
             // 
@@ -959,20 +951,14 @@ namespace ServiceExpressDsk.GUI
             this.toolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator31,
             this.toolStripButton32,
             this.toolStripButton33,
             this.toolStripButton34});
             this.toolStrip8.Location = new System.Drawing.Point(3, 0);
             this.toolStrip8.Name = "toolStrip8";
-            this.toolStrip8.Size = new System.Drawing.Size(350, 32);
+            this.toolStrip8.Size = new System.Drawing.Size(344, 32);
             this.toolStrip8.TabIndex = 13;
             this.toolStrip8.Text = "toolStrip8";
-            // 
-            // toolStripSeparator31
-            // 
-            this.toolStripSeparator31.Name = "toolStripSeparator31";
-            this.toolStripSeparator31.Size = new System.Drawing.Size(6, 32);
             // 
             // toolStripButton32
             // 
@@ -1225,8 +1211,8 @@ namespace ServiceExpressDsk.GUI
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1370, 716);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.Name = "Main";
@@ -1352,7 +1338,6 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton18;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.ToolStrip toolStrip6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripButton toolStripButton19;
         private System.Windows.Forms.ToolStripButton toolStripButton20;
         private System.Windows.Forms.ToolStripButton toolStripButton21;
@@ -1370,7 +1355,6 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton31;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.ToolStrip toolStrip8;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator31;
         private System.Windows.Forms.ToolStripButton toolStripButton32;
         private System.Windows.Forms.ToolStripButton toolStripButton33;
         private System.Windows.Forms.ToolStripButton toolStripButton34;

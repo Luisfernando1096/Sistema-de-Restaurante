@@ -13,6 +13,7 @@ namespace ServiceExpressDsk.GUI
     public partial class Main : Form
     {
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
+        private bool cerrar = false;
         public Main()
         {
             InitializeComponent();
@@ -20,11 +21,16 @@ namespace ServiceExpressDsk.GUI
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Se cerrara la sesion, ¿esta seguro que desea cerrar sesion?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
+            if (!cerrar)
             {
-                e.Cancel = true; // Cancelar el cierre del formulario
+                DialogResult result = MessageBox.Show("Se cerrara la sesion, ¿esta seguro que desea cerrar sesion?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true; // Cancelar el cierre del formulario
+                }
             }
+                
+            
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -201,7 +207,11 @@ namespace ServiceExpressDsk.GUI
             this.Hide();
             TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
             f.ShowDialog();
-            this.Show();
+            cerrar = f.cerrarSesion;
+            if (!cerrar)
+            {
+                this.Show();
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -218,6 +228,7 @@ namespace ServiceExpressDsk.GUI
             f2.Hide();
             TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago();
             f3.ShowDialog();
+
             if (f3.lblMesa.Tag != null)
             {
                 DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(f3.lblMesa.Tag.ToString());
@@ -253,7 +264,6 @@ namespace ServiceExpressDsk.GUI
                 f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
             }
             f2.ShowDialog();
-            f.ShowDialog();
             this.Show();
         }
 
