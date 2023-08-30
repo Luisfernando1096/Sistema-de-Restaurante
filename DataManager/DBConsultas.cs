@@ -31,6 +31,24 @@ namespace DataManager
 
         }
 
+        public static DataTable Meseros()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT * FROM empleado;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable PedidoPorId(int idPedido)
         {
             try
