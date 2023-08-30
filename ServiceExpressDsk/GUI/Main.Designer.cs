@@ -33,6 +33,14 @@ namespace ServiceExpressDsk.GUI
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.toolStripContainer3 = new System.Windows.Forms.ToolStripContainer();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tpvPuntoVenta = new System.Windows.Forms.ToolStripButton();
+            this.tpvPuntoPago = new System.Windows.Forms.ToolStripButton();
+            this.tpvClientes = new System.Windows.Forms.ToolStripButton();
+            this.tpvTickets = new System.Windows.Forms.ToolStripButton();
+            this.tpvAnular = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolStripContainer4 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -106,16 +114,12 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton41 = new System.Windows.Forms.ToolStripButton();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.toolStripContainer3 = new System.Windows.Forms.ToolStripContainer();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.toolStripContainer3.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer3.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.toolStripContainer4.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer4.SuspendLayout();
@@ -156,10 +160,6 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip10.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.toolStripContainer3.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer3.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -200,6 +200,114 @@ namespace ServiceExpressDsk.GUI
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1370, 687);
             this.tabControl1.TabIndex = 7;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.Controls.Add(this.toolStripContainer3);
+            this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 37);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1362, 646);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "TPV";
+            // 
+            // toolStripContainer3
+            // 
+            // 
+            // toolStripContainer3.ContentPanel
+            // 
+            this.toolStripContainer3.ContentPanel.Size = new System.Drawing.Size(1366, 93);
+            this.toolStripContainer3.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer3.Name = "toolStripContainer3";
+            this.toolStripContainer3.Size = new System.Drawing.Size(1366, 175);
+            this.toolStripContainer3.TabIndex = 9;
+            this.toolStripContainer3.Text = "toolStripContainer3";
+            // 
+            // toolStripContainer3.TopToolStripPanel
+            // 
+            this.toolStripContainer3.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.Color.White;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tpvPuntoVenta,
+            this.tpvPuntoPago,
+            this.tpvClientes,
+            this.tpvTickets,
+            this.tpvAnular});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip1.Location = new System.Drawing.Point(3, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
+            this.toolStrip1.TabIndex = 10;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tpvPuntoVenta
+            // 
+            this.tpvPuntoVenta.Enabled = false;
+            this.tpvPuntoVenta.Image = ((System.Drawing.Image)(resources.GetObject("tpvPuntoVenta.Image")));
+            this.tpvPuntoVenta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tpvPuntoVenta.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tpvPuntoVenta.Name = "tpvPuntoVenta";
+            this.tpvPuntoVenta.Size = new System.Drawing.Size(138, 79);
+            this.tpvPuntoVenta.Tag = "1";
+            this.tpvPuntoVenta.Text = "Punto de Venta";
+            this.tpvPuntoVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tpvPuntoVenta.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // tpvPuntoPago
+            // 
+            this.tpvPuntoPago.Enabled = false;
+            this.tpvPuntoPago.Image = ((System.Drawing.Image)(resources.GetObject("tpvPuntoPago.Image")));
+            this.tpvPuntoPago.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tpvPuntoPago.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tpvPuntoPago.Name = "tpvPuntoPago";
+            this.tpvPuntoPago.Size = new System.Drawing.Size(133, 79);
+            this.tpvPuntoPago.Text = "Punto de Pago";
+            this.tpvPuntoPago.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tpvPuntoPago.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // tpvClientes
+            // 
+            this.tpvClientes.Enabled = false;
+            this.tpvClientes.Image = ((System.Drawing.Image)(resources.GetObject("tpvClientes.Image")));
+            this.tpvClientes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tpvClientes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tpvClientes.Name = "tpvClientes";
+            this.tpvClientes.Size = new System.Drawing.Size(80, 79);
+            this.tpvClientes.Text = "Clientes";
+            this.tpvClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tpvClientes.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // tpvTickets
+            // 
+            this.tpvTickets.Enabled = false;
+            this.tpvTickets.Image = ((System.Drawing.Image)(resources.GetObject("tpvTickets.Image")));
+            this.tpvTickets.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tpvTickets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tpvTickets.Name = "tpvTickets";
+            this.tpvTickets.Size = new System.Drawing.Size(172, 79);
+            this.tpvTickets.Text = "Tickets Procesados";
+            this.tpvTickets.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tpvTickets.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // tpvAnular
+            // 
+            this.tpvAnular.Image = ((System.Drawing.Image)(resources.GetObject("tpvAnular.Image")));
+            this.tpvAnular.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tpvAnular.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tpvAnular.Name = "tpvAnular";
+            this.tpvAnular.Size = new System.Drawing.Size(133, 79);
+            this.tpvAnular.Text = "Anular Factura";
+            this.tpvAnular.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tpvAnular.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // tabPage2
             // 
@@ -253,6 +361,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton2
             // 
+            this.toolStripButton2.Enabled = false;
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -264,6 +373,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton3
             // 
+            this.toolStripButton3.Enabled = false;
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -275,6 +385,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton4
             // 
+            this.toolStripButton4.Enabled = false;
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
             this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -286,6 +397,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton5
             // 
+            this.toolStripButton5.Enabled = false;
             this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -297,6 +409,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton6
             // 
+            this.toolStripButton6.Enabled = false;
             this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -308,6 +421,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton7
             // 
+            this.toolStripButton7.Enabled = false;
             this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -319,6 +433,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton9
             // 
+            this.toolStripButton9.Enabled = false;
             this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
             this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -330,6 +445,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton8
             // 
+            this.toolStripButton8.Enabled = false;
             this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
             this.toolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -385,6 +501,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton10
             // 
+            this.toolStripButton10.Enabled = false;
             this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
             this.toolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -396,6 +513,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton11
             // 
+            this.toolStripButton11.Enabled = false;
             this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
             this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -407,6 +525,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton12
             // 
+            this.toolStripButton12.Enabled = false;
             this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
             this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -418,6 +537,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton13
             // 
+            this.toolStripButton13.Enabled = false;
             this.toolStripButton13.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton13.Image")));
             this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -470,6 +590,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton15
             // 
+            this.toolStripButton15.Enabled = false;
             this.toolStripButton15.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton15.Image")));
             this.toolStripButton15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -525,6 +646,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton14
             // 
+            this.toolStripButton14.Enabled = false;
             this.toolStripButton14.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton14.Image")));
             this.toolStripButton14.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -535,6 +657,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton16
             // 
+            this.toolStripButton16.Enabled = false;
             this.toolStripButton16.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton16.Image")));
             this.toolStripButton16.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -545,6 +668,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton17
             // 
+            this.toolStripButton17.Enabled = false;
             this.toolStripButton17.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton17.Image")));
             this.toolStripButton17.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -556,6 +680,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton18
             // 
+            this.toolStripButton18.Enabled = false;
             this.toolStripButton18.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton18.Image")));
             this.toolStripButton18.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -620,6 +745,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton19
             // 
+            this.toolStripButton19.Enabled = false;
             this.toolStripButton19.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton19.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton19.Name = "toolStripButton19";
@@ -630,6 +756,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton20
             // 
+            this.toolStripButton20.Enabled = false;
             this.toolStripButton20.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton20.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton20.Name = "toolStripButton20";
@@ -640,6 +767,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton21
             // 
+            this.toolStripButton21.Enabled = false;
             this.toolStripButton21.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton21.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton21.Name = "toolStripButton21";
@@ -650,6 +778,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton22
             // 
+            this.toolStripButton22.Enabled = false;
             this.toolStripButton22.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton22.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton22.Name = "toolStripButton22";
@@ -659,6 +788,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton23
             // 
+            this.toolStripButton23.Enabled = false;
             this.toolStripButton23.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton23.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton23.Name = "toolStripButton23";
@@ -668,6 +798,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton24
             // 
+            this.toolStripButton24.Enabled = false;
             this.toolStripButton24.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton24.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton24.Name = "toolStripButton24";
@@ -677,6 +808,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton25
             // 
+            this.toolStripButton25.Enabled = false;
             this.toolStripButton25.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton25.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton25.Name = "toolStripButton25";
@@ -732,6 +864,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton26
             // 
+            this.toolStripButton26.Enabled = false;
             this.toolStripButton26.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton26.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton26.Name = "toolStripButton26";
@@ -741,6 +874,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton27
             // 
+            this.toolStripButton27.Enabled = false;
             this.toolStripButton27.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton27.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton27.Name = "toolStripButton27";
@@ -750,6 +884,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton28
             // 
+            this.toolStripButton28.Enabled = false;
             this.toolStripButton28.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton28.Image")));
             this.toolStripButton28.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton28.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -760,6 +895,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton29
             // 
+            this.toolStripButton29.Enabled = false;
             this.toolStripButton29.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton29.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton29.Name = "toolStripButton29";
@@ -769,6 +905,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton30
             // 
+            this.toolStripButton30.Enabled = false;
             this.toolStripButton30.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton30.Image")));
             this.toolStripButton30.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton30.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -779,6 +916,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton31
             // 
+            this.toolStripButton31.Enabled = false;
             this.toolStripButton31.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton31.Image")));
             this.toolStripButton31.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton31.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -838,6 +976,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton32
             // 
+            this.toolStripButton32.Enabled = false;
             this.toolStripButton32.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton32.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton32.Name = "toolStripButton32";
@@ -847,6 +986,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton33
             // 
+            this.toolStripButton33.Enabled = false;
             this.toolStripButton33.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton33.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton33.Name = "toolStripButton33";
@@ -856,6 +996,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton34
             // 
+            this.toolStripButton34.Enabled = false;
             this.toolStripButton34.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton34.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton34.Name = "toolStripButton34";
@@ -911,6 +1052,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton35
             // 
+            this.toolStripButton35.Enabled = false;
             this.toolStripButton35.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton35.Image")));
             this.toolStripButton35.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton35.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -921,6 +1063,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton36
             // 
+            this.toolStripButton36.Enabled = false;
             this.toolStripButton36.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton36.Image")));
             this.toolStripButton36.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton36.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -931,6 +1074,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton37
             // 
+            this.toolStripButton37.Enabled = false;
             this.toolStripButton37.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton37.Image")));
             this.toolStripButton37.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton37.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -951,6 +1095,7 @@ namespace ServiceExpressDsk.GUI
             // 
             // toolStripButton39
             // 
+            this.toolStripButton39.Enabled = false;
             this.toolStripButton39.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton39.Image")));
             this.toolStripButton39.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton39.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1073,109 +1218,6 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton41.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton41.Click += new System.EventHandler(this.toolStripButton41_Click);
             // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1.Controls.Add(this.toolStripContainer3);
-            this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 37);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1362, 646);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "TPV";
-            // 
-            // toolStripContainer3
-            // 
-            // 
-            // toolStripContainer3.ContentPanel
-            // 
-            this.toolStripContainer3.ContentPanel.Size = new System.Drawing.Size(1366, 93);
-            this.toolStripContainer3.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer3.Name = "toolStripContainer3";
-            this.toolStripContainer3.Size = new System.Drawing.Size(1366, 175);
-            this.toolStripContainer3.TabIndex = 9;
-            this.toolStripContainer3.Text = "toolStripContainer3";
-            // 
-            // toolStripContainer3.TopToolStripPanel
-            // 
-            this.toolStripContainer3.TopToolStripPanel.Controls.Add(this.toolStrip1);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.White;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnEliminar,
-            this.btnEditar,
-            this.btnGuardar,
-            this.btnLimpiar,
-            this.toolStripButton1});
-            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip1.Location = new System.Drawing.Point(3, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
-            this.toolStrip1.TabIndex = 10;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(138, 79);
-            this.btnEliminar.Text = "Punto de Venta";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
-            this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(133, 79);
-            this.btnEditar.Text = "Punto de Pago";
-            this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(80, 79);
-            this.btnGuardar.Text = "Clientes";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(172, 79);
-            this.btnLimpiar.Text = "Tickets Procesados";
-            this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(133, 79);
-            this.toolStripButton1.Text = "Anular Factura";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1196,6 +1238,13 @@ namespace ServiceExpressDsk.GUI
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.toolStripContainer3.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer3.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer3.ResumeLayout(false);
+            this.toolStripContainer3.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.toolStripContainer4.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer4.TopToolStripPanel.PerformLayout();
@@ -1266,13 +1315,6 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1.PerformLayout();
             this.toolStrip10.ResumeLayout(false);
             this.toolStrip10.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.toolStripContainer3.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer3.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer3.ResumeLayout(false);
-            this.toolStripContainer3.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1283,11 +1325,6 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnEliminar;
-        private System.Windows.Forms.ToolStripButton btnEditar;
-        private System.Windows.Forms.ToolStripButton btnGuardar;
-        private System.Windows.Forms.ToolStripButton btnLimpiar;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
@@ -1362,6 +1399,11 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripContainer toolStripContainer9;
         private System.Windows.Forms.ToolStripContainer toolStripContainer10;
         private System.Windows.Forms.ToolStripContainer toolStripContainer11;
+        public System.Windows.Forms.ToolStripButton tpvPuntoVenta;
+        public System.Windows.Forms.ToolStripButton tpvPuntoPago;
+        public System.Windows.Forms.ToolStripButton tpvClientes;
+        public System.Windows.Forms.ToolStripButton tpvTickets;
+        public System.Windows.Forms.ToolStripButton tpvAnular;
     }
 }
 

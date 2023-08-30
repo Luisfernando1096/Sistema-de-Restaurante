@@ -29,6 +29,166 @@ namespace ServiceExpressDsk.GUI
 
         private void Main_Load(object sender, EventArgs e)
         {
+            //Obtener todos los comandos
+            DataTable comandos = DataManager.DBConsultas.ComandosPorRol(oUsuario.IdRol);
+
+            if (comandos.Rows.Count > 0)
+            {
+                foreach (DataRow comando in comandos.Rows)
+                {
+                    switch (Int32.Parse(comando["idComando"].ToString()))
+                    {
+                        case 1:
+                            tpvPuntoVenta.Enabled = true;
+                            break;
+                        case 2:
+                            tpvPuntoPago.Enabled = true;
+                            break;
+                        case 3:
+                            tpvClientes.Enabled = true;
+                            break;
+                        case 4:
+                            tpvTickets.Enabled = true;
+                            break;
+                        case 10:
+                            toolStripButton2.Enabled = true;
+                            break;
+                        case 11:
+                            toolStripButton3.Enabled = true;
+                            break;
+                        case 12:
+                            toolStripButton4.Enabled = true;
+                            break;
+                        case 13:
+                            toolStripButton5.Enabled = true;
+                            break;
+                        case 14:
+                            toolStripButton6.Enabled = true;
+                            break;
+                        case 15:
+                            toolStripButton7.Enabled = true;
+                            break;
+                        case 16:
+                            toolStripButton9.Enabled = true;
+                            break;
+                        case 17:
+                            toolStripButton8.Enabled = true;
+                            break;
+                        case 20:
+                            toolStripButton10.Enabled = true;
+                            break;
+                        case 21:
+                            toolStripButton11.Enabled = true;
+                            break;
+                        case 22:
+                            toolStripButton12.Enabled = true;
+                            break;
+                        case 23:
+                            toolStripButton13.Enabled = true;
+                            break;
+                        case 30:
+                            toolStripButton15.Enabled = true;
+                            break;
+                        case 40:
+                            toolStripButton14.Enabled = true;
+                            break;
+                        case 41:
+                            toolStripButton16.Enabled = true;
+                            break;
+                        case 42:
+                            toolStripButton17.Enabled = true;
+                            break;
+                        case 43:
+                            toolStripButton18.Enabled = true;
+                            break;
+                        case 50:
+                            toolStripButton19.Enabled = true;
+                            break;
+                        case 51:
+                            toolStripButton20.Enabled = true;
+                            break;
+                        case 52:
+                            toolStripButton21.Enabled = true;
+                            break;
+                        case 53:
+                            toolStripButton22.Enabled = true;
+                            break;
+                        case 54:
+                            toolStripButton23.Enabled = true;
+                            break;
+                        case 55:
+                            toolStripButton24.Enabled = true;
+                            break;
+                        case 56:
+                            toolStripButton25.Enabled = true;
+                            break;
+                        case 60:
+                            toolStripButton26.Enabled = true;
+                            break;
+                        case 61:
+                            toolStripButton27.Enabled = true;
+                            toolStripButton28.Enabled = true;
+                            toolStripButton30.Enabled = true;
+                            toolStripButton31.Enabled = true;
+                            break;
+                        case 62:
+                            toolStripButton29.Enabled = true;
+                            break;
+                        case 70:
+                            toolStripButton32.Enabled = true;
+                            break;
+                        case 71:
+                            toolStripButton33.Enabled = true;
+                            break;
+                        case 72:
+                            toolStripButton34.Enabled = true;
+                            break;
+                        case 80:
+                            toolStripButton35.Enabled = true;
+                            break;
+                        case 81:
+                            toolStripButton36.Enabled = true;
+                            break;
+                        case 82:
+                            toolStripButton37.Enabled = true;
+                            break;
+                        case 83:
+                            toolStripButton39.Enabled = true;
+                            break;
+                        case 90:
+                            //cambiarUsuario.Enabled = true;
+                            break;
+                    }
+                }
+                if (oUsuario.IdRol.ToString().Equals("1"))
+                {
+                    //Administrador
+
+                } else if (oUsuario.IdRol.ToString().Equals("2"))
+                {
+                    //Mesero
+                    this.Hide();
+                    TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
+                    f.ShowDialog();
+                    this.Show();
+
+                } else if (oUsuario.IdRol.ToString().Equals("3"))
+                {
+                    //Cajero
+                    CargarPuntoPago();
+
+                } else if (oUsuario.IdRol.ToString().Equals("4"))
+                {
+                    //Mantenimiento
+
+                }
+            }
+            else
+            {
+                //No tiene comandos disponibles
+
+            }
+
             //lblConexionGreen.Visible = true;
             lblUsuario.Text = "SESION DE : " + oUsuario.Usuario.ToUpper();
             //lblRol.Text = oUsuario.Rol.ToUpper();
@@ -45,6 +205,11 @@ namespace ServiceExpressDsk.GUI
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
+        {
+            CargarPuntoPago();
+        }
+
+        private void CargarPuntoPago()
         {
             this.Hide();
             TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();

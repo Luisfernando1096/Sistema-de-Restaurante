@@ -49,6 +49,26 @@ namespace DataManager
             }
         }
 
+        public static DataTable ComandosPorRol(String rol)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT c.idComando FROM comando c, rol r, permiso p, usuario u
+                                    WHERE p.idComando = c.idComando AND p.idRol = r.idRol AND u.idRol = r.idRol AND r.idRol=" + rol + @" 
+                                    group by c.idComando;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable PedidoPorId(int idPedido)
         {
             try

@@ -42,6 +42,7 @@ namespace ServiceExpressDsk.GUI
             if (oSesion.IniciarSesion(txtClave.Text))
             {
                 autorizado = true;
+
                 Close();
             }
             else
