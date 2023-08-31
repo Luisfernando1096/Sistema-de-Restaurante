@@ -509,6 +509,7 @@ namespace TPV.GUI
             this.Name = "ComandaGestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ComandaGestion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ComandaGestion_FormClosing);
             this.Load += new System.EventHandler(this.ComandaGestion_Load);
             this.Resize += new System.EventHandler(this.ComandaGestion_Resize);
             this.flpFamilias.ResumeLayout(false);

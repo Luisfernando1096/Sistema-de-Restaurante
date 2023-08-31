@@ -12,14 +12,16 @@ namespace TPV.GUI
 {
     public partial class PuntoPago : Form
     {
+        ComandaGestion comandaGestion;
         BindingSource datos = new BindingSource();
         DataTable configuracion = DataManager.DBConsultas.Configuraciones();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
 
-        public PuntoPago()
+        public PuntoPago(ComandaGestion comandaGestion)
         {
             InitializeComponent();
+            this.comandaGestion = comandaGestion;
         }
 
         public void CargarProductosPorMesa(String id)
@@ -503,6 +505,17 @@ namespace TPV.GUI
                 {
                     e.Handled = true; // Indicar que el evento está manejado y no debe procesarse
                 }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Se cerrara la sesion, ¿esta seguro que desea cerrar sesion?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                comandaGestion.cerrarSesion = true;
+                comandaGestion.Close();
+                this.Close();
             }
         }
     }

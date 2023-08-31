@@ -13,7 +13,8 @@ namespace ServiceExpressDsk.GUI
     public partial class Main : Form
     {
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
-        private bool cerrar = false;
+        private bool cerrarF2;
+        private bool cerrar;
         public Main()
         {
             InitializeComponent();
@@ -29,8 +30,7 @@ namespace ServiceExpressDsk.GUI
                     e.Cancel = true; // Cancelar el cierre del formulario
                 }
             }
-                
-            
+                 
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -226,7 +226,7 @@ namespace ServiceExpressDsk.GUI
             f.Hide();
             TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f);
             f2.Hide();
-            TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago();
+            TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago(f2);
             f3.ShowDialog();
 
             if (f3.lblMesa.Tag != null)
@@ -263,8 +263,32 @@ namespace ServiceExpressDsk.GUI
                 f2.lblMesa.Text = f3.lblMesa.Text.ToString();
                 f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
             }
-            f2.ShowDialog();
-            this.Show();
+
+            //Si Se presiona click en cerrar sesion
+            cerrar = f2.cerrarSesion;
+            if (!cerrar)
+            {
+                cerrar = f.cerrarSesion;
+            }
+
+            if (cerrar)
+            {
+                Close();
+            }
+            else
+            {
+                f2.ShowDialog();
+                cerrar = f2.cerrarSesion;
+                if (!cerrar)
+                {
+                    f.ShowDialog();
+                    cerrar = f.cerrarSesion;
+                    if (!cerrar)
+                    {
+                        this.Show();
+                    }
+                }
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
