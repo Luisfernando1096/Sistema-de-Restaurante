@@ -40,6 +40,7 @@ namespace ServiceExpressDsk.GUI
 
             if (comandos.Rows.Count > 0)
             {
+                this.SuspendLayout();
                 foreach (DataRow comando in comandos.Rows)
                 {
                     switch (Int32.Parse(comando["idComando"].ToString()))
@@ -166,6 +167,8 @@ namespace ServiceExpressDsk.GUI
                             break;
                     }
                 }
+                this.ResumeLayout();
+
                 if (oUsuario.IdRol.ToString().Equals("1"))
                 {
                     //Administrador

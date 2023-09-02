@@ -194,11 +194,7 @@ namespace TPV.GUI
                 f2.idMesaAnterior = idMesaAnterior;
                 f2.ShowDialog(); // Muestra el nuevo formulario
             }
-            else
-            {
 
-            }
-            
         }
 
         private void btnSalir_Resize(object sender, EventArgs e)

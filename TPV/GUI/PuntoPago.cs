@@ -17,11 +17,14 @@ namespace TPV.GUI
         DataTable configuracion = DataManager.DBConsultas.Configuraciones();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
+        private bool activarFactura = false;
+        private bool activarTicket = true;
 
         public PuntoPago(ComandaGestion comandaGestion)
         {
             InitializeComponent();
             this.comandaGestion = comandaGestion;
+            button1.BackColor = Color.CadetBlue;
         }
 
         public void CargarProductosPorMesa(String id)
@@ -516,6 +519,34 @@ namespace TPV.GUI
                 comandaGestion.cerrarSesion = true;
                 comandaGestion.Close();
                 this.Close();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (activarFactura)
+            {
+                activarFactura = false;
+                button2.BackColor = Color.White;
+            }
+            else
+            {
+                activarFactura = true;
+                button2.BackColor = Color.CadetBlue;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (activarTicket)
+            {
+                activarTicket = false;
+                button1.BackColor = Color.White;
+            }
+            else
+            {
+                activarTicket = true;
+                button1.BackColor = Color.CadetBlue;
             }
         }
     }
