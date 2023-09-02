@@ -274,6 +274,7 @@ namespace TPV.GUI
                 pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
                 DataTable up = DataManager.DBConsultas.UltimoPedido();
                 pedidoDetalle.IdPedido = Int32.Parse(up.Rows[0]["idPedido"].ToString());
+                lblTicket.Text = up.Rows[0]["idPedido"].ToString();
                 pedidoDetalle.Cantidad = cantidad;
                 DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(botonProducto.Tag.ToString()));
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());

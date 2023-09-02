@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Finanzas
+namespace Finanzas.GUI
 {
-    public partial class Form1 : Form
+    public partial class CierreCaja : Form
     {
-        public Form1()
+        public CierreCaja()
         {
             InitializeComponent();
         }

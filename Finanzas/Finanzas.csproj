@@ -46,17 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\AdministrarCuentas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\AdministrarCuentas.Designer.cs">
       <DependentUpon>AdministrarCuentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ApuertaraCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ApuertaraCaja.Designer.cs">
+      <DependentUpon>ApuertaraCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CierreCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CierreCaja.Designer.cs">
+      <DependentUpon>CierreCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Egresos.cs">
       <SubType>Form</SubType>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\AdministrarCuentas.resx">
       <DependentUpon>AdministrarCuentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ApuertaraCaja.resx">
+      <DependentUpon>ApuertaraCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Egresos.resx">
       <DependentUpon>Egresos.cs</DependentUpon>
