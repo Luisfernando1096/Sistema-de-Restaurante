@@ -428,6 +428,11 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
         }
 
+        private void toolStripContainer3_TopToolStripPanel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void toolStripButton14_Click(object sender, EventArgs e)
         {
             Finanzas.GUI.ApuertaraCaja f = new Finanzas.GUI.ApuertaraCaja();

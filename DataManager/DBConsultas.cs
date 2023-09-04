@@ -818,6 +818,23 @@ namespace DataManager
                 return new DataTable();
             }
         }
+        public static DataTable Mesas()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"select m.idMesa, m.numero,m.nombre nomMesa, m.capacidad, m.disponible,s.idSalon, s.nombre, s.fondo, s.nMesas from mesa m, salon s where m.idSalon  = s.idSalon;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
     }
 }
 
