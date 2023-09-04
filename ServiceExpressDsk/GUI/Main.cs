@@ -427,5 +427,17 @@ namespace ServiceExpressDsk.GUI
             Salones.GUI.SalonesMesas f = new Salones.GUI.SalonesMesas();
             f.ShowDialog();
         }
+
+        private void toolStripButton14_Click(object sender, EventArgs e)
+        {
+            Finanzas.GUI.ApuertaraCaja f = new Finanzas.GUI.ApuertaraCaja();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton16_Click(object sender, EventArgs e)
+        {
+            Finanzas.GUI.CierreCaja f = new Finanzas.GUI.CierreCaja();
+            f.ShowDialog();
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace Finanzas.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApuertaraCaja));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -43,7 +44,16 @@ namespace Finanzas.GUI
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.dgvCajas = new System.Windows.Forms.DataGridView();
+            this.idCaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.fechaApertura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaCierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saldoInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.efectivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label8 = new System.Windows.Forms.Label();
             this.txtIdCaja = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,15 +63,9 @@ namespace Finanzas.GUI
             this.label2 = new System.Windows.Forms.Label();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.idCaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.fechaApertura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaCierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saldoInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.efectivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCajas)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -113,6 +117,7 @@ namespace Finanzas.GUI
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(102, 59);
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // toolStripSeparator3
             // 
@@ -127,6 +132,7 @@ namespace Finanzas.GUI
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(133, 59);
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // toolStripSeparator5
             // 
@@ -141,6 +147,7 @@ namespace Finanzas.GUI
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(114, 59);
             this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnSalir
             // 
@@ -151,6 +158,7 @@ namespace Finanzas.GUI
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(101, 59);
             this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // toolStripSeparator2
             // 
@@ -158,19 +166,21 @@ namespace Finanzas.GUI
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 62);
             // 
-            // dgvClientes
+            // dgvCajas
             // 
-            this.dgvClientes.AllowUserToAddRows = false;
-            this.dgvClientes.AllowUserToDeleteRows = false;
-            this.dgvClientes.AllowUserToResizeRows = false;
+            this.dgvCajas.AllowUserToAddRows = false;
+            this.dgvCajas.AllowUserToDeleteRows = false;
+            this.dgvCajas.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCajas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCajas.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.dgvCajas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvCajas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvCajas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCajas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCaja,
+            this.idCajero,
+            this.nombres,
             this.estado,
             this.fechaApertura,
             this.fechaCierre,
@@ -184,108 +194,17 @@ namespace Finanzas.GUI
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClientes.Location = new System.Drawing.Point(2, 135);
-            this.dgvClientes.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvClientes.MultiSelect = false;
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.ReadOnly = true;
-            this.dgvClientes.RowHeadersVisible = false;
-            this.dgvClientes.RowHeadersWidth = 51;
-            this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(753, 181);
-            this.dgvClientes.TabIndex = 10;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(11, 111);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(98, 20);
-            this.label8.TabIndex = 43;
-            this.label8.Text = "Auto generado";
-            // 
-            // txtIdCaja
-            // 
-            this.txtIdCaja.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtIdCaja.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdCaja.Location = new System.Drawing.Point(12, 82);
-            this.txtIdCaja.Name = "txtIdCaja";
-            this.txtIdCaja.ReadOnly = true;
-            this.txtIdCaja.Size = new System.Drawing.Size(95, 26);
-            this.txtIdCaja.TabIndex = 42;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 20);
-            this.label1.TabIndex = 41;
-            this.label1.Text = "Id caja:";
-            // 
-            // txtCajero
-            // 
-            this.txtCajero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCajero.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCajero.Location = new System.Drawing.Point(413, 82);
-            this.txtCajero.Name = "txtCajero";
-            this.txtCajero.Size = new System.Drawing.Size(209, 26);
-            this.txtCajero.TabIndex = 45;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(409, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 20);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "Cajero:";
-            // 
-            // txtSaldoInicial
-            // 
-            this.txtSaldoInicial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSaldoInicial.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSaldoInicial.Location = new System.Drawing.Point(645, 82);
-            this.txtSaldoInicial.Name = "txtSaldoInicial";
-            this.txtSaldoInicial.Size = new System.Drawing.Size(81, 26);
-            this.txtSaldoInicial.TabIndex = 47;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(641, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 20);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Saldo Inicial:";
-            // 
-            // dtpFecha
-            // 
-            this.dtpFecha.CustomFormat = "yyyy/MM/dd";
-            this.dtpFecha.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFecha.Location = new System.Drawing.Point(154, 82);
-            this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(200, 26);
-            this.dtpFecha.TabIndex = 48;
-            this.dtpFecha.Value = new System.DateTime(2023, 9, 1, 22, 19, 0, 0);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(150, 59);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 20);
-            this.label4.TabIndex = 49;
-            this.label4.Text = "Fecha:";
+            this.dgvCajas.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCajas.Location = new System.Drawing.Point(1, 135);
+            this.dgvCajas.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvCajas.MultiSelect = false;
+            this.dgvCajas.Name = "dgvCajas";
+            this.dgvCajas.ReadOnly = true;
+            this.dgvCajas.RowHeadersVisible = false;
+            this.dgvCajas.RowHeadersWidth = 51;
+            this.dgvCajas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCajas.Size = new System.Drawing.Size(753, 181);
+            this.dgvCajas.TabIndex = 10;
             // 
             // idCaja
             // 
@@ -294,6 +213,22 @@ namespace Finanzas.GUI
             this.idCaja.Name = "idCaja";
             this.idCaja.ReadOnly = true;
             this.idCaja.Width = 50;
+            // 
+            // idCajero
+            // 
+            this.idCajero.DataPropertyName = "idCajero";
+            this.idCajero.HeaderText = "Id cajero";
+            this.idCajero.Name = "idCajero";
+            this.idCajero.ReadOnly = true;
+            this.idCajero.Visible = false;
+            // 
+            // nombres
+            // 
+            this.nombres.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Nombres";
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
             // 
             // estado
             // 
@@ -334,6 +269,7 @@ namespace Finanzas.GUI
             this.efectivo.HeaderText = "Efectivo";
             this.efectivo.Name = "efectivo";
             this.efectivo.ReadOnly = true;
+            this.efectivo.Visible = false;
             // 
             // saldo
             // 
@@ -341,6 +277,106 @@ namespace Finanzas.GUI
             this.saldo.HeaderText = "Saldo";
             this.saldo.Name = "saldo";
             this.saldo.ReadOnly = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(11, 111);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(98, 20);
+            this.label8.TabIndex = 43;
+            this.label8.Text = "Auto generado";
+            // 
+            // txtIdCaja
+            // 
+            this.txtIdCaja.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtIdCaja.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIdCaja.Location = new System.Drawing.Point(12, 82);
+            this.txtIdCaja.Name = "txtIdCaja";
+            this.txtIdCaja.ReadOnly = true;
+            this.txtIdCaja.Size = new System.Drawing.Size(95, 26);
+            this.txtIdCaja.TabIndex = 42;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 59);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 20);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Id caja:";
+            // 
+            // txtCajero
+            // 
+            this.txtCajero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCajero.Enabled = false;
+            this.txtCajero.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCajero.Location = new System.Drawing.Point(413, 82);
+            this.txtCajero.Name = "txtCajero";
+            this.txtCajero.Size = new System.Drawing.Size(209, 26);
+            this.txtCajero.TabIndex = 45;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(409, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 20);
+            this.label3.TabIndex = 44;
+            this.label3.Text = "Cajero:";
+            // 
+            // txtSaldoInicial
+            // 
+            this.txtSaldoInicial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSaldoInicial.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSaldoInicial.Location = new System.Drawing.Point(645, 82);
+            this.txtSaldoInicial.Name = "txtSaldoInicial";
+            this.txtSaldoInicial.Size = new System.Drawing.Size(81, 26);
+            this.txtSaldoInicial.TabIndex = 47;
+            this.txtSaldoInicial.Text = "0";
+            this.txtSaldoInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSaldoInicial_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(641, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 20);
+            this.label2.TabIndex = 46;
+            this.label2.Text = "Saldo Inicial:";
+            // 
+            // dtpFecha
+            // 
+            this.dtpFecha.CustomFormat = "yyyy/MM/dd HH:MM:ss";
+            this.dtpFecha.Enabled = false;
+            this.dtpFecha.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFecha.Location = new System.Drawing.Point(154, 82);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(200, 26);
+            this.dtpFecha.TabIndex = 48;
+            this.dtpFecha.Value = new System.DateTime(2023, 9, 1, 22, 19, 0, 0);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(150, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 20);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "Fecha:";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ApuertaraCaja
             // 
@@ -356,14 +392,15 @@ namespace Finanzas.GUI
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtIdCaja);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvClientes);
+            this.Controls.Add(this.dgvCajas);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ApuertaraCaja";
             this.Text = "ApuertaraCaja";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApuertaraCaja_FormClosing);
             this.Load += new System.EventHandler(this.ApuertaraCaja_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCajas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,7 +419,7 @@ namespace Finanzas.GUI
         private System.Windows.Forms.ToolStripButton btnLimpiar;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.DataGridView dgvClientes;
+        private System.Windows.Forms.DataGridView dgvCajas;
         private System.Windows.Forms.Label label8;
         public System.Windows.Forms.TextBox txtIdCaja;
         private System.Windows.Forms.Label label1;
@@ -392,7 +429,10 @@ namespace Finanzas.GUI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpFecha;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCaja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCajero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
         private System.Windows.Forms.DataGridViewCheckBoxColumn estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaApertura;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCierre;

@@ -582,12 +582,32 @@ namespace DataManager
             }
         }
 
-        public static DataTable Caja()
+        public static DataTable Cajas()
         {
             try
             {
                 DataTable resultado = new DataTable();
-                string sentencia = "SELECT * FROM caja;";
+                string sentencia = @"SELECT c.idCaja, c.idCajero, c.estado, c.fechaApertura, c.fechaCierre,
+                                     c.saldoInicial, c.efectivo, c.saldo, e.nombres FROM caja c, empleado e WHERE c.idCajero = e.idEmpleado; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable CajaAbierta()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                string sentencia = @"SELECT c.idCaja, c.idCajero, c.estado, c.fechaApertura, c.fechaCierre,
+                                     c.saldoInicial, c.efectivo, c.saldo, e.nombres FROM caja c, empleado e WHERE c.idCajero = e.idEmpleado AND c.estado = 1; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

@@ -638,7 +638,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton18});
             this.toolStrip5.Location = new System.Drawing.Point(3, 0);
             this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.Size = new System.Drawing.Size(457, 82);
+            this.toolStrip5.Size = new System.Drawing.Size(488, 82);
             this.toolStrip5.TabIndex = 11;
             this.toolStrip5.Text = "toolStrip5";
             // 
@@ -652,6 +652,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton14.Size = new System.Drawing.Size(125, 79);
             this.toolStripButton14.Text = "Apertura Caja";
             this.toolStripButton14.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton14.Click += new System.EventHandler(this.toolStripButton14_Click);
             // 
             // toolStripButton16
             // 
@@ -663,6 +664,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton16.Size = new System.Drawing.Size(105, 79);
             this.toolStripButton16.Text = "Cierre Caja";
             this.toolStripButton16.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton16.Click += new System.EventHandler(this.toolStripButton16_Click);
             // 
             // toolStripButton17
             // 

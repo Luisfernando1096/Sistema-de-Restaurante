@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    internal class Caja
+    public class Caja
     {
         int _idCaja;
         int _idCajero;
-        int _Estado;
+        Boolean _Estado;
         String _FechaApertura;
         String _FechaCierre;
         double _SaldoInicial;
@@ -19,7 +19,7 @@ namespace Mantenimiento.CLS
 
         public int IdCaja { get => _idCaja; set => _idCaja = value; }
         public int IdCajero { get => _idCajero; set => _idCajero = value; }
-        public int Estado { get => _Estado; set => _Estado = value; }
+        public Boolean Estado { get => _Estado; set => _Estado = value; }
         public string FechaApertura { get => _FechaApertura; set => _FechaApertura = value; }
         public string FechaCierre { get => _FechaCierre; set => _FechaCierre = value; }
         public double SaldoInicial { get => _SaldoInicial; set => _SaldoInicial = value; }
@@ -30,7 +30,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into caja(idCajero,estado,fechaApertura,fechaCierre,saldoInicial,efectivo,saldo) values ("+_idCajero+","+_Estado+",'"+_FechaApertura+"','"+_FechaCierre+"',"+_SaldoInicial+","+_Efectivo+","+_Saldo+");";
+            sentencia = @"insert into caja(idCajero,estado,fechaApertura,saldoInicial,efectivo,saldo) values ("+_idCajero+","+_Estado+",'"+_FechaApertura+"',"+_SaldoInicial+","+_Efectivo+","+_Saldo+");";
 
             try
             {
@@ -55,7 +55,32 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update caja set idCajero = "+_idCajero+", estado = "+_Estado+", fechaApertura ='"+_FechaApertura+"', fechaCierre ='"+_FechaCierre+"', saldoInicial = "+_SaldoInicial+", efectivo = "+_Efectivo+", saldo = "+_Saldo+" where idCaja ="+_idCaja+";";
+            sentencia = @"update caja set idCajero = "+_idCajero+", estado = "+_Estado+", fechaApertura ='"+_FechaApertura+"', saldoInicial = "+_SaldoInicial+", efectivo = "+_Efectivo+", saldo = "+_Saldo+" where idCaja ="+_idCaja+";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
+        public Boolean ActualizarCierre()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"update caja set  fechaCierre ='" + _FechaCierre + "', estado = " + _Estado + " where idCaja =" + _idCaja + ";";
 
             try
             {
