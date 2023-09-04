@@ -400,5 +400,10 @@ namespace ServiceExpressDsk.GUI
             Salones.GUI.SalonesMesas f = new Salones.GUI.SalonesMesas();
             f.ShowDialog();
         }
+
+        private void toolStripContainer3_TopToolStripPanel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
