@@ -582,13 +582,78 @@ namespace DataManager
             }
         }
 
-        public static DataTable Cajas()
+        public static DataTable Cajas(Boolean soloAbiertas)
         {
             try
             {
                 DataTable resultado = new DataTable();
-                string sentencia = @"SELECT c.idCaja, c.idCajero, c.estado, c.fechaApertura, c.fechaCierre,
-                                     c.saldoInicial, c.efectivo, c.saldo, e.nombres FROM caja c, empleado e WHERE c.idCajero = e.idEmpleado; ";
+                string sentencia;
+                if (soloAbiertas)
+                {
+                    sentencia = @"SELECT
+                                c.idCaja,
+                                c.idCajero,
+                                c.estado,
+                                c.fechaApertura,
+                                c.fechaCierre,
+                                c.saldoInicial,
+                                c.efectivo,
+                                c.saldo,
+                                e.nombres,
+                                SUM(eg.cantidad) cantidad
+                            FROM
+                                caja c,
+                                empleado e,
+                                egreso eg
+                            WHERE
+                                c.idCajero = e.idEmpleado
+                                AND e.idEmpleado = eg.idUsuario
+                                AND eg.idCaja = c.idCaja
+                                AND c.estado = 1
+                            GROUP BY
+                                c.idCaja,  
+                                c.idCajero,
+                                c.estado,
+                                c.fechaApertura,
+                                c.fechaCierre,
+                                c.saldoInicial,
+                                c.efectivo,
+                                c.saldo,
+                                e.nombres;";
+                }
+                else
+                {
+                    sentencia = @"SELECT
+                                    c.idCaja,
+                                    c.idCajero,
+                                    c.estado,
+                                    c.fechaApertura,
+                                    c.fechaCierre,
+                                    c.saldoInicial,
+                                    c.efectivo,
+                                    c.saldo,
+                                    e.nombres,
+                                    SUM(eg.cantidad) cantidad
+                                FROM
+                                    caja c,
+                                    empleado e,
+                                    egreso eg
+                                WHERE
+                                    c.idCajero = e.idEmpleado
+                                    AND e.idEmpleado = eg.idUsuario
+                                    AND eg.idCaja = c.idCaja
+                                GROUP BY
+                                    c.idCaja,  
+                                    c.idCajero,
+                                    c.estado,
+                                    c.fechaApertura,
+                                    c.fechaCierre,
+                                    c.saldoInicial,
+                                    c.efectivo,
+                                    c.saldo,
+                                    e.nombres;";
+                }
+                
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

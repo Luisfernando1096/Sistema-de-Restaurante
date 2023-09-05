@@ -43,7 +43,7 @@ namespace Finanzas.GUI
             try
             {
                 // Obtener los datos
-                DataTable caja = DataManager.DBConsultas.Cajas();
+                DataTable caja = DataManager.DBConsultas.Cajas(false);
 
                 // Crear un nuevo DataTable con la estructura
                 DataTable dt = caja.Clone();

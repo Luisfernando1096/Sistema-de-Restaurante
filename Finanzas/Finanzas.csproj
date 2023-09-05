@@ -78,6 +78,9 @@
     <EmbeddedResource Include="GUI\ApuertaraCaja.resx">
       <DependentUpon>ApuertaraCaja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CierreCaja.resx">
+      <DependentUpon>CierreCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Egresos.resx">
       <DependentUpon>Egresos.cs</DependentUpon>
     </EmbeddedResource>

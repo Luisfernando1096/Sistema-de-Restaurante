@@ -18,6 +18,7 @@ namespace Finanzas.GUI
         public ApuertaraCaja()
         {
             InitializeComponent();
+            dtpFecha.Text = DateTime.Now.ToString();
         }
 
         private void ApuertaraCaja_Load(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace Finanzas.GUI
         {
             try
             {
-                datos.DataSource = DataManager.DBConsultas.Cajas();
+                datos.DataSource = DataManager.DBConsultas.Cajas(false);
                 dgvCajas.DataSource = datos;
                 dgvCajas.AutoGenerateColumns = false;
             }

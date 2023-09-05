@@ -31,8 +31,8 @@ namespace Finanzas.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApuertaraCaja));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
@@ -46,6 +46,7 @@ namespace Finanzas.GUI
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvCajas = new System.Windows.Forms.DataGridView();
             this.idCaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -171,14 +172,15 @@ namespace Finanzas.GUI
             this.dgvCajas.AllowUserToAddRows = false;
             this.dgvCajas.AllowUserToDeleteRows = false;
             this.dgvCajas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvCajas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            this.dgvCajas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCajas.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvCajas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCajas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvCajas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCajas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCaja,
+            this.cantidad,
             this.idCajero,
             this.nombres,
             this.estado,
@@ -187,14 +189,14 @@ namespace Finanzas.GUI
             this.saldoInicial,
             this.efectivo,
             this.saldo});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCajas.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCajas.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCajas.Location = new System.Drawing.Point(1, 135);
             this.dgvCajas.Margin = new System.Windows.Forms.Padding(2);
             this.dgvCajas.MultiSelect = false;
@@ -213,6 +215,14 @@ namespace Finanzas.GUI
             this.idCaja.Name = "idCaja";
             this.idCaja.ReadOnly = true;
             this.idCaja.Width = 50;
+            // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Egresos";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            this.cantidad.Visible = false;
             // 
             // idCajero
             // 
@@ -283,12 +293,12 @@ namespace Finanzas.GUI
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(11, 111);
+            this.label8.Location = new System.Drawing.Point(57, 62);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(98, 20);
+            this.label8.Size = new System.Drawing.Size(36, 20);
             this.label8.TabIndex = 43;
-            this.label8.Text = "Auto generado";
+            this.label8.Text = "Auto";
             // 
             // txtIdCaja
             // 
@@ -353,7 +363,7 @@ namespace Finanzas.GUI
             // 
             // dtpFecha
             // 
-            this.dtpFecha.CustomFormat = "yyyy/MM/dd HH:MM:ss";
+            this.dtpFecha.CustomFormat = "yyyy/MM/dd hh:mm:ss";
             this.dtpFecha.Enabled = false;
             this.dtpFecha.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -361,7 +371,7 @@ namespace Finanzas.GUI
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(200, 26);
             this.dtpFecha.TabIndex = 48;
-            this.dtpFecha.Value = new System.DateTime(2023, 9, 1, 22, 19, 0, 0);
+            this.dtpFecha.Value = new System.DateTime(2023, 9, 5, 0, 0, 0, 0);
             // 
             // label4
             // 
@@ -395,6 +405,7 @@ namespace Finanzas.GUI
             this.Controls.Add(this.dgvCajas);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ApuertaraCaja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ApuertaraCaja";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApuertaraCaja_FormClosing);
             this.Load += new System.EventHandler(this.ApuertaraCaja_Load);
@@ -431,6 +442,7 @@ namespace Finanzas.GUI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCaja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCajero;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
         private System.Windows.Forms.DataGridViewCheckBoxColumn estado;
