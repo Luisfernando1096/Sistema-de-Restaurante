@@ -284,8 +284,12 @@ namespace ServiceExpressDsk.GUI
                 cerrar = f2.cerrarSesion;
                 if (!cerrar)
                 {
-                    f.ShowDialog();
-                    cerrar = f.cerrarSesion;
+                    if (!f.admin)
+                    {
+                        f.ShowDialog();
+                        cerrar = f.cerrarSesion;
+                    }
+                    
                     if (!cerrar)
                     {
                         this.Show();

@@ -59,11 +59,14 @@ namespace TPV.GUI
 
                     if (incluirPropina)
                     {
-                        //Denifir la propina
+                        //Activar  el check
+                        cbPropina.Checked = false;
                         CalcularTodo();
                     }
                     else
                     {
+                        //Activar  el check
+                        cbPropina.Checked = true;
                         CalcularTodo();
                     }
                 }
@@ -437,7 +440,7 @@ namespace TPV.GUI
 
         private void cbPropina_CheckedChanged(object sender, EventArgs e)
         {
-            CalcularTodo();
+            
         }
 
         private void txtPorcentaje_TextChanged(object sender, EventArgs e)
@@ -547,6 +550,38 @@ namespace TPV.GUI
             {
                 activarTicket = true;
                 button1.BackColor = Color.CadetBlue;
+            }
+        }
+
+        private void cbPropina_Click(object sender, EventArgs e)
+        {
+            //Autorizar
+            bool autorizar = bool.Parse(configuracion.Rows[0]["autorizarDescProp"].ToString());
+            if (autorizar)
+            {
+                //Codigo para mostrar la interfaz y autorizar
+                bool exito = false;
+
+                if (exito)
+                {
+                    CalcularTodo();
+                }
+                else
+                {
+                    if (cbPropina.Checked)
+                    {
+                        cbPropina.Checked = false;
+                    }
+                    else
+                    {
+                        cbPropina.Checked = true;
+                    }
+                }
+
+            }
+            else
+            {
+                CalcularTodo();
             }
         }
     }

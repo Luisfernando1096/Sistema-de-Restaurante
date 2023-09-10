@@ -591,39 +591,6 @@ namespace DataManager
                 if (soloAbiertas)
                 {
                     sentencia = @"SELECT
-                                c.idCaja,
-                                c.idCajero,
-                                c.estado,
-                                c.fechaApertura,
-                                c.fechaCierre,
-                                c.saldoInicial,
-                                c.efectivo,
-                                c.saldo,
-                                e.nombres,
-                                SUM(eg.cantidad) cantidad
-                            FROM
-                                caja c,
-                                empleado e,
-                                egreso eg
-                            WHERE
-                                c.idCajero = e.idEmpleado
-                                AND e.idEmpleado = eg.idUsuario
-                                AND eg.idCaja = c.idCaja
-                                AND c.estado = 1
-                            GROUP BY
-                                c.idCaja,  
-                                c.idCajero,
-                                c.estado,
-                                c.fechaApertura,
-                                c.fechaCierre,
-                                c.saldoInicial,
-                                c.efectivo,
-                                c.saldo,
-                                e.nombres;";
-                }
-                else
-                {
-                    sentencia = @"SELECT
                                     c.idCaja,
                                     c.idCajero,
                                     c.estado,
@@ -633,15 +600,14 @@ namespace DataManager
                                     c.efectivo,
                                     c.saldo,
                                     e.nombres,
-                                    SUM(eg.cantidad) cantidad
+                                    COALESCE(SUM(eg.cantidad), 0) AS cantidad
                                 FROM
-                                    caja c,
-                                    empleado e,
-                                    egreso eg
-                                WHERE
-                                    c.idCajero = e.idEmpleado
-                                    AND e.idEmpleado = eg.idUsuario
-                                    AND eg.idCaja = c.idCaja
+                                    caja c
+                                LEFT JOIN
+                                    empleado e ON c.idCajero = e.idEmpleado
+                                LEFT JOIN
+                                    egreso eg ON e.idEmpleado = eg.idUsuario AND eg.idCaja = c.idCaja AND c.estado = 1
+                                WHERE c.estado = 1
                                 GROUP BY
                                     c.idCaja,  
                                     c.idCajero,
@@ -652,6 +618,36 @@ namespace DataManager
                                     c.efectivo,
                                     c.saldo,
                                     e.nombres;";
+                }
+                else
+                {
+                    sentencia = @"SELECT
+                                c.idCaja,
+                                c.idCajero,
+                                c.estado,
+                                c.fechaApertura,
+                                c.fechaCierre,
+                                c.saldoInicial,
+                                c.efectivo,
+                                c.saldo,
+                                e.nombres,
+                                COALESCE(SUM(eg.cantidad), 0) AS cantidad
+                            FROM
+                                caja c
+                            LEFT JOIN
+                                empleado e ON c.idCajero = e.idEmpleado
+                            LEFT JOIN
+                                egreso eg ON e.idEmpleado = eg.idUsuario AND eg.idCaja = c.idCaja
+                            GROUP BY
+                                c.idCaja,  
+                                c.idCajero,
+                                c.estado,
+                                c.fechaApertura,
+                                c.fechaCierre,
+                                c.saldoInicial,
+                                c.efectivo,
+                                c.saldo,
+                                e.nombres;";
                 }
                 
                 DBOperacion operacion = new DBOperacion();
