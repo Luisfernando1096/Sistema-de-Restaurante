@@ -896,6 +896,41 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable Comprobante()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"select idComprobante, tipo from comprobante";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable Proveedor()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"select idProveedor, nombre, NIT, telefono,email,regContable, contacto, direccion from proveedor";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
     }
 }
 
