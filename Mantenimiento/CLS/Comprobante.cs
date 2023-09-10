@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    internal class Comprobante
+    public class Comprobante
     {
         int _idComprobante;
         String _tipo;
