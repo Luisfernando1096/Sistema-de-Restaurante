@@ -13,7 +13,7 @@ namespace ServiceExpressDsk.GUI
     public partial class Main : Form
     {
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
-        private bool cerrarF2;
+        private bool tpv;
         private bool cerrar;
         public Main()
         {
@@ -269,6 +269,7 @@ namespace ServiceExpressDsk.GUI
 
             //Si Se presiona click en cerrar sesion
             cerrar = f2.cerrarSesion;
+            tpv = f2.tpv;
             if (!cerrar)
             {
                 cerrar = f.cerrarSesion;
@@ -280,8 +281,12 @@ namespace ServiceExpressDsk.GUI
             }
             else
             {
-                f2.ShowDialog();
-                cerrar = f2.cerrarSesion;
+                if (!tpv)
+                {
+                    f2.ShowDialog();
+                    cerrar = f2.cerrarSesion;
+                }
+                
                 if (!cerrar)
                 {
                     if (!f.admin)

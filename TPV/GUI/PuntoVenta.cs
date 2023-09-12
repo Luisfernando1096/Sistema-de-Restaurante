@@ -17,6 +17,7 @@ namespace TPV.GUI
         public int idPedidoCambioMesa = 0;
         private int idMesaAnterior = 0;
         public bool admin;
+        public bool tpv;
         public bool cerrarSesion;
 
         public PuntoVenta()

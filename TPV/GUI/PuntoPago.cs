@@ -119,7 +119,9 @@ namespace TPV.GUI
 
         private void button13_Click(object sender, EventArgs e)
         {
-            PuntoVenta f = new PuntoVenta();
+            comandaGestion.tpv = true;
+            comandaGestion.Close();
+            Close();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -720,7 +722,9 @@ namespace TPV.GUI
             }
             else
             {
-
+                comandaGestion.tpv = true;
+                comandaGestion.Close();
+                Close();
             }
         }
     }

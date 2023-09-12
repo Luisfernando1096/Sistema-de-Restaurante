@@ -18,6 +18,7 @@ namespace TPV.GUI
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
         public bool cerrarSesion;
+        public bool tpv;
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
@@ -509,6 +510,7 @@ namespace TPV.GUI
         {
             if (cerrarSesion)
             {
+                punto_venta.tpv = true;
                 punto_venta.cerrarSesion = true;
                 punto_venta.Close();
 
