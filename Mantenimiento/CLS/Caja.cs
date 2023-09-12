@@ -57,11 +57,27 @@ namespace Mantenimiento.CLS
             string sentencia;
             if (_FechaCierre != null)
             {
-                sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", fechaApertura ='" + _FechaApertura + "', fechaCierre ='" + _FechaCierre + "', saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                if (_FechaApertura != null)
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", fechaApertura ='" + _FechaApertura + "', fechaCierre ='" + _FechaCierre + "', saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+                else
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+                
             }
             else
             {
-                sentencia = @"update caja set idCajero = "+_idCajero+", estado = "+_Estado+", fechaApertura ='"+_FechaApertura+"', saldoInicial = "+_SaldoInicial+", efectivo = "+_Efectivo+", saldo = "+_Saldo+" where idCaja ="+_idCaja+";";
+                if (_FechaApertura != null)
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", fechaApertura ='" + _FechaApertura + "', saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+                else
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+                
             }
             
             try

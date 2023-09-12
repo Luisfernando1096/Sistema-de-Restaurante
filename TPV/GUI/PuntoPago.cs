@@ -636,7 +636,7 @@ namespace TPV.GUI
         {
             if (ValidarExistenciaTicket()) return;
             //Programar pago exacto
-            pedido.Total = Double.Parse(txtTotalPagar.Text);
+            pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
             RegistrarPago();
         }
 
@@ -644,12 +644,13 @@ namespace TPV.GUI
         {
             if (ValidarExistenciaTicket()) return;
             //Programar pago cortesia
-            pedido.Total = Double.Parse(txtTotalPagar.Text);
+            pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
             RegistrarPago();
         }
 
         private void ProcesarPago()
         {
+            pedido.TotalPago = Double.Parse(txtPagoRegistrar.Text);
             if (Double.Parse(txtPagoRegistrar.Text) < Double.Parse(txtTotalPagar.Text))
             {
                 //Enviar mensaje que 
@@ -678,7 +679,6 @@ namespace TPV.GUI
                     cajaActualizar.IdCaja = Int32.Parse(item["idCaja"].ToString());
                     cajaActualizar.IdCajero = Int32.Parse(item["idCajero"].ToString());
                     cajaActualizar.Estado = true;
-                    cajaActualizar.FechaApertura = item["fechaApertura"].ToString();
                     cajaActualizar.SaldoInicial = Double.Parse(item["saldoInicial"].ToString());
                     cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
                     cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
@@ -698,6 +698,7 @@ namespace TPV.GUI
         private void RegistrarPago()
         {
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
+            pedido.Total = Double.Parse(txtTotalPagar.Tag.ToString());
             pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
             pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
             pedido.Cancelado = true;
@@ -722,6 +723,19 @@ namespace TPV.GUI
             }
             else
             {
+                //Actualizar estado de la mesa
+                Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
+                mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+                mesa.Disponible = true;
+                if (mesa.ActualizarEstado())
+                {
+                    //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                }
+                else
+                {
+                    MessageBox.Show("ERROR AL ACTUALIZAR");
+                }
+                //IRa tpv
                 comandaGestion.tpv = true;
                 comandaGestion.Close();
                 Close();
