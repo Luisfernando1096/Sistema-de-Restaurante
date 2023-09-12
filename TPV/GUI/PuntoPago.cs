@@ -15,6 +15,7 @@ namespace TPV.GUI
         ComandaGestion comandaGestion;
         BindingSource datos = new BindingSource();
         DataTable configuracion = DataManager.DBConsultas.Configuraciones();
+        private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
         private bool activarFactura = false;
@@ -24,7 +25,7 @@ namespace TPV.GUI
         {
             InitializeComponent();
             this.comandaGestion = comandaGestion;
-            button1.BackColor = Color.CadetBlue;
+            btnTicket.BackColor = Color.CadetBlue;
         }
 
         public void CargarProductosPorMesa(String id)
@@ -433,7 +434,14 @@ namespace TPV.GUI
             double cambio = 0;
             if (!txtPagoRegistrar.Text.Equals(""))
             {
-                cambio = double.Parse(txtPagoRegistrar.Text.ToString()) - totalPagar;
+                if (!txtPagoRegistrar.Text.Equals("."))
+                {
+                    cambio = double.Parse(txtPagoRegistrar.Text.ToString()) - totalPagar;
+                }
+                else
+                {
+                    txtPagoRegistrar.Text = "";
+                }
             }
             return cambio;
         }
@@ -486,6 +494,7 @@ namespace TPV.GUI
             // Verificar si el carácter ingresado no es un dígito
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
+                if(e.KeyChar != '.' || !hasEnteredNumber)
                 e.Handled = true; // Ignorar el carácter si no es un dígito ni una tecla de control
             }
             if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar))
@@ -502,15 +511,6 @@ namespace TPV.GUI
             else
             {
                 e.Handled = true; // Ignorar cualquier otro carácter
-            }
-            // Verificar si la tecla presionada es el retroceso (Backspace)
-            if (e.KeyChar == (char)Keys.Back)
-            {
-                // Impedir borrar si solo hay un carácter en el TextBox
-                if (txtPagoRegistrar.Text.Length <= 1)
-                {
-                    e.Handled = true; // Indicar que el evento está manejado y no debe procesarse
-                }
             }
         }
 
@@ -530,12 +530,12 @@ namespace TPV.GUI
             if (activarFactura)
             {
                 activarFactura = false;
-                button2.BackColor = Color.White;
+                btnFactura.BackColor = Color.White;
             }
             else
             {
                 activarFactura = true;
-                button2.BackColor = Color.CadetBlue;
+                btnFactura.BackColor = Color.CadetBlue;
             }
         }
 
@@ -544,16 +544,16 @@ namespace TPV.GUI
             if (activarTicket)
             {
                 activarTicket = false;
-                button1.BackColor = Color.White;
+                btnTicket.BackColor = Color.White;
             }
             else
             {
                 activarTicket = true;
-                button1.BackColor = Color.CadetBlue;
+                btnTicket.BackColor = Color.CadetBlue;
             }
         }
 
-        private void cbPropina_Click(object sender, EventArgs e)
+        private void cbPropina_Click_1(object sender, EventArgs e)
         {
             //Autorizar
             bool autorizar = bool.Parse(configuracion.Rows[0]["autorizarDescProp"].ToString());
@@ -582,6 +582,145 @@ namespace TPV.GUI
             else
             {
                 CalcularTodo();
+            }
+        }
+
+        private void btnEfectivo_Click(object sender, EventArgs e)
+        {
+            if (ValidarExistenciaTicket()) return;
+            //Programar pago en efectivo
+            if (!txtPagoRegistrar.Text.Equals(""))
+            {
+                ProcesarPago();
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar el pago a registrar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private bool ValidarExistenciaTicket()
+        {
+            if (lblTicket.Text.Equals(""))
+            {
+                MessageBox.Show("Debe seleccionar un pedido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            return false;
+        }
+
+        private void btnTarjeta_Click(object sender, EventArgs e)
+        {
+            if (ValidarExistenciaTicket()) return;
+            if (!txtPagoRegistrar.Text.Equals(""))
+            {
+                ProcesarPago();
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar el pago a registrar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnMuchos_Click(object sender, EventArgs e)
+        {
+            if (ValidarExistenciaTicket()) return;
+            //Programar pago entre muchos
+            //Mostrar interfaz para dividir la cuenta
+            
+        }
+
+        private void btnExacto_Click(object sender, EventArgs e)
+        {
+            if (ValidarExistenciaTicket()) return;
+            //Programar pago exacto
+            pedido.Total = Double.Parse(txtTotalPagar.Text);
+            RegistrarPago();
+        }
+
+        private void btnCortesia_Click(object sender, EventArgs e)
+        {
+            if (ValidarExistenciaTicket()) return;
+            //Programar pago cortesia
+            pedido.Total = Double.Parse(txtTotalPagar.Text);
+            RegistrarPago();
+        }
+
+        private void ProcesarPago()
+        {
+            if (Double.Parse(txtPagoRegistrar.Text) < Double.Parse(txtTotalPagar.Text))
+            {
+                //Enviar mensaje que 
+                if (MessageBox.Show("El total a registrar es menor al total a pagar, si continua se creara una cuenta por cobrar ¿Esta seguro que desea continuar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    //Se creara una cuenta por cobrar
+                    RegistrarPago();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                RegistrarPago();
+            }
+
+            //Sucedera algo en caja programar aqui
+            DataTable caja = DataManager.DBConsultas.CajaAbierta();
+            if (caja.Rows.Count>0)
+            {
+                Mantenimiento.CLS.Caja cajaActualizar = new Mantenimiento.CLS.Caja();
+                foreach (DataRow item in caja.Rows)
+                {
+                    cajaActualizar.IdCaja = Int32.Parse(item["idCaja"].ToString());
+                    cajaActualizar.IdCajero = Int32.Parse(item["idCajero"].ToString());
+                    cajaActualizar.Estado = true;
+                    cajaActualizar.FechaApertura = item["fechaApertura"].ToString();
+                    cajaActualizar.SaldoInicial = Double.Parse(item["saldoInicial"].ToString());
+                    cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
+                    cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
+                }
+                if (!cajaActualizar.Actualizar())
+                {
+                    MessageBox.Show("Ocurrio un error al actualizar caja, contacte al programador.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se encontro caja abierta, el pago no se registro en caja.");
+            }
+
+        }
+
+        private void RegistrarPago()
+        {
+            pedido.IdPedido = Int32.Parse(lblTicket.Text);
+            pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
+            pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
+            pedido.Cancelado = true;
+
+            if (activarFactura)
+            {
+                //Lleva factura
+                //Obtener la ultima factura y crear una nueva
+                pedido.NFactura = "";
+                MessageBox.Show("Imprimir la factura");
+
+            }
+            if (activarTicket)
+            {
+                //Lleva ticket
+                MessageBox.Show("Imprimir el ticket");
+            }
+
+            if (!pedido.ActualizarPedidoPagado())
+            {
+                MessageBox.Show("Ocurrio un error al guardar pago, contacte al programador.");
+            }
+            else
+            {
+
             }
         }
     }

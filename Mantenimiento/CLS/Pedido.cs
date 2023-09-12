@@ -204,5 +204,39 @@ namespace Mantenimiento.CLS
 
             return resultado;
         }
+
+        public Boolean ActualizarPedidoPagado()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            if(nFactura != null)
+            {
+                sentencia = @"UPDATE pedido SET total = " + total + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", , nFactura = '" + nFactura + "' " +
+                                "WHERE idPedido = " + idPedido + ";";
+            }
+            else
+            {
+                sentencia = @"UPDATE pedido SET total = " + total + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + " " +
+                                "WHERE idPedido = " + idPedido + ";";
+            }
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
     }
 }

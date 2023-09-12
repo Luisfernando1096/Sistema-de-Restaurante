@@ -389,7 +389,7 @@ namespace TPV.GUI
             }
             if (!cerrarSesion)
             {
-                this.Show();
+                Show();
             }
             
         }

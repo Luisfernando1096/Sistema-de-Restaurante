@@ -50,8 +50,8 @@ namespace TPV.GUI
             this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnFactura = new System.Windows.Forms.Button();
+            this.btnTicket = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -281,8 +281,8 @@ namespace TPV.GUI
             this.flpAcciones.AutoScroll = true;
             this.flpAcciones.AutoSize = true;
             this.flpAcciones.Controls.Add(this.button3);
-            this.flpAcciones.Controls.Add(this.button2);
-            this.flpAcciones.Controls.Add(this.button1);
+            this.flpAcciones.Controls.Add(this.btnFactura);
+            this.flpAcciones.Controls.Add(this.btnTicket);
             this.flpAcciones.Controls.Add(this.button4);
             this.flpAcciones.Controls.Add(this.button5);
             this.flpAcciones.Controls.Add(this.button6);
@@ -311,35 +311,35 @@ namespace TPV.GUI
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnFactura
             // 
-            this.button2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(0, 90);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(122, 90);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Factura";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnFactura.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFactura.Image = ((System.Drawing.Image)(resources.GetObject("btnFactura.Image")));
+            this.btnFactura.Location = new System.Drawing.Point(0, 90);
+            this.btnFactura.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFactura.Name = "btnFactura";
+            this.btnFactura.Size = new System.Drawing.Size(122, 90);
+            this.btnFactura.TabIndex = 1;
+            this.btnFactura.Text = "Factura";
+            this.btnFactura.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnFactura.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnFactura.UseVisualStyleBackColor = true;
+            this.btnFactura.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // btnTicket
             // 
-            this.button1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(0, 180);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 90);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Ticket";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnTicket.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTicket.Image = ((System.Drawing.Image)(resources.GetObject("btnTicket.Image")));
+            this.btnTicket.Location = new System.Drawing.Point(0, 180);
+            this.btnTicket.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTicket.Name = "btnTicket";
+            this.btnTicket.Size = new System.Drawing.Size(122, 90);
+            this.btnTicket.TabIndex = 0;
+            this.btnTicket.Text = "Ticket";
+            this.btnTicket.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTicket.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnTicket.UseVisualStyleBackColor = true;
+            this.btnTicket.Click += new System.EventHandler(this.button1_Click);
             // 
             // button4
             // 
@@ -396,6 +396,7 @@ namespace TPV.GUI
             this.cbPropina.Text = "Sin propina";
             this.cbPropina.UseVisualStyleBackColor = true;
             this.cbPropina.CheckedChanged += new System.EventHandler(this.cbPropina_CheckedChanged);
+            this.cbPropina.Click += new System.EventHandler(this.cbPropina_Click_1);
             // 
             // cbDescuento
             // 
@@ -602,6 +603,7 @@ namespace TPV.GUI
             this.lblIva.Name = "lblIva";
             this.lblIva.Size = new System.Drawing.Size(59, 23);
             this.lblIva.TabIndex = 35;
+            this.lblIva.Tag = "0";
             this.lblIva.Text = "$0.00";
             // 
             // lblPropina
@@ -612,6 +614,7 @@ namespace TPV.GUI
             this.lblPropina.Name = "lblPropina";
             this.lblPropina.Size = new System.Drawing.Size(59, 23);
             this.lblPropina.TabIndex = 34;
+            this.lblPropina.Tag = "0";
             this.lblPropina.Text = "$0.00";
             // 
             // lblDescuento
@@ -622,6 +625,7 @@ namespace TPV.GUI
             this.lblDescuento.Name = "lblDescuento";
             this.lblDescuento.Size = new System.Drawing.Size(59, 23);
             this.lblDescuento.TabIndex = 33;
+            this.lblDescuento.Tag = "0";
             this.lblDescuento.Text = "$0.00";
             // 
             // lblSaldo
@@ -632,6 +636,7 @@ namespace TPV.GUI
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(59, 23);
             this.lblSaldo.TabIndex = 32;
+            this.lblSaldo.Tag = "0";
             this.lblSaldo.Text = "$0.00";
             // 
             // label9
@@ -693,9 +698,9 @@ namespace TPV.GUI
             // 
             this.txtTotalPagar.Font = new System.Drawing.Font("Arial Narrow", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalPagar.Location = new System.Drawing.Point(801, 105);
-            this.txtTotalPagar.Multiline = true;
             this.txtTotalPagar.Name = "txtTotalPagar";
-            this.txtTotalPagar.Size = new System.Drawing.Size(269, 40);
+            this.txtTotalPagar.ReadOnly = true;
+            this.txtTotalPagar.Size = new System.Drawing.Size(269, 48);
             this.txtTotalPagar.TabIndex = 38;
             this.txtTotalPagar.Text = "0";
             this.txtTotalPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -724,11 +729,9 @@ namespace TPV.GUI
             // 
             this.txtPagoRegistrar.Font = new System.Drawing.Font("Arial Narrow", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPagoRegistrar.Location = new System.Drawing.Point(801, 207);
-            this.txtPagoRegistrar.Multiline = true;
             this.txtPagoRegistrar.Name = "txtPagoRegistrar";
-            this.txtPagoRegistrar.Size = new System.Drawing.Size(269, 40);
+            this.txtPagoRegistrar.Size = new System.Drawing.Size(269, 48);
             this.txtPagoRegistrar.TabIndex = 40;
-            this.txtPagoRegistrar.Text = "0";
             this.txtPagoRegistrar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPagoRegistrar.TextChanged += new System.EventHandler(this.txtPagoRegistrar_TextChanged);
             this.txtPagoRegistrar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPagoRegistrar_KeyPress);
@@ -766,6 +769,7 @@ namespace TPV.GUI
             this.btnEfectivo.Text = "Pago en efectivo";
             this.btnEfectivo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEfectivo.UseVisualStyleBackColor = true;
+            this.btnEfectivo.Click += new System.EventHandler(this.btnEfectivo_Click);
             // 
             // btnTarjeta
             // 
@@ -777,6 +781,7 @@ namespace TPV.GUI
             this.btnTarjeta.Text = "Pago con tarjeta";
             this.btnTarjeta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnTarjeta.UseVisualStyleBackColor = true;
+            this.btnTarjeta.Click += new System.EventHandler(this.btnTarjeta_Click);
             // 
             // btnMuchos
             // 
@@ -788,6 +793,7 @@ namespace TPV.GUI
             this.btnMuchos.Text = "Pago entre muchos";
             this.btnMuchos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnMuchos.UseVisualStyleBackColor = true;
+            this.btnMuchos.Click += new System.EventHandler(this.btnMuchos_Click);
             // 
             // btnExacto
             // 
@@ -799,6 +805,7 @@ namespace TPV.GUI
             this.btnExacto.Text = "Pago exacto";
             this.btnExacto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnExacto.UseVisualStyleBackColor = true;
+            this.btnExacto.Click += new System.EventHandler(this.btnExacto_Click);
             // 
             // btnCortesia
             // 
@@ -810,6 +817,7 @@ namespace TPV.GUI
             this.btnCortesia.Text = "Pago cortesia";
             this.btnCortesia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCortesia.UseVisualStyleBackColor = true;
+            this.btnCortesia.Click += new System.EventHandler(this.btnCortesia_Click);
             // 
             // btn9
             // 
@@ -973,6 +981,7 @@ namespace TPV.GUI
             this.lblCambio.Name = "lblCambio";
             this.lblCambio.Size = new System.Drawing.Size(59, 23);
             this.lblCambio.TabIndex = 61;
+            this.lblCambio.Tag = "0";
             this.lblCambio.Text = "$0.00";
             // 
             // PuntoPago
@@ -1059,8 +1068,8 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
         private System.Windows.Forms.FlowLayoutPanel flpAcciones;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnTicket;
+        private System.Windows.Forms.Button btnFactura;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
