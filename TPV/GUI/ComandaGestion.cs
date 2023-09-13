@@ -291,6 +291,9 @@ namespace TPV.GUI
                     if (mesa.ActualizarEstado())
                     {
                         //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                        btnComanda.Enabled = true;
+                        btnDisminuir.Enabled = true;
+                        btnExtras.Enabled = true;
                     }
                     else
                     {
@@ -312,6 +315,7 @@ namespace TPV.GUI
 
             //Actualizar al final el datagrid
             CargarProductosPorMesa(lblMesa.Tag.ToString());
+
         }
         private void btnSalir_Click_1(object sender, EventArgs e)
         {

@@ -698,7 +698,7 @@ namespace TPV.GUI
         private void RegistrarPago()
         {
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
-            pedido.Total = Double.Parse(txtTotalPagar.Tag.ToString());
+            pedido.Total = Double.Parse(lblSaldo.Tag.ToString());
             pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
             pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
             pedido.Cancelado = true;
@@ -707,7 +707,18 @@ namespace TPV.GUI
             {
                 //Lleva factura
                 //Obtener la ultima factura y crear una nueva
-                pedido.NFactura = "";
+                DataTable siguienteFactura = DataManager.DBConsultas.ObtenerFacturaSiguiente();
+                if (siguienteFactura.Rows.Count>0)
+                {
+                    foreach (DataRow item in siguienteFactura.Rows)
+                    {
+                        pedido.NFactura = item["siguienteFactura"].ToString();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error al buscar ultima factura, contacte al programador.");
+                }
                 MessageBox.Show("Imprimir la factura");
 
             }

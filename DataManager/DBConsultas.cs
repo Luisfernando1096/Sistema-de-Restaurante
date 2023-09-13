@@ -662,6 +662,24 @@ namespace DataManager
             }
         }
 
+        public static DataTable ObtenerFacturaSiguiente()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                string sentencia = @"SELECT (nFactura + 1) siguienteFactura FROM pedido where nFactura!=0 order by nFactura desc limit 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable CajaAbierta()
         {
             try
