@@ -15,6 +15,7 @@ namespace TPV.GUI
         ComandaGestion comandaGestion;
         BindingSource datos = new BindingSource();
         DataTable configuracion = DataManager.DBConsultas.Configuraciones();
+        DataTable actualFactura = DataManager.DBConsultas.ObtenerTirajeActual();
         private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
@@ -529,15 +530,34 @@ namespace TPV.GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (activarFactura)
+            //Obtener la ultima factura y crear una nueva
+            if (actualFactura.Rows.Count > 0)
             {
-                activarFactura = false;
-                btnFactura.BackColor = Color.White;
+                foreach (DataRow item in actualFactura.Rows)
+                {
+                    if (Int32.Parse(item["actual"].ToString()) == Int32.Parse(item["fin"].ToString()))
+                    {
+                        MessageBox.Show("Se ha alcanzado el maximo de facturas, solicite al administrador un nuevo tiraje.");
+                    }
+                    else
+                    {
+                        if (activarFactura)
+                        {
+                            activarFactura = false;
+                            btnFactura.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            activarFactura = true;
+                            btnFactura.BackColor = Color.CadetBlue;
+                        }
+                    }
+                }
+                
             }
             else
             {
-                activarFactura = true;
-                btnFactura.BackColor = Color.CadetBlue;
+                MessageBox.Show("Ocurrio un error al buscar ultima factura, contacte al programador.");
             }
         }
 
@@ -697,6 +717,7 @@ namespace TPV.GUI
 
         private void RegistrarPago()
         {
+            int siguiente = 0, idTiraje = 0;
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
             pedido.Total = Double.Parse(lblSaldo.Tag.ToString());
             pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
@@ -707,13 +728,25 @@ namespace TPV.GUI
             {
                 //Lleva factura
                 //Obtener la ultima factura y crear una nueva
-                DataTable siguienteFactura = DataManager.DBConsultas.ObtenerFacturaSiguiente();
-                if (siguienteFactura.Rows.Count>0)
+                if (actualFactura.Rows.Count>0)
                 {
-                    foreach (DataRow item in siguienteFactura.Rows)
+                    foreach (DataRow item in actualFactura.Rows)
                     {
-                        pedido.NFactura = item["siguienteFactura"].ToString();
+                        pedido.NFactura  = (Int32.Parse(item["actual"].ToString())+1).ToString();
+                        siguiente = (Int32.Parse(item["actual"].ToString()) + 1);
+                        idTiraje = Int32.Parse(item["idTiraje"].ToString());
                     }
+
+                    Mantenimiento.CLS.Tiraje_Factura tiraje = new Mantenimiento.CLS.Tiraje_Factura();
+                    if (siguiente != 0)
+                    {
+                        tiraje.IdTiraje = idTiraje;
+                        tiraje.Actual = siguiente;
+                        if (!tiraje.ActualizarTirajeActual()){
+                            MessageBox.Show("Fallo al actualizar el tiraje actual");
+                        }
+                    }
+
                 }
                 else
                 {
@@ -741,6 +774,7 @@ namespace TPV.GUI
                 if (mesa.ActualizarEstado())
                 {
                     //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                    
                 }
                 else
                 {

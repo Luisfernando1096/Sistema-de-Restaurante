@@ -662,12 +662,12 @@ namespace DataManager
             }
         }
 
-        public static DataTable ObtenerFacturaSiguiente()
+        public static DataTable ObtenerTirajeActual()
         {
             try
             {
                 DataTable resultado = new DataTable();
-                string sentencia = @"SELECT (nFactura + 1) siguienteFactura FROM pedido where nFactura!=0 order by nFactura desc limit 1;";
+                string sentencia = @"SELECT idTiraje, actual, fin FROM tiraje_factura where activo=1;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

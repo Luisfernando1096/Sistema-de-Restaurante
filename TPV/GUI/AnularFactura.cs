@@ -146,5 +146,10 @@ namespace TPV.GUI
         {
 
         }
+
+        private void btnCargarFactura_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

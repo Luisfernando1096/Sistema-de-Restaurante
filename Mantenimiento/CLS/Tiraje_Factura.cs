@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Tiraje_Factura
+    public class Tiraje_Factura
     {
         /*DECLARACION DE VARIABLES*/
         int idTiraje;
@@ -54,6 +54,28 @@ namespace Mantenimiento.CLS
             DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
             sentencia = "UPDATE tiraje_factura SET tipoFactura = '" + tipoFactura + "', serie = '" + serie + "', inicio = " + inicio + ", fin = " + fin + ", actual = " + actual + ", activo = " + activo + " WHERE idTiraje = " + idTiraje + ";";
+            try
+            {
+                int filasAfectadas = 0;
+                filasAfectadas = op.EjecutarSentencia(sentencia);
+                if (filasAfectadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
+        }
+
+        public Boolean ActualizarTirajeActual()
+        {
+            Boolean resultado = false;
+            DataManager.DBOperacion op = new DataManager.DBOperacion();
+            string sentencia;
+            sentencia = "UPDATE tiraje_factura SET actual = " + actual + " WHERE idTiraje = " + idTiraje + ";";
             try
             {
                 int filasAfectadas = 0;
