@@ -649,6 +649,9 @@ namespace TPV.GUI
             if (ValidarExistenciaTicket()) return;
             //Programar pago entre muchos
             //Mostrar interfaz para dividir la cuenta
+            DividirPago f = new DividirPago();
+            f.Tag = txtTotalPagar.Text;//Mandamos el total a pagar en el tag
+            f.ShowDialog();
             
         }
 
