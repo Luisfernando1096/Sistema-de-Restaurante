@@ -12,134 +12,71 @@ namespace TPV.GUI
 {
     public partial class AnularFactura : Form
     {
+        BindingSource datos = new BindingSource();
         public AnularFactura()
         {
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void btnCargarFactura_Click(object sender, EventArgs e)
         {
+            FacturasCargar f = new FacturasCargar();
+            f.ShowDialog();
+            DataGridViewRow datos = f.datosEnviar;
+            if (datos != null)
+            {
+                txtCliente.Text = datos.Cells["nombre"].Value.ToString();
+                txtNumeroFactura.Text = datos.Cells["nFactura"].Value.ToString();
+                txtNumeroPedido.Text = datos.Cells["idPedido"].Value.ToString();
+                txtFecha.Text = datos.Cells["fecha"].Value.ToString();
+                txtDescuento.Text = datos.Cells["descuento"].Value.ToString();
+                txtPropina.Text = datos.Cells["propina"].Value.ToString();
+                txtSumas.Text = datos.Cells["total"].Value.ToString();
+                txtTotales.Text = datos.Cells["totalPago"].Value.ToString();
+                txtIva.Text = datos.Cells["iva"].Value.ToString();
 
+                LlenarDetalle();
+                btnAnular.Enabled = true;
+            }
+            else
+            {
+                btnAnular.Enabled = false;
+                Limpiar();
+            }
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void LlenarDetalle()
         {
-            Close();
+            try
+            {
+                datos.DataSource = DataManager.DBConsultas.ObtenerDetallePedidoConIdParaAnular(txtNumeroPedido.Text);
+                dgvDetalle.DataSource = datos;
+                dgvDetalle.AutoGenerateColumns = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Limpiar()
         {
-
+            txtCliente.Text = "";
+            txtNumeroFactura.Text = "";
+            txtNumeroPedido.Text = "";
+            txtFecha.Text = "";
+            txtDescuento.Text = "";
+            txtPropina.Text = "";
+            txtSumas.Text = "";
+            txtTotales.Text = "";
+            txtIva.Text = "";
+            dgvDetalle.DataSource = null;
+            dgvDetalle.Rows.Clear();
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtNumeroFactura_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCliente_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtNumeroPedido_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            Limpiar();
         }
 
         private void AnularFactura_Load(object sender, EventArgs e)
@@ -147,9 +84,9 @@ namespace TPV.GUI
 
         }
 
-        private void btnCargarFactura_Click(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
     }
 }

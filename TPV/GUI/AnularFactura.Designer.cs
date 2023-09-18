@@ -32,11 +32,7 @@ namespace TPV.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnularFactura));
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ventasGravadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDetalle = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnCargarFactura = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,44 +48,47 @@ namespace TPV.GUI
             this.label4 = new System.Windows.Forms.Label();
             this.txtNumeroFactura = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtFecha = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNumeroPedido = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtTotales = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtIva = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtPropina = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtSumas = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvClientes
+            // dgvDetalle
             // 
-            this.dgvClientes.AllowUserToAddRows = false;
-            this.dgvClientes.AllowUserToDeleteRows = false;
-            this.dgvClientes.AllowUserToResizeRows = false;
+            this.dgvDetalle.AllowUserToAddRows = false;
+            this.dgvDetalle.AllowUserToDeleteRows = false;
+            this.dgvDetalle.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvDetalle.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDetalle.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.dgvDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cantidad,
-            this.descripcion,
-            this.precioUnitario,
-            this.ventasGravadas});
+            this.nombre,
+            this.precio,
+            this.subTotal});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -97,45 +96,16 @@ namespace TPV.GUI
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClientes.Location = new System.Drawing.Point(3, 203);
-            this.dgvClientes.MultiSelect = false;
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.ReadOnly = true;
-            this.dgvClientes.RowHeadersVisible = false;
-            this.dgvClientes.RowHeadersWidth = 51;
-            this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(794, 189);
-            this.dgvClientes.TabIndex = 8;
-            this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            this.cantidad.Width = 150;
-            // 
-            // descripcion
-            // 
-            this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // precioUnitario
-            // 
-            this.precioUnitario.HeaderText = "Precio Unitario";
-            this.precioUnitario.Name = "precioUnitario";
-            this.precioUnitario.ReadOnly = true;
-            this.precioUnitario.Width = 150;
-            // 
-            // ventasGravadas
-            // 
-            this.ventasGravadas.HeaderText = "Ventas Grabadas";
-            this.ventasGravadas.Name = "ventasGravadas";
-            this.ventasGravadas.ReadOnly = true;
-            this.ventasGravadas.Width = 150;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvDetalle.Location = new System.Drawing.Point(3, 203);
+            this.dgvDetalle.MultiSelect = false;
+            this.dgvDetalle.Name = "dgvDetalle";
+            this.dgvDetalle.ReadOnly = true;
+            this.dgvDetalle.RowHeadersVisible = false;
+            this.dgvDetalle.RowHeadersWidth = 51;
+            this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDetalle.Size = new System.Drawing.Size(794, 189);
+            this.dgvDetalle.TabIndex = 8;
             // 
             // toolStrip1
             // 
@@ -155,7 +125,6 @@ namespace TPV.GUI
             this.toolStrip1.Size = new System.Drawing.Size(800, 57);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnCargarFactura
             // 
@@ -195,6 +164,7 @@ namespace TPV.GUI
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(114, 54);
             this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnSalir
             // 
@@ -223,7 +193,6 @@ namespace TPV.GUI
             this.label8.Size = new System.Drawing.Size(98, 20);
             this.label8.TabIndex = 43;
             this.label8.Text = "Auto generado";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // txtCliente
             // 
@@ -234,7 +203,6 @@ namespace TPV.GUI
             this.txtCliente.ReadOnly = true;
             this.txtCliente.Size = new System.Drawing.Size(274, 26);
             this.txtCliente.TabIndex = 42;
-            this.txtCliente.TextChanged += new System.EventHandler(this.txtCliente_TextChanged);
             // 
             // label1
             // 
@@ -245,14 +213,13 @@ namespace TPV.GUI
             this.label1.Size = new System.Drawing.Size(58, 20);
             this.label1.TabIndex = 41;
             this.label1.Text = "Cliente: ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtNumeroFactura);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label8);
@@ -266,7 +233,6 @@ namespace TPV.GUI
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de compra";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label4
             // 
@@ -277,7 +243,6 @@ namespace TPV.GUI
             this.label4.Size = new System.Drawing.Size(79, 20);
             this.label4.TabIndex = 48;
             this.label4.Text = "N° Factura: ";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtNumeroFactura
             // 
@@ -288,7 +253,6 @@ namespace TPV.GUI
             this.txtNumeroFactura.ReadOnly = true;
             this.txtNumeroFactura.Size = new System.Drawing.Size(122, 26);
             this.txtNumeroFactura.TabIndex = 50;
-            this.txtNumeroFactura.TextChanged += new System.EventHandler(this.txtNumeroFactura_TextChanged);
             // 
             // label6
             // 
@@ -299,18 +263,16 @@ namespace TPV.GUI
             this.label6.Size = new System.Drawing.Size(146, 20);
             this.label6.TabIndex = 46;
             this.label6.Text = "Fecha de Facturacion: ";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
-            // textBox2
+            // txtFecha
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(382, 95);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(274, 26);
-            this.textBox2.TabIndex = 47;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtFecha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFecha.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFecha.Location = new System.Drawing.Point(382, 95);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.ReadOnly = true;
+            this.txtFecha.Size = new System.Drawing.Size(274, 26);
+            this.txtFecha.TabIndex = 47;
             // 
             // label3
             // 
@@ -332,7 +294,6 @@ namespace TPV.GUI
             this.label2.Size = new System.Drawing.Size(80, 20);
             this.label2.TabIndex = 43;
             this.label2.Text = "N° Pedido: ";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtNumeroPedido
             // 
@@ -343,21 +304,20 @@ namespace TPV.GUI
             this.txtNumeroPedido.ReadOnly = true;
             this.txtNumeroPedido.Size = new System.Drawing.Size(122, 26);
             this.txtNumeroPedido.TabIndex = 44;
-            this.txtNumeroPedido.TextChanged += new System.EventHandler(this.txtNumeroPedido_TextChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.textBox6);
+            this.groupBox2.Controls.Add(this.txtTotales);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txtIva);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.txtPropina);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.textBox4);
+            this.groupBox2.Controls.Add(this.txtSumas);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.txtDescuento);
             this.groupBox2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 398);
             this.groupBox2.Name = "groupBox2";
@@ -365,7 +325,6 @@ namespace TPV.GUI
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Otros Datos";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // label11
             // 
@@ -376,7 +335,6 @@ namespace TPV.GUI
             this.label11.Size = new System.Drawing.Size(246, 49);
             this.label11.TabIndex = 53;
             this.label11.Text = "Nota: Se descontara el saldo y efectivo de la caja abierta. ";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label9
             // 
@@ -387,18 +345,16 @@ namespace TPV.GUI
             this.label9.Size = new System.Drawing.Size(56, 20);
             this.label9.TabIndex = 51;
             this.label9.Text = "Totales:";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
-            // textBox6
+            // txtTotales
             // 
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(508, 43);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(196, 26);
-            this.textBox6.TabIndex = 52;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.txtTotales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotales.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotales.Location = new System.Drawing.Point(508, 43);
+            this.txtTotales.Name = "txtTotales";
+            this.txtTotales.ReadOnly = true;
+            this.txtTotales.Size = new System.Drawing.Size(196, 26);
+            this.txtTotales.TabIndex = 52;
             // 
             // label5
             // 
@@ -409,18 +365,16 @@ namespace TPV.GUI
             this.label5.Size = new System.Drawing.Size(30, 20);
             this.label5.TabIndex = 48;
             this.label5.Text = "Iva:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // textBox1
+            // txtIva
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(302, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(186, 26);
-            this.textBox1.TabIndex = 50;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtIva.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtIva.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIva.Location = new System.Drawing.Point(302, 43);
+            this.txtIva.Name = "txtIva";
+            this.txtIva.ReadOnly = true;
+            this.txtIva.Size = new System.Drawing.Size(186, 26);
+            this.txtIva.TabIndex = 50;
             // 
             // label7
             // 
@@ -431,18 +385,16 @@ namespace TPV.GUI
             this.label7.Size = new System.Drawing.Size(59, 20);
             this.label7.TabIndex = 46;
             this.label7.Text = "Propina:";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // textBox3
+            // txtPropina
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(302, 95);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(186, 26);
-            this.textBox3.TabIndex = 47;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.txtPropina.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPropina.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPropina.Location = new System.Drawing.Point(302, 95);
+            this.txtPropina.Name = "txtPropina";
+            this.txtPropina.ReadOnly = true;
+            this.txtPropina.Size = new System.Drawing.Size(186, 26);
+            this.txtPropina.TabIndex = 47;
             // 
             // label10
             // 
@@ -453,18 +405,16 @@ namespace TPV.GUI
             this.label10.Size = new System.Drawing.Size(58, 20);
             this.label10.TabIndex = 43;
             this.label10.Text = "Sumas: ";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // textBox4
+            // txtSumas
             // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(43, 43);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(202, 26);
-            this.textBox4.TabIndex = 44;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.txtSumas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSumas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSumas.Location = new System.Drawing.Point(43, 43);
+            this.txtSumas.Name = "txtSumas";
+            this.txtSumas.ReadOnly = true;
+            this.txtSumas.Size = new System.Drawing.Size(202, 26);
+            this.txtSumas.TabIndex = 44;
             // 
             // label12
             // 
@@ -475,34 +425,65 @@ namespace TPV.GUI
             this.label12.Size = new System.Drawing.Size(77, 20);
             this.label12.TabIndex = 41;
             this.label12.Text = "Descuento:";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
-            // textBox5
+            // txtDescuento
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(43, 95);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(202, 26);
-            this.textBox5.TabIndex = 42;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.txtDescuento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescuento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescuento.Location = new System.Drawing.Point(43, 95);
+            this.txtDescuento.Name = "txtDescuento";
+            this.txtDescuento.ReadOnly = true;
+            this.txtDescuento.Size = new System.Drawing.Size(202, 26);
+            this.txtDescuento.TabIndex = 42;
+            // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            this.cantidad.Width = 150;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Descripcion";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            this.precio.HeaderText = "Precio Unitario";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.Width = 150;
+            // 
+            // subTotal
+            // 
+            this.subTotal.DataPropertyName = "subTotal";
+            this.subTotal.HeaderText = "Ventas Grabadas";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 150;
             // 
             // AnularFactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 540);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.dgvClientes);
+            this.Controls.Add(this.dgvDetalle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AnularFactura";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Anular Factura";
             this.Load += new System.EventHandler(this.AnularFactura_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -516,7 +497,7 @@ namespace TPV.GUI
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvClientes;
+        private System.Windows.Forms.DataGridView dgvDetalle;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnCargarFactura;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -534,23 +515,23 @@ namespace TPV.GUI
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox txtNumeroFactura;
         private System.Windows.Forms.Label label6;
-        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox txtFecha;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
-        public System.Windows.Forms.TextBox textBox6;
+        public System.Windows.Forms.TextBox txtTotales;
         private System.Windows.Forms.Label label5;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox txtIva;
         private System.Windows.Forms.Label label7;
-        public System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.TextBox txtPropina;
         private System.Windows.Forms.Label label10;
-        public System.Windows.Forms.TextBox textBox4;
+        public System.Windows.Forms.TextBox txtSumas;
         private System.Windows.Forms.Label label12;
-        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.TextBox txtDescuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precioUnitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ventasGravadas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
     }
 }

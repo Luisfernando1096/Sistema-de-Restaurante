@@ -74,11 +74,14 @@ namespace TPV.GUI
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "CantidadProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CantidadProductos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CantidadProductos_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CantidadProductos_FormClosed);
+            this.Load += new System.EventHandler(this.CantidadProductos_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CantidadProductos_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

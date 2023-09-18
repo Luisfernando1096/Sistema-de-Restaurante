@@ -31,12 +31,66 @@ namespace DataManager
 
         }
 
+        public static DataTable TicketsFacturados(String nFactura)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia;
+                if (nFactura!="")
+                {
+                    sentencia = @"SELECT p.idPedido, c.nombre, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago, p.saldo,
+                                     p.idTiraje, p.nFactura, p.efectivo
+                                    FROM pedido p
+                                    LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    WHERE p.nFactura = '" + nFactura + @"' AND p.anular != 1; ";
+                }
+                else
+                {
+                    sentencia = @"SELECT p.idPedido, c.nombre, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago, p.saldo,
+                                     p.idTiraje, p.nFactura, p.efectivo
+                                    FROM pedido p
+                                    LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    WHERE p.nFactura > 0 AND p.anular != 1; ";
+                }
+                
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable ObtenerDetallePedidoConIdParaAnular(string text)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT p.nombre, cantidad, pd.precio, subTotal 
+                                     FROM pedido_detalle pd, producto p WHERE p.idProducto=pd.idProducto AND pd.idPedido = " + text + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable Meseros()
         {
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = "SELECT * FROM empleado;";
+                String sentencia = @"SELECT * FROM empleado;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

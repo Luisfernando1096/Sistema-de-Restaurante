@@ -73,6 +73,12 @@
     <Compile Include="GUI\DividirPago.Designer.cs">
       <DependentUpon>DividirPago.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\FacturasCargar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FacturasCargar.Designer.cs">
+      <DependentUpon>FacturasCargar.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\MeserosSeleccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\DividirPago.resx">
       <DependentUpon>DividirPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FacturasCargar.resx">
+      <DependentUpon>FacturasCargar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MeserosSeleccion.resx">
       <DependentUpon>MeserosSeleccion.cs</DependentUpon>

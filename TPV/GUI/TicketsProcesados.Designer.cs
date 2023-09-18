@@ -38,7 +38,6 @@ namespace TPV.GUI
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.txtidPedido = new System.Windows.Forms.TextBox();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +50,7 @@ namespace TPV.GUI
             this.totalPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtidPedido = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -116,7 +116,6 @@ namespace TPV.GUI
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
             this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -149,16 +148,6 @@ namespace TPV.GUI
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClientes.Size = new System.Drawing.Size(835, 237);
             this.dgvClientes.TabIndex = 13;
-            // 
-            // txtidPedido
-            // 
-            this.txtidPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtidPedido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtidPedido.Location = new System.Drawing.Point(265, 66);
-            this.txtidPedido.Name = "txtidPedido";
-            this.txtidPedido.Size = new System.Drawing.Size(224, 26);
-            this.txtidPedido.TabIndex = 28;
-            this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
             // 
             // idPedido
             // 
@@ -256,10 +245,21 @@ namespace TPV.GUI
             this.idCliente.ReadOnly = true;
             this.idCliente.Visible = false;
             // 
+            // txtidPedido
+            // 
+            this.txtidPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtidPedido.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtidPedido.Location = new System.Drawing.Point(265, 66);
+            this.txtidPedido.Name = "txtidPedido";
+            this.txtidPedido.Size = new System.Drawing.Size(224, 26);
+            this.txtidPedido.TabIndex = 28;
+            this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
+            // 
             // TicketsProcesados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(847, 364);
             this.Controls.Add(this.txtidPedido);
             this.Controls.Add(this.dgvClientes);

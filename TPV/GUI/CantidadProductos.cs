@@ -58,5 +58,19 @@ namespace TPV.GUI
             }
             cerrarPorBoton = false;
         }
+
+        private void CantidadProductos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                button1.PerformClick(); // Ejecutar el evento Click del botón
+            }
+        }
+
+        private void CantidadProductos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
