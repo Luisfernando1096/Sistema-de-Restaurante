@@ -607,6 +607,16 @@ namespace TPV.GUI
             }
         }
 
+        private bool ValidarExistenciaTicket()
+        {
+            if (lblTicket.Text.Equals(""))
+            {
+                MessageBox.Show("Debe seleccionar un pedido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            return false;
+        }
+
         private void btnEfectivo_Click(object sender, EventArgs e)
         {
             if (ValidarExistenciaTicket()) return;
@@ -621,22 +631,13 @@ namespace TPV.GUI
             }
         }
 
-        private bool ValidarExistenciaTicket()
-        {
-            if (lblTicket.Text.Equals(""))
-            {
-                MessageBox.Show("Debe seleccionar un pedido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return true;
-            }
-            return false;
-        }
-
         private void btnTarjeta_Click(object sender, EventArgs e)
         {
             if (ValidarExistenciaTicket()) return;
             if (!txtPagoRegistrar.Text.Equals(""))
             {
-                ProcesarPago();
+                pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
+                RegistrarPago();
             }
             else
             {
@@ -661,6 +662,7 @@ namespace TPV.GUI
             //Programar pago exacto
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
             RegistrarPago();
+            ActualizarCaja(true);
         }
 
         private void btnCortesia_Click(object sender, EventArgs e)
@@ -692,9 +694,15 @@ namespace TPV.GUI
                 RegistrarPago();
             }
 
+            ActualizarCaja(false);
+
+        }
+
+        private void ActualizarCaja(Boolean exacto)
+        {
             //Sucedera algo en caja programar aqui
             DataTable caja = DataManager.DBConsultas.CajaAbierta();
-            if (caja.Rows.Count>0)
+            if (caja.Rows.Count > 0)
             {
                 Mantenimiento.CLS.Caja cajaActualizar = new Mantenimiento.CLS.Caja();
                 foreach (DataRow item in caja.Rows)
@@ -703,8 +711,16 @@ namespace TPV.GUI
                     cajaActualizar.IdCajero = Int32.Parse(item["idCajero"].ToString());
                     cajaActualizar.Estado = true;
                     cajaActualizar.SaldoInicial = Double.Parse(item["saldoInicial"].ToString());
-                    cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
-                    cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
+                    if (exacto)
+                    {
+                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtTotalPagar.Text);
+                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtTotalPagar.Text);
+                    }
+                    else
+                    {
+                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
+                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text);
+                    }
                 }
                 if (!cajaActualizar.Actualizar())
                 {
@@ -715,7 +731,6 @@ namespace TPV.GUI
             {
                 MessageBox.Show("No se encontro caja abierta, el pago no se registro en caja.");
             }
-
         }
 
         private void RegistrarPago()

@@ -75,6 +75,32 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
+        public Boolean ActualizarFactura()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"UPDATE pedido SET anular = " + anular +
+                " WHERE idPedido = " + idPedido + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
         public Boolean ActualizarCliente()
         {
             Boolean resultado = false;

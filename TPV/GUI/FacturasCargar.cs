@@ -29,8 +29,8 @@ namespace TPV.GUI
             try
             {
                 datos.DataSource = DataManager.DBConsultas.TicketsFacturados(txtNumeroFactura.Text);
-                dgvClientes.DataSource = datos;
-                dgvClientes.AutoGenerateColumns = false;
+                dgvPedidos.DataSource = datos;
+                dgvPedidos.AutoGenerateColumns = false;
             }
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace TPV.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            datosEnviar = dgvClientes.CurrentRow;
+            datosEnviar = dgvPedidos.CurrentRow;
             Close();
         }
     }

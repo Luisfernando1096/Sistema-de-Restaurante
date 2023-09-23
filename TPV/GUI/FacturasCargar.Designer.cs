@@ -35,7 +35,7 @@ namespace TPV.GUI
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtNumeroFactura = new System.Windows.Forms.TextBox();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.dgvPedidos = new System.Windows.Forms.DataGridView();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +49,7 @@ namespace TPV.GUI
             this.descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -95,17 +95,17 @@ namespace TPV.GUI
             this.txtNumeroFactura.TabIndex = 50;
             this.txtNumeroFactura.TextChanged += new System.EventHandler(this.txtNumeroFactura_TextChanged);
             // 
-            // dgvClientes
+            // dgvPedidos
             // 
-            this.dgvClientes.AllowUserToAddRows = false;
-            this.dgvClientes.AllowUserToDeleteRows = false;
-            this.dgvClientes.AllowUserToResizeRows = false;
+            this.dgvPedidos.AllowUserToAddRows = false;
+            this.dgvPedidos.AllowUserToDeleteRows = false;
+            this.dgvPedidos.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPedidos.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.dgvPedidos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idPedido,
             this.nFactura,
             this.nombre,
@@ -125,16 +125,16 @@ namespace TPV.GUI
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClientes.Location = new System.Drawing.Point(3, 82);
-            this.dgvClientes.MultiSelect = false;
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.ReadOnly = true;
-            this.dgvClientes.RowHeadersVisible = false;
-            this.dgvClientes.RowHeadersWidth = 51;
-            this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(794, 356);
-            this.dgvClientes.TabIndex = 46;
+            this.dgvPedidos.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvPedidos.Location = new System.Drawing.Point(3, 82);
+            this.dgvPedidos.MultiSelect = false;
+            this.dgvPedidos.Name = "dgvPedidos";
+            this.dgvPedidos.ReadOnly = true;
+            this.dgvPedidos.RowHeadersVisible = false;
+            this.dgvPedidos.RowHeadersWidth = 51;
+            this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPedidos.Size = new System.Drawing.Size(794, 356);
+            this.dgvPedidos.TabIndex = 46;
             // 
             // idPedido
             // 
@@ -242,7 +242,7 @@ namespace TPV.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgvClientes);
+            this.Controls.Add(this.dgvPedidos);
             this.Controls.Add(this.groupBox1);
             this.Name = "FacturasCargar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -250,7 +250,7 @@ namespace TPV.GUI
             this.Load += new System.EventHandler(this.FacturasCargar_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -261,7 +261,7 @@ namespace TPV.GUI
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox txtNumeroFactura;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dgvClientes;
+        private System.Windows.Forms.DataGridView dgvPedidos;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn nFactura;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
