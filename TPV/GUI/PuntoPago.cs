@@ -623,6 +623,7 @@ namespace TPV.GUI
             //Programar pago en efectivo
             if (!txtPagoRegistrar.Text.Equals(""))
             {
+                pedido.Saldo = Double.Parse(lblCambio.Tag.ToString())*(-1);
                 ProcesarPago();
             }
             else
@@ -636,8 +637,9 @@ namespace TPV.GUI
             if (ValidarExistenciaTicket()) return;
             if (!txtPagoRegistrar.Text.Equals(""))
             {
+                pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
                 pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
-                RegistrarPago();
+                ProcesarPago();
             }
             else
             {
@@ -660,6 +662,7 @@ namespace TPV.GUI
         {
             if (ValidarExistenciaTicket()) return;
             //Programar pago exacto
+            pedido.Saldo = 0.00;
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
             RegistrarPago();
             ActualizarCaja(true);
@@ -669,6 +672,7 @@ namespace TPV.GUI
         {
             if (ValidarExistenciaTicket()) return;
             //Programar pago cortesia
+            pedido.Saldo = 0.00;
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
             RegistrarPago();
         }
