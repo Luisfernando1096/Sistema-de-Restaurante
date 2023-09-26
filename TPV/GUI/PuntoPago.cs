@@ -38,7 +38,7 @@ namespace TPV.GUI
                 dgvDatos.AutoGenerateColumns = false;
 
                 lblTicket.Text = dgvDatos.Rows[0].Cells["idPedido"].Value.ToString();//Accedemos a la primera posicion de la tabla
-
+                lblTicket.Tag = Int32.Parse(dgvDatos.Rows[0].Cells["idPedido"].Value.ToString());
             }
             catch (Exception)
             {
