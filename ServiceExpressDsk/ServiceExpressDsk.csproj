@@ -112,6 +112,10 @@
       <Project>{daaabf86-c50d-42b6-824a-7e6eef455a86}</Project>
       <Name>Compras</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConfiguracionManager\ConfiguracionManager.csproj">
+      <Project>{ec3f4bba-3f7f-432d-ac18-b2222adc87ab}</Project>
+      <Name>ConfiguracionManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>

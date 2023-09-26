@@ -14,7 +14,7 @@ namespace TPV.GUI
     {
         ComandaGestion comandaGestion;
         BindingSource datos = new BindingSource();
-        DataTable configuracion = DataManager.DBConsultas.Configuraciones();
+        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         DataTable actualFactura = DataManager.DBConsultas.ObtenerTirajeActual();
         private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
@@ -55,9 +55,9 @@ namespace TPV.GUI
             {
                 lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
                 lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
-                if (configuracion.Rows.Count > 0)
+                if (oConfiguracion != null)
                 {
-                    bool incluirPropina = bool.Parse(configuracion.Rows[0]["incluirPropina"].ToString());
+                    bool incluirPropina = bool.Parse(oConfiguracion.IncluirPropina);
 
                     if (incluirPropina)
                     {
@@ -93,9 +93,9 @@ namespace TPV.GUI
 
         private double CalcularPropina()
         {
-            if (configuracion.Rows.Count > 0)
+            if (oConfiguracion != null)
             {
-                double porcentaje = Double.Parse(configuracion.Rows[0]["propina"].ToString());
+                double porcentaje = Double.Parse(oConfiguracion.Propina);
                 double total = CalcularTotal();
                 return (total * (porcentaje / 100));
             }
@@ -578,7 +578,7 @@ namespace TPV.GUI
         private void cbPropina_Click_1(object sender, EventArgs e)
         {
             //Autorizar
-            bool autorizar = bool.Parse(configuracion.Rows[0]["autorizarDescProp"].ToString());
+            bool autorizar = bool.Parse(oConfiguracion.AutorizarDescProp);
             if (autorizar)
             {
                 //Codigo para mostrar la interfaz y autorizar
@@ -599,7 +599,7 @@ namespace TPV.GUI
                         cbPropina.Checked = true;
                     }
                 }
-
+                MessageBox.Show("Necesita autorizar");
             }
             else
             {

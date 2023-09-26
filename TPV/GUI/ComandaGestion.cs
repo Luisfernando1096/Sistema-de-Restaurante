@@ -14,6 +14,7 @@ namespace TPV.GUI
     public partial class ComandaGestion : Form
     {
         PuntoVenta punto_venta;
+        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         BindingSource datos = new BindingSource();
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
@@ -148,33 +149,25 @@ namespace TPV.GUI
 
         private void BotonProducto_Click(object sender, EventArgs e)
         {
-            DataTable config = DataManager.DBConsultas.Configuraciones();
             Button botonProducto = (Button)sender;
             int cantidad = 0;
-            if (config.Rows.Count > 0)
-            {
                 
-                if (bool.Parse(config.Rows[0]["muchosProductos"].ToString()))
+            if (bool.Parse(oConfiguracion.MuchosProductos))
+            {
+                // Agregar muchos productos
+                CantidadProductos f = new CantidadProductos();
+                f.ShowDialog();
+                cantidad = Int32.Parse(f.txtCantidad.Text);
+                if (cantidad!=0)
                 {
-                    // Agregar muchos productos
-                    CantidadProductos f = new CantidadProductos();
-                    f.ShowDialog();
-                    cantidad = Int32.Parse(f.txtCantidad.Text);
-                    if (cantidad!=0)
-                    {
-                        AgregarProductos(botonProducto, cantidad);
-                    } 
-                }
-                else
-                {
-                    // Agregar un producto
-                    cantidad = 1;
                     AgregarProductos(botonProducto, cantidad);
-                }
+                } 
             }
             else
             {
-                MessageBox.Show("No se pudo obtener la configuración o 'muchosProductos' no está definido.");
+                // Agregar un producto
+                cantidad = 1;
+                AgregarProductos(botonProducto, cantidad);
             }
         }
 
