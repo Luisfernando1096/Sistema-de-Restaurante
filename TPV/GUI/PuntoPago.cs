@@ -48,7 +48,6 @@ namespace TPV.GUI
         }
         private void PuntoPago_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
 
             if(dgvDatos.Rows.Count > 0)

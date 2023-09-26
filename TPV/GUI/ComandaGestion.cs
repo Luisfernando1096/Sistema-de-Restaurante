@@ -64,7 +64,6 @@ namespace TPV.GUI
                 btnDisminuir.Enabled = true;
                 btnExtras.Enabled = true;
             }
-            WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             // Creamos un Panel para envolver el FlowLayoutPanel
             Panel panelWrapper = new Panel();

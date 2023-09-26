@@ -45,7 +45,7 @@ namespace TPV.GUI
             this.flpSalones.Controls.Add(this.btnSalon);
             this.flpSalones.Location = new System.Drawing.Point(12, 98);
             this.flpSalones.Name = "flpSalones";
-            this.flpSalones.Size = new System.Drawing.Size(1040, 180);
+            this.flpSalones.Size = new System.Drawing.Size(1357, 180);
             this.flpSalones.TabIndex = 0;
             // 
             // btnSalon
@@ -63,7 +63,7 @@ namespace TPV.GUI
             this.flpMesas.Controls.Add(this.btnMesa);
             this.flpMesas.Location = new System.Drawing.Point(12, 284);
             this.flpMesas.Name = "flpMesas";
-            this.flpMesas.Size = new System.Drawing.Size(1040, 261);
+            this.flpMesas.Size = new System.Drawing.Size(1357, 261);
             this.flpMesas.TabIndex = 1;
             // 
             // btnMesa
@@ -86,29 +86,27 @@ namespace TPV.GUI
             this.btnSalir.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(948, 2);
+            this.btnSalir.Location = new System.Drawing.Point(898, -2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(113, 58);
-            this.btnSalir.TabIndex = 15;
+            this.btnSalir.TabIndex = 14;
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            this.btnSalir.Resize += new System.EventHandler(this.btnSalir_Resize);
             // 
             // PuntoVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1064, 553);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.flpMesas);
             this.Controls.Add(this.flpSalones);
             this.Name = "PuntoVenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuntoVenta";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PuntoVenta_Load);
             this.flpSalones.ResumeLayout(false);
             this.flpMesas.ResumeLayout(false);

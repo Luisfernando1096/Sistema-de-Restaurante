@@ -1039,6 +1039,7 @@ namespace TPV.GUI
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.flpAcciones);
             this.Name = "PuntoPago";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuntoPago";
             this.Load += new System.EventHandler(this.PuntoPago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();

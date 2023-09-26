@@ -40,7 +40,6 @@ namespace TPV.GUI
 
         private void PuntoVenta_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             DataTable salones = DataManager.DBConsultas.Salones();
             // Crear y agregar botones al FlowLayoutPanel para cada salon
@@ -196,11 +195,6 @@ namespace TPV.GUI
                 f2.ShowDialog(); // Muestra el nuevo formulario
             }
 
-        }
-
-        private void btnSalir_Resize(object sender, EventArgs e)
-        {
-            AjustarPosicionBoton();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
