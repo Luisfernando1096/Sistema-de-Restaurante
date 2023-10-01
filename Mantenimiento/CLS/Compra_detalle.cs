@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    internal class Compra_detalle
+    public class Compra_detalle
     {
         int _idDetalleCompra;
         int _idCompra;
@@ -24,11 +24,37 @@ namespace Mantenimiento.CLS
         public double Precio { get => _precio; set => _precio = value; }
         public double SubTotal { get => _subTotal; set => _subTotal = value; }
 
-        public Boolean Insertar()
+        public Boolean InsertarProductos()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into compra_detalle(idCompra,idProducto,idIngrediente,cantidad,precio,subtotal) values("+_idCompra+","+_idProducto+","+_idIngrediente+","+_cantidad+","+_precio+","+_subTotal+");";
+            sentencia = @"insert into compra_detalle(idCompra,idProducto,cantidad,precio,subtotal) values("+_idCompra+","+_idProducto+","+_cantidad+","+_precio+","+_subTotal+");";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasInsertadas = 0;
+                filasInsertadas = op.EjecutarSentencia(sentencia);
+                if (filasInsertadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
+
+        public Boolean InsertarIngredientes()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"insert into compra_detalle(idCompra,idIngrediente,cantidad,precio,subtotal) values(" + _idCompra + "," + _idIngrediente + "," + _cantidad + "," + _precio + "," + _subTotal + ");";
 
             try
             {

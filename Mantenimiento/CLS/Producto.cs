@@ -61,6 +61,29 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
+        public Boolean ActualizarStockProductos()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"update producto SET stock = " + stock + " where idProducto =" + idProducto + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
+        }
+
         public Boolean Actualizar()
         {
             Boolean resultado = false;

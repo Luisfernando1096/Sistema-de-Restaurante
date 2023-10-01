@@ -13,6 +13,9 @@ namespace Compras.GUI
     public partial class BuscarProveedor : Form
     {
         BindingSource datos = new BindingSource();
+        public string Nombre { get; set; }
+        public int ID { get; set; }
+
         public BuscarProveedor()
         {
             InitializeComponent();
@@ -98,6 +101,17 @@ namespace Compras.GUI
         private void rbtnNIT_CheckedChanged(object sender, EventArgs e)
         {
             BuscarDatos();
+        }
+
+        private void bntSelecionar_Click(object sender, EventArgs e)
+        {
+            if (dgvBuscar.SelectedRows.Count != 0)
+            {
+                ID = int.Parse(dgvBuscar.CurrentRow.Cells["idProveedor"].Value.ToString());
+                Nombre = dgvBuscar.CurrentRow.Cells["nombre"].Value.ToString();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }

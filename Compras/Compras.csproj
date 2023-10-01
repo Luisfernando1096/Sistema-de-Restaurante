@@ -91,9 +91,17 @@
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ingredientes y Productos\Ingredientes y Productos.csproj">
+      <Project>{5a6cd6ab-96fd-4bb3-a348-d1e87add4f19}</Project>
+      <Name>Ingredientes y Productos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
       <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
       <Name>Mantenimiento</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SessionManager\SessionManager.csproj">
+      <Project>{cd0bf5a6-d3b7-493c-8cc7-3368b5e6c30c}</Project>
+      <Name>SessionManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
