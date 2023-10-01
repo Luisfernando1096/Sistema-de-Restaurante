@@ -1003,6 +1003,72 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static int ConsultarUltimoRegistro(int idUsuario)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idCompra FROM compra WHERE idUsuario = " + idUsuario + " ORDER BY idCompra DESC LIMIT 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+
+                if (resultado.Rows.Count > 0)
+                {
+                    int idCompra = Convert.ToInt32(resultado.Rows[0]["idCompra"]);
+                    return idCompra;
+                }
+                else
+                {
+                    throw new Exception("No se encontraron registros para el usuario especificado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return -1;
+            }
+        }
+
+        public static int ConsultarStock(int Tipo, int idTipo)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                string sentencia = "";
+
+                if (Tipo == 1)
+                {
+                    sentencia = @"SELECT stock FROM producto WHERE idProducto = '" + idTipo + "'";
+                }
+                else if (Tipo == 2)
+                {
+                    sentencia = @"SELECT stock FROM ingrediente WHERE idIngrediente = '" + idTipo + "'";
+                }
+
+                if (!string.IsNullOrEmpty(sentencia))
+                {
+                    DBOperacion operacion = new DBOperacion();
+                    resultado = operacion.Consultar(sentencia);
+                }
+
+                if (resultado.Rows.Count > 0)
+                {
+                    int stock = Convert.ToInt32(resultado.Rows[0]["stock"]);
+                    return stock;
+                }
+                else
+                {
+                    throw new Exception("No se encontraron registros");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return 0;
+            }
+        }
+
     }
 }
-

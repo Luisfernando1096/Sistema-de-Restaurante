@@ -30,13 +30,6 @@ namespace Compras.GUI
         private void InitializeComponent()
         {
             this.dgvBuscar = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cmbLista = new System.Windows.Forms.ComboBox();
-            this.bntSelecionar = new System.Windows.Forms.Button();
-            this.rbtnNRC = new System.Windows.Forms.RadioButton();
-            this.rbtnNombre = new System.Windows.Forms.RadioButton();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.rbtnNIT = new System.Windows.Forms.RadioButton();
             this.idProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +38,13 @@ namespace Compras.GUI
             this.regContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rbtnNIT = new System.Windows.Forms.RadioButton();
+            this.cmbLista = new System.Windows.Forms.ComboBox();
+            this.bntSelecionar = new System.Windows.Forms.Button();
+            this.rbtnNRC = new System.Windows.Forms.RadioButton();
+            this.rbtnNombre = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscar)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -78,86 +78,6 @@ namespace Compras.GUI
             this.dgvBuscar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBuscar.Size = new System.Drawing.Size(1378, 415);
             this.dgvBuscar.TabIndex = 15;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.rbtnNIT);
-            this.groupBox3.Controls.Add(this.cmbLista);
-            this.groupBox3.Controls.Add(this.bntSelecionar);
-            this.groupBox3.Controls.Add(this.rbtnNRC);
-            this.groupBox3.Controls.Add(this.rbtnNombre);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1378, 62);
-            this.groupBox3.TabIndex = 13;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Filtrar datos por: ";
-            // 
-            // cmbLista
-            // 
-            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(292, 23);
-            this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(376, 24);
-            this.cmbLista.TabIndex = 26;
-            this.cmbLista.TextChanged += new System.EventHandler(this.cmbLista_TextChanged);
-            // 
-            // bntSelecionar
-            // 
-            this.bntSelecionar.Location = new System.Drawing.Point(992, 15);
-            this.bntSelecionar.Name = "bntSelecionar";
-            this.bntSelecionar.Size = new System.Drawing.Size(216, 34);
-            this.bntSelecionar.TabIndex = 25;
-            this.bntSelecionar.Text = "Seleccionar y salir";
-            this.bntSelecionar.UseVisualStyleBackColor = true;
-            this.bntSelecionar.Visible = false;
-            // 
-            // rbtnNRC
-            // 
-            this.rbtnNRC.AutoSize = true;
-            this.rbtnNRC.Location = new System.Drawing.Point(141, 25);
-            this.rbtnNRC.Name = "rbtnNRC";
-            this.rbtnNRC.Size = new System.Drawing.Size(58, 21);
-            this.rbtnNRC.TabIndex = 1;
-            this.rbtnNRC.TabStop = true;
-            this.rbtnNRC.Text = "NRC";
-            this.rbtnNRC.UseVisualStyleBackColor = true;
-            this.rbtnNRC.CheckedChanged += new System.EventHandler(this.rbtnNRC_CheckedChanged);
-            // 
-            // rbtnNombre
-            // 
-            this.rbtnNombre.AutoSize = true;
-            this.rbtnNombre.Location = new System.Drawing.Point(53, 24);
-            this.rbtnNombre.Name = "rbtnNombre";
-            this.rbtnNombre.Size = new System.Drawing.Size(79, 21);
-            this.rbtnNombre.TabIndex = 0;
-            this.rbtnNombre.TabStop = true;
-            this.rbtnNombre.Text = "Nombre";
-            this.rbtnNombre.UseVisualStyleBackColor = true;
-            this.rbtnNombre.CheckedChanged += new System.EventHandler(this.rbtnNombre_CheckedChanged);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox6.Location = new System.Drawing.Point(0, 477);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1378, 62);
-            this.groupBox6.TabIndex = 14;
-            this.groupBox6.TabStop = false;
-            // 
-            // rbtnNIT
-            // 
-            this.rbtnNIT.AutoSize = true;
-            this.rbtnNIT.Location = new System.Drawing.Point(212, 25);
-            this.rbtnNIT.Name = "rbtnNIT";
-            this.rbtnNIT.Size = new System.Drawing.Size(51, 21);
-            this.rbtnNIT.TabIndex = 28;
-            this.rbtnNIT.TabStop = true;
-            this.rbtnNIT.Text = "NIT";
-            this.rbtnNIT.UseVisualStyleBackColor = true;
-            this.rbtnNIT.CheckedChanged += new System.EventHandler(this.rbtnNIT_CheckedChanged);
             // 
             // idProveedor
             // 
@@ -193,6 +113,7 @@ namespace Compras.GUI
             this.telefono.MinimumWidth = 6;
             this.telefono.Name = "telefono";
             this.telefono.ReadOnly = true;
+            this.telefono.Width = 125;
             // 
             // NIT
             // 
@@ -230,6 +151,87 @@ namespace Compras.GUI
             this.direccion.Name = "direccion";
             this.direccion.ReadOnly = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rbtnNIT);
+            this.groupBox3.Controls.Add(this.cmbLista);
+            this.groupBox3.Controls.Add(this.bntSelecionar);
+            this.groupBox3.Controls.Add(this.rbtnNRC);
+            this.groupBox3.Controls.Add(this.rbtnNombre);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1378, 62);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Filtrar datos por: ";
+            // 
+            // rbtnNIT
+            // 
+            this.rbtnNIT.AutoSize = true;
+            this.rbtnNIT.Location = new System.Drawing.Point(212, 25);
+            this.rbtnNIT.Name = "rbtnNIT";
+            this.rbtnNIT.Size = new System.Drawing.Size(51, 21);
+            this.rbtnNIT.TabIndex = 28;
+            this.rbtnNIT.TabStop = true;
+            this.rbtnNIT.Text = "NIT";
+            this.rbtnNIT.UseVisualStyleBackColor = true;
+            this.rbtnNIT.CheckedChanged += new System.EventHandler(this.rbtnNIT_CheckedChanged);
+            // 
+            // cmbLista
+            // 
+            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbLista.FormattingEnabled = true;
+            this.cmbLista.Location = new System.Drawing.Point(292, 23);
+            this.cmbLista.Name = "cmbLista";
+            this.cmbLista.Size = new System.Drawing.Size(376, 24);
+            this.cmbLista.TabIndex = 26;
+            this.cmbLista.TextChanged += new System.EventHandler(this.cmbLista_TextChanged);
+            // 
+            // bntSelecionar
+            // 
+            this.bntSelecionar.Location = new System.Drawing.Point(992, 15);
+            this.bntSelecionar.Name = "bntSelecionar";
+            this.bntSelecionar.Size = new System.Drawing.Size(216, 34);
+            this.bntSelecionar.TabIndex = 25;
+            this.bntSelecionar.Text = "Seleccionar y salir";
+            this.bntSelecionar.UseVisualStyleBackColor = true;
+            this.bntSelecionar.Visible = false;
+            this.bntSelecionar.Click += new System.EventHandler(this.bntSelecionar_Click);
+            // 
+            // rbtnNRC
+            // 
+            this.rbtnNRC.AutoSize = true;
+            this.rbtnNRC.Location = new System.Drawing.Point(141, 25);
+            this.rbtnNRC.Name = "rbtnNRC";
+            this.rbtnNRC.Size = new System.Drawing.Size(58, 21);
+            this.rbtnNRC.TabIndex = 1;
+            this.rbtnNRC.TabStop = true;
+            this.rbtnNRC.Text = "NRC";
+            this.rbtnNRC.UseVisualStyleBackColor = true;
+            this.rbtnNRC.CheckedChanged += new System.EventHandler(this.rbtnNRC_CheckedChanged);
+            // 
+            // rbtnNombre
+            // 
+            this.rbtnNombre.AutoSize = true;
+            this.rbtnNombre.Location = new System.Drawing.Point(53, 24);
+            this.rbtnNombre.Name = "rbtnNombre";
+            this.rbtnNombre.Size = new System.Drawing.Size(79, 21);
+            this.rbtnNombre.TabIndex = 0;
+            this.rbtnNombre.TabStop = true;
+            this.rbtnNombre.Text = "Nombre";
+            this.rbtnNombre.UseVisualStyleBackColor = true;
+            this.rbtnNombre.CheckedChanged += new System.EventHandler(this.rbtnNombre_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox6.Location = new System.Drawing.Point(0, 477);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(1378, 62);
+            this.groupBox6.TabIndex = 14;
+            this.groupBox6.TabStop = false;
+            // 
             // BuscarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -238,7 +240,7 @@ namespace Compras.GUI
             this.Controls.Add(this.dgvBuscar);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox6);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BuscarProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuscarProveedor";

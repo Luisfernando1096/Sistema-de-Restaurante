@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    internal class Compra
+    public class Compra
     {
         int _idCompra;
         String _tipoCompra;
