@@ -184,7 +184,7 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             string sentencia;
             sentencia = @"UPDATE pedido SET total = " + total + " " +
-                "WHERE idMesa = " + idMesa + ";";
+                "WHERE idMesa = " + idMesa + " AND idPedido = " + idPedido + ";";
 
             try
             {

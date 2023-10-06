@@ -362,7 +362,8 @@ namespace DataManager
                                         pd.precio, 
                                         pro.nombre, 
                                         pd.subTotal, 
-                                        pe.fecha
+                                        pe.fecha,
+                                        f.grupoPrinter as grupo
                                     FROM 
                                         pedido pe
                                     JOIN 
@@ -371,6 +372,8 @@ namespace DataManager
                                         producto pro ON pd.idProducto = pro.idProducto
                                     JOIN 
                                         mesa m ON pe.idMesa = m.idMesa
+                                    JOIN
+										familia f ON pro.idFamilia = f.idFamilia
                                     WHERE 
                                         pe.idMesa = " + idMesa + @" 
                                         AND pe.cancelado = 0 

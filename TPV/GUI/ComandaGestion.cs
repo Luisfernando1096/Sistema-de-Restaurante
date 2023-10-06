@@ -299,14 +299,16 @@ namespace TPV.GUI
                 }
 
             }
-            //Vamos a actualizar el total del pedido
-            Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido();
-            pedido2.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
-            double total = CalcularTotal();
-            pedido2.ActualizarTotal(total); 
 
             //Actualizar al final el datagrid
             CargarProductosPorMesa(lblMesa.Tag.ToString());
+
+            //Vamos a actualizar el total del pedido
+            Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido();
+            pedido2.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+            pedido2.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+            double total = CalcularTotal();
+            pedido2.ActualizarTotal(total); 
 
         }
         private void btnSalir_Click_1(object sender, EventArgs e)
