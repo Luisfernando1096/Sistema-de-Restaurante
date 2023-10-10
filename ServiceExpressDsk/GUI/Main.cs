@@ -291,6 +291,9 @@ namespace ServiceExpressDsk.GUI
                 {
                     if (!f.admin)
                     {
+                        f.cambiarMesa = f2.cambiarMesa;
+                        f.idMesaAnterior = Int32.Parse(f2.lblMesa.Tag.ToString());
+                        f.idPedidoCambioMesa = int.Parse(f2.lblTicket.Text);
                         f.ShowDialog();
                         cerrar = f.cerrarSesion;
                     }

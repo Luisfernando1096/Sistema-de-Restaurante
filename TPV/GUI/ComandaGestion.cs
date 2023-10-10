@@ -464,6 +464,7 @@ namespace TPV.GUI
 
         private void button4_Click(object sender, EventArgs e)
         {
+            idPedidoCambioMesa = Int32.Parse(lblTicket.Text.ToString());
             cambiarMesa = true;
             Close();
         }

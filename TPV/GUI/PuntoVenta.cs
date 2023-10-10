@@ -15,7 +15,7 @@ namespace TPV.GUI
     {
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
-        private int idMesaAnterior = 0;
+        public int idMesaAnterior = 0;
         public bool admin;
         public bool tpv;
         public bool cerrarSesion;
@@ -43,8 +43,6 @@ namespace TPV.GUI
             FormBorderStyle = FormBorderStyle.None;
             DataTable salones = DataManager.DBConsultas.Salones();
             // Crear y agregar botones al FlowLayoutPanel para cada salon
-            int fila = 0;
-            int columna = 0;
             foreach (DataRow salon in salones.Rows)
             {
                 btnSalon = new Button();
@@ -54,12 +52,7 @@ namespace TPV.GUI
                 btnSalon.Click += BotonSalon_Click;
                 flpSalones.Controls.Add(btnSalon);
                 flpSalones.ScrollControlIntoView(btnSalon);
-                columna++;
-                if (columna == 5)
-                {
-                    columna = 0;
-                    fila++;
-                }
+                
             }
         }
 
@@ -119,7 +112,7 @@ namespace TPV.GUI
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL ACTUALIZAR");
+                    MessageBox.Show("ERROR AL ACTUALIZAR Pedido");
                 }
                 
                 //Aqui el codigo para cambiar de mesa
@@ -138,12 +131,12 @@ namespace TPV.GUI
                     }
                     else
                     {
-                        MessageBox.Show("ERROR AL ACTUALIZAR");
+                        MessageBox.Show("ERROR AL ACTUALIZAR TRUE MESA");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL ACTUALIZAR");
+                    MessageBox.Show("ERROR AL ACTUALIZAR FALSE MESA");
                 }
 
             }
