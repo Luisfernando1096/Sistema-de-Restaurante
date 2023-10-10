@@ -171,6 +171,10 @@
       <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
       <Name>Mantenimiento</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SessionManager\SessionManager.csproj">
+      <Project>{cd0bf5a6-d3b7-493c-8cc7-3368b5e6c30c}</Project>
+      <Name>SessionManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

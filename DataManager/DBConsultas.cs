@@ -363,7 +363,8 @@ namespace DataManager
                                         pro.nombre, 
                                         pd.subTotal, 
                                         pe.fecha,
-                                        f.grupoPrinter as grupo
+                                        f.grupoPrinter as grupo,
+                                        pd.idDetalle
                                     FROM 
                                         pedido pe
                                     JOIN 

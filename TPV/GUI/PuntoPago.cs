@@ -70,6 +70,7 @@ namespace TPV.GUI
                         cbPropina.Checked = true;
                         CalcularTodo();
                     }
+
                 }
             }
         }
@@ -393,13 +394,13 @@ namespace TPV.GUI
             else
             {
                 //Con propina
-                totalPagar = totalPagar + propina;
+                totalPagar = totalPagar + propina + iva;
             }
 
             if (cbDescuento.Checked)
             {
                 //Con descuento
-                totalPagar = totalPagar - descuento;
+                totalPagar = totalPagar - descuento + iva;
             }
             else
             {
@@ -412,7 +413,19 @@ namespace TPV.GUI
 
         private double CalcularIva()
         {
-            return 0;
+            double iva = 0;
+            bool incluirIva = bool.Parse(oConfiguracion.IncluirImpuesto);
+            if (incluirIva)
+            {
+                iva = Double.Parse(lblSaldo.Tag.ToString()) * (Double.Parse(oConfiguracion.Iva)/100);
+
+            }
+            else
+            {
+                iva = 0;
+            }
+            
+            return iva;
         }
 
         private void ActualizarCampos(double propina, double descuento, double total, double iva, double cambio)

@@ -14,6 +14,7 @@ namespace TPV.GUI
     public partial class ComandaGestion : Form
     {
         PuntoVenta punto_venta;
+        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         BindingSource datos = new BindingSource();
         public bool cambiarMesa = false;
@@ -178,6 +179,8 @@ namespace TPV.GUI
                 //Ya existe un pedido
                 bool aumentarUnProducto = false;
                 double precio = 0;
+                int idProducto = 0;
+                int idDetalle = 0;
                 //Saber si ya existe algun producto igual en los detalles
                 foreach (DataGridViewRow row in dgvDatos.Rows)
                 {
@@ -185,17 +188,22 @@ namespace TPV.GUI
                     {
                         cantidad = cantidad + Int32.Parse(row.Cells["cantidad"].Value.ToString());
                         precio = double.Parse(row.Cells["precio"].Value.ToString());
+                        idDetalle = Int32.Parse(row.Cells["idDetalle"].Value.ToString());
+                        idProducto = Int32.Parse(botonProducto.Tag.ToString());
                         aumentarUnProducto = true;
                     }
                 }
+                
                 Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+                    
                 if (aumentarUnProducto)
                 {
                     //Ya existe un producto igual en el datgrid, hay que aumentar
+                    pedidoDetalle.IdDetalle = idDetalle;
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
                     pedidoDetalle.Cantidad = cantidad;
-                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), precio);
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, idProducto, precio);
                     if (pedidoDetalle.ActualizarCompra())
                     {
 
@@ -217,7 +225,7 @@ namespace TPV.GUI
                     pedidoDetalle.Precio = double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString());
                     pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString()));
                     pedidoDetalle.Grupo = "0";
-                    pedidoDetalle.Usuario = null;
+                    pedidoDetalle.Usuario = oUsuario.IdUsuario;
                     pedidoDetalle.Insertar();
                 }
 
@@ -273,7 +281,7 @@ namespace TPV.GUI
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
                 pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
                 pedidoDetalle.Grupo = "0";
-                pedidoDetalle.Usuario = null;
+                pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
 
                 if (pedidoDetalle.Insertar())
@@ -432,17 +440,26 @@ namespace TPV.GUI
             Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
             if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                pedidoDetalle.IdDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
                 pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                 pedidoDetalle.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
                 pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
                 pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
 
-            }
-            if (pedidoDetalle.ActualizarCompra())
-            {
-                //Actualizar al final el datagrid
+                if(pedidoDetalle.Cantidad != 0)
+                {
+                    pedidoDetalle.ActualizarCompra();
+                }
+                else
+                {
+                    //Se eliminara el producto
+                    pedidoDetalle.Eliminar();
+                }
+
                 CargarProductosPorMesa(lblMesa.Tag.ToString());
             }
+
+            
         }
 
         private void button4_Click(object sender, EventArgs e)

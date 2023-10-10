@@ -61,6 +61,7 @@ namespace TPV.GUI
             this.btnPagar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -267,6 +268,7 @@ namespace TPV.GUI
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDetalle,
             this.cantidad,
             this.idPedido,
             this.idProducto,
@@ -431,6 +433,14 @@ namespace TPV.GUI
             this.label5.TabIndex = 18;
             this.label5.Text = "Nota: puede configurar para agregar muchos productos al dar un click.";
             // 
+            // idDetalle
+            // 
+            this.idDetalle.DataPropertyName = "idDetalle";
+            this.idDetalle.HeaderText = "ID";
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            // 
             // cantidad
             // 
             this.cantidad.DataPropertyName = "cantidad";
@@ -441,7 +451,7 @@ namespace TPV.GUI
             // idPedido
             // 
             this.idPedido.DataPropertyName = "idPedido";
-            this.idPedido.HeaderText = "ID";
+            this.idPedido.HeaderText = "Id Pedido";
             this.idPedido.Name = "idPedido";
             this.idPedido.ReadOnly = true;
             this.idPedido.Visible = false;
@@ -561,6 +571,7 @@ namespace TPV.GUI
         public System.Windows.Forms.Label lblTicket;
         private System.Windows.Forms.Timer tFecha;
         public System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
