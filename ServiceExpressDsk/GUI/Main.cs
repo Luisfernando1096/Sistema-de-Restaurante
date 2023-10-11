@@ -240,6 +240,7 @@ namespace ServiceExpressDsk.GUI
                 {
                     //Aqui cargamos los datos en datagrid 
                     f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
+                    f2.CargarPedidosEnMesa(f3.lblMesa.Tag.ToString());
                     f2.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
                     DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
                     if (!pedido.Rows[0]["nombres"].ToString().Equals(""))

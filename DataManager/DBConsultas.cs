@@ -350,6 +350,39 @@ namespace DataManager
             }
         }
 
+        public static DataTable PedidosEnMesa(string idMesa)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT
+                                        pd.idPedido
+                                    FROM
+                                        pedido pe
+                                    JOIN
+                                        pedido_detalle pd ON pe.idPedido = pd.idPedido
+                                    JOIN
+                                        producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN
+                                        mesa m ON pe.idMesa = m.idMesa
+                                    WHERE
+                                        pe.idMesa = " + idMesa + @"
+                                        AND pe.cancelado = 0
+                                        AND m.disponible = 0
+                                    GROUP BY
+                                        pd.idPedido;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ProductosEnMesa(string idMesa)
         {
             try
@@ -364,17 +397,18 @@ namespace DataManager
                                         pd.subTotal, 
                                         pe.fecha
                                     FROM 
-                                        pedido pe
-                                    JOIN 
-                                        pedido_detalle pd ON pe.idPedido = pd.idPedido
+                                        pedido_detalle pd
                                     JOIN 
                                         producto pro ON pd.idProducto = pro.idProducto
                                     JOIN 
-                                        mesa m ON pe.idMesa = m.idMesa
-                                    WHERE 
-                                        pe.idMesa = " + idMesa + @" 
-                                        AND pe.cancelado = 0 
-                                        AND m.disponible = 0
+                                        (SELECT pe.idPedido, pe.idMesa, pe.fecha
+                                         FROM pedido pe
+                                         JOIN mesa m ON pe.idMesa = m.idMesa
+                                         WHERE pe.idMesa = " + idMesa + @" 
+                                           AND pe.cancelado = 0 
+                                           AND m.disponible = 0
+                                         ORDER BY pe.fecha ASC
+                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
                                     ORDER BY 
                                         pd.horaPedido DESC;";
                 DBOperacion operacion = new DBOperacion();

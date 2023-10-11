@@ -21,6 +21,7 @@ namespace TPV.GUI
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
         private bool activarFactura = false;
         private bool activarTicket = true;
+        private DataTable datosEnMesa;
 
         public PuntoPago(ComandaGestion comandaGestion)
         {
@@ -46,6 +47,25 @@ namespace TPV.GUI
                 throw;
             }
         }
+
+        public void CargarPedidosEnMesa(String id)
+        {
+            try
+            {
+                datosEnMesa = DataManager.DBConsultas.PedidosEnMesa(id);
+                if (datosEnMesa.Rows.Count > 1)
+                {
+                    btnCuentas.Visible = true;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private void PuntoPago_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;
@@ -131,6 +151,7 @@ namespace TPV.GUI
             if (SeleccionSalonMesa.idMesa > 0)
             {
                 CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
+                CargarPedidosEnMesa(SeleccionSalonMesa.idMesa.ToString());
                 lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
                 lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
                 DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));

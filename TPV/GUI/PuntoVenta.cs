@@ -106,6 +106,7 @@ namespace TPV.GUI
             this.Hide();
             Button botonMesa = (Button)sender;
             String idMesa = botonMesa.Tag.ToString();
+            DataTable datosEnMesa = DataManager.DBConsultas.PedidosEnMesa(idMesaAnterior.ToString());
             //Hacer que las mesas se puedan o no seleccionar
             if (cambiarMesa)
             {
@@ -128,17 +129,20 @@ namespace TPV.GUI
                 mesa.IdMesa = Int32.Parse(botonMesa.Tag.ToString());
                 if (mesa.ActualizarEstado())
                 {
-                    //Hacer disponible la mesa anterior
-                    Mantenimiento.CLS.Mesa mesa2 = new Mantenimiento.CLS.Mesa();
-                    mesa2.Disponible = true;
-                    mesa2.IdMesa = idMesaAnterior;
-                    if (mesa2.ActualizarEstado())
+                    if (datosEnMesa.Rows.Count == 1)
                     {
-                        //MessageBox.Show("SE ACTUALIZO CON EXITO");
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR AL ACTUALIZAR");
+                        //Hacer disponible la mesa anterior
+                        Mantenimiento.CLS.Mesa mesa2 = new Mantenimiento.CLS.Mesa();
+                        mesa2.Disponible = true;
+                        mesa2.IdMesa = idMesaAnterior;
+                        if (mesa2.ActualizarEstado())
+                        {
+                            //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR AL ACTUALIZAR");
+                        }
                     }
                 }
                 else
@@ -155,6 +159,7 @@ namespace TPV.GUI
             {
                 //Asignamos datos al futuro formulario a abrir.
                 f.CargarProductosPorMesa(idMesa);
+                f.CargarPedidosEnMesa(idMesa);
                 f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
                 //Agregando datos mesero y cliente si los hay
                 DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));

@@ -16,6 +16,7 @@ namespace TPV.GUI
         PuntoVenta punto_venta;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         BindingSource datos = new BindingSource();
+        DataTable datosEnMesa = new DataTable();
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
         public bool cerrarSesion;
@@ -47,6 +48,24 @@ namespace TPV.GUI
                 datos.DataSource = DataManager.DBConsultas.ProductosEnMesa(id);
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void CargarPedidosEnMesa(String id)
+        {
+            try
+            {
+                datosEnMesa = DataManager.DBConsultas.PedidosEnMesa(id);
+                if (datosEnMesa.Rows.Count > 1)
+                {
+                    btnCuentas.Visible = true;
+                }
 
             }
             catch (Exception)
@@ -339,6 +358,7 @@ namespace TPV.GUI
                     if (productoEnMesas.Rows.Count > 0)
                     {
                         f.CargarProductosPorMesa(idMesa);
+                        f.CargarPedidosEnMesa(idMesa);
                         f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
 
                         DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));
@@ -378,6 +398,7 @@ namespace TPV.GUI
             if (f.lblTicket.Tag != null)
             {
                 this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
+                this.CargarPedidosEnMesa(f.lblMesa.Tag.ToString());
 
                 ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()));
                 lblMesa.Text = f.lblMesa.Text.ToString();
