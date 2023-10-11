@@ -108,5 +108,36 @@ namespace DataManager
             return Resultado;
         }
 
+        public int? ConsultarScalar(String consulta)
+        {
+            int? resultado = null;
+            MySqlCommand comando = new MySqlCommand();
+
+            if (base.Conectar())
+            {
+                comando.Connection = base.conexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = consulta;
+
+                try
+                {
+                    var scalarResult = comando.ExecuteScalar();
+                    if (scalarResult != null && scalarResult != DBNull.Value)
+                    {
+                        resultado = Convert.ToInt32(scalarResult); // Ejecuta la consulta y obtiene un valor escalar
+                    }
+                }
+                catch (Exception)
+                {
+                    resultado = null;
+                }
+
+                base.Desconectar();
+            }
+
+            return resultado;
+        }
+
+
     }
 }

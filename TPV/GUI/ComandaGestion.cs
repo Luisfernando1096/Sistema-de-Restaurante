@@ -246,14 +246,15 @@ namespace TPV.GUI
                 pedido.Credito = 0;
                 pedido.Btc = 0;
 
+                int idPedidoInsertado;
                 //Insertamos en la base de datos el pedido
-                if (pedido.Insertar())
+                if (pedido.Insertar(out idPedidoInsertado))
                 {
                     //MessageBox.Show("SE INSERTO CON EXITO");
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL INSERTAR");
+                    MessageBox.Show("ERROR AL INSERTAR PEDIDO");
                 }
 
                 //Agregamos detalles al pedido
@@ -265,9 +266,8 @@ namespace TPV.GUI
                 pedidoDetalle.HoraPedido = fecha;
                 //pedidoDetalle.IdCocinero = null;
                 pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
-                DataTable up = DataManager.DBConsultas.UltimoPedido();
-                pedidoDetalle.IdPedido = Int32.Parse(up.Rows[0]["idPedido"].ToString());
-                lblTicket.Text = up.Rows[0]["idPedido"].ToString();
+                pedidoDetalle.IdPedido = idPedidoInsertado;
+                lblTicket.Text = idPedidoInsertado.ToString();
                 pedidoDetalle.Cantidad = cantidad;
                 DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(botonProducto.Tag.ToString()));
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
@@ -289,13 +289,13 @@ namespace TPV.GUI
                     }
                     else
                     {
-                        MessageBox.Show("ERROR AL ACTUALIZAR");
+                        MessageBox.Show("ERROR AL ACTUALIZAR MESAO");
                     }
                     //MessageBox.Show("SE INSERTO CON EXITO");
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL INSERTAR");
+                    MessageBox.Show("ERROR AL INSERTAR DETALLE PEDIDO");
                 }
 
             }
@@ -511,6 +511,16 @@ namespace TPV.GUI
                 punto_venta.Close();
 
             }
+        }
+
+        private void btnExtras_Click(object sender, EventArgs e)
+        {
+            SepararCuenta separar = new SepararCuenta();
+            separar.lblMesa.Tag = lblMesa.Tag;
+            separar.lblMesa.Text = "#Mesa: " + lblMesa.Tag;
+            separar.lblTicket.Tag = lblTicket.Text;
+            separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
+            separar.ShowDialog();
         }
     }
 }
