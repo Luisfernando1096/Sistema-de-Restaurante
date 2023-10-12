@@ -543,5 +543,14 @@ namespace TPV.GUI
             separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
             separar.ShowDialog();
         }
+
+        private void btnCuentas_Click(object sender, EventArgs e)
+        {
+            PedidosSeparados pedidosSeparados = new PedidosSeparados();
+            pedidosSeparados.idMesa = lblMesa.Tag.ToString();
+            pedidosSeparados.pedidosEnMesa = datosEnMesa;
+            pedidosSeparados.ShowDialog();
+
+        }
     }
 }
