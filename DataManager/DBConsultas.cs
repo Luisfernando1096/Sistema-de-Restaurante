@@ -395,7 +395,8 @@ namespace DataManager
                                         pd.precio, 
                                         pro.nombre, 
                                         pd.subTotal, 
-                                        pe.fecha
+                                        pe.fecha,
+                                        pd.idDetalle
                                     FROM 
                                         pedido_detalle pd
                                     JOIN 

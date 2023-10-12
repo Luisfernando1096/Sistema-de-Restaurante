@@ -68,7 +68,8 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             string sentencia;
             sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @" 
-                            WHERE pe.idPedido=pd.idPedido AND pe.idPedido = " + idPedido + @" AND pd.idProducto = " + idProducto + @";";
+                            WHERE pe.idPedido=pd.idPedido AND pe.idPedido = " + idPedido + @" AND pd.idProducto = " + idProducto + @"
+                            AND pd.idDetalle = " + IdDetalle + ";";
 
             try
             {

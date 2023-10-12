@@ -14,6 +14,8 @@ namespace TPV.GUI
     {
         private DataTable datosActual = new DataTable();
         private DataTable datosSiguiente = new DataTable();
+        private DataTable datosPrincipales = new DataTable();
+        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         Boolean pasar = false;
         public SepararCuenta()
         {
@@ -25,6 +27,7 @@ namespace TPV.GUI
             try
             {
                 datosActual = DataManager.DBConsultas.ProductosEnMesa(id);
+                datosPrincipales = DataManager.DBConsultas.ProductosEnMesa(id);
                 dgvActual.DataSource = datosActual;
                 dgvActual.AutoGenerateColumns = false;
 
@@ -75,8 +78,6 @@ namespace TPV.GUI
                 }
                 else
                 {
-                    MessageBox.Show("Solo pasar ya que hay uno");
-
                     //Pasar y quitar
                     ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
                     PasarCompleto(indiceActual);
@@ -97,7 +98,6 @@ namespace TPV.GUI
                     }
                     else if (cantidad > Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()))
                     {
-                        MessageBox.Show("Separar: " + separar + " Quedaran: " + quedaran);
                         //Pasar una parte
                         ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
                     }
@@ -157,8 +157,6 @@ namespace TPV.GUI
                 }
                 else
                 {
-                    MessageBox.Show("Solo pasar ya que hay uno");
-
                     //Pasar y quitar
                     ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
                     PasarCompleto(indiceActual);
@@ -184,7 +182,6 @@ namespace TPV.GUI
                     }
                     else if (cantidad > Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()))
                     {
-                        MessageBox.Show("Separar: " + separar + " Quedaran: " + quedaran);
                         //Pasar una parte
                         ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
                     }
@@ -338,6 +335,132 @@ namespace TPV.GUI
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnExtras_Click(object sender, EventArgs e)
+        {
+            int idPedido = Int32.Parse(lblTicket.Tag.ToString());
+            int idMesa = Int32.Parse(lblMesa.Tag.ToString());
+
+            if (datosSiguiente.Rows.Count>0)
+            {
+                //Programado para el pedido principal
+                Mantenimiento.CLS.PedidoDetalle pedidoDetalle;
+                if (datosPrincipales.Rows.Count == datosActual.Rows.Count)
+                {
+                    //Solo actualizacion
+                    foreach (DataRow siguiente in datosSiguiente.Rows)
+                    {
+                        foreach (DataRow actual in datosActual.Rows)
+                        {
+                            if (siguiente["idProductoSiguiente"].ToString().Equals(actual["idProducto"].ToString()))
+                            {
+                                pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+                                pedidoDetalle.IdDetalle = Int32.Parse(actual["idDetalle"].ToString());
+                                pedidoDetalle.IdPedido = idPedido;
+                                pedidoDetalle.IdProducto = Int32.Parse(actual["idProducto"].ToString());
+                                pedidoDetalle.Cantidad = Int32.Parse(actual["cantidad"].ToString());
+                                pedidoDetalle.SubTotal = Double.Parse(actual["subTotal"].ToString());
+                                pedidoDetalle.ActualizarDatos();
+
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    bool eliminar = false;
+                    //Habra eliminacion y posible actualizacion
+                    foreach (DataRow siguiente in datosSiguiente.Rows)
+                    {
+                        foreach (DataRow actual in datosActual.Rows)
+                        {
+                            if (siguiente["idProductoSiguiente"].ToString().Equals(actual["idProducto"].ToString()))
+                            {
+                                pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+                                pedidoDetalle.IdDetalle = Int32.Parse(actual["idDetalle"].ToString());
+                                pedidoDetalle.IdPedido = idPedido;
+                                pedidoDetalle.IdProducto = Int32.Parse(actual["idProducto"].ToString());
+                                pedidoDetalle.Cantidad = Int32.Parse(actual["cantidad"].ToString());
+                                pedidoDetalle.SubTotal = Double.Parse(actual["subTotal"].ToString());
+                                pedidoDetalle.ActualizarDatos();
+                                eliminar = false;
+                                break;
+                            }
+                            else
+                            {
+                                eliminar = true;
+                            }
+                        }
+
+                        if (eliminar)
+                        {
+                            pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+                            pedidoDetalle.IdDetalle = Int32.Parse(siguiente["idDetalleSiguiente"].ToString());
+                            pedidoDetalle.Eliminar();
+                        }
+                    }
+
+                }
+
+                String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                //Creamos un nuevo pedido y despues los detalles
+                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                pedido.IdMesa = idMesa;
+                pedido.IdCuenta = 1;
+                pedido.Cancelado = false;
+                pedido.Fecha = fecha;
+                pedido.Listo = false;
+                pedido.Total = 0;
+                pedido.Descuento = 0;
+                pedido.Iva = 0;
+                pedido.Propina = 0;
+                pedido.TotalPago = 0;
+                pedido.Saldo = 0;
+                pedido.NFactura = "0";
+                pedido.Anular = false;
+                pedido.Efectivo = 0;
+                pedido.Credito = 0;
+                pedido.Btc = 0;
+
+                int idPedidoInsertado;
+                //Agregamos detalles al pedido
+                Mantenimiento.CLS.PedidoDetalle pedidoDetalle2;
+                //Insertamos en la base de datos el pedido
+                if (pedido.Insertar(out idPedidoInsertado))
+                {
+                    foreach (DataRow siguiente in datosSiguiente.Rows)
+                    {
+                        pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle();
+                        pedidoDetalle2.IdDetalle = 0;
+                        pedidoDetalle2.Cocinando = true;
+                        pedidoDetalle2.Extras = "";
+                        pedidoDetalle2.HoraEntregado = fecha;
+                        pedidoDetalle2.HoraPedido = fecha;
+                        //pedidoDetalle2.IdCocinero = null;
+                        pedidoDetalle2.IdProducto = Int32.Parse(siguiente["idProductoSiguiente"].ToString());
+                        pedidoDetalle2.IdPedido = idPedidoInsertado;
+                        lblTicket.Text = idPedidoInsertado.ToString();
+                        pedidoDetalle2.Cantidad = Int32.Parse(siguiente["cantidadSiguiente"].ToString());
+                        pedidoDetalle2.Precio = Double.Parse(siguiente["precioSiguiente"].ToString());
+                        pedidoDetalle2.SubTotal = Double.Parse(siguiente["subTotalSiguiente"].ToString());
+                        pedidoDetalle2.Grupo = "0";
+                        pedidoDetalle2.Usuario = oUsuario.IdUsuario;
+                        //pedidoDetalle2.Fecha = null;
+                        pedidoDetalle2.Insertar();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ERROR AL INSERTAR PEDIDO");
+                }
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("No hay nada que separar");
+            }
         }
     }
 }

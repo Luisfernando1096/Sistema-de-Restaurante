@@ -43,6 +43,7 @@ namespace TPV.GUI
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnExtras = new System.Windows.Forms.Button();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +51,7 @@ namespace TPV.GUI
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDetalleSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPedidoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProductoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +95,7 @@ namespace TPV.GUI
             this.dgvActual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvActual.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cantidad,
+            this.idDetalle,
             this.idPedido,
             this.idProducto,
             this.precio,
@@ -130,6 +133,7 @@ namespace TPV.GUI
             this.dgvSiguiente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSiguiente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cantidadSiguiente,
+            this.idDetalleSiguiente,
             this.idPedidoSiguiente,
             this.idProductoSiguiente,
             this.precioSiguiente,
@@ -203,6 +207,7 @@ namespace TPV.GUI
             this.btnExtras.Text = "Separar pedido";
             this.btnExtras.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExtras.UseVisualStyleBackColor = true;
+            this.btnExtras.Click += new System.EventHandler(this.btnExtras_Click);
             // 
             // cantidad
             // 
@@ -210,6 +215,14 @@ namespace TPV.GUI
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.Name = "cantidad";
             this.cantidad.ReadOnly = true;
+            // 
+            // idDetalle
+            // 
+            this.idDetalle.DataPropertyName = "idDetalle";
+            this.idDetalle.HeaderText = "ID Detalle";
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
             // 
             // idPedido
             // 
@@ -264,6 +277,14 @@ namespace TPV.GUI
             this.cantidadSiguiente.HeaderText = "Cantidad";
             this.cantidadSiguiente.Name = "cantidadSiguiente";
             this.cantidadSiguiente.ReadOnly = true;
+            // 
+            // idDetalleSiguiente
+            // 
+            this.idDetalleSiguiente.DataPropertyName = "idDetalleSiguiente";
+            this.idDetalleSiguiente.HeaderText = "ID Detalle";
+            this.idDetalleSiguiente.Name = "idDetalleSiguiente";
+            this.idDetalleSiguiente.ReadOnly = true;
+            this.idDetalleSiguiente.Visible = false;
             // 
             // idPedidoSiguiente
             // 
@@ -346,6 +367,7 @@ namespace TPV.GUI
         public System.Windows.Forms.Label lblTicket;
         public System.Windows.Forms.Label lblMesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
@@ -353,6 +375,7 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalleSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedidoSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProductoSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioSiguiente;

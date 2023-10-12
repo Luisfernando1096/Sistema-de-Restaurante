@@ -15,6 +15,7 @@ namespace TPV.GUI
     {
         PuntoVenta punto_venta;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         BindingSource datos = new BindingSource();
         DataTable datosEnMesa = new DataTable();
         public bool cambiarMesa = false;
@@ -192,6 +193,7 @@ namespace TPV.GUI
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            int idDetalle = 0;
             if (dgvDatos.Rows.Count > 0)
             {
                 //Ya existe un pedido
@@ -202,6 +204,7 @@ namespace TPV.GUI
                 {
                     if (row.Cells["idProducto"].Value.ToString() == botonProducto.Tag.ToString())
                     {
+                        idDetalle = Int32.Parse(row.Cells["idDetalle"].Value.ToString());
                         cantidad = cantidad + Int32.Parse(row.Cells["cantidad"].Value.ToString());
                         precio = double.Parse(row.Cells["precio"].Value.ToString());
                         aumentarUnProducto = true;
@@ -211,6 +214,7 @@ namespace TPV.GUI
                 if (aumentarUnProducto)
                 {
                     //Ya existe un producto igual en el datgrid, hay que aumentar
+                    pedidoDetalle.IdDetalle = idDetalle;
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
                     pedidoDetalle.Cantidad = cantidad;
@@ -236,7 +240,7 @@ namespace TPV.GUI
                     pedidoDetalle.Precio = double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString());
                     pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString()));
                     pedidoDetalle.Grupo = "0";
-                    pedidoDetalle.Usuario = null;
+                    pedidoDetalle.Usuario = oUsuario.IdUsuario;
                     pedidoDetalle.Insertar();
                 }
 
@@ -292,7 +296,7 @@ namespace TPV.GUI
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
                 pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
                 pedidoDetalle.Grupo = "0";
-                pedidoDetalle.Usuario = null;
+                pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
 
                 if (pedidoDetalle.Insertar())
@@ -451,6 +455,7 @@ namespace TPV.GUI
             Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
             if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                pedidoDetalle.IdDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
                 pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                 pedidoDetalle.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
                 pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
@@ -542,6 +547,8 @@ namespace TPV.GUI
             separar.lblTicket.Tag = lblTicket.Text;
             separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
             separar.ShowDialog();
+            CargarPedidosEnMesa(lblMesa.Tag.ToString());
+            CargarProductosPorMesa(lblMesa.Tag.ToString());
         }
 
         private void btnCuentas_Click(object sender, EventArgs e)
