@@ -828,5 +828,21 @@ namespace TPV.GUI
                 Close();
             }
         }
+
+        public void CargarProductosPorMesayIdPedido(string idMesa, int idPedido)
+        {
+            try
+            {
+                datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
+                dgvDatos.DataSource = datos;
+                dgvDatos.AutoGenerateColumns = false;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

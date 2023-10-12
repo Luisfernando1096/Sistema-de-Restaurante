@@ -620,7 +620,7 @@ namespace DataManager
             }
         }
 
-        public static object ProductosEnMesaConIdPedido(string idMesa, int idPedido)
+        public static DataTable ProductosEnMesaConIdPedido(string idMesa, int idPedido)
         {
             try
             {
