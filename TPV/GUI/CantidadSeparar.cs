@@ -57,13 +57,22 @@ namespace TPV.GUI
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
-                button1.PerformClick(); // Ejecutar el evento Click del botón
+                btnOk.PerformClick(); // Ejecutar el evento Click del botón
             }
         }
 
         private void CantidadSeparar_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                btnOk.PerformClick(); // Ejecutar el evento Click del botón
+            }
         }
     }
 }

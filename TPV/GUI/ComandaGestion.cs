@@ -557,7 +557,48 @@ namespace TPV.GUI
             pedidosSeparados.idMesa = lblMesa.Tag.ToString();
             pedidosSeparados.pedidosEnMesa = datosEnMesa;
             pedidosSeparados.ShowDialog();
+            int idPedido = pedidosSeparados.idPedido;
+            CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedido);
+            lblTicket.Text = idPedido.ToString();//Accedemos a la primera posicion de la tabla
 
+            DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedido);
+            //Agregando datos mesero y cliente si los hay
+            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+            {
+                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+            }
+            else
+            {
+                lblMesero.Text = "";
+                lblMesero.Tag = "";
+            }
+            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+            {
+                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+            }
+            else
+            {
+                lblCliente.Text = "";
+                lblCliente.Tag = "";
+            }
+        }
+
+        private void CargarProductosPorMesayIdPedido(string idMesa, int idPedido)
+        {
+            try
+            {
+                datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
+                dgvDatos.DataSource = datos;
+                dgvDatos.AutoGenerateColumns = false;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

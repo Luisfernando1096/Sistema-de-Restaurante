@@ -13,6 +13,7 @@ namespace TPV.GUI
     public partial class PedidosSeparados : Form
     {
         public string idMesa;
+        public int idPedido;
         public DataTable pedidosEnMesa;
         public PedidosSeparados()
         {
@@ -37,7 +38,9 @@ namespace TPV.GUI
 
         private void BotonPedido_Click(object sender, EventArgs e)
         {
-            
+            Button botonPedido = (Button)sender;
+            idPedido = Int32.Parse(botonPedido.Text);
+            Close();
         }
     }
 }

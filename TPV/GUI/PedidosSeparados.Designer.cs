@@ -39,9 +39,9 @@ namespace TPV.GUI
             this.flpPedidos.AutoScroll = true;
             this.flpPedidos.AutoSize = true;
             this.flpPedidos.Controls.Add(this.btnPedido);
-            this.flpPedidos.Location = new System.Drawing.Point(12, 12);
+            this.flpPedidos.Location = new System.Drawing.Point(5, 12);
             this.flpPedidos.Name = "flpPedidos";
-            this.flpPedidos.Size = new System.Drawing.Size(511, 249);
+            this.flpPedidos.Size = new System.Drawing.Size(633, 249);
             this.flpPedidos.TabIndex = 5;
             // 
             // btnPedido
@@ -49,7 +49,7 @@ namespace TPV.GUI
             this.btnPedido.AutoSize = true;
             this.btnPedido.Location = new System.Drawing.Point(3, 3);
             this.btnPedido.Name = "btnPedido";
-            this.btnPedido.Size = new System.Drawing.Size(120, 120);
+            this.btnPedido.Size = new System.Drawing.Size(200, 80);
             this.btnPedido.TabIndex = 14;
             this.btnPedido.UseVisualStyleBackColor = true;
             this.btnPedido.Visible = false;
@@ -58,7 +58,7 @@ namespace TPV.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 273);
+            this.ClientSize = new System.Drawing.Size(641, 273);
             this.Controls.Add(this.flpPedidos);
             this.Name = "PedidosSeparados";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

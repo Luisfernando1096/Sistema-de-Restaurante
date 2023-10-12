@@ -619,6 +619,49 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static object ProductosEnMesaConIdPedido(string idMesa, int idPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT 
+                                        pd.idPedido, 
+                                        pd.idProducto, 
+                                        pd.cantidad, 
+                                        pd.precio, 
+                                        pro.nombre, 
+                                        pd.subTotal, 
+                                        pe.fecha,
+                                        pd.idDetalle
+                                    FROM 
+                                        pedido_detalle pd
+                                    JOIN 
+                                        producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN 
+                                        (SELECT pe.idPedido, pe.idMesa, pe.fecha
+                                         FROM pedido pe
+                                         JOIN mesa m ON pe.idMesa = m.idMesa
+                                         WHERE pe.idMesa = " + idMesa + @"
+                                         AND pe.idPedido = " + idPedido + @"
+                                           AND pe.cancelado = 0 
+                                           AND m.disponible = 0
+                                         ORDER BY pe.fecha ASC
+                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
+                                    ORDER BY 
+                                        pd.horaPedido DESC;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ProductosActivos()
         {
             try
