@@ -16,7 +16,6 @@ namespace TPV.GUI
         PuntoVenta punto_venta;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
-        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         BindingSource datos = new BindingSource();
         DataTable datosEnMesa = new DataTable();
         public bool cambiarMesa = false;
@@ -197,7 +196,6 @@ namespace TPV.GUI
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            int idDetalle = 0;
             if (dgvDatos.Rows.Count > 0)
             {
                 //Ya existe un pedido

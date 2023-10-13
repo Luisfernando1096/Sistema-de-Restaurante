@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace TPV.GUI
 {
     partial class PuntoPago
@@ -203,7 +205,6 @@ namespace TPV.GUI
             this.cantidad,
             this.idDetalle,
             this.idPedido,
-            this.idDetalle,
             this.grupo,
             this.idProducto,
             this.precio,
@@ -1222,6 +1223,7 @@ namespace TPV.GUI
         private System.Windows.Forms.Button btnCuentas;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
+        private DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn grupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;

@@ -70,6 +70,7 @@ namespace TPV.GUI
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpFamilias.SuspendLayout();
             this.flpAcciones.SuspendLayout();
             this.flpProductos.SuspendLayout();
@@ -271,7 +272,6 @@ namespace TPV.GUI
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDetalle,
             this.cantidad,
-            this.idDetalle,
             this.idPedido,
             this.idProducto,
             this.precio,
