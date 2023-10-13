@@ -90,7 +90,8 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM empleado;";
+                String sentencia = @"SELECT e.idEmpleado, e.nombres FROM empleado e, rol r, usuario u 
+                                     WHERE e.idEmpleado=u.idUsuario AND u.idRol=r.idRol AND r.idRol=2;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
