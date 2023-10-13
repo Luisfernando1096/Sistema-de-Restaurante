@@ -16,6 +16,7 @@ namespace Ingredientes_y_Productos.GUI
         BindingSource datosProductos = new BindingSource();
         BindingSource datosFamilias = new BindingSource();
         BindingSource datosUnidadMedida = new BindingSource();
+        private String SeleccionarImg = string.Empty;
         private void CargarDatos()
         {
             try
@@ -196,19 +197,6 @@ namespace Ingredientes_y_Productos.GUI
                 throw;
             }
         }
-        private byte[] ImageToByteArray(Image image)
-        {
-            if (image == null)
-            {
-                return null;
-            }
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                return ms.ToArray();
-            }
-        }
 
         private void LimpiarCamposProductos() 
         {
@@ -349,6 +337,27 @@ namespace Ingredientes_y_Productos.GUI
                         txtStock.Text = dgvProductos.CurrentRow.Cells["Stock"].Value.ToString();
                         txtStockMinimo.Text = dgvProductos.CurrentRow.Cells["StockMinimo"].Value.ToString();
 
+                        string rutaImagen = dgvProductos.CurrentRow.Cells["foto"].Value.ToString();
+
+                        if (!string.IsNullOrEmpty(rutaImagen))
+                        {
+                            if (System.IO.File.Exists(rutaImagen))
+                            {
+                                ImgPrevia.Image = Image.FromFile(rutaImagen);
+                                ImgPrevia.SizeMode = PictureBoxSizeMode.Zoom;
+                            }
+                            else
+                            {
+                                MessageBox.Show("El archivo de imagen no se encontró en la ruta especificada.");
+                                ImgPrevia.Image = null;
+                            }
+                        }
+                        else
+                        {
+                            //MessageBox.Show("La ruta de imagen está vacía.");
+                            ImgPrevia.Image = null;
+                        }
+
                         bool conIngrediente = Convert.ToBoolean(dgvProductos.CurrentRow.Cells["ConIngrediente"].Value);
                         chBoxConIngrediente.Checked = conIngrediente;
 
@@ -373,7 +382,7 @@ namespace Ingredientes_y_Productos.GUI
                 if (txtNombre.Text != "" & cmbFamilia.SelectedIndex != 0 && cmbUnidad.SelectedIndex !=0)
                 {
                     Mantenimiento.CLS.Producto mantenimiento = new Mantenimiento.CLS.Producto();
-                    mantenimiento.Foto = ImageToByteArray(ImgPrevia.Image);
+                    mantenimiento.Foto = SeleccionarImg;
                     mantenimiento.Nombre = txtNombre.Text;
                     mantenimiento.IdFamilia = int.Parse(cmbFamilia.SelectedValue.ToString());
                     mantenimiento.IdUnidad = int.Parse(cmbUnidad.SelectedValue.ToString());
@@ -710,8 +719,12 @@ namespace Ingredientes_y_Productos.GUI
 
             if (!string.IsNullOrEmpty(rutaImagen))
             {
+                string rutaFormateada = rutaImagen.Replace("\\", "\\\\");
+
                 ImgPrevia.ImageLocation = rutaImagen;
                 ImgPrevia.SizeMode = PictureBoxSizeMode.Zoom;
+
+                SeleccionarImg = rutaFormateada;
             }
             else
             {

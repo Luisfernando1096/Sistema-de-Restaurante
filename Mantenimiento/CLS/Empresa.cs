@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Empresa
+    public class Empresa
     {
         /*DECLARACION DE VARIABLES*/
         int idEmpresa;
@@ -63,6 +63,8 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
+            
+            
             sentencia = "UPDATE empresa SET  nombreEmpresa = '" + nombreEmpresa + "', slogan = '" + slogan + "', direccion = '" + direccion + "', telefono = '" + telefono + "', logo = '" + logo + "', firma = '" + firma + "', sello = '" + sello + "', saludo = '" + saludo + "', NRC = '" + NRC + "' , NIT  = '" + NIT + "', numAutorizacion = '" + numAutorizacion + "' " +
                           "WHERE idEmpresa = " + idEmpresa + ";";
             try

@@ -15,7 +15,7 @@ namespace Mantenimiento.CLS
         String descripcion;
         double precio;
         double costo;
-        Byte[] foto;
+        String foto;
         int inventariable;
         int conIngrediente;
         int stock;
@@ -29,7 +29,7 @@ namespace Mantenimiento.CLS
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public double Precio { get => precio; set => precio = value; }
         public double Costo { get => costo; set => costo = value; }
-        public byte[] Foto { get => foto; set => foto = value; }
+        public String Foto { get => foto; set => foto = value; }
         public int Inventariable { get => inventariable; set => inventariable = value; }
         public int ConIngrediente { get => conIngrediente; set => conIngrediente = value; }
         public int Stock { get => stock; set => stock = value; }

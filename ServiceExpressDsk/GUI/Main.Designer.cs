@@ -1077,13 +1077,12 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton40});
             this.toolStrip9.Location = new System.Drawing.Point(4, 0);
             this.toolStrip9.Name = "toolStrip9";
-            this.toolStrip9.Size = new System.Drawing.Size(1028, 88);
+            this.toolStrip9.Size = new System.Drawing.Size(1067, 88);
             this.toolStrip9.TabIndex = 13;
             this.toolStrip9.Text = "toolStrip9";
             // 
             // toolStripButton35
             // 
-            this.toolStripButton35.Enabled = false;
             this.toolStripButton35.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton35.Image")));
             this.toolStripButton35.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton35.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1091,6 +1090,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton35.Size = new System.Drawing.Size(169, 85);
             this.toolStripButton35.Text = "Configurar TPV";
             this.toolStripButton35.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton35.Click += new System.EventHandler(this.toolStripButton35_Click);
             // 
             // toolStripButton36
             // 
@@ -1102,6 +1102,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton36.Size = new System.Drawing.Size(105, 85);
             this.toolStripButton36.Text = "Empresa";
             this.toolStripButton36.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton36.Click += new System.EventHandler(this.toolStripButton36_Click);
             // 
             // toolStripButton37
             // 
@@ -1113,6 +1114,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton37.Size = new System.Drawing.Size(88, 85);
             this.toolStripButton37.Text = "Tickets";
             this.toolStripButton37.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton37.Click += new System.EventHandler(this.toolStripButton37_Click);
             // 
             // toolStripButton38
             // 
