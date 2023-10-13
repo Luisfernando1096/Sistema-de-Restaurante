@@ -50,7 +50,9 @@ namespace TPV.GUI
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDetalleSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPedidoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProductoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,7 +103,8 @@ namespace TPV.GUI
             this.precio,
             this.fecha,
             this.nombre,
-            this.subTotal});
+            this.subTotal,
+            this.grupo});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -133,6 +136,7 @@ namespace TPV.GUI
             this.dgvSiguiente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSiguiente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cantidadSiguiente,
+            this.grupoSiguiente,
             this.idDetalleSiguiente,
             this.idPedidoSiguiente,
             this.idProductoSiguiente,
@@ -271,12 +275,28 @@ namespace TPV.GUI
             this.subTotal.Name = "subTotal";
             this.subTotal.ReadOnly = true;
             // 
+            // grupo
+            // 
+            this.grupo.DataPropertyName = "grupo";
+            this.grupo.HeaderText = "Grupo";
+            this.grupo.Name = "grupo";
+            this.grupo.ReadOnly = true;
+            this.grupo.Visible = false;
+            // 
             // cantidadSiguiente
             // 
             this.cantidadSiguiente.DataPropertyName = "cantidadSiguiente";
             this.cantidadSiguiente.HeaderText = "Cantidad";
             this.cantidadSiguiente.Name = "cantidadSiguiente";
             this.cantidadSiguiente.ReadOnly = true;
+            // 
+            // grupoSiguiente
+            // 
+            this.grupoSiguiente.DataPropertyName = "grupoSiguiente";
+            this.grupoSiguiente.HeaderText = "Grupo";
+            this.grupoSiguiente.Name = "grupoSiguiente";
+            this.grupoSiguiente.ReadOnly = true;
+            this.grupoSiguiente.Visible = false;
             // 
             // idDetalleSiguiente
             // 
@@ -374,7 +394,9 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grupoSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDetalleSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedidoSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProductoSiguiente;

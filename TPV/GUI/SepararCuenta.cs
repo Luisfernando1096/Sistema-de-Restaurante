@@ -22,11 +22,11 @@ namespace TPV.GUI
             InitializeComponent();
         }
 
-        public void CargarProductosPorMesa(String id)
+        public void CargarProductosPorMesayPorIdPedido(String id, int idPedido)
         {
             try
             {
-                datosActual = DataManager.DBConsultas.ProductosEnMesa(id);
+                datosActual = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, idPedido);
                 datosPrincipales = DataManager.DBConsultas.ProductosEnMesa(id);
                 dgvActual.DataSource = datosActual;
                 dgvActual.AutoGenerateColumns = false;
@@ -116,7 +116,7 @@ namespace TPV.GUI
 
         private void SepararCuenta_Load(object sender, EventArgs e)
         {
-            CargarProductosPorMesa(lblMesa.Tag.ToString());
+            CargarProductosPorMesayPorIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Tag.ToString()));
         }
 
         private void btnPasar_Click(object sender, EventArgs e)
@@ -361,7 +361,7 @@ namespace TPV.GUI
                                 pedidoDetalle.IdProducto = Int32.Parse(actual["idProducto"].ToString());
                                 pedidoDetalle.Cantidad = Int32.Parse(actual["cantidad"].ToString());
                                 pedidoDetalle.SubTotal = Double.Parse(actual["subTotal"].ToString());
-                                pedidoDetalle.ActualizarDatos();
+                                pedidoDetalle.ActualizarCompra();
 
                             }
                         }
@@ -384,7 +384,7 @@ namespace TPV.GUI
                                 pedidoDetalle.IdProducto = Int32.Parse(actual["idProducto"].ToString());
                                 pedidoDetalle.Cantidad = Int32.Parse(actual["cantidad"].ToString());
                                 pedidoDetalle.SubTotal = Double.Parse(actual["subTotal"].ToString());
-                                pedidoDetalle.ActualizarDatos();
+                                pedidoDetalle.ActualizarCompra();
                                 eliminar = false;
                                 break;
                             }

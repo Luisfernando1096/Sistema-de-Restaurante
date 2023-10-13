@@ -606,8 +606,16 @@ namespace TPV.GUI
             separar.lblTicket.Tag = lblTicket.Text;
             separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
             separar.ShowDialog();
+            if (idPedidoSiguiente > 0)
+            {
+                CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            }
+            else
+            {
+                CargarProductosPorMesa(lblMesa.Tag.ToString());
+            }
             CargarPedidosEnMesa(lblMesa.Tag.ToString());
-            CargarProductosPorMesa(lblMesa.Tag.ToString());
+            
         }
 
         private void btnCuentas_Click(object sender, EventArgs e)
@@ -617,31 +625,34 @@ namespace TPV.GUI
             pedidosSeparados.pedidosEnMesa = datosEnMesa;
             pedidosSeparados.ShowDialog();
             idPedidoSiguiente = pedidosSeparados.idPedido;
-            
-            CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
-            lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
 
-            DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
-            //Agregando datos mesero y cliente si los hay
-            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+            if (idPedidoSiguiente > 0)
             {
-                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
-            }
-            else
-            {
-                lblMesero.Text = "";
-                lblMesero.Tag = "";
-            }
-            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-            {
-                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-            }
-            else
-            {
-                lblCliente.Text = "";
-                lblCliente.Tag = "";
+                CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
+                lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
+
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
+                //Agregando datos mesero y cliente si los hay
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                {
+                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                }
+                else
+                {
+                    lblMesero.Text = "";
+                    lblMesero.Tag = "";
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                }
+                else
+                {
+                    lblCliente.Text = "";
+                    lblCliente.Tag = "";
+                }
             }
         }
 
