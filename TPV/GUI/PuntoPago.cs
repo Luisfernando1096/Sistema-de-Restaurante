@@ -21,6 +21,8 @@ namespace TPV.GUI
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
         private bool activarFactura = false;
         private bool activarTicket = true;
+        private DataTable datosEnMesa;
+        public int idPedidoSiguiente;
 
         public PuntoPago(ComandaGestion comandaGestion)
         {
@@ -46,6 +48,25 @@ namespace TPV.GUI
                 throw;
             }
         }
+
+        public void CargarPedidosEnMesa(String id)
+        {
+            try
+            {
+                datosEnMesa = DataManager.DBConsultas.PedidosEnMesa(id);
+                if (datosEnMesa.Rows.Count > 1)
+                {
+                    btnCuentas.Visible = true;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private void PuntoPago_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;
@@ -132,6 +153,7 @@ namespace TPV.GUI
             if (SeleccionSalonMesa.idMesa > 0)
             {
                 CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
+                CargarPedidosEnMesa(SeleccionSalonMesa.idMesa.ToString());
                 lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
                 lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
                 DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));
@@ -819,6 +841,60 @@ namespace TPV.GUI
                 comandaGestion.Close();
                 Close();
             }
+        }
+
+        public void CargarProductosPorMesayIdPedido(string idMesa, int idPedido)
+        {
+            try
+            {
+                datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
+                dgvDatos.DataSource = datos;
+                dgvDatos.AutoGenerateColumns = false;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnCuentas_Click(object sender, EventArgs e)
+        {
+            PedidosSeparados pedidosSeparados = new PedidosSeparados();
+            pedidosSeparados.idMesa = lblMesa.Tag.ToString();
+            pedidosSeparados.pedidosEnMesa = datosEnMesa;
+            pedidosSeparados.ShowDialog();
+            idPedidoSiguiente = pedidosSeparados.idPedido;
+
+            CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
+            lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
+
+            DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
+            //Agregando datos mesero y cliente si los hay
+            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+            {
+                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+            }
+            else
+            {
+                lblMesero.Text = "";
+                lblMesero.Tag = "";
+            }
+            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+            {
+                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+            }
+            else
+            {
+                lblCliente.Text = "";
+                lblCliente.Tag = "";
+            }
+            lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
+            lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
+            CalcularTodo();
         }
     }
 }

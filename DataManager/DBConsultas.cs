@@ -90,7 +90,8 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM empleado;";
+                String sentencia = @"SELECT e.idEmpleado, e.nombres FROM empleado e, rol r, usuario u 
+                                     WHERE e.idEmpleado=u.idUsuario AND u.idRol=r.idRol AND r.idRol=2;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -350,6 +351,39 @@ namespace DataManager
             }
         }
 
+        public static DataTable PedidosEnMesa(string idMesa)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT
+                                        pd.idPedido
+                                    FROM
+                                        pedido pe
+                                    JOIN
+                                        pedido_detalle pd ON pe.idPedido = pd.idPedido
+                                    JOIN
+                                        producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN
+                                        mesa m ON pe.idMesa = m.idMesa
+                                    WHERE
+                                        pe.idMesa = " + idMesa + @"
+                                        AND pe.cancelado = 0
+                                        AND m.disponible = 0
+                                    GROUP BY
+                                        pd.idPedido;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ProductosEnMesa(string idMesa)
         {
             try
@@ -366,19 +400,18 @@ namespace DataManager
                                         f.grupoPrinter as grupo,
                                         pd.idDetalle
                                     FROM 
-                                        pedido pe
-                                    JOIN 
-                                        pedido_detalle pd ON pe.idPedido = pd.idPedido
+                                        pedido_detalle pd
                                     JOIN 
                                         producto pro ON pd.idProducto = pro.idProducto
                                     JOIN 
-                                        mesa m ON pe.idMesa = m.idMesa
-                                    JOIN
-										familia f ON pro.idFamilia = f.idFamilia
-                                    WHERE 
-                                        pe.idMesa = " + idMesa + @" 
-                                        AND pe.cancelado = 0 
-                                        AND m.disponible = 0
+                                        (SELECT pe.idPedido, pe.idMesa, pe.fecha
+                                         FROM pedido pe
+                                         JOIN mesa m ON pe.idMesa = m.idMesa
+                                         WHERE pe.idMesa = " + idMesa + @" 
+                                           AND pe.cancelado = 0 
+                                           AND m.disponible = 0
+                                         ORDER BY pe.fecha ASC
+                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
                                     ORDER BY 
                                         pd.horaPedido DESC;";
                 DBOperacion operacion = new DBOperacion();
@@ -588,6 +621,49 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable ProductosEnMesaConIdPedido(string idMesa, int idPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT 
+                                        pd.idPedido, 
+                                        pd.idProducto, 
+                                        pd.cantidad, 
+                                        pd.precio, 
+                                        pro.nombre, 
+                                        pd.subTotal, 
+                                        pe.fecha,
+                                        pd.idDetalle
+                                    FROM 
+                                        pedido_detalle pd
+                                    JOIN 
+                                        producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN 
+                                        (SELECT pe.idPedido, pe.idMesa, pe.fecha
+                                         FROM pedido pe
+                                         JOIN mesa m ON pe.idMesa = m.idMesa
+                                         WHERE pe.idMesa = " + idMesa + @"
+                                         AND pe.idPedido = " + idPedido + @"
+                                           AND pe.cancelado = 0 
+                                           AND m.disponible = 0
+                                         ORDER BY pe.fecha ASC
+                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
+                                    ORDER BY 
+                                        pd.horaPedido DESC;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ProductosActivos()
         {
             try

@@ -58,18 +58,18 @@ namespace TPV.GUI
             this.lblFecha = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tFecha = new System.Windows.Forms.Timer(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnCuentas = new System.Windows.Forms.Button();
             this.btnPagar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpFamilias.SuspendLayout();
             this.flpAcciones.SuspendLayout();
             this.flpProductos.SuspendLayout();
@@ -206,6 +206,7 @@ namespace TPV.GUI
             this.btnExtras.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExtras.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnExtras.UseVisualStyleBackColor = true;
+            this.btnExtras.Click += new System.EventHandler(this.btnExtras_Click);
             // 
             // btnComanda
             // 
@@ -242,7 +243,7 @@ namespace TPV.GUI
             this.flpProductos.AutoScroll = true;
             this.flpProductos.AutoSize = true;
             this.flpProductos.Controls.Add(this.btnProducto);
-            this.flpProductos.Location = new System.Drawing.Point(700, 54);
+            this.flpProductos.Location = new System.Drawing.Point(703, 54);
             this.flpProductos.Name = "flpProductos";
             this.flpProductos.Size = new System.Drawing.Size(126, 586);
             this.flpProductos.TabIndex = 4;
@@ -270,6 +271,7 @@ namespace TPV.GUI
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDetalle,
             this.cantidad,
+            this.idDetalle,
             this.idPedido,
             this.idProducto,
             this.precio,
@@ -395,6 +397,32 @@ namespace TPV.GUI
             this.tFecha.Interval = 1000;
             this.tFecha.Tick += new System.EventHandler(this.tFecha_Tick);
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label5.Location = new System.Drawing.Point(699, 649);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(408, 74);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Nota: puede configurar para agregar muchos productos al dar un click.";
+            // 
+            // btnCuentas
+            // 
+            this.btnCuentas.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnCuentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCuentas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCuentas.Image = ((System.Drawing.Image)(resources.GetObject("btnCuentas.Image")));
+            this.btnCuentas.Location = new System.Drawing.Point(375, 39);
+            this.btnCuentas.Name = "btnCuentas";
+            this.btnCuentas.Size = new System.Drawing.Size(133, 57);
+            this.btnCuentas.TabIndex = 28;
+            this.btnCuentas.Text = "Cuentas";
+            this.btnCuentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCuentas.UseVisualStyleBackColor = false;
+            this.btnCuentas.Visible = false;
+            this.btnCuentas.Click += new System.EventHandler(this.btnCuentas_Click);
+            // 
             // btnPagar
             // 
             this.btnPagar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -423,15 +451,67 @@ namespace TPV.GUI
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
             // 
-            // label5
+            // cantidad
             // 
-            this.label5.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Location = new System.Drawing.Point(699, 649);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(408, 74);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Nota: puede configurar para agregar muchos productos al dar un click.";
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // idDetalle
+            // 
+            this.idDetalle.DataPropertyName = "idDetalle";
+            this.idDetalle.HeaderText = "ID Detalle";
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            // 
+            // idPedido
+            // 
+            this.idPedido.DataPropertyName = "idPedido";
+            this.idPedido.HeaderText = "ID";
+            this.idPedido.Name = "idPedido";
+            this.idPedido.ReadOnly = true;
+            this.idPedido.Visible = false;
+            // 
+            // idProducto
+            // 
+            this.idProducto.DataPropertyName = "idProducto";
+            this.idProducto.HeaderText = "Id Producto";
+            this.idProducto.Name = "idProducto";
+            this.idProducto.ReadOnly = true;
+            this.idProducto.Visible = false;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.Visible = false;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            this.fecha.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Producto";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // subTotal
+            // 
+            this.subTotal.DataPropertyName = "subTotal";
+            this.subTotal.HeaderText = "Sub Total";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
             // 
             // idDetalle
             // 
@@ -508,6 +588,7 @@ namespace TPV.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.btnCuentas);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.label10);
@@ -571,8 +652,9 @@ namespace TPV.GUI
         public System.Windows.Forms.Label lblTicket;
         private System.Windows.Forms.Timer tFecha;
         public System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
+        private System.Windows.Forms.Button btnCuentas;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;

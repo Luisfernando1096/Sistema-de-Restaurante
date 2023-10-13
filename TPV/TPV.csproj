@@ -55,6 +55,12 @@
     <Compile Include="GUI\CantidadProductos.Designer.cs">
       <DependentUpon>CantidadProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\CantidadSeparar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CantidadSeparar.Designer.cs">
+      <DependentUpon>CantidadSeparar.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ClientesGestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,12 @@
     <Compile Include="GUI\MeserosSeleccion.Designer.cs">
       <DependentUpon>MeserosSeleccion.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\PedidosSeparados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\PedidosSeparados.Designer.cs">
+      <DependentUpon>PedidosSeparados.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\PuntoPago.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     </Compile>
     <Compile Include="GUI\SeleccionSalonMesa.Designer.cs">
       <DependentUpon>SeleccionSalonMesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\SepararCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\SepararCuenta.Designer.cs">
+      <DependentUpon>SepararCuenta.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\TicketsProcesados.cs">
       <SubType>Form</SubType>
@@ -126,6 +144,9 @@
     <EmbeddedResource Include="GUI\CantidadProductos.resx">
       <DependentUpon>CantidadProductos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CantidadSeparar.resx">
+      <DependentUpon>CantidadSeparar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ClientesGestion.resx">
       <DependentUpon>ClientesGestion.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +162,9 @@
     <EmbeddedResource Include="GUI\MeserosSeleccion.resx">
       <DependentUpon>MeserosSeleccion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PedidosSeparados.resx">
+      <DependentUpon>PedidosSeparados.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\PuntoPago.resx">
       <DependentUpon>PuntoPago.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\SeleccionSalonMesa.resx">
       <DependentUpon>SeleccionSalonMesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\SepararCuenta.resx">
+      <DependentUpon>SepararCuenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\TicketsProcesados.resx">
       <DependentUpon>TicketsProcesados.cs</DependentUpon>

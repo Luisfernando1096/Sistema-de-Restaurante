@@ -124,5 +124,14 @@ namespace Mantenimiento.CLS
 
             return resultado;
         }
+
+        public String StringActualizarEstado()
+        {
+            string sentencia;
+            sentencia = @"UPDATE mesa SET disponible = " + disponible + " " +
+                "WHERE idMesa = " + idMesa + ";";
+
+            return sentencia;
+        }
     }
 }

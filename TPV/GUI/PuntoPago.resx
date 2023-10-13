@@ -120,6 +120,9 @@
   <metadata name="cantidad.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="idDetalle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="idPedido.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -15606,6 +15609,17 @@
         87c64xRvBhmfEiwXOY2h4ZEKHWD4QhSpuSunD04ohNRw/LM3i5iw/yaLZa/V1oQ8JzPXWxE0JY92iMXL
         l4c0v+9X5gkoiRr5Hp3x0dJfE/pEGU1d/E1hK3KZmzeeSdrRPdJEzGjPhTxSxDhm4tDbQ1rohk/lQmqJ
         UuggXvKz7u3Bzu4fyKyLMpVEIVEAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnCuentas.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAASNJREFUaEPtlkEKwkAMRXsJRe9/E10putGFx9Gk8KEMaqeZZJKBPPiLlgnkkZTO
+        lCRJkiTKnCg3yn5+igX3dKec56cVrpQ35UmJJMO9cE/c24VfrLGjPChc8KIcKd6UPR0oVUSSEUuACDLN
+        EsBTRk0CeMioS4CeMmYSoIeMuQSwlOkmASxkuksATRk3CaAhYyqx5dK4vP9svZtJavmM2aVR2lBLjdml
+        cUuNZJ3EK2gl01UCaMu4SAAtGVcJoPExt9bX1FTROhnUuUyipEUmjASQjJzP1J4zWadfSCazRrdJlGjK
+        uEkADRl3CdAiE0YCSGTCSYAtMmElQI1MeAnwT2YYCfBNZjgJUP6lu/6xtVlOYbhJlEBmaAnAqzTcOiVJ
+        klgyTR9poeiF1A1qAQAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

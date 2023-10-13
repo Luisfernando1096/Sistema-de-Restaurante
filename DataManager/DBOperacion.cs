@@ -10,7 +10,6 @@ namespace DataManager
 {
     public class DBOperacion : DBConexion
     {
-
         public Int32 EjecutarSentencia(String sentencia)
         {
             Int32 filasAfectadas = 0;
@@ -33,6 +32,57 @@ namespace DataManager
             }
             return filasAfectadas;
         }
+
+        public int EjecutarTransaccion(List<string> sentencias)
+        {
+            int filasAfectadas = 0;
+            MySqlCommand comando = new MySqlCommand();
+            MySqlTransaction transaction = null;
+
+            if (base.Conectar())
+            {
+                comando.Connection = base.conexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                try
+                {
+                    transaction = base.conexion.BeginTransaction();
+                    comando.Transaction = transaction;
+
+                    foreach (string sentencia in sentencias)
+                    {
+                        comando.CommandText = sentencia;
+                        filasAfectadas += comando.ExecuteNonQuery();
+                    }
+
+                    if (filasAfectadas >= sentencias.Count)
+                    {
+                        transaction.Commit(); // Confirmar la transacción si todo se ejecuta correctamente
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        filasAfectadas = -1;
+                    }
+
+                    
+                }
+                catch (Exception)
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Rollback(); // Revertir la transacción en caso de error
+                    }
+                    filasAfectadas = -1;
+                }
+                finally
+                {
+                    base.Desconectar();
+                }
+            }
+            return filasAfectadas;
+        }
+
+
 
         public DataTable Consultar(String consulta)
         {
@@ -57,5 +107,37 @@ namespace DataManager
             }
             return Resultado;
         }
+
+        public int? ConsultarScalar(String consulta)
+        {
+            int? resultado = null;
+            MySqlCommand comando = new MySqlCommand();
+
+            if (base.Conectar())
+            {
+                comando.Connection = base.conexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = consulta;
+
+                try
+                {
+                    var scalarResult = comando.ExecuteScalar();
+                    if (scalarResult != null && scalarResult != DBNull.Value)
+                    {
+                        resultado = Convert.ToInt32(scalarResult); // Ejecuta la consulta y obtiene un valor escalar
+                    }
+                }
+                catch (Exception)
+                {
+                    resultado = null;
+                }
+
+                base.Desconectar();
+            }
+
+            return resultado;
+        }
+
+
     }
 }

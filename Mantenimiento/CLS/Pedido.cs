@@ -50,11 +50,13 @@ namespace Mantenimiento.CLS
         public double Credito { get => credito; set => credito = value; }
         public double Btc { get => btc; set => btc = value; }
 
-        public Boolean Insertar()
+        public Boolean Insertar(out int idPedidoInsertado)
         {
             Boolean resultado = false;
+            idPedidoInsertado = -1; // Valor predeterminado en caso de error
             string sentencia;
-            sentencia = @"INSERT INTO pedido(idMesa, idCuenta, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) VALUES(" + idMesa + ", " + idCuenta + ", " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
+            sentencia = @"INSERT INTO pedido(idMesa, idCuenta, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
+                 VALUES(" + idMesa + ", " + idCuenta + ", " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
 
             try
             {
@@ -64,16 +66,20 @@ namespace Mantenimiento.CLS
                 if (filasInsertadas > 0)
                 {
                     resultado = true;
+
+                    // Ahora, obtén el ID del pedido insertado usando una consulta adicional
+                    string consultaId = "SELECT LAST_INSERT_ID();";
+                    idPedidoInsertado = Convert.ToInt32(op.ConsultarScalar(consultaId));
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
 
             return resultado;
         }
+
 
         public Boolean ActualizarFactura()
         {
