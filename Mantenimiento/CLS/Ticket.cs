@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Ticket
+    public class Ticket
     {
         /*DECLARACION DE VARIABLES*/
         int idTicket;

@@ -6,37 +6,39 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Configuracion
+    public class Configuracion
     {
         int idConfiguracion;
-        Boolean controlStock;
-        Boolean incluirPropina;
+        int controlStock;
+        int incluirPropina;
         double propina;
-        Boolean incluirImpuesto;
+        int incluirImpuesto;
         double iva;
         double mesaVIP;
-        Double autorizarDescProp;
+        int autorizarDescProp;
         String printerComanda;
         String printerFactura;
         String printerInformes;
-        Boolean alertaCaja;
-        Boolean multisesion;
+        int alertaCaja;
+        int multisesion;
         int numSesiones;
+        int muchosProductos;
 
         public int IdConfiguracion { get => idConfiguracion; set => idConfiguracion = value; }
-        public bool ControlStock { get => controlStock; set => controlStock = value; }
-        public bool IncluirPropina { get => incluirPropina; set => incluirPropina = value; }
+        public int ControlStock { get => controlStock; set => controlStock = value; }
+        public int IncluirPropina { get => incluirPropina; set => incluirPropina = value; }
         public double Propina { get => propina; set => propina = value; }
-        public bool IncluirImpuesto { get => incluirImpuesto; set => incluirImpuesto = value; }
+        public int IncluirImpuesto { get => incluirImpuesto; set => incluirImpuesto = value; }
         public double Iva { get => iva; set => iva = value; }
         public double MesaVIP { get => mesaVIP; set => mesaVIP = value; }
-        public double AutorizarDescProp { get => autorizarDescProp; set => autorizarDescProp = value; }
+        public int AutorizarDescProp { get => autorizarDescProp; set => autorizarDescProp = value; }
         public string PrinterComanda { get => printerComanda; set => printerComanda = value; }
         public string PrinterFactura { get => printerFactura; set => printerFactura = value; }
-        public bool AlertaCaja { get => alertaCaja; set => alertaCaja = value; }
-        public bool Multisesion { get => multisesion; set => multisesion = value; }
+        public int AlertaCaja { get => alertaCaja; set => alertaCaja = value; }
+        public int Multisesion { get => multisesion; set => multisesion = value; }
         public int NumSesiones { get => numSesiones; set => numSesiones = value; }
         public string PrinterInformes { get => printerInformes; set => printerInformes = value; }
+        public int MuchosProductos { get => muchosProductos; set => muchosProductos = value; }
 
         public Boolean Insertar()
         {
@@ -67,8 +69,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE configuracion SET controlStock = " + controlStock + ", incluirPropina = " + incluirPropina + ", propina = " + propina + ", incluirImpuesto = " + incluirImpuesto + ", iva = " + iva + ", mesaVIP = " + mesaVIP + ", autorizarDescProp = " + autorizarDescProp + ", printerComanda = '" + printerComanda + "', printerFactura = '" + printerFactura + "', printerInformes = '" + printerInformes + "', alertaCaja = " + alertaCaja + ", multisesion = " + multisesion + ", numSesiones = " + numSesiones + "" +
-                "WHERE idConfiguracion = " + idConfiguracion + ";";
+            sentencia = @"UPDATE configuracion SET controlStock = " + controlStock + ", incluirPropina = " + incluirPropina + ", propina = " + propina + ", incluirImpuesto = " + incluirImpuesto + ", iva = " + iva + ", mesaVIP = " + mesaVIP + ", autorizarDescProp = " + autorizarDescProp + ", printerComanda = '" + printerComanda + "', printerFactura = '" + printerFactura + "', printerInformes = '" + printerInformes + "', alertaCaja = " + alertaCaja + ", multisesion = " + multisesion + ", numSesiones = " + numSesiones + ", muchosProductos = " + muchosProductos + " WHERE idConfiguracion = " + idConfiguracion + ";";
 
             try
             {

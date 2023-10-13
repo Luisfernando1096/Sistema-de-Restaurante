@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CFDF850C-9305-47C2-84F5-14036CBD9BBA}</ProjectGuid>
+    <ProjectGuid>{83CA1379-D821-456A-8DF7-7BE76654901A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ServiceExpressDsk</RootNamespace>
-    <AssemblyName>ServiceExpressDsk</AssemblyName>
+    <RootNamespace>Configuraciones</RootNamespace>
+    <AssemblyName>Configuraciones</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,44 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CLS\AppManager.cs" />
-    <Compile Include="GUI\CadenaConexion.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\CadenaConexion.Designer.cs">
-      <DependentUpon>CadenaConexion.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Login.cs">
+    <Compile Include="GUI\ConfiguracionTPV.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Splash.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Splash.Designer.cs">
-      <DependentUpon>Splash.cs</DependentUpon>
+    <Compile Include="GUI\ConfiguracionTPV.Designer.cs">
+      <DependentUpon>ConfiguracionTPV.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GUI\CadenaConexion.resx">
-      <DependentUpon>CadenaConexion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Splash.resx">
-      <DependentUpon>Splash.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\ConfiguracionTPV.resx">
+      <DependentUpon>ConfiguracionTPV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,49 +86,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Compras\Compras.csproj">
-      <Project>{daaabf86-c50d-42b6-824a-7e6eef455a86}</Project>
-      <Name>Compras</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Configuraciones\Configuraciones.csproj">
-      <Project>{83ca1379-d821-456a-8df7-7be76654901a}</Project>
-      <Name>Configuraciones</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConfiguracionManager\ConfiguracionManager.csproj">
-      <Project>{ec3f4bba-3f7f-432d-ac18-b2222adc87ab}</Project>
-      <Name>ConfiguracionManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Personal\Personal.csproj">
-      <Project>{df452496-63e3-4aa2-8e9a-09517b20fc50}</Project>
-      <Name>Personal</Name>
+    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
+      <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
+      <Name>Mantenimiento</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Salones\Salones.csproj">
-      <Project>{435e58e5-86e9-4574-961d-899f8a47cb27}</Project>
-      <Name>Salones</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Finanzas\Finanzas.csproj">
-      <Project>{80e2accc-0b6b-491b-a4c1-e43f6c5996e1}</Project>
-      <Name>Finanzas</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ingredientes y Productos\Ingredientes y Productos.csproj">
-      <Project>{5a6cd6ab-96fd-4bb3-a348-d1e87add4f19}</Project>
-      <Name>Ingredientes y Productos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SessionManager\SessionManager.csproj">
-      <Project>{cd0bf5a6-d3b7-493c-8cc7-3368b5e6c30c}</Project>
-      <Name>SessionManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TPV\TPV.csproj">
-      <Project>{ec2deb8e-2e16-4c46-86e1-25b77483bdb6}</Project>
-      <Name>TPV</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Extras\configuracion.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

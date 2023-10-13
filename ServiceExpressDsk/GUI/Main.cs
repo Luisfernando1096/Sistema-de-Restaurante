@@ -372,6 +372,7 @@ namespace ServiceExpressDsk.GUI
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
             Ingredientes_y_Productos.GUI.AjusteStock f = new Ingredientes_y_Productos.GUI.AjusteStock();
+            f.tabControl1.SelectedIndex = 2;
             f.ShowDialog();
         }
 
@@ -454,6 +455,27 @@ namespace ServiceExpressDsk.GUI
         private void toolStripButton16_Click(object sender, EventArgs e)
         {
             Finanzas.GUI.CierreCaja f = new Finanzas.GUI.CierreCaja();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton35_Click(object sender, EventArgs e)
+        {
+            Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV();
+            f.tabControl1.SelectedIndex = 0;
+            f.ShowDialog();
+        }
+
+        private void toolStripButton36_Click(object sender, EventArgs e)
+        {
+            Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV();
+            f.tabControl1.SelectedIndex = 1;
+            f.ShowDialog();
+        }
+
+        private void toolStripButton37_Click(object sender, EventArgs e)
+        {
+            Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV();
+            f.tabControl1.SelectedIndex = 2;
             f.ShowDialog();
         }
     }

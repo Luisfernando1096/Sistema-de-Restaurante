@@ -254,6 +254,40 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable Ticket(int idTicket)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT * FROM ticket WHERE IdTicket = " + idTicket + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable Empresa(int idEmpresa)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT idEmpresa, nombreEmpresa, slogan, direccion, telefono, logo, firma, sello, saludo, NRC, NIT, numAutorizacion FROM empresa WHERE idEmpresa = " + idEmpresa + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
 
         public static DataTable Familias()
         {
