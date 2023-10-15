@@ -671,11 +671,14 @@ namespace DataManager
                                         pro.nombre, 
                                         pd.subTotal, 
                                         pe.fecha,
+                                        f.grupoPrinter as grupo,
                                         pd.idDetalle
                                     FROM 
                                         pedido_detalle pd
                                     JOIN 
                                         producto pro ON pd.idProducto = pro.idProducto
+                                    JOIN
+										familia f ON pro.idFamilia = f.idFamilia
                                     JOIN 
                                         (SELECT pe.idPedido, pe.idMesa, pe.fecha
                                          FROM pedido pe
