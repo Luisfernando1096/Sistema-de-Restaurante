@@ -11,26 +11,23 @@ namespace Configuraciones.GUI
         private String SeleccionarLogo = string.Empty;
         private String SeleccionarFirma = string.Empty;
         private String SeleccionarSello = string.Empty;
+        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         private void CargarDatosConfig()
         {
             try
             {
-                DataTable configuracionTable = DataManager.DBConsultas.Configuraciones();
 
-                if (configuracionTable.Rows.Count > 0)
+                if (oConfiguracion != null)
                 {
-                    DataRow configuracionRow = configuracionTable.Rows[0];
-
                     // Asigna valores a los CheckBoxes
-                    checkActivarInventario.Checked = Convert.ToBoolean(configuracionRow["controlStock"]);
-                    checkActivarPropina.Checked = Convert.ToBoolean(configuracionRow["incluirPropina"]);
-                    checkActivarIva.Checked = Convert.ToBoolean(configuracionRow["incluirImpuesto"]);
-                    checkActivarIVip.Checked = Convert.ToBoolean(configuracionRow["mesaVIP"]);
-                    checkActivarAlerta.Checked = Convert.ToBoolean(configuracionRow["alertaCaja"]);
-                    checkMultiSe.Checked = Convert.ToBoolean(configuracionRow["multisesion"]);
-                    checkMuchosPro.Checked = Convert.ToBoolean(configuracionRow["muchosProductos"]);
-                    checkAutorizacion.Checked = Convert.ToBoolean(configuracionRow["autorizarDescProp"]);
-                    if (Convert.ToDouble(configuracionRow["mesaVip"]) != 0)
+                    checkActivarInventario.Checked = Boolean.Parse(oConfiguracion.ControlStock);
+                    checkActivarPropina.Checked = Boolean.Parse(oConfiguracion.IncluirPropina);
+                    checkActivarIva.Checked = Boolean.Parse(oConfiguracion.IncluirImpuesto);
+                    checkActivarAlerta.Checked = Boolean.Parse(oConfiguracion.AlertaCaja);
+                    checkMultiSe.Checked = Boolean.Parse(oConfiguracion.Multisesion);
+                    checkMuchosPro.Checked = Boolean.Parse(oConfiguracion.MuchosProductos);
+                    checkAutorizacion.Checked = Boolean.Parse(oConfiguracion.AutorizarDescProp);
+                    if (Boolean.Parse(oConfiguracion.IncluirImpuesto))
                     {
                         checkActivarIVip.Checked = true;
                     }
@@ -39,15 +36,15 @@ namespace Configuraciones.GUI
                         checkActivarIVip.Checked = false;
                     }
 
-                    txtPropinas.Text = configuracionRow["propina"].ToString();
-                    txtImpuesto.Text = configuracionRow["iva"].ToString();
-                    txtImpuestoVIP.Text = configuracionRow["mesaVIP"].ToString();
-                    txtMultiSe.Text = configuracionRow["numSesiones"].ToString();
+                    txtPropinas.Text = oConfiguracion.Propina.ToString();
+                    txtImpuesto.Text = oConfiguracion.Iva.ToString();
+                    txtImpuestoVIP.Text = oConfiguracion.MesaVIP.ToString();
+                    txtMultiSe.Text = oConfiguracion.NumSesiones.ToString();
 
                     // Configura los ComboBox para mostrar la opción que coincide con el valor del campo en la base de datos
-                    cmbComandas.SelectedIndex = cmbComandas.FindStringExact(configuracionRow["printerComanda"].ToString());
-                    cmbFacturas.SelectedIndex = cmbFacturas.FindStringExact(configuracionRow["printerFactura"].ToString());
-                    cmbInformes.SelectedIndex = cmbInformes.FindStringExact(configuracionRow["printerInformes"].ToString());
+                    cmbComandas.SelectedIndex = cmbComandas.FindStringExact((oConfiguracion.PrinterComanda).ToString());
+                    cmbFacturas.SelectedIndex = cmbFacturas.FindStringExact((oConfiguracion.PrinterFactura).ToString());
+                    cmbInformes.SelectedIndex = cmbInformes.FindStringExact((oConfiguracion.PrinterInformes).ToString());
 
                 }
                 else
@@ -259,25 +256,24 @@ namespace Configuraciones.GUI
                 if (checkActivarPropina.Checked)
                 {
                     config.IncluirPropina = 1;
-                    config.Propina = double.Parse(txtPropinas.Text);
                 }
                 else
                 {
                     config.IncluirPropina = 0;
-                    config.Propina = 0;
                 }
+                config.Propina = double.Parse(txtPropinas.Text);
 
                 //Iva
                 if (checkActivarIva.Checked)
                 {
                     config.IncluirImpuesto = 1;
-                    config.Iva = double.Parse(txtImpuesto.Text);
                 }
                 else
                 {
                     config.IncluirImpuesto = 0;
-                    config.Iva = 0;
                 }
+                config.Iva = double.Parse(txtImpuesto.Text);
+
                 //Mesa Vip
                 if (checkActivarIVip.Checked)
                 {
@@ -285,19 +281,20 @@ namespace Configuraciones.GUI
                 }
                 else
                 {
-                    config.MesaVIP = 0;
+                    config.MesaVIP = double.Parse(txtImpuestoVIP.Text);
                 }
+                
+
                 //Multisesiones
                 if (checkMultiSe.Checked)
                 {
                     config.Multisesion = 1;
-                    config.NumSesiones = int.Parse(txtMultiSe.Text);
                 }
                 else
                 {
                     config.Multisesion = 0;
-                    config.NumSesiones = 0;
                 }
+                config.NumSesiones = int.Parse(txtMultiSe.Text);
                 if (checkActivarInventario.Checked)
                 {
                     config.ControlStock = 1;
@@ -306,6 +303,7 @@ namespace Configuraciones.GUI
                 {
                     config.ControlStock = 0;
                 }
+
                 if (checkActivarAlerta.Checked)
                 {
                     config.AlertaCaja = 1;
@@ -349,6 +347,7 @@ namespace Configuraciones.GUI
                 if (config.Actualizar())
                 {
                     MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    oConfiguracion.ObtenerConfiguracion();
                     CargarDatosConfig();
                     this.Focus();
 
