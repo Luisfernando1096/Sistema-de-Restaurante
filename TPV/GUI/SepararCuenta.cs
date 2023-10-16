@@ -400,6 +400,12 @@ namespace TPV.GUI
                             pedidoDetalle.IdDetalle = Int32.Parse(siguiente["idDetalleSiguiente"].ToString());
                             pedidoDetalle.Eliminar();
                         }
+                        //Vamos a actualizar el total del pedido
+                        Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido();
+                        pedido2.IdPedido = idPedido;
+                        pedido2.IdMesa = idMesa;
+                        double total = CalcularTotal(dgvActual, "subTotal");
+                        pedido2.ActualizarTotal(total);
                     }
 
                 }
@@ -450,6 +456,9 @@ namespace TPV.GUI
                         //pedidoDetalle2.Fecha = null;
                         pedidoDetalle2.Insertar();
                     }
+                    double total = CalcularTotal(dgvSiguiente, "subTotalSiguiente");
+                    pedido.IdPedido = idPedidoInsertado;
+                    pedido.ActualizarTotal(total);
                 }
                 else
                 {
@@ -461,6 +470,22 @@ namespace TPV.GUI
             {
                 MessageBox.Show("No hay nada que separar");
             }
+        }
+
+        private double CalcularTotal(DataGridView dgv, String name)
+        {
+            double total = 0;
+            if (dgv.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if (row.Cells[name].Value != null && row.Cells[name].Value != DBNull.Value)
+                    {
+                        total += Convert.ToDouble(row.Cells[name].Value);
+                    }
+                }
+            }
+            return total;
         }
     }
 }
