@@ -147,13 +147,14 @@ namespace TPV.GUI
           
             DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
             ComandaGestion f = new ComandaGestion(this);
+            f.borrarData = false;
 
             if (productoEnMesas.Rows.Count > 0)
             {
                 //Asignamos datos al futuro formulario a abrir.
                 f.CargarProductosPorMesa(idMesa);
                 f.CargarPedidosEnMesa(idMesa);
-                f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+
                 //Agregando datos mesero y cliente si los hay
                 DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
                 if (!pedido.Rows[0]["nombres"].ToString().Equals(""))

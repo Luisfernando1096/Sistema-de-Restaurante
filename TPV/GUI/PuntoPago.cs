@@ -136,6 +136,21 @@ namespace TPV.GUI
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (idPedidoSiguiente > 0 || !lblTicket.Text.Equals(""))
+            {
+                if (comandaGestion.datos.DataSource != null && comandaGestion.borrarData)
+                {
+                    comandaGestion.datos.DataSource = null;
+                }
+                else
+                {
+                    comandaGestion.CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    comandaGestion.lblTicket.Text = lblTicket.Text;
+                    comandaGestion.lblMesa.Text = lblMesa.Text;
+                    comandaGestion.lblMesa.Tag = lblMesa.Tag.ToString();
+                }
+
+            }
             Close();
         }
 
@@ -867,34 +882,37 @@ namespace TPV.GUI
             pedidosSeparados.ShowDialog();
             idPedidoSiguiente = pedidosSeparados.idPedido;
 
-            CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
-            lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
+            if (idPedidoSiguiente > 0)
+            {
+                CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
+                lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
 
-            DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
-            //Agregando datos mesero y cliente si los hay
-            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
-            {
-                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text));
+                //Agregando datos mesero y cliente si los hay
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                {
+                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                }
+                else
+                {
+                    lblMesero.Text = "";
+                    lblMesero.Tag = "";
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                }
+                else
+                {
+                    lblCliente.Text = "";
+                    lblCliente.Tag = "";
+                }
+                lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
+                lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
+                CalcularTodo();
             }
-            else
-            {
-                lblMesero.Text = "";
-                lblMesero.Tag = "";
-            }
-            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-            {
-                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-            }
-            else
-            {
-                lblCliente.Text = "";
-                lblCliente.Tag = "";
-            }
-            lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
-            lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
-            CalcularTodo();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace TPV.GUI
         PuntoVenta punto_venta;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
-        BindingSource datos = new BindingSource();
+        public BindingSource datos = new BindingSource();
         DataTable datosEnMesa = new DataTable();
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
@@ -24,6 +24,7 @@ namespace TPV.GUI
         String idMesa = "0";
         public bool cerrarSesion;
         public bool tpv;
+        public bool borrarData;
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
@@ -52,6 +53,27 @@ namespace TPV.GUI
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
 
+                if(dgvDatos.Rows.Count > 0)
+                {
+                    lblTicket.Text = dgvDatos.Rows[0].Cells["idPedido"].Value.ToString();//Accedemos a la primera posicion de la tabla
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void CargarProductosPorMesayIdPedido(string idMesa, int idPedido)
+        {
+            try
+            {
+                datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
+                dgvDatos.DataSource = datos;
+                dgvDatos.AutoGenerateColumns = false;
+
             }
             catch (Exception)
             {
@@ -68,6 +90,10 @@ namespace TPV.GUI
                 if (datosEnMesa.Rows.Count > 1)
                 {
                     btnCuentas.Visible = true;
+                }
+                else
+                {
+                    btnCuentas.Visible = false;
                 }
 
             }
@@ -112,7 +138,11 @@ namespace TPV.GUI
                 btnFamilia.Click += BotonFamilia_Click;
                 flpFamilias.Controls.Add(btnFamilia);
             }
-            idMesa = lblMesa.Tag.ToString();
+            if (lblMesa.Tag != null)
+            {
+                idMesa = lblMesa.Tag.ToString();
+            }
+            borrarData = false;
         }
 
         private void BotonFamilia_Click(object sender, EventArgs e)
@@ -363,83 +393,53 @@ namespace TPV.GUI
             PuntoPago f = new PuntoPago(this);
 
             //Si comanda gestion va vacia
-            if(lblMesa.Tag != null)
+            if(lblMesa.Tag != null || !lblTicket.Text.Equals(""))
             {
-                if (idPedidoSiguiente != 0)
+                if (idPedidoSiguiente != 0 || !lblTicket.Text.Equals(""))
                 {
-                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedidoSiguiente);
-                    if (lblMesa.Tag != null)
+                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, Int32.Parse(lblTicket.Text));
+                    if (productoEnMesas.Rows.Count > 0)
                     {
-                        if (productoEnMesas.Rows.Count > 0)
+                        if (lblMesa.Tag != null)
                         {
-                            f.CargarProductosPorMesayIdPedido(idMesa, idPedidoSiguiente);
-                            f.CargarPedidosEnMesa(idMesa);
-                            f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                            if (productoEnMesas.Rows.Count > 0)
+                            {
+                                f.CargarProductosPorMesayIdPedido(idMesa, Int32.Parse(lblTicket.Text));
+                                f.CargarPedidosEnMesa(idMesa);
+                                f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
 
-                            DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
-                            //Agregando datos mesero y cliente si los hay
-                            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
-                            {
-                                f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                                f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text));
+                                //Agregando datos mesero y cliente si los hay
+                                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                                {
+                                    f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                                    f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                                }
+                                else
+                                {
+                                    f.lblMesero.Text = "";
+                                    f.lblMesero.Tag = "";
+                                }
+                                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                                {
+                                    f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                                    f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                                }
+                                else
+                                {
+                                    f.lblCliente.Text = "";
+                                    f.lblCliente.Tag = "";
+                                }
                             }
-                            else
-                            {
-                                f.lblMesero.Text = "";
-                                f.lblMesero.Tag = "";
-                            }
-                            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                            {
-                                f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                                f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                            }
-                            else
-                            {
-                                f.lblCliente.Text = "";
-                                f.lblCliente.Tag = "";
-                            }
+                            f.lblMesa.Text = lblMesa.Text.ToString();
+                            f.lblMesa.Tag = lblMesa.Tag.ToString();
                         }
-                        f.lblMesa.Text = lblMesa.Text.ToString();
-                        f.lblMesa.Tag = lblMesa.Tag.ToString();
                     }
                 }
                 else
                 {
-                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
-                    if (lblMesa.Tag != null)
-                    {
-                        if (productoEnMesas.Rows.Count > 0)
-                        {
-                            f.CargarProductosPorMesa(idMesa);
-                            f.CargarPedidosEnMesa(idMesa);
-                            f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-
-                            DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));
-                            //Agregando datos mesero y cliente si los hay
-                            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
-                            {
-                                f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                                f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
-                            }
-                            else
-                            {
-                                f.lblMesero.Text = "";
-                                f.lblMesero.Tag = "";
-                            }
-                            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                            {
-                                f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                                f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                            }
-                            else
-                            {
-                                f.lblCliente.Text = "";
-                                f.lblCliente.Tag = "";
-                            }
-                        }
-                        f.lblMesa.Text = lblMesa.Text.ToString();
-                        f.lblMesa.Tag = lblMesa.Tag.ToString();
-                    }
+                    f.lblMesa.Text = lblMesa.Text.ToString();
+                    f.lblMesa.Tag = lblMesa.Tag.ToString();
                 }
             }
             //Hacer algo aqui al cerrar sesion
@@ -457,7 +457,6 @@ namespace TPV.GUI
                 ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()));
                 lblMesa.Text = f.lblMesa.Text.ToString();
                 lblMesa.Tag = f.lblMesa.Tag.ToString();
-                lblTicket.Text = f.lblTicket.Text;
             }
             if (!cerrarSesion)
             {
@@ -514,14 +513,28 @@ namespace TPV.GUI
                 if(pedidoDetalle.Cantidad != 0)
                 {
                     pedidoDetalle.ActualizarCompra();
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
                 }
                 else
                 {
                     //Se eliminara el producto
                     pedidoDetalle.Eliminar();
+
+                    if (dgvDatos.Rows.Count == 1)
+                    {
+                        Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                        pedido.IdPedido = Int32.Parse(lblTicket.Text);
+                        pedido.Eliminar();
+                        CargarProductosPorMesa(lblMesa.Tag.ToString());
+
+                    }
+                    else
+                    {
+                        CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    }
                 }
 
-                CargarProductosPorMesa(lblMesa.Tag.ToString());
+                CargarPedidosEnMesa(lblMesa.Tag.ToString());
             }
 
             
@@ -626,6 +639,7 @@ namespace TPV.GUI
             pedidosSeparados.ShowDialog();
             idPedidoSiguiente = pedidosSeparados.idPedido;
 
+
             if (idPedidoSiguiente > 0)
             {
                 CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
@@ -656,20 +670,5 @@ namespace TPV.GUI
             }
         }
 
-        private void CargarProductosPorMesayIdPedido(string idMesa, int idPedido)
-        {
-            try
-            {
-                datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
-                dgvDatos.DataSource = datos;
-                dgvDatos.AutoGenerateColumns = false;
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
 }

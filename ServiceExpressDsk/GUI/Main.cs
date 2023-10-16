@@ -229,59 +229,38 @@ namespace ServiceExpressDsk.GUI
             TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
             f.Hide();
             TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f);
+            f2.borrarData = true;
             f2.Hide();
             TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago(f2);
             f3.ShowDialog();
 
             if (f3.lblMesa.Tag != null)
             {
-                if (f3.idPedidoSiguiente != 0)
+
+                if (!f3.lblTicket.Text.Equals("") && f2.datos == null)
                 {
-                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(f3.lblMesa.Tag.ToString(), f3.idPedidoSiguiente);
+                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
 
                     if (productoEnMesas.Rows.Count > 0)
                     {
                         idPedidoSiguiente = f3.idPedidoSiguiente;
+                        DataTable pedido;
                         //Aqui cargamos los datos en datagrid 
-                        f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
-                        f2.CargarPedidosEnMesa(f3.lblMesa.Tag.ToString());
-                        f2.lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
-                        DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
-                        if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                        if (idPedidoSiguiente > 0)
                         {
-                            f2.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                            f2.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                            f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), idPedidoSiguiente);
+                            f2.lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
+                            pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
                         }
                         else
                         {
-                            f2.lblMesero.Text = "";
-                            f2.lblMesero.Tag = "";
+                            f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
+                            f2.lblTicket.Text = f3.lblTicket.Text;//Accedemos a la primera posicion de la tabla
+                            pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f3.lblTicket.Text));
                         }
-                        if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                        {
-                            f2.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                            f2.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                        }
-                        else
-                        {
-                            f2.lblCliente.Text = "";
-                            f2.lblCliente.Tag = "";
-                        }
-                    }
-                    f2.lblMesa.Text = f3.lblMesa.Text.ToString();
-                    f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
-                }
-                else
-                {
-                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(f3.lblMesa.Tag.ToString());
 
-                    if (productoEnMesas.Rows.Count > 0)
-                    {
-                        //Aqui cargamos los datos en datagrid 
-                        f2.CargarProductosPorMesa(f3.lblMesa.Tag.ToString());
                         f2.CargarPedidosEnMesa(f3.lblMesa.Tag.ToString());
-                        f2.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
-                        DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
+
                         if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                         {
                             f2.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
@@ -306,6 +285,7 @@ namespace ServiceExpressDsk.GUI
                     f2.lblMesa.Text = f3.lblMesa.Text.ToString();
                     f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
                 }
+                
 
             }
 
@@ -334,8 +314,15 @@ namespace ServiceExpressDsk.GUI
                     if (!f.admin)
                     {
                         f.cambiarMesa = f2.cambiarMesa;
-                        f.idMesaAnterior = Int32.Parse(f2.lblMesa.Tag.ToString());
-                        f.idPedidoCambioMesa = int.Parse(f2.lblTicket.Text);
+                        if(f2.lblMesa.Tag != null)
+                        {
+                            f.idMesaAnterior = Int32.Parse(f2.lblMesa.Tag.ToString());
+                            if (!f2.lblTicket.Text.Equals(""))
+                            {
+                                f.idPedidoCambioMesa = int.Parse(f2.lblTicket.Text);
+                            }
+                        }
+                        
                         f.ShowDialog();
                         cerrar = f.cerrarSesion;
                     }
