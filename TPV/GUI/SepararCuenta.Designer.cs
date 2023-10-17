@@ -51,6 +51,11 @@ namespace TPV.GUI
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grupoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDetalleSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +65,11 @@ namespace TPV.GUI
             this.fechaSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subTotalSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cocinandoSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreMeseroSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombresSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesaSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salonSiguiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActual)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiguiente)).BeginInit();
             this.SuspendLayout();
@@ -104,7 +114,12 @@ namespace TPV.GUI
             this.fecha,
             this.nombre,
             this.subTotal,
-            this.grupo});
+            this.grupo,
+            this.cocinando,
+            this.nombreMesero,
+            this.nombres,
+            this.mesa,
+            this.salon});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -143,7 +158,12 @@ namespace TPV.GUI
             this.precioSiguiente,
             this.fechaSiguiente,
             this.nombreSiguiente,
-            this.subTotalSiguiente});
+            this.subTotalSiguiente,
+            this.cocinandoSiguiente,
+            this.nombreMeseroSiguiente,
+            this.nombresSiguiente,
+            this.mesaSiguiente,
+            this.salonSiguiente});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -283,6 +303,46 @@ namespace TPV.GUI
             this.grupo.ReadOnly = true;
             this.grupo.Visible = false;
             // 
+            // cocinando
+            // 
+            this.cocinando.DataPropertyName = "cocinando";
+            this.cocinando.HeaderText = "Cocinando";
+            this.cocinando.Name = "cocinando";
+            this.cocinando.ReadOnly = true;
+            this.cocinando.Visible = false;
+            // 
+            // nombreMesero
+            // 
+            this.nombreMesero.DataPropertyName = "nombreMesero";
+            this.nombreMesero.HeaderText = "Mesero";
+            this.nombreMesero.Name = "nombreMesero";
+            this.nombreMesero.ReadOnly = true;
+            this.nombreMesero.Visible = false;
+            // 
+            // nombres
+            // 
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Cliente";
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            this.nombres.Visible = false;
+            // 
+            // mesa
+            // 
+            this.mesa.DataPropertyName = "mesa";
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            this.mesa.Visible = false;
+            // 
+            // salon
+            // 
+            this.salon.DataPropertyName = "salon";
+            this.salon.HeaderText = "Salon";
+            this.salon.Name = "salon";
+            this.salon.ReadOnly = true;
+            this.salon.Visible = false;
+            // 
             // cantidadSiguiente
             // 
             this.cantidadSiguiente.DataPropertyName = "cantidadSiguiente";
@@ -353,6 +413,46 @@ namespace TPV.GUI
             this.subTotalSiguiente.Name = "subTotalSiguiente";
             this.subTotalSiguiente.ReadOnly = true;
             // 
+            // cocinandoSiguiente
+            // 
+            this.cocinandoSiguiente.DataPropertyName = "cocinandoSiguiente";
+            this.cocinandoSiguiente.HeaderText = "Cocinando";
+            this.cocinandoSiguiente.Name = "cocinandoSiguiente";
+            this.cocinandoSiguiente.ReadOnly = true;
+            this.cocinandoSiguiente.Visible = false;
+            // 
+            // nombreMeseroSiguiente
+            // 
+            this.nombreMeseroSiguiente.DataPropertyName = "nombreMeseroSiguiente";
+            this.nombreMeseroSiguiente.HeaderText = "Mesero";
+            this.nombreMeseroSiguiente.Name = "nombreMeseroSiguiente";
+            this.nombreMeseroSiguiente.ReadOnly = true;
+            this.nombreMeseroSiguiente.Visible = false;
+            // 
+            // nombresSiguiente
+            // 
+            this.nombresSiguiente.DataPropertyName = "nombresSiguiente";
+            this.nombresSiguiente.HeaderText = "Cliente";
+            this.nombresSiguiente.Name = "nombresSiguiente";
+            this.nombresSiguiente.ReadOnly = true;
+            this.nombresSiguiente.Visible = false;
+            // 
+            // mesaSiguiente
+            // 
+            this.mesaSiguiente.DataPropertyName = "mesaSiguiente";
+            this.mesaSiguiente.HeaderText = "Mesa";
+            this.mesaSiguiente.Name = "mesaSiguiente";
+            this.mesaSiguiente.ReadOnly = true;
+            this.mesaSiguiente.Visible = false;
+            // 
+            // salonSiguiente
+            // 
+            this.salonSiguiente.DataPropertyName = "salonSiguiente";
+            this.salonSiguiente.HeaderText = "Salon";
+            this.salonSiguiente.Name = "salonSiguiente";
+            this.salonSiguiente.ReadOnly = true;
+            this.salonSiguiente.Visible = false;
+            // 
             // SepararCuenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +495,11 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn grupo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cocinando;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreMesero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salon;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn grupoSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDetalleSiguiente;
@@ -404,5 +509,10 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreSiguiente;
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotalSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cocinandoSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreMeseroSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombresSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mesaSiguiente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salonSiguiente;
     }
 }

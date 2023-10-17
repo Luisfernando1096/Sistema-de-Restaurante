@@ -418,49 +418,6 @@ namespace DataManager
             }
         }
 
-        public static DataTable ProductosEnMesa(string idMesa)
-        {
-            try
-            {
-                DataTable resultado = new DataTable();
-                String sentencia = @"SELECT 
-                                        pd.idPedido, 
-                                        pd.idProducto, 
-                                        pd.cantidad, 
-                                        pd.precio, 
-                                        pro.nombre, 
-                                        pd.subTotal, 
-                                        pe.fecha,
-                                        f.grupoPrinter as grupo,
-                                        pd.idDetalle
-                                    FROM 
-                                        pedido_detalle pd
-                                    JOIN 
-                                        producto pro ON pd.idProducto = pro.idProducto
-                                    JOIN
-										familia f ON pro.idFamilia = f.idFamilia
-                                    JOIN 
-                                        (SELECT pe.idPedido, pe.idMesa, pe.fecha
-                                         FROM pedido pe
-                                         JOIN mesa m ON pe.idMesa = m.idMesa
-                                         WHERE pe.idMesa = " + idMesa + @" 
-                                           AND pe.cancelado = 0 
-                                           AND m.disponible = 0
-                                         ORDER BY pe.fecha ASC
-                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
-                                    ORDER BY 
-                                        pd.horaPedido DESC;";
-                DBOperacion operacion = new DBOperacion();
-
-                resultado = operacion.Consultar(sentencia);
-                return resultado;
-            }
-            catch (Exception)
-            {
-                return new DataTable();
-                throw;
-            }
-        }
         public static DataTable VerProductos()
         {
             try
@@ -663,34 +620,98 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT 
-                                        pd.idPedido, 
-                                        pd.idProducto, 
-                                        pd.cantidad, 
-                                        pd.precio, 
-                                        pro.nombre, 
-                                        pd.subTotal, 
-                                        pe.fecha,
-                                        f.grupoPrinter as grupo,
-                                        pd.idDetalle
-                                    FROM 
-                                        pedido_detalle pd
+                String sentencia;
+
+                if (idPedido > 0)
+                {
+                    sentencia = @"SELECT 
+                                    pd.idPedido, 
+                                    pd.idProducto, 
+                                    pd.cantidad, 
+                                    pd.precio, 
+                                    pro.nombre, 
+                                    pd.subTotal, 
+                                    pe.fecha,
+                                    f.grupoPrinter as grupo,
+                                    pd.idDetalle,
+                                    pd.cocinando,
+                                    pe.nombre as nombreMesero,
+                                    pe.nombres,
+                                    pe.mesa,
+                                    pe.salon
+                                        
+                                FROM 
+                                    pedido_detalle pd
+                                JOIN 
+                                    producto pro ON pd.idProducto = pro.idProducto
+                                JOIN
+									familia f ON pro.idFamilia = f.idFamilia
+                                JOIN 
+                                    (SELECT pe.idPedido, pe.idMesa, pe.fecha, em.nombres,
+                                    cli.nombre, m.nombre as mesa, s.nombre as salon
+									FROM pedido pe
+									JOIN 
+										mesa m ON pe.idMesa = m.idMesa
+									JOIN 
+                                    salon s ON s.idSalon = m.idSalon
+									LEFT JOIN
+										empleado em ON em.idEmpleado = pe.idMesero
+									LEFT JOIN
+										cliente cli ON cli.idCliente = pe.idCliente
+										WHERE pe.idMesa = " + idMesa + @"
+                                        AND pe.idPedido = " + idPedido + @"
+										AND pe.cancelado = 0 
+										AND m.disponible = 0
+                                        ORDER BY pe.fecha ASC
+                                        LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
+                                ORDER BY 
+                                    pd.horaPedido DESC;";
+                }
+                else
+                {
+                    sentencia = @"SELECT 
+                                    pd.idPedido, 
+                                    pd.idProducto, 
+                                    pd.cantidad, 
+                                    pd.precio, 
+                                    pro.nombre, 
+                                    pd.subTotal, 
+                                    pe.fecha,
+                                    f.grupoPrinter as grupo,
+                                    pd.idDetalle,
+                                    pd.cocinando,
+                                    pe.nombre as nombreMesero,
+                                    pe.nombres,
+                                    pe.mesa,
+                                    pe.salon
+                                        
+                                FROM 
+                                    pedido_detalle pd
+                                JOIN 
+                                    producto pro ON pd.idProducto = pro.idProducto
+                                JOIN
+									familia f ON pro.idFamilia = f.idFamilia
+                                JOIN 
+                                    (SELECT pe.idPedido, pe.idMesa, pe.fecha, em.nombres,
+                                    cli.nombre, m.nombre as mesa, s.nombre as salon
+									FROM pedido pe
+									JOIN 
+										mesa m ON pe.idMesa = m.idMesa
                                     JOIN 
-                                        producto pro ON pd.idProducto = pro.idProducto
-                                    JOIN
-										familia f ON pro.idFamilia = f.idFamilia
-                                    JOIN 
-                                        (SELECT pe.idPedido, pe.idMesa, pe.fecha
-                                         FROM pedido pe
-                                         JOIN mesa m ON pe.idMesa = m.idMesa
-                                         WHERE pe.idMesa = " + idMesa + @"
-                                         AND pe.idPedido = " + idPedido + @"
-                                           AND pe.cancelado = 0 
-                                           AND m.disponible = 0
-                                         ORDER BY pe.fecha ASC
-                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
-                                    ORDER BY 
-                                        pd.horaPedido DESC;";
+                                    salon s ON s.idSalon = m.idSalon
+									LEFT JOIN
+										empleado em ON em.idEmpleado = pe.idMesero
+									LEFT JOIN
+										cliente cli ON cli.idCliente = pe.idCliente
+										WHERE pe.idMesa = " + idMesa + @"
+										AND pe.cancelado = 0 
+										AND m.disponible = 0
+                                        ORDER BY pe.fecha ASC
+                                        LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
+                                ORDER BY 
+                                    pd.horaPedido DESC;";
+                }
+
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

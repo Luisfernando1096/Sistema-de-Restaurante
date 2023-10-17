@@ -145,7 +145,7 @@ namespace TPV.GUI
 
             }
           
-            DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesa(idMesa);
+            DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, 0);
             ComandaGestion f = new ComandaGestion(this);
             f.borrarData = false;
 

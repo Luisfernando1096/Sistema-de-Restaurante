@@ -43,15 +43,6 @@ namespace TPV.GUI
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
             this.btnFactura = new System.Windows.Forms.Button();
@@ -109,6 +100,20 @@ namespace TPV.GUI
             this.label8 = new System.Windows.Forms.Label();
             this.lblCambio = new System.Windows.Forms.Label();
             this.btnCuentas = new System.Windows.Forms.Button();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -205,12 +210,17 @@ namespace TPV.GUI
             this.cantidad,
             this.idDetalle,
             this.idPedido,
-            this.grupo,
             this.idProducto,
             this.precio,
             this.fecha,
             this.nombre,
-            this.subTotal});
+            this.subTotal,
+            this.grupo,
+            this.cocinando,
+            this.nombreMesero,
+            this.nombres,
+            this.mesa,
+            this.salon});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -228,68 +238,6 @@ namespace TPV.GUI
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(375, 393);
             this.dgvDatos.TabIndex = 15;
-            // 
-            // cantidad
-            // 
-            this.cantidad.DataPropertyName = "cantidad";
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // idDetalle
-            // 
-            this.idDetalle.DataPropertyName = "idDetalle";
-            this.idDetalle.HeaderText = "ID Detalle";
-            this.idDetalle.Name = "idDetalle";
-            this.idDetalle.ReadOnly = true;
-            this.idDetalle.Visible = false;
-            // 
-            // idPedido
-            // 
-            this.idPedido.DataPropertyName = "idPedido";
-            this.idPedido.HeaderText = "ID";
-            this.idPedido.Name = "idPedido";
-            this.idPedido.ReadOnly = true;
-            this.idPedido.Visible = false;
-            // 
-            // idProducto
-            // 
-            this.idProducto.DataPropertyName = "idProducto";
-            this.idProducto.HeaderText = "Id Producto";
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            this.precio.Visible = false;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
-            this.fecha.Visible = false;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Producto";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // subTotal
-            // 
-            this.subTotal.DataPropertyName = "subTotal";
-            this.subTotal.HeaderText = "Sub Total";
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
             // 
             // flpAcciones
             // 
@@ -1000,20 +948,28 @@ namespace TPV.GUI
             this.lblCambio.Tag = "0";
             this.lblCambio.Text = "$0.00";
             // 
+            // btnCuentas
+            // 
+            this.btnCuentas.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnCuentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCuentas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCuentas.Image = ((System.Drawing.Image)(resources.GetObject("btnCuentas.Image")));
+            this.btnCuentas.Location = new System.Drawing.Point(383, 77);
+            this.btnCuentas.Name = "btnCuentas";
+            this.btnCuentas.Size = new System.Drawing.Size(133, 57);
+            this.btnCuentas.TabIndex = 62;
+            this.btnCuentas.Text = "Cuentas";
+            this.btnCuentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCuentas.UseVisualStyleBackColor = false;
+            this.btnCuentas.Visible = false;
+            this.btnCuentas.Click += new System.EventHandler(this.btnCuentas_Click);
+            // 
             // cantidad
             // 
             this.cantidad.DataPropertyName = "cantidad";
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.Name = "cantidad";
             this.cantidad.ReadOnly = true;
-            // 
-            // idPedido
-            // 
-            this.idPedido.DataPropertyName = "idPedido";
-            this.idPedido.HeaderText = "Id Pedido";
-            this.idPedido.Name = "idPedido";
-            this.idPedido.ReadOnly = true;
-            this.idPedido.Visible = false;
             // 
             // idDetalle
             // 
@@ -1023,13 +979,13 @@ namespace TPV.GUI
             this.idDetalle.ReadOnly = true;
             this.idDetalle.Visible = false;
             // 
-            // grupo
+            // idPedido
             // 
-            this.grupo.DataPropertyName = "grupo";
-            this.grupo.HeaderText = "Grupo";
-            this.grupo.Name = "grupo";
-            this.grupo.ReadOnly = true;
-            this.grupo.Visible = false;
+            this.idPedido.DataPropertyName = "idPedido";
+            this.idPedido.HeaderText = "Id Pedido";
+            this.idPedido.Name = "idPedido";
+            this.idPedido.ReadOnly = true;
+            this.idPedido.Visible = false;
             // 
             // idProducto
             // 
@@ -1070,21 +1026,53 @@ namespace TPV.GUI
             this.subTotal.Name = "subTotal";
             this.subTotal.ReadOnly = true;
             // 
-            // btnCuentas
+            // grupo
             // 
-            this.btnCuentas.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnCuentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCuentas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCuentas.Image = ((System.Drawing.Image)(resources.GetObject("btnCuentas.Image")));
-            this.btnCuentas.Location = new System.Drawing.Point(383, 77);
-            this.btnCuentas.Name = "btnCuentas";
-            this.btnCuentas.Size = new System.Drawing.Size(133, 57);
-            this.btnCuentas.TabIndex = 62;
-            this.btnCuentas.Text = "Cuentas";
-            this.btnCuentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCuentas.UseVisualStyleBackColor = false;
-            this.btnCuentas.Visible = false;
-            this.btnCuentas.Click += new System.EventHandler(this.btnCuentas_Click);
+            this.grupo.DataPropertyName = "grupo";
+            this.grupo.HeaderText = "Grupo";
+            this.grupo.Name = "grupo";
+            this.grupo.ReadOnly = true;
+            this.grupo.Visible = false;
+            // 
+            // cocinando
+            // 
+            this.cocinando.DataPropertyName = "cocinando";
+            this.cocinando.HeaderText = "Cocinando";
+            this.cocinando.Name = "cocinando";
+            this.cocinando.ReadOnly = true;
+            this.cocinando.Visible = false;
+            // 
+            // nombreMesero
+            // 
+            this.nombreMesero.DataPropertyName = "nombreMesero";
+            this.nombreMesero.HeaderText = "Mesero";
+            this.nombreMesero.Name = "nombreMesero";
+            this.nombreMesero.ReadOnly = true;
+            this.nombreMesero.Visible = false;
+            // 
+            // nombres
+            // 
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Cliente";
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            this.nombres.Visible = false;
+            // 
+            // mesa
+            // 
+            this.mesa.DataPropertyName = "mesa";
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            this.mesa.Visible = false;
+            // 
+            // salon
+            // 
+            this.salon.DataPropertyName = "salon";
+            this.salon.HeaderText = "Salon";
+            this.salon.Name = "salon";
+            this.salon.ReadOnly = true;
+            this.salon.Visible = false;
             // 
             // PuntoPago
             // 
@@ -1221,14 +1209,19 @@ namespace TPV.GUI
         private System.Windows.Forms.TextBox txtPorcentaje;
         private System.Windows.Forms.Label lblPorcentaje;
         private System.Windows.Forms.Button btnCuentas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
+        private DataGridViewTextBoxColumn cantidad;
+        private DataGridViewTextBoxColumn idDetalle;
         private DataGridViewTextBoxColumn idPedido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grupo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
+        private DataGridViewTextBoxColumn idProducto;
+        private DataGridViewTextBoxColumn precio;
+        private DataGridViewTextBoxColumn fecha;
+        private DataGridViewTextBoxColumn nombre;
+        private DataGridViewTextBoxColumn subTotal;
+        private DataGridViewTextBoxColumn grupo;
+        private DataGridViewTextBoxColumn cocinando;
+        private DataGridViewTextBoxColumn nombreMesero;
+        private DataGridViewTextBoxColumn nombres;
+        private DataGridViewTextBoxColumn mesa;
+        private DataGridViewTextBoxColumn salon;
     }
 }

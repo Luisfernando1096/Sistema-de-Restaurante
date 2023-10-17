@@ -27,7 +27,7 @@ namespace TPV.GUI
             try
             {
                 datosActual = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, idPedido);
-                datosPrincipales = DataManager.DBConsultas.ProductosEnMesa(id);
+                datosPrincipales = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, 0);
                 dgvActual.DataSource = datosActual;
                 dgvActual.AutoGenerateColumns = false;
 

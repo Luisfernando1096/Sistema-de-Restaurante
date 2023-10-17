@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -49,7 +51,7 @@ namespace TPV.GUI
         {
             try
             {
-                datos.DataSource = DataManager.DBConsultas.ProductosEnMesa(id);
+                datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, 0);
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
 
@@ -670,5 +672,38 @@ namespace TPV.GUI
             }
         }
 
+        private void btnComanda_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.Rows.Count > 0)
+            {
+                DataTable datos = new DataTable();
+                Reportes.REP.RepComandaCompleta oReporte = new Reportes.REP.RepComandaCompleta();
+                datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                oReporte.SetDataSource(datos);
+                oReporte.SetParameterValue("Empresa", "ALTEZZA");
+
+                if (oReporte != null)
+                {
+                    SaveFileDialog saveDialog = new SaveFileDialog();
+                    saveDialog.Filter = "Archivos PDF (*.pdf)|*.pdf";
+                    saveDialog.Title = "Guardar Informe PDF";
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string fileName = saveDialog.FileName;
+                        Reportes.CLS.CrystalReportExporter crystalReportExporter = new Reportes.CLS.CrystalReportExporter();
+                        crystalReportExporter.ExportToPDF(oReporte, fileName);
+
+                        MessageBox.Show($"El informe se ha guardado como {fileName}");
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
     }
 }
