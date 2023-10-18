@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace TPV.GUI
         PuntoVenta punto_venta;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+
         public BindingSource datos = new BindingSource();
         DataTable datosEnMesa = new DataTable();
         public bool cambiarMesa = false;
@@ -676,26 +679,26 @@ namespace TPV.GUI
         {
             if (dgvDatos.Rows.Count > 0)
             {
+                // Cargar los datos en un DataTable
                 DataTable datos = new DataTable();
                 Reportes.REP.RepComandaCompleta oReporte = new Reportes.REP.RepComandaCompleta();
                 datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
                 oReporte.SetDataSource(datos);
-                oReporte.SetParameterValue("Empresa", "ALTEZZA");
+                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
 
                 if (oReporte != null)
                 {
-                    SaveFileDialog saveDialog = new SaveFileDialog();
-                    saveDialog.Filter = "Archivos PDF (*.pdf)|*.pdf";
-                    saveDialog.Title = "Guardar Informe PDF";
+                    // Configurar la ruta de destino en la impresora virtual XPS
+                    PrinterSettings settings = new PrinterSettings();
+                    settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
 
-                    if (saveDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string fileName = saveDialog.FileName;
-                        Reportes.CLS.CrystalReportExporter crystalReportExporter = new Reportes.CLS.CrystalReportExporter();
-                        crystalReportExporter.ExportToPDF(oReporte, fileName);
+                    // Imprimir el informe en la impresora virtual XPS
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
 
-                        MessageBox.Show($"El informe se ha guardado como {fileName}");
-                    }
+                    MessageBox.Show($"El informe se ha guardado en la ubicación especificada.");
+                    
                 }
 
             }

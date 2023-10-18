@@ -12,6 +12,7 @@ namespace Configuraciones.GUI
         private String SeleccionarFirma = string.Empty;
         private String SeleccionarSello = string.Empty;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         private void CargarDatosConfig()
         {
             try
@@ -437,6 +438,7 @@ namespace Configuraciones.GUI
                 CargarDatosEmpresa();
                 this.Focus();
             }
+            oEmpresa.ObtenerConfiguracion();
         }
 
         private void btnGuardarOpT_Click(object sender, EventArgs e)

@@ -15,6 +15,7 @@ namespace ServiceExpressDsk.GUI
         Boolean autorizado = false;
         SessionManager.Session oSesion = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         public bool Autorizado { get => autorizado; }
         public Login()
         {
@@ -44,6 +45,7 @@ namespace ServiceExpressDsk.GUI
             {
                 autorizado = true;
                 oConfiguracion.ObtenerConfiguracion();
+                oEmpresa.ObtenerConfiguracion();
                 Close();
             }
             else
