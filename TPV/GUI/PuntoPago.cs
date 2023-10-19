@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -858,37 +859,8 @@ namespace TPV.GUI
                     if (dgvDatos.Rows.Count > 0)
                     {
                         // Cargar los datos en un DataTable
-                        DataTable datos = new DataTable();
                         Reportes.REP.RepPagoEfectivo oReporte = new Reportes.REP.RepPagoEfectivo();
-                        datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                        oReporte.SetDataSource(datos);
-                        oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                        oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                        oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
-                        oReporte.SetParameterValue("Total", lblSaldo.Text.ToString());
-                        oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
-                        oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
-                        oReporte.SetParameterValue("Iva", lblIva.Text);
-                        oReporte.SetParameterValue("TotalPagar", txtTotalPagar.Text.ToString());
-                        oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
-                        oReporte.SetParameterValue("Pago", "$" + Int32.Parse(txtPagoRegistrar.Text).ToString("0.00"));
-                        oReporte.SetParameterValue("Cambio", lblCambio.Text);
-                        oReporte.SetParameterValue("TipoPago", "Efectivo");
-
-
-                        if (oReporte != null)
-                        {
-                            // Configurar la ruta de destino en la impresora virtual XPS
-                            PrinterSettings settings = new PrinterSettings();
-                            settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
-
-                            // Imprimir el informe en la impresora virtual XPS
-                            oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                            oReporte.PrintToPrinter(1, false, 0, 0);
-
-                            MessageBox.Show($"El informe se ha guardado en la ubicación especificada.");
-
-                        }
+                        GenerarTicket(oReporte);
 
                     }
                     else
@@ -1002,40 +974,49 @@ namespace TPV.GUI
             if (dgvDatos.Rows.Count > 0)
             {
                 // Cargar los datos en un DataTable
-                DataTable datos = new DataTable();
+                
                 Reportes.REP.RepImprimirPuntoPago oReporte = new Reportes.REP.RepImprimirPuntoPago();
-                datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                oReporte.SetDataSource(datos);
-                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
-                oReporte.SetParameterValue("Total", lblSaldo.Text.ToString());
-                oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
-                oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
-                oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
-                oReporte.SetParameterValue("TotalPagar", txtTotalPagar.Text);
-                oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
-
-
-                if (oReporte != null)
-                {
-                    // Configurar la ruta de destino en la impresora virtual XPS
-                    PrinterSettings settings = new PrinterSettings();
-                    settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
-
-                    // Imprimir el informe en la impresora virtual XPS
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
-
-                    MessageBox.Show($"El informe se ha guardado en la ubicación especificada.");
-
-                }
+                GenerarTicket(oReporte);
 
             }
             else
             {
                 MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
+            }
+        }
+
+        private void GenerarTicket(ReportClass oReporte)
+        {
+            DataTable datos = new DataTable();
+            datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            oReporte.SetDataSource(datos);
+            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+            oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
+            oReporte.SetParameterValue("Total", lblSaldo.Text.ToString());
+            oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
+            oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
+            oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
+            oReporte.SetParameterValue("TotalPagar", txtTotalPagar.Text);
+            oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
+            oReporte.SetParameterValue("Pago", "$" + Int32.Parse(txtPagoRegistrar.Text).ToString("0.00"));
+            oReporte.SetParameterValue("Cambio", lblCambio.Text);
+            oReporte.SetParameterValue("TipoPago", "Efectivo");
+
+
+            if (oReporte != null)
+            {
+                // Configurar la ruta de destino en la impresora virtual XPS
+                PrinterSettings settings = new PrinterSettings();
+                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                // Imprimir el informe en la impresora virtual XPS
+                oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                oReporte.PrintToPrinter(1, false, 0, 0);
+
+                MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
         }
     }

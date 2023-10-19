@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using Reportes.REP;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -680,32 +681,37 @@ namespace TPV.GUI
             if (dgvDatos.Rows.Count > 0)
             {
                 // Cargar los datos en un DataTable
-                DataTable datos = new DataTable();
                 Reportes.REP.RepComandaCompleta oReporte = new Reportes.REP.RepComandaCompleta();
-                datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                oReporte.SetDataSource(datos);
-                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                
-                if (oReporte != null)
-                {
-                    // Configurar la ruta de destino en la impresora virtual XPS
-                    PrinterSettings settings = new PrinterSettings();
-                    settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
-
-                    // Imprimir el informe en la impresora virtual XPS
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
-
-                    MessageBox.Show($"El informe se ha guardado en la ubicación especificada.");
-                    
-                }
+                GenerarComanda(oReporte);
 
             }
             else
             {
                 MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
+            }
+        }
+
+        private void GenerarComanda(ReportClass oReporte)
+        {
+            DataTable datos = new DataTable();
+            datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            oReporte.SetDataSource(datos);
+            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+
+            if (oReporte != null)
+            {
+                // Configurar la ruta de destino en la impresora virtual XPS
+                PrinterSettings settings = new PrinterSettings();
+                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                // Imprimir el informe en la impresora virtual XPS
+                oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                oReporte.PrintToPrinter(1, false, 0, 0);
+
+                MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
         }
     }
