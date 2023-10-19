@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace TPV.GUI
         ComandaGestion comandaGestion;
         BindingSource datos = new BindingSource();
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         DataTable actualFactura = DataManager.DBConsultas.ObtenerTirajeActual();
         private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
@@ -23,6 +25,10 @@ namespace TPV.GUI
         private bool activarTicket = true;
         private DataTable datosEnMesa;
         public int idPedidoSiguiente;
+        private bool pagoEfectivo;
+        private bool pagoTarjeta;
+        private bool pagoCortesia;
+        private bool pagoExacto;
 
         public PuntoPago(ComandaGestion comandaGestion)
         {
@@ -668,6 +674,7 @@ namespace TPV.GUI
 
         private void btnEfectivo_Click(object sender, EventArgs e)
         {
+            pagoEfectivo = true;
             if (ValidarExistenciaTicket()) return;
             //Programar pago en efectivo
             if (!txtPagoRegistrar.Text.Equals(""))
@@ -823,13 +830,84 @@ namespace TPV.GUI
                 {
                     MessageBox.Show("Ocurrio un error al buscar ultima factura, contacte al programador.");
                 }
-                MessageBox.Show("Imprimir la factura");
+                if (pagoEfectivo)
+                {
+                    MessageBox.Show("Imprimir el factura Efectivo");
+                }
+                else if (pagoTarjeta)
+                {
+                    MessageBox.Show("Imprimir el factura Tarjeta");
+
+                }
+                else if (pagoCortesia)
+                {
+                    MessageBox.Show("Imprimir el factura Cortesia");
+
+                }
+                else if (pagoExacto)
+                {
+                    MessageBox.Show("Imprimir el factura Exacto");
+                }
 
             }
             if (activarTicket)
             {
                 //Lleva ticket
-                MessageBox.Show("Imprimir el ticket");
+                if (pagoEfectivo)
+                {
+                    if (dgvDatos.Rows.Count > 0)
+                    {
+                        // Cargar los datos en un DataTable
+                        DataTable datos = new DataTable();
+                        Reportes.REP.RepPagoEfectivo oReporte = new Reportes.REP.RepPagoEfectivo();
+                        datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                        oReporte.SetDataSource(datos);
+                        oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                        oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+                        oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
+                        oReporte.SetParameterValue("Total", lblSaldo.Text.ToString());
+                        oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
+                        oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
+                        oReporte.SetParameterValue("Iva", lblIva.Text);
+                        oReporte.SetParameterValue("TotalPagar", txtTotalPagar.Text.ToString());
+                        oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
+                        oReporte.SetParameterValue("Pago", "$" + Int32.Parse(txtPagoRegistrar.Text).ToString("0.00"));
+                        oReporte.SetParameterValue("Cambio", lblCambio.Text);
+                        oReporte.SetParameterValue("TipoPago", "Efectivo");
+
+
+                        if (oReporte != null)
+                        {
+                            // Configurar la ruta de destino en la impresora virtual XPS
+                            PrinterSettings settings = new PrinterSettings();
+                            settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                            // Imprimir el informe en la impresora virtual XPS
+                            oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                            oReporte.PrintToPrinter(1, false, 0, 0);
+
+                            MessageBox.Show($"El informe se ha guardado en la ubicación especificada.");
+
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+                else if(pagoTarjeta){
+                    MessageBox.Show("Imprimir el ticket Tarjeta");
+
+                } else if(pagoCortesia)
+                {
+                    MessageBox.Show("Imprimir el ticket Cortesia");
+
+                } else if (pagoExacto)
+                {
+                    MessageBox.Show("Imprimir el ticket Exacto");
+                }
             }
 
             if (!pedido.ActualizarPedidoPagado())
@@ -838,19 +916,23 @@ namespace TPV.GUI
             }
             else
             {
-                //Actualizar estado de la mesa
-                Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
-                mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
-                mesa.Disponible = true;
-                if (mesa.ActualizarEstado())
+                if (datosEnMesa.Rows.Count == 1)
                 {
-                    //MessageBox.Show("SE ACTUALIZO CON EXITO");
-                    
+                    //Actualizar estado de la mesa
+                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
+                    mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+                    mesa.Disponible = true;
+                    if (mesa.ActualizarEstado())
+                    {
+                        //MessageBox.Show("SE ACTUALIZO CON EXITO");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR AL ACTUALIZAR");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("ERROR AL ACTUALIZAR");
-                }
+                
                 //IRa tpv
                 comandaGestion.tpv = true;
                 comandaGestion.Close();
@@ -912,6 +994,48 @@ namespace TPV.GUI
                 lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
                 lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
                 CalcularTodo();
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.Rows.Count > 0)
+            {
+                // Cargar los datos en un DataTable
+                DataTable datos = new DataTable();
+                Reportes.REP.RepImprimirPuntoPago oReporte = new Reportes.REP.RepImprimirPuntoPago();
+                datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                oReporte.SetDataSource(datos);
+                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+                oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
+                oReporte.SetParameterValue("Total", lblSaldo.Text.ToString());
+                oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
+                oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
+                oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
+                oReporte.SetParameterValue("TotalPagar", txtTotalPagar.Text);
+                oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
+
+
+                if (oReporte != null)
+                {
+                    // Configurar la ruta de destino en la impresora virtual XPS
+                    PrinterSettings settings = new PrinterSettings();
+                    settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                    // Imprimir el informe en la impresora virtual XPS
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
+
+                    MessageBox.Show($"El informe se ha guardado en la ubicación especificada.");
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
         }
     }

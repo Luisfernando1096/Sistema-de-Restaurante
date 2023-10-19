@@ -43,6 +43,20 @@ namespace TPV.GUI
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
             this.btnFactura = new System.Windows.Forms.Button();
@@ -100,20 +114,6 @@ namespace TPV.GUI
             this.label8 = new System.Windows.Forms.Label();
             this.lblCambio = new System.Windows.Forms.Label();
             this.btnCuentas = new System.Windows.Forms.Button();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -239,6 +239,116 @@ namespace TPV.GUI
             this.dgvDatos.Size = new System.Drawing.Size(375, 393);
             this.dgvDatos.TabIndex = 15;
             // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // idDetalle
+            // 
+            this.idDetalle.DataPropertyName = "idDetalle";
+            this.idDetalle.HeaderText = "ID";
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            // 
+            // idPedido
+            // 
+            this.idPedido.DataPropertyName = "idPedido";
+            this.idPedido.HeaderText = "Id Pedido";
+            this.idPedido.Name = "idPedido";
+            this.idPedido.ReadOnly = true;
+            this.idPedido.Visible = false;
+            // 
+            // idProducto
+            // 
+            this.idProducto.DataPropertyName = "idProducto";
+            this.idProducto.HeaderText = "Id Producto";
+            this.idProducto.Name = "idProducto";
+            this.idProducto.ReadOnly = true;
+            this.idProducto.Visible = false;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.Visible = false;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            this.fecha.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Producto";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // subTotal
+            // 
+            this.subTotal.DataPropertyName = "subTotal";
+            this.subTotal.HeaderText = "Sub Total";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            // 
+            // grupo
+            // 
+            this.grupo.DataPropertyName = "grupo";
+            this.grupo.HeaderText = "Grupo";
+            this.grupo.Name = "grupo";
+            this.grupo.ReadOnly = true;
+            this.grupo.Visible = false;
+            // 
+            // cocinando
+            // 
+            this.cocinando.DataPropertyName = "cocinando";
+            this.cocinando.HeaderText = "Cocinando";
+            this.cocinando.Name = "cocinando";
+            this.cocinando.ReadOnly = true;
+            this.cocinando.Visible = false;
+            // 
+            // nombreMesero
+            // 
+            this.nombreMesero.DataPropertyName = "nombreMesero";
+            this.nombreMesero.HeaderText = "Mesero";
+            this.nombreMesero.Name = "nombreMesero";
+            this.nombreMesero.ReadOnly = true;
+            this.nombreMesero.Visible = false;
+            // 
+            // nombres
+            // 
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Cliente";
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            this.nombres.Visible = false;
+            // 
+            // mesa
+            // 
+            this.mesa.DataPropertyName = "mesa";
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            this.mesa.Visible = false;
+            // 
+            // salon
+            // 
+            this.salon.DataPropertyName = "salon";
+            this.salon.HeaderText = "Salon";
+            this.salon.Name = "salon";
+            this.salon.ReadOnly = true;
+            this.salon.Visible = false;
+            // 
             // flpAcciones
             // 
             this.flpAcciones.AutoScroll = true;
@@ -332,6 +442,7 @@ namespace TPV.GUI
             this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -963,116 +1074,6 @@ namespace TPV.GUI
             this.btnCuentas.UseVisualStyleBackColor = false;
             this.btnCuentas.Visible = false;
             this.btnCuentas.Click += new System.EventHandler(this.btnCuentas_Click);
-            // 
-            // cantidad
-            // 
-            this.cantidad.DataPropertyName = "cantidad";
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // idDetalle
-            // 
-            this.idDetalle.DataPropertyName = "idDetalle";
-            this.idDetalle.HeaderText = "ID";
-            this.idDetalle.Name = "idDetalle";
-            this.idDetalle.ReadOnly = true;
-            this.idDetalle.Visible = false;
-            // 
-            // idPedido
-            // 
-            this.idPedido.DataPropertyName = "idPedido";
-            this.idPedido.HeaderText = "Id Pedido";
-            this.idPedido.Name = "idPedido";
-            this.idPedido.ReadOnly = true;
-            this.idPedido.Visible = false;
-            // 
-            // idProducto
-            // 
-            this.idProducto.DataPropertyName = "idProducto";
-            this.idProducto.HeaderText = "Id Producto";
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            this.precio.Visible = false;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
-            this.fecha.Visible = false;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Producto";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // subTotal
-            // 
-            this.subTotal.DataPropertyName = "subTotal";
-            this.subTotal.HeaderText = "Sub Total";
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            // 
-            // grupo
-            // 
-            this.grupo.DataPropertyName = "grupo";
-            this.grupo.HeaderText = "Grupo";
-            this.grupo.Name = "grupo";
-            this.grupo.ReadOnly = true;
-            this.grupo.Visible = false;
-            // 
-            // cocinando
-            // 
-            this.cocinando.DataPropertyName = "cocinando";
-            this.cocinando.HeaderText = "Cocinando";
-            this.cocinando.Name = "cocinando";
-            this.cocinando.ReadOnly = true;
-            this.cocinando.Visible = false;
-            // 
-            // nombreMesero
-            // 
-            this.nombreMesero.DataPropertyName = "nombreMesero";
-            this.nombreMesero.HeaderText = "Mesero";
-            this.nombreMesero.Name = "nombreMesero";
-            this.nombreMesero.ReadOnly = true;
-            this.nombreMesero.Visible = false;
-            // 
-            // nombres
-            // 
-            this.nombres.DataPropertyName = "nombres";
-            this.nombres.HeaderText = "Cliente";
-            this.nombres.Name = "nombres";
-            this.nombres.ReadOnly = true;
-            this.nombres.Visible = false;
-            // 
-            // mesa
-            // 
-            this.mesa.DataPropertyName = "mesa";
-            this.mesa.HeaderText = "Mesa";
-            this.mesa.Name = "mesa";
-            this.mesa.ReadOnly = true;
-            this.mesa.Visible = false;
-            // 
-            // salon
-            // 
-            this.salon.DataPropertyName = "salon";
-            this.salon.HeaderText = "Salon";
-            this.salon.Name = "salon";
-            this.salon.ReadOnly = true;
-            this.salon.Visible = false;
             // 
             // PuntoPago
             // 

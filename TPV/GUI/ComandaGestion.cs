@@ -686,7 +686,7 @@ namespace TPV.GUI
                 oReporte.SetDataSource(datos);
                 oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
                 oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-
+                
                 if (oReporte != null)
                 {
                     // Configurar la ruta de destino en la impresora virtual XPS
