@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -676,6 +677,9 @@ namespace TPV.GUI
         private void btnEfectivo_Click(object sender, EventArgs e)
         {
             pagoEfectivo = true;
+            pagoTarjeta = false;
+            pagoCortesia = false;
+            pagoExacto = false;
             if (ValidarExistenciaTicket()) return;
             //Programar pago en efectivo
             if (!txtPagoRegistrar.Text.Equals(""))
@@ -691,7 +695,10 @@ namespace TPV.GUI
 
         private void btnTarjeta_Click(object sender, EventArgs e)
         {
-            if (ValidarExistenciaTicket()) return;
+            pagoEfectivo = false;
+            pagoTarjeta = true;
+            pagoCortesia = false;
+            pagoExacto = false; if (ValidarExistenciaTicket()) return;
             if (!txtPagoRegistrar.Text.Equals(""))
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
@@ -717,16 +724,32 @@ namespace TPV.GUI
 
         private void btnExacto_Click(object sender, EventArgs e)
         {
-            if (ValidarExistenciaTicket()) return;
-            //Programar pago exacto
-            pedido.Saldo = 0.00;
-            pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
-            RegistrarPago();
-            ActualizarCaja(true);
+            if (txtPagoRegistrar.Text.Equals(txtTotalPagar.Text))
+            {
+                pagoEfectivo = false;
+                pagoTarjeta = false;
+                pagoExacto = true;
+                pagoCortesia = false;
+
+                if (ValidarExistenciaTicket()) return;
+                //Programar pago exacto
+                pedido.Saldo = 0.00;
+                pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
+                RegistrarPago();
+                ActualizarCaja(true);
+            }
+            else
+            {
+                MessageBox.Show("El total a pagar debe ser exacto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnCortesia_Click(object sender, EventArgs e)
         {
+            pagoEfectivo = false;
+            pagoTarjeta = false;
+            pagoExacto = false;
+            pagoCortesia = true;
             if (ValidarExistenciaTicket()) return;
             //Programar pago cortesia
             pedido.Saldo = 0.00;
@@ -870,15 +893,51 @@ namespace TPV.GUI
                     }
                 }
                 else if(pagoTarjeta){
-                    MessageBox.Show("Imprimir el ticket Tarjeta");
+                    //MessageBox.Show("Imprimir el ticket Tarjeta");
+                    if (dgvDatos.Rows.Count > 0)
+                    {
+                        // Cargar los datos en un DataTable
+                        Reportes.REP.RepPagoTarjeta oReporte = new Reportes.REP.RepPagoTarjeta();
+                        GenerarTicket(oReporte);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
 
                 } else if(pagoCortesia)
                 {
-                    MessageBox.Show("Imprimir el ticket Cortesia");
+                    //MessageBox.Show("Imprimir el ticket Tarjeta");
+                    if (dgvDatos.Rows.Count > 0)
+                    {
+                        // Cargar los datos en un DataTable
+                        Reportes.REP.RepPagoCortesia oReporte = new Reportes.REP.RepPagoCortesia();
+                        GenerarTicket(oReporte);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
 
                 } else if (pagoExacto)
                 {
-                    MessageBox.Show("Imprimir el ticket Exacto");
+                    //MessageBox.Show("Imprimir el ticket Exacto");
+                    if (dgvDatos.Rows.Count > 0)
+                    {
+                        // Cargar los datos en un DataTable
+                        Reportes.REP.RepPagoExacto oReporte = new Reportes.REP.RepPagoExacto();
+                        GenerarTicket(oReporte);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
                 }
             }
 
@@ -988,6 +1047,8 @@ namespace TPV.GUI
 
         private void GenerarTicket(ReportClass oReporte)
         {
+            decimal pago;
+
             DataTable datos = new DataTable();
             datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
             oReporte.SetDataSource(datos);
@@ -998,9 +1059,9 @@ namespace TPV.GUI
             oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
             oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
             oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
-            oReporte.SetParameterValue("TotalPagar", txtTotalPagar.Text);
+            oReporte.SetParameterValue("TotalPagar", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
             oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
-            oReporte.SetParameterValue("Pago", "$" + Int32.Parse(txtPagoRegistrar.Text).ToString("0.00"));
+            oReporte.SetParameterValue("Pago", "$" + Double.Parse(txtPagoRegistrar.Text).ToString("0.00"));
             oReporte.SetParameterValue("Cambio", lblCambio.Text);
             oReporte.SetParameterValue("TipoPago", "Efectivo");
 
