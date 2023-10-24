@@ -234,9 +234,14 @@ namespace TPV.GUI
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             PedidoDetalle pDetalle = new PedidoDetalle();
             pDetalle.Cantidad = cantidad;
-            pDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+            if (!lblTicket.Text.Equals(""))
+            {
+                pDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+            }
+            pDetalle.Mesa = lblMesa.Text;
             pDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
             pDetalle.Fecha = fecha;
+            pDetalle.Nombre = botonProducto.Text;
             Boolean encontrado = false;
 
             if (lstDetalle.Count > 0)
@@ -254,8 +259,7 @@ namespace TPV.GUI
                 {
                     lstDetalle.Add(pDetalle);
                 }
-            }
-            else
+            }else if (dgvDatos.Rows.Count > 0)
             {
                 lstDetalle.Add(pDetalle);
             }
@@ -351,6 +355,8 @@ namespace TPV.GUI
                 {
                     MessageBox.Show("ERROR AL INSERTAR PEDIDO");
                 }
+                pDetalle.IdPedido = idPedidoInsertado;
+                lstDetalle.Add(pDetalle);
 
                 //Agregamos detalles al pedido
                 Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
@@ -416,10 +422,9 @@ namespace TPV.GUI
         {
             if (lstDetalle.Count > 0)
             {
-                foreach (PedidoDetalle item in lstDetalle)
-                {
-                    MessageBox.Show("Cantidad: " + item.Cantidad + " ID: " + item.IdProducto);
-                }
+                // Cargar los datos en un DataTable
+                RepComandaParcial oReporte = new RepComandaParcial();
+                GenerarComandaParcial(oReporte);
             }
             
         }
@@ -436,6 +441,7 @@ namespace TPV.GUI
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
+            ImprimirComandaActual();
             this.Hide();
             PuntoPago f = new PuntoPago(this);
 
@@ -758,6 +764,36 @@ namespace TPV.GUI
             oReporte.SetDataSource(datos);
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+
+            if (oReporte != null)
+            {
+                // Configurar la ruta de destino en la impresora virtual XPS
+                PrinterSettings settings = new PrinterSettings();
+                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                // Imprimir el informe en la impresora virtual XPS
+                oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                oReporte.PrintToPrinter(1, false, 0, 0);
+
+                MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+        }
+
+        private void GenerarComandaParcial(ReportClass oReporte)
+        {
+            oReporte.SetDataSource(lstDetalle);
+            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+            oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value);
+            if (!lblMesero.Text.Equals(""))
+            {
+                oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
+            }
+            if (!lblCliente.Text.Equals(""))
+            {
+                oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
+            }
 
             if (oReporte != null)
             {

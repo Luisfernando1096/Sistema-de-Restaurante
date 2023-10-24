@@ -63,6 +63,12 @@
       <DependentUpon>VisorComandaCompleta.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="REP\RepComandaParcial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComandaParcial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepImprimirPuntoPago.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +128,10 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\VisorComandaCompleta.resx">
       <DependentUpon>VisorComandaCompleta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepComandaParcial.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComandaParcial.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepImprimirPuntoPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

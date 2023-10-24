@@ -22,6 +22,8 @@ namespace Mantenimiento.CLS
         String grupo;
         String usuario;
         String fecha;
+        String nombre;
+        String mesa;
 
         public int IdDetalle { get => idDetalle; set => idDetalle = value; }
         public bool Cocinando { get => cocinando; set => cocinando = value; }
@@ -37,6 +39,8 @@ namespace Mantenimiento.CLS
         public string Grupo { get => grupo; set => grupo = value; }
         public string Usuario { get => usuario; set => usuario = value; }
         public string Fecha { get => fecha; set => fecha = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Mesa { get => mesa; set => mesa = value; }
 
         public Boolean Insertar()
         {
