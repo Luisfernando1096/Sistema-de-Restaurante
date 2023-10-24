@@ -36,6 +36,7 @@ namespace ServiceExpressDsk.GUI
 
         private void Main_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
             //Obtener todos los comandos
             DataTable comandos = DataManager.DBConsultas.ComandosPorRol(oUsuario.IdRol);
 

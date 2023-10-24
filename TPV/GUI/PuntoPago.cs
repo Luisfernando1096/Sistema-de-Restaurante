@@ -77,9 +77,18 @@ namespace TPV.GUI
 
         private void PuntoPago_Load(object sender, EventArgs e)
         {
-            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            // Creamos un Panel para envolver el FlowLayoutPanel
+            Panel panelWrapper = new Panel();
+            panelWrapper.Dock = DockStyle.Fill;
+            panelWrapper.AutoScroll = true;
 
-            if(dgvDatos.Rows.Count > 0)
+            // Agregamos el FlowLayoutPanel al Panel
+            panelWrapper.Controls.Add(flpAcciones);
+
+            // Agregamos el Panel al formulario
+            Controls.Add(panelWrapper);
+            if (dgvDatos.Rows.Count > 0)
             {
                 lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
                 lblSaldo.Tag = Math.Round(CalcularTotal(), 2);

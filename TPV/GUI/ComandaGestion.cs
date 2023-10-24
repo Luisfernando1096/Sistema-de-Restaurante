@@ -114,22 +114,20 @@ namespace TPV.GUI
 
         private void ComandaGestion_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
             if (dgvDatos.Rows.Count>0)
             {
                 btnComanda.Enabled = true;
                 btnDisminuir.Enabled = true;
                 btnExtras.Enabled = true;
             }
-            FormBorderStyle = FormBorderStyle.None;
             // Creamos un Panel para envolver el FlowLayoutPanel
             Panel panelWrapper = new Panel();
             panelWrapper.Dock = DockStyle.Fill;
             panelWrapper.AutoScroll = true;
 
             // Agregamos el FlowLayoutPanel al Panel
-            panelWrapper.Controls.Add(flpAcciones);
-            panelWrapper.Controls.Add(flpFamilias);
-            panelWrapper.Controls.Add(flpProductos);
+            panelWrapper.Controls.Add(panelComanda);
 
             // Agregamos el Panel al formulario
             Controls.Add(panelWrapper);
