@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using Mantenimiento.CLS;
 using Reportes.REP;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace TPV.GUI
 {
     public partial class ComandaGestion : Form
     {
+        private List<PedidoDetalle> lstDetalle = new List<PedidoDetalle>();
         PuntoVenta punto_venta;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
@@ -232,6 +234,34 @@ namespace TPV.GUI
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            PedidoDetalle pDetalle = new PedidoDetalle();
+            pDetalle.Cantidad = cantidad;
+            pDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+            pDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+            pDetalle.Fecha = fecha;
+            Boolean encontrado = false;
+
+            if (lstDetalle.Count > 0)
+            {
+                foreach (PedidoDetalle item in lstDetalle)
+                {
+                    if (botonProducto.Tag.ToString().Equals(item.IdProducto.ToString()))
+                    {
+                        encontrado = true;
+                        item.Cantidad += cantidad;
+                        break;
+                    }
+                }
+                if (!encontrado)
+                {
+                    lstDetalle.Add(pDetalle);
+                }
+            }
+            else
+            {
+                lstDetalle.Add(pDetalle);
+            }
+
             if (dgvDatos.Rows.Count > 0)
             {
                 //Ya existe un pedido
@@ -247,13 +277,12 @@ namespace TPV.GUI
                         idDetalle = Int32.Parse(row.Cells["idDetalle"].Value.ToString());
                         cantidad = cantidad + Int32.Parse(row.Cells["cantidad"].Value.ToString());
                         precio = double.Parse(row.Cells["precio"].Value.ToString());
-                        idDetalle = Int32.Parse(row.Cells["idDetalle"].Value.ToString());
                         idProducto = Int32.Parse(botonProducto.Tag.ToString());
                         aumentarUnProducto = true;
                     }
                 }
                 
-                Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+                PedidoDetalle pedidoDetalle = new PedidoDetalle();
                     
                 if (aumentarUnProducto)
                 {
@@ -263,6 +292,7 @@ namespace TPV.GUI
                     pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
                     pedidoDetalle.Cantidad = cantidad;
                     pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, idProducto, precio);
+
                     if (pedidoDetalle.ActualizarCompra())
                     {
 
@@ -380,7 +410,20 @@ namespace TPV.GUI
         }
         private void btnSalir_Click_1(object sender, EventArgs e)
         {
+            ImprimirComandaActual();
             Close();
+        }
+
+        private void ImprimirComandaActual()
+        {
+            if (lstDetalle.Count > 0)
+            {
+                foreach (PedidoDetalle item in lstDetalle)
+                {
+                    MessageBox.Show("Cantidad: " + item.Cantidad + " ID: " + item.IdProducto);
+                }
+            }
+            
         }
 
         private void ComandaGestion_Resize(object sender, EventArgs e)
@@ -506,8 +549,26 @@ namespace TPV.GUI
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (lstDetalle.Count > 0)
+            {
+                foreach (PedidoDetalle item in lstDetalle)
+                {
+                    if (dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item.IdProducto.ToString()))
+                    {
+                        item.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+                        item.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                        item.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
+                        if (item.Cantidad == 0)
+                        {
+                            lstDetalle.Remove(item);
+                        }
+                        break;
+                    }
+                }
+            }
+
             //Programando boton de disminuir
-            Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
+            PedidoDetalle pedidoDetalle = new PedidoDetalle();
             if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 pedidoDetalle.IdDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
@@ -528,7 +589,7 @@ namespace TPV.GUI
 
                     if (dgvDatos.Rows.Count == 1)
                     {
-                        Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+                        Pedido pedido = new Pedido();
                         pedido.IdPedido = Int32.Parse(lblTicket.Text);
                         pedido.Eliminar();
                         CargarProductosPorMesa(lblMesa.Tag.ToString());
