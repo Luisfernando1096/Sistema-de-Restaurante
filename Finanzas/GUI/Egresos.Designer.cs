@@ -29,9 +29,9 @@ namespace Finanzas.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Egresos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tanConsultas = new System.Windows.Forms.TabPage();
             this.dgvDatosCaja = new System.Windows.Forms.DataGridView();
             this.idEgreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +53,6 @@ namespace Finanzas.GUI
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.cmbCaja = new System.Windows.Forms.ComboBox();
             this.rbCaja = new System.Windows.Forms.RadioButton();
             this.rbNinguno = new System.Windows.Forms.RadioButton();
             this.tabEgresos = new System.Windows.Forms.TabPage();
@@ -65,13 +64,11 @@ namespace Finanzas.GUI
             this.cantidad1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtPrecioIngrediente = new System.Windows.Forms.TextBox();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtStockIngrediente = new System.Windows.Forms.TextBox();
-            this.txtIDIngrediente = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -85,13 +82,8 @@ namespace Finanzas.GUI
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chBox = new System.Windows.Forms.CheckBox();
-            this.cmbUsuario = new System.Windows.Forms.ComboBox();
-            this.cmbCaja1 = new System.Windows.Forms.ComboBox();
-            this.rbtn1Usuario = new System.Windows.Forms.RadioButton();
-            this.rbtn1Caja = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.txtNumero = new System.Windows.Forms.TextBox();
             this.tanConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosCaja)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -101,7 +93,6 @@ namespace Finanzas.GUI
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,10 +103,10 @@ namespace Finanzas.GUI
             this.tanConsultas.Controls.Add(this.toolStrip1);
             this.tanConsultas.Controls.Add(this.groupBox4);
             this.tanConsultas.Location = new System.Drawing.Point(4, 44);
-            this.tanConsultas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tanConsultas.Margin = new System.Windows.Forms.Padding(2);
             this.tanConsultas.Name = "tanConsultas";
-            this.tanConsultas.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tanConsultas.Size = new System.Drawing.Size(1120, 487);
+            this.tanConsultas.Padding = new System.Windows.Forms.Padding(2);
+            this.tanConsultas.Size = new System.Drawing.Size(1020, 487);
             this.tanConsultas.TabIndex = 1;
             this.tanConsultas.Text = "       Consulta egresos       ";
             this.tanConsultas.UseVisualStyleBackColor = true;
@@ -139,14 +130,14 @@ namespace Finanzas.GUI
             this.dgvDatosCaja.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatosCaja.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvDatosCaja.Location = new System.Drawing.Point(2, 137);
-            this.dgvDatosCaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvDatosCaja.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDatosCaja.Name = "dgvDatosCaja";
             this.dgvDatosCaja.ReadOnly = true;
             this.dgvDatosCaja.RowHeadersVisible = false;
             this.dgvDatosCaja.RowHeadersWidth = 51;
             this.dgvDatosCaja.RowTemplate.Height = 24;
             this.dgvDatosCaja.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatosCaja.Size = new System.Drawing.Size(1116, 298);
+            this.dgvDatosCaja.Size = new System.Drawing.Size(1016, 298);
             this.dgvDatosCaja.TabIndex = 17;
             // 
             // idEgreso
@@ -179,8 +170,8 @@ namespace Finanzas.GUI
             // fecha
             // 
             this.fecha.DataPropertyName = "fecha";
-            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha.DefaultCellStyle = dataGridViewCellStyle5;
             this.fecha.HeaderText = "Fecha";
             this.fecha.MinimumWidth = 6;
             this.fecha.Name = "fecha";
@@ -216,17 +207,17 @@ namespace Finanzas.GUI
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(2, 59);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1116, 78);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(1016, 78);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(451, 14);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(181, 21);
             this.button2.TabIndex = 23;
@@ -237,7 +228,7 @@ namespace Finanzas.GUI
             // dateTPHasta
             // 
             this.dateTPHasta.Location = new System.Drawing.Point(230, 47);
-            this.dateTPHasta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTPHasta.Margin = new System.Windows.Forms.Padding(2);
             this.dateTPHasta.Name = "dateTPHasta";
             this.dateTPHasta.Size = new System.Drawing.Size(213, 20);
             this.dateTPHasta.TabIndex = 21;
@@ -246,7 +237,7 @@ namespace Finanzas.GUI
             // dateTPDesde
             // 
             this.dateTPDesde.Location = new System.Drawing.Point(230, 15);
-            this.dateTPDesde.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTPDesde.Margin = new System.Windows.Forms.Padding(2);
             this.dateTPDesde.Name = "dateTPDesde";
             this.dateTPDesde.Size = new System.Drawing.Size(213, 20);
             this.dateTPDesde.TabIndex = 20;
@@ -255,7 +246,7 @@ namespace Finanzas.GUI
             // txtHasta
             // 
             this.txtHasta.Location = new System.Drawing.Point(65, 49);
-            this.txtHasta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHasta.Margin = new System.Windows.Forms.Padding(2);
             this.txtHasta.Name = "txtHasta";
             this.txtHasta.Size = new System.Drawing.Size(152, 20);
             this.txtHasta.TabIndex = 19;
@@ -275,7 +266,7 @@ namespace Finanzas.GUI
             // txtDesde
             // 
             this.txtDesde.Location = new System.Drawing.Point(65, 15);
-            this.txtDesde.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDesde.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesde.Name = "txtDesde";
             this.txtDesde.Size = new System.Drawing.Size(152, 20);
             this.txtDesde.TabIndex = 10;
@@ -303,7 +294,7 @@ namespace Finanzas.GUI
             this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(2, 2);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1116, 57);
+            this.toolStrip1.Size = new System.Drawing.Size(1016, 57);
             this.toolStrip1.TabIndex = 19;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -331,36 +322,24 @@ namespace Finanzas.GUI
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.cmbCaja);
+            this.groupBox4.Controls.Add(this.txtNumero);
             this.groupBox4.Controls.Add(this.rbCaja);
             this.groupBox4.Controls.Add(this.rbNinguno);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox4.Location = new System.Drawing.Point(2, 435);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(1116, 50);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(1016, 50);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Filtrar por:";
-            // 
-            // cmbCaja
-            // 
-            this.cmbCaja.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCaja.FormattingEnabled = true;
-            this.cmbCaja.Location = new System.Drawing.Point(225, 19);
-            this.cmbCaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cmbCaja.Name = "cmbCaja";
-            this.cmbCaja.Size = new System.Drawing.Size(127, 21);
-            this.cmbCaja.TabIndex = 14;
-            this.cmbCaja.Visible = false;
-            this.cmbCaja.SelectedIndexChanged += new System.EventHandler(this.cmbCaja_SelectedIndexChanged);
             // 
             // rbCaja
             // 
             this.rbCaja.AutoSize = true;
             this.rbCaja.Location = new System.Drawing.Point(104, 19);
-            this.rbCaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbCaja.Margin = new System.Windows.Forms.Padding(2);
             this.rbCaja.Name = "rbCaja";
             this.rbCaja.Size = new System.Drawing.Size(118, 17);
             this.rbCaja.TabIndex = 1;
@@ -373,7 +352,7 @@ namespace Finanzas.GUI
             // 
             this.rbNinguno.AutoSize = true;
             this.rbNinguno.Location = new System.Drawing.Point(17, 19);
-            this.rbNinguno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbNinguno.Margin = new System.Windows.Forms.Padding(2);
             this.rbNinguno.Name = "rbNinguno";
             this.rbNinguno.Size = new System.Drawing.Size(65, 17);
             this.rbNinguno.TabIndex = 0;
@@ -387,11 +366,10 @@ namespace Finanzas.GUI
             this.tabEgresos.Controls.Add(this.dgvDatos);
             this.tabEgresos.Controls.Add(this.groupBox2);
             this.tabEgresos.Controls.Add(this.toolStrip2);
-            this.tabEgresos.Controls.Add(this.groupBox3);
             this.tabEgresos.Location = new System.Drawing.Point(4, 44);
-            this.tabEgresos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabEgresos.Margin = new System.Windows.Forms.Padding(2);
             this.tabEgresos.Name = "tabEgresos";
-            this.tabEgresos.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabEgresos.Padding = new System.Windows.Forms.Padding(2);
             this.tabEgresos.Size = new System.Drawing.Size(1020, 487);
             this.tabEgresos.TabIndex = 0;
             this.tabEgresos.Text = "        Egresos de efectivo        ";
@@ -416,14 +394,14 @@ namespace Finanzas.GUI
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvDatos.Location = new System.Drawing.Point(2, 118);
-            this.dgvDatos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.RowTemplate.Height = 24;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(1016, 317);
+            this.dgvDatos.Size = new System.Drawing.Size(1016, 367);
             this.dgvDatos.TabIndex = 18;
             // 
             // idEgreso1
@@ -456,8 +434,8 @@ namespace Finanzas.GUI
             // fecha1
             // 
             this.fecha1.DataPropertyName = "fecha";
-            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha1.DefaultCellStyle = dataGridViewCellStyle6;
             this.fecha1.HeaderText = "Fecha";
             this.fecha1.MinimumWidth = 6;
             this.fecha1.Name = "fecha1";
@@ -484,90 +462,73 @@ namespace Finanzas.GUI
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dateTimePicker1);
+            this.groupBox2.Controls.Add(this.dtpFecha);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.txtPrecioIngrediente);
+            this.groupBox2.Controls.Add(this.txtCantidad);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtStockIngrediente);
-            this.groupBox2.Controls.Add(this.txtIDIngrediente);
-            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.txtDescripcion);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(2, 64);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(1016, 54);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
-            // dateTimePicker1
+            // dtpFecha
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(104, 17);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(204, 20);
-            this.dateTimePicker1.TabIndex = 18;
+            this.dtpFecha.CustomFormat = "yyyy/MM/dd hh:mm:ss";
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFecha.Location = new System.Drawing.Point(54, 17);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(141, 20);
+            this.dtpFecha.TabIndex = 18;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(689, 20);
+            this.label5.Location = new System.Drawing.Point(639, 20);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 17;
             this.label5.Text = "Cantidad";
             // 
-            // txtPrecioIngrediente
+            // txtCantidad
             // 
-            this.txtPrecioIngrediente.Location = new System.Drawing.Point(743, 17);
-            this.txtPrecioIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtPrecioIngrediente.Name = "txtPrecioIngrediente";
-            this.txtPrecioIngrediente.Size = new System.Drawing.Size(65, 20);
-            this.txtPrecioIngrediente.TabIndex = 16;
+            this.txtCantidad.Location = new System.Drawing.Point(693, 17);
+            this.txtCantidad.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(65, 20);
+            this.txtCantidad.TabIndex = 16;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(322, 20);
+            this.label4.Location = new System.Drawing.Point(272, 20);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 15;
             this.label4.Text = "Breve descripcion";
             // 
-            // txtStockIngrediente
+            // txtDescripcion
             // 
-            this.txtStockIngrediente.Location = new System.Drawing.Point(418, 17);
-            this.txtStockIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtStockIngrediente.Name = "txtStockIngrediente";
-            this.txtStockIngrediente.Size = new System.Drawing.Size(263, 20);
-            this.txtStockIngrediente.TabIndex = 13;
-            // 
-            // txtIDIngrediente
-            // 
-            this.txtIDIngrediente.Enabled = false;
-            this.txtIDIngrediente.Location = new System.Drawing.Point(25, 17);
-            this.txtIDIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtIDIngrediente.Name = "txtIDIngrediente";
-            this.txtIDIngrediente.Size = new System.Drawing.Size(21, 20);
-            this.txtIDIngrediente.TabIndex = 11;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 20);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "ID";
+            this.txtDescripcion.Location = new System.Drawing.Point(368, 17);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(263, 20);
+            this.txtDescripcion.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 20);
+            this.label3.Location = new System.Drawing.Point(14, 20);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
@@ -625,6 +586,7 @@ namespace Finanzas.GUI
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(102, 59);
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // toolStripSeparator7
             // 
@@ -639,6 +601,7 @@ namespace Finanzas.GUI
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(133, 59);
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnLimpiar
             // 
@@ -648,6 +611,7 @@ namespace Finanzas.GUI
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(114, 59);
             this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnSalirIngrediente
             // 
@@ -681,84 +645,6 @@ namespace Finanzas.GUI
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(0, 59);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.chBox);
-            this.groupBox3.Controls.Add(this.cmbUsuario);
-            this.groupBox3.Controls.Add(this.cmbCaja1);
-            this.groupBox3.Controls.Add(this.rbtn1Usuario);
-            this.groupBox3.Controls.Add(this.rbtn1Caja);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(2, 435);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Size = new System.Drawing.Size(1016, 50);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Filtrar datos por: ";
-            // 
-            // chBox
-            // 
-            this.chBox.AutoSize = true;
-            this.chBox.Location = new System.Drawing.Point(39, 21);
-            this.chBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chBox.Name = "chBox";
-            this.chBox.Size = new System.Drawing.Size(48, 17);
-            this.chBox.TabIndex = 32;
-            this.chBox.Text = "Filtro";
-            this.chBox.UseVisualStyleBackColor = true;
-            this.chBox.CheckedChanged += new System.EventHandler(this.chBox_CheckedChanged);
-            // 
-            // cmbUsuario
-            // 
-            this.cmbUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUsuario.FormattingEnabled = true;
-            this.cmbUsuario.Location = new System.Drawing.Point(302, 20);
-            this.cmbUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cmbUsuario.Name = "cmbUsuario";
-            this.cmbUsuario.Size = new System.Drawing.Size(127, 21);
-            this.cmbUsuario.TabIndex = 31;
-            this.cmbUsuario.Visible = false;
-            // 
-            // cmbCaja1
-            // 
-            this.cmbCaja1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCaja1.FormattingEnabled = true;
-            this.cmbCaja1.Location = new System.Drawing.Point(142, 20);
-            this.cmbCaja1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cmbCaja1.Name = "cmbCaja1";
-            this.cmbCaja1.Size = new System.Drawing.Size(83, 21);
-            this.cmbCaja1.TabIndex = 30;
-            this.cmbCaja1.Visible = false;
-            // 
-            // rbtn1Usuario
-            // 
-            this.rbtn1Usuario.AutoSize = true;
-            this.rbtn1Usuario.Location = new System.Drawing.Point(238, 20);
-            this.rbtn1Usuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.rbtn1Usuario.Name = "rbtn1Usuario";
-            this.rbtn1Usuario.Size = new System.Drawing.Size(61, 17);
-            this.rbtn1Usuario.TabIndex = 29;
-            this.rbtn1Usuario.TabStop = true;
-            this.rbtn1Usuario.Text = "Usuario";
-            this.rbtn1Usuario.UseVisualStyleBackColor = true;
-            this.rbtn1Usuario.Visible = false;
-            // 
-            // rbtn1Caja
-            // 
-            this.rbtn1Caja.AutoSize = true;
-            this.rbtn1Caja.Location = new System.Drawing.Point(95, 20);
-            this.rbtn1Caja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.rbtn1Caja.Name = "rbtn1Caja";
-            this.rbtn1Caja.Size = new System.Drawing.Size(46, 17);
-            this.rbtn1Caja.TabIndex = 28;
-            this.rbtn1Caja.TabStop = true;
-            this.rbtn1Caja.Text = "Caja";
-            this.rbtn1Caja.UseVisualStyleBackColor = true;
-            this.rbtn1Caja.Visible = false;
-            this.rbtn1Caja.CheckedChanged += new System.EventHandler(this.rbtn1Caja_CheckedChanged);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabEgresos);
@@ -766,12 +652,22 @@ namespace Finanzas.GUI
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(200, 40);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1028, 535);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // txtNumero
+            // 
+            this.txtNumero.Location = new System.Drawing.Point(230, 16);
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(100, 20);
+            this.txtNumero.TabIndex = 2;
+            this.txtNumero.Text = "1";
+            this.txtNumero.TextChanged += new System.EventHandler(this.txtNumero_TextChanged);
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // Egresos
             // 
@@ -779,7 +675,7 @@ namespace Finanzas.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 535);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Egresos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Egresos";
@@ -800,8 +696,6 @@ namespace Finanzas.GUI
             this.groupBox2.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -826,11 +720,9 @@ namespace Finanzas.GUI
         private System.Windows.Forms.TabPage tabEgresos;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtPrecioIngrediente;
+        private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtStockIngrediente;
-        private System.Windows.Forms.TextBox txtIDIngrediente;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
@@ -844,13 +736,9 @@ namespace Finanzas.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton rbtn1Usuario;
-        private System.Windows.Forms.RadioButton rbtn1Caja;
         public System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.RadioButton rbCaja;
         private System.Windows.Forms.RadioButton rbNinguno;
-        private System.Windows.Forms.ComboBox cmbCaja;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEgreso;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCaja;
@@ -859,15 +747,13 @@ namespace Finanzas.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridView dgvDatos;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEgreso1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCaja1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usuario1;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad1;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion1;
-        private System.Windows.Forms.ComboBox cmbUsuario;
-        private System.Windows.Forms.ComboBox cmbCaja1;
-        private System.Windows.Forms.CheckBox chBox;
+        private System.Windows.Forms.TextBox txtNumero;
     }
 }

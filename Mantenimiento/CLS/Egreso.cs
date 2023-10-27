@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Egreso
+    public class Egreso
     {
         int idEgreso;
         int idCaja;

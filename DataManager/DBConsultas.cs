@@ -892,12 +892,12 @@ namespace DataManager
                 throw;
             }
         }
-        public static DataTable Egreso()
+        public static DataTable Egreso(int id)
         {
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado;";
+                String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado AND idCaja = " + id + ";";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
