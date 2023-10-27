@@ -18,19 +18,12 @@ namespace Finanzas.GUI
         BindingSource datos1 = new BindingSource();
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         int idCajaAbierta;
-        Double saldoAnterior;
-
-
-
 
         public Egresos()
         {
             InitializeComponent();
-            DataTable cajaAbierta = DataManager.DBConsultas.CajaAbierta();
-            saldoAnterior = Double.Parse(cajaAbierta.Rows[0]["saldo"].ToString());
-            idCajaAbierta = Int32.Parse(cajaAbierta.Rows[0]["idCaja"].ToString());
             txtCantidad.TextChanged += txtCantidad_TextChanged;
-
+            ConsultarCaja();
         }
         private void CargarDatos(int id)
         {
@@ -291,7 +284,23 @@ namespace Finanzas.GUI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("¿Esta seguro que desea eliminar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Mantenimiento.CLS.Egreso egreso = new Mantenimiento.CLS.Egreso();
+                egreso.IdEgreso = Int32.Parse(dgvDatos.CurrentRow.Cells["idEgreso1"].Value.ToString());
+                egreso.Eliminar();
 
+                Mantenimiento.CLS.Caja caja = new Mantenimiento.CLS.Caja();
+                caja.IdCaja = idCajaAbierta;
+                caja.Saldo = Double.Parse(lblEfectivo.Text) + Double.Parse(dgvDatos.CurrentRow.Cells["cantidad1"].Value.ToString());
+                caja.ActualizarSaldo();
+
+                Limpiar();
+                CargarDatos(idCajaAbierta);
+                ConsultarCaja();
+                MessageBox.Show("Operacion exitosa. ", "Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
         }
 
         private void btnSalirIngrediente_Click(object sender, EventArgs e)
@@ -337,9 +346,8 @@ namespace Finanzas.GUI
             if (txtDescripcion.Tag == null)
             {
                 //Se insertara
-                MessageBox.Show("Insertar");
                 egreso.Insertar();
-                caja.Saldo = saldoAnterior - Double.Parse(txtCantidad.Text.ToString());
+                caja.Saldo = Double.Parse(lblEfectivo.Text) - Double.Parse(txtCantidad.Text.ToString());
                 caja.ActualizarSaldo();
             }
             else
@@ -356,12 +364,12 @@ namespace Finanzas.GUI
                     if (cantAnterior > cantActual)
                     {
                         res = cantAnterior - cantActual;
-                        caja.Saldo = saldoAnterior + res;
+                        caja.Saldo = Double.Parse(lblEfectivo.Text) + res;
                     }
                     else
                     {
                         res = cantActual - cantAnterior;
-                        caja.Saldo = saldoAnterior - res;
+                        caja.Saldo = Double.Parse(lblEfectivo.Text) - res;
                     }
                     caja.ActualizarSaldo();
                 }
@@ -369,6 +377,7 @@ namespace Finanzas.GUI
             }
             Limpiar();
             CargarDatos(idCajaAbierta);
+            ConsultarCaja();
             MessageBox.Show("Operacion exitosa. ", "Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -417,6 +426,12 @@ namespace Finanzas.GUI
         private void txtNumero_TextChanged(object sender, EventArgs e)
         {
             FiltrarDatos();
+        }
+        private void ConsultarCaja()
+        {
+            DataTable cajaAbierta = DataManager.DBConsultas.CajaAbierta();
+            lblEfectivo.Text = cajaAbierta.Rows[0]["saldo"].ToString();
+            idCajaAbierta = Int32.Parse(cajaAbierta.Rows[0]["idCaja"].ToString());
         }
     }
 }

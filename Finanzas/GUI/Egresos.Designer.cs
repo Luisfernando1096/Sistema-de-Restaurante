@@ -29,9 +29,9 @@ namespace Finanzas.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Egresos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tanConsultas = new System.Windows.Forms.TabPage();
             this.dgvDatosCaja = new System.Windows.Forms.DataGridView();
             this.idEgreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +53,7 @@ namespace Finanzas.GUI
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtNumero = new System.Windows.Forms.TextBox();
             this.rbCaja = new System.Windows.Forms.RadioButton();
             this.rbNinguno = new System.Windows.Forms.RadioButton();
             this.tabEgresos = new System.Windows.Forms.TabPage();
@@ -83,7 +84,8 @@ namespace Finanzas.GUI
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblEfectivo = new System.Windows.Forms.Label();
             this.tanConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosCaja)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -170,8 +172,8 @@ namespace Finanzas.GUI
             // fecha
             // 
             this.fecha.DataPropertyName = "fecha";
-            dataGridViewCellStyle5.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha.DefaultCellStyle = dataGridViewCellStyle1;
             this.fecha.HeaderText = "Fecha";
             this.fecha.MinimumWidth = 6;
             this.fecha.Name = "fecha";
@@ -335,6 +337,16 @@ namespace Finanzas.GUI
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Filtrar por:";
             // 
+            // txtNumero
+            // 
+            this.txtNumero.Location = new System.Drawing.Point(230, 16);
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(100, 20);
+            this.txtNumero.TabIndex = 2;
+            this.txtNumero.Text = "1";
+            this.txtNumero.TextChanged += new System.EventHandler(this.txtNumero_TextChanged);
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
+            // 
             // rbCaja
             // 
             this.rbCaja.AutoSize = true;
@@ -391,9 +403,8 @@ namespace Finanzas.GUI
             this.fecha1,
             this.cantidad1,
             this.descripcion1});
-            this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvDatos.Location = new System.Drawing.Point(2, 118);
+            this.dgvDatos.Location = new System.Drawing.Point(2, 169);
             this.dgvDatos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
@@ -401,7 +412,7 @@ namespace Finanzas.GUI
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.RowTemplate.Height = 24;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(1016, 367);
+            this.dgvDatos.Size = new System.Drawing.Size(1016, 316);
             this.dgvDatos.TabIndex = 18;
             // 
             // idEgreso1
@@ -434,8 +445,8 @@ namespace Finanzas.GUI
             // fecha1
             // 
             this.fecha1.DataPropertyName = "fecha";
-            dataGridViewCellStyle6.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha1.DefaultCellStyle = dataGridViewCellStyle2;
             this.fecha1.HeaderText = "Fecha";
             this.fecha1.MinimumWidth = 6;
             this.fecha1.Name = "fecha1";
@@ -462,18 +473,20 @@ namespace Finanzas.GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.dtpFecha);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtCantidad);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.txtDescripcion);
             this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.lblEfectivo);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(2, 64);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(1016, 54);
+            this.groupBox2.Size = new System.Drawing.Size(1016, 101);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
@@ -481,7 +494,7 @@ namespace Finanzas.GUI
             // 
             this.dtpFecha.CustomFormat = "yyyy/MM/dd hh:mm:ss";
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFecha.Location = new System.Drawing.Point(54, 17);
+            this.dtpFecha.Location = new System.Drawing.Point(54, 60);
             this.dtpFecha.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(141, 20);
@@ -490,7 +503,7 @@ namespace Finanzas.GUI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(639, 20);
+            this.label5.Location = new System.Drawing.Point(639, 63);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
@@ -499,7 +512,7 @@ namespace Finanzas.GUI
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(693, 17);
+            this.txtCantidad.Location = new System.Drawing.Point(693, 60);
             this.txtCantidad.Margin = new System.Windows.Forms.Padding(2);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(65, 20);
@@ -510,7 +523,7 @@ namespace Finanzas.GUI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(272, 20);
+            this.label4.Location = new System.Drawing.Point(272, 63);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
@@ -519,7 +532,7 @@ namespace Finanzas.GUI
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(368, 17);
+            this.txtDescripcion.Location = new System.Drawing.Point(368, 60);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(263, 20);
@@ -528,7 +541,7 @@ namespace Finanzas.GUI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 20);
+            this.label3.Location = new System.Drawing.Point(14, 63);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
@@ -659,15 +672,25 @@ namespace Finanzas.GUI
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // txtNumero
+            // label1
             // 
-            this.txtNumero.Location = new System.Drawing.Point(230, 16);
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(100, 20);
-            this.txtNumero.TabIndex = 2;
-            this.txtNumero.Text = "1";
-            this.txtNumero.TextChanged += new System.EventHandler(this.txtNumero_TextChanged);
-            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(247, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(368, 37);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Efectivo disponible en caja:  $";
+            // 
+            // lblEfectivo
+            // 
+            this.lblEfectivo.AutoSize = true;
+            this.lblEfectivo.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEfectivo.Location = new System.Drawing.Point(609, 9);
+            this.lblEfectivo.Name = "lblEfectivo";
+            this.lblEfectivo.Size = new System.Drawing.Size(47, 37);
+            this.lblEfectivo.TabIndex = 20;
+            this.lblEfectivo.Text = "25";
             // 
             // Egresos
             // 
@@ -755,5 +778,7 @@ namespace Finanzas.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad1;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion1;
         private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEfectivo;
     }
 }
