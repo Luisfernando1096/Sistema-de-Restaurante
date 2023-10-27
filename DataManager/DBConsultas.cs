@@ -1096,7 +1096,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"select m.idMesa, m.numero,m.nombre nomMesa, m.capacidad, m.disponible,s.idSalon, s.nombre, s.fondo, s.nMesas from mesa m, salon s where m.idSalon  = s.idSalon;";
+                String sentencia = "select m.idMesa, m.numero,m.nombre nomMesa, m.capacidad, m.disponible,s.idSalon, s.nombre, s.fondo, s.nMesas from mesa m, salon s where m.idSalon  = s.idSalon;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1170,7 +1170,173 @@ namespace DataManager
                 return -1;
             }
         }
+        public static int UltimoSalon(String nombre)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idSalon FROM salon WHERE nombre = '" + nombre + "' ORDER BY idSalon DESC LIMIT 1;";
+                DBOperacion operacion = new DBOperacion();
 
+                resultado = operacion.Consultar(sentencia);
+
+                if (resultado.Rows.Count > 0)
+                {
+                    int idSalon = Convert.ToInt32(resultado.Rows[0]["idSalon"]);
+                    return idSalon;
+                }
+                else
+                {
+                    throw new Exception("No se encontraron registros para el usuario especificado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return -1;
+            }
+        }
+        public static Boolean EstaActivo(int idSalon)
+        {
+            try
+            {
+                Boolean existe = false;
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM mesa WHERE disponible = " + 0 + " AND idSalon = " + idSalon + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+
+                if (resultado.Rows.Count > 0)
+                {
+                    existe = true;
+                }
+
+                return existe;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+        public static Boolean MesaActiva(int idMesa)
+        {
+            try
+            {
+                Boolean existe = false;
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM mesa WHERE disponible = " + 0 + " AND idMesa = " + idMesa + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+
+                if (resultado.Rows.Count > 0)
+                {
+                    existe = true;
+                }
+
+                return existe;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+
+        public static int CantidadMesas(int idSalon)
+        {
+            try
+            {
+                int cantidad = 0;
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT COUNT(*) FROM mesa WHERE idSalon = " + idSalon + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+
+                if (resultado.Rows.Count > 0)
+                {
+                    cantidad = Convert.ToInt32(resultado.Rows[0][0]);
+                }
+
+                return cantidad;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int UltimoNumero(int idSalon)
+        {
+            try
+            {
+                int cantidad = 0;
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT numero FROM mesa WHERE idSalon =  " + idSalon + " order by idMesa desc limit 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+
+                if (resultado.Rows.Count > 0)
+                {
+                    cantidad = Convert.ToInt32(resultado.Rows[0]["numero"]);
+                    return cantidad;
+                }
+                return cantidad;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static DataTable PermisosOtorgados(String IDROL)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "select p.idRol, r.rol, p.idComando, c.comando  from rol r, comando c, permiso p where p.idRol = r.idRol and p.idComando = c.idComando and p.idRol = " + IDROL + " order by p.idComando;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable PermisosDisponibles(String IDROL)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = "SELECT s.idcomando AS idcomando, s.comando AS comando " +
+                                  "FROM comando s " +
+                                  "LEFT JOIN ( " +
+                                  "  SELECT p.idComando " +
+                                  "  FROM rol r, comando c, permiso p " +
+                                  "  WHERE p.idRol = r.idRol " +
+                                  "  AND p.idComando = c.idComando " +
+                                  "  AND p.idRol = " + IDROL +
+                                  ") t " +
+                                  "ON s.idcomando = t.idComando " +
+                                  "WHERE t.idComando IS NULL;";
+
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
         public static int ConsultarStock(int Tipo, int idTipo)
         {
             try

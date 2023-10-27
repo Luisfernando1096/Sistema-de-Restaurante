@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Proveedor
+    public class Proveedor
     {
         /*DECLARACION DE VARIABLES IGUAL A LA BASE DE DATOS*/
         int idProveedor;

@@ -23,14 +23,18 @@ namespace Personal.GUI
             DataTable Roles = new DataTable();
             try
             {
-                Roles = DataManager.DBConsultas.Roles();
-                cmbRol.DataSource = Roles;
+                DataTable rol = DataManager.DBConsultas.Roles();
+                DataTable dt = rol.Clone();
+
+                dt.Merge(rol);
+
+                cmbRol.DataSource = dt;
                 cmbRol.DisplayMember = "rol";
                 cmbRol.ValueMember = "idRol";
             }
             catch (Exception)
             {
-
+                throw;
             }
         }
 

@@ -508,5 +508,11 @@ namespace ServiceExpressDsk.GUI
             f.tabControl1.SelectedIndex = 2;
             f.ShowDialog();
         }
+
+        private void toolStripButton23_Click(object sender, EventArgs e)
+        {
+            Personal.GUI.Permisos f = new Personal.GUI.Permisos();
+            f.ShowDialog();
+        }
     }
 }

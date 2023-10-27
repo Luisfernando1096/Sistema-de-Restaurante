@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Permiso
+    public class Permiso
     {
         int idRol;
         int idComando;

@@ -30,11 +30,11 @@ namespace TPV.GUI
         private void AjustarPosicionBoton()
         {
             // Obtenemos el ancho y alto de la pantalla
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenWidth = this.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
             // Ajustamos la posición del botón a la esquina derecha superior
-            btnSalir.Left = screenWidth - btnSalir.Width;
+            btnSalir.Left = screenWidth - (btnSalir.Width + 30);
             btnSalir.Top = 0;
         }
 

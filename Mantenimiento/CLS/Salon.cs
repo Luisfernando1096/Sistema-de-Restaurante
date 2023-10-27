@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class Salon
+    public class Salon
     {
         /*DECLARAR LAS VARIABLES*/
         int idSalon;
@@ -64,6 +64,52 @@ namespace Mantenimiento.CLS
             }
             return resultado;
         }
+        public Boolean ActualizarNombre()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = "UPDATE salon SET nombre = '" + nombre + "' WHERE idSalon = " + idSalon + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                int filasAfectadas = 0;
+                filasAfectadas = op.EjecutarSentencia(sentencia);
+                if (filasAfectadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
+        }
+
+        public Boolean ActualizarNMesas()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = "UPDATE salon SET nMesas = " + nMesas + " WHERE idSalon = " + idSalon + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                int filasAfectadas = 0;
+                filasAfectadas = op.EjecutarSentencia(sentencia);
+                if (filasAfectadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
+        }
+
         public Boolean Eliminar()
         {
             Boolean resultado = false;

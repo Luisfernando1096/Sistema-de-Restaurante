@@ -24,12 +24,12 @@ namespace Mantenimiento.CLS
 
         public Boolean Insertar()
         {
-            Boolean resultado = false;
-            string sentencia;
-            sentencia = @"INSERT INTO logfile(numero, nombre, capacidad, disponible, idSalon) VALUES(" + numero + ", '" + nombre + "', " + capacidad + ", " + disponible + ", " + idSalon + ");";
-
             try
             {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = "INSERT INTO mesa(numero, nombre, capacidad, disponible, idSalon) VALUES(" + numero + ", '" + nombre + "', " + capacidad + ", " + disponible + ", " + idSalon + ")";
+
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
                 Int32 filasInsertadas = 0;
                 filasInsertadas = op.EjecutarSentencia(sentencia);
@@ -37,25 +37,24 @@ namespace Mantenimiento.CLS
                 {
                     resultado = true;
                 }
+                return resultado;
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-            return resultado;
         }
 
         public Boolean Actualizar()
         {
-            Boolean resultado = false;
-            string sentencia;
-            sentencia = @"UPDATE mesa SET numero = " + numero + ", nombre = '" + nombre + "', capacidad= " + capacidad + ", disponible = " + disponible + ", idSalon = " + idSalon + " " +
-                "WHERE idMesa = " + idMesa + ";";
-
             try
             {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = @"UPDATE mesa SET numero = " + numero + ", nombre = '" + nombre + "', capacidad= " + capacidad + ", disponible = " + disponible + ", idSalon = " + idSalon + " " +
+                    "WHERE idMesa = " + idMesa + ";";
+
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
                 Int32 filasActualizadas = 0;
                 filasActualizadas = op.EjecutarSentencia(sentencia);
@@ -63,25 +62,45 @@ namespace Mantenimiento.CLS
                 {
                     resultado = true;
                 }
+
+                return resultado;
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-            return resultado;
         }
 
         public Boolean Eliminar()
         {
-            Boolean resultado = false;
-            string sentencia;
-            sentencia = @"DELETE FROM mesa " +
-                "WHERE idMesa = " + idMesa + ";";
-
             try
             {
+                Boolean resultado = false;
+                string sentencia = @"DELETE FROM mesa WHERE idSalon = " + idSalon + ";";
+
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                int filasEliminadas = op.EjecutarSentencia(sentencia);
+                if (filasEliminadas > 0)
+                {
+                    resultado = true;
+                }
+                return resultado;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Boolean EliminarFila()
+        {
+            try
+            {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = @"DELETE FROM mesa " +
+                    "WHERE idMesa = " + idMesa + ";";
+
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
                 Int32 filasEliminadas = 0;
                 filasEliminadas = op.EjecutarSentencia(sentencia);
@@ -89,25 +108,25 @@ namespace Mantenimiento.CLS
                 {
                     resultado = true;
                 }
+                return resultado;
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-            return resultado;
         }
 
         public Boolean ActualizarEstado()
         {
-            Boolean resultado = false;
-            string sentencia;
-            sentencia = @"UPDATE mesa SET disponible = " + disponible + " " +
-                "WHERE idMesa = " + idMesa + ";";
 
             try
             {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = @"UPDATE mesa SET disponible = " + disponible + " " +
+                    "WHERE idMesa = " + idMesa + ";";
+
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
                 Int32 filasActualizadas = 0;
                 filasActualizadas = op.EjecutarSentencia(sentencia);
@@ -115,6 +134,8 @@ namespace Mantenimiento.CLS
                 {
                     resultado = true;
                 }
+                return resultado;
+
             }
             catch (Exception)
             {
@@ -122,7 +143,6 @@ namespace Mantenimiento.CLS
                 throw;
             }
 
-            return resultado;
         }
 
         public String StringActualizarEstado()
