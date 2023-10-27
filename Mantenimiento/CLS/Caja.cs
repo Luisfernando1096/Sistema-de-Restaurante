@@ -124,6 +124,31 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
+        public Boolean ActualizarSaldo()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"update caja set  saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+        }
+
         public Boolean Eliminar()
         {
             Boolean resultado = false;
