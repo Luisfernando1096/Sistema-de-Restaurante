@@ -332,7 +332,7 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT p.idProducto, p.nombre, p.descripcion, p.precio, p.costo, p.inventariable, 
-                                    p.conIngrediente, p.stock, p.stockMinimo, p.activo, s.idFamilia, s.familia, s.grupoPrinter 
+                                    p.conIngrediente, p.stock, p.stockMinimo, p.activo, s.idFamilia, s.familia, s.grupoPrinter, p.foto 
                                     FROM producto p, familia s
                                     WHERE p.idFamilia=s.idFamilia AND p.idFamilia=" + idfamilia + " AND p.activo=1;";
                 DBOperacion operacion = new DBOperacion();

@@ -152,5 +152,6 @@
   <ItemGroup>
     <Content Include="Extras\configuracion.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

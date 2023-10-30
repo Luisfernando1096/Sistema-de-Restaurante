@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CLS\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GUI\AnularFactura.resx">

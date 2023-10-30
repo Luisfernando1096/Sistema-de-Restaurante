@@ -204,7 +204,7 @@ namespace Configuraciones.GUI
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(200, 40);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1028, 609);
@@ -215,9 +215,9 @@ namespace Configuraciones.GUI
             this.tabPageConfig.Controls.Add(this.groupBox2);
             this.tabPageConfig.Controls.Add(this.toolStrip1);
             this.tabPageConfig.Location = new System.Drawing.Point(4, 44);
-            this.tabPageConfig.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageConfig.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageConfig.Name = "tabPageConfig";
-            this.tabPageConfig.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageConfig.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageConfig.Size = new System.Drawing.Size(1020, 561);
             this.tabPageConfig.TabIndex = 0;
             this.tabPageConfig.Text = "       Configuraciones        ";
@@ -245,9 +245,9 @@ namespace Configuraciones.GUI
             this.groupBox2.Controls.Add(this.checkActivarInventario);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(2, 61);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(1016, 535);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
@@ -256,7 +256,7 @@ namespace Configuraciones.GUI
             // 
             this.checkAutorizacion.AutoSize = true;
             this.checkAutorizacion.Location = new System.Drawing.Point(85, 225);
-            this.checkAutorizacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkAutorizacion.Margin = new System.Windows.Forms.Padding(2);
             this.checkAutorizacion.Name = "checkAutorizacion";
             this.checkAutorizacion.Size = new System.Drawing.Size(395, 17);
             this.checkAutorizacion.TabIndex = 25;
@@ -267,7 +267,7 @@ namespace Configuraciones.GUI
             // 
             this.checkMuchosPro.AutoSize = true;
             this.checkMuchosPro.Location = new System.Drawing.Point(85, 194);
-            this.checkMuchosPro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkMuchosPro.Margin = new System.Windows.Forms.Padding(2);
             this.checkMuchosPro.Name = "checkMuchosPro";
             this.checkMuchosPro.Size = new System.Drawing.Size(206, 17);
             this.checkMuchosPro.TabIndex = 24;
@@ -286,9 +286,9 @@ namespace Configuraciones.GUI
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(384, 18);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(545, 202);
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
@@ -299,7 +299,7 @@ namespace Configuraciones.GUI
             this.cmbInformes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInformes.FormattingEnabled = true;
             this.cmbInformes.Location = new System.Drawing.Point(143, 125);
-            this.cmbInformes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbInformes.Margin = new System.Windows.Forms.Padding(2);
             this.cmbInformes.Name = "cmbInformes";
             this.cmbInformes.Size = new System.Drawing.Size(214, 21);
             this.cmbInformes.TabIndex = 28;
@@ -309,7 +309,7 @@ namespace Configuraciones.GUI
             this.cmbFacturas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFacturas.FormattingEnabled = true;
             this.cmbFacturas.Location = new System.Drawing.Point(143, 92);
-            this.cmbFacturas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbFacturas.Margin = new System.Windows.Forms.Padding(2);
             this.cmbFacturas.Name = "cmbFacturas";
             this.cmbFacturas.Size = new System.Drawing.Size(214, 21);
             this.cmbFacturas.TabIndex = 27;
@@ -319,7 +319,7 @@ namespace Configuraciones.GUI
             this.cmbComandaTick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbComandaTick.FormattingEnabled = true;
             this.cmbComandaTick.Location = new System.Drawing.Point(143, 62);
-            this.cmbComandaTick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbComandaTick.Margin = new System.Windows.Forms.Padding(2);
             this.cmbComandaTick.Name = "cmbComandaTick";
             this.cmbComandaTick.Size = new System.Drawing.Size(214, 21);
             this.cmbComandaTick.TabIndex = 26;
@@ -329,7 +329,7 @@ namespace Configuraciones.GUI
             this.cmbComandas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbComandas.FormattingEnabled = true;
             this.cmbComandas.Location = new System.Drawing.Point(143, 31);
-            this.cmbComandas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbComandas.Margin = new System.Windows.Forms.Padding(2);
             this.cmbComandas.Name = "cmbComandas";
             this.cmbComandas.Size = new System.Drawing.Size(214, 21);
             this.cmbComandas.TabIndex = 25;
@@ -380,7 +380,7 @@ namespace Configuraciones.GUI
             this.textBox6.Enabled = false;
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.Location = new System.Drawing.Point(350, 106);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(20, 16);
             this.textBox6.TabIndex = 22;
@@ -392,7 +392,7 @@ namespace Configuraciones.GUI
             this.textBox5.Enabled = false;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.Location = new System.Drawing.Point(350, 74);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(20, 16);
             this.textBox5.TabIndex = 21;
@@ -404,7 +404,7 @@ namespace Configuraciones.GUI
             this.textBox4.Enabled = false;
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.Location = new System.Drawing.Point(350, 48);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(20, 16);
             this.textBox4.TabIndex = 20;
@@ -413,7 +413,7 @@ namespace Configuraciones.GUI
             // txtPropinas
             // 
             this.txtPropinas.Location = new System.Drawing.Point(293, 48);
-            this.txtPropinas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPropinas.Margin = new System.Windows.Forms.Padding(2);
             this.txtPropinas.Name = "txtPropinas";
             this.txtPropinas.Size = new System.Drawing.Size(54, 20);
             this.txtPropinas.TabIndex = 19;
@@ -422,7 +422,7 @@ namespace Configuraciones.GUI
             // txtImpuesto
             // 
             this.txtImpuesto.Location = new System.Drawing.Point(293, 74);
-            this.txtImpuesto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtImpuesto.Margin = new System.Windows.Forms.Padding(2);
             this.txtImpuesto.Name = "txtImpuesto";
             this.txtImpuesto.Size = new System.Drawing.Size(54, 20);
             this.txtImpuesto.TabIndex = 18;
@@ -431,7 +431,7 @@ namespace Configuraciones.GUI
             // txtImpuestoVIP
             // 
             this.txtImpuestoVIP.Location = new System.Drawing.Point(293, 104);
-            this.txtImpuestoVIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtImpuestoVIP.Margin = new System.Windows.Forms.Padding(2);
             this.txtImpuestoVIP.Name = "txtImpuestoVIP";
             this.txtImpuestoVIP.Size = new System.Drawing.Size(54, 20);
             this.txtImpuestoVIP.TabIndex = 17;
@@ -440,7 +440,7 @@ namespace Configuraciones.GUI
             // txtMultiSe
             // 
             this.txtMultiSe.Location = new System.Drawing.Point(293, 135);
-            this.txtMultiSe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMultiSe.Margin = new System.Windows.Forms.Padding(2);
             this.txtMultiSe.Name = "txtMultiSe";
             this.txtMultiSe.Size = new System.Drawing.Size(54, 20);
             this.txtMultiSe.TabIndex = 16;
@@ -464,9 +464,9 @@ namespace Configuraciones.GUI
             this.groupBox3.Controls.Add(this.label29);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(73, 377);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(856, 119);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
@@ -475,7 +475,7 @@ namespace Configuraciones.GUI
             // UpFaSeparador
             // 
             this.UpFaSeparador.Location = new System.Drawing.Point(662, 63);
-            this.UpFaSeparador.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpFaSeparador.Margin = new System.Windows.Forms.Padding(2);
             this.UpFaSeparador.Name = "UpFaSeparador";
             this.UpFaSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpFaSeparador.TabIndex = 30;
@@ -483,7 +483,7 @@ namespace Configuraciones.GUI
             // UpFaAlto
             // 
             this.UpFaAlto.Location = new System.Drawing.Point(570, 63);
-            this.UpFaAlto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpFaAlto.Margin = new System.Windows.Forms.Padding(2);
             this.UpFaAlto.Name = "UpFaAlto";
             this.UpFaAlto.Size = new System.Drawing.Size(74, 19);
             this.UpFaAlto.TabIndex = 29;
@@ -491,7 +491,7 @@ namespace Configuraciones.GUI
             // UpFaAncho
             // 
             this.UpFaAncho.Location = new System.Drawing.Point(478, 63);
-            this.UpFaAncho.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpFaAncho.Margin = new System.Windows.Forms.Padding(2);
             this.UpFaAncho.Name = "UpFaAncho";
             this.UpFaAncho.Size = new System.Drawing.Size(74, 19);
             this.UpFaAncho.TabIndex = 28;
@@ -542,7 +542,7 @@ namespace Configuraciones.GUI
             // UpProSeparador
             // 
             this.UpProSeparador.Location = new System.Drawing.Point(255, 63);
-            this.UpProSeparador.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpProSeparador.Margin = new System.Windows.Forms.Padding(2);
             this.UpProSeparador.Name = "UpProSeparador";
             this.UpProSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpProSeparador.TabIndex = 23;
@@ -550,7 +550,7 @@ namespace Configuraciones.GUI
             // UpProAlto
             // 
             this.UpProAlto.Location = new System.Drawing.Point(164, 63);
-            this.UpProAlto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpProAlto.Margin = new System.Windows.Forms.Padding(2);
             this.UpProAlto.Name = "UpProAlto";
             this.UpProAlto.Size = new System.Drawing.Size(74, 19);
             this.UpProAlto.TabIndex = 22;
@@ -558,7 +558,7 @@ namespace Configuraciones.GUI
             // UpProAncho
             // 
             this.UpProAncho.Location = new System.Drawing.Point(71, 63);
-            this.UpProAncho.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpProAncho.Margin = new System.Windows.Forms.Padding(2);
             this.UpProAncho.Name = "UpProAncho";
             this.UpProAncho.Size = new System.Drawing.Size(74, 19);
             this.UpProAncho.TabIndex = 21;
@@ -624,9 +624,9 @@ namespace Configuraciones.GUI
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(73, 258);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(856, 115);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
@@ -636,7 +636,7 @@ namespace Configuraciones.GUI
             // 
             this.UpMesasSeparador.AutoSize = true;
             this.UpMesasSeparador.Location = new System.Drawing.Point(662, 59);
-            this.UpMesasSeparador.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpMesasSeparador.Margin = new System.Windows.Forms.Padding(2);
             this.UpMesasSeparador.Name = "UpMesasSeparador";
             this.UpMesasSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpMesasSeparador.TabIndex = 16;
@@ -645,7 +645,7 @@ namespace Configuraciones.GUI
             // 
             this.UpMesasAlto.AutoSize = true;
             this.UpMesasAlto.Location = new System.Drawing.Point(570, 59);
-            this.UpMesasAlto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpMesasAlto.Margin = new System.Windows.Forms.Padding(2);
             this.UpMesasAlto.Name = "UpMesasAlto";
             this.UpMesasAlto.Size = new System.Drawing.Size(74, 19);
             this.UpMesasAlto.TabIndex = 15;
@@ -654,7 +654,7 @@ namespace Configuraciones.GUI
             // 
             this.UpMesasAncho.AutoSize = true;
             this.UpMesasAncho.Location = new System.Drawing.Point(478, 59);
-            this.UpMesasAncho.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpMesasAncho.Margin = new System.Windows.Forms.Padding(2);
             this.UpMesasAncho.Name = "UpMesasAncho";
             this.UpMesasAncho.Size = new System.Drawing.Size(74, 19);
             this.UpMesasAncho.TabIndex = 14;
@@ -706,7 +706,7 @@ namespace Configuraciones.GUI
             // 
             this.UpSalonesSeparador.AutoSize = true;
             this.UpSalonesSeparador.Location = new System.Drawing.Point(255, 59);
-            this.UpSalonesSeparador.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpSalonesSeparador.Margin = new System.Windows.Forms.Padding(2);
             this.UpSalonesSeparador.Name = "UpSalonesSeparador";
             this.UpSalonesSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpSalonesSeparador.TabIndex = 9;
@@ -715,7 +715,7 @@ namespace Configuraciones.GUI
             // 
             this.UpSalonesAlto.AutoSize = true;
             this.UpSalonesAlto.Location = new System.Drawing.Point(164, 59);
-            this.UpSalonesAlto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpSalonesAlto.Margin = new System.Windows.Forms.Padding(2);
             this.UpSalonesAlto.Name = "UpSalonesAlto";
             this.UpSalonesAlto.Size = new System.Drawing.Size(74, 19);
             this.UpSalonesAlto.TabIndex = 8;
@@ -723,7 +723,7 @@ namespace Configuraciones.GUI
             // UpSalonesAncho
             // 
             this.UpSalonesAncho.Location = new System.Drawing.Point(71, 59);
-            this.UpSalonesAncho.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpSalonesAncho.Margin = new System.Windows.Forms.Padding(2);
             this.UpSalonesAncho.Name = "UpSalonesAncho";
             this.UpSalonesAncho.Size = new System.Drawing.Size(74, 19);
             this.UpSalonesAncho.TabIndex = 7;
@@ -775,7 +775,7 @@ namespace Configuraciones.GUI
             // 
             this.checkActivarAlerta.AutoSize = true;
             this.checkActivarAlerta.Location = new System.Drawing.Point(85, 164);
-            this.checkActivarAlerta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkActivarAlerta.Margin = new System.Windows.Forms.Padding(2);
             this.checkActivarAlerta.Name = "checkActivarAlerta";
             this.checkActivarAlerta.Size = new System.Drawing.Size(191, 17);
             this.checkActivarAlerta.TabIndex = 5;
@@ -786,7 +786,7 @@ namespace Configuraciones.GUI
             // 
             this.checkMultiSe.AutoSize = true;
             this.checkMultiSe.Location = new System.Drawing.Point(85, 136);
-            this.checkMultiSe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkMultiSe.Margin = new System.Windows.Forms.Padding(2);
             this.checkMultiSe.Name = "checkMultiSe";
             this.checkMultiSe.Size = new System.Drawing.Size(162, 17);
             this.checkMultiSe.TabIndex = 4;
@@ -798,7 +798,7 @@ namespace Configuraciones.GUI
             // 
             this.checkActivarIVip.AutoSize = true;
             this.checkActivarIVip.Location = new System.Drawing.Point(85, 106);
-            this.checkActivarIVip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkActivarIVip.Margin = new System.Windows.Forms.Padding(2);
             this.checkActivarIVip.Name = "checkActivarIVip";
             this.checkActivarIVip.Size = new System.Drawing.Size(151, 17);
             this.checkActivarIVip.TabIndex = 3;
@@ -810,7 +810,7 @@ namespace Configuraciones.GUI
             // 
             this.checkActivarIva.AutoSize = true;
             this.checkActivarIva.Location = new System.Drawing.Point(85, 76);
-            this.checkActivarIva.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkActivarIva.Margin = new System.Windows.Forms.Padding(2);
             this.checkActivarIva.Name = "checkActivarIva";
             this.checkActivarIva.Size = new System.Drawing.Size(128, 17);
             this.checkActivarIva.TabIndex = 2;
@@ -822,7 +822,7 @@ namespace Configuraciones.GUI
             // 
             this.checkActivarPropina.AutoSize = true;
             this.checkActivarPropina.Location = new System.Drawing.Point(85, 50);
-            this.checkActivarPropina.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkActivarPropina.Margin = new System.Windows.Forms.Padding(2);
             this.checkActivarPropina.Name = "checkActivarPropina";
             this.checkActivarPropina.Size = new System.Drawing.Size(98, 17);
             this.checkActivarPropina.TabIndex = 1;
@@ -834,7 +834,7 @@ namespace Configuraciones.GUI
             // 
             this.checkActivarInventario.AutoSize = true;
             this.checkActivarInventario.Location = new System.Drawing.Point(85, 25);
-            this.checkActivarInventario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkActivarInventario.Margin = new System.Windows.Forms.Padding(2);
             this.checkActivarInventario.Name = "checkActivarInventario";
             this.checkActivarInventario.Size = new System.Drawing.Size(158, 17);
             this.checkActivarInventario.TabIndex = 0;
@@ -894,9 +894,9 @@ namespace Configuraciones.GUI
             this.tabPageDatosEmpresa.Controls.Add(this.groupBox5);
             this.tabPageDatosEmpresa.Controls.Add(this.toolStrip3);
             this.tabPageDatosEmpresa.Location = new System.Drawing.Point(4, 44);
-            this.tabPageDatosEmpresa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageDatosEmpresa.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageDatosEmpresa.Name = "tabPageDatosEmpresa";
-            this.tabPageDatosEmpresa.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageDatosEmpresa.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageDatosEmpresa.Size = new System.Drawing.Size(1020, 561);
             this.tabPageDatosEmpresa.TabIndex = 1;
             this.tabPageDatosEmpresa.Text = "       Datos de la empresa       ";
@@ -907,9 +907,9 @@ namespace Configuraciones.GUI
             this.groupBox5.Controls.Add(this.groupBox8);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(2, 61);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(1016, 535);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
@@ -945,9 +945,9 @@ namespace Configuraciones.GUI
             this.groupBox8.Controls.Add(this.label23);
             this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.Location = new System.Drawing.Point(79, 16);
-            this.groupBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox8.Size = new System.Drawing.Size(881, 503);
             this.groupBox8.TabIndex = 40;
             this.groupBox8.TabStop = false;
@@ -956,7 +956,7 @@ namespace Configuraciones.GUI
             // bttExaminarSello
             // 
             this.bttExaminarSello.Location = new System.Drawing.Point(561, 352);
-            this.bttExaminarSello.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bttExaminarSello.Margin = new System.Windows.Forms.Padding(2);
             this.bttExaminarSello.Name = "bttExaminarSello";
             this.bttExaminarSello.Size = new System.Drawing.Size(72, 28);
             this.bttExaminarSello.TabIndex = 48;
@@ -968,9 +968,10 @@ namespace Configuraciones.GUI
             // 
             this.pBoxSello.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pBoxSello.Location = new System.Drawing.Point(561, 210);
-            this.pBoxSello.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pBoxSello.Margin = new System.Windows.Forms.Padding(2);
             this.pBoxSello.Name = "pBoxSello";
             this.pBoxSello.Size = new System.Drawing.Size(160, 131);
+            this.pBoxSello.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBoxSello.TabIndex = 47;
             this.pBoxSello.TabStop = false;
             // 
@@ -978,26 +979,31 @@ namespace Configuraciones.GUI
             // 
             this.pBoxFirma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pBoxFirma.Location = new System.Drawing.Point(374, 210);
-            this.pBoxFirma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pBoxFirma.Margin = new System.Windows.Forms.Padding(2);
             this.pBoxFirma.Name = "pBoxFirma";
             this.pBoxFirma.Size = new System.Drawing.Size(160, 131);
+            this.pBoxFirma.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBoxFirma.TabIndex = 46;
             this.pBoxFirma.TabStop = false;
             // 
             // pBoxLogo
             // 
+            this.pBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pBoxLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pBoxLogo.Location = new System.Drawing.Point(196, 210);
-            this.pBoxLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pBoxLogo.Margin = new System.Windows.Forms.Padding(2);
             this.pBoxLogo.Name = "pBoxLogo";
             this.pBoxLogo.Size = new System.Drawing.Size(160, 131);
+            this.pBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBoxLogo.TabIndex = 45;
             this.pBoxLogo.TabStop = false;
             // 
             // bttExaminarFirma
             // 
             this.bttExaminarFirma.Location = new System.Drawing.Point(374, 352);
-            this.bttExaminarFirma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bttExaminarFirma.Margin = new System.Windows.Forms.Padding(2);
             this.bttExaminarFirma.Name = "bttExaminarFirma";
             this.bttExaminarFirma.Size = new System.Drawing.Size(72, 28);
             this.bttExaminarFirma.TabIndex = 44;
@@ -1008,7 +1014,7 @@ namespace Configuraciones.GUI
             // bttExaminarLogo
             // 
             this.bttExaminarLogo.Location = new System.Drawing.Point(196, 352);
-            this.bttExaminarLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bttExaminarLogo.Margin = new System.Windows.Forms.Padding(2);
             this.bttExaminarLogo.Name = "bttExaminarLogo";
             this.bttExaminarLogo.Size = new System.Drawing.Size(72, 28);
             this.bttExaminarLogo.TabIndex = 43;
@@ -1052,7 +1058,7 @@ namespace Configuraciones.GUI
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(521, 76);
-            this.txtTelefono.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTelefono.Margin = new System.Windows.Forms.Padding(2);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(216, 19);
             this.txtTelefono.TabIndex = 33;
@@ -1060,7 +1066,7 @@ namespace Configuraciones.GUI
             // txtAutorizacionTicket
             // 
             this.txtAutorizacionTicket.Location = new System.Drawing.Point(561, 151);
-            this.txtAutorizacionTicket.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAutorizacionTicket.Margin = new System.Windows.Forms.Padding(2);
             this.txtAutorizacionTicket.Name = "txtAutorizacionTicket";
             this.txtAutorizacionTicket.Size = new System.Drawing.Size(164, 19);
             this.txtAutorizacionTicket.TabIndex = 39;
@@ -1068,7 +1074,7 @@ namespace Configuraciones.GUI
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(175, 19);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(54, 19);
             this.textBox7.TabIndex = 21;
@@ -1077,7 +1083,7 @@ namespace Configuraciones.GUI
             // txtNIT
             // 
             this.txtNIT.Location = new System.Drawing.Point(374, 151);
-            this.txtNIT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNIT.Margin = new System.Windows.Forms.Padding(2);
             this.txtNIT.Name = "txtNIT";
             this.txtNIT.Size = new System.Drawing.Size(164, 19);
             this.txtNIT.TabIndex = 38;
@@ -1097,7 +1103,7 @@ namespace Configuraciones.GUI
             // txtNRC
             // 
             this.txtNRC.Location = new System.Drawing.Point(196, 151);
-            this.txtNRC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNRC.Margin = new System.Windows.Forms.Padding(2);
             this.txtNRC.Name = "txtNRC";
             this.txtNRC.Size = new System.Drawing.Size(164, 19);
             this.txtNRC.TabIndex = 37;
@@ -1171,7 +1177,7 @@ namespace Configuraciones.GUI
             // txtEmpresa
             // 
             this.txtEmpresa.Location = new System.Drawing.Point(175, 48);
-            this.txtEmpresa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmpresa.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresa.Name = "txtEmpresa";
             this.txtEmpresa.Size = new System.Drawing.Size(216, 19);
             this.txtEmpresa.TabIndex = 25;
@@ -1179,7 +1185,7 @@ namespace Configuraciones.GUI
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(175, 76);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDireccion.Margin = new System.Windows.Forms.Padding(2);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(280, 19);
             this.txtDireccion.TabIndex = 26;
@@ -1187,7 +1193,7 @@ namespace Configuraciones.GUI
             // txtSlogan
             // 
             this.txtSlogan.Location = new System.Drawing.Point(521, 48);
-            this.txtSlogan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSlogan.Margin = new System.Windows.Forms.Padding(2);
             this.txtSlogan.Name = "txtSlogan";
             this.txtSlogan.Size = new System.Drawing.Size(216, 19);
             this.txtSlogan.TabIndex = 32;
@@ -1195,7 +1201,7 @@ namespace Configuraciones.GUI
             // txtSaludo
             // 
             this.txtSaludo.Location = new System.Drawing.Point(175, 107);
-            this.txtSaludo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSaludo.Margin = new System.Windows.Forms.Padding(2);
             this.txtSaludo.Name = "txtSaludo";
             this.txtSaludo.Size = new System.Drawing.Size(562, 19);
             this.txtSaludo.TabIndex = 27;
@@ -1275,10 +1281,10 @@ namespace Configuraciones.GUI
             this.tabPageOpTicket.Controls.Add(this.groupBox6);
             this.tabPageOpTicket.Controls.Add(this.toolStrip2);
             this.tabPageOpTicket.Location = new System.Drawing.Point(4, 44);
-            this.tabPageOpTicket.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageOpTicket.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageOpTicket.Name = "tabPageOpTicket";
-            this.tabPageOpTicket.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPageOpTicket.Size = new System.Drawing.Size(1028, 601);
+            this.tabPageOpTicket.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPageOpTicket.Size = new System.Drawing.Size(1020, 561);
             this.tabPageOpTicket.TabIndex = 2;
             this.tabPageOpTicket.Text = "       Opciones de Ticket       ";
             this.tabPageOpTicket.UseVisualStyleBackColor = true;
@@ -1288,10 +1294,10 @@ namespace Configuraciones.GUI
             this.groupBox6.Controls.Add(this.groupBox9);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(2, 61);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox6.Size = new System.Drawing.Size(1024, 535);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Size = new System.Drawing.Size(1016, 535);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             // 
@@ -1317,9 +1323,9 @@ namespace Configuraciones.GUI
             this.groupBox9.Controls.Add(this.label50);
             this.groupBox9.Controls.Add(this.groupBox10);
             this.groupBox9.Location = new System.Drawing.Point(63, 16);
-            this.groupBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox9.Size = new System.Drawing.Size(873, 500);
             this.groupBox9.TabIndex = 59;
             this.groupBox9.TabStop = false;
@@ -1327,7 +1333,7 @@ namespace Configuraciones.GUI
             // txtNumCaracteres
             // 
             this.txtNumCaracteres.Location = new System.Drawing.Point(632, 418);
-            this.txtNumCaracteres.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCaracteres.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCaracteres.Name = "txtNumCaracteres";
             this.txtNumCaracteres.Size = new System.Drawing.Size(120, 20);
             this.txtNumCaracteres.TabIndex = 77;
@@ -1347,7 +1353,7 @@ namespace Configuraciones.GUI
             // txtMargen
             // 
             this.txtMargen.Location = new System.Drawing.Point(466, 418);
-            this.txtMargen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMargen.Margin = new System.Windows.Forms.Padding(2);
             this.txtMargen.Name = "txtMargen";
             this.txtMargen.Size = new System.Drawing.Size(155, 20);
             this.txtMargen.TabIndex = 75;
@@ -1367,7 +1373,7 @@ namespace Configuraciones.GUI
             // txtSecuenciaP
             // 
             this.txtSecuenciaP.Location = new System.Drawing.Point(97, 418);
-            this.txtSecuenciaP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSecuenciaP.Margin = new System.Windows.Forms.Padding(2);
             this.txtSecuenciaP.Name = "txtSecuenciaP";
             this.txtSecuenciaP.Size = new System.Drawing.Size(338, 20);
             this.txtSecuenciaP.TabIndex = 73;
@@ -1386,7 +1392,7 @@ namespace Configuraciones.GUI
             // txtPie3
             // 
             this.txtPie3.Location = new System.Drawing.Point(466, 340);
-            this.txtPie3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPie3.Margin = new System.Windows.Forms.Padding(2);
             this.txtPie3.Name = "txtPie3";
             this.txtPie3.Size = new System.Drawing.Size(283, 20);
             this.txtPie3.TabIndex = 71;
@@ -1405,7 +1411,7 @@ namespace Configuraciones.GUI
             // txtPie2
             // 
             this.txtPie2.Location = new System.Drawing.Point(466, 282);
-            this.txtPie2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPie2.Margin = new System.Windows.Forms.Padding(2);
             this.txtPie2.Name = "txtPie2";
             this.txtPie2.Size = new System.Drawing.Size(283, 20);
             this.txtPie2.TabIndex = 69;
@@ -1424,7 +1430,7 @@ namespace Configuraciones.GUI
             // txtPie1
             // 
             this.txtPie1.Location = new System.Drawing.Point(466, 228);
-            this.txtPie1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPie1.Margin = new System.Windows.Forms.Padding(2);
             this.txtPie1.Name = "txtPie1";
             this.txtPie1.Size = new System.Drawing.Size(283, 20);
             this.txtPie1.TabIndex = 67;
@@ -1443,7 +1449,7 @@ namespace Configuraciones.GUI
             // txtEncabezado3
             // 
             this.txtEncabezado3.Location = new System.Drawing.Point(466, 175);
-            this.txtEncabezado3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEncabezado3.Margin = new System.Windows.Forms.Padding(2);
             this.txtEncabezado3.Name = "txtEncabezado3";
             this.txtEncabezado3.Size = new System.Drawing.Size(283, 20);
             this.txtEncabezado3.TabIndex = 65;
@@ -1462,7 +1468,7 @@ namespace Configuraciones.GUI
             // txtEncabezado2
             // 
             this.txtEncabezado2.Location = new System.Drawing.Point(466, 116);
-            this.txtEncabezado2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEncabezado2.Margin = new System.Windows.Forms.Padding(2);
             this.txtEncabezado2.Name = "txtEncabezado2";
             this.txtEncabezado2.Size = new System.Drawing.Size(283, 20);
             this.txtEncabezado2.TabIndex = 63;
@@ -1481,7 +1487,7 @@ namespace Configuraciones.GUI
             // txtEncabezado1
             // 
             this.txtEncabezado1.Location = new System.Drawing.Point(466, 63);
-            this.txtEncabezado1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEncabezado1.Margin = new System.Windows.Forms.Padding(2);
             this.txtEncabezado1.Name = "txtEncabezado1";
             this.txtEncabezado1.Size = new System.Drawing.Size(283, 20);
             this.txtEncabezado1.TabIndex = 61;
@@ -1510,9 +1516,9 @@ namespace Configuraciones.GUI
             this.groupBox10.Controls.Add(this.chkMostrarEmpresa);
             this.groupBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox10.Location = new System.Drawing.Point(97, 17);
-            this.groupBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox10.Size = new System.Drawing.Size(338, 368);
             this.groupBox10.TabIndex = 59;
             this.groupBox10.TabStop = false;
@@ -1523,7 +1529,7 @@ namespace Configuraciones.GUI
             this.chkAgregarLinea.AutoSize = true;
             this.chkAgregarLinea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAgregarLinea.Location = new System.Drawing.Point(13, 330);
-            this.chkAgregarLinea.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAgregarLinea.Margin = new System.Windows.Forms.Padding(2);
             this.chkAgregarLinea.Name = "chkAgregarLinea";
             this.chkAgregarLinea.Size = new System.Drawing.Size(239, 17);
             this.chkAgregarLinea.TabIndex = 8;
@@ -1535,7 +1541,7 @@ namespace Configuraciones.GUI
             this.chkMostrarSaludo.AutoSize = true;
             this.chkMostrarSaludo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarSaludo.Location = new System.Drawing.Point(13, 293);
-            this.chkMostrarSaludo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarSaludo.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarSaludo.Name = "chkMostrarSaludo";
             this.chkMostrarSaludo.Size = new System.Drawing.Size(123, 17);
             this.chkMostrarSaludo.TabIndex = 7;
@@ -1547,7 +1553,7 @@ namespace Configuraciones.GUI
             this.chkMostrarTel.AutoSize = true;
             this.chkMostrarTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarTel.Location = new System.Drawing.Point(13, 254);
-            this.chkMostrarTel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarTel.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarTel.Name = "chkMostrarTel";
             this.chkMostrarTel.Size = new System.Drawing.Size(102, 17);
             this.chkMostrarTel.TabIndex = 6;
@@ -1559,7 +1565,7 @@ namespace Configuraciones.GUI
             this.chkMostrarNumAutorizacion.AutoSize = true;
             this.chkMostrarNumAutorizacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarNumAutorizacion.Location = new System.Drawing.Point(13, 211);
-            this.chkMostrarNumAutorizacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarNumAutorizacion.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarNumAutorizacion.Name = "chkMostrarNumAutorizacion";
             this.chkMostrarNumAutorizacion.Size = new System.Drawing.Size(174, 17);
             this.chkMostrarNumAutorizacion.TabIndex = 5;
@@ -1571,7 +1577,7 @@ namespace Configuraciones.GUI
             this.chkMostrarNCR.AutoSize = true;
             this.chkMostrarNCR.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarNCR.Location = new System.Drawing.Point(13, 176);
-            this.chkMostrarNCR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarNCR.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarNCR.Name = "chkMostrarNCR";
             this.chkMostrarNCR.Size = new System.Drawing.Size(87, 17);
             this.chkMostrarNCR.TabIndex = 4;
@@ -1583,7 +1589,7 @@ namespace Configuraciones.GUI
             this.chkMostrarNIT.AutoSize = true;
             this.chkMostrarNIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarNIT.Location = new System.Drawing.Point(13, 138);
-            this.chkMostrarNIT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarNIT.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarNIT.Name = "chkMostrarNIT";
             this.chkMostrarNIT.Size = new System.Drawing.Size(82, 17);
             this.chkMostrarNIT.TabIndex = 3;
@@ -1595,7 +1601,7 @@ namespace Configuraciones.GUI
             this.chkMostrarDireccion.AutoSize = true;
             this.chkMostrarDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarDireccion.Location = new System.Drawing.Point(13, 106);
-            this.chkMostrarDireccion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarDireccion.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarDireccion.Name = "chkMostrarDireccion";
             this.chkMostrarDireccion.Size = new System.Drawing.Size(107, 17);
             this.chkMostrarDireccion.TabIndex = 2;
@@ -1607,7 +1613,7 @@ namespace Configuraciones.GUI
             this.chkMostrarSlogan.AutoSize = true;
             this.chkMostrarSlogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarSlogan.Location = new System.Drawing.Point(13, 71);
-            this.chkMostrarSlogan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarSlogan.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarSlogan.Name = "chkMostrarSlogan";
             this.chkMostrarSlogan.Size = new System.Drawing.Size(97, 17);
             this.chkMostrarSlogan.TabIndex = 1;
@@ -1619,7 +1625,7 @@ namespace Configuraciones.GUI
             this.chkMostrarEmpresa.AutoSize = true;
             this.chkMostrarEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMostrarEmpresa.Location = new System.Drawing.Point(13, 36);
-            this.chkMostrarEmpresa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMostrarEmpresa.Margin = new System.Windows.Forms.Padding(2);
             this.chkMostrarEmpresa.Name = "chkMostrarEmpresa";
             this.chkMostrarEmpresa.Size = new System.Drawing.Size(169, 17);
             this.chkMostrarEmpresa.TabIndex = 0;
@@ -1638,7 +1644,7 @@ namespace Configuraciones.GUI
             this.toolStripSeparator6});
             this.toolStrip2.Location = new System.Drawing.Point(2, 2);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1024, 59);
+            this.toolStrip2.Size = new System.Drawing.Size(1016, 59);
             this.toolStrip2.TabIndex = 12;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1680,7 +1686,7 @@ namespace Configuraciones.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 609);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ConfiguracionTPV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
