@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CLS\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj">

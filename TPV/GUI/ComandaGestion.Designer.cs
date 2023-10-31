@@ -86,9 +86,10 @@ namespace TPV.GUI
             // 
             // btnFamilia
             // 
-            this.btnFamilia.Location = new System.Drawing.Point(3, 3);
+            this.btnFamilia.Location = new System.Drawing.Point(4, 4);
+            this.btnFamilia.Margin = new System.Windows.Forms.Padding(4);
             this.btnFamilia.Name = "btnFamilia";
-            this.btnFamilia.Size = new System.Drawing.Size(150, 55);
+            this.btnFamilia.Size = new System.Drawing.Size(200, 68);
             this.btnFamilia.TabIndex = 0;
             this.btnFamilia.UseVisualStyleBackColor = true;
             this.btnFamilia.Visible = false;
@@ -99,9 +100,10 @@ namespace TPV.GUI
             this.flpFamilias.AutoSize = true;
             this.flpFamilias.Controls.Add(this.btnFamilia);
             this.flpFamilias.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpFamilias.Location = new System.Drawing.Point(517, 53);
+            this.flpFamilias.Location = new System.Drawing.Point(689, 65);
+            this.flpFamilias.Margin = new System.Windows.Forms.Padding(4);
             this.flpFamilias.Name = "flpFamilias";
-            this.flpFamilias.Size = new System.Drawing.Size(165, 614);
+            this.flpFamilias.Size = new System.Drawing.Size(220, 756);
             this.flpFamilias.TabIndex = 1;
             this.flpFamilias.WrapContents = false;
             // 
@@ -117,10 +119,10 @@ namespace TPV.GUI
             this.flpAcciones.Controls.Add(this.btnComanda);
             this.flpAcciones.Controls.Add(this.button8);
             this.flpAcciones.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpAcciones.Location = new System.Drawing.Point(10, 3);
+            this.flpAcciones.Location = new System.Drawing.Point(13, 4);
             this.flpAcciones.Margin = new System.Windows.Forms.Padding(1);
             this.flpAcciones.Name = "flpAcciones";
-            this.flpAcciones.Size = new System.Drawing.Size(140, 664);
+            this.flpAcciones.Size = new System.Drawing.Size(187, 817);
             this.flpAcciones.TabIndex = 3;
             this.flpAcciones.WrapContents = false;
             // 
@@ -131,7 +133,7 @@ namespace TPV.GUI
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 90);
+            this.button1.Size = new System.Drawing.Size(163, 111);
             this.button1.TabIndex = 0;
             this.button1.Text = "Administracion";
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -143,10 +145,10 @@ namespace TPV.GUI
             // 
             this.button2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(0, 90);
+            this.button2.Location = new System.Drawing.Point(0, 111);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(122, 90);
+            this.button2.Size = new System.Drawing.Size(163, 111);
             this.button2.TabIndex = 1;
             this.button2.Text = "Mesero";
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -158,10 +160,10 @@ namespace TPV.GUI
             // 
             this.button3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(0, 180);
+            this.button3.Location = new System.Drawing.Point(0, 222);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(122, 90);
+            this.button3.Size = new System.Drawing.Size(163, 111);
             this.button3.TabIndex = 2;
             this.button3.Text = "Cliente";
             this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -173,10 +175,10 @@ namespace TPV.GUI
             // 
             this.button4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(0, 270);
+            this.button4.Location = new System.Drawing.Point(0, 333);
             this.button4.Margin = new System.Windows.Forms.Padding(0);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(122, 90);
+            this.button4.Size = new System.Drawing.Size(163, 111);
             this.button4.TabIndex = 3;
             this.button4.Text = "Cambiar Mesa";
             this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -189,10 +191,10 @@ namespace TPV.GUI
             this.btnDisminuir.Enabled = false;
             this.btnDisminuir.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDisminuir.Image = ((System.Drawing.Image)(resources.GetObject("btnDisminuir.Image")));
-            this.btnDisminuir.Location = new System.Drawing.Point(0, 360);
+            this.btnDisminuir.Location = new System.Drawing.Point(0, 444);
             this.btnDisminuir.Margin = new System.Windows.Forms.Padding(0);
             this.btnDisminuir.Name = "btnDisminuir";
-            this.btnDisminuir.Size = new System.Drawing.Size(122, 90);
+            this.btnDisminuir.Size = new System.Drawing.Size(163, 111);
             this.btnDisminuir.TabIndex = 4;
             this.btnDisminuir.Text = "Disminuir";
             this.btnDisminuir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -205,10 +207,10 @@ namespace TPV.GUI
             this.btnExtras.Enabled = false;
             this.btnExtras.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExtras.Image = ((System.Drawing.Image)(resources.GetObject("btnExtras.Image")));
-            this.btnExtras.Location = new System.Drawing.Point(0, 450);
+            this.btnExtras.Location = new System.Drawing.Point(0, 555);
             this.btnExtras.Margin = new System.Windows.Forms.Padding(0);
             this.btnExtras.Name = "btnExtras";
-            this.btnExtras.Size = new System.Drawing.Size(122, 90);
+            this.btnExtras.Size = new System.Drawing.Size(163, 111);
             this.btnExtras.TabIndex = 5;
             this.btnExtras.Text = "Extras";
             this.btnExtras.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -221,10 +223,10 @@ namespace TPV.GUI
             this.btnComanda.Enabled = false;
             this.btnComanda.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComanda.Image = ((System.Drawing.Image)(resources.GetObject("btnComanda.Image")));
-            this.btnComanda.Location = new System.Drawing.Point(0, 540);
+            this.btnComanda.Location = new System.Drawing.Point(0, 666);
             this.btnComanda.Margin = new System.Windows.Forms.Padding(0);
             this.btnComanda.Name = "btnComanda";
-            this.btnComanda.Size = new System.Drawing.Size(122, 90);
+            this.btnComanda.Size = new System.Drawing.Size(163, 111);
             this.btnComanda.TabIndex = 6;
             this.btnComanda.Text = "Comanda";
             this.btnComanda.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -236,10 +238,10 @@ namespace TPV.GUI
             // 
             this.button8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.Location = new System.Drawing.Point(0, 630);
+            this.button8.Location = new System.Drawing.Point(0, 777);
             this.button8.Margin = new System.Windows.Forms.Padding(0);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(122, 90);
+            this.button8.Size = new System.Drawing.Size(163, 111);
             this.button8.TabIndex = 7;
             this.button8.Text = "Cerrar Sesion";
             this.button8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -252,16 +254,19 @@ namespace TPV.GUI
             this.flpProductos.AutoScroll = true;
             this.flpProductos.AutoSize = true;
             this.flpProductos.Controls.Add(this.btnProducto);
-            this.flpProductos.Location = new System.Drawing.Point(703, 54);
+            this.flpProductos.Location = new System.Drawing.Point(937, 66);
+            this.flpProductos.Margin = new System.Windows.Forms.Padding(4);
             this.flpProductos.Name = "flpProductos";
-            this.flpProductos.Size = new System.Drawing.Size(126, 586);
+            this.flpProductos.Size = new System.Drawing.Size(168, 721);
             this.flpProductos.TabIndex = 4;
             // 
             // btnProducto
             // 
-            this.btnProducto.Location = new System.Drawing.Point(3, 3);
+            this.btnProducto.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProducto.Location = new System.Drawing.Point(4, 4);
+            this.btnProducto.Margin = new System.Windows.Forms.Padding(4);
             this.btnProducto.Name = "btnProducto";
-            this.btnProducto.Size = new System.Drawing.Size(120, 120);
+            this.btnProducto.Size = new System.Drawing.Size(160, 148);
             this.btnProducto.TabIndex = 0;
             this.btnProducto.UseVisualStyleBackColor = true;
             this.btnProducto.Visible = false;
@@ -300,68 +305,82 @@ namespace TPV.GUI
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvDatos.Location = new System.Drawing.Point(148, 100);
+            this.dgvDatos.Location = new System.Drawing.Point(197, 123);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(362, 480);
+            this.dgvDatos.Size = new System.Drawing.Size(483, 591);
             this.dgvDatos.TabIndex = 5;
             // 
             // idDetalle
             // 
             this.idDetalle.DataPropertyName = "idDetalle";
             this.idDetalle.HeaderText = "ID";
+            this.idDetalle.MinimumWidth = 6;
             this.idDetalle.Name = "idDetalle";
             this.idDetalle.ReadOnly = true;
             this.idDetalle.Visible = false;
+            this.idDetalle.Width = 125;
             // 
             // cantidad
             // 
             this.cantidad.DataPropertyName = "cantidad";
             this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.MinimumWidth = 6;
             this.cantidad.Name = "cantidad";
             this.cantidad.ReadOnly = true;
+            this.cantidad.Width = 125;
             // 
             // idPedido
             // 
             this.idPedido.DataPropertyName = "idPedido";
             this.idPedido.HeaderText = "Id Pedido";
+            this.idPedido.MinimumWidth = 6;
             this.idPedido.Name = "idPedido";
             this.idPedido.ReadOnly = true;
             this.idPedido.Visible = false;
+            this.idPedido.Width = 125;
             // 
             // idProducto
             // 
             this.idProducto.DataPropertyName = "idProducto";
             this.idProducto.HeaderText = "Id Producto";
+            this.idProducto.MinimumWidth = 6;
             this.idProducto.Name = "idProducto";
             this.idProducto.ReadOnly = true;
             this.idProducto.Visible = false;
+            this.idProducto.Width = 125;
             // 
             // precio
             // 
             this.precio.DataPropertyName = "precio";
             this.precio.HeaderText = "Precio";
+            this.precio.MinimumWidth = 6;
             this.precio.Name = "precio";
             this.precio.ReadOnly = true;
             this.precio.Visible = false;
+            this.precio.Width = 125;
             // 
             // fecha
             // 
             this.fecha.DataPropertyName = "fecha";
             this.fecha.HeaderText = "Fecha";
+            this.fecha.MinimumWidth = 6;
             this.fecha.Name = "fecha";
             this.fecha.ReadOnly = true;
             this.fecha.Visible = false;
+            this.fecha.Width = 125;
             // 
             // nombre
             // 
             this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.nombre.DataPropertyName = "nombre";
             this.nombre.HeaderText = "Producto";
+            this.nombre.MinimumWidth = 6;
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
             // 
@@ -369,64 +388,79 @@ namespace TPV.GUI
             // 
             this.subTotal.DataPropertyName = "subTotal";
             this.subTotal.HeaderText = "Sub Total";
+            this.subTotal.MinimumWidth = 6;
             this.subTotal.Name = "subTotal";
             this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 125;
             // 
             // grupo
             // 
             this.grupo.DataPropertyName = "grupo";
             this.grupo.HeaderText = "Grupo Impresion";
+            this.grupo.MinimumWidth = 6;
             this.grupo.Name = "grupo";
             this.grupo.ReadOnly = true;
             this.grupo.Visible = false;
+            this.grupo.Width = 125;
             // 
             // cocinando
             // 
             this.cocinando.DataPropertyName = "cocinando";
             this.cocinando.HeaderText = "Cocinando";
+            this.cocinando.MinimumWidth = 6;
             this.cocinando.Name = "cocinando";
             this.cocinando.ReadOnly = true;
             this.cocinando.Visible = false;
+            this.cocinando.Width = 125;
             // 
             // nombreMesero
             // 
             this.nombreMesero.DataPropertyName = "nombreMesero";
             this.nombreMesero.HeaderText = "Mesero";
+            this.nombreMesero.MinimumWidth = 6;
             this.nombreMesero.Name = "nombreMesero";
             this.nombreMesero.ReadOnly = true;
             this.nombreMesero.Visible = false;
+            this.nombreMesero.Width = 125;
             // 
             // nombres
             // 
             this.nombres.DataPropertyName = "nombres";
             this.nombres.HeaderText = "Cliente";
+            this.nombres.MinimumWidth = 6;
             this.nombres.Name = "nombres";
             this.nombres.ReadOnly = true;
             this.nombres.Visible = false;
+            this.nombres.Width = 125;
             // 
             // mesa
             // 
             this.mesa.DataPropertyName = "mesa";
             this.mesa.HeaderText = "Mesa";
+            this.mesa.MinimumWidth = 6;
             this.mesa.Name = "mesa";
             this.mesa.ReadOnly = true;
             this.mesa.Visible = false;
+            this.mesa.Width = 125;
             // 
             // salon
             // 
             this.salon.DataPropertyName = "salon";
             this.salon.HeaderText = "Salon";
+            this.salon.MinimumWidth = 6;
             this.salon.Name = "salon";
             this.salon.ReadOnly = true;
             this.salon.Visible = false;
+            this.salon.Width = 125;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(148, 13);
+            this.label1.Location = new System.Drawing.Point(197, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 20);
+            this.label1.Size = new System.Drawing.Size(72, 24);
             this.label1.TabIndex = 6;
             this.label1.Text = "Ticket # ";
             // 
@@ -434,9 +468,10 @@ namespace TPV.GUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(148, 73);
+            this.label2.Location = new System.Drawing.Point(197, 90);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.Size = new System.Drawing.Size(70, 24);
             this.label2.TabIndex = 7;
             this.label2.Text = "Mesero:";
             // 
@@ -444,9 +479,10 @@ namespace TPV.GUI
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(148, 53);
+            this.label3.Location = new System.Drawing.Point(197, 65);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 20);
+            this.label3.Size = new System.Drawing.Size(65, 24);
             this.label3.TabIndex = 8;
             this.label3.Text = "Cliente:";
             // 
@@ -454,9 +490,10 @@ namespace TPV.GUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(148, 33);
+            this.label4.Location = new System.Drawing.Point(197, 41);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 20);
+            this.label4.Size = new System.Drawing.Size(56, 24);
             this.label4.TabIndex = 9;
             this.label4.Text = "Mesa:";
             // 
@@ -464,54 +501,60 @@ namespace TPV.GUI
             // 
             this.lblMesa.AutoSize = true;
             this.lblMesa.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesa.Location = new System.Drawing.Point(214, 33);
+            this.lblMesa.Location = new System.Drawing.Point(285, 41);
+            this.lblMesa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMesa.Name = "lblMesa";
-            this.lblMesa.Size = new System.Drawing.Size(0, 23);
+            this.lblMesa.Size = new System.Drawing.Size(0, 28);
             this.lblMesa.TabIndex = 13;
             // 
             // lblCliente
             // 
             this.lblCliente.AutoSize = true;
             this.lblCliente.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCliente.Location = new System.Drawing.Point(214, 53);
+            this.lblCliente.Location = new System.Drawing.Point(285, 65);
+            this.lblCliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(0, 23);
+            this.lblCliente.Size = new System.Drawing.Size(0, 28);
             this.lblCliente.TabIndex = 12;
             // 
             // lblMesero
             // 
             this.lblMesero.AutoSize = true;
             this.lblMesero.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesero.Location = new System.Drawing.Point(214, 73);
+            this.lblMesero.Location = new System.Drawing.Point(285, 90);
+            this.lblMesero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMesero.Name = "lblMesero";
-            this.lblMesero.Size = new System.Drawing.Size(0, 23);
+            this.lblMesero.Size = new System.Drawing.Size(0, 28);
             this.lblMesero.TabIndex = 11;
             // 
             // lblTicket
             // 
             this.lblTicket.AutoSize = true;
             this.lblTicket.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTicket.Location = new System.Drawing.Point(214, 13);
+            this.lblTicket.Location = new System.Drawing.Point(285, 16);
+            this.lblTicket.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTicket.Name = "lblTicket";
-            this.lblTicket.Size = new System.Drawing.Size(0, 23);
+            this.lblTicket.Size = new System.Drawing.Size(0, 28);
             this.lblTicket.TabIndex = 10;
             // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
             this.lblFecha.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFecha.Location = new System.Drawing.Point(578, 15);
+            this.lblFecha.Location = new System.Drawing.Point(771, 18);
+            this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(0, 23);
+            this.lblFecha.Size = new System.Drawing.Size(0, 28);
             this.lblFecha.TabIndex = 17;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(512, 15);
+            this.label10.Location = new System.Drawing.Point(683, 18);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 20);
+            this.label10.Size = new System.Drawing.Size(60, 24);
             this.label10.TabIndex = 16;
             this.label10.Text = "Fecha:";
             // 
@@ -524,9 +567,10 @@ namespace TPV.GUI
             // 
             this.label5.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Location = new System.Drawing.Point(699, 649);
+            this.label5.Location = new System.Drawing.Point(932, 799);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(408, 74);
+            this.label5.Size = new System.Drawing.Size(544, 91);
             this.label5.TabIndex = 18;
             this.label5.Text = "Nota: puede configurar para agregar muchos productos al dar un click.";
             // 
@@ -536,9 +580,10 @@ namespace TPV.GUI
             this.btnCuentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCuentas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCuentas.Image = ((System.Drawing.Image)(resources.GetObject("btnCuentas.Image")));
-            this.btnCuentas.Location = new System.Drawing.Point(377, 39);
+            this.btnCuentas.Location = new System.Drawing.Point(503, 48);
+            this.btnCuentas.Margin = new System.Windows.Forms.Padding(4);
             this.btnCuentas.Name = "btnCuentas";
-            this.btnCuentas.Size = new System.Drawing.Size(133, 57);
+            this.btnCuentas.Size = new System.Drawing.Size(177, 70);
             this.btnCuentas.TabIndex = 28;
             this.btnCuentas.Text = "Cuentas";
             this.btnCuentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -550,9 +595,10 @@ namespace TPV.GUI
             // 
             this.btnPagar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPagar.Image = ((System.Drawing.Image)(resources.GetObject("btnPagar.Image")));
-            this.btnPagar.Location = new System.Drawing.Point(251, 598);
+            this.btnPagar.Location = new System.Drawing.Point(335, 736);
+            this.btnPagar.Margin = new System.Windows.Forms.Padding(4);
             this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(152, 69);
+            this.btnPagar.Size = new System.Drawing.Size(203, 85);
             this.btnPagar.TabIndex = 15;
             this.btnPagar.Text = "Pagar";
             this.btnPagar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -565,9 +611,10 @@ namespace TPV.GUI
             this.btnSalir.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(1147, 3);
+            this.btnSalir.Location = new System.Drawing.Point(1529, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(113, 58);
+            this.btnSalir.Size = new System.Drawing.Size(151, 71);
             this.btnSalir.TabIndex = 14;
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -597,20 +644,22 @@ namespace TPV.GUI
             this.panelComanda.Controls.Add(this.flpFamilias);
             this.panelComanda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelComanda.Location = new System.Drawing.Point(0, 0);
+            this.panelComanda.Margin = new System.Windows.Forms.Padding(4);
             this.panelComanda.Name = "panelComanda";
-            this.panelComanda.Size = new System.Drawing.Size(1370, 749);
+            this.panelComanda.Size = new System.Drawing.Size(1824, 912);
             this.panelComanda.TabIndex = 29;
             // 
             // ComandaGestion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1824, 912);
             this.ControlBox = false;
             this.Controls.Add(this.panelComanda);
-            this.MaximumSize = new System.Drawing.Size(1386, 788);
-            this.MinimumSize = new System.Drawing.Size(1364, 718);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximumSize = new System.Drawing.Size(1842, 959);
+            this.MinimumSize = new System.Drawing.Size(1813, 873);
             this.Name = "ComandaGestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ComandaGestion";

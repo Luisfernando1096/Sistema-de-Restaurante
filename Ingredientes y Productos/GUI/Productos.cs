@@ -17,6 +17,10 @@ namespace Ingredientes_y_Productos.GUI
         BindingSource datosFamilias = new BindingSource();
         BindingSource datosUnidadMedida = new BindingSource();
         private String SeleccionarImg = string.Empty;
+        private string selectedImagePathImg;
+        private string destinationPathImg;
+        String seleccionImgAnterior;
+
         private void CargarDatos()
         {
             try
@@ -337,25 +341,33 @@ namespace Ingredientes_y_Productos.GUI
                         txtStock.Text = dgvProductos.CurrentRow.Cells["Stock"].Value.ToString();
                         txtStockMinimo.Text = dgvProductos.CurrentRow.Cells["StockMinimo"].Value.ToString();
 
-                        string rutaImagen = dgvProductos.CurrentRow.Cells["foto"].Value.ToString();
+                        SeleccionarImg = dgvProductos.CurrentRow.Cells["foto"].Value.ToString();
+                        seleccionImgAnterior = dgvProductos.CurrentRow.Cells["foto"].Value.ToString();
 
-                        if (!string.IsNullOrEmpty(rutaImagen))
+                        if (!string.IsNullOrEmpty(SeleccionarImg))
                         {
-                            if (System.IO.File.Exists(rutaImagen))
+                            // Obtén la ruta de la imagen en la carpeta "Images" en el directorio de salida
+                            string imagePathInOutput = Path.Combine("Ingredientes y Productos", "Images", SeleccionarImg);
+
+                            // Obten la ruta del directorio de salida de la aplicación
+                            string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                            string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
+                            string fullPath = Path.Combine(projectDirectory, imagePathInOutput);
+
+                            if (File.Exists(fullPath))
                             {
-                                ImgPrevia.Image = Image.FromFile(rutaImagen);
-                                ImgPrevia.SizeMode = PictureBoxSizeMode.Zoom;
+                                // Carga la imagen desde la ruta en el directorio de salida
+                                Image originalImage = Image.FromFile(fullPath);
+                                ImgPrevia.Image = originalImage;
                             }
                             else
                             {
-                                MessageBox.Show("El archivo de imagen no se encontró en la ruta especificada.");
-                                ImgPrevia.Image = null;
+                                //MessageBox.Show("¡La imagen no se encontró, se recomienda agregar una nueva imagen para tener una mejor experiencia!", "Error al buscar imagen del producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         else
                         {
-                            //MessageBox.Show("La ruta de imagen está vacía.");
-                            ImgPrevia.Image = null;
+                            //MessageBox.Show("¡No existe imagen asociada a este producto, se recomienda agregar una nueva imagen para tener una mejor experiencia!", "Error al buscar imagen del producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
                         bool conIngrediente = Convert.ToBoolean(dgvProductos.CurrentRow.Cells["ConIngrediente"].Value);
@@ -395,6 +407,25 @@ namespace Ingredientes_y_Productos.GUI
                     mantenimiento.ConIngrediente = chBoxConIngrediente.Checked ? 1 : 0;
                     mantenimiento.Inventariable = chBoxInventariable.Checked ? 1 : 0;
                     mantenimiento.Activo = chBoxMostrar.Checked ? 1 : 0;
+
+                    // Obten la ruta del directorio de salida de la aplicación
+                    string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                    string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
+                    // Ahora tienes la ruta del directorio base de tu proyecto
+                    string imagesDirectory = Path.Combine(projectDirectory, "Ingredientes y productos", "Images");
+                    // Obtén el nombre del archivo seleccionado
+                    string selectedImageFileName = Path.GetFileName(selectedImagePathImg);
+                    // Construye la ruta de destino
+                    destinationPathImg = Path.Combine(imagesDirectory, selectedImageFileName);
+                    // Si el archivo no existe o si el nombre de la imagen es diferente a SeleccionarImg
+                    if (!File.Exists(destinationPathImg) || !SeleccionarImg.Equals(selectedImageFileName))
+                    {
+                        // Copia la imagen seleccionada a la ubicación en tu proyecto
+                        File.Copy(selectedImagePathImg, destinationPathImg);
+
+                        // Actualiza la variable SeleccionarImg con el nuevo nombre
+                        SeleccionarImg = selectedImageFileName;
+                    }
 
                     if (txtID.Text == "")
                     {
@@ -715,20 +746,36 @@ namespace Ingredientes_y_Productos.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string rutaImagen = SeleccionarImagen();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos de imagen|*.jpg;*.png;*.gif;*.bmp|Todos los archivos|*.*";
 
-            if (!string.IsNullOrEmpty(rutaImagen))
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string rutaFormateada = rutaImagen.Replace("\\", "\\\\");
+                // El usuario seleccionó una imagen
+                selectedImagePathImg = openFileDialog.FileName;
+                try
+                {
+                    if (!Path.GetFileName(selectedImagePathImg).Equals(SeleccionarImg))
+                    {
+                        SeleccionarImg = Path.GetFileName(selectedImagePathImg);
 
-                ImgPrevia.ImageLocation = rutaImagen;
-                ImgPrevia.SizeMode = PictureBoxSizeMode.Zoom;
+                        // Carga la imagen desde la ruta en el directorio de salida
+                        Image originalImage = Image.FromFile(selectedImagePathImg);
+                        ImgPrevia.Image = originalImage;
+                    }
+                    else
+                    {
+                        SeleccionarImg = Path.GetFileName(selectedImagePathImg);
 
-                SeleccionarImg = rutaFormateada;
-            }
-            else
-            {
-                MessageBox.Show("No se seleccionó ninguna imagen.");
+                        // Carga la imagen desde la ruta en el directorio de salida
+                        Image originalImage = Image.FromFile(selectedImagePathImg);
+                        ImgPrevia.Image = originalImage;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al copiar la imagen: " + ex.Message);
+                }
             }
         }
         public static string SeleccionarImagen()

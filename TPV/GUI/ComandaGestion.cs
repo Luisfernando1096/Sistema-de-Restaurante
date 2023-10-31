@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,8 @@ namespace TPV.GUI
         public bool cerrarSesion;
         public bool tpv;
         public bool borrarData;
+        private String SeleccionarImg;
+        private String seleccionImgAnterior;
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
@@ -167,9 +170,41 @@ namespace TPV.GUI
                 btnProducto = new Button();
                 btnProducto.Text = producto["nombre"].ToString().ToUpper();
                 btnProducto.Tag = producto["idProducto"].ToString().ToUpper();
+
+                // Crear un nuevo objeto Font con estilo negrita
+                Font boldFont = new Font(btnProducto.Font, FontStyle.Bold);
+                // Asignar el nuevo estilo de fuente al botón
+                btnProducto.Font = boldFont;
+                // Establecer el color del texto en negro
+                btnProducto.ForeColor = Color.Black;
+
+                SeleccionarImg = producto["foto"].ToString();
+                seleccionImgAnterior = producto["foto"].ToString();
+
+                if (!string.IsNullOrEmpty(SeleccionarImg))
+                {
+                    // Obtén la ruta de la imagen en la carpeta "Images" en el directorio de salida
+                    string imagePathInOutput = Path.Combine("Ingredientes y Productos", "Images", SeleccionarImg);
+
+                    // Obten la ruta del directorio de salida de la aplicación
+                    string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                    string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
+                    string fullPath = Path.Combine(projectDirectory, imagePathInOutput);
+
+                    if (File.Exists(fullPath))
+                    {
+                        // Carga la imagen desde la ruta en el directorio de salida
+                        Image originalImage = Image.FromFile(fullPath);
+                        btnProducto.BackgroundImage = originalImage;
+                        btnProducto.BackgroundImageLayout = ImageLayout.Stretch;
+
+                    }
+                }
+
                 //btnProducto.BackgroundImage = Properties.Resources.mesa;
                 //btnProducto.BackgroundImageLayout = ImageLayout.Stretch;
-                btnProducto.TextAlign = ContentAlignment.MiddleCenter;
+                btnProducto.TextAlign = ContentAlignment.BottomCenter;
+                //btnProducto.TextAlign = ContentAlignment.MiddleCenter;
                 /*if (!Boolean.Parse(producto["disponible"].ToString()))
                 {
                     btnProducto.BackColor = Color.MidnightBlue;
@@ -806,7 +841,6 @@ namespace TPV.GUI
                 oReporte.PrintToPrinter(1, false, 0, 0);
 
                 MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
         }
     }

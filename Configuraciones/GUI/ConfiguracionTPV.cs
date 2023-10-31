@@ -18,12 +18,12 @@ namespace Configuraciones.GUI
         private string destinationPathFirma, destinationPathLogo, destinationPathSello;
         String seleccionLogoAnterior;
         String seleccionFirmaAnterior;
+        String seleccionSelloAnterior;
 
         private void CargarDatosConfig()
         {
             try
             {
-
                 if (oConfiguracion != null)
                 {
                     // Asigna valores a los CheckBoxes
@@ -131,7 +131,8 @@ namespace Configuraciones.GUI
                     seleccionLogoAnterior = configuracionRow["logo"].ToString();//Establezco cual era la imagen anterior
                     SeleccionarFirma = configuracionRow["firma"].ToString();
                     seleccionFirmaAnterior = configuracionRow["firma"].ToString();
-                    string rutaImagenSello = configuracionRow["sello"].ToString();
+                    SeleccionarSello = configuracionRow["sello"].ToString();
+                    seleccionSelloAnterior = configuracionRow["sello"].ToString();
 
                     if (!string.IsNullOrEmpty(SeleccionarLogo))
                     {
@@ -143,10 +144,16 @@ namespace Configuraciones.GUI
                         string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
                         string fullPath = Path.Combine(projectDirectory, imagePathInOutput);
 
-                        // Carga la imagen desde la ruta en el directorio de salida
-                        Image originalImage = Image.FromFile(fullPath);
-
-                        pBoxLogo.Image = originalImage;
+                        if (File.Exists(fullPath))
+                        {
+                            // Carga la imagen desde la ruta en el directorio de salida
+                            Image originalImage = Image.FromFile(fullPath);
+                            pBoxLogo.Image = originalImage;
+                        }
+                        else
+                        {
+                            //MessageBox.Show("¡La imagen no se encontró, se recomienda agregar una nueva imagen para tener una mejor experiencia!", "Error al buscar imagen del producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
 
                     }
                     else
@@ -164,25 +171,48 @@ namespace Configuraciones.GUI
                         string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
                         string fullPath = Path.Combine(projectDirectory, imagePathInOutput);
 
-                        // Carga la imagen desde la ruta en el directorio de salida
-                        Image originalImage = Image.FromFile(fullPath);
-
-                        pBoxFirma.Image = originalImage;
+                        if (File.Exists(fullPath))
+                        {
+                            // Carga la imagen desde la ruta en el directorio de salida
+                            Image originalImage = Image.FromFile(fullPath);
+                            pBoxFirma.Image = originalImage;
+                        }
+                        else
+                        {
+                            //MessageBox.Show("¡La imagen no se encontró, se recomienda agregar una nueva imagen para tener una mejor experiencia!", "Error al buscar imagen del producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {
                         //MessageBox.Show("La imagen no se encontró en la ruta especificada.");
                     }
 
-                    if (!string.IsNullOrEmpty(rutaImagenSello))
+                    if (!string.IsNullOrEmpty(SeleccionarSello))
                     {
-                        pBoxSello.Image = Image.FromFile(rutaImagenSello);
-                        pBoxSello.SizeMode = PictureBoxSizeMode.Zoom;
+                        // Obtén la ruta de la imagen en la carpeta "Images" en el directorio de salida
+                        string imagePathInOutput = Path.Combine("Configuraciones", "Images", SeleccionarSello);
+
+                        // Obten la ruta del directorio de salida de la aplicación
+                        string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                        string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
+                        string fullPath = Path.Combine(projectDirectory, imagePathInOutput);
+
+                        if (File.Exists(fullPath))
+                        {
+                            // Carga la imagen desde la ruta en el directorio de salida
+                            Image originalImage = Image.FromFile(fullPath);
+                            pBoxSello.Image = originalImage;
+                        }
+                        else
+                        {
+                            //MessageBox.Show("¡La imagen no se encontró, se recomienda agregar una nueva imagen para tener una mejor experiencia!", "Error al buscar imagen del producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {
                         //MessageBox.Show("La imagen no se encontró en la ruta especificada.");
                     }
+
                 }
                 else
                 {
@@ -274,7 +304,6 @@ namespace Configuraciones.GUI
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             Close();
-
         }
 
         private void btnGuardarConfig_Click(object sender, EventArgs e)
@@ -393,125 +422,152 @@ namespace Configuraciones.GUI
 
         private void btnGuardarDatos_Click(object sender, EventArgs e)
         {
-            Mantenimiento.CLS.Empresa empresa = new Mantenimiento.CLS.Empresa();
-            empresa.IdEmpresa = 1;
-            empresa.Logo = SeleccionarLogo;
-            empresa.Firma = SeleccionarFirma;
-            empresa.Sello = SeleccionarSello;
-            if (txtEmpresa.Text != string.Empty)
+            try
             {
-                empresa.NombreEmpresa = txtEmpresa.Text;
-            }
-            else
-            {
-                empresa.NombreEmpresa = "";
-            }
-            if (txtDireccion.Text != string.Empty)
-            {
-                empresa.Direccion = txtDireccion.Text;
-            }
-            else
-            {
-                empresa.Direccion = "";
-            }
-            if (txtSaludo.Text != string.Empty)
-            {
-                empresa.Saludo = txtSaludo.Text;
-            }
-            else
-            {
-                empresa.Saludo = "";
-            }
-            if (txtSlogan.Text != string.Empty)
-            {
-                empresa.Slogan = txtSlogan.Text;
-            }
-            else
-            {
-                empresa.Slogan = "";
-            }
-            if (txtTelefono.Text != string.Empty)
-            {
-                empresa.Telefono = txtTelefono.Text;
-            }
-            else
-            {
-                empresa.Telefono = "";
-            }
-            if (txtNRC.Text != string.Empty)
-            {
-                empresa.NRC1 = txtNRC.Text;
-            }
-            else
-            {
-                empresa.NRC1 = "";
-            }
-            if (txtNIT.Text != string.Empty)
-            {
-                empresa.NIT1 = txtNIT.Text;
-            }
-            else
-            {
-                empresa.NIT1 = "";
-            }
-            if (txtAutorizacionTicket.Text != string.Empty)
-            {
-                empresa.NumAutorizacion = txtAutorizacionTicket.Text;
-            }
-            else
-            {
-                empresa.NumAutorizacion = "";
-            }
-
-            if (empresa.Actualizar())
-            {
-                MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //Aqui se guardara la imagen
-                if (!seleccionLogoAnterior.Equals(SeleccionarLogo))
+                Mantenimiento.CLS.Empresa empresa = new Mantenimiento.CLS.Empresa();
+                empresa.IdEmpresa = 1;
+                empresa.Logo = SeleccionarLogo;
+                empresa.Firma = SeleccionarFirma;
+                empresa.Sello = SeleccionarSello;
+                if (txtEmpresa.Text != string.Empty)
                 {
-                    // Obten la ruta del directorio de salida de la aplicación
-                    string outputPath = AppDomain.CurrentDomain.BaseDirectory;
-                    string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
-
-                    // Ahora tienes la ruta del directorio base de tu proyecto
-                    string imagesDirectory = Path.Combine(projectDirectory, "Configuraciones", "Images");
-
-                    // Copia la imagen seleccionada a una ubicación en tu proyecto
-                    destinationPathLogo = Path.Combine(imagesDirectory, Path.GetFileName(selectedImagePathLogo));
-
-                    if (!File.Exists(destinationPathLogo))
-                    {
-                        // El archivo no existe, puedes proceder con la insercion
-                        File.Copy(selectedImagePathLogo, destinationPathLogo);
-                    }
-                    // Continúa con el resto de tu lógica
+                    empresa.NombreEmpresa = txtEmpresa.Text;
+                }
+                else
+                {
+                    empresa.NombreEmpresa = "";
+                }
+                if (txtDireccion.Text != string.Empty)
+                {
+                    empresa.Direccion = txtDireccion.Text;
+                }
+                else
+                {
+                    empresa.Direccion = "";
+                }
+                if (txtSaludo.Text != string.Empty)
+                {
+                    empresa.Saludo = txtSaludo.Text;
+                }
+                else
+                {
+                    empresa.Saludo = "";
+                }
+                if (txtSlogan.Text != string.Empty)
+                {
+                    empresa.Slogan = txtSlogan.Text;
+                }
+                else
+                {
+                    empresa.Slogan = "";
+                }
+                if (txtTelefono.Text != string.Empty)
+                {
+                    empresa.Telefono = txtTelefono.Text;
+                }
+                else
+                {
+                    empresa.Telefono = "";
+                }
+                if (txtNRC.Text != string.Empty)
+                {
+                    empresa.NRC1 = txtNRC.Text;
+                }
+                else
+                {
+                    empresa.NRC1 = "";
+                }
+                if (txtNIT.Text != string.Empty)
+                {
+                    empresa.NIT1 = txtNIT.Text;
+                }
+                else
+                {
+                    empresa.NIT1 = "";
+                }
+                if (txtAutorizacionTicket.Text != string.Empty)
+                {
+                    empresa.NumAutorizacion = txtAutorizacionTicket.Text;
+                }
+                else
+                {
+                    empresa.NumAutorizacion = "";
                 }
 
-                //Aqui se guardara la imagen
-                if (!seleccionFirmaAnterior.Equals(SeleccionarFirma))
+                if (empresa.Actualizar())
                 {
-                    // Obten la ruta del directorio de salida de la aplicación
-                    string outputPath = AppDomain.CurrentDomain.BaseDirectory;
-                    string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
-
-                    // Ahora tienes la ruta del directorio base de tu proyecto
-                    string imagesDirectory = Path.Combine(projectDirectory, "Configuraciones", "Images");
-
-                    // Copia la imagen seleccionada a una ubicación en tu proyecto
-                    destinationPathFirma = Path.Combine(imagesDirectory, Path.GetFileName(selectedImagePathFirma));
-
-                    if (!File.Exists(destinationPathFirma))
+                    MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //Aqui se guardara la imagen
+                    if (!seleccionLogoAnterior.Equals(SeleccionarLogo))
                     {
-                        // El archivo no existe, puedes proceder con la insercion
-                        File.Copy(selectedImagePathFirma, destinationPathFirma);
-                    }
-                    // Continúa con el resto de tu lógica
-                }
-                CargarDatosEmpresa();
+                        // Obten la ruta del directorio de salida de la aplicación
+                        string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                        string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
 
-                this.Focus();
+                        // Ahora tienes la ruta del directorio base de tu proyecto
+                        string imagesDirectory = Path.Combine(projectDirectory, "Configuraciones", "Images");
+
+                        // Copia la imagen seleccionada a una ubicación en tu proyecto
+                        destinationPathLogo = Path.Combine(imagesDirectory, Path.GetFileName(selectedImagePathLogo));
+
+                        if (!File.Exists(destinationPathLogo))
+                        {
+                            // El archivo no existe, puedes proceder con la insercion
+                            File.Copy(selectedImagePathLogo, destinationPathLogo);
+                        }
+                        // Continúa con el resto de tu lógica
+                    }
+
+                    //Aqui se guardara la imagen
+                    if (!seleccionFirmaAnterior.Equals(SeleccionarFirma))
+                    {
+                        // Obten la ruta del directorio de salida de la aplicación
+                        string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                        string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
+
+                        // Ahora tienes la ruta del directorio base de tu proyecto
+                        string imagesDirectory = Path.Combine(projectDirectory, "Configuraciones", "Images");
+
+                        // Copia la imagen seleccionada a una ubicación en tu proyecto
+                        destinationPathFirma = Path.Combine(imagesDirectory, Path.GetFileName(selectedImagePathFirma));
+
+                        if (!File.Exists(destinationPathFirma))
+                        {
+                            // El archivo no existe, puedes proceder con la insercion
+                            File.Copy(selectedImagePathFirma, destinationPathFirma);
+                        }
+                        // Continúa con el resto de tu lógica
+                    }
+
+                    if (!seleccionSelloAnterior.Equals(SeleccionarSello))
+                    {
+                        // Obten la ruta del directorio de salida de la aplicación
+                        string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+                        string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
+
+                        // Ahora tienes la ruta del directorio base de tu proyecto
+                        string imagesDirectory = Path.Combine(projectDirectory, "Configuraciones", "Images");
+
+                        // Copia la imagen seleccionada a una ubicación en tu proyecto
+                        destinationPathSello = Path.Combine(imagesDirectory, Path.GetFileName(selectedImagePathSello));
+
+                        if (!File.Exists(destinationPathSello))
+                        {
+                            // El archivo no existe, puedes proceder con la insercion
+                            File.Copy(selectedImagePathSello, destinationPathSello);
+                        }
+                        // Continúa con el resto de tu lógica
+                    }
+                    CargarDatosEmpresa();
+
+                    this.Focus();
+                }
+                oEmpresa.ObtenerConfiguracion();
             }
-            oEmpresa.ObtenerConfiguracion();
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void btnGuardarOpT_Click(object sender, EventArgs e)
@@ -697,9 +753,7 @@ namespace Configuraciones.GUI
                 {
                     MessageBox.Show("Error al copiar la imagen: " + ex.Message);
                 }
-
             }
-
         }
 
         private void bttExaminarFirma_Click(object sender, EventArgs e)
@@ -733,20 +787,29 @@ namespace Configuraciones.GUI
 
         private void bttExaminarSello_Click(object sender, EventArgs e)
         {
-            string rutaImagen = SeleccionarImagen();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos de imagen|*.jpg;*.png;*.gif;*.bmp|Todos los archivos|*.*";
 
-            if (!string.IsNullOrEmpty(rutaImagen))
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string rutaFormateada = rutaImagen.Replace("\\", "\\\\");
+                // El usuario seleccionó una imagen
+                selectedImagePathSello = openFileDialog.FileName;
 
-                pBoxSello.ImageLocation = rutaImagen;
-                pBoxSello.SizeMode = PictureBoxSizeMode.Zoom;
+                try
+                {
+                    if (!Path.GetFileName(selectedImagePathSello).Equals(SeleccionarSello))
+                    {
+                        SeleccionarSello = Path.GetFileName(selectedImagePathSello);
 
-                SeleccionarSello = rutaFormateada;
-            }
-            else
-            {
-                //MessageBox.Show("No se seleccionó ninguna imagen.");
+                        // Carga la imagen desde la ruta en el directorio de salida
+                        Image originalImage = Image.FromFile(selectedImagePathSello);
+                        pBoxSello.Image = originalImage;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al copiar la imagen: " + ex.Message);
+                }
             }
         }
 
