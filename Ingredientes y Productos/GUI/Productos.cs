@@ -412,7 +412,7 @@ namespace Ingredientes_y_Productos.GUI
                     string outputPath = AppDomain.CurrentDomain.BaseDirectory;
                     string projectDirectory = Path.GetFullPath(Path.Combine(outputPath, @"..\..\..\"));
                     // Ahora tienes la ruta del directorio base de tu proyecto
-                    string imagesDirectory = Path.Combine(projectDirectory, "Ingredientes y productos", "Images");
+                    string imagesDirectory = Path.Combine(projectDirectory, "Ingredientes y Productos", "Images");
                     // Obtén el nombre del archivo seleccionado
                     string selectedImageFileName = Path.GetFileName(selectedImagePathImg);
                     // Construye la ruta de destino

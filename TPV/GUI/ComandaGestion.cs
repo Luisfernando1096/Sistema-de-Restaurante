@@ -35,7 +35,6 @@ namespace TPV.GUI
         public bool tpv;
         public bool borrarData;
         private String SeleccionarImg;
-        private String seleccionImgAnterior;
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
@@ -179,7 +178,6 @@ namespace TPV.GUI
                 btnProducto.ForeColor = Color.Black;
 
                 SeleccionarImg = producto["foto"].ToString();
-                seleccionImgAnterior = producto["foto"].ToString();
 
                 if (!string.IsNullOrEmpty(SeleccionarImg))
                 {
@@ -195,21 +193,22 @@ namespace TPV.GUI
                     {
                         // Carga la imagen desde la ruta en el directorio de salida
                         Image originalImage = Image.FromFile(fullPath);
-                        btnProducto.BackgroundImage = originalImage;
-                        btnProducto.BackgroundImageLayout = ImageLayout.Stretch;
 
+                        // Define las dimensiones deseadas para la imagen
+                        int nuevoAncho = 100; // Cambia este valor al ancho deseado
+                        int nuevoAlto = 100; // Cambia este valor al alto deseado
+
+                        // Crea una nueva imagen con las dimensiones deseadas
+                        Image imagenRedimensionada = new Bitmap(originalImage, new Size(nuevoAncho, nuevoAlto));
+
+                        // Asigna la imagen redimensionada al botón
+                        btnProducto.Image = imagenRedimensionada;
+                        btnProducto.TextImageRelation = TextImageRelation.ImageAboveText;
                     }
-                }
 
-                //btnProducto.BackgroundImage = Properties.Resources.mesa;
-                //btnProducto.BackgroundImageLayout = ImageLayout.Stretch;
+                }
+                
                 btnProducto.TextAlign = ContentAlignment.BottomCenter;
-                //btnProducto.TextAlign = ContentAlignment.MiddleCenter;
-                /*if (!Boolean.Parse(producto["disponible"].ToString()))
-                {
-                    btnProducto.BackColor = Color.MidnightBlue;
-                    btnProducto.ForeColor = Color.White;
-                }*/
                 btnProducto.Size = new Size(130, 130);
                 btnProducto.Click += BotonProducto_Click;
                 flpProductos.Controls.Add(btnProducto);
@@ -825,9 +824,17 @@ namespace TPV.GUI
             {
                 oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
             }
+            else
+            {
+                oReporte.SetParameterValue("Mesero", "");
+            }
             if (!lblCliente.Text.Equals(""))
             {
                 oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
+            }
+            else
+            {
+                oReporte.SetParameterValue("Cliente", "");
             }
 
             if (oReporte != null)
