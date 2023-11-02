@@ -532,7 +532,7 @@ namespace Ingredientes_y_Productos.GUI
                 {
                     Mantenimiento.CLS.Familia mantenimiento = new Mantenimiento.CLS.Familia();
                     mantenimiento.Familia1 = txtFamilia.Text;
-                    mantenimiento.GrupoPrinter = txtGrupoImpresion.Text;
+                    mantenimiento.GrupoPrinter = txtGrupoImpresion.Text.ToUpper();
                     mantenimiento.Activo = chMostrarMenu.Checked ? 1 : 0;
 
                     if (txtIdFamilia.Text == "")

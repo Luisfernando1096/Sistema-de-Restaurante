@@ -31,8 +31,9 @@ namespace TPV.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PuntoPago));
             this.lblMesa = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -114,6 +115,7 @@ namespace TPV.GUI
             this.label8 = new System.Windows.Forms.Label();
             this.lblCambio = new System.Windows.Forms.Label();
             this.btnCuentas = new System.Windows.Forms.Button();
+            this.tFecha = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flpDinero.SuspendLayout();
@@ -200,8 +202,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -221,14 +223,14 @@ namespace TPV.GUI
             this.nombres,
             this.mesa,
             this.salon});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDatos.Location = new System.Drawing.Point(152, 140);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -1075,6 +1077,11 @@ namespace TPV.GUI
             this.btnCuentas.Visible = false;
             this.btnCuentas.Click += new System.EventHandler(this.btnCuentas_Click);
             // 
+            // tFecha
+            // 
+            this.tFecha.Interval = 1000;
+            this.tFecha.Tick += new System.EventHandler(this.tFecha_Tick);
+            // 
             // PuntoPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1135,6 +1142,7 @@ namespace TPV.GUI
             this.Name = "PuntoPago";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuntoPago";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PuntoPago_FormClosing);
             this.Load += new System.EventHandler(this.PuntoPago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.flpAcciones.ResumeLayout(false);
@@ -1227,5 +1235,6 @@ namespace TPV.GUI
         private DataGridViewTextBoxColumn nombres;
         private DataGridViewTextBoxColumn mesa;
         private DataGridViewTextBoxColumn salon;
+        private Timer tFecha;
     }
 }

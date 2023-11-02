@@ -31,8 +31,8 @@ namespace TPV.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComandaGestion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnFamilia = new System.Windows.Forms.Button();
             this.flpFamilias = new System.Windows.Forms.FlowLayoutPanel();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
@@ -273,8 +273,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -294,14 +294,14 @@ namespace TPV.GUI
             this.nombres,
             this.mesa,
             this.salon});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDatos.Location = new System.Drawing.Point(148, 100);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -679,7 +679,6 @@ namespace TPV.GUI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnPagar;
-        private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label label10;
         public System.Windows.Forms.Label lblMesa;
         public System.Windows.Forms.Label lblCliente;
@@ -703,5 +702,6 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn salon;
         private System.Windows.Forms.Panel panelComanda;
+        public System.Windows.Forms.Label lblFecha;
     }
 }

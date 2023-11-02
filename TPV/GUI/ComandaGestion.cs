@@ -116,6 +116,7 @@ namespace TPV.GUI
 
         private void ComandaGestion_Load(object sender, EventArgs e)
         {
+            tFecha.Start();
             WindowState = FormWindowState.Maximized;
             if (dgvDatos.Rows.Count>0)
             {
@@ -134,7 +135,6 @@ namespace TPV.GUI
             // Agregamos el Panel al formulario
             Controls.Add(panelWrapper);
 
-            tFecha.Start();
             DataTable salones = DataManager.DBConsultas.Familias();
             // Crear y agregar botones al FlowLayoutPanel para cada salon
             foreach (DataRow salon in salones.Rows)
@@ -166,9 +166,10 @@ namespace TPV.GUI
             // Crear y agregar botones al FlowLayoutPanel para cada producto
             foreach (DataRow producto in productos.Rows)
             {
+                String[] aux = { producto["idProducto"].ToString().ToUpper(), producto["grupoPrinter"].ToString().ToUpper() };
                 btnProducto = new Button();
                 btnProducto.Text = producto["nombre"].ToString().ToUpper();
-                btnProducto.Tag = producto["idProducto"].ToString().ToUpper();
+                btnProducto.Tag = aux;
 
                 // Crear un nuevo objeto Font con estilo negrita
                 Font boldFont = new Font(btnProducto.Font, FontStyle.Bold);
@@ -266,6 +267,7 @@ namespace TPV.GUI
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            String[] aux = (string[])botonProducto.Tag;
             PedidoDetalle pDetalle = new PedidoDetalle();
             pDetalle.Cantidad = cantidad;
             if (!lblTicket.Text.Equals(""))
@@ -273,16 +275,19 @@ namespace TPV.GUI
                 pDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
             }
             pDetalle.Mesa = lblMesa.Text;
-            pDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+            pDetalle.IdProducto = Int32.Parse(aux[0].ToString());
             pDetalle.Fecha = fecha;
             pDetalle.Nombre = botonProducto.Text;
+            pDetalle.Grupo = aux[1].ToString();
+
+
             Boolean encontrado = false;
 
             if (lstDetalle.Count > 0)
             {
                 foreach (PedidoDetalle item in lstDetalle)
                 {
-                    if (botonProducto.Tag.ToString().Equals(item.IdProducto.ToString()))
+                    if (aux[0].ToString().Equals(item.IdProducto.ToString()))
                     {
                         encontrado = true;
                         item.Cantidad += cantidad;
@@ -308,12 +313,12 @@ namespace TPV.GUI
                 //Saber si ya existe algun producto igual en los detalles
                 foreach (DataGridViewRow row in dgvDatos.Rows)
                 {
-                    if (row.Cells["idProducto"].Value.ToString() == botonProducto.Tag.ToString())
+                    if (row.Cells["idProducto"].Value.ToString() == aux[0].ToString())
                     {
                         idDetalle = Int32.Parse(row.Cells["idDetalle"].Value.ToString());
                         cantidad = cantidad + Int32.Parse(row.Cells["cantidad"].Value.ToString());
                         precio = double.Parse(row.Cells["precio"].Value.ToString());
-                        idProducto = Int32.Parse(botonProducto.Tag.ToString());
+                        idProducto = Int32.Parse(aux[0].ToString());
                         aumentarUnProducto = true;
                     }
                 }
@@ -325,7 +330,7 @@ namespace TPV.GUI
                     //Ya existe un producto igual en el datgrid, hay que aumentar
                     pedidoDetalle.IdDetalle = idDetalle;
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
-                    pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+                    pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
                     pedidoDetalle.Cantidad = cantidad;
                     pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, idProducto, precio);
 
@@ -343,12 +348,12 @@ namespace TPV.GUI
                     pedidoDetalle.HoraEntregado = fecha;
                     pedidoDetalle.HoraPedido = fecha;
                     //pedidoDetalle.IdCocinero = null;
-                    pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+                    pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.Cantidad = cantidad;
-                    DataTable precioProductoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(botonProducto.Tag.ToString()));
+                    DataTable precioProductoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
                     pedidoDetalle.Precio = double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString());
-                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString()));
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString()));
                     pedidoDetalle.Grupo = "0";
                     pedidoDetalle.Usuario = oUsuario.IdUsuario;
                     pedidoDetalle.Insertar();
@@ -400,13 +405,13 @@ namespace TPV.GUI
                 pedidoDetalle.HoraEntregado = fecha;
                 pedidoDetalle.HoraPedido = fecha;
                 //pedidoDetalle.IdCocinero = null;
-                pedidoDetalle.IdProducto = Int32.Parse(botonProducto.Tag.ToString());
+                pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
                 pedidoDetalle.IdPedido = idPedidoInsertado;
                 lblTicket.Text = idPedidoInsertado.ToString();
                 pedidoDetalle.Cantidad = cantidad;
-                DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(botonProducto.Tag.ToString()));
+                DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
-                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(botonProducto.Tag.ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
+                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
                 pedidoDetalle.Grupo = "0";
                 pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
@@ -476,6 +481,7 @@ namespace TPV.GUI
         private void btnPagar_Click(object sender, EventArgs e)
         {
             ImprimirComandaActual();
+            lstDetalle.Clear();
             this.Hide();
             PuntoPago f = new PuntoPago(this);
 
@@ -714,6 +720,7 @@ namespace TPV.GUI
                 punto_venta.Close();
 
             }
+            tFecha.Stop();
         }
 
         private void btnExtras_Click(object sender, EventArgs e)
@@ -816,39 +823,64 @@ namespace TPV.GUI
 
         private void GenerarComandaParcial(ReportClass oReporte)
         {
-            oReporte.SetDataSource(lstDetalle);
-            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-            oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-            oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value);
-            if (!lblMesero.Text.Equals(""))
+            // Crear un diccionario para almacenar listas de detalles por grupo
+            var grupos = new Dictionary<string, List<PedidoDetalle>>();
+
+            // Iterar a través de los detalles y agregar los detalles a las listas de grupos correspondientes
+            foreach (PedidoDetalle detalle in lstDetalle)
             {
-                oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
-            }
-            else
-            {
-                oReporte.SetParameterValue("Mesero", "");
-            }
-            if (!lblCliente.Text.Equals(""))
-            {
-                oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
-            }
-            else
-            {
-                oReporte.SetParameterValue("Cliente", "");
+                string grupoKey = detalle.Grupo; // Asegúrate de tener una propiedad "Grupo" en tu clase PedidoDetalle
+
+                if (!grupos.ContainsKey(grupoKey))
+                {
+                    grupos[grupoKey] = new List<PedidoDetalle>();
+                }
+                grupos[grupoKey].Add(detalle);
             }
 
-            if (oReporte != null)
+            // Ahora, itera a través de los grupos y crea e imprime el informe para cada grupo
+            foreach (var kvp in grupos)
             {
-                // Configurar la ruta de destino en la impresora virtual XPS
-                PrinterSettings settings = new PrinterSettings();
-                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+                var detallesDelGrupo = kvp.Value;
 
-                // Imprimir el informe en la impresora virtual XPS
-                oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                oReporte.PrintToPrinter(1, false, 0, 0);
+                oReporte.SetDataSource(detallesDelGrupo);
+                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+                oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value);
 
-                MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!lblMesero.Text.Equals(""))
+                {
+                    oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
+                }
+                else
+                {
+                    oReporte.SetParameterValue("Mesero", "");
+                }
+
+                if (!lblCliente.Text.Equals(""))
+                {
+                    oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
+                }
+                else
+                {
+                    oReporte.SetParameterValue("Cliente", "");
+                }
+
+                if (oReporte != null)
+                {
+                    // Configurar la ruta de destino en la impresora virtual XPS
+                    PrinterSettings settings = new PrinterSettings();
+                    settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                    // Imprimir el informe en la impresora virtual XPS
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
+
+                    MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+
         }
+
     }
 }

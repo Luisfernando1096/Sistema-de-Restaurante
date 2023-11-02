@@ -37,6 +37,7 @@ namespace TPV.GUI
             InitializeComponent();
             this.comandaGestion = comandaGestion;
             btnTicket.BackColor = Color.CadetBlue;
+            lblFecha.Text = comandaGestion.lblFecha.Text;
         }
 
         public void CargarProductosPorMesa(String id)
@@ -77,6 +78,7 @@ namespace TPV.GUI
 
         private void PuntoPago_Load(object sender, EventArgs e)
         {
+            tFecha.Start();
             WindowState = FormWindowState.Maximized;
             // Creamos un Panel para envolver el FlowLayoutPanel
             Panel panelWrapper = new Panel();
@@ -733,24 +735,18 @@ namespace TPV.GUI
 
         private void btnExacto_Click(object sender, EventArgs e)
         {
-            if (txtPagoRegistrar.Text.Equals(txtTotalPagar.Text))
-            {
-                pagoEfectivo = false;
-                pagoTarjeta = false;
-                pagoExacto = true;
-                pagoCortesia = false;
+            txtPagoRegistrar.Text = txtTotalPagar.Text;
+            pagoEfectivo = false;
+            pagoTarjeta = false;
+            pagoExacto = true;
+            pagoCortesia = false;
 
-                if (ValidarExistenciaTicket()) return;
-                //Programar pago exacto
-                pedido.Saldo = 0.00;
-                pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
-                RegistrarPago();
-                ActualizarCaja(true);
-            }
-            else
-            {
-                MessageBox.Show("El total a pagar debe ser exacto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            if (ValidarExistenciaTicket()) return;
+            //Programar pago exacto
+            pedido.Saldo = 0.00;
+            pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
+            RegistrarPago();
+            ActualizarCaja(true);
         }
 
         private void btnCortesia_Click(object sender, EventArgs e)
@@ -1088,6 +1084,16 @@ namespace TPV.GUI
                 MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+        }
+
+        private void tFecha_Tick(object sender, EventArgs e)
+        {
+            lblFecha.Text = DateTime.Now.ToString();
+        }
+
+        private void PuntoPago_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tFecha.Stop();
         }
     }
 }
