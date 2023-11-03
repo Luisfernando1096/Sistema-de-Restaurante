@@ -31,8 +31,8 @@ namespace TPV.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComandaGestion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnFamilia = new System.Windows.Forms.Button();
             this.flpFamilias = new System.Windows.Forms.FlowLayoutPanel();
             this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
@@ -44,23 +44,7 @@ namespace TPV.GUI
             this.btnExtras = new System.Windows.Forms.Button();
             this.btnComanda = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.flpProductos = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnProducto = new System.Windows.Forms.Button();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -77,11 +61,27 @@ namespace TPV.GUI
             this.btnPagar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelComanda = new System.Windows.Forms.Panel();
+            this.btnProducto = new System.Windows.Forms.Button();
+            this.flpProductos = new System.Windows.Forms.FlowLayoutPanel();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpFamilias.SuspendLayout();
             this.flpAcciones.SuspendLayout();
-            this.flpProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.panelComanda.SuspendLayout();
+            this.flpProductos.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnFamilia
@@ -96,12 +96,11 @@ namespace TPV.GUI
             // flpFamilias
             // 
             this.flpFamilias.AutoScroll = true;
-            this.flpFamilias.AutoSize = true;
             this.flpFamilias.Controls.Add(this.btnFamilia);
             this.flpFamilias.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpFamilias.Location = new System.Drawing.Point(517, 53);
+            this.flpFamilias.Location = new System.Drawing.Point(517, 60);
             this.flpFamilias.Name = "flpFamilias";
-            this.flpFamilias.Size = new System.Drawing.Size(165, 614);
+            this.flpFamilias.Size = new System.Drawing.Size(179, 580);
             this.flpFamilias.TabIndex = 1;
             this.flpFamilias.WrapContents = false;
             // 
@@ -247,34 +246,13 @@ namespace TPV.GUI
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // flpProductos
-            // 
-            this.flpProductos.AutoScroll = true;
-            this.flpProductos.AutoSize = true;
-            this.flpProductos.Controls.Add(this.btnProducto);
-            this.flpProductos.Location = new System.Drawing.Point(703, 54);
-            this.flpProductos.Name = "flpProductos";
-            this.flpProductos.Size = new System.Drawing.Size(126, 586);
-            this.flpProductos.TabIndex = 4;
-            // 
-            // btnProducto
-            // 
-            this.btnProducto.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProducto.Location = new System.Drawing.Point(3, 3);
-            this.btnProducto.Name = "btnProducto";
-            this.btnProducto.Size = new System.Drawing.Size(120, 120);
-            this.btnProducto.TabIndex = 0;
-            this.btnProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.btnProducto.UseVisualStyleBackColor = true;
-            this.btnProducto.Visible = false;
-            // 
             // dgvDatos
             // 
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -294,14 +272,14 @@ namespace TPV.GUI
             this.nombres,
             this.mesa,
             this.salon});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.Location = new System.Drawing.Point(148, 100);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -311,143 +289,6 @@ namespace TPV.GUI
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(362, 480);
             this.dgvDatos.TabIndex = 5;
-            // 
-            // idDetalle
-            // 
-            this.idDetalle.DataPropertyName = "idDetalle";
-            this.idDetalle.HeaderText = "ID";
-            this.idDetalle.MinimumWidth = 6;
-            this.idDetalle.Name = "idDetalle";
-            this.idDetalle.ReadOnly = true;
-            this.idDetalle.Visible = false;
-            this.idDetalle.Width = 125;
-            // 
-            // cantidad
-            // 
-            this.cantidad.DataPropertyName = "cantidad";
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.MinimumWidth = 6;
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            this.cantidad.Width = 125;
-            // 
-            // idPedido
-            // 
-            this.idPedido.DataPropertyName = "idPedido";
-            this.idPedido.HeaderText = "Id Pedido";
-            this.idPedido.MinimumWidth = 6;
-            this.idPedido.Name = "idPedido";
-            this.idPedido.ReadOnly = true;
-            this.idPedido.Visible = false;
-            this.idPedido.Width = 125;
-            // 
-            // idProducto
-            // 
-            this.idProducto.DataPropertyName = "idProducto";
-            this.idProducto.HeaderText = "Id Producto";
-            this.idProducto.MinimumWidth = 6;
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
-            this.idProducto.Width = 125;
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            this.precio.HeaderText = "Precio";
-            this.precio.MinimumWidth = 6;
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            this.precio.Visible = false;
-            this.precio.Width = 125;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.MinimumWidth = 6;
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
-            this.fecha.Visible = false;
-            this.fecha.Width = 125;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Producto";
-            this.nombre.MinimumWidth = 6;
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // subTotal
-            // 
-            this.subTotal.DataPropertyName = "subTotal";
-            this.subTotal.HeaderText = "Sub Total";
-            this.subTotal.MinimumWidth = 6;
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            this.subTotal.Width = 125;
-            // 
-            // grupo
-            // 
-            this.grupo.DataPropertyName = "grupo";
-            this.grupo.HeaderText = "Grupo Impresion";
-            this.grupo.MinimumWidth = 6;
-            this.grupo.Name = "grupo";
-            this.grupo.ReadOnly = true;
-            this.grupo.Visible = false;
-            this.grupo.Width = 125;
-            // 
-            // cocinando
-            // 
-            this.cocinando.DataPropertyName = "cocinando";
-            this.cocinando.HeaderText = "Cocinando";
-            this.cocinando.MinimumWidth = 6;
-            this.cocinando.Name = "cocinando";
-            this.cocinando.ReadOnly = true;
-            this.cocinando.Visible = false;
-            this.cocinando.Width = 125;
-            // 
-            // nombreMesero
-            // 
-            this.nombreMesero.DataPropertyName = "nombreMesero";
-            this.nombreMesero.HeaderText = "Mesero";
-            this.nombreMesero.MinimumWidth = 6;
-            this.nombreMesero.Name = "nombreMesero";
-            this.nombreMesero.ReadOnly = true;
-            this.nombreMesero.Visible = false;
-            this.nombreMesero.Width = 125;
-            // 
-            // nombres
-            // 
-            this.nombres.DataPropertyName = "nombres";
-            this.nombres.HeaderText = "Cliente";
-            this.nombres.MinimumWidth = 6;
-            this.nombres.Name = "nombres";
-            this.nombres.ReadOnly = true;
-            this.nombres.Visible = false;
-            this.nombres.Width = 125;
-            // 
-            // mesa
-            // 
-            this.mesa.DataPropertyName = "mesa";
-            this.mesa.HeaderText = "Mesa";
-            this.mesa.MinimumWidth = 6;
-            this.mesa.Name = "mesa";
-            this.mesa.ReadOnly = true;
-            this.mesa.Visible = false;
-            this.mesa.Width = 125;
-            // 
-            // salon
-            // 
-            this.salon.DataPropertyName = "salon";
-            this.salon.HeaderText = "Salon";
-            this.salon.MinimumWidth = 6;
-            this.salon.Name = "salon";
-            this.salon.ReadOnly = true;
-            this.salon.Visible = false;
-            this.salon.Width = 125;
             // 
             // label1
             // 
@@ -579,7 +420,7 @@ namespace TPV.GUI
             // 
             this.btnPagar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPagar.Image = ((System.Drawing.Image)(resources.GetObject("btnPagar.Image")));
-            this.btnPagar.Location = new System.Drawing.Point(251, 598);
+            this.btnPagar.Location = new System.Drawing.Point(254, 577);
             this.btnPagar.Name = "btnPagar";
             this.btnPagar.Size = new System.Drawing.Size(152, 69);
             this.btnPagar.TabIndex = 15;
@@ -606,6 +447,7 @@ namespace TPV.GUI
             // panelComanda
             // 
             this.panelComanda.AutoSize = true;
+            this.panelComanda.Controls.Add(this.flpProductos);
             this.panelComanda.Controls.Add(this.label5);
             this.panelComanda.Controls.Add(this.lblFecha);
             this.panelComanda.Controls.Add(this.btnSalir);
@@ -621,21 +463,177 @@ namespace TPV.GUI
             this.panelComanda.Controls.Add(this.btnCuentas);
             this.panelComanda.Controls.Add(this.label1);
             this.panelComanda.Controls.Add(this.dgvDatos);
-            this.panelComanda.Controls.Add(this.flpProductos);
             this.panelComanda.Controls.Add(this.flpAcciones);
             this.panelComanda.Controls.Add(this.flpFamilias);
             this.panelComanda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelComanda.Location = new System.Drawing.Point(0, 0);
             this.panelComanda.Name = "panelComanda";
-            this.panelComanda.Size = new System.Drawing.Size(1028, 609);
+            this.panelComanda.Size = new System.Drawing.Size(1261, 748);
             this.panelComanda.TabIndex = 29;
+            // 
+            // btnProducto
+            // 
+            this.btnProducto.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProducto.Location = new System.Drawing.Point(3, 3);
+            this.btnProducto.Name = "btnProducto";
+            this.btnProducto.Size = new System.Drawing.Size(120, 120);
+            this.btnProducto.TabIndex = 29;
+            this.btnProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnProducto.UseVisualStyleBackColor = true;
+            this.btnProducto.Visible = false;
+            // 
+            // flpProductos
+            // 
+            this.flpProductos.AutoScroll = true;
+            this.flpProductos.Controls.Add(this.btnProducto);
+            this.flpProductos.Location = new System.Drawing.Point(702, 60);
+            this.flpProductos.Name = "flpProductos";
+            this.flpProductos.Size = new System.Drawing.Size(547, 580);
+            this.flpProductos.TabIndex = 30;
+            // 
+            // idDetalle
+            // 
+            this.idDetalle.DataPropertyName = "idDetalle";
+            this.idDetalle.HeaderText = "ID";
+            this.idDetalle.MinimumWidth = 6;
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            this.idDetalle.Width = 125;
+            // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.MinimumWidth = 6;
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            this.cantidad.Width = 60;
+            // 
+            // idPedido
+            // 
+            this.idPedido.DataPropertyName = "idPedido";
+            this.idPedido.HeaderText = "Id Pedido";
+            this.idPedido.MinimumWidth = 6;
+            this.idPedido.Name = "idPedido";
+            this.idPedido.ReadOnly = true;
+            this.idPedido.Visible = false;
+            this.idPedido.Width = 125;
+            // 
+            // idProducto
+            // 
+            this.idProducto.DataPropertyName = "idProducto";
+            this.idProducto.HeaderText = "Id Producto";
+            this.idProducto.MinimumWidth = 6;
+            this.idProducto.Name = "idProducto";
+            this.idProducto.ReadOnly = true;
+            this.idProducto.Visible = false;
+            this.idProducto.Width = 125;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            this.precio.HeaderText = "Precio";
+            this.precio.MinimumWidth = 6;
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.Visible = false;
+            this.precio.Width = 125;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.MinimumWidth = 6;
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            this.fecha.Visible = false;
+            this.fecha.Width = 125;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Producto";
+            this.nombre.MinimumWidth = 6;
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // subTotal
+            // 
+            this.subTotal.DataPropertyName = "subTotal";
+            this.subTotal.HeaderText = "Sub Total";
+            this.subTotal.MinimumWidth = 6;
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 125;
+            // 
+            // grupo
+            // 
+            this.grupo.DataPropertyName = "grupo";
+            this.grupo.HeaderText = "Grupo Impresion";
+            this.grupo.MinimumWidth = 6;
+            this.grupo.Name = "grupo";
+            this.grupo.ReadOnly = true;
+            this.grupo.Visible = false;
+            this.grupo.Width = 125;
+            // 
+            // cocinando
+            // 
+            this.cocinando.DataPropertyName = "cocinando";
+            this.cocinando.HeaderText = "Cocinando";
+            this.cocinando.MinimumWidth = 6;
+            this.cocinando.Name = "cocinando";
+            this.cocinando.ReadOnly = true;
+            this.cocinando.Visible = false;
+            this.cocinando.Width = 125;
+            // 
+            // nombreMesero
+            // 
+            this.nombreMesero.DataPropertyName = "nombreMesero";
+            this.nombreMesero.HeaderText = "Mesero";
+            this.nombreMesero.MinimumWidth = 6;
+            this.nombreMesero.Name = "nombreMesero";
+            this.nombreMesero.ReadOnly = true;
+            this.nombreMesero.Visible = false;
+            this.nombreMesero.Width = 125;
+            // 
+            // nombres
+            // 
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Cliente";
+            this.nombres.MinimumWidth = 6;
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            this.nombres.Visible = false;
+            this.nombres.Width = 125;
+            // 
+            // mesa
+            // 
+            this.mesa.DataPropertyName = "mesa";
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.MinimumWidth = 6;
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            this.mesa.Visible = false;
+            this.mesa.Width = 125;
+            // 
+            // salon
+            // 
+            this.salon.DataPropertyName = "salon";
+            this.salon.HeaderText = "Salon";
+            this.salon.MinimumWidth = 6;
+            this.salon.Name = "salon";
+            this.salon.ReadOnly = true;
+            this.salon.Visible = false;
+            this.salon.Width = 125;
             // 
             // ComandaGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1028, 609);
+            this.ClientSize = new System.Drawing.Size(1261, 748);
             this.ControlBox = false;
             this.Controls.Add(this.panelComanda);
             this.MaximumSize = new System.Drawing.Size(1386, 787);
@@ -648,10 +646,10 @@ namespace TPV.GUI
             this.Resize += new System.EventHandler(this.ComandaGestion_Resize);
             this.flpFamilias.ResumeLayout(false);
             this.flpAcciones.ResumeLayout(false);
-            this.flpProductos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.panelComanda.ResumeLayout(false);
             this.panelComanda.PerformLayout();
+            this.flpProductos.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -670,8 +668,6 @@ namespace TPV.GUI
         private System.Windows.Forms.Button btnExtras;
         private System.Windows.Forms.Button btnComanda;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.FlowLayoutPanel flpProductos;
-        private System.Windows.Forms.Button btnProducto;
         private System.Windows.Forms.DataGridView dgvDatos;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -687,6 +683,10 @@ namespace TPV.GUI
         private System.Windows.Forms.Timer tFecha;
         public System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCuentas;
+        private System.Windows.Forms.Panel panelComanda;
+        public System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Button btnProducto;
+        private System.Windows.Forms.FlowLayoutPanel flpProductos;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
@@ -701,7 +701,5 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
         private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn salon;
-        private System.Windows.Forms.Panel panelComanda;
-        public System.Windows.Forms.Label lblFecha;
     }
 }

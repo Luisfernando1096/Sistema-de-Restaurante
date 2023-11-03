@@ -593,23 +593,6 @@ namespace TPV.GUI
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (lstDetalle.Count > 0)
-            {
-                foreach (PedidoDetalle item in lstDetalle)
-                {
-                    if (dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item.IdProducto.ToString()))
-                    {
-                        item.IdPedido = Int32.Parse(lblTicket.Text.ToString());
-                        item.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
-                        item.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
-                        if (item.Cantidad == 0)
-                        {
-                            lstDetalle.Remove(item);
-                        }
-                        break;
-                    }
-                }
-            }
 
             //Programando boton de disminuir
             PedidoDetalle pedidoDetalle = new PedidoDetalle();
@@ -646,6 +629,23 @@ namespace TPV.GUI
                 }
 
                 CargarPedidosEnMesa(lblMesa.Tag.ToString());
+                if (lstDetalle.Count > 0)
+                {
+                    foreach (PedidoDetalle item in lstDetalle)
+                    {
+                        if (dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item.IdProducto.ToString()))
+                        {
+                            item.IdPedido = item.IdPedido;
+                            item.IdProducto = item.IdProducto;
+                            item.Cantidad = item.Cantidad - 1;
+                            if (item.Cantidad == 0)
+                            {
+                                lstDetalle.Remove(item);
+                            }
+                            break;
+                        }
+                    }
+                }
             }
 
             
