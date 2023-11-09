@@ -109,5 +109,27 @@ namespace Mantenimiento.CLS
             }
             return resultado;
         }
+
+        public Boolean ActualizarStock()
+        {
+            Boolean resultado = false;
+            DataManager.DBOperacion op = new DataManager.DBOperacion();
+            string sentencia;
+            sentencia = "UPDATE ingrediente SET stock = " + stock + " WHERE idIngrediente = " + idIngrediente + ";";
+            try
+            {
+                int filasAfectadas = 0;
+                filasAfectadas = op.EjecutarSentencia(sentencia);
+                if (filasAfectadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
+        }
     }
 }

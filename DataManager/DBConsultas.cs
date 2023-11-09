@@ -206,7 +206,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT precio FROM producto
+                String sentencia = @"SELECT precio, stock FROM producto
                                     WHERE idProducto = " + id + "; ";
                 DBOperacion operacion = new DBOperacion();
 
@@ -1373,6 +1373,25 @@ namespace DataManager
             {
                 Console.WriteLine("Error: " + ex.Message);
                 return 0;
+            }
+        }
+
+        public static DataTable BuscarIngredientesPorProducto(String idProducto)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT p.idProducto, i.idIngrediente, ip.cantidad, i.stock as stock_ingrediente, p.stock as stock_producto FROM ingrediente_producto ip, producto p, ingrediente i
+                                    WHERE p.idProducto = ip.idProducto AND i.idIngrediente = ip.idIngrediente AND p.idProducto = " + idProducto + @";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
             }
         }
 

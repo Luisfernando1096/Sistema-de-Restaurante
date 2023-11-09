@@ -266,8 +266,10 @@ namespace TPV.GUI
 
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
+            int cant = cantidad;
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             String[] aux = (string[])botonProducto.Tag;
+            DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
             PedidoDetalle pDetalle = new PedidoDetalle();
             pDetalle.Cantidad = cantidad;
             if (!lblTicket.Text.Equals(""))
@@ -351,9 +353,8 @@ namespace TPV.GUI
                     pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.Cantidad = cantidad;
-                    DataTable precioProductoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
-                    pedidoDetalle.Precio = double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString());
-                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(precioProductoNuevo.Rows[0]["precio"].ToString()));
+                    pedidoDetalle.Precio = double.Parse(productoNuevo.Rows[0]["precio"].ToString());
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(productoNuevo.Rows[0]["precio"].ToString()));
                     pedidoDetalle.Grupo = "0";
                     pedidoDetalle.Usuario = oUsuario.IdUsuario;
                     pedidoDetalle.Insertar();
@@ -448,9 +449,44 @@ namespace TPV.GUI
             pedido2.IdPedido = Int32.Parse(lblTicket.Text.ToString());
             pedido2.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
             double total = CalcularTotal();
-            pedido2.ActualizarTotal(total); 
+            pedido2.ActualizarTotal(total);
+
+            ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo);
 
         }
+
+        private void ActualizarStockProductosIngredientes(string id, int cantidad, DataTable productoNuevo)
+        {
+            DataTable ingredientes = DataManager.DBConsultas.BuscarIngredientesPorProducto(id);
+
+            Ingrediente ingrediente;
+            Producto producto;
+
+            if (ingredientes.Rows.Count>0)
+            {
+                foreach (DataRow item in ingredientes.Rows)
+                {
+                    ingrediente = new Ingrediente();
+                    ingrediente.IdIngrediente = Int32.Parse(item["idIngrediente"].ToString());
+                    ingrediente.Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) - CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()));
+                    ingrediente.ActualizarStock();
+                }
+            }
+            else
+            {
+                //El producto no tiene ingredientes
+                producto = new Producto();
+                producto.IdProducto = Int32.Parse(id);
+                producto.Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) - cantidad;
+                producto.ActualizarStock();
+            }
+        }
+
+        private decimal CalcularCantidad(int cantidad, decimal v)
+        {
+            return cantidad*v;
+        }
+
         private void btnSalir_Click_1(object sender, EventArgs e)
         {
             ImprimirComandaActual();
