@@ -451,34 +451,58 @@ namespace TPV.GUI
             double total = CalcularTotal();
             pedido2.ActualizarTotal(total);
 
-            ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo);
+            ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
 
         }
 
-        private void ActualizarStockProductosIngredientes(string id, int cantidad, DataTable productoNuevo)
+        private void ActualizarStockProductosIngredientes(string id, int cantidad, DataTable productoNuevo, bool aumentar)
         {
             DataTable ingredientes = DataManager.DBConsultas.BuscarIngredientesPorProducto(id);
 
             Ingrediente ingrediente;
             Producto producto;
 
-            if (ingredientes.Rows.Count>0)
+            if (aumentar)//Si seleccionamos un producto
             {
-                foreach (DataRow item in ingredientes.Rows)
+                if (ingredientes.Rows.Count > 0)
                 {
-                    ingrediente = new Ingrediente();
-                    ingrediente.IdIngrediente = Int32.Parse(item["idIngrediente"].ToString());
-                    ingrediente.Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) - CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()));
-                    ingrediente.ActualizarStock();
+                    foreach (DataRow item in ingredientes.Rows)
+                    {
+                        ingrediente = new Ingrediente();
+                        ingrediente.IdIngrediente = Int32.Parse(item["idIngrediente"].ToString());
+                        ingrediente.Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) - CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()));
+                        ingrediente.ActualizarStock();
+                    }
+                }
+                else
+                {
+                    //El producto no tiene ingredientes
+                    producto = new Producto();
+                    producto.IdProducto = Int32.Parse(id);
+                    producto.Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) - cantidad;
+                    producto.ActualizarStock();
                 }
             }
-            else
+            else//Si disminuimos
             {
-                //El producto no tiene ingredientes
-                producto = new Producto();
-                producto.IdProducto = Int32.Parse(id);
-                producto.Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) - cantidad;
-                producto.ActualizarStock();
+                if (ingredientes.Rows.Count > 0)
+                {
+                    foreach (DataRow item in ingredientes.Rows)
+                    {
+                        ingrediente = new Ingrediente();
+                        ingrediente.IdIngrediente = Int32.Parse(item["idIngrediente"].ToString());
+                        ingrediente.Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) + CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()));
+                        ingrediente.ActualizarStock();
+                    }
+                }
+                else
+                {
+                    //El producto no tiene ingredientes
+                    producto = new Producto();
+                    producto.IdProducto = Int32.Parse(id);
+                    producto.Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) + cantidad;
+                    producto.ActualizarStock();
+                }
             }
         }
 
@@ -682,6 +706,9 @@ namespace TPV.GUI
                         }
                     }
                 }
+
+                DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
+                ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
             }
 
             
