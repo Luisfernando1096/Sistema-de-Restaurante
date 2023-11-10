@@ -226,6 +226,7 @@ namespace Ingredientes_y_Productos.GUI
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuscarIngrediente";
             this.Load += new System.EventHandler(this.BuscarIngrediente_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BuscarIngrediente_KeyDown);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarIngrediente)).EndInit();

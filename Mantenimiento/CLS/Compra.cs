@@ -32,9 +32,10 @@ namespace Mantenimiento.CLS
         public double Iva { get => _iva; set => _iva = value; }
         public double TotalPago { get => _totalPago; set => _totalPago = value; }
 
-        public Boolean Insertar()
+        public Boolean Insertar(out int idInsertado)
         {
             Boolean resultado = false;
+            idInsertado = -1; // Valor predeterminado en caso de error
             string sentencia;
             sentencia = @"insert into compra(tipoCompra,idProveedor,idComprobante,nComprobante,idUsuario,fecha,total,descuento,iva,totalPago) values('"+_tipoCompra+"',"+_idProveedor+","+_idComprobante+",'"+_nComprobante+"',"+_idUsuario+",'"+_fecha+"',"+_total+","+_descuento+","+_iva+","+_totalPago+");";
 
@@ -46,6 +47,10 @@ namespace Mantenimiento.CLS
                 if (filasInsertadas > 0)
                 {
                     resultado = true;
+
+                    // Ahora, obtén el ID del pedido insertado usando una consulta adicional
+                    string consultaId = "SELECT LAST_INSERT_ID();";
+                    idInsertado = Convert.ToInt32(op.ConsultarScalar(consultaId));
                 }
             }
             catch (Exception)

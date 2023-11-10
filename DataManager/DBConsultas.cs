@@ -1125,7 +1125,28 @@ namespace DataManager
                 throw;
             }
         }
+        public static Boolean ExisteComprobante(String nComprbante)
+        {
+            try
+            {
+                Boolean existe = false;
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM compra WHERE nComprobante =  '"+ nComprbante +"';";
+                DBOperacion operacion = new DBOperacion();
 
+                resultado = operacion.Consultar(sentencia);
+                if (resultado.Rows.Count > 0)
+                {
+                    existe = true;
+                }
+
+                return existe;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public static DataTable Proveedor()
         {
             try
@@ -1337,6 +1358,84 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable ComprasProveedor(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia;
+                string Ingrediente = "INGREDIENTES";
+                string producto = "PRODUCTOS";
+                if (id == 1)
+                {
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + producto + "';";
+                } 
+                else if (id == 2)
+                {
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + Ingrediente + "';";
+                }
+                else if(id == 3)
+                {
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
+                }
+                else
+                {
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
+                }
+
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable Compras(int identificador, int id, string nComprobante)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                DBOperacion operacion = new DBOperacion();
+                String sentencia = null;
+                if (identificador == 1)
+                {
+                    sentencia = @"SELECT 
+                                         dt.cantidad, c.idCompra, c.tipoCompra, c.nComprobante, c.fecha, c.totalPago, c.descuento, c.iva,
+                                         pd.idProducto idTipo, pd.nombre, cm.idComprobante, cm.Tipo, dt.precio, dt.subTotal 
+                                    FROM compra_detalle AS dt
+                                        JOIN producto AS pd ON dt.idProducto = pd.idProducto
+                                        JOIN compra AS c ON dt.idCompra = c.idCompra
+                                        JOIN proveedor AS pv ON c.idProveedor = pv.idProveedor
+                                        JOIN comprobante AS cm ON c.idComprobante = cm.idComprobante
+                                    WHERE pv.idProveedor = " + id + " AND c.nComprobante = '" + nComprobante + "' ;";
+                }
+                else if (identificador == 2)
+                {
+                    sentencia = @"SELECT 
+                                         dt.cantidad, c.idCompra, c.tipoCompra, c.nComprobante, c.fecha, c.totalPago, c.descuento, c.iva,
+                                        ig.idIngrediente AS idTipo, ig.nombre, cm.idComprobante, cm.Tipo, dt.precio, dt.subTotal 
+                                    FROM compra_detalle AS dt
+                                        JOIN ingrediente AS ig ON dt.idIngrediente = ig.idIngrediente
+                                        JOIN compra AS c ON dt.idCompra = c.idCompra
+                                        JOIN proveedor AS pv ON c.idProveedor = pv.idProveedor
+                                        JOIN comprobante AS cm ON c.idComprobante = cm.idComprobante
+                                    WHERE pv.idProveedor = " + id + " AND c.nComprobante = '" + nComprobante + "' ;";
+                }
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static int ConsultarStock(int Tipo, int idTipo)
         {
             try

@@ -196,6 +196,7 @@ namespace Ingredientes_y_Productos.GUI
         public BuscarIngrediente()
         {
             InitializeComponent();
+            KeyPreview = true; // Habilitar la captura de teclas en el formulario
         }
 
         private void BuscarIngrediente_Load(object sender, EventArgs e)
@@ -251,6 +252,18 @@ namespace Ingredientes_y_Productos.GUI
         {
             CargarDatos();
             cmbLista.Visible = false;
+        }
+
+        private void BuscarIngrediente_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dgvBuscarIngrediente.SelectedRows.Count != 0)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                    bntSelecionar.PerformClick(); // Ejecutar el evento Click del botón
+                }
+            }
         }
     }
 }

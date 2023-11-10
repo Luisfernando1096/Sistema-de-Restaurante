@@ -6,8 +6,12 @@ namespace Compras.GUI
 {
     public partial class Compras : Form
     {
+        BindingSource datos = new BindingSource();
         Boolean variable = false;
+        Boolean estadoCmb = false;
+        Boolean editar = false;
         private int indiceAnterior = -1;
+
         public Compras()
         {
             InitializeComponent();
@@ -16,6 +20,44 @@ namespace Compras.GUI
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void CargarDatos(int identificador, int idProveedor, string nComprobante)
+        {
+            try
+            {
+                if (identificador == 1)
+                {
+                    datos.DataSource = DataManager.DBConsultas.Compras(1, idProveedor, nComprobante);
+                    dgvDatos.DataSource = datos;
+                    dgvDatos.AutoGenerateColumns = false;
+                }
+                else if (identificador == 2)
+                {
+                    datos.DataSource = DataManager.DBConsultas.Compras(2, idProveedor, nComprobante);
+                    dgvDatos.DataSource = datos;
+                    dgvDatos.AutoGenerateColumns = false;
+                }
+                else if (identificador == 3)
+                {
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private DataGridViewColumn AgregarColumnaConAncho(string nombre, string encabezado, int ancho)
+        {
+            DataGridViewColumn columna = new DataGridViewTextBoxColumn
+            {
+                Name = nombre,
+                HeaderText = encabezado,
+                Width = ancho
+            };
+
+            dgvDatos.Columns.Add(columna);
+
+            return columna;
         }
 
         private void CalcularTotal()
@@ -38,9 +80,9 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    decimal SumaTotal = Acumulado - (descuento * Acumulado) + (iva * Acumulado);
-                    txtSumas.Text = Acumulado.ToString("0.00");
-                    txtTotales.Text = SumaTotal.ToString("0.00");
+                    decimal SumaTotal = Acumulado - ((descuento / 100) * Acumulado) + ((iva / 100) * Acumulado);
+                    txtSumas.Text = Acumulado.ToString("0");
+                    txtTotales.Text = SumaTotal.ToString("0");
                 }
                 else if (!string.IsNullOrEmpty(txtDescuento.Text) && decimal.TryParse(txtDescuento.Text, out descuento))
                 {
@@ -53,9 +95,9 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    decimal SumaTotal = Acumulado - (descuento * Acumulado);
-                    txtSumas.Text = Acumulado.ToString("0.00");
-                    txtTotales.Text = SumaTotal.ToString("0.00");
+                    decimal SumaTotal = Acumulado - ((descuento / 100) * Acumulado);
+                    txtSumas.Text = Acumulado.ToString("0");
+                    txtTotales.Text = SumaTotal.ToString("0");
                 }
                 else if (!string.IsNullOrEmpty(txtIva.Text) && decimal.TryParse(txtIva.Text, out iva))
                 {
@@ -68,9 +110,9 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    decimal SumaTotal = Acumulado + (iva * Acumulado);
-                    txtSumas.Text = Acumulado.ToString("0.00");
-                    txtTotales.Text = SumaTotal.ToString("0.00");
+                    decimal SumaTotal = Acumulado + ((iva / 100) * Acumulado);
+                    txtSumas.Text = Acumulado.ToString("0");
+                    txtTotales.Text = SumaTotal.ToString("0");
                 }
                 else
                 {
@@ -86,7 +128,7 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    txtSumas.Text = Acumulado.ToString("0.00");
+                    txtSumas.Text = Acumulado.ToString("0");
                     txtTotales.Text = txtSumas.Text;
                 }
             }
@@ -191,6 +233,7 @@ namespace Compras.GUI
 
         private void Compras_Load(object sender, EventArgs e)
         {
+            btnAtras.Visible = false;
             cmbTipoCompra.Items.Insert(0, "Productos");
             cmbTipoCompra.Items.Insert(1, "Ingredientes");
             txtIva.Text = "0";
@@ -204,55 +247,76 @@ namespace Compras.GUI
         {
             try
             {
-                string idBuscar = txtDescripcion.Tag.ToString();
                 if (txtDescripcion.Text == string.Empty || txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty)
                 {
                     MessageBox.Show("¡Por favor asegurese de selecionar todos los campos necesarios!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    if (variable)
+                    if (txtDescripcion.Tag != null) 
                     {
-                        if (ExisteID(idBuscar))
-                        {
-                            // Actualizar los valores de la fila existente
-                            foreach (DataGridViewRow row in dgvDatos.Rows)
-                            {
-                                string idExistente = row.Cells["ID"].Value.ToString();
+                        string idBuscar = txtDescripcion.Tag.ToString();
 
-                                if (idBuscar == idExistente)
+                        if (variable)
+                        {
+                            if (ExisteID(idBuscar))
+                            {
+                                // Actualizar los valores de la fila existente
+                                foreach (DataGridViewRow row in dgvDatos.Rows)
                                 {
-                                    row.Cells["precioUnitario"].Value = txtPrecio.Text;
-                                    row.Cells["cantidad"].Value = txtCantidad.Text;
-                                    row.Cells["ventasGravadas"].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
-                                    break;
+                                    string idExistente = row.Cells["ID"].Value.ToString();
+
+                                    if (idBuscar == idExistente)
+                                    {
+                                        row.Cells["precioUnitario"].Value = txtPrecio.Text;
+                                        row.Cells["cantidad"].Value = txtCantidad.Text;
+                                        row.Cells["ventasGravadas"].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
+                                        break;
+                                    }
                                 }
+                                MessageBox.Show("¡El se ha modificado con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                LimpiarCampos();
+                                variable = false;
                             }
-                            MessageBox.Show("¡El se ha modificado con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            if (ExisteID(idBuscar))
+                            {
+                                MessageBox.Show("¡El registro ya existe agregado, si desea cambiar sus datos por favor de click sobre editar!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                            if (!editar)
+                            {
+                                DataGridViewRow fila = new DataGridViewRow();
+                                fila.CreateCells(dgvDatos);
+
+                                fila.Cells[0].Value = txtCantidad.Text;
+                                fila.Cells[1].Value = txtDescripcion.Tag;
+                                fila.Cells[2].Value = txtDescripcion.Text;
+                                fila.Cells[3].Value = txtPrecio.Text;
+                                fila.Cells[4].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
+
+                                dgvDatos.Rows.Add(fila);
+
+                            }
+                            else
+                            {
+                                DataGridViewRow fila = new DataGridViewRow();
+                                fila.CreateCells(dgvDatos);
+
+                                fila.Cells[0].Value = txtCantidad.Text;
+                                fila.Cells[1].Value = txtDescripcion.Tag;
+                                fila.Cells[2].Value = txtDescripcion.Text;
+                                fila.Cells[3].Value = txtPrecio.Text;
+                                fila.Cells[4].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
+
+                                dgvDatos.Rows.Add(fila); // Asegúrate de agregar la fila después de establecer los valores de las celdas
+                            }
 
                             LimpiarCampos();
-                            variable = false;
                         }
-                    }
-                    else
-                    {
-                        if (ExisteID(idBuscar))
-                        {
-                            MessageBox.Show("¡El registro ya existe agregado, si desea cambiar sus datos por favor de click sobre editar!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                        }
-
-                        DataGridViewRow fila = new DataGridViewRow();
-                        fila.CreateCells(dgvDatos);
-
-                        fila.Cells[0].Value = txtCantidad.Text;
-                        fila.Cells[1].Value = txtDescripcion.Tag;
-                        fila.Cells[2].Value = txtDescripcion.Text;
-                        fila.Cells[3].Value = txtPrecio.Text;
-                        fila.Cells[4].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
-
-                        dgvDatos.Rows.Add(fila);
-                        LimpiarCampos();
                     }
                 }
                 CalcularTotal();
@@ -286,32 +350,38 @@ namespace Compras.GUI
         private void cmbTipoCompra_SelectedValueChanged(object sender, EventArgs e)
         {
             int indiceActual = cmbTipoCompra.SelectedIndex;
-
-            if (indiceActual != indiceAnterior)
+            if (!estadoCmb)
             {
-                if (dgvDatos.Rows.Count != 0)
+                if (indiceActual != indiceAnterior)
                 {
-                    DialogResult respuesta = MessageBox.Show("¡Al cambiar el tipo de comprobante se eliminarán los registros actuales sin guardar! ¿Estás seguro?", "Información", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
-                    if (respuesta == DialogResult.OK)
+                    if (dgvDatos.Rows.Count != 0)
                     {
-                        while (dgvDatos.Rows.Count > 0)
+                        DialogResult respuesta = MessageBox.Show("¡Al cambiar el tipo de comprobante se eliminarán los registros actuales sin guardar! ¿Estás seguro?", "Información", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                        if (respuesta == DialogResult.OK)
                         {
-                            dgvDatos.Rows.RemoveAt(0);
+                            while (dgvDatos.Rows.Count > 0)
+                            {
+                                dgvDatos.Rows.RemoveAt(0);
+                            }
+                            MessageBox.Show("¡Datos borrados, nuevo tipo de comprobante listo!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtSumas.Text = string.Empty;
+                            txtTotales.Text = string.Empty;
+                            txtDescripcion.Text = string.Empty;
+                            txtDescripcion.Tag = null;
                         }
-                        MessageBox.Show("¡Datos borrados, nuevo tipo de comprobante listo!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtSumas.Text = string.Empty;
-                        txtTotales.Text = string.Empty;
+                        else
+                        {
+                            // El usuario ha cancelado la advertencia, no permitir el cambio en el ComboBox.
+                            cmbTipoCompra.SelectedIndex = indiceAnterior; // Restaurar el índice anterior
+                        }
                     }
-                    else
-                    {
-                        // El usuario ha cancelado la advertencia, no permitir el cambio en el ComboBox.
-                        cmbTipoCompra.SelectedIndex = indiceAnterior; // Restaurar el índice anterior
-                    }
+                    indiceAnterior = cmbTipoCompra.SelectedIndex; // Actualizar el índice anterior
                 }
-
-                indiceAnterior = cmbTipoCompra.SelectedIndex; // Actualizar el índice anterior
+                txtDescripcion.Text = string.Empty;
+                txtDescripcion.Tag = null;
             }
+            estadoCmb = false;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -348,96 +418,111 @@ namespace Compras.GUI
                         {
                             txtIva.Text = "0";
                         }
-
-                        Mantenimiento.CLS.Compra compra = new Mantenimiento.CLS.Compra();
-                        compra.TipoCompra = cmbTipoCompra.Text;
-                        compra.IdProveedor = int.Parse(txtProveedor.Tag.ToString());
-                        compra.IdComprobante = int.Parse(cmbComprobante.SelectedValue.ToString());
-                        compra.NComprobante = txtNoComprobante.Text;
-                        compra.IdUsuario = int.Parse(SessionManager.Session.Instancia.IdUsuario);
-
-                        DateTime fechaSeleccionada = dtpFechaCompra.Value;
-                        string fechaFormateada = fechaSeleccionada.ToString("yyyy-MM-dd");
-                        compra.Fecha = fechaFormateada;
-
-                        compra.Total = double.Parse(txtSumas.Text.ToString());
-                        compra.Descuento = double.Parse(txtDescuento.Text);
-                        compra.Iva = double.Parse(txtIva.Text);
-                        compra.TotalPago = double.Parse(txtTotales.Text);
-
-                        if (compra.Insertar())
+                        if (txtIdCompra.Text == string.Empty)
                         {
-                            resultadoCompra = true;
-                            filasCompras= filasCompras + 1;
-                            int NuevoStock = 0;
-
-                            ///SI SE INSEERTO EN COMPRAS SE IRA A INSERTAR EN COMPRAS_DETALLES
-                            Mantenimiento.CLS.Compra_detalle compra_detalle = new Mantenimiento.CLS.Compra_detalle();
-                            compra_detalle.IdCompra = DataManager.DBConsultas.ConsultarUltimoRegistro(int.Parse(SessionManager.Session.Instancia.IdUsuario));
-
-                            if (cmbTipoCompra.Text == "Productos")
+                            Boolean existeComprobante = DataManager.DBConsultas.ExisteComprobante(txtNoComprobante.Text);
+                            if (!existeComprobante)
                             {
-                                foreach (DataGridViewRow item in dgvDatos.Rows)
+                                Mantenimiento.CLS.Compra compra = new Mantenimiento.CLS.Compra();
+                                compra.TipoCompra = cmbTipoCompra.Text;
+                                compra.IdProveedor = int.Parse(txtProveedor.Tag.ToString());
+                                compra.IdComprobante = int.Parse(cmbComprobante.SelectedValue.ToString());
+                                compra.NComprobante = txtNoComprobante.Text;
+                                compra.IdUsuario = int.Parse(SessionManager.Session.Instancia.IdUsuario);
+
+                                DateTime fechaSeleccionada = dtpFechaCompra.Value;
+                                string fechaFormateada = fechaSeleccionada.ToString("yyyy-MM-dd");
+                                compra.Fecha = fechaFormateada;
+
+                                compra.Total = double.Parse(txtSumas.Text.ToString());
+                                compra.Descuento = (double.Parse(txtDescuento.Text) / 100);
+                                compra.Iva = (double.Parse(txtIva.Text) / 100);
+                                compra.TotalPago = double.Parse(txtTotales.Text);
+
+                                int idCompraInsertada;
+                                if (compra.Insertar(out idCompraInsertada))
                                 {
-                                    compra_detalle.IdProducto = int.Parse(item.Cells["ID"].Value.ToString());
-                                    compra_detalle.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());
-                                    compra_detalle.Precio = double.Parse(item.Cells["precioUnitario"].Value.ToString());
-                                    compra_detalle.SubTotal = double.Parse(item.Cells["ventasGravadas"].Value.ToString());
+                                    resultadoCompra = true;
+                                    filasCompras = filasCompras + 1;
+                                    int NuevoStock = 0;
 
-                                    ///SI SE INSERTO DETALLES_COMPRAS, IR A MODIFICAR EL STOCK DE PRODUCTOS
-                                    if (compra_detalle.InsertarProductos())
+                                    ///SI SE INSEERTO EN COMPRAS SE IRA A INSERTAR EN COMPRAS_DETALLES
+                                    Mantenimiento.CLS.Compra_detalle compra_detalle = new Mantenimiento.CLS.Compra_detalle();
+                                    compra_detalle.IdCompra = idCompraInsertada; /*DataManager.DBConsultas.ConsultarUltimoRegistro(int.Parse(SessionManager.Session.Instancia.IdUsuario));*/
+
+                                    if (cmbTipoCompra.Text == "Productos")
                                     {
-                                        resultadoComprasDetalles = true;
-                                        filasComprasDetalles = filasComprasDetalles + 1;
+                                        foreach (DataGridViewRow item in dgvDatos.Rows)
+                                        {
+                                            compra_detalle.IdProducto = int.Parse(item.Cells["ID"].Value.ToString());
+                                            compra_detalle.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());
+                                            compra_detalle.Precio = double.Parse(item.Cells["precioUnitario"].Value.ToString());
+                                            compra_detalle.SubTotal = double.Parse(item.Cells["ventasGravadas"].Value.ToString());
 
-                                        NuevoStock = DataManager.DBConsultas.ConsultarStock(1, compra_detalle.IdProducto) + compra_detalle.Cantidad;
-                                        Mantenimiento.CLS.Producto producto = new Mantenimiento.CLS.Producto();
-                                        producto.IdProducto = compra_detalle.IdProducto;
-                                        producto.Stock = NuevoStock;
+                                            ///SI SE INSERTO DETALLES_COMPRAS, IR A MODIFICAR EL STOCK DE PRODUCTOS
+                                            if (compra_detalle.InsertarProductos())
+                                            {
+                                                resultadoComprasDetalles = true;
+                                                filasComprasDetalles = filasComprasDetalles + 1;
 
-                                        producto.ActualizarStockProductos();
+                                                NuevoStock = DataManager.DBConsultas.ConsultarStock(1, compra_detalle.IdProducto) + compra_detalle.Cantidad;
+                                                Mantenimiento.CLS.Producto producto = new Mantenimiento.CLS.Producto();
+                                                producto.IdProducto = compra_detalle.IdProducto;
+                                                producto.Stock = NuevoStock;
+
+                                                producto.ActualizarStockProductos();
+                                            }
+                                        }
+                                    }
+                                    else if (cmbTipoCompra.Text == "Ingredientes")
+                                    {
+                                        foreach (DataGridViewRow item in dgvDatos.Rows)
+                                        {
+                                            compra_detalle.IdIngrediente = int.Parse(item.Cells["ID"].Value.ToString());
+                                            compra_detalle.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());
+                                            compra_detalle.Precio = double.Parse(item.Cells["precioUnitario"].Value.ToString());
+                                            compra_detalle.SubTotal = double.Parse(item.Cells["ventasGravadas"].Value.ToString());
+
+                                            ///SI SE INSERTO DETALLES_COMPRAS, IR A MODIFICAR EL STOCK DE INGREDIENTES
+                                            if (compra_detalle.InsertarIngredientes())
+                                            {
+                                                resultadoComprasDetalles = true;
+                                                filasComprasDetalles = filasComprasDetalles + 1;
+
+                                                NuevoStock = DataManager.DBConsultas.ConsultarStock(2, compra_detalle.IdIngrediente) + compra_detalle.Cantidad;
+
+                                                Mantenimiento.CLS.Ingrediente ingrediente = new Mantenimiento.CLS.Ingrediente();
+                                                ingrediente.IdIngrediente = compra_detalle.IdIngrediente;
+                                                ingrediente.Stock = NuevoStock;
+
+                                                ingrediente.ActualizarStockIngredientes();
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                            else if (cmbTipoCompra.Text == "Ingredientes")
-                            {
-                                foreach (DataGridViewRow item in dgvDatos.Rows)
+                                if (resultadoComprasDetalles & resultadoCompra)
                                 {
-                                    compra_detalle.IdIngrediente = int.Parse(item.Cells["ID"].Value.ToString());
-                                    compra_detalle.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());
-                                    compra_detalle.Precio = double.Parse(item.Cells["precioUnitario"].Value.ToString());
-                                    compra_detalle.SubTotal = double.Parse(item.Cells["ventasGravadas"].Value.ToString());
-
-                                    ///SI SE INSERTO DETALLES_COMPRAS, IR A MODIFICAR EL STOCK DE INGREDIENTES
-                                    if (compra_detalle.InsertarIngredientes())
-                                    {
-                                        resultadoComprasDetalles = true;
-                                        filasComprasDetalles = filasComprasDetalles + 1;
-
-                                        NuevoStock = DataManager.DBConsultas.ConsultarStock(2, compra_detalle.IdIngrediente) + compra_detalle.Cantidad;
-
-                                        Mantenimiento.CLS.Ingrediente ingrediente = new Mantenimiento.CLS.Ingrediente();
-                                        ingrediente.IdIngrediente = compra_detalle.IdIngrediente;
-                                        ingrediente.Stock = NuevoStock;
-
-                                        ingrediente.ActualizarStockIngredientes();
-                                    }
+                                    MessageBox.Show("!" + filasComprasDetalles + " registros insertados correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    dgvDatos.Rows.Clear();
+                                    txtProveedor.Text = "";
+                                    txtProveedor.Tag = "";
+                                    txtSumas.Text = string.Empty;
+                                    txtTotales.Text = string.Empty;
+                                    txtNoComprobante.Text = string.Empty;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡Error al insertar registro!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
-                        }
-                        if (resultadoComprasDetalles & resultadoCompra)
-                        {
-                            MessageBox.Show("!" + filasComprasDetalles + " registros insertados correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            dgvDatos.Rows.Clear();
-                            txtProveedor.Text = "";
-                            txtProveedor.Tag = "";
-                            txtSumas.Text = string.Empty;
-                            txtTotales.Text = string.Empty;
-                            txtNoComprobante.Text = string.Empty;
+                            else
+                            {
+                                MessageBox.Show("El numero de comprobante ya existe registradoe en el sistema", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("¡Error al insertar registro!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("¡ACA SE MANEJARIA LA MODIFICACION!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
@@ -519,32 +604,136 @@ namespace Compras.GUI
 
         private void txtIva_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verificar si la tecla presionada no es un número, un punto decimal o la tecla de retroceso
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Evita que se ingrese el carácter no permitido
-            }
-
-            // Verificar si ya se ha ingresado un punto decimal y se intenta ingresar otro
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true; // Evita que se ingrese el segundo punto decimal
+                e.Handled = true;
             }
         }
 
         private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verificar si la tecla presionada no es un número, un punto decimal o la tecla de retroceso
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Evita que se ingrese el carácter no permitido
+                e.Handled = true;
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            BuscarDetalles buscarDetalle = new BuscarDetalles();
+            buscarDetalle.bntSelecionar.Visible = true;
+            var resultado = buscarDetalle.ShowDialog();
+
+            estadoCmb = true;
+            if (resultado == DialogResult.OK)
+            {
+                txtDescripcion.Text = string.Empty;
+                txtDescripcion.Tag = null;
+                txtCantidad.Text = string.Empty;
+                txtPrecio.Text = string.Empty;
+                btnAtras.Visible = false;
+                btnEliminar.Visible = false;
+                btnGuardar.Visible = false;
+                btnEditarReceta.Visible = false;
+                button3.Visible = false;
+                btnLimpiar.Visible = false;
+                btnAtras.Visible = true;
+                btnBuscarProveedor.Enabled = false;
+                btnBuscar.Enabled = false;
+                cmbComprobante.Enabled = false;
+                dtpFechaCompra.Enabled = false;
+                txtIva.Enabled = false;
+                txtDescuento.Enabled = false;
+                
+                decimal subTotal = 0;
+                cmbTipoCompra.Enabled = false;
+                txtNoComprobante.Enabled = false;
+
+                txtIdCompra.Text = buscarDetalle.IdCompra.ToString();
+                cmbTipoCompra.Text = buscarDetalle.TCompra.ToString();
+                txtProveedor.Tag = buscarDetalle.IdProveedor.ToString();
+                txtProveedor.Text = buscarDetalle.Nombre;
+                cmbComprobante.Tag = buscarDetalle.IdComprobante.ToString();
+                cmbComprobante.Text = buscarDetalle.tipo.ToString();
+                txtNoComprobante.Text = buscarDetalle.NComprobante;
+                dtpFechaCompra.Value = buscarDetalle.Fecha;
+                txtDescuento.Text = buscarDetalle.Descuento.ToString();
+                txtIva.Text = buscarDetalle.Iva.ToString();
+                txtTotales.Text = buscarDetalle.Total.ToString();
+                editar = true;
+
+                if (cmbTipoCompra.Text == "Productos")
+                {
+                    CargarDatos(1, buscarDetalle.IdProveedor, buscarDetalle.NComprobante);
+                }
+                else if (cmbTipoCompra.Text == "Ingredientes")
+                {
+                    CargarDatos(2, buscarDetalle.IdProveedor, buscarDetalle.NComprobante);
+                }
+
+                foreach (DataGridViewRow item in dgvDatos.Rows)
+                {
+                    decimal subTotalItem = Convert.ToDecimal(item.Cells["ventasGravadas"].Value);
+
+                    subTotal += subTotalItem;
+                }
+                txtSumas.Text = subTotal.ToString();
+            }
+            else
+            {
+               /// MessageBox.Show("¡No se seleciono ningun proveedor!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            txtIva.Enabled = true;
+            txtDescuento.Enabled = true;
+            btnBuscarProveedor.Enabled = true;
+            btnBuscar.Enabled = true;
+            cmbComprobante.Enabled = true;
+            dtpFechaCompra.Enabled = true;
+            btnAtras.Visible = true;
+            btnEliminar.Visible = true;
+            btnGuardar.Visible = true;
+            btnEditarReceta.Visible = true;
+            button3.Visible = true;
+            btnAtras.Visible = false;
+            txtNoComprobante.Enabled = true;
+            LimpiarCampos();
+
+            dgvDatos.DataSource = null;
+            dgvDatos.Rows.Clear();
+            // Borrar todas las columnas existentes en el DataGridView
+            dgvDatos.Columns.Clear();
+            // Agregar nuevas columnas al DataGridView con ancho y propiedades personalizadas
+            AgregarColumnaConAncho("Cantidad", "Cantidad", 150).DataPropertyName = "cantidad";
+            AgregarColumnaConAncho("ID", "ID", 80).DataPropertyName = "idTipo";
+            AgregarColumnaConAncho("Descripcion", "Descripción", 455).DataPropertyName = "nombre";
+            AgregarColumnaConAncho("precioUnitario", "Precio Unitario", 150).DataPropertyName = "precio";
+            AgregarColumnaConAncho("ventasGravadas", "Ventas Gravadas", 150).DataPropertyName = "subtotal";
+            // Crear una nueva fila
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(dgvDatos);
+            if (dgvDatos.Columns.Contains("ID"))
+            {
+                dgvDatos.Columns["ID"].Visible = false;
             }
 
-            // Verificar si ya se ha ingresado un punto decimal y se intenta ingresar otro
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true; // Evita que se ingrese el segundo punto decimal
-            }
+            cmbComprobante.SelectedIndex = 0;
+            cmbTipoCompra.Enabled = true;
+            cmbTipoCompra.SelectedIndex = -1;
+            txtProveedor.Text = string.Empty;
+            txtProveedor.Tag = null;
+            txtIdCompra.Text = string.Empty;
+
+            btnLimpiar.Visible = true;
+            txtNoComprobante.Text = string.Empty;
+            txtSumas.Text = string.Empty;
+            txtIva.Text = string.Empty;
+            txtDescuento.Text = string.Empty;
+            txtTotales.Text = string.Empty;
+            dtpFechaCompra.Value = DateTime.Now;
         }
     }
 }
