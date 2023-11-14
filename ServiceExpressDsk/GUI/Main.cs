@@ -16,9 +16,15 @@ namespace ServiceExpressDsk.GUI
         private bool tpv;
         private bool cerrar;
         private int idPedidoSiguiente = 0;
+        Server myServer = new Server();
+
         public Main()
         {
             InitializeComponent();
+            // Iniciar el servidor
+            myServer.StartServer();
+
+            // Aquí puedes hacer otras cosas en tu aplicación, ya que el servidor se está ejecutando en un hilo separado
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -30,6 +36,16 @@ namespace ServiceExpressDsk.GUI
                 {
                     e.Cancel = true; // Cancelar el cierre del formulario
                 }
+                else
+                {
+                    // Detener el servidor (por ejemplo, cuando la aplicación se cierra)
+                    myServer.StopServer();
+                }
+            }
+            else
+            {
+                // Detener el servidor (por ejemplo, cuando la aplicación se cierra)
+                myServer.StopServer();
             }
                  
         }

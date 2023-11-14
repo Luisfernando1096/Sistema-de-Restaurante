@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuraciones", "Configur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportes", "Reportes\Reportes.csproj", "{6D4CE0E2-FC1D-48EB-80B4-95C600828D69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscuchaServer", "EscuchaServer\EscuchaServer.csproj", "{3B988C48-B277-4089-A6B8-11ADCD6C2909}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{6D4CE0E2-FC1D-48EB-80B4-95C600828D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D4CE0E2-FC1D-48EB-80B4-95C600828D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D4CE0E2-FC1D-48EB-80B4-95C600828D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B988C48-B277-4089-A6B8-11ADCD6C2909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B988C48-B277-4089-A6B8-11ADCD6C2909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B988C48-B277-4089-A6B8-11ADCD6C2909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B988C48-B277-4089-A6B8-11ADCD6C2909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -124,6 +124,10 @@
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EscuchaServer\EscuchaServer.csproj">
+      <Project>{3b988c48-b277-4089-a6b8-11adcd6c2909}</Project>
+      <Name>EscuchaServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Personal\Personal.csproj">
       <Project>{df452496-63e3-4aa2-8e9a-09517b20fc50}</Project>
       <Name>Personal</Name>

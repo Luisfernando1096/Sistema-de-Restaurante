@@ -14,6 +14,7 @@ namespace Mantenimiento.CLS
         String horaEntregado;
         String horaPedido;
         int idCocinero;
+        String cocinero;
         int idProducto;
         int idPedido;
         int cantidad;
@@ -41,6 +42,7 @@ namespace Mantenimiento.CLS
         public string Fecha { get => fecha; set => fecha = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Mesa { get => mesa; set => mesa = value; }
+        public string Cocinero { get => cocinero; set => cocinero = value; }
 
         public Boolean Insertar()
         {
