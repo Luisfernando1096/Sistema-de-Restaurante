@@ -162,17 +162,17 @@ public class Server
         // Ahora, itera a través de los grupos y crea e imprime el informe para cada grupo
         foreach (var kvp in grupos)
         {
-            var detallesDelGrupo = kvp.Value;
+            List<PedidoDetalle> detallesDelGrupo = kvp.Value;
 
             oReporte.SetDataSource(detallesDelGrupo);
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-            oReporte.SetParameterValue("Salon", "Hola");
+            oReporte.SetParameterValue("Salon", detallesDelGrupo[0].Salon);
 
             
-            oReporte.SetParameterValue("Mesero", "");
+            oReporte.SetParameterValue("Mesero", detallesDelGrupo[0].Mesero);
 
-            oReporte.SetParameterValue("Cliente", "");
+            oReporte.SetParameterValue("Cliente", detallesDelGrupo[0].Cliente);
 
             if (oReporte != null)
             {

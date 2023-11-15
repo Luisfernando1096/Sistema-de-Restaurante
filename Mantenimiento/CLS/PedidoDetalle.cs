@@ -25,6 +25,9 @@ namespace Mantenimiento.CLS
         String fecha;
         String nombre;
         String mesa;
+        String cliente;
+        String salon;
+        String mesero;
 
         public int IdDetalle { get => idDetalle; set => idDetalle = value; }
         public bool Cocinando { get => cocinando; set => cocinando = value; }
@@ -43,6 +46,9 @@ namespace Mantenimiento.CLS
         public string Nombre { get => nombre; set => nombre = value; }
         public string Mesa { get => mesa; set => mesa = value; }
         public string Cocinero { get => cocinero; set => cocinero = value; }
+        public string Cliente { get => cliente; set => cliente = value; }
+        public string Salon { get => salon; set => salon = value; }
+        public string Mesero { get => mesero; set => mesero = value; }
 
         public Boolean Insertar()
         {
