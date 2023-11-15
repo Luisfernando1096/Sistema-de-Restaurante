@@ -11,6 +11,7 @@ using System.Threading;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using System.Linq;
 
 public class Server
 {
@@ -22,6 +23,16 @@ public class Server
 
     public void StartServer()
     {
+
+       /*OBETNER IP AUTOMATICAMENTE
+        string hostName = Dns.GetHostName();
+        // Inicializar la variable
+        IPAddress[] localIPs = Dns.GetHostAddresses(hostName);
+        // Filtrar las direcciones IPv4
+        IPAddress ipv4Address = localIPs.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+        isServerRunning = true;
+        tcpListener = new TcpListener(IPAddress.Parse(ipv4Address.ToString()), 4000);*/
+
         isServerRunning = true;
         tcpListener = new TcpListener(IPAddress.Parse("192.168.2.105"), 4000);
         listenerThread = new Thread(new ThreadStart(ListenForClients));
