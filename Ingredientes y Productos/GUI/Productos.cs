@@ -415,17 +415,22 @@ namespace Ingredientes_y_Productos.GUI
                     string imagesDirectory = Path.Combine(projectDirectory, "Ingredientes y Productos", "Images");
                     // Obtén el nombre del archivo seleccionado
                     string selectedImageFileName = Path.GetFileName(selectedImagePathImg);
-                    // Construye la ruta de destino
-                    destinationPathImg = Path.Combine(imagesDirectory, selectedImageFileName);
-                    // Si el archivo no existe o si el nombre de la imagen es diferente a SeleccionarImg
-                    if (!File.Exists(destinationPathImg) || !SeleccionarImg.Equals(selectedImageFileName))
+                    //Sise selecciono alguna imagen
+                    if (selectedImageFileName != null)
                     {
-                        // Copia la imagen seleccionada a la ubicación en tu proyecto
-                        File.Copy(selectedImagePathImg, destinationPathImg);
+                        // Construye la ruta de destino
+                        destinationPathImg = Path.Combine(imagesDirectory, selectedImageFileName);
+                        // Si el archivo no existe o si el nombre de la imagen es diferente a SeleccionarImg
+                        if (!File.Exists(destinationPathImg) || !SeleccionarImg.Equals(selectedImageFileName))
+                        {
+                            // Copia la imagen seleccionada a la ubicación en tu proyecto
+                            File.Copy(selectedImagePathImg, destinationPathImg);
 
-                        // Actualiza la variable SeleccionarImg con el nuevo nombre
-                        SeleccionarImg = selectedImageFileName;
+                            // Actualiza la variable SeleccionarImg con el nuevo nombre
+                            SeleccionarImg = selectedImageFileName;
+                        }
                     }
+                    
 
                     if (txtID.Text == "")
                     {
