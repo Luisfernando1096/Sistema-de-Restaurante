@@ -34,7 +34,7 @@ public class Server
         tcpListener = new TcpListener(IPAddress.Parse(ipv4Address.ToString()), 4000);*/
 
         isServerRunning = true;
-        tcpListener = new TcpListener(IPAddress.Parse("192.168.2.105"), 4000);
+        tcpListener = new TcpListener(IPAddress.Parse("192.168.233.52"), 4000);
         listenerThread = new Thread(new ThreadStart(ListenForClients));
         listenerThread.Start();
         Console.WriteLine("Servidor iniciado. Esperando conexiones...");
@@ -103,6 +103,9 @@ public class Server
                         // Procesar la solicitud solo si está en la ruta '/notificar'
                         Console.WriteLine($"Solicitud POST en la ruta '/notificar'.");
 
+                        // Imprimir el contenido para ayudar a diagnosticar el problema
+                        Console.WriteLine($"Contenido recibido: {contenido}");
+
                         try
                         {
                             // Intentar deserializar la solicitud como una lista de objetos
@@ -114,8 +117,36 @@ public class Server
                             // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
                             ImprimirComandaActual(listaObjetos);
 
-                            // Imprimir el contenido para ayudar a diagnosticar el problema
-                            Console.WriteLine($"Contenido recibido: {contenido}");
+                        }
+                        catch (JsonException ex)
+                        {
+                            // Imprimir detalles completos de la excepción
+                            Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Solicitud no reconocida.");
+                    }
+
+                    if (ruta.StartsWith("/comandaCompleta"))
+                    {
+                        MessageBox.Show("Generando comanda completa");
+                        // Procesar la solicitud solo si está en la ruta '/comanda'
+                        Console.WriteLine($"Solicitud POST en la ruta '/comandaCompleta'.");
+                        // Imprimir el contenido para ayudar a diagnosticar el problema
+                        Console.WriteLine($"Contenido recibido: {contenido}");
+
+                        try
+                        {
+                            // Intentar deserializar la solicitud como una lista de objetos
+                            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
+
+                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
+                            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
+
+                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            ImprimirComandaCompleta(listaObjetos);
 
                         }
                         catch (JsonException ex)
@@ -149,6 +180,17 @@ public class Server
             // Cargar los datos en un DataTable
             RepComandaParcial oReporte = new RepComandaParcial();
             GenerarComandaParcial(oReporte, listaObjetos);
+        }
+
+    }
+
+    private void ImprimirComandaCompleta(List<PedidoDetalle> listaObjetos)
+    {
+        if (listaObjetos.Count > 0)
+        {
+            // Cargar los datos en un DataTable
+            RepComandaCompleta oReporte = new RepComandaCompleta();
+            GenerarComandaCompleta(oReporte, listaObjetos);
         }
 
     }
@@ -198,7 +240,43 @@ public class Server
                 MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+    }
 
+    private void GenerarComandaCompleta(ReportClass oReporte, List<PedidoDetalle> listaObjetos)
+    {
+        // Crear un solo grupo para almacenar todos los detalles
+        var grupoUnico = new List<PedidoDetalle>();
+
+        // Iterar a través de los detalles y agregarlos al grupo único
+        foreach (PedidoDetalle detalle in listaObjetos)
+        {
+            grupoUnico.Add(detalle);
+        }
+
+        // Configurar el informe con los detalles del grupo único
+        oReporte.SetDataSource(grupoUnico);
+        oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+        oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+
+        try
+        {
+            if (oReporte != null)
+            {
+                // Configurar la ruta de destino en la impresora virtual XPS
+                PrinterSettings settings = new PrinterSettings();
+                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+
+                // Imprimir el informe en la impresora virtual XPS
+                oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                oReporte.PrintToPrinter(1, false, 0, 0);
+
+                MessageBox.Show("Informe finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        catch (Exception ex)
+        {
+            // Manejar excepciones específicas de Crystal Reports si es necesario
+            MessageBox.Show($"Error al imprimir el informe: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }
-
