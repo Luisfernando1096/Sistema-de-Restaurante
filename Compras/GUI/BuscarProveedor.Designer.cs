@@ -80,6 +80,7 @@ namespace Compras.GUI
             this.dgvBuscar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBuscar.Size = new System.Drawing.Size(1028, 338);
             this.dgvBuscar.TabIndex = 15;
+            this.dgvBuscar.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvBuscar_ColumnHeaderMouseClick);
             // 
             // idProveedor
             // 
@@ -255,6 +256,7 @@ namespace Compras.GUI
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuscarProveedor";
             this.Load += new System.EventHandler(this.BuscarProveedor_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BuscarProveedor_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscar)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

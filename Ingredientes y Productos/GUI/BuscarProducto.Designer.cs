@@ -33,6 +33,7 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cmbLista = new System.Windows.Forms.ComboBox();
             this.rbtNinguno = new System.Windows.Forms.RadioButton();
+            this.bntSelecionar = new System.Windows.Forms.Button();
             this.rbtnFamilia = new System.Windows.Forms.RadioButton();
             this.rbtnProducto = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -71,6 +72,28 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.Text = "Filtrar datos por: ";
             // 
             // cmbLista
+            // 
+            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLista.FormattingEnabled = true;
+            this.cmbLista.Location = new System.Drawing.Point(323, 25);
+            this.cmbLista.Name = "cmbLista";
+            this.cmbLista.Size = new System.Drawing.Size(376, 24);
+            this.cmbLista.TabIndex = 29;
+            this.cmbLista.SelectedIndexChanged += new System.EventHandler(this.cmbLista_SelectedIndexChanged);
+            // 
+            // rbtNinguno
+            // 
+            this.rbtNinguno.AutoSize = true;
+            this.rbtNinguno.Location = new System.Drawing.Point(67, 25);
+            this.rbtNinguno.Name = "rbtNinguno";
+            this.rbtNinguno.Size = new System.Drawing.Size(80, 21);
+            this.rbtNinguno.TabIndex = 28;
+            this.rbtNinguno.TabStop = true;
+            this.rbtNinguno.Text = "Sin filtro";
+            this.rbtNinguno.UseVisualStyleBackColor = true;
+            this.rbtNinguno.CheckedChanged += new System.EventHandler(this.rbtNinguno_CheckedChanged);
+            // 
+            // bntSelecionar
             // 
             this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLista.FormattingEnabled = true;
@@ -313,6 +336,7 @@ namespace Ingredientes_y_Productos.GUI
             this.Name = "BuscarProducto";
             this.Text = "Buscar";
             this.Load += new System.EventHandler(this.Buscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BuscarProducto_KeyDown);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();

@@ -30,10 +30,10 @@ namespace Compras.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Compras));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label111 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotales = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -62,6 +62,8 @@ namespace Compras.GUI
             this.txtProveedor = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtDescuento = new System.Windows.Forms.TextBox();
             this.txtIva = new System.Windows.Forms.TextBox();
             this.txtPropina = new System.Windows.Forms.TextBox();
@@ -73,6 +75,15 @@ namespace Compras.GUI
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ventasGravadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nComprobante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idComprobante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEditarReceta = new System.Windows.Forms.ToolStripButton();
@@ -81,9 +92,10 @@ namespace Compras.GUI
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAtras = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
@@ -100,15 +112,17 @@ namespace Compras.GUI
             this.label1.TabIndex = 41;
             this.label1.Text = "Proveedor:";
             // 
-            // label11
+            // label111
             // 
-            this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(504, 83);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(399, 49);
-            this.label11.TabIndex = 53;
-            this.label11.Text = "Nota: ";
+            this.label111.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label111.ForeColor = System.Drawing.Color.Black;
+            this.label111.Location = new System.Drawing.Point(83, 695);
+            this.label111.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label111.Name = "label111";
+            this.label111.Size = new System.Drawing.Size(790, 60);
+            this.label111.TabIndex = 53;
+            this.label111.Text = "Nota: \"Asegurese de utilizar valores enteros (por ejemplo, \"13\") en lugar de deci" +
+    "males (como \"0.13\") para representar el porcentaje o el descuento\"";
             // 
             // label9
             // 
@@ -410,9 +424,10 @@ namespace Compras.GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.txtDescuento);
             this.groupBox2.Controls.Add(this.txtIva);
-            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.txtTotales);
             this.groupBox2.Controls.Add(this.label5);
@@ -429,26 +444,46 @@ namespace Compras.GUI
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Otros Datos";
             // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(618, 53);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 30);
+            this.label17.TabIndex = 70;
+            this.label17.Text = "%";
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(294, 117);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 30);
+            this.label11.TabIndex = 69;
+            this.label11.Text = "%";
+            // 
             // txtDescuento
             // 
-            this.txtDescuento.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.txtDescuento.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtDescuento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescuento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescuento.Location = new System.Drawing.Point(43, 95);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(202, 26);
+            this.txtDescuento.Size = new System.Drawing.Size(234, 30);
             this.txtDescuento.TabIndex = 68;
             this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
             this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescuento_KeyPress);
             // 
             // txtIva
             // 
-            this.txtIva.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.txtIva.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtIva.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIva.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIva.Location = new System.Drawing.Point(302, 43);
             this.txtIva.Name = "txtIva";
-            this.txtIva.Size = new System.Drawing.Size(186, 26);
+            this.txtIva.Size = new System.Drawing.Size(213, 30);
             this.txtIva.TabIndex = 67;
             this.txtIva.TextChanged += new System.EventHandler(this.txtIva_TextChanged);
             this.txtIva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIva_KeyPress);
@@ -488,8 +523,8 @@ namespace Compras.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -499,16 +534,26 @@ namespace Compras.GUI
             this.ID,
             this.descripcion,
             this.precioUnitario,
-            this.ventasGravadas});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvDatos.Location = new System.Drawing.Point(22, 226);
+            this.ventasGravadas,
+            this.idCompra,
+            this.tipoCompra,
+            this.nComprobante,
+            this.fecha,
+            this.totalPago,
+            this.descuento,
+            this.iva,
+            this.idComprobante,
+            this.Tipo});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvDatos.Location = new System.Drawing.Point(30, 278);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
@@ -520,6 +565,7 @@ namespace Compras.GUI
             // 
             // cantidad
             // 
+            this.cantidad.DataPropertyName = "cantidad";
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.MinimumWidth = 6;
             this.cantidad.Name = "cantidad";
@@ -528,6 +574,7 @@ namespace Compras.GUI
             // 
             // ID
             // 
+            this.ID.DataPropertyName = "idTipo";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 6;
             this.ID.Name = "ID";
@@ -538,6 +585,7 @@ namespace Compras.GUI
             // descripcion
             // 
             this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.descripcion.DataPropertyName = "nombre";
             this.descripcion.HeaderText = "Descripcion";
             this.descripcion.MinimumWidth = 6;
             this.descripcion.Name = "descripcion";
@@ -545,6 +593,7 @@ namespace Compras.GUI
             // 
             // precioUnitario
             // 
+            this.precioUnitario.DataPropertyName = "precio";
             this.precioUnitario.HeaderText = "Precio Unitario";
             this.precioUnitario.MinimumWidth = 6;
             this.precioUnitario.Name = "precioUnitario";
@@ -553,11 +602,102 @@ namespace Compras.GUI
             // 
             // ventasGravadas
             // 
+            this.ventasGravadas.DataPropertyName = "subtotal";
             this.ventasGravadas.HeaderText = "Ventas Grabadas";
             this.ventasGravadas.MinimumWidth = 6;
             this.ventasGravadas.Name = "ventasGravadas";
             this.ventasGravadas.ReadOnly = true;
             this.ventasGravadas.Width = 150;
+            // 
+            // idCompra
+            // 
+            this.idCompra.DataPropertyName = "idCompra";
+            this.idCompra.HeaderText = "idCompra";
+            this.idCompra.MinimumWidth = 6;
+            this.idCompra.Name = "idCompra";
+            this.idCompra.ReadOnly = true;
+            this.idCompra.Visible = false;
+            this.idCompra.Width = 6;
+            // 
+            // tipoCompra
+            // 
+            this.tipoCompra.DataPropertyName = "tipoCompra";
+            this.tipoCompra.HeaderText = "Nombre";
+            this.tipoCompra.MinimumWidth = 6;
+            this.tipoCompra.Name = "tipoCompra";
+            this.tipoCompra.ReadOnly = true;
+            this.tipoCompra.Visible = false;
+            this.tipoCompra.Width = 6;
+            // 
+            // nComprobante
+            // 
+            this.nComprobante.DataPropertyName = "nComprobante";
+            this.nComprobante.HeaderText = "nComprobante";
+            this.nComprobante.MinimumWidth = 6;
+            this.nComprobante.Name = "nComprobante";
+            this.nComprobante.ReadOnly = true;
+            this.nComprobante.Visible = false;
+            this.nComprobante.Width = 6;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "fecha";
+            this.fecha.HeaderText = "fecha";
+            this.fecha.MinimumWidth = 6;
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            this.fecha.Visible = false;
+            this.fecha.Width = 6;
+            // 
+            // totalPago
+            // 
+            this.totalPago.DataPropertyName = "totalPago";
+            this.totalPago.HeaderText = "totalPago";
+            this.totalPago.MinimumWidth = 6;
+            this.totalPago.Name = "totalPago";
+            this.totalPago.ReadOnly = true;
+            this.totalPago.Visible = false;
+            this.totalPago.Width = 6;
+            // 
+            // descuento
+            // 
+            this.descuento.DataPropertyName = "descuento";
+            this.descuento.HeaderText = "descuento";
+            this.descuento.MinimumWidth = 6;
+            this.descuento.Name = "descuento";
+            this.descuento.ReadOnly = true;
+            this.descuento.Visible = false;
+            this.descuento.Width = 6;
+            // 
+            // iva
+            // 
+            this.iva.DataPropertyName = "iva";
+            this.iva.HeaderText = "iva";
+            this.iva.MinimumWidth = 6;
+            this.iva.Name = "iva";
+            this.iva.ReadOnly = true;
+            this.iva.Visible = false;
+            this.iva.Width = 6;
+            // 
+            // idComprobante
+            // 
+            this.idComprobante.DataPropertyName = "idComprobante";
+            this.idComprobante.HeaderText = "idComprobante";
+            this.idComprobante.MinimumWidth = 6;
+            this.idComprobante.Name = "idComprobante";
+            this.idComprobante.ReadOnly = true;
+            this.idComprobante.Visible = false;
+            this.idComprobante.Width = 6;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.MinimumWidth = 6;
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Visible = false;
+            this.Tipo.Width = 6;
             // 
             // btnEliminar
             // 
@@ -625,12 +765,6 @@ namespace Compras.GUI
             this.toolStripButton3.Text = "Salir";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 62);
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -646,7 +780,8 @@ namespace Compras.GUI
             this.btnLimpiar,
             this.toolStripButton3,
             this.toolStripButton1,
-            this.toolStripSeparator2});
+            this.toolStripSeparator4,
+            this.btnAtras});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(961, 62);
@@ -664,6 +799,21 @@ namespace Compras.GUI
             this.toolStripButton1.Text = "Cargar Factura";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 62);
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.Image = ((System.Drawing.Image)(resources.GetObject("btnAtras.Image")));
+            this.btnAtras.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAtras.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(123, 59);
+            this.btnAtras.Text = "Atras";
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            // 
             // Compras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -671,6 +821,7 @@ namespace Compras.GUI
             this.ClientSize = new System.Drawing.Size(961, 609);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.label111);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dgvDatos);
             this.Name = "Compras";
@@ -692,7 +843,7 @@ namespace Compras.GUI
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label111;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox txtTotales;
         private System.Windows.Forms.Label label5;
@@ -724,11 +875,6 @@ namespace Compras.GUI
         private System.Windows.Forms.ComboBox cmbTipoCompra;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox cmbComprobante;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precioUnitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ventasGravadas;
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnEditarReceta;
@@ -737,11 +883,28 @@ namespace Compras.GUI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton btnLimpiar;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         public System.Windows.Forms.TextBox txtDescuento;
         public System.Windows.Forms.TextBox txtIva;
         public System.Windows.Forms.TextBox txtPropina;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioUnitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ventasGravadas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nComprobante;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalPago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descuento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idComprobante;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnAtras;
     }
 }

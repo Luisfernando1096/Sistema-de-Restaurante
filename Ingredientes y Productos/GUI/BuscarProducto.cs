@@ -196,6 +196,7 @@ namespace Ingredientes_y_Productos.GUI
         public BuscarProducto()
         {
             InitializeComponent();
+            KeyPreview = true; // Habilitar la captura de teclas en el formulario
         }
 
         private void Buscar_Load(object sender, EventArgs e)
@@ -256,6 +257,18 @@ namespace Ingredientes_y_Productos.GUI
             else
             {
                 MessageBox.Show("Debe seleccionar un Producto.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void BuscarProducto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dgvProductos.SelectedRows.Count != 0)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                    bntSelecionar.PerformClick(); // Ejecutar el evento Click del botón
+                }
             }
         }
     }
