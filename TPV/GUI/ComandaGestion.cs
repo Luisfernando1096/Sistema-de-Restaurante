@@ -618,7 +618,7 @@ namespace TPV.GUI
             
         }
 
-        private void ActualizarLabelsRetroceder(int id)
+        public void ActualizarLabelsRetroceder(int id)
         {
             //Obtengo el pedido que estaba abierto en el punto de pago.
             DataTable pedido = DataManager.DBConsultas.PedidoPorId(id);

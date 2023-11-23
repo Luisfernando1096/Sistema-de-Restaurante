@@ -167,6 +167,7 @@ namespace TPV.GUI
                     comandaGestion.lblTicket.Text = lblTicket.Text;
                     comandaGestion.lblMesa.Text = lblMesa.Text;
                     comandaGestion.lblMesa.Tag = lblMesa.Tag.ToString();
+                    comandaGestion.ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text));
                 }
 
             }
@@ -1094,6 +1095,52 @@ namespace TPV.GUI
         private void PuntoPago_FormClosing(object sender, FormClosingEventArgs e)
         {
             tFecha.Stop();
+        }
+
+        private void btnCliente_Click(object sender, EventArgs e)
+        {
+            ClientesGestion cg = new ClientesGestion();
+            cg.seleccionCliente = true;
+            if (lblTicket.Text.ToString().Equals(""))
+            {
+                cg.idPedido = 0;
+            }
+            else
+            {
+                cg.idPedido = Int32.Parse(lblTicket.Text.ToString());
+            }
+
+            cg.ShowDialog();
+            if (!lblTicket.Text.ToString().Equals(""))
+            {
+                ActualizarLabels(Int32.Parse(lblTicket.Text.ToString()));
+            }
+        }
+
+        private void ActualizarLabels(int id)
+        {
+            //Obtengo el pedido que estaba abierto en el punto de pago.
+            DataTable pedido = DataManager.DBConsultas.PedidoPorId(id);
+            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+            {
+                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+            }
+            else
+            {
+                lblMesero.Text = "";
+                lblMesero.Tag = "";
+            }
+            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+            {
+                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+            }
+            else
+            {
+                lblCliente.Text = "";
+                lblCliente.Tag = "";
+            }
         }
     }
 }
