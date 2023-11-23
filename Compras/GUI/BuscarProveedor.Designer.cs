@@ -69,14 +69,16 @@ namespace Compras.GUI
             this.direccion});
             this.dgvBuscar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBuscar.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvBuscar.Location = new System.Drawing.Point(0, 62);
+            this.dgvBuscar.Location = new System.Drawing.Point(0, 50);
+            this.dgvBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvBuscar.MultiSelect = false;
             this.dgvBuscar.Name = "dgvBuscar";
             this.dgvBuscar.ReadOnly = true;
             this.dgvBuscar.RowHeadersVisible = false;
             this.dgvBuscar.RowHeadersWidth = 51;
             this.dgvBuscar.RowTemplate.Height = 24;
             this.dgvBuscar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBuscar.Size = new System.Drawing.Size(1378, 415);
+            this.dgvBuscar.Size = new System.Drawing.Size(1028, 338);
             this.dgvBuscar.TabIndex = 15;
             // 
             // idProveedor
@@ -160,8 +162,10 @@ namespace Compras.GUI
             this.groupBox3.Controls.Add(this.rbtnNombre);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1378, 62);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(1028, 50);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
@@ -169,9 +173,10 @@ namespace Compras.GUI
             // rbtnNIT
             // 
             this.rbtnNIT.AutoSize = true;
-            this.rbtnNIT.Location = new System.Drawing.Point(212, 25);
+            this.rbtnNIT.Location = new System.Drawing.Point(159, 19);
+            this.rbtnNIT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbtnNIT.Name = "rbtnNIT";
-            this.rbtnNIT.Size = new System.Drawing.Size(51, 21);
+            this.rbtnNIT.Size = new System.Drawing.Size(43, 17);
             this.rbtnNIT.TabIndex = 28;
             this.rbtnNIT.TabStop = true;
             this.rbtnNIT.Text = "NIT";
@@ -182,17 +187,19 @@ namespace Compras.GUI
             // 
             this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(292, 23);
+            this.cmbLista.Location = new System.Drawing.Point(219, 18);
+            this.cmbLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(376, 24);
+            this.cmbLista.Size = new System.Drawing.Size(283, 20);
             this.cmbLista.TabIndex = 26;
             this.cmbLista.TextChanged += new System.EventHandler(this.cmbLista_TextChanged);
             // 
             // bntSelecionar
             // 
-            this.bntSelecionar.Location = new System.Drawing.Point(992, 15);
+            this.bntSelecionar.Location = new System.Drawing.Point(744, 11);
+            this.bntSelecionar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bntSelecionar.Name = "bntSelecionar";
-            this.bntSelecionar.Size = new System.Drawing.Size(216, 34);
+            this.bntSelecionar.Size = new System.Drawing.Size(162, 28);
             this.bntSelecionar.TabIndex = 25;
             this.bntSelecionar.Text = "Seleccionar y salir";
             this.bntSelecionar.UseVisualStyleBackColor = true;
@@ -202,9 +209,10 @@ namespace Compras.GUI
             // rbtnNRC
             // 
             this.rbtnNRC.AutoSize = true;
-            this.rbtnNRC.Location = new System.Drawing.Point(141, 25);
+            this.rbtnNRC.Location = new System.Drawing.Point(106, 19);
+            this.rbtnNRC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbtnNRC.Name = "rbtnNRC";
-            this.rbtnNRC.Size = new System.Drawing.Size(58, 21);
+            this.rbtnNRC.Size = new System.Drawing.Size(48, 17);
             this.rbtnNRC.TabIndex = 1;
             this.rbtnNRC.TabStop = true;
             this.rbtnNRC.Text = "NRC";
@@ -214,9 +222,10 @@ namespace Compras.GUI
             // rbtnNombre
             // 
             this.rbtnNombre.AutoSize = true;
-            this.rbtnNombre.Location = new System.Drawing.Point(53, 24);
+            this.rbtnNombre.Location = new System.Drawing.Point(40, 19);
+            this.rbtnNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbtnNombre.Name = "rbtnNombre";
-            this.rbtnNombre.Size = new System.Drawing.Size(79, 21);
+            this.rbtnNombre.Size = new System.Drawing.Size(62, 17);
             this.rbtnNombre.TabIndex = 0;
             this.rbtnNombre.TabStop = true;
             this.rbtnNombre.Text = "Nombre";
@@ -226,21 +235,22 @@ namespace Compras.GUI
             // groupBox6
             // 
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox6.Location = new System.Drawing.Point(0, 477);
+            this.groupBox6.Location = new System.Drawing.Point(0, 388);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1378, 62);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Size = new System.Drawing.Size(1028, 50);
             this.groupBox6.TabIndex = 14;
             this.groupBox6.TabStop = false;
             // 
             // BuscarProveedor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 539);
+            this.ClientSize = new System.Drawing.Size(1028, 438);
             this.Controls.Add(this.dgvBuscar);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox6);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BuscarProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuscarProveedor";

@@ -270,7 +270,6 @@ namespace Ingredientes_y_Productos.GUI
         private void bntBuscarProducto_Click(object sender, EventArgs e)
         {
             BuscarProducto f = new BuscarProducto();
-            f.bntSelecionar.Visible = true;
             var result = f.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -282,7 +281,6 @@ namespace Ingredientes_y_Productos.GUI
         private void btnBuscarIngrediente_Click(object sender, EventArgs e)
         {
             BuscarIngrediente f = new BuscarIngrediente();
-            f.bntSelecionar.Visible = true;
             var result = f.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -308,11 +306,13 @@ namespace Ingredientes_y_Productos.GUI
                 {
                     if (cmPresentacion.SelectedIndex != 0)
                     {
-                        Mantenimiento.CLS.Ingrediente mantenimiento = new Mantenimiento.CLS.Ingrediente();
-                        mantenimiento.Nombre = txtNombreIngrediente.Text;
-                        mantenimiento.IdUnidad = int.Parse(cmPresentacion.SelectedValue.ToString());
-                        mantenimiento.Stock = decimal.Parse(txtStockIngrediente.Text);
-                        mantenimiento.Precio = decimal.Parse(txtPrecioIngrediente.Text);
+                        Mantenimiento.CLS.Ingrediente mantenimiento = new Mantenimiento.CLS.Ingrediente
+                        {
+                            Nombre = txtNombreIngrediente.Text,
+                            IdUnidad = int.Parse(cmPresentacion.SelectedValue.ToString()),
+                            Stock = decimal.Parse(txtStockIngrediente.Text),
+                            Precio = decimal.Parse(txtPrecioIngrediente.Text)
+                        };
 
                         if (txtIDIngrediente.Text == "")
                         {
@@ -362,8 +362,10 @@ namespace Ingredientes_y_Productos.GUI
                 {
                     if (MessageBox.Show("¿Esta seguro que desea eliminar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        Mantenimiento.CLS.Ingrediente mantenimiento = new Mantenimiento.CLS.Ingrediente();
-                        mantenimiento.IdIngrediente = int.Parse(dgvIngredientes.CurrentRow.Cells["idIngrediente"].Value.ToString());
+                        Mantenimiento.CLS.Ingrediente mantenimiento = new Mantenimiento.CLS.Ingrediente
+                        {
+                            IdIngrediente = int.Parse(dgvIngredientes.CurrentRow.Cells["idIngrediente"].Value.ToString())
+                        };
 
                         if (mantenimiento.Eliminar())
                         {
@@ -434,8 +436,10 @@ namespace Ingredientes_y_Productos.GUI
                 }
                 else
                 {
-                    Mantenimiento.CLS.IngredienteProducto mantenimiento = new Mantenimiento.CLS.IngredienteProducto();
-                    mantenimiento.IdProducto = int.Parse(txtIDProducto.Text);
+                    Mantenimiento.CLS.IngredienteProducto mantenimiento = new Mantenimiento.CLS.IngredienteProducto
+                    {
+                        IdProducto = int.Parse(txtIDProducto.Text)
+                    };
                     foreach (DataGridViewRow item in dgvReceta.Rows)
                     {
                         mantenimiento.IdIngrediente = int.Parse(item.Cells["idIngredienteReceta"].Value.ToString());
@@ -443,7 +447,7 @@ namespace Ingredientes_y_Productos.GUI
                         if (mantenimiento.Insertar())
                         {
                             resultado = true;
-                            filas = filas + 1;
+                            filas++;
                         }
                     }
                 }
@@ -592,9 +596,10 @@ namespace Ingredientes_y_Productos.GUI
                 {
                     if (MessageBox.Show("¿Esta seguro que desea eliminar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        Mantenimiento.CLS.UnidadMedida mantenimiento = new Mantenimiento.CLS.UnidadMedida();
-
-                        mantenimiento.IdUnidad = int.Parse(dgvUnidad.CurrentRow.Cells["idUnidadMedida"].Value.ToString());
+                        Mantenimiento.CLS.UnidadMedida mantenimiento = new Mantenimiento.CLS.UnidadMedida
+                        {
+                            IdUnidad = int.Parse(dgvUnidad.CurrentRow.Cells["idUnidadMedida"].Value.ToString())
+                        };
                         if (mantenimiento.Eliminar())
                         {
                             MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -644,8 +649,10 @@ namespace Ingredientes_y_Productos.GUI
                 }
                 else
                 {
-                    Mantenimiento.CLS.UnidadMedida mantenimiento = new Mantenimiento.CLS.UnidadMedida();
-                    mantenimiento.Unidad_Medida = txtPresentacion.Text;
+                    Mantenimiento.CLS.UnidadMedida mantenimiento = new Mantenimiento.CLS.UnidadMedida
+                    {
+                        Unidad_Medida = txtPresentacion.Text
+                    };
                     if (txtIDUnidad.Text == "")
                     {
                         if (mantenimiento.Insertar())

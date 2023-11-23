@@ -81,9 +81,11 @@ namespace TPV.GUI
             tFecha.Start();
             WindowState = FormWindowState.Maximized;
             // Creamos un Panel para envolver el FlowLayoutPanel
-            Panel panelWrapper = new Panel();
-            panelWrapper.Dock = DockStyle.Fill;
-            panelWrapper.AutoScroll = true;
+            Panel panelWrapper = new Panel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true
+            };
 
             // Agregamos el FlowLayoutPanel al Panel
             panelWrapper.Controls.Add(flpAcciones);
@@ -470,7 +472,7 @@ namespace TPV.GUI
 
         private double CalcularIva()
         {
-            double iva = 0;
+            double iva;
             bool incluirIva = bool.Parse(oConfiguracion.IncluirImpuesto);
             if (incluirIva)
             {
@@ -728,8 +730,10 @@ namespace TPV.GUI
             if (ValidarExistenciaTicket()) return;
             //Programar pago entre muchos
             //Mostrar interfaz para dividir la cuenta
-            DividirPago f = new DividirPago();
-            f.Tag = txtTotalPagar.Text;//Mandamos el total a pagar en el tag
+            DividirPago f = new DividirPago
+            {
+                Tag = txtTotalPagar.Text//Mandamos el total a pagar en el tag
+            };
             f.ShowDialog();
             
         }
@@ -956,9 +960,11 @@ namespace TPV.GUI
                 if (datosEnMesa.Rows.Count == 1)
                 {
                     //Actualizar estado de la mesa
-                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
-                    mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
-                    mesa.Disponible = true;
+                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+                    {
+                        IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                        Disponible = true
+                    };
                     if (mesa.ActualizarEstado())
                     {
                         //MessageBox.Show("SE ACTUALIZO CON EXITO");
@@ -995,9 +1001,11 @@ namespace TPV.GUI
 
         private void btnCuentas_Click(object sender, EventArgs e)
         {
-            PedidosSeparados pedidosSeparados = new PedidosSeparados();
-            pedidosSeparados.idMesa = lblMesa.Tag.ToString();
-            pedidosSeparados.pedidosEnMesa = datosEnMesa;
+            PedidosSeparados pedidosSeparados = new PedidosSeparados
+            {
+                idMesa = lblMesa.Tag.ToString(),
+                pedidosEnMesa = datosEnMesa
+            };
             pedidosSeparados.ShowDialog();
             idPedidoSiguiente = pedidosSeparados.idPedido;
 
@@ -1053,10 +1061,7 @@ namespace TPV.GUI
 
         private void GenerarTicket(ReportClass oReporte)
         {
-            decimal pago;
-
-            DataTable datos = new DataTable();
-            datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
             oReporte.SetDataSource(datos);
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
@@ -1075,8 +1080,10 @@ namespace TPV.GUI
             if (oReporte != null)
             {
                 // Configurar la ruta de destino en la impresora virtual XPS
-                PrinterSettings settings = new PrinterSettings();
-                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+                PrinterSettings settings = new PrinterSettings
+                {
+                    PrinterName = oConfiguracion.PrinterComanda // Nombre de la impresora virtual XPS
+                };
 
                 // Imprimir el informe en la impresora virtual XPS
                 oReporte.PrintOptions.PrinterName = settings.PrinterName;
@@ -1099,8 +1106,10 @@ namespace TPV.GUI
 
         private void btnCliente_Click(object sender, EventArgs e)
         {
-            ClientesGestion cg = new ClientesGestion();
-            cg.seleccionCliente = true;
+            ClientesGestion cg = new ClientesGestion
+            {
+                seleccionCliente = true
+            };
             if (lblTicket.Text.ToString().Equals(""))
             {
                 cg.idPedido = 0;

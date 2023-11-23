@@ -121,7 +121,8 @@ namespace Ingredientes_y_Productos.GUI
         {
             InitializeComponent();
         }
-        List<string> items = new List<string>
+
+        readonly List<string> items = new List<string>
         {
             "Seleccione una opcion",
             "Producto",
@@ -1810,7 +1811,6 @@ namespace Ingredientes_y_Productos.GUI
         private void bntBuscarProductos_Click(object sender, EventArgs e)
         {
             BuscarProducto producto = new BuscarProducto();
-            producto.bntSelecionar.Visible = true;
             var result = producto.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -1833,9 +1833,11 @@ namespace Ingredientes_y_Productos.GUI
                 Boolean resultado = false;
                 if (dgvProductos.Rows.Count != 0)
                 {
-                    Mantenimiento.CLS.Ajuste_Stock ajuste = new Mantenimiento.CLS.Ajuste_Stock();
-                    ajuste.Fecha = dtpFechaProducto.Text;
-                    ajuste.IdUsuario = int.Parse(oUsuario.IdUsuario);
+                    Mantenimiento.CLS.Ajuste_Stock ajuste = new Mantenimiento.CLS.Ajuste_Stock
+                    {
+                        Fecha = dtpFechaProducto.Text,
+                        IdUsuario = int.Parse(oUsuario.IdUsuario)
+                    };
                     foreach (DataGridViewRow row in dgvProductos.Rows)
                     {
                         ajuste.IdProducto = int.Parse(row.Cells["idProducto"].Value.ToString());
@@ -2067,9 +2069,11 @@ namespace Ingredientes_y_Productos.GUI
                 Boolean resultado = false;
                 if (dgvIngredientes.Rows.Count != 0)
                 {
-                    Mantenimiento.CLS.Ajuste_Stock ajuste = new Mantenimiento.CLS.Ajuste_Stock();
-                    ajuste.Fecha = dtpFechaProducto.Text;
-                    ajuste.IdUsuario = int.Parse(oUsuario.IdUsuario);
+                    Mantenimiento.CLS.Ajuste_Stock ajuste = new Mantenimiento.CLS.Ajuste_Stock
+                    {
+                        Fecha = dtpFechaProducto.Text,
+                        IdUsuario = int.Parse(oUsuario.IdUsuario)
+                    };
 
                     foreach (DataGridViewRow row in dgvIngredientes.Rows)
                     {
@@ -2200,7 +2204,6 @@ namespace Ingredientes_y_Productos.GUI
         private void bntBuscarIngrediente_Click(object sender, EventArgs e)
         {
             BuscarIngrediente ingrediente = new BuscarIngrediente();
-            ingrediente.bntSelecionar.Visible = true;
             var result = ingrediente.ShowDialog();
             if (result == DialogResult.OK)
             {

@@ -206,7 +206,7 @@ namespace TPV.GUI
             }
             else
             {
-                CrearNuevaFila(separar, quedaran, precio, indiceActual, indiceSiguiente);
+                CrearNuevaFila(separar, quedaran, precio, indiceActual);
             }
         }
 
@@ -252,7 +252,7 @@ namespace TPV.GUI
             }
         }
 
-        private void CrearNuevaFila(int separar, int quedaran, double precio, int indiceActual, int indiceSiguiente)
+        private void CrearNuevaFila(int separar, int quedaran, double precio, int indiceActual)
         {
             if (pasar)
             {
@@ -355,12 +355,14 @@ namespace TPV.GUI
                         {
                             if (siguiente["idProductoSiguiente"].ToString().Equals(actual["idProducto"].ToString()))
                             {
-                                pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
-                                pedidoDetalle.IdDetalle = Int32.Parse(actual["idDetalle"].ToString());
-                                pedidoDetalle.IdPedido = idPedido;
-                                pedidoDetalle.IdProducto = Int32.Parse(actual["idProducto"].ToString());
-                                pedidoDetalle.Cantidad = Int32.Parse(actual["cantidad"].ToString());
-                                pedidoDetalle.SubTotal = Double.Parse(actual["subTotal"].ToString());
+                                pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle
+                                {
+                                    IdDetalle = Int32.Parse(actual["idDetalle"].ToString()),
+                                    IdPedido = idPedido,
+                                    IdProducto = Int32.Parse(actual["idProducto"].ToString()),
+                                    Cantidad = Int32.Parse(actual["cantidad"].ToString()),
+                                    SubTotal = Double.Parse(actual["subTotal"].ToString())
+                                };
                                 pedidoDetalle.ActualizarCompra();
 
                             }
@@ -378,12 +380,14 @@ namespace TPV.GUI
                         {
                             if (siguiente["idProductoSiguiente"].ToString().Equals(actual["idProducto"].ToString()))
                             {
-                                pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
-                                pedidoDetalle.IdDetalle = Int32.Parse(actual["idDetalle"].ToString());
-                                pedidoDetalle.IdPedido = idPedido;
-                                pedidoDetalle.IdProducto = Int32.Parse(actual["idProducto"].ToString());
-                                pedidoDetalle.Cantidad = Int32.Parse(actual["cantidad"].ToString());
-                                pedidoDetalle.SubTotal = Double.Parse(actual["subTotal"].ToString());
+                                pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle
+                                {
+                                    IdDetalle = Int32.Parse(actual["idDetalle"].ToString()),
+                                    IdPedido = idPedido,
+                                    IdProducto = Int32.Parse(actual["idProducto"].ToString()),
+                                    Cantidad = Int32.Parse(actual["cantidad"].ToString()),
+                                    SubTotal = Double.Parse(actual["subTotal"].ToString())
+                                };
                                 pedidoDetalle.ActualizarCompra();
                                 eliminar = false;
                                 break;
@@ -396,14 +400,18 @@ namespace TPV.GUI
 
                         if (eliminar)
                         {
-                            pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
-                            pedidoDetalle.IdDetalle = Int32.Parse(siguiente["idDetalleSiguiente"].ToString());
+                            pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle
+                            {
+                                IdDetalle = Int32.Parse(siguiente["idDetalleSiguiente"].ToString())
+                            };
                             pedidoDetalle.Eliminar();
                         }
                         //Vamos a actualizar el total del pedido
-                        Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido();
-                        pedido2.IdPedido = idPedido;
-                        pedido2.IdMesa = idMesa;
+                        Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido
+                        {
+                            IdPedido = idPedido,
+                            IdMesa = idMesa
+                        };
                         double total = CalcularTotal(dgvActual, "subTotal");
                         pedido2.ActualizarTotal(total);
                     }
@@ -412,49 +420,52 @@ namespace TPV.GUI
 
                 String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 //Creamos un nuevo pedido y despues los detalles
-                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
-                pedido.IdMesa = idMesa;
-                pedido.IdCuenta = 1;
-                pedido.Cancelado = false;
-                pedido.Fecha = fecha;
-                pedido.Listo = false;
-                pedido.Total = 0;
-                pedido.Descuento = 0;
-                pedido.Iva = 0;
-                pedido.Propina = 0;
-                pedido.TotalPago = 0;
-                pedido.Saldo = 0;
-                pedido.NFactura = "0";
-                pedido.Anular = false;
-                pedido.Efectivo = 0;
-                pedido.Credito = 0;
-                pedido.Btc = 0;
+                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
+                {
+                    IdMesa = idMesa,
+                    IdCuenta = 1,
+                    Cancelado = false,
+                    Fecha = fecha,
+                    Listo = false,
+                    Total = 0,
+                    Descuento = 0,
+                    Iva = 0,
+                    Propina = 0,
+                    TotalPago = 0,
+                    Saldo = 0,
+                    NFactura = "0",
+                    Anular = false,
+                    Efectivo = 0,
+                    Credito = 0,
+                    Btc = 0
+                };
 
-                int idPedidoInsertado;
                 //Agregamos detalles al pedido
                 Mantenimiento.CLS.PedidoDetalle pedidoDetalle2;
                 //Insertamos en la base de datos el pedido
-                if (pedido.Insertar(out idPedidoInsertado))
+                if (pedido.Insertar(out int idPedidoInsertado))
                 {
                     foreach (DataRow siguiente in datosSiguiente.Rows)
                     {
-                        pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle();
-                        pedidoDetalle2.IdDetalle = 0;
-                        pedidoDetalle2.Cocinando = true;
-                        pedidoDetalle2.Extras = "";
-                        pedidoDetalle2.HoraEntregado = fecha;
-                        pedidoDetalle2.HoraPedido = fecha;
-                        //pedidoDetalle2.IdCocinero = null;
-                        pedidoDetalle2.IdProducto = Int32.Parse(siguiente["idProductoSiguiente"].ToString());
-                        pedidoDetalle2.IdPedido = idPedidoInsertado;
-                        lblTicket.Text = idPedidoInsertado.ToString();
-                        pedidoDetalle2.Cantidad = Int32.Parse(siguiente["cantidadSiguiente"].ToString());
-                        pedidoDetalle2.Precio = Double.Parse(siguiente["precioSiguiente"].ToString());
-                        pedidoDetalle2.SubTotal = Double.Parse(siguiente["subTotalSiguiente"].ToString());
-                        pedidoDetalle2.Grupo = "0";
-                        pedidoDetalle2.Usuario = oUsuario.IdUsuario;
+                        pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle
+                        {
+                            IdDetalle = 0,
+                            Cocinando = true,
+                            Extras = "",
+                            HoraEntregado = fecha,
+                            HoraPedido = fecha,
+                            //pedidoDetalle2.IdCocinero = null;
+                            IdProducto = Int32.Parse(siguiente["idProductoSiguiente"].ToString()),
+                            IdPedido = idPedidoInsertado,
+                            Cantidad = Int32.Parse(siguiente["cantidadSiguiente"].ToString()),
+                            Precio = Double.Parse(siguiente["precioSiguiente"].ToString()),
+                            SubTotal = Double.Parse(siguiente["subTotalSiguiente"].ToString()),
+                            Grupo = "0",
+                            Usuario = oUsuario.IdUsuario
+                        };
                         //pedidoDetalle2.Fecha = null;
                         pedidoDetalle2.Insertar();
+                        lblTicket.Text = idPedidoInsertado.ToString();
                     }
                     double total = CalcularTotal(dgvSiguiente, "subTotalSiguiente");
                     pedido.IdPedido = idPedidoInsertado;

@@ -23,11 +23,9 @@ namespace Compras.GUI
             try
             {
                 decimal Acumulado = 0;
-                decimal descuento = 0;
-                decimal iva = 0;
 
-                if (!string.IsNullOrEmpty(txtDescuento.Text) && decimal.TryParse(txtDescuento.Text, out descuento) &&
-                    !string.IsNullOrEmpty(txtIva.Text) && decimal.TryParse(txtIva.Text, out iva))
+                if (!string.IsNullOrEmpty(txtDescuento.Text) && decimal.TryParse(txtDescuento.Text, out decimal descuento) &&
+                    !string.IsNullOrEmpty(txtIva.Text) && decimal.TryParse(txtIva.Text, out decimal iva))
                 {
                     // Ambos txtDescuento y txtIva son números válidos y no están vacíos.
                     foreach (DataGridViewRow item in dgvDatos.Rows)
@@ -163,8 +161,6 @@ namespace Compras.GUI
 
             if (cmbTipoCompra.SelectedIndex == 0)
             {
-                producto.bntSelecionar.Visible = true;
-
                 var result = producto.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -174,8 +170,6 @@ namespace Compras.GUI
             }
             else if (cmbTipoCompra.SelectedIndex == 1)
             {
-                ingrediente.bntSelecionar.Visible = true;
-
                 var result = ingrediente.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -349,12 +343,14 @@ namespace Compras.GUI
                             txtIva.Text = "0";
                         }
 
-                        Mantenimiento.CLS.Compra compra = new Mantenimiento.CLS.Compra();
-                        compra.TipoCompra = cmbTipoCompra.Text;
-                        compra.IdProveedor = int.Parse(txtProveedor.Tag.ToString());
-                        compra.IdComprobante = int.Parse(cmbComprobante.SelectedValue.ToString());
-                        compra.NComprobante = txtNoComprobante.Text;
-                        compra.IdUsuario = int.Parse(SessionManager.Session.Instancia.IdUsuario);
+                        Mantenimiento.CLS.Compra compra = new Mantenimiento.CLS.Compra
+                        {
+                            TipoCompra = cmbTipoCompra.Text,
+                            IdProveedor = int.Parse(txtProveedor.Tag.ToString()),
+                            IdComprobante = int.Parse(cmbComprobante.SelectedValue.ToString()),
+                            NComprobante = txtNoComprobante.Text,
+                            IdUsuario = int.Parse(SessionManager.Session.Instancia.IdUsuario)
+                        };
 
                         DateTime fechaSeleccionada = dtpFechaCompra.Value;
                         string fechaFormateada = fechaSeleccionada.ToString("yyyy-MM-dd");
@@ -368,12 +364,14 @@ namespace Compras.GUI
                         if (compra.Insertar())
                         {
                             resultadoCompra = true;
-                            filasCompras= filasCompras + 1;
+                            filasCompras++;
                             int NuevoStock = 0;
 
                             ///SI SE INSEERTO EN COMPRAS SE IRA A INSERTAR EN COMPRAS_DETALLES
-                            Mantenimiento.CLS.Compra_detalle compra_detalle = new Mantenimiento.CLS.Compra_detalle();
-                            compra_detalle.IdCompra = DataManager.DBConsultas.ConsultarUltimoRegistro(int.Parse(SessionManager.Session.Instancia.IdUsuario));
+                            Mantenimiento.CLS.Compra_detalle compra_detalle = new Mantenimiento.CLS.Compra_detalle
+                            {
+                                IdCompra = DataManager.DBConsultas.ConsultarUltimoRegistro(int.Parse(SessionManager.Session.Instancia.IdUsuario))
+                            };
 
                             if (cmbTipoCompra.Text == "Productos")
                             {
@@ -388,12 +386,14 @@ namespace Compras.GUI
                                     if (compra_detalle.InsertarProductos())
                                     {
                                         resultadoComprasDetalles = true;
-                                        filasComprasDetalles = filasComprasDetalles + 1;
+                                        filasComprasDetalles++;
 
                                         NuevoStock = DataManager.DBConsultas.ConsultarStock(1, compra_detalle.IdProducto) + compra_detalle.Cantidad;
-                                        Mantenimiento.CLS.Producto producto = new Mantenimiento.CLS.Producto();
-                                        producto.IdProducto = compra_detalle.IdProducto;
-                                        producto.Stock = NuevoStock;
+                                        Mantenimiento.CLS.Producto producto = new Mantenimiento.CLS.Producto
+                                        {
+                                            IdProducto = compra_detalle.IdProducto,
+                                            Stock = NuevoStock
+                                        };
 
                                         producto.ActualizarStockProductos();
                                     }
@@ -412,13 +412,15 @@ namespace Compras.GUI
                                     if (compra_detalle.InsertarIngredientes())
                                     {
                                         resultadoComprasDetalles = true;
-                                        filasComprasDetalles = filasComprasDetalles + 1;
+                                        filasComprasDetalles++;
 
                                         NuevoStock = DataManager.DBConsultas.ConsultarStock(2, compra_detalle.IdIngrediente) + compra_detalle.Cantidad;
 
-                                        Mantenimiento.CLS.Ingrediente ingrediente = new Mantenimiento.CLS.Ingrediente();
-                                        ingrediente.IdIngrediente = compra_detalle.IdIngrediente;
-                                        ingrediente.Stock = NuevoStock;
+                                        Mantenimiento.CLS.Ingrediente ingrediente = new Mantenimiento.CLS.Ingrediente
+                                        {
+                                            IdIngrediente = compra_detalle.IdIngrediente,
+                                            Stock = NuevoStock
+                                        };
 
                                         ingrediente.ActualizarStockIngredientes();
                                     }
@@ -545,6 +547,11 @@ namespace Compras.GUI
             {
                 e.Handled = true; // Evita que se ingrese el segundo punto decimal
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

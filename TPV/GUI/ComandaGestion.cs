@@ -48,7 +48,7 @@ namespace TPV.GUI
         {
             // Obtenemos el ancho y alto de la pantalla
             int screenWidth = this.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
             // Ajustamos la posición del botón a la esquina derecha superior
             btnSalir.Left = screenWidth - (btnSalir.Width + 30);
@@ -125,9 +125,11 @@ namespace TPV.GUI
                 btnExtras.Enabled = true;
             }
             // Creamos un Panel para envolver el FlowLayoutPanel
-            Panel panelWrapper = new Panel();
-            panelWrapper.Dock = DockStyle.Fill;
-            panelWrapper.AutoScroll = true;
+            Panel panelWrapper = new Panel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true
+            };
 
             // Agregamos el FlowLayoutPanel al Panel
             panelWrapper.Controls.Add(panelComanda);
@@ -139,10 +141,12 @@ namespace TPV.GUI
             // Crear y agregar botones al FlowLayoutPanel para cada salon
             foreach (DataRow salon in salones.Rows)
             {
-                btnFamilia = new Button();
-                btnFamilia.Text = salon["familia"].ToString().ToUpper();
-                btnFamilia.Tag = salon["idFamilia"].ToString().ToUpper();
-                btnFamilia.Size = new Size(150, 60);
+                btnFamilia = new Button
+                {
+                    Text = salon["familia"].ToString().ToUpper(),
+                    Tag = salon["idFamilia"].ToString().ToUpper(),
+                    Size = new Size(150, 60)
+                };
                 btnFamilia.Click += BotonFamilia_Click;
                 flpFamilias.Controls.Add(btnFamilia);
             }
@@ -167,9 +171,11 @@ namespace TPV.GUI
             foreach (DataRow producto in productos.Rows)
             {
                 String[] aux = { producto["idProducto"].ToString().ToUpper(), producto["grupoPrinter"].ToString().ToUpper() };
-                btnProducto = new Button();
-                btnProducto.Text = producto["nombre"].ToString().ToUpper();
-                btnProducto.Tag = aux;
+                btnProducto = new Button
+                {
+                    Text = producto["nombre"].ToString().ToUpper(),
+                    Tag = aux
+                };
 
                 // Crear un nuevo objeto Font con estilo negrita
                 Font boldFont = new Font(btnProducto.Font, FontStyle.Bold);
@@ -235,7 +241,7 @@ namespace TPV.GUI
         private double CalcularSubTotal(int cantidad, int id, double precio)
         {
             
-            double subTotal = 0;
+            double subTotal;
             subTotal = precio*cantidad;
             return subTotal;
         }
@@ -243,7 +249,7 @@ namespace TPV.GUI
         private void BotonProducto_Click(object sender, EventArgs e)
         {
             Button botonProducto = (Button)sender;
-            int cantidad = 0;
+            int cantidad;
                 
             if (bool.Parse(oConfiguracion.MuchosProductos))
             {
@@ -270,8 +276,10 @@ namespace TPV.GUI
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             String[] aux = (string[])botonProducto.Tag;
             DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
-            PedidoDetalle pDetalle = new PedidoDetalle();
-            pDetalle.Cantidad = cantidad;
+            PedidoDetalle pDetalle = new PedidoDetalle
+            {
+                Cantidad = cantidad
+            };
             if (!lblTicket.Text.Equals(""))
             {
                 pDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
@@ -318,7 +326,7 @@ namespace TPV.GUI
                     if (row.Cells["idProducto"].Value.ToString() == aux[0].ToString())
                     {
                         idDetalle = Int32.Parse(row.Cells["idDetalle"].Value.ToString());
-                        cantidad = cantidad + Int32.Parse(row.Cells["cantidad"].Value.ToString());
+                        cantidad += Int32.Parse(row.Cells["cantidad"].Value.ToString());
                         precio = double.Parse(row.Cells["precio"].Value.ToString());
                         idProducto = Int32.Parse(aux[0].ToString());
                         aumentarUnProducto = true;
@@ -364,30 +372,31 @@ namespace TPV.GUI
             else
             {
                 //Creamos un nuevo pedido
-                
+
                 //No hay productos, se inicia el pedido
                 //Creamos el pedido
-                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
-                pedido.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
-                pedido.IdCuenta = 1;
-                pedido.Cancelado = false;
-                pedido.Fecha = fecha;
-                pedido.Listo = false;
-                pedido.Total = 0;
-                pedido.Descuento = 0;
-                pedido.Iva = 0;
-                pedido.Propina = 0;
-                pedido.TotalPago = 0;
-                pedido.Saldo = 0;
-                pedido.NFactura = "0";
-                pedido.Anular = false;
-                pedido.Efectivo = 0;
-                pedido.Credito = 0;
-                pedido.Btc = 0;
+                Pedido pedido = new Pedido
+                {
+                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                    IdCuenta = 1,
+                    Cancelado = false,
+                    Fecha = fecha,
+                    Listo = false,
+                    Total = 0,
+                    Descuento = 0,
+                    Iva = 0,
+                    Propina = 0,
+                    TotalPago = 0,
+                    Saldo = 0,
+                    NFactura = "0",
+                    Anular = false,
+                    Efectivo = 0,
+                    Credito = 0,
+                    Btc = 0
+                };
 
-                int idPedidoInsertado;
                 //Insertamos en la base de datos el pedido
-                if (pedido.Insertar(out idPedidoInsertado))
+                if (pedido.Insertar(out int idPedidoInsertado))
                 {
                     //MessageBox.Show("SE INSERTO CON EXITO");
                 }
@@ -399,15 +408,17 @@ namespace TPV.GUI
                 lstDetalle.Add(pDetalle);
 
                 //Agregamos detalles al pedido
-                Mantenimiento.CLS.PedidoDetalle pedidoDetalle = new Mantenimiento.CLS.PedidoDetalle();
-                pedidoDetalle.IdDetalle = 0;
-                pedidoDetalle.Cocinando = true;
-                pedidoDetalle.Extras = "";
-                pedidoDetalle.HoraEntregado = fecha;
-                pedidoDetalle.HoraPedido = fecha;
-                //pedidoDetalle.IdCocinero = null;
-                pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
-                pedidoDetalle.IdPedido = idPedidoInsertado;
+                PedidoDetalle pedidoDetalle = new PedidoDetalle
+                {
+                    IdDetalle = 0,
+                    Cocinando = true,
+                    Extras = "",
+                    HoraEntregado = fecha,
+                    HoraPedido = fecha,
+                    //pedidoDetalle.IdCocinero = null;
+                    IdProducto = Int32.Parse(aux[0].ToString()),
+                    IdPedido = idPedidoInsertado
+                };
                 lblTicket.Text = idPedidoInsertado.ToString();
                 pedidoDetalle.Cantidad = cantidad;
                 DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
@@ -419,8 +430,10 @@ namespace TPV.GUI
 
                 if (pedidoDetalle.Insertar())
                 {
-                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
-                    mesa.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+                    Mesa mesa = new Mesa
+                    {
+                        IdMesa = Int32.Parse(lblMesa.Tag.ToString())
+                    };
                     if (mesa.ActualizarEstado())
                     {
                         //MessageBox.Show("SE ACTUALIZO CON EXITO");
@@ -445,9 +458,11 @@ namespace TPV.GUI
             CargarProductosPorMesa(lblMesa.Tag.ToString());
 
             //Vamos a actualizar el total del pedido
-            Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido();
-            pedido2.IdPedido = Int32.Parse(lblTicket.Text.ToString());
-            pedido2.IdMesa = Int32.Parse(lblMesa.Tag.ToString());
+            Pedido pedido2 = new Pedido
+            {
+                IdPedido = Int32.Parse(lblTicket.Text.ToString()),
+                IdMesa = Int32.Parse(lblMesa.Tag.ToString())
+            };
             double total = CalcularTotal();
             pedido2.ActualizarTotal(total);
 
@@ -468,18 +483,22 @@ namespace TPV.GUI
                 {
                     foreach (DataRow item in ingredientes.Rows)
                     {
-                        ingrediente = new Ingrediente();
-                        ingrediente.IdIngrediente = Int32.Parse(item["idIngrediente"].ToString());
-                        ingrediente.Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) - CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()));
+                        ingrediente = new Ingrediente
+                        {
+                            IdIngrediente = Int32.Parse(item["idIngrediente"].ToString()),
+                            Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) - CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()))
+                        };
                         ingrediente.ActualizarStock();
                     }
                 }
                 else
                 {
                     //El producto no tiene ingredientes
-                    producto = new Producto();
-                    producto.IdProducto = Int32.Parse(id);
-                    producto.Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) - cantidad;
+                    producto = new Producto
+                    {
+                        IdProducto = Int32.Parse(id),
+                        Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) - cantidad
+                    };
                     producto.ActualizarStock();
                 }
             }
@@ -489,18 +508,22 @@ namespace TPV.GUI
                 {
                     foreach (DataRow item in ingredientes.Rows)
                     {
-                        ingrediente = new Ingrediente();
-                        ingrediente.IdIngrediente = Int32.Parse(item["idIngrediente"].ToString());
-                        ingrediente.Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) + CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()));
+                        ingrediente = new Ingrediente
+                        {
+                            IdIngrediente = Int32.Parse(item["idIngrediente"].ToString()),
+                            Stock = Decimal.Parse(item["stock_ingrediente"].ToString()) + CalcularCantidad(cantidad, Decimal.Parse(item["cantidad"].ToString()))
+                        };
                         ingrediente.ActualizarStock();
                     }
                 }
                 else
                 {
                     //El producto no tiene ingredientes
-                    producto = new Producto();
-                    producto.IdProducto = Int32.Parse(id);
-                    producto.Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) + cantidad;
+                    producto = new Producto
+                    {
+                        IdProducto = Int32.Parse(id),
+                        Stock = Int32.Parse(productoNuevo.Rows[0]["stock"].ToString()) + cantidad
+                    };
                     producto.ActualizarStock();
                 }
             }
@@ -676,8 +699,10 @@ namespace TPV.GUI
 
                     if (dgvDatos.Rows.Count == 1)
                     {
-                        Pedido pedido = new Pedido();
-                        pedido.IdPedido = Int32.Parse(lblTicket.Text);
+                        Pedido pedido = new Pedido
+                        {
+                            IdPedido = Int32.Parse(lblTicket.Text)
+                        };
                         pedido.Eliminar();
                         CargarProductosPorMesa(lblMesa.Tag.ToString());
 
@@ -697,7 +722,7 @@ namespace TPV.GUI
                         {
                             item.IdPedido = item.IdPedido;
                             item.IdProducto = item.IdProducto;
-                            item.Cantidad = item.Cantidad - 1;
+                            item.Cantidad--;
                             if (item.Cantidad == 0)
                             {
                                 lstDetalle.Remove(item);
@@ -723,8 +748,10 @@ namespace TPV.GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ClientesGestion cg = new ClientesGestion();
-            cg.seleccionCliente = true;
+            ClientesGestion cg = new ClientesGestion
+            {
+                seleccionCliente = true
+            };
             if (lblTicket.Text.ToString().Equals(""))
             {
                 cg.idPedido = 0;
@@ -808,9 +835,11 @@ namespace TPV.GUI
 
         private void btnCuentas_Click(object sender, EventArgs e)
         {
-            PedidosSeparados pedidosSeparados = new PedidosSeparados();
-            pedidosSeparados.idMesa = lblMesa.Tag.ToString();
-            pedidosSeparados.pedidosEnMesa = datosEnMesa;
+            PedidosSeparados pedidosSeparados = new PedidosSeparados
+            {
+                idMesa = lblMesa.Tag.ToString(),
+                pedidosEnMesa = datosEnMesa
+            };
             pedidosSeparados.ShowDialog();
             idPedidoSiguiente = pedidosSeparados.idPedido;
 
@@ -863,8 +892,7 @@ namespace TPV.GUI
 
         private void GenerarComanda(ReportClass oReporte)
         {
-            DataTable datos = new DataTable();
-            datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
             oReporte.SetDataSource(datos);
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
@@ -872,8 +900,10 @@ namespace TPV.GUI
             if (oReporte != null)
             {
                 // Configurar la ruta de destino en la impresora virtual XPS
-                PrinterSettings settings = new PrinterSettings();
-                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+                PrinterSettings settings = new PrinterSettings
+                {
+                    PrinterName = oConfiguracion.PrinterComanda // Nombre de la impresora virtual XPS
+                };
 
                 // Imprimir el informe en la impresora virtual XPS
                 oReporte.PrintOptions.PrinterName = settings.PrinterName;
@@ -932,8 +962,10 @@ namespace TPV.GUI
                 if (oReporte != null)
                 {
                     // Configurar la ruta de destino en la impresora virtual XPS
-                    PrinterSettings settings = new PrinterSettings();
-                    settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda // Nombre de la impresora virtual XPS
+                    };
 
                     // Imprimir el informe en la impresora virtual XPS
                     oReporte.PrintOptions.PrinterName = settings.PrinterName;

@@ -135,8 +135,10 @@ namespace TPV.GUI
             {
                 if (MessageBox.Show("¿Esta seguro que desea eliminar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    Mantenimiento.CLS.Cliente cliente = new Mantenimiento.CLS.Cliente();
-                    cliente.IdCliente = int.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString());
+                    Mantenimiento.CLS.Cliente cliente = new Mantenimiento.CLS.Cliente
+                    {
+                        IdCliente = int.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString())
+                    };
 
                     if (cliente.Eliminar())
                     {
@@ -161,15 +163,17 @@ namespace TPV.GUI
             MessageBox.Show("Hola estoy escribiendo");
         }
 
-        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (seleccionCliente)
             {
                 if(idPedido != 0)
                 {
-                    Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
-                    pedido.IdPedido = idPedido;
-                    pedido.IdCliente = Int32.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString());
+                    Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
+                    {
+                        IdPedido = idPedido,
+                        IdCliente = Int32.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString())
+                    };
                     pedido.ActualizarCliente();
                     Close();
                 }

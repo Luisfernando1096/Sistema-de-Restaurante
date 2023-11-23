@@ -245,8 +245,10 @@ namespace ServiceExpressDsk.GUI
             this.Hide();
             TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
             f.Hide();
-            TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f);
-            f2.borrarData = true;
+            TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f)
+            {
+                borrarData = true
+            };
             f2.Hide();
             TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago(f2);
             f3.ShowDialog();

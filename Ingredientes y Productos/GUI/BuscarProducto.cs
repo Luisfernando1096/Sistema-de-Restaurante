@@ -229,6 +229,22 @@ namespace Ingredientes_y_Productos.GUI
 
         private void bntSelecionar_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuscarDatosEnCombo();
+        }
+
+        private void rbtNinguno_CheckedChanged(object sender, EventArgs e)
+        {
+            CargarDatos();
+            cmbLista.Visible = false;
+        }
+
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (dgvProductos.SelectedRows.Count != 0)
             {
                 IDProducto = int.Parse(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
@@ -241,17 +257,6 @@ namespace Ingredientes_y_Productos.GUI
             {
                 MessageBox.Show("Debe seleccionar un Producto.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-        }
-
-        private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BuscarDatosEnCombo();
-        }
-
-        private void rbtNinguno_CheckedChanged(object sender, EventArgs e)
-        {
-            CargarDatos();
-            cmbLista.Visible = false;
         }
     }
 }

@@ -14,7 +14,8 @@ namespace Ingredientes_y_Productos.GUI
     {
         public int IDIngrediente { get; set; }
         public string NombreIngrediente { get; set; }
-        BindingSource datos = new BindingSource();
+
+        readonly BindingSource datos = new BindingSource();
         private void CargarDatos() 
         {
             try
@@ -229,17 +230,7 @@ namespace Ingredientes_y_Productos.GUI
 
         private void bntSelecionar_Click(object sender, EventArgs e)
         {
-            if (dgvBuscarIngrediente.SelectedRows.Count != 0)
-            {
-                IDIngrediente = int.Parse(dgvBuscarIngrediente.CurrentRow.Cells["ID"].Value.ToString());
-                NombreIngrediente = dgvBuscarIngrediente.CurrentRow.Cells["nombreIngrediente"].Value.ToString();
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Ingrediente.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+           
         }
 
         private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
@@ -251,6 +242,21 @@ namespace Ingredientes_y_Productos.GUI
         {
             CargarDatos();
             cmbLista.Visible = false;
+        }
+
+        private void dgvBuscarIngrediente_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvBuscarIngrediente.SelectedRows.Count != 0)
+            {
+                IDIngrediente = int.Parse(dgvBuscarIngrediente.CurrentRow.Cells["ID"].Value.ToString());
+                NombreIngrediente = dgvBuscarIngrediente.CurrentRow.Cells["nombreIngrediente"].Value.ToString();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Ingrediente.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }
