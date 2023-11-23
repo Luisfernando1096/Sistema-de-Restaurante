@@ -15,6 +15,9 @@ namespace Compras.GUI
         public Compras()
         {
             InitializeComponent();
+            // Asocia el evento KeyPress del TextBox a tu método personalizado
+            txtDescuento.KeyPress += txtDescuento_KeyPress;
+            txtIva.KeyPress += txtIva_KeyPress;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -79,8 +82,8 @@ namespace Compras.GUI
                         }
                     }
                     decimal SumaTotal = Acumulado - ((descuento / 100) * Acumulado) + ((iva / 100) * Acumulado);
-                    txtSumas.Text = Acumulado.ToString("0");
-                    txtTotales.Text = SumaTotal.ToString("0");
+                    txtSumas.Text = Acumulado.ToString("0.00");
+                    txtTotales.Text = SumaTotal.ToString("0.00");
                 }
                 else if (!string.IsNullOrEmpty(txtDescuento.Text) && decimal.TryParse(txtDescuento.Text, out descuento))
                 {
@@ -94,8 +97,8 @@ namespace Compras.GUI
                         }
                     }
                     decimal SumaTotal = Acumulado - ((descuento / 100) * Acumulado);
-                    txtSumas.Text = Acumulado.ToString("0");
-                    txtTotales.Text = SumaTotal.ToString("0");
+                    txtSumas.Text = Acumulado.ToString("0.00");
+                    txtTotales.Text = SumaTotal.ToString("0.00");
                 }
                 else if (!string.IsNullOrEmpty(txtIva.Text) && decimal.TryParse(txtIva.Text, out iva))
                 {
@@ -109,8 +112,8 @@ namespace Compras.GUI
                         }
                     }
                     decimal SumaTotal = Acumulado + ((iva / 100) * Acumulado);
-                    txtSumas.Text = Acumulado.ToString("0");
-                    txtTotales.Text = SumaTotal.ToString("0");
+                    txtSumas.Text = Acumulado.ToString("0.00");
+                    txtTotales.Text = SumaTotal.ToString("0.00");
                 }
                 else
                 {
@@ -126,7 +129,7 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    txtSumas.Text = Acumulado.ToString("0");
+                    txtSumas.Text = Acumulado.ToString("0.00");
                     txtTotales.Text = txtSumas.Text;
                 }
             }
@@ -185,7 +188,6 @@ namespace Compras.GUI
         private void btnBuscarProveedor_Click(object sender, EventArgs e)
         {
             BuscarProveedor proveedores = new BuscarProveedor();
-            proveedores.bntSelecionar.Visible = true;
 
             var result = proveedores.ShowDialog();
             if (result == DialogResult.OK)
@@ -262,7 +264,7 @@ namespace Compras.GUI
 
                                     if (idBuscar == idExistente)
                                     {
-                                        row.Cells["precioUnitario"].Value = txtPrecio.Text;
+                                        row.Cells["precioUnitario"].Value = Double.Parse(txtPrecio.Text).ToString("0.00");
                                         row.Cells["cantidad"].Value = txtCantidad.Text;
                                         row.Cells["ventasGravadas"].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
                                         break;
@@ -598,17 +600,53 @@ namespace Compras.GUI
 
         private void txtIva_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Verifica si la tecla presionada es un número o una tecla de control (por ejemplo, retroceso)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
             {
+                // Si no es un número o una tecla de control, indica que el evento ya ha sido manejado
                 e.Handled = true;
+            }
+            else
+            {
+                // Obtiene el texto actual del TextBox después de la inserción de la nueva tecla
+                string nuevoTexto = txtIva.Text + e.KeyChar;
+
+                // Intenta convertir el contenido del TextBox a un número
+                if (int.TryParse(nuevoTexto, out int numero))
+                {
+                    // Verifica si el número está en el rango de 1 a 100
+                    if (numero < 0 || numero > 100)
+                    {
+                        // Si no está en el rango, indica que el evento ya ha sido manejado
+                        e.Handled = true;
+                    }
+                }
             }
         }
 
         private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Verifica si la tecla presionada es un número o una tecla de control (por ejemplo, retroceso)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
             {
+                // Si no es un número o una tecla de control, indica que el evento ya ha sido manejado
                 e.Handled = true;
+            }
+            else
+            {
+                // Obtiene el texto actual del TextBox después de la inserción de la nueva tecla
+                string nuevoTexto = txtDescuento.Text + e.KeyChar;
+
+                // Intenta convertir el contenido del TextBox a un número
+                if (int.TryParse(nuevoTexto, out int numero))
+                {
+                    // Verifica si el número está en el rango de 1 a 100
+                    if (numero < 0 || numero > 100)
+                    {
+                        // Si no está en el rango, indica que el evento ya ha sido manejado
+                        e.Handled = true;
+                    }
+                }
             }
         }
 

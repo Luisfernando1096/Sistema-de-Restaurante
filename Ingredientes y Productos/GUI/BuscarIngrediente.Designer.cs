@@ -54,9 +54,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.Controls.Add(this.rbtnIngrediente);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(910, 50);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
@@ -66,7 +66,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.rbtNinguno.AutoSize = true;
             this.rbtNinguno.Location = new System.Drawing.Point(50, 20);
-            this.rbtNinguno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtNinguno.Margin = new System.Windows.Forms.Padding(2);
             this.rbtNinguno.Name = "rbtNinguno";
             this.rbtNinguno.Size = new System.Drawing.Size(62, 17);
             this.rbtNinguno.TabIndex = 27;
@@ -80,7 +80,7 @@ namespace Ingredientes_y_Productos.GUI
             this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLista.FormattingEnabled = true;
             this.cmbLista.Location = new System.Drawing.Point(283, 18);
-            this.cmbLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbLista.Margin = new System.Windows.Forms.Padding(2);
             this.cmbLista.Name = "cmbLista";
             this.cmbLista.Size = new System.Drawing.Size(283, 21);
             this.cmbLista.TabIndex = 26;
@@ -90,7 +90,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.rbtnPresentacion.AutoSize = true;
             this.rbtnPresentacion.Location = new System.Drawing.Point(194, 20);
-            this.rbtnPresentacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnPresentacion.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnPresentacion.Name = "rbtnPresentacion";
             this.rbtnPresentacion.Size = new System.Drawing.Size(87, 17);
             this.rbtnPresentacion.TabIndex = 1;
@@ -103,7 +103,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.rbtnIngrediente.AutoSize = true;
             this.rbtnIngrediente.Location = new System.Drawing.Point(115, 19);
-            this.rbtnIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnIngrediente.Name = "rbtnIngrediente";
             this.rbtnIngrediente.Size = new System.Drawing.Size(78, 17);
             this.rbtnIngrediente.TabIndex = 0;
@@ -116,9 +116,9 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox6.Location = new System.Drawing.Point(0, 500);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox6.Size = new System.Drawing.Size(910, 50);
             this.groupBox6.TabIndex = 11;
             this.groupBox6.TabStop = false;
@@ -142,7 +142,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvBuscarIngrediente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBuscarIngrediente.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvBuscarIngrediente.Location = new System.Drawing.Point(0, 50);
-            this.dgvBuscarIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvBuscarIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBuscarIngrediente.Name = "dgvBuscarIngrediente";
             this.dgvBuscarIngrediente.ReadOnly = true;
             this.dgvBuscarIngrediente.RowHeadersVisible = false;
@@ -151,7 +151,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvBuscarIngrediente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBuscarIngrediente.Size = new System.Drawing.Size(910, 450);
             this.dgvBuscarIngrediente.TabIndex = 12;
-            this.dgvBuscarIngrediente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuscarIngrediente_CellContentClick);
+            this.dgvBuscarIngrediente.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuscarIngrediente_CellClick);
             this.dgvBuscarIngrediente.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvBuscarIngrediente_ColumnHeaderMouseClick);
             // 
             // ID
@@ -219,12 +219,11 @@ namespace Ingredientes_y_Productos.GUI
             this.Controls.Add(this.dgvBuscarIngrediente);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox6);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BuscarIngrediente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuscarIngrediente";
             this.Load += new System.EventHandler(this.BuscarIngrediente_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BuscarIngrediente_KeyDown);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarIngrediente)).EndInit();

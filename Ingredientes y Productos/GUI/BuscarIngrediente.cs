@@ -229,10 +229,6 @@ namespace Ingredientes_y_Productos.GUI
             BuscarDatosEnCombo();
         }
 
-        private void bntSelecionar_Click(object sender, EventArgs e)
-        {
-           
-        }
 
         private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -245,7 +241,7 @@ namespace Ingredientes_y_Productos.GUI
             cmbLista.Visible = false;
         }
 
-        private void dgvBuscarIngrediente_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvBuscarIngrediente_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvBuscarIngrediente.SelectedRows.Count != 0)
             {
@@ -257,29 +253,6 @@ namespace Ingredientes_y_Productos.GUI
             else
             {
                 MessageBox.Show("Debe seleccionar un Ingrediente.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
-
-        private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BuscarDatosEnCombo();
-        }
-
-        private void rbtNinguno_CheckedChanged(object sender, EventArgs e)
-        {
-            CargarDatos();
-            cmbLista.Visible = false;
-        }
-
-        private void BuscarIngrediente_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (dgvBuscarIngrediente.SelectedRows.Count != 0)
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
-                    bntSelecionar.PerformClick(); // Ejecutar el evento Click del botón
-                }
             }
         }
     }

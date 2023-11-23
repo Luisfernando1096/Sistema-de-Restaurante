@@ -30,14 +30,13 @@ namespace Compras.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Compras));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label111 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotales = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbComprobante = new System.Windows.Forms.ComboBox();
@@ -62,11 +61,8 @@ namespace Compras.GUI
             this.txtProveedor = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.txtDescuento = new System.Windows.Forms.TextBox();
             this.txtIva = new System.Windows.Forms.TextBox();
-            this.txtPropina = new System.Windows.Forms.TextBox();
             this.txtSumas = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
@@ -96,6 +92,8 @@ namespace Compras.GUI
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAtras = new System.Windows.Forms.ToolStripButton();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
@@ -128,7 +126,7 @@ namespace Compras.GUI
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(504, 20);
+            this.label9.Location = new System.Drawing.Point(525, 16);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 20);
             this.label9.TabIndex = 51;
@@ -138,31 +136,21 @@ namespace Compras.GUI
             // 
             this.txtTotales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotales.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotales.Location = new System.Drawing.Point(508, 43);
+            this.txtTotales.Location = new System.Drawing.Point(529, 39);
             this.txtTotales.Name = "txtTotales";
             this.txtTotales.ReadOnly = true;
-            this.txtTotales.Size = new System.Drawing.Size(196, 26);
+            this.txtTotales.Size = new System.Drawing.Size(234, 26);
             this.txtTotales.TabIndex = 52;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(298, 20);
+            this.label5.Location = new System.Drawing.Point(178, 73);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 20);
             this.label5.TabIndex = 48;
             this.label5.Text = "Iva:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(298, 72);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 20);
-            this.label7.TabIndex = 46;
-            this.label7.Text = "Propina:";
             // 
             // label2
             // 
@@ -211,7 +199,7 @@ namespace Compras.GUI
             this.cmbComprobante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbComprobante.FormattingEnabled = true;
             this.cmbComprobante.Location = new System.Drawing.Point(544, 41);
-            this.cmbComprobante.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbComprobante.Margin = new System.Windows.Forms.Padding(2);
             this.cmbComprobante.Name = "cmbComprobante";
             this.cmbComprobante.Size = new System.Drawing.Size(129, 28);
             this.cmbComprobante.TabIndex = 66;
@@ -321,7 +309,7 @@ namespace Compras.GUI
             this.cmbTipoCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoCompra.FormattingEnabled = true;
             this.cmbTipoCompra.Location = new System.Drawing.Point(228, 43);
-            this.cmbTipoCompra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbTipoCompra.Margin = new System.Windows.Forms.Padding(2);
             this.cmbTipoCompra.Name = "cmbTipoCompra";
             this.cmbTipoCompra.Size = new System.Drawing.Size(156, 28);
             this.cmbTipoCompra.TabIndex = 55;
@@ -416,7 +404,7 @@ namespace Compras.GUI
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(39, 20);
+            this.label10.Location = new System.Drawing.Point(178, 16);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(58, 20);
             this.label10.TabIndex = 43;
@@ -424,54 +412,32 @@ namespace Compras.GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.txtDescuento);
             this.groupBox2.Controls.Add(this.txtIva);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.txtTotales);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtPropina);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.txtSumas);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(22, 421);
+            this.groupBox2.Location = new System.Drawing.Point(22, 502);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(909, 132);
             this.groupBox2.TabIndex = 49;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Otros Datos";
             // 
-            // label17
-            // 
-            this.label17.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(618, 53);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(32, 30);
-            this.label17.TabIndex = 70;
-            this.label17.Text = "%";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(294, 117);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 30);
-            this.label11.TabIndex = 69;
-            this.label11.Text = "%";
-            // 
             // txtDescuento
             // 
             this.txtDescuento.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtDescuento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescuento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescuento.Location = new System.Drawing.Point(43, 95);
+            this.txtDescuento.Location = new System.Drawing.Point(529, 96);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(234, 30);
+            this.txtDescuento.Size = new System.Drawing.Size(234, 26);
             this.txtDescuento.TabIndex = 68;
             this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
             this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescuento_KeyPress);
@@ -481,28 +447,18 @@ namespace Compras.GUI
             this.txtIva.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtIva.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIva.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIva.Location = new System.Drawing.Point(302, 43);
+            this.txtIva.Location = new System.Drawing.Point(182, 96);
             this.txtIva.Name = "txtIva";
-            this.txtIva.Size = new System.Drawing.Size(213, 30);
+            this.txtIva.Size = new System.Drawing.Size(202, 26);
             this.txtIva.TabIndex = 67;
             this.txtIva.TextChanged += new System.EventHandler(this.txtIva_TextChanged);
             this.txtIva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIva_KeyPress);
-            // 
-            // txtPropina
-            // 
-            this.txtPropina.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPropina.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPropina.Location = new System.Drawing.Point(302, 95);
-            this.txtPropina.Name = "txtPropina";
-            this.txtPropina.ReadOnly = true;
-            this.txtPropina.Size = new System.Drawing.Size(186, 26);
-            this.txtPropina.TabIndex = 47;
             // 
             // txtSumas
             // 
             this.txtSumas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSumas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumas.Location = new System.Drawing.Point(43, 43);
+            this.txtSumas.Location = new System.Drawing.Point(182, 39);
             this.txtSumas.Name = "txtSumas";
             this.txtSumas.ReadOnly = true;
             this.txtSumas.Size = new System.Drawing.Size(202, 26);
@@ -512,7 +468,7 @@ namespace Compras.GUI
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(39, 72);
+            this.label12.Location = new System.Drawing.Point(525, 73);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 20);
             this.label12.TabIndex = 41;
@@ -523,10 +479,9 @@ namespace Compras.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -544,15 +499,15 @@ namespace Compras.GUI
             this.iva,
             this.idComprobante,
             this.Tipo});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvDatos.Location = new System.Drawing.Point(30, 278);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvDatos.Location = new System.Drawing.Point(30, 228);
             this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -560,7 +515,7 @@ namespace Compras.GUI
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(909, 189);
+            this.dgvDatos.Size = new System.Drawing.Size(909, 267);
             this.dgvDatos.TabIndex = 46;
             // 
             // cantidad
@@ -810,15 +765,37 @@ namespace Compras.GUI
             this.btnAtras.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAtras.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(123, 59);
+            this.btnAtras.Size = new System.Drawing.Size(111, 59);
             this.btnAtras.Text = "Atras";
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(384, 94);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 30);
+            this.label17.TabIndex = 71;
+            this.label17.Text = "%";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(763, 94);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 30);
+            this.label7.TabIndex = 72;
+            this.label7.Text = "%";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Compras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(961, 609);
+            this.ClientSize = new System.Drawing.Size(961, 630);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label111);
@@ -847,7 +824,6 @@ namespace Compras.GUI
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox txtTotales;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscarProveedor;
@@ -887,9 +863,6 @@ namespace Compras.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         public System.Windows.Forms.TextBox txtDescuento;
         public System.Windows.Forms.TextBox txtIva;
-        public System.Windows.Forms.TextBox txtPropina;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
@@ -906,5 +879,7 @@ namespace Compras.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton btnAtras;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label17;
     }
 }

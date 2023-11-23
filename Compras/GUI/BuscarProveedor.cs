@@ -104,7 +104,12 @@ namespace Compras.GUI
             BuscarDatos();
         }
 
-        private void bntSelecionar_Click(object sender, EventArgs e)
+        private void dgvBuscar_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            BuscarDatos();
+        }
+
+        private void dgvBuscar_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvBuscar.SelectedRows.Count != 0)
             {
@@ -112,23 +117,6 @@ namespace Compras.GUI
                 Nombre = dgvBuscar.CurrentRow.Cells["nombre"].Value.ToString();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-        }
-
-        private void dgvBuscar_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            BuscarDatos();
-        }
-
-        private void BuscarProveedor_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (dgvBuscar.SelectedRows.Count != 0)
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
-                    bntSelecionar.PerformClick(); // Ejecutar el evento Click del botón
-                }
             }
         }
     }
