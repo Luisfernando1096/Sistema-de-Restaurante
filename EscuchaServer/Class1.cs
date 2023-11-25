@@ -257,6 +257,9 @@ public class Server
         oReporte.SetDataSource(grupoUnico);
         oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
         oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+        oReporte.SetParameterValue("Salon", grupoUnico[0].Salon);
+        oReporte.SetParameterValue("Mesero", grupoUnico[0].Mesero);
+        oReporte.SetParameterValue("Cliente", grupoUnico[0].Cliente);
 
         try
         {

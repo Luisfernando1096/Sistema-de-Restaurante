@@ -896,6 +896,9 @@ namespace TPV.GUI
             oReporte.SetDataSource(datos);
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+            oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value.ToString());
+            oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value.ToString());
+            oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value.ToString());
 
             if (oReporte != null)
             {
