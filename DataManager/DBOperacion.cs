@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -138,6 +139,83 @@ namespace DataManager
             return resultado;
         }
 
+        public TimeSpan Respaldo(string ruta)
+        {
+            Stopwatch stopwatch = new Stopwatch();
 
+            try
+            {
+                MySqlConnection conexion = new MySqlConnection();
+                MySqlCommand Comando = new MySqlCommand();
+                MySqlBackup bk = new MySqlBackup(Comando);
+
+                if (base.Conectar())
+                {
+                    Comando.Connection = base.conexion;
+
+                    // Inicia el cronómetro
+                    stopwatch.Start();
+
+                    try
+                    {
+                        bk.ExportToFile(ruta);
+                    }
+                    catch (Exception e)
+                    {
+                        String Mensaje = e.Message;
+                    }
+
+                    // Detiene el cronómetro
+                    stopwatch.Stop();
+
+                    base.Desconectar();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al generar el respaldo: {ex.Message}");
+                Console.WriteLine($"Trace de la Pila: {ex.StackTrace}");
+            }
+            return stopwatch.Elapsed;
+        }
+        public TimeSpan RestaurarRespaldo(string ruta)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+
+            try
+            {
+                MySqlConnection conexion = new MySqlConnection();
+                MySqlCommand comando = new MySqlCommand();
+                MySqlBackup bk = new MySqlBackup(comando);
+
+                if (base.Conectar())
+                {
+                    comando.Connection = base.conexion;
+
+                    // Inicia el cronómetro
+                    stopwatch.Start();
+
+                    try
+                    {
+                        bk.ImportFromFile(ruta);
+                    }
+                    catch (Exception e)
+                    {
+                        String Mensaje = e.Message;
+                    }
+
+                    // Detiene el cronómetro
+                    stopwatch.Stop();
+
+                    base.Desconectar();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al restaurar el respaldo: {ex.Message}");
+                Console.WriteLine($"Trace de la Pila: {ex.StackTrace}");
+            }
+            return stopwatch.Elapsed;
+        }
     }
 }

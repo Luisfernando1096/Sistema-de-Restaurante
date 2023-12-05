@@ -113,6 +113,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="DAT\DatComandaCompleta.xsc">
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
     </None>

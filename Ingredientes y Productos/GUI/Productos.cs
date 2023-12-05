@@ -458,6 +458,7 @@ namespace Ingredientes_y_Productos.GUI
                         }
                     }
                     LimpiarCamposProductos();
+                    BuscarDatosEnCombo();
                 }
                 else
                 {

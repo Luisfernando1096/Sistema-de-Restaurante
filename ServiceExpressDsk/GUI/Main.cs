@@ -532,5 +532,23 @@ namespace ServiceExpressDsk.GUI
             Personal.GUI.Permisos f = new Personal.GUI.Permisos();
             f.ShowDialog();
         }
+
+        private void toolStripButton32_Click(object sender, EventArgs e)
+        {
+            Respaldos.GUI.Respaldo f = new Respaldos.GUI.Respaldo();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton33_Click(object sender, EventArgs e)
+        {
+            Respaldos.GUI.Restauracion f = new Respaldos.GUI.Restauracion();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton34_Click(object sender, EventArgs e)
+        {
+            Respaldos.GUI.Vaciar f = new Respaldos.GUI.Vaciar();
+            f.ShowDialog();
+        }
     }
 }

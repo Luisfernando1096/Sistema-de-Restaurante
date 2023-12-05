@@ -132,6 +132,10 @@
       <Project>{df452496-63e3-4aa2-8e9a-09517b20fc50}</Project>
       <Name>Personal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Respaldos\Respaldos.csproj">
+      <Project>{26a30c48-46f8-4999-8dd1-ea94796ce507}</Project>
+      <Name>Respaldos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Salones\Salones.csproj">
       <Project>{435e58e5-86e9-4574-961d-899f8a47cb27}</Project>
       <Name>Salones</Name>
