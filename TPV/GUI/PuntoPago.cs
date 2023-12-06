@@ -699,6 +699,7 @@ namespace TPV.GUI
             if (!txtPagoRegistrar.Text.Equals(""))
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString())*(-1);
+                pedido.IdCuenta = 1;
                 ProcesarPago();
             }
             else
@@ -752,6 +753,7 @@ namespace TPV.GUI
             //Programar pago exacto
             pedido.Saldo = 0.00;
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
+            pedido.IdCuenta = 1;
             RegistrarPago();
             ActualizarCaja(true);
         }
@@ -766,6 +768,7 @@ namespace TPV.GUI
             //Programar pago cortesia
             pedido.Saldo = 0.00;
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
+            pedido.IdCuenta = 1;
             RegistrarPago();
         }
 
@@ -977,7 +980,33 @@ namespace TPV.GUI
                         MessageBox.Show("ERROR AL ACTUALIZAR");
                     }
                 }
-                
+
+                //Proceso para agregar el efectivo cancelado
+                DataTable cuenta = null;
+                Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
+                if (pagoTarjeta)
+                {
+                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
+                }
+                else if (!pagoCortesia)
+                {
+                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
+                }
+
+                if (cuenta != null)
+                {
+                    int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
+                    String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
+                    String numero = cuenta.Rows[0]["numero"].ToString();
+                    Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
+                    oCuenta.IdCuenta = idCuenta;
+                    oCuenta.NombreCuenta = nombreCuenta;
+                    oCuenta.Numero = numero;
+                    oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
+
+                    oCuenta.Actualizar();
+                }
+
                 //IRa tpv
                 comandaGestion.tpv = true;
                 comandaGestion.Close();

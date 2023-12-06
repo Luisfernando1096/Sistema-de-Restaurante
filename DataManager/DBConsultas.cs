@@ -1557,5 +1557,24 @@ namespace DataManager
             }
         }
 
+        public static DataTable ObtenerCuentaPorId(String idCuenta)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idCuenta, nombreCuenta, numero, saldo FROM cuenta
+                                    WHERE idCuenta = " + idCuenta + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
     }
 }
