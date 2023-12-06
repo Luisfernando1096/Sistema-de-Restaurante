@@ -717,7 +717,9 @@ namespace TPV.GUI
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
                 pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
+                pedido.IdCuenta = 2;
                 ProcesarPago();
+                //Registrar pago en cuenta
             }
             else
             {

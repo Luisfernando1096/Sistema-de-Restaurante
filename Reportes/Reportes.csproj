@@ -56,6 +56,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatTicket.cs">
+      <DependentUpon>DatTicket.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatTicket.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatTicket.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GUI\VisorComandaCompleta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +113,12 @@
       <DependentUpon>RepPagoTarjeta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepTicket.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepTicket.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
@@ -123,6 +137,17 @@
     </None>
     <None Include="DAT\DatComandaCompleta.xss">
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatTicket.xsc">
+      <DependentUpon>DatTicket.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatTicket.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatTicket.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatTicket.xss">
+      <DependentUpon>DatTicket.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +181,10 @@
     <EmbeddedResource Include="REP\RepPagoTarjeta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepPagoTarjeta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepTicket.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepTicket.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -724,6 +724,69 @@ namespace DataManager
             }
         }
 
+        public static DataTable ImprimirTicket(int idPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia;
+
+                sentencia = @"SELECT 
+                                pd.idPedido, 
+                                pd.cantidad, 
+                                pro.nombre, 
+                                pd.subTotal, 
+                                pe.fecha,
+                                pe.nombre as nombreMesero,
+                                pe.nombres as nombreCliente,
+                                pe.mesa,
+                                pe.descuento,
+                                pe.iva,
+                                pe.propina,
+                                pe.total,
+                                pe.totalPagar,
+                                CASE pe.idCuenta
+									WHEN 1 THEN 'Efectivo'
+									WHEN 2 THEN 'Tarjeta de crédito'
+									ELSE 'Otro'
+								END AS metodoPago
+                            FROM 
+                                pedido_detalle pd
+                            JOIN 
+                                producto pro ON pd.idProducto = pro.idProducto
+                            JOIN
+							    familia f ON pro.idFamilia = f.idFamilia
+                            JOIN 
+                                (SELECT pe.idCuenta, pe.idPedido, pe.descuento, pe.iva, pe.propina, pe.total, (pe.iva + pe.propina + pe.descuento + pe.total) as totalPagar, pe.idMesa, pe.fecha, em.nombres,
+                                cli.nombre, m.nombre as mesa
+							    FROM pedido pe
+							    JOIN 
+								    mesa m ON pe.idMesa = m.idMesa
+							    JOIN 
+                                salon s ON s.idSalon = m.idSalon
+							    LEFT JOIN
+								    empleado em ON em.idEmpleado = pe.idMesero
+							    LEFT JOIN
+								    cliente cli ON cli.idCliente = pe.idCliente
+								    WHERE pe.idPedido = " + idPedido + @"
+								    AND pe.cancelado = 1 
+                                    ORDER BY pe.fecha ASC
+                                    LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
+                            ORDER BY 
+                                pd.horaPedido DESC;";
+
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ProductosActivos()
         {
             try
