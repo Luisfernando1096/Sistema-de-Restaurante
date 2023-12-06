@@ -131,7 +131,7 @@ public class Server
 
                     if (ruta.StartsWith("/comandaCompleta"))
                     {
-                        MessageBox.Show("Generando comanda completa");
+                        //MessageBox.Show("Generando comanda completa");
                         // Procesar la solicitud solo si está en la ruta '/comanda'
                         Console.WriteLine($"Solicitud POST en la ruta '/comandaCompleta'.");
                         // Imprimir el contenido para ayudar a diagnosticar el problema

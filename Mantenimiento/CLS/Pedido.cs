@@ -243,12 +243,12 @@ namespace Mantenimiento.CLS
             string sentencia;
             if(nFactura != null)
             {
-                sentencia = @"UPDATE pedido SET total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + " " +
+                sentencia = @"UPDATE pedido SET total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + ", idCuenta = " + idCuenta + " " +
                                 "WHERE idPedido = " + idPedido + ";";
             }
             else
             {
-                sentencia = @"UPDATE pedido SET total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", saldo = " + saldo + " " +
+                sentencia = @"UPDATE pedido SET total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", saldo = " + saldo + ", idCuenta = " + idCuenta + " " +
                                 "WHERE idPedido = " + idPedido + ";";
             }
 

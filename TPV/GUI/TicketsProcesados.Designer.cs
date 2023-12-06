@@ -101,6 +101,7 @@ namespace TPV.GUI
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
             this.toolStripButton6.Text = "Imprimir";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // toolStripSeparator2
             // 
@@ -254,6 +255,7 @@ namespace TPV.GUI
             this.txtidPedido.Size = new System.Drawing.Size(224, 26);
             this.txtidPedido.TabIndex = 28;
             this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
+            this.txtidPedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtidPedido_KeyPress);
             // 
             // TicketsProcesados
             // 
