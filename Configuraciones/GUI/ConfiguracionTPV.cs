@@ -14,6 +14,7 @@ namespace Configuraciones.GUI
         private String SeleccionarSello = string.Empty;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         private string selectedImagePathFirma, selectedImagePathLogo, selectedImagePathSello;
         private string destinationPathFirma, destinationPathLogo, destinationPathSello;
         String seleccionLogoAnterior;
@@ -728,6 +729,7 @@ namespace Configuraciones.GUI
             {
                 MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarDatosOpTicket();
+                oTicket.ObtenerConfiguracion();
                 this.Focus();
             }
         }

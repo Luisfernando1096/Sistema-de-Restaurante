@@ -17,6 +17,7 @@ namespace TPV.GUI
         BindingSource datos = new BindingSource();
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         public TicketsProcesados()
         {
             InitializeComponent();
@@ -73,7 +74,7 @@ namespace TPV.GUI
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
             oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
-            oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
+            oReporte.SetParameterValue("Footer3", oTicket.Footer3);
 
 
             if (oReporte != null)

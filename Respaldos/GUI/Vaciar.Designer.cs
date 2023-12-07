@@ -55,7 +55,7 @@ namespace Respaldos.GUI
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1015, 57);
+            this.toolStrip1.Size = new System.Drawing.Size(1053, 57);
             this.toolStrip1.TabIndex = 15;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -86,7 +86,7 @@ namespace Respaldos.GUI
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(1015, 62);
+            this.groupBox3.Size = new System.Drawing.Size(1053, 62);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             // 
@@ -97,7 +97,7 @@ namespace Respaldos.GUI
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 57);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1015, 368);
+            this.panel1.Size = new System.Drawing.Size(1053, 368);
             this.panel1.TabIndex = 16;
             // 
             // progressBar1
@@ -114,7 +114,7 @@ namespace Respaldos.GUI
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1015, 221);
+            this.panel2.Size = new System.Drawing.Size(1053, 221);
             this.panel2.TabIndex = 0;
             // 
             // pictureBox1
@@ -140,10 +140,11 @@ namespace Respaldos.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1015, 487);
+            this.ClientSize = new System.Drawing.Size(1053, 487);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Vaciar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -57,7 +57,7 @@ namespace Respaldos.GUI
             this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(957, 60);
+            this.toolStrip1.Size = new System.Drawing.Size(1064, 60);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -95,7 +95,7 @@ namespace Respaldos.GUI
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(957, 62);
+            this.groupBox3.Size = new System.Drawing.Size(1064, 62);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             // 
@@ -106,7 +106,7 @@ namespace Respaldos.GUI
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(957, 391);
+            this.panel1.Size = new System.Drawing.Size(1064, 391);
             this.panel1.TabIndex = 12;
             // 
             // progressBar1
@@ -123,7 +123,7 @@ namespace Respaldos.GUI
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(957, 287);
+            this.panel2.Size = new System.Drawing.Size(1064, 287);
             this.panel2.TabIndex = 0;
             // 
             // pictureBox1
@@ -141,7 +141,7 @@ namespace Respaldos.GUI
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(285, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(614, 204);
+            this.label1.Size = new System.Drawing.Size(646, 214);
             this.label1.TabIndex = 0;
             this.label1.Text = resources.GetString("label1.Text");
             // 
@@ -149,7 +149,7 @@ namespace Respaldos.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 513);
+            this.ClientSize = new System.Drawing.Size(1064, 513);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox3);

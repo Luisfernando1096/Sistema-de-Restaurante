@@ -36,6 +36,13 @@ namespace Configuraciones.GUI
             this.checkAutorizacion = new System.Windows.Forms.CheckBox();
             this.checkMuchosPro = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btt4 = new System.Windows.Forms.Button();
+            this.btt3 = new System.Windows.Forms.Button();
+            this.btt2 = new System.Windows.Forms.Button();
+            this.TxtInformes = new System.Windows.Forms.TextBox();
+            this.TxtFacturas = new System.Windows.Forms.TextBox();
+            this.TxtComandaTick = new System.Windows.Forms.TextBox();
+            this.txtComandas = new System.Windows.Forms.TextBox();
             this.btt1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -160,13 +167,6 @@ namespace Configuraciones.GUI
             this.btnGuardarOpT = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.txtComandas = new System.Windows.Forms.TextBox();
-            this.TxtComandaTick = new System.Windows.Forms.TextBox();
-            this.TxtFacturas = new System.Windows.Forms.TextBox();
-            this.TxtInformes = new System.Windows.Forms.TextBox();
-            this.btt2 = new System.Windows.Forms.Button();
-            this.btt3 = new System.Windows.Forms.Button();
-            this.btt4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -301,6 +301,80 @@ namespace Configuraciones.GUI
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Configuracion de impresiones";
+            // 
+            // btt4
+            // 
+            this.btt4.Location = new System.Drawing.Point(533, 148);
+            this.btt4.Name = "btt4";
+            this.btt4.Size = new System.Drawing.Size(101, 32);
+            this.btt4.TabIndex = 51;
+            this.btt4.Text = "Selecionar";
+            this.btt4.UseVisualStyleBackColor = true;
+            this.btt4.Click += new System.EventHandler(this.btt4_Click);
+            // 
+            // btt3
+            // 
+            this.btt3.Location = new System.Drawing.Point(533, 107);
+            this.btt3.Name = "btt3";
+            this.btt3.Size = new System.Drawing.Size(101, 32);
+            this.btt3.TabIndex = 50;
+            this.btt3.Text = "Selecionar";
+            this.btt3.UseVisualStyleBackColor = true;
+            this.btt3.Click += new System.EventHandler(this.btt3_Click);
+            // 
+            // btt2
+            // 
+            this.btt2.Location = new System.Drawing.Point(533, 69);
+            this.btt2.Name = "btt2";
+            this.btt2.Size = new System.Drawing.Size(101, 32);
+            this.btt2.TabIndex = 49;
+            this.btt2.Text = "Selecionar";
+            this.btt2.UseVisualStyleBackColor = true;
+            this.btt2.Click += new System.EventHandler(this.btt2_Click);
+            // 
+            // TxtInformes
+            // 
+            this.TxtInformes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtInformes.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtInformes.Location = new System.Drawing.Point(202, 150);
+            this.TxtInformes.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtInformes.Name = "TxtInformes";
+            this.TxtInformes.ReadOnly = true;
+            this.TxtInformes.Size = new System.Drawing.Size(307, 30);
+            this.TxtInformes.TabIndex = 48;
+            // 
+            // TxtFacturas
+            // 
+            this.TxtFacturas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtFacturas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFacturas.Location = new System.Drawing.Point(202, 110);
+            this.TxtFacturas.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtFacturas.Name = "TxtFacturas";
+            this.TxtFacturas.ReadOnly = true;
+            this.TxtFacturas.Size = new System.Drawing.Size(307, 30);
+            this.TxtFacturas.TabIndex = 47;
+            // 
+            // TxtComandaTick
+            // 
+            this.TxtComandaTick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtComandaTick.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtComandaTick.Location = new System.Drawing.Point(202, 71);
+            this.TxtComandaTick.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtComandaTick.Name = "TxtComandaTick";
+            this.TxtComandaTick.ReadOnly = true;
+            this.TxtComandaTick.Size = new System.Drawing.Size(307, 30);
+            this.TxtComandaTick.TabIndex = 46;
+            // 
+            // txtComandas
+            // 
+            this.txtComandas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtComandas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtComandas.Location = new System.Drawing.Point(202, 33);
+            this.txtComandas.Margin = new System.Windows.Forms.Padding(4);
+            this.txtComandas.Name = "txtComandas";
+            this.txtComandas.ReadOnly = true;
+            this.txtComandas.Size = new System.Drawing.Size(307, 30);
+            this.txtComandas.TabIndex = 45;
             // 
             // btt1
             // 
@@ -902,11 +976,11 @@ namespace Configuraciones.GUI
             this.groupBox8.Controls.Add(this.label22);
             this.groupBox8.Controls.Add(this.label23);
             this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox8.Location = new System.Drawing.Point(105, 20);
+            this.groupBox8.Location = new System.Drawing.Point(86, 20);
             this.groupBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox8.Size = new System.Drawing.Size(1175, 619);
+            this.groupBox8.Size = new System.Drawing.Size(1163, 590);
             this.groupBox8.TabIndex = 40;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Configuracion datos de la Empresa";
@@ -953,7 +1027,7 @@ namespace Configuraciones.GUI
             this.pBoxLogo.Location = new System.Drawing.Point(261, 258);
             this.pBoxLogo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pBoxLogo.Name = "pBoxLogo";
-            this.pBoxLogo.Size = new System.Drawing.Size(213, 161);
+            this.pBoxLogo.Size = new System.Drawing.Size(201, 161);
             this.pBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBoxLogo.TabIndex = 45;
             this.pBoxLogo.TabStop = false;
@@ -1272,7 +1346,7 @@ namespace Configuraciones.GUI
             this.groupBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox9.Size = new System.Drawing.Size(1164, 615);
+            this.groupBox9.Size = new System.Drawing.Size(1164, 590);
             this.groupBox9.TabIndex = 59;
             this.groupBox9.TabStop = false;
             // 
@@ -1616,80 +1690,6 @@ namespace Configuraciones.GUI
             this.toolStripSeparator6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 59);
-            // 
-            // txtComandas
-            // 
-            this.txtComandas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtComandas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComandas.Location = new System.Drawing.Point(202, 33);
-            this.txtComandas.Margin = new System.Windows.Forms.Padding(4);
-            this.txtComandas.Name = "txtComandas";
-            this.txtComandas.ReadOnly = true;
-            this.txtComandas.Size = new System.Drawing.Size(307, 30);
-            this.txtComandas.TabIndex = 45;
-            // 
-            // TxtComandaTick
-            // 
-            this.TxtComandaTick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtComandaTick.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtComandaTick.Location = new System.Drawing.Point(202, 71);
-            this.TxtComandaTick.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtComandaTick.Name = "TxtComandaTick";
-            this.TxtComandaTick.ReadOnly = true;
-            this.TxtComandaTick.Size = new System.Drawing.Size(307, 30);
-            this.TxtComandaTick.TabIndex = 46;
-            // 
-            // TxtFacturas
-            // 
-            this.TxtFacturas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtFacturas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFacturas.Location = new System.Drawing.Point(202, 110);
-            this.TxtFacturas.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFacturas.Name = "TxtFacturas";
-            this.TxtFacturas.ReadOnly = true;
-            this.TxtFacturas.Size = new System.Drawing.Size(307, 30);
-            this.TxtFacturas.TabIndex = 47;
-            // 
-            // TxtInformes
-            // 
-            this.TxtInformes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtInformes.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtInformes.Location = new System.Drawing.Point(202, 150);
-            this.TxtInformes.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtInformes.Name = "TxtInformes";
-            this.TxtInformes.ReadOnly = true;
-            this.TxtInformes.Size = new System.Drawing.Size(307, 30);
-            this.TxtInformes.TabIndex = 48;
-            // 
-            // btt2
-            // 
-            this.btt2.Location = new System.Drawing.Point(533, 69);
-            this.btt2.Name = "btt2";
-            this.btt2.Size = new System.Drawing.Size(101, 32);
-            this.btt2.TabIndex = 49;
-            this.btt2.Text = "Selecionar";
-            this.btt2.UseVisualStyleBackColor = true;
-            this.btt2.Click += new System.EventHandler(this.btt2_Click);
-            // 
-            // btt3
-            // 
-            this.btt3.Location = new System.Drawing.Point(533, 107);
-            this.btt3.Name = "btt3";
-            this.btt3.Size = new System.Drawing.Size(101, 32);
-            this.btt3.TabIndex = 50;
-            this.btt3.Text = "Selecionar";
-            this.btt3.UseVisualStyleBackColor = true;
-            this.btt3.Click += new System.EventHandler(this.btt3_Click);
-            // 
-            // btt4
-            // 
-            this.btt4.Location = new System.Drawing.Point(533, 148);
-            this.btt4.Name = "btt4";
-            this.btt4.Size = new System.Drawing.Size(101, 32);
-            this.btt4.TabIndex = 51;
-            this.btt4.Text = "Selecionar";
-            this.btt4.UseVisualStyleBackColor = true;
-            this.btt4.Click += new System.EventHandler(this.btt4_Click);
             // 
             // ConfiguracionTPV
             // 

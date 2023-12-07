@@ -34,8 +34,8 @@ namespace Respaldos.GUI
             this.bntRespaldo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bntRestaurar = new System.Windows.Forms.ToolStripButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -89,6 +89,16 @@ namespace Respaldos.GUI
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // bntRestaurar
+            // 
+            this.bntRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("bntRestaurar.Image")));
+            this.bntRestaurar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.bntRestaurar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bntRestaurar.Name = "bntRestaurar";
+            this.bntRestaurar.Size = new System.Drawing.Size(168, 57);
+            this.bntRestaurar.Text = "Restaurar";
+            this.bntRestaurar.Click += new System.EventHandler(this.bntRestaurar_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -99,16 +109,6 @@ namespace Respaldos.GUI
             this.groupBox3.Size = new System.Drawing.Size(1099, 62);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
-            // 
-            // bntRestaurar
-            // 
-            this.bntRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("bntRestaurar.Image")));
-            this.bntRestaurar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.bntRestaurar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bntRestaurar.Name = "bntRestaurar";
-            this.bntRestaurar.Size = new System.Drawing.Size(168, 57);
-            this.bntRestaurar.Text = "Restaurar";
-            this.bntRestaurar.Click += new System.EventHandler(this.bntRestaurar_Click);
             // 
             // panel1
             // 
@@ -166,6 +166,7 @@ namespace Respaldos.GUI
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Restauracion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

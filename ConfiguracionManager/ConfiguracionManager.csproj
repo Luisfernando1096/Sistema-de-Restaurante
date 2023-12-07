@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CLS\Configuracion.cs" />
     <Compile Include="CLS\Empresa.cs" />
+    <Compile Include="CLS\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
