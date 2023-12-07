@@ -48,10 +48,15 @@ namespace Configuraciones.GUI
                     txtImpuestoVIP.Text = oConfiguracion.MesaVIP.ToString();
                     txtMultiSe.Text = oConfiguracion.NumSesiones.ToString();
 
+
+                    txtComandas.Text = oConfiguracion.PrinterComanda.ToString();
+                    TxtFacturas.Text = oConfiguracion.PrinterFactura.ToString();
+                    TxtInformes.Text = oConfiguracion.PrinterInformes.ToString();
+
                     // Configura los ComboBox para mostrar la opción que coincide con el valor del campo en la base de datos
-                    cmbComandas.SelectedIndex = cmbComandas.FindStringExact((oConfiguracion.PrinterComanda).ToString());
-                    cmbFacturas.SelectedIndex = cmbFacturas.FindStringExact((oConfiguracion.PrinterFactura).ToString());
-                    cmbInformes.SelectedIndex = cmbInformes.FindStringExact((oConfiguracion.PrinterInformes).ToString());
+                    //cmbComandas.SelectedIndex = cmbComandas.FindStringExact((oConfiguracion.PrinterComanda).ToString());
+                    //cmbFacturas.SelectedIndex = cmbFacturas.FindStringExact((oConfiguracion.PrinterFactura).ToString());
+                    //cmbInformes.SelectedIndex = cmbInformes.FindStringExact((oConfiguracion.PrinterInformes).ToString());
 
                 }
                 else
@@ -276,15 +281,15 @@ namespace Configuraciones.GUI
         private void ConfiguracionTPV_Load(object sender, EventArgs e)
         {
             // Crea una lista de impresoras
-            List<string> lstImpresoras = new List<string>();
-            lstImpresoras.Add("Microsoft Print to PDF");
-            lstImpresoras.Add("Microsoft XPS Document Writer");
+            //List<string> lstImpresoras = new List<string>();
+            //lstImpresoras.Add("Microsoft Print to PDF");
+            //lstImpresoras.Add("Microsoft XPS Document Writer");
 
-            // Asigna la lista de impresoras a los ComboBoxes
-            cmbComandas.Items.AddRange(lstImpresoras.ToArray());
-            cmbComandaTick.Items.AddRange(lstImpresoras.ToArray());
-            cmbFacturas.Items.AddRange(lstImpresoras.ToArray());
-            cmbInformes.Items.AddRange(lstImpresoras.ToArray());
+            //// Asigna la lista de impresoras a los ComboBoxes
+            //cmbComandas.Items.AddRange(lstImpresoras.ToArray());
+            //cmbComandaTick.Items.AddRange(lstImpresoras.ToArray());
+            //cmbFacturas.Items.AddRange(lstImpresoras.ToArray());
+            //cmbInformes.Items.AddRange(lstImpresoras.ToArray());
 
             CargarDatosConfig();
             CargarDatosEmpresa();
@@ -392,17 +397,30 @@ namespace Configuraciones.GUI
                     config.MuchosProductos = 0;
                 }
 
-                if (cmbComandas.SelectedIndex != -1)
+                //if (cmbComandas.SelectedIndex != -1)
+                //{
+                //    config.PrinterComanda = cmbComandas.Text;
+                //}
+                //if (cmbInformes.SelectedIndex != -1)
+                //{
+                //    config.PrinterInformes = cmbInformes.Text;
+                //}
+                //if (cmbFacturas.SelectedIndex != -1)
+                //{
+                //    config.PrinterFactura = cmbFacturas.Text;
+                //}
+
+                if (txtComandas.Text != string.Empty)
                 {
-                    config.PrinterComanda = cmbComandas.Text;
+                    config.PrinterComanda = txtComandas.Text;
                 }
-                if (cmbInformes.SelectedIndex != -1)
+                if (TxtInformes.Text != string.Empty)
                 {
-                    config.PrinterInformes = cmbInformes.Text;
+                    config.PrinterInformes = TxtInformes.Text;
                 }
-                if (cmbFacturas.SelectedIndex != -1)
+                if (TxtFacturas.Text != string.Empty)
                 {
-                    config.PrinterFactura = cmbFacturas.Text;
+                    config.PrinterFactura = TxtFacturas.Text;
                 }
 
                 if (config.Actualizar())
@@ -860,6 +878,126 @@ namespace Configuraciones.GUI
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true; // Evita que se ingrese el segundo punto decimal
+            }
+        }
+
+        private void btt1_Click(object sender, EventArgs e)
+        {
+            // Crea un cuadro de diálogo de impresión
+            PrintDialog printDialog = new PrintDialog();
+
+            // Habilita la opción para mostrar impresoras de red
+            printDialog.ShowNetwork = true;
+
+            // Muestra el cuadro de diálogo de impresión
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Actualiza el nombre de la impresora en el TextBox
+                txtComandas.Text = printDialog.PrinterSettings.PrinterName;
+
+                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
+                oConfiguracion.PrinterComanda = txtComandas.Text;
+
+                // Puedes imprimir el informe si es necesario
+                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
+
+                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                //MessageBox.Show($"Impresora seleccionada: {txtComandas.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // El usuario canceló la selección de la impresora
+                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btt2_Click(object sender, EventArgs e)
+        {
+            // Crea un cuadro de diálogo de impresión
+            PrintDialog printDialog = new PrintDialog();
+
+            // Habilita la opción para mostrar impresoras de red
+            printDialog.ShowNetwork = true;
+
+            // Muestra el cuadro de diálogo de impresión
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Actualiza el nombre de la impresora en el TextBox
+                TxtComandaTick.Text = printDialog.PrinterSettings.PrinterName;
+
+                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
+                oConfiguracion.PrinterComanda = TxtComandaTick.Text;
+
+                // Puedes imprimir el informe si es necesario
+                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
+
+                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                //MessageBox.Show($"Impresora seleccionada: {TxtComandaTick.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // El usuario canceló la selección de la impresora
+                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btt3_Click(object sender, EventArgs e)
+        {
+            // Crea un cuadro de diálogo de impresión
+            PrintDialog printDialog = new PrintDialog();
+
+            // Habilita la opción para mostrar impresoras de red
+            printDialog.ShowNetwork = true;
+
+            // Muestra el cuadro de diálogo de impresión
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Actualiza el nombre de la impresora en el TextBox
+                TxtFacturas.Text = printDialog.PrinterSettings.PrinterName;
+
+                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
+                oConfiguracion.PrinterComanda = TxtFacturas.Text;
+
+                // Puedes imprimir el informe si es necesario
+                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
+
+                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                //MessageBox.Show($"Impresora seleccionada: {TxtFacturas.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // El usuario canceló la selección de la impresora
+                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btt4_Click(object sender, EventArgs e)
+        {
+            // Crea un cuadro de diálogo de impresión
+            PrintDialog printDialog = new PrintDialog();
+
+            // Habilita la opción para mostrar impresoras de red
+            printDialog.ShowNetwork = true;
+
+            // Muestra el cuadro de diálogo de impresión
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Actualiza el nombre de la impresora en el TextBox
+                TxtInformes.Text = printDialog.PrinterSettings.PrinterName;
+
+                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
+                oConfiguracion.PrinterComanda = TxtInformes.Text;
+
+                // Puedes imprimir el informe si es necesario
+                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
+
+                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                //MessageBox.Show($"Impresora seleccionada: {TxtInformes.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // El usuario canceló la selección de la impresora
+                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
