@@ -88,7 +88,7 @@ namespace Finanzas.GUI
             caja.FechaApertura = dtpFecha.Text;
             caja.SaldoInicial = Double.Parse(txtSaldoInicial.Text);
             caja.Efectivo = 0;
-            caja.Saldo = 0;
+            caja.Saldo = Double.Parse(txtSaldoInicial.Text);
             
             if (txtIdCaja.Text.Equals(""))
             {

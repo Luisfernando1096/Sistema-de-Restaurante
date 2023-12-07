@@ -78,18 +78,29 @@ namespace TPV.GUI
 
             if (oReporte != null)
             {
-                // Configurar la ruta de destino en la impresora virtual XPS
-                PrinterSettings settings = new PrinterSettings
+                try
                 {
-                    PrinterName = oConfiguracion.PrinterComanda // Nombre de la impresora virtual XPS
-                };
+                    // Imprimir el informe en la impresora seleccionada
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda
+                    };
 
-                // Imprimir el informe en la impresora virtual XPS
-                oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                oReporte.PrintToPrinter(1, false, 0, 0);
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
 
-                MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                    this.Invoke((MethodInvoker)delegate {
+                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    this.Invoke((MethodInvoker)delegate {
+                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
             }
         }
 

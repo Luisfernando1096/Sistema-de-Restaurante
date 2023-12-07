@@ -45,6 +45,20 @@ namespace TPV.GUI
             this.btnComanda = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,22 +75,8 @@ namespace TPV.GUI
             this.btnPagar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelComanda = new System.Windows.Forms.Panel();
-            this.btnProducto = new System.Windows.Forms.Button();
             this.flpProductos = new System.Windows.Forms.FlowLayoutPanel();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cocinando = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnProducto = new System.Windows.Forms.Button();
             this.flpFamilias.SuspendLayout();
             this.flpAcciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
@@ -290,6 +290,143 @@ namespace TPV.GUI
             this.dgvDatos.Size = new System.Drawing.Size(362, 480);
             this.dgvDatos.TabIndex = 5;
             // 
+            // idDetalle
+            // 
+            this.idDetalle.DataPropertyName = "idDetalle";
+            this.idDetalle.HeaderText = "ID";
+            this.idDetalle.MinimumWidth = 6;
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            this.idDetalle.Width = 125;
+            // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.MinimumWidth = 6;
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            this.cantidad.Width = 60;
+            // 
+            // idPedido
+            // 
+            this.idPedido.DataPropertyName = "idPedido";
+            this.idPedido.HeaderText = "Id Pedido";
+            this.idPedido.MinimumWidth = 6;
+            this.idPedido.Name = "idPedido";
+            this.idPedido.ReadOnly = true;
+            this.idPedido.Visible = false;
+            this.idPedido.Width = 125;
+            // 
+            // idProducto
+            // 
+            this.idProducto.DataPropertyName = "idProducto";
+            this.idProducto.HeaderText = "Id Producto";
+            this.idProducto.MinimumWidth = 6;
+            this.idProducto.Name = "idProducto";
+            this.idProducto.ReadOnly = true;
+            this.idProducto.Visible = false;
+            this.idProducto.Width = 125;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            this.precio.HeaderText = "Precio";
+            this.precio.MinimumWidth = 6;
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.Visible = false;
+            this.precio.Width = 125;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.MinimumWidth = 6;
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            this.fecha.Visible = false;
+            this.fecha.Width = 125;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Producto";
+            this.nombre.MinimumWidth = 6;
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // subTotal
+            // 
+            this.subTotal.DataPropertyName = "subTotal";
+            this.subTotal.HeaderText = "Sub Total";
+            this.subTotal.MinimumWidth = 6;
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 125;
+            // 
+            // grupo
+            // 
+            this.grupo.DataPropertyName = "grupo";
+            this.grupo.HeaderText = "Grupo Impresion";
+            this.grupo.MinimumWidth = 6;
+            this.grupo.Name = "grupo";
+            this.grupo.ReadOnly = true;
+            this.grupo.Visible = false;
+            this.grupo.Width = 125;
+            // 
+            // cocinando
+            // 
+            this.cocinando.DataPropertyName = "cocinando";
+            this.cocinando.HeaderText = "Cocinando";
+            this.cocinando.MinimumWidth = 6;
+            this.cocinando.Name = "cocinando";
+            this.cocinando.ReadOnly = true;
+            this.cocinando.Visible = false;
+            this.cocinando.Width = 125;
+            // 
+            // nombreMesero
+            // 
+            this.nombreMesero.DataPropertyName = "nombreMesero";
+            this.nombreMesero.HeaderText = "Mesero";
+            this.nombreMesero.MinimumWidth = 6;
+            this.nombreMesero.Name = "nombreMesero";
+            this.nombreMesero.ReadOnly = true;
+            this.nombreMesero.Visible = false;
+            this.nombreMesero.Width = 125;
+            // 
+            // nombres
+            // 
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Cliente";
+            this.nombres.MinimumWidth = 6;
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            this.nombres.Visible = false;
+            this.nombres.Width = 125;
+            // 
+            // mesa
+            // 
+            this.mesa.DataPropertyName = "mesa";
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.MinimumWidth = 6;
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            this.mesa.Visible = false;
+            this.mesa.Width = 125;
+            // 
+            // salon
+            // 
+            this.salon.DataPropertyName = "salon";
+            this.salon.HeaderText = "Salon";
+            this.salon.MinimumWidth = 6;
+            this.salon.Name = "salon";
+            this.salon.ReadOnly = true;
+            this.salon.Visible = false;
+            this.salon.Width = 125;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -471,6 +608,15 @@ namespace TPV.GUI
             this.panelComanda.Size = new System.Drawing.Size(1261, 748);
             this.panelComanda.TabIndex = 29;
             // 
+            // flpProductos
+            // 
+            this.flpProductos.AutoScroll = true;
+            this.flpProductos.Controls.Add(this.btnProducto);
+            this.flpProductos.Location = new System.Drawing.Point(702, 60);
+            this.flpProductos.Name = "flpProductos";
+            this.flpProductos.Size = new System.Drawing.Size(547, 580);
+            this.flpProductos.TabIndex = 30;
+            // 
             // btnProducto
             // 
             this.btnProducto.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -481,152 +627,6 @@ namespace TPV.GUI
             this.btnProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnProducto.UseVisualStyleBackColor = true;
             this.btnProducto.Visible = false;
-            // 
-            // flpProductos
-            // 
-            this.flpProductos.AutoScroll = true;
-            this.flpProductos.Controls.Add(this.btnProducto);
-            this.flpProductos.Location = new System.Drawing.Point(702, 60);
-            this.flpProductos.Name = "flpProductos";
-            this.flpProductos.Size = new System.Drawing.Size(547, 580);
-            this.flpProductos.TabIndex = 30;
-            // 
-            // idDetalle
-            // 
-            this.idDetalle.DataPropertyName = "idDetalle";
-            this.idDetalle.HeaderText = "ID";
-            this.idDetalle.MinimumWidth = 6;
-            this.idDetalle.Name = "idDetalle";
-            this.idDetalle.ReadOnly = true;
-            this.idDetalle.Visible = false;
-            this.idDetalle.Width = 125;
-            // 
-            // cantidad
-            // 
-            this.cantidad.DataPropertyName = "cantidad";
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.MinimumWidth = 6;
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            this.cantidad.Width = 60;
-            // 
-            // idPedido
-            // 
-            this.idPedido.DataPropertyName = "idPedido";
-            this.idPedido.HeaderText = "Id Pedido";
-            this.idPedido.MinimumWidth = 6;
-            this.idPedido.Name = "idPedido";
-            this.idPedido.ReadOnly = true;
-            this.idPedido.Visible = false;
-            this.idPedido.Width = 125;
-            // 
-            // idProducto
-            // 
-            this.idProducto.DataPropertyName = "idProducto";
-            this.idProducto.HeaderText = "Id Producto";
-            this.idProducto.MinimumWidth = 6;
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
-            this.idProducto.Width = 125;
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            this.precio.HeaderText = "Precio";
-            this.precio.MinimumWidth = 6;
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            this.precio.Visible = false;
-            this.precio.Width = 125;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.MinimumWidth = 6;
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
-            this.fecha.Visible = false;
-            this.fecha.Width = 125;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Producto";
-            this.nombre.MinimumWidth = 6;
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // subTotal
-            // 
-            this.subTotal.DataPropertyName = "subTotal";
-            this.subTotal.HeaderText = "Sub Total";
-            this.subTotal.MinimumWidth = 6;
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            this.subTotal.Width = 125;
-            // 
-            // grupo
-            // 
-            this.grupo.DataPropertyName = "grupo";
-            this.grupo.HeaderText = "Grupo Impresion";
-            this.grupo.MinimumWidth = 6;
-            this.grupo.Name = "grupo";
-            this.grupo.ReadOnly = true;
-            this.grupo.Visible = false;
-            this.grupo.Width = 125;
-            // 
-            // cocinando
-            // 
-            this.cocinando.DataPropertyName = "cocinando";
-            this.cocinando.HeaderText = "Cocinando";
-            this.cocinando.MinimumWidth = 6;
-            this.cocinando.Name = "cocinando";
-            this.cocinando.ReadOnly = true;
-            this.cocinando.Visible = false;
-            this.cocinando.Width = 125;
-            // 
-            // nombreMesero
-            // 
-            this.nombreMesero.DataPropertyName = "nombreMesero";
-            this.nombreMesero.HeaderText = "Mesero";
-            this.nombreMesero.MinimumWidth = 6;
-            this.nombreMesero.Name = "nombreMesero";
-            this.nombreMesero.ReadOnly = true;
-            this.nombreMesero.Visible = false;
-            this.nombreMesero.Width = 125;
-            // 
-            // nombres
-            // 
-            this.nombres.DataPropertyName = "nombres";
-            this.nombres.HeaderText = "Cliente";
-            this.nombres.MinimumWidth = 6;
-            this.nombres.Name = "nombres";
-            this.nombres.ReadOnly = true;
-            this.nombres.Visible = false;
-            this.nombres.Width = 125;
-            // 
-            // mesa
-            // 
-            this.mesa.DataPropertyName = "mesa";
-            this.mesa.HeaderText = "Mesa";
-            this.mesa.MinimumWidth = 6;
-            this.mesa.Name = "mesa";
-            this.mesa.ReadOnly = true;
-            this.mesa.Visible = false;
-            this.mesa.Width = 125;
-            // 
-            // salon
-            // 
-            this.salon.DataPropertyName = "salon";
-            this.salon.HeaderText = "Salon";
-            this.salon.MinimumWidth = 6;
-            this.salon.Name = "salon";
-            this.salon.ReadOnly = true;
-            this.salon.Visible = false;
-            this.salon.Width = 125;
             // 
             // ComandaGestion
             // 

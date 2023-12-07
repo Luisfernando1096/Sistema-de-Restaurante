@@ -563,8 +563,6 @@ namespace TPV.GUI
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
-            ImprimirComandaActual();
-            lstDetalle.Clear();
             this.Hide();
             PuntoPago f = new PuntoPago(this);
 
@@ -892,29 +890,39 @@ namespace TPV.GUI
 
         private void GenerarComanda(ReportClass oReporte)
         {
-            DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-            oReporte.SetDataSource(datos);
-            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-            oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-            oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value.ToString());
-            oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value.ToString());
-            oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value.ToString());
-
-            if (oReporte != null)
+            try
             {
-                // Configurar la ruta de destino en la impresora virtual XPS
+                // Código para obtener datos y configurar parámetros del informe
+                DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                oReporte.SetDataSource(datos);
+                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+                oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value.ToString());
+                oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value.ToString());
+                oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value.ToString());
+
+                // Imprimir el informe en la impresora seleccionada
                 PrinterSettings settings = new PrinterSettings
                 {
-                    PrinterName = oConfiguracion.PrinterComanda // Nombre de la impresora virtual XPS
+                    PrinterName = oConfiguracion.PrinterComanda
                 };
 
-                // Imprimir el informe en la impresora virtual XPS
                 oReporte.PrintOptions.PrinterName = settings.PrinterName;
                 oReporte.PrintToPrinter(1, false, 0, 0);
 
-                MessageBox.Show($"Finalizado con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                this.Invoke((MethodInvoker)delegate {
+                    MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                });
             }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                this.Invoke((MethodInvoker)delegate {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
+            }
+
         }
 
         private void GenerarComandaParcial(ReportClass oReporte)
@@ -964,21 +972,32 @@ namespace TPV.GUI
 
                 if (oReporte != null)
                 {
-                    // Configurar la ruta de destino en la impresora virtual XPS
-                    PrinterSettings settings = new PrinterSettings
+                    try
                     {
-                        PrinterName = oConfiguracion.PrinterComanda // Nombre de la impresora virtual XPS
-                    };
+                         // Imprimir el informe en la impresora seleccionada
+                        PrinterSettings settings = new PrinterSettings
+                        {
+                            PrinterName = oConfiguracion.PrinterComanda
+                        };
 
-                    // Imprimir el informe en la impresora virtual XPS
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
+                        oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                        oReporte.PrintToPrinter(1, false, 0, 0);
 
-                    MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                        this.Invoke((MethodInvoker)delegate {
+                            MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                        this.Invoke((MethodInvoker)delegate {
+                            MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        });
+                    }
                 }
             }
 
         }
-
     }
 }
