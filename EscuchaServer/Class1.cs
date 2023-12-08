@@ -229,15 +229,25 @@ public class Server
 
             if (oReporte != null)
             {
-                // Configurar la ruta de destino en la impresora virtual XPS
-                PrinterSettings settings = new PrinterSettings();
-                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+                try
+                {
+                    // Imprimir el informe en la impresora seleccionada
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda
+                    };
 
-                // Imprimir el informe en la impresora virtual XPS
-                oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                oReporte.PrintToPrinter(1, false, 0, 0);
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
 
-                MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Muestra un mensaje de éxito
+                    MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
@@ -265,15 +275,25 @@ public class Server
         {
             if (oReporte != null)
             {
-                // Configurar la ruta de destino en la impresora virtual XPS
-                PrinterSettings settings = new PrinterSettings();
-                settings.PrinterName = oConfiguracion.PrinterComanda; // Nombre de la impresora virtual XPS
+                try
+                {
+                    // Imprimir el informe en la impresora seleccionada
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda
+                    };
 
-                // Imprimir el informe en la impresora virtual XPS
-                oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                oReporte.PrintToPrinter(1, false, 0, 0);
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
 
-                MessageBox.Show("Informe finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Muestra un mensaje de éxito
+                    MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         catch (Exception ex)

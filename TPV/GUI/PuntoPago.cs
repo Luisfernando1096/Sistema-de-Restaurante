@@ -19,6 +19,7 @@ namespace TPV.GUI
         BindingSource datos = new BindingSource();
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         DataTable actualFactura = DataManager.DBConsultas.ObtenerTirajeActual();
         private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
@@ -1102,7 +1103,14 @@ namespace TPV.GUI
             oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
             oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
             oReporte.SetParameterValue("TotalPagar", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
-            oReporte.SetParameterValue("Footer3", "Gracias por tu visita");
+            if (Boolean.Parse(oTicket.ShowSaludo))
+            {
+                oReporte.SetParameterValue("Footer3", oTicket.Footer3);
+            }
+            else
+            {
+                oReporte.SetParameterValue("Footer3", "");
+            }
             oReporte.SetParameterValue("Pago", "$" + Double.Parse(txtPagoRegistrar.Text).ToString("0.00"));
             oReporte.SetParameterValue("Cambio", lblCambio.Text);
             oReporte.SetParameterValue("TipoPago", "Efectivo");

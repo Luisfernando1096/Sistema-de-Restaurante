@@ -35,8 +35,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscuchaServer", "EscuchaSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Respaldos", "Respaldos\Respaldos.csproj", "{26A30C48-46F8-4999-8DD1-EA94796CE507}"
 EndProject
-Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "Setup", "Setup\Setup.aiproj", "{798CFB62-216E-4077-9B7C-D376C099F09A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,12 +138,6 @@ Global
 		{26A30C48-46F8-4999-8DD1-EA94796CE507}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{26A30C48-46F8-4999-8DD1-EA94796CE507}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26A30C48-46F8-4999-8DD1-EA94796CE507}.Release|Any CPU.Build.0 = Release|Any CPU
-		{798CFB62-216E-4077-9B7C-D376C099F09A}.Debug|Any CPU.ActiveCfg = DefaultBuild
-		{798CFB62-216E-4077-9B7C-D376C099F09A}.Debug|Any CPU.Build.0 = DefaultBuild
-		{798CFB62-216E-4077-9B7C-D376C099F09A}.DefaultBuild|Any CPU.ActiveCfg = DefaultBuild
-		{798CFB62-216E-4077-9B7C-D376C099F09A}.DefaultBuild|Any CPU.Build.0 = DefaultBuild
-		{798CFB62-216E-4077-9B7C-D376C099F09A}.Release|Any CPU.ActiveCfg = DefaultBuild
-		{798CFB62-216E-4077-9B7C-D376C099F09A}.Release|Any CPU.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

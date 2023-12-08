@@ -65,12 +65,14 @@ namespace Finanzas.GUI
             this.cantidad1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblEfectivo = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
@@ -84,8 +86,6 @@ namespace Finanzas.GUI
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblEfectivo = new System.Windows.Forms.Label();
             this.tanConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosCaja)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -490,6 +490,16 @@ namespace Finanzas.GUI
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(247, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(368, 37);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Efectivo disponible en caja:  $";
+            // 
             // dtpFecha
             // 
             this.dtpFecha.CustomFormat = "yyyy/MM/dd hh:mm:ss";
@@ -506,13 +516,13 @@ namespace Finanzas.GUI
             this.label5.Location = new System.Drawing.Point(639, 63);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
+            this.label5.Size = new System.Drawing.Size(110, 13);
             this.label5.TabIndex = 17;
-            this.label5.Text = "Cantidad";
+            this.label5.Text = "Cantidad en dolares $";
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(693, 60);
+            this.txtCantidad.Location = new System.Drawing.Point(753, 60);
             this.txtCantidad.Margin = new System.Windows.Forms.Padding(2);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(65, 20);
@@ -547,6 +557,16 @@ namespace Finanzas.GUI
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Fecha";
+            // 
+            // lblEfectivo
+            // 
+            this.lblEfectivo.AutoSize = true;
+            this.lblEfectivo.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEfectivo.Location = new System.Drawing.Point(609, 9);
+            this.lblEfectivo.Name = "lblEfectivo";
+            this.lblEfectivo.Size = new System.Drawing.Size(47, 37);
+            this.lblEfectivo.TabIndex = 20;
+            this.lblEfectivo.Text = "25";
             // 
             // toolStrip2
             // 
@@ -671,26 +691,6 @@ namespace Finanzas.GUI
             this.tabControl1.Size = new System.Drawing.Size(1028, 535);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(247, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(368, 37);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Efectivo disponible en caja:  $";
-            // 
-            // lblEfectivo
-            // 
-            this.lblEfectivo.AutoSize = true;
-            this.lblEfectivo.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEfectivo.Location = new System.Drawing.Point(609, 9);
-            this.lblEfectivo.Name = "lblEfectivo";
-            this.lblEfectivo.Size = new System.Drawing.Size(47, 37);
-            this.lblEfectivo.TabIndex = 20;
-            this.lblEfectivo.Text = "25";
             // 
             // Egresos
             // 
