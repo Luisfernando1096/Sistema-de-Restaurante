@@ -31,15 +31,13 @@ namespace Finanzas.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CierreCaja));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.label4 = new System.Windows.Forms.Label();
@@ -69,6 +67,7 @@ namespace Finanzas.GUI
             this.label6 = new System.Windows.Forms.Label();
             this.txtEfectivoRecaudado = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCajas)).BeginInit();
             this.SuspendLayout();
@@ -83,20 +82,19 @@ namespace Finanzas.GUI
             this.btnEliminar,
             this.toolStripSeparator1,
             this.btnEditar,
-            this.toolStripSeparator3,
-            this.btnGuardar,
             this.btnSalir,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.toolStripButton6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(891, 59);
+            this.toolStrip1.Size = new System.Drawing.Size(891, 57);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 59);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 57);
             // 
             // btnEliminar
             // 
@@ -104,14 +102,14 @@ namespace Finanzas.GUI
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(116, 56);
+            this.btnEliminar.Size = new System.Drawing.Size(116, 54);
             this.btnEliminar.Text = "Cerrar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 59);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 57);
             // 
             // btnEditar
             // 
@@ -119,23 +117,9 @@ namespace Finanzas.GUI
             this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(132, 56);
+            this.btnEditar.Size = new System.Drawing.Size(132, 54);
             this.btnEditar.Text = "Deshacer";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 59);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(130, 56);
-            this.btnGuardar.Text = "Imprimir";
             // 
             // btnSalir
             // 
@@ -144,7 +128,7 @@ namespace Finanzas.GUI
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(101, 56);
+            this.btnSalir.Size = new System.Drawing.Size(101, 54);
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -152,7 +136,7 @@ namespace Finanzas.GUI
             // 
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 59);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 57);
             // 
             // label4
             // 
@@ -233,8 +217,8 @@ namespace Finanzas.GUI
             this.dgvCajas.AllowUserToAddRows = false;
             this.dgvCajas.AllowUserToDeleteRows = false;
             this.dgvCajas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            this.dgvCajas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            this.dgvCajas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCajas.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvCajas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCajas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -250,14 +234,14 @@ namespace Finanzas.GUI
             this.efectivo,
             this.cantidad,
             this.saldo});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCajas.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCajas.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCajas.Location = new System.Drawing.Point(0, 173);
             this.dgvCajas.Margin = new System.Windows.Forms.Padding(2);
             this.dgvCajas.MultiSelect = false;
@@ -432,6 +416,16 @@ namespace Finanzas.GUI
             this.label7.TabIndex = 64;
             this.label7.Text = "Efectivo recaudado";
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
+            this.toolStripButton6.Text = "Imprimir";
+            // 
             // CierreCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,8 +468,6 @@ namespace Finanzas.GUI
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnEditar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton btnGuardar;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Label label4;
@@ -505,5 +497,6 @@ namespace Finanzas.GUI
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.TextBox txtEfectivoRecaudado;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
     }
 }
