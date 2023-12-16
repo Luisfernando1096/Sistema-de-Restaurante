@@ -29,29 +29,29 @@ namespace Reportes.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.crvComandaCompleta = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.crvVisor = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.SuspendLayout();
             // 
-            // crvComandaCompleta
+            // crvVisor
             // 
-            this.crvComandaCompleta.ActiveViewIndex = -1;
-            this.crvComandaCompleta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crvComandaCompleta.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crvComandaCompleta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crvComandaCompleta.Location = new System.Drawing.Point(0, 0);
-            this.crvComandaCompleta.Name = "crvComandaCompleta";
-            this.crvComandaCompleta.Size = new System.Drawing.Size(800, 450);
-            this.crvComandaCompleta.TabIndex = 0;
-            this.crvComandaCompleta.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+            this.crvVisor.ActiveViewIndex = -1;
+            this.crvVisor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crvVisor.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crvVisor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crvVisor.Location = new System.Drawing.Point(0, 0);
+            this.crvVisor.Name = "crvVisor";
+            this.crvVisor.Size = new System.Drawing.Size(800, 450);
+            this.crvVisor.TabIndex = 0;
+            this.crvVisor.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // VisorComandaCompleta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.crvComandaCompleta);
+            this.Controls.Add(this.crvVisor);
             this.Name = "VisorComandaCompleta";
-            this.Text = "VisorComandaCompleta";
+            this.Text = "form";
             this.Load += new System.EventHandler(this.VisorComandaCompleta_Load);
             this.ResumeLayout(false);
 
@@ -59,6 +59,6 @@ namespace Reportes.GUI
 
         #endregion
 
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crvComandaCompleta;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer crvVisor;
     }
 }

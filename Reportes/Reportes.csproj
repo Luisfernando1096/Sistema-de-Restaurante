@@ -64,6 +64,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatTicket.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatVentasAgProducto.cs">
+      <DependentUpon>DatVentasAgProducto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatVentasAgProducto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatVentasAgProducto.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GUI\VisorComandaCompleta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +127,12 @@
       <DependentUpon>RepTicket.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepVentasAgrupadoPorProducto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepVentasAgrupadoPorProducto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
@@ -149,6 +163,17 @@
     </None>
     <None Include="DAT\DatTicket.xss">
       <DependentUpon>DatTicket.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatVentasAgProducto.xsc">
+      <DependentUpon>DatVentasAgProducto.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatVentasAgProducto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatVentasAgProducto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatVentasAgProducto.xss">
+      <DependentUpon>DatVentasAgProducto.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +211,10 @@
     <EmbeddedResource Include="REP\RepTicket.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepTicket.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepVentasAgrupadoPorProducto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepVentasAgrupadoPorProducto.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

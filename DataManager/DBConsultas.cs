@@ -1576,5 +1576,27 @@ namespace DataManager
             }
         }
 
+        public static DataTable RepVentasAgrupadasPorProducto(String fInicio,String  fFin)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT pd.idPedido as ticket, pr.nombre as nombreProducto, p.fecha, pd.cantidad, pd.precio, pd.subTotal
+                                        FROM pedido_detalle pd
+                                        JOIN pedido p ON p.idPedido = pd.idPedido
+                                        JOIN producto pr ON pr.idProducto = pd.idProducto
+                                        WHERE p.fecha BETWEEN '2023-12-01' AND '2023-12-11' order by pr.nombre, p.fecha asc;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
     }
 }

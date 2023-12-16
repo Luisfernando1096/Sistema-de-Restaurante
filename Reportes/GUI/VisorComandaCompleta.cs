@@ -18,9 +18,18 @@ namespace Reportes.GUI
             InitializeComponent();
         }
 
+        private void CargarReporte()
+        {
+            DataTable datos = new DataTable();
+            REP.RepVentasAgrupadoPorProducto oReporte = new REP.RepVentasAgrupadoPorProducto();
+            datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto("", "");
+            oReporte.SetDataSource(datos);
+            crvVisor.ReportSource = oReporte;
+        }
+
         private void VisorComandaCompleta_Load(object sender, EventArgs e)
         {
-            
+            CargarReporte();
         }
     }
 }
