@@ -550,5 +550,16 @@ namespace ServiceExpressDsk.GUI
             Respaldos.GUI.Vaciar f = new Respaldos.GUI.Vaciar();
             f.ShowDialog();
         }
+
+        private void toolStripButton26_Click(object sender, EventArgs e)
+        {
+            Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton27_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
