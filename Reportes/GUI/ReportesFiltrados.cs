@@ -16,5 +16,42 @@ namespace Reportes.GUI
         {
             InitializeComponent();
         }
+
+        private void btnSalirIngrediente_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnQuitarFiltro_Click(object sender, EventArgs e)
+        {
+            pbInicio.Visible = false;
+            pbFin.Visible = false;
+            dtpInicio.Value = DateTime.Now;
+            dtpFin.Value = DateTime.Now;
+        }
+
+        private void dtpFechaDesde_CloseUp(object sender, EventArgs e)
+        {
+            if (dtpInicio.Value.Date > dtpFin.Value.Date)
+            {
+                pbInicio.Visible = false;
+                dtpInicio.Value = DateTime.Now;
+                MessageBox.Show("Debe seleccionar un rango de fecha valido.");
+                return;
+            }
+            pbInicio.Visible = true;
+        }
+
+        private void dtpFechaHasta_CloseUp(object sender, EventArgs e)
+        {
+            if (dtpInicio.Value.Date > dtpFin.Value.Date)
+            {
+                pbFin.Visible = false;
+                dtpFin.Value = DateTime.Now;
+                MessageBox.Show("Debe seleccionar un rango de fecha valido.");
+                return;
+            }
+            pbFin.Visible = true;
+        }
     }
 }
