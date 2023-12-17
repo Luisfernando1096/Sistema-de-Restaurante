@@ -553,8 +553,8 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton26_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
-            f.ShowDialog();
+             Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
+             f.ShowDialog();
         }
 
         private void toolStripButton27_Click(object sender, EventArgs e)

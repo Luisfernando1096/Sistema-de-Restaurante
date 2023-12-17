@@ -47,6 +47,18 @@ namespace Reportes.GUI
             this.btnCompras = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtgvMeseros = new System.Windows.Forms.DataGridView();
+            this.Asignado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DUI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sueldoBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.regContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVerPropinas = new System.Windows.Forms.Button();
             this.checkBoxConMesero = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -66,18 +78,6 @@ namespace Reportes.GUI
             this.label9 = new System.Windows.Forms.Label();
             this.cmbAjusteEn = new System.Windows.Forms.ComboBox();
             this.btnQuitarFiltro = new System.Windows.Forms.Button();
-            this.Asignado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DUI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sueldoBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.regContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -164,10 +164,10 @@ namespace Reportes.GUI
             this.label3.Location = new System.Drawing.Point(20, 170);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(613, 13);
+            this.label3.Size = new System.Drawing.Size(617, 13);
             this.label3.TabIndex = 82;
-            this.label3.Text = "Seleccione la fecha o rango de fechas  (desde, hasta) Seleccione solo \"Desde\" par" +
-    "a una fecha espesifica";
+            this.label3.Text = "Seleccione  la fecha o rango de fechas  (desde, hasta) Seleccione solo \"Desde\" pa" +
+    "ra una fecha espesifica";
             // 
             // cmbTipoCompras
             // 
@@ -297,6 +297,80 @@ namespace Reportes.GUI
             this.dtgvMeseros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgvMeseros.Size = new System.Drawing.Size(396, 143);
             this.dtgvMeseros.TabIndex = 127;
+            // 
+            // Asignado
+            // 
+            this.Asignado.DataPropertyName = "Asignado";
+            this.Asignado.HeaderText = "";
+            this.Asignado.Name = "Asignado";
+            this.Asignado.Width = 40;
+            // 
+            // nombres
+            // 
+            this.nombres.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Empleado";
+            this.nombres.Name = "nombres";
+            // 
+            // apellidos
+            // 
+            this.apellidos.HeaderText = "Apellidos";
+            this.apellidos.Name = "apellidos";
+            this.apellidos.Visible = false;
+            // 
+            // idEmpleado
+            // 
+            this.idEmpleado.HeaderText = "ID Empleado";
+            this.idEmpleado.Name = "idEmpleado";
+            this.idEmpleado.Visible = false;
+            // 
+            // direccion
+            // 
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.Visible = false;
+            // 
+            // email
+            // 
+            this.email.HeaderText = "Email";
+            this.email.Name = "email";
+            this.email.Visible = false;
+            // 
+            // telefono
+            // 
+            this.telefono.HeaderText = "Telefono";
+            this.telefono.Name = "telefono";
+            this.telefono.Visible = false;
+            // 
+            // DUI
+            // 
+            this.DUI.HeaderText = "DUI";
+            this.DUI.Name = "DUI";
+            this.DUI.Visible = false;
+            // 
+            // NIT
+            // 
+            this.NIT.HeaderText = "NIT";
+            this.NIT.Name = "NIT";
+            this.NIT.Visible = false;
+            // 
+            // sueldoBase
+            // 
+            this.sueldoBase.HeaderText = "Sueldo Base";
+            this.sueldoBase.Name = "sueldoBase";
+            this.sueldoBase.Visible = false;
+            // 
+            // comision
+            // 
+            this.comision.HeaderText = "Comision";
+            this.comision.Name = "comision";
+            this.comision.Visible = false;
+            // 
+            // regContable
+            // 
+            this.regContable.HeaderText = "Reg Contable";
+            this.regContable.Name = "regContable";
+            this.regContable.Visible = false;
             // 
             // btnVerPropinas
             // 
@@ -518,80 +592,6 @@ namespace Reportes.GUI
             this.btnQuitarFiltro.Text = "Quitar filtro de fechas";
             this.btnQuitarFiltro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnQuitarFiltro.UseVisualStyleBackColor = false;
-            // 
-            // Asignado
-            // 
-            this.Asignado.DataPropertyName = "Asignado";
-            this.Asignado.HeaderText = "";
-            this.Asignado.Name = "Asignado";
-            this.Asignado.Width = 40;
-            // 
-            // nombres
-            // 
-            this.nombres.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombres.DataPropertyName = "nombres";
-            this.nombres.HeaderText = "Empleado";
-            this.nombres.Name = "nombres";
-            // 
-            // apellidos
-            // 
-            this.apellidos.HeaderText = "Apellidos";
-            this.apellidos.Name = "apellidos";
-            this.apellidos.Visible = false;
-            // 
-            // idEmpleado
-            // 
-            this.idEmpleado.HeaderText = "ID Empleado";
-            this.idEmpleado.Name = "idEmpleado";
-            this.idEmpleado.Visible = false;
-            // 
-            // direccion
-            // 
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.Visible = false;
-            // 
-            // email
-            // 
-            this.email.HeaderText = "Email";
-            this.email.Name = "email";
-            this.email.Visible = false;
-            // 
-            // telefono
-            // 
-            this.telefono.HeaderText = "Telefono";
-            this.telefono.Name = "telefono";
-            this.telefono.Visible = false;
-            // 
-            // DUI
-            // 
-            this.DUI.HeaderText = "DUI";
-            this.DUI.Name = "DUI";
-            this.DUI.Visible = false;
-            // 
-            // NIT
-            // 
-            this.NIT.HeaderText = "NIT";
-            this.NIT.Name = "NIT";
-            this.NIT.Visible = false;
-            // 
-            // sueldoBase
-            // 
-            this.sueldoBase.HeaderText = "Sueldo Base";
-            this.sueldoBase.Name = "sueldoBase";
-            this.sueldoBase.Visible = false;
-            // 
-            // comision
-            // 
-            this.comision.HeaderText = "Comision";
-            this.comision.Name = "comision";
-            this.comision.Visible = false;
-            // 
-            // regContable
-            // 
-            this.regContable.HeaderText = "Reg Contable";
-            this.regContable.Name = "regContable";
-            this.regContable.Visible = false;
             // 
             // ReportesFiltrados
             // 
