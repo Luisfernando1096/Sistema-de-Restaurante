@@ -551,6 +551,17 @@ namespace ServiceExpressDsk.GUI
             f.ShowDialog();
         }
 
+        private void toolStripButton26_Click(object sender, EventArgs e)
+        {
+             Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
+             f.ShowDialog();
+        }
+
+        private void toolStripButton27_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void toolStripButton31_Click(object sender, EventArgs e)
         {
             Reportes.GUI.VisorComandaCompleta f = new Reportes.GUI.VisorComandaCompleta();

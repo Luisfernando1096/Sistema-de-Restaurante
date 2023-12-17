@@ -876,6 +876,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton26.Size = new System.Drawing.Size(162, 79);
             this.toolStripButton26.Text = "Reportes Filtrados";
             this.toolStripButton26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton26.Click += new System.EventHandler(this.toolStripButton26_Click);
             // 
             // toolStripButton27
             // 
@@ -887,6 +888,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton27.Size = new System.Drawing.Size(96, 79);
             this.toolStripButton27.Text = "Productos";
             this.toolStripButton27.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton27.Click += new System.EventHandler(this.toolStripButton27_Click);
             // 
             // toolStripButton28
             // 
