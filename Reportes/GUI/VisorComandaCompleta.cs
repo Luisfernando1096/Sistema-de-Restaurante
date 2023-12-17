@@ -21,9 +21,12 @@ namespace Reportes.GUI
         private void CargarReporte()
         {
             DataTable datos = new DataTable();
-            REP.RepVentasAgrupadoPorProducto oReporte = new REP.RepVentasAgrupadoPorProducto();
-            datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto("", "");
+            REP.RepVentasDiarias oReporte = new REP.RepVentasDiarias();
+            datos = DataManager.DBConsultas.RepVentasDiarias("");
             oReporte.SetDataSource(datos);
+            oReporte.SetParameterValue("Empresa", "ALTEZZA");
+            oReporte.SetParameterValue("Footer", "Hasta la cima del sabor");
+            oReporte.SetParameterValue("Fecha", DateTime.Now.ToString());
             crvVisor.ReportSource = oReporte;
         }
 
