@@ -78,6 +78,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatVentasAgProducto.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatVentasDiarias.cs">
+      <DependentUpon>DatVentasDiarias.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatVentasDiarias.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatVentasDiarias.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GUI\VisorComandaCompleta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +152,12 @@
       <DependentUpon>RepVentasAgrupadoPorProducto.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepVentasDiarias.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepVentasDiarias.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
@@ -185,6 +199,17 @@
     </None>
     <None Include="DAT\DatVentasAgProducto.xss">
       <DependentUpon>DatVentasAgProducto.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatVentasDiarias.xsc">
+      <DependentUpon>DatVentasDiarias.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatVentasDiarias.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatVentasDiarias.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatVentasDiarias.xss">
+      <DependentUpon>DatVentasDiarias.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +258,10 @@
     <EmbeddedResource Include="REP\RepVentasAgrupadoPorProducto.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepVentasAgrupadoPorProducto.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepVentasDiarias.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepVentasDiarias.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

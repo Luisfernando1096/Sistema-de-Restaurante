@@ -1598,5 +1598,29 @@ namespace DataManager
             }
         }
 
+        public static DataTable RepVentasDiarias(String fInicio)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago
+                                        FROM pedido_detalle pd
+                                        JOIN pedido p ON p.idPedido = pd.idPedido
+                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                        JOIN producto pr ON pr.idProducto = pd.idProducto
+                                        WHERE DATE(p.fecha) = '2023-12-06' AND p.cancelado = 1 GROUP BY ticket
+                                        ORDER BY c.nombreCuenta, p.fecha ASC;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
     }
 }
