@@ -1585,7 +1585,7 @@ namespace DataManager
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        WHERE p.fecha BETWEEN '2023-12-01' AND '2023-12-11' order by pr.nombre, p.fecha asc;";
+                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + "', INTERVAL 1 DAY) ORDER BY pr.nombre, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1608,7 +1608,7 @@ namespace DataManager
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        WHERE DATE(p.fecha) = '2023-12-06' AND p.cancelado = 1 GROUP BY ticket
+                                        WHERE DATE(p.fecha) = '" + fInicio + @"' AND p.cancelado = 1 GROUP BY ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 

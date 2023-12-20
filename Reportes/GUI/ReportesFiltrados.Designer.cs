@@ -420,6 +420,7 @@ namespace Reportes.GUI
             this.btnVerPropinas.Text = "Ver propinas";
             this.btnVerPropinas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnVerPropinas.UseVisualStyleBackColor = false;
+            this.btnVerPropinas.Click += new System.EventHandler(this.btnVerPropinas_Click);
             // 
             // checkBoxConMesero
             // 
@@ -492,6 +493,7 @@ namespace Reportes.GUI
             this.btnVentas.TabIndex = 128;
             this.btnVentas.Text = "Ventas";
             this.btnVentas.UseVisualStyleBackColor = false;
+            this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
             // btnCompras
             // 
@@ -504,6 +506,7 @@ namespace Reportes.GUI
             this.btnCompras.TabIndex = 127;
             this.btnCompras.Text = "Compras";
             this.btnCompras.UseVisualStyleBackColor = false;
+            this.btnCompras.Click += new System.EventHandler(this.btnCompras_Click);
             // 
             // cmbTipoVetas
             // 

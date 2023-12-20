@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,9 @@ namespace ServiceExpressDsk.GUI
 {
     public partial class Main : Form
     {
+        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         private bool tpv;
         private bool cerrar;
@@ -566,6 +571,103 @@ namespace ServiceExpressDsk.GUI
         {
             Reportes.GUI.VisorComandaCompleta f = new Reportes.GUI.VisorComandaCompleta();
             f.ShowDialog();
+        }
+
+        private void toolStripButton29_Click(object sender, EventArgs e)
+        {
+            String fechaBD = DateTime.Now.ToString("yyyy/MM/dd");
+            String fechaREP = DateTime.Now.ToString("dd/MM/yyyy");
+
+            DataTable datos = DataManager.DBConsultas.RepVentasDiarias(fechaBD);
+            Reportes.REP.RepVentasDiarias rep = new Reportes.REP.RepVentasDiarias();
+            GenerarReporte(rep, datos, "", "", fechaREP);
+        }
+
+        private void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
+        {
+            oReporte.SetDataSource(datos);
+            if (!f.Equals(""))
+            {
+                // Convertir la cadena a DateTime
+                if (DateTime.TryParse(f, out DateTime fecha))
+                {
+                    // Formatear la fecha
+                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+
+                    oReporte.SetParameterValue("Fecha", fechaFormateada);
+                }
+                else
+                {
+                    Console.WriteLine("La cadena no es un formato de fecha válido.");
+                }
+
+            }
+            if (!fi.Equals(""))
+            {
+                // Convertir la cadena a DateTime
+                if (DateTime.TryParse(fi, out DateTime fecha))
+                {
+                    // Formatear la fecha
+                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+
+                    oReporte.SetParameterValue("fInicio", fechaFormateada);
+                }
+                else
+                {
+                    Console.WriteLine("La cadena no es un formato de fecha válido.");
+                }
+            }
+            if (!ff.Equals(""))
+            {
+                // Convertir la cadena a DateTime
+                if (DateTime.TryParse(ff, out DateTime fecha))
+                {
+                    // Formatear la fecha
+                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+
+                    oReporte.SetParameterValue("fFin", fechaFormateada);
+                }
+                else
+                {
+                    Console.WriteLine("La cadena no es un formato de fecha válido.");
+                }
+            }
+            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            if (Boolean.Parse(oTicket.ShowSaludo))
+            {
+                oReporte.SetParameterValue("Footer", oTicket.Footer3);
+            }
+            else
+            {
+                oReporte.SetParameterValue("Footer", "");
+            }
+
+            if (oReporte != null)
+            {
+                try
+                {
+                    // Imprimir el informe en la impresora seleccionada
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda
+                    };
+
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
+
+                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                    this.Invoke((MethodInvoker)delegate {
+                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    this.Invoke((MethodInvoker)delegate {
+                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
+            }
         }
     }
 }

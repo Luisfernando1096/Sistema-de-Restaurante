@@ -207,7 +207,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 37);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1020, 568);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TPV";
@@ -315,7 +315,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 37);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1020, 568);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Productos e Ingredientes";
@@ -911,6 +911,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton29.Size = new System.Drawing.Size(131, 79);
             this.toolStripButton29.Text = "Ventas Diarias";
             this.toolStripButton29.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton29.Click += new System.EventHandler(this.toolStripButton29_Click);
             // 
             // toolStripButton30
             // 
@@ -1132,7 +1133,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage10.Controls.Add(this.toolStripContainer2);
             this.tabPage10.Location = new System.Drawing.Point(4, 37);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage10.Size = new System.Drawing.Size(1020, 568);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Cuentas por cobrar";
