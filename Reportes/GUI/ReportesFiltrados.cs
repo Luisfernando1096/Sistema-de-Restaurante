@@ -111,6 +111,10 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
+                            //Ventas Resumen por periodo
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
+                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
 
                         }
                         else
