@@ -158,6 +158,12 @@
       <DependentUpon>RepVentasDiarias.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepVentasPorPeriodo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepVentasPorPeriodo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepVentasResumenPorPeriodo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -272,6 +278,10 @@
     <EmbeddedResource Include="REP\RepVentasDiarias.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepVentasDiarias.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepVentasPorPeriodo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepVentasPorPeriodo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepVentasResumenPorPeriodo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

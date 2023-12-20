@@ -80,10 +80,16 @@ namespace Reportes.GUI
                         //Generar reporte de ventas
                         if (cmbTipoVetas.SelectedIndex == 0)
                         {
-
+                            //Ventas Resumen por periodo
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
+                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                         } else if (cmbTipoVetas.SelectedIndex == 1)
                         {
-
+                            //Ventas Resumen por periodo
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
+                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                         } else if (cmbTipoVetas.SelectedIndex == 2)
                         {
 
@@ -111,10 +117,7 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
-                            //Ventas Resumen por periodo
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
-                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            
 
                         }
                         else
