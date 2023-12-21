@@ -53,5 +53,17 @@ namespace Reportes.GUI
             }
             pbFin.Visible = true;
         }
+
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            if (cmbTipoVetas.SelectedIndex == 7)
+            {
+                Reportes.GUI.VisorGeneral rg = new Reportes.GUI.VisorGeneral();
+                rg.opc = 4;
+                rg.FechaInicio = dtpInicio.Value.ToString("yyyy-MM-dd");
+                rg.FechaFinal = dtpFin.Value.ToString("yyyy-MM-dd");
+                rg.ShowDialog();
+            }
+        }
     }
 }

@@ -559,12 +559,22 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton27_Click(object sender, EventArgs e)
         {
-
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+            f.opc = 3;
+            f.ShowDialog();
         }
 
         private void toolStripButton31_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorComandaCompleta f = new Reportes.GUI.VisorComandaCompleta();
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+            f.opc = 2;
+            f.ShowDialog();
+        }
+
+        private void toolStripButton28_Click(object sender, EventArgs e)
+        {
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+            f.opc = 1;
             f.ShowDialog();
         }
     }
