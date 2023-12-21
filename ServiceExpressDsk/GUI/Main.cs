@@ -649,7 +649,7 @@ namespace ServiceExpressDsk.GUI
                     // Imprimir el informe en la impresora seleccionada
                     PrinterSettings settings = new PrinterSettings
                     {
-                        PrinterName = oConfiguracion.PrinterComanda
+                        PrinterName = oConfiguracion.PrinterInformes
                     };
 
                     oReporte.PrintOptions.PrinterName = settings.PrinterName;

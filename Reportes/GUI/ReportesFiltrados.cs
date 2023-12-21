@@ -117,8 +117,10 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
-                            
-
+                            //Agrupado por productos
+                            DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepVentasProductosResumen rep = new REP.RepVentasProductosResumen();
+                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                         }
                         else
                         {
@@ -208,7 +210,7 @@ namespace Reportes.GUI
                     // Imprimir el informe en la impresora seleccionada
                     PrinterSettings settings = new PrinterSettings
                     {
-                        PrinterName = oConfiguracion.PrinterComanda
+                        PrinterName = oConfiguracion.PrinterInformes
                     };
 
                     oReporte.PrintOptions.PrinterName = settings.PrinterName;
