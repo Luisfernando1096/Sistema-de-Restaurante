@@ -51,10 +51,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLS\CrystalReportExporter.cs" />
+    <Compile Include="DAT\DatClientes.cs">
+      <DependentUpon>DatClientes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatClientes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatClientes.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatComandaCompleta.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatProveedores.cs">
+      <DependentUpon>DatProveedores.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatProveedores.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatProveedores.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatStockProducto.cs">
+      <DependentUpon>DatStockProducto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatStockProducto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatStockProducto.xsd</DependentUpon>
     </Compile>
     <Compile Include="DAT\DatTicket.cs">
       <DependentUpon>DatTicket.xsd</DependentUpon>
@@ -63,6 +87,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatTicket.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatVentasPorFechas.cs">
+      <DependentUpon>DatVentasPorFechas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatVentasPorFechas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatVentasPorFechas.xsd</DependentUpon>
     </Compile>
     <Compile Include="GUI\ReportesFiltrados.cs">
       <SubType>Form</SubType>
@@ -92,11 +124,23 @@
     <Compile Include="GUI\VisorComandaCompleta.Designer.cs">
       <DependentUpon>VisorComandaCompleta.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\VisorGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\VisorGeneral.Designer.cs">
+      <DependentUpon>VisorGeneral.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="REP\RepClientes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="REP\RepComandaParcial.cs">
       <AutoGen>True</AutoGen>
@@ -140,6 +184,18 @@
       <DependentUpon>RepPagoTarjeta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepProveedores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepProveedores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="REP\RepStockProducto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepStockProducto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepTicket.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +232,12 @@
       <DependentUpon>RepVentasResumenPorPeriodo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepVentasPorFechas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepVentasPorFechas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfiguracionManager\ConfiguracionManager.csproj">
@@ -189,6 +251,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="DAT\DatClientes.xsc">
+      <DependentUpon>DatClientes.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatClientes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatClientes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatClientes.xss">
+      <DependentUpon>DatClientes.xsd</DependentUpon>
+    </None>
     <None Include="DAT\DatComandaCompleta.xsc">
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
     </None>
@@ -199,6 +272,28 @@
     </None>
     <None Include="DAT\DatComandaCompleta.xss">
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatProveedores.xsc">
+      <DependentUpon>DatProveedores.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatProveedores.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatProveedores.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatProveedores.xss">
+      <DependentUpon>DatProveedores.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatStockProducto.xsc">
+      <DependentUpon>DatStockProducto.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatStockProducto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatStockProducto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatStockProducto.xss">
+      <DependentUpon>DatStockProducto.xsd</DependentUpon>
     </None>
     <None Include="DAT\DatTicket.xsc">
       <DependentUpon>DatTicket.xsd</DependentUpon>
@@ -233,6 +328,17 @@
     <None Include="DAT\DatVentasDiarias.xss">
       <DependentUpon>DatVentasDiarias.xsd</DependentUpon>
     </None>
+    <None Include="DAT\DatVentasPorFechas.xsc">
+      <DependentUpon>DatVentasPorFechas.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatVentasPorFechas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatVentasPorFechas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatVentasPorFechas.xss">
+      <DependentUpon>DatVentasPorFechas.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GUI\ReportesFiltrados.resx">
@@ -241,9 +347,16 @@
     <EmbeddedResource Include="GUI\VisorComandaCompleta.resx">
       <DependentUpon>VisorComandaCompleta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\VisorGeneral.resx">
+      <DependentUpon>VisorGeneral.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepClientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepClientes.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepComandaParcial.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -273,6 +386,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepPagoTarjeta.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepProveedores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepProveedores.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepStockProducto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepStockProducto.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="REP\RepTicket.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepTicket.cs</LastGenOutput>
@@ -296,6 +417,10 @@
     <EmbeddedResource Include="REP\RepVentasResumenPorPeriodo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepVentasResumenPorPeriodo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepVentasPorFechas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepVentasPorFechas.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

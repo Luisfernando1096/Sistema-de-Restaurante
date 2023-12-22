@@ -435,6 +435,23 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable VentasPorfecha(string fechaInicio, string fechaFinal)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT pr.nombre as producto, SUM(pd.cantidad) as cantidad FROM pedido_detalle pd JOIN pedido p ON p.idPedido = pd.idPedido JOIN producto pr ON pr.idProducto = pd.idProducto WHERE p.fecha BETWEEN '" + fechaInicio + "' AND '" + fechaFinal + "' group by pr.nombre order by pr.nombre asc;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
         public static DataTable ListaProductos()
         {
             try
