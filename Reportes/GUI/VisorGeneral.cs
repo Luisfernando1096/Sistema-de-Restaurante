@@ -28,43 +28,21 @@ namespace Reportes.GUI
 
             if (opc == 1) //Reporte de clientes
             {
-                REP.RepClientes oReporte = new REP.RepClientes();
-                datos = DataManager.DBConsultas.Clientes();
-                oReporte.SetDataSource(datos);
-                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                crvVisor.ReportSource = oReporte;
+                
             }
             else if(opc == 2) //Reporte de proveedores
             {
-                REP.RepProveedores oReporte = new REP.RepProveedores();
-                datos = DataManager.DBConsultas.Proveedor();
-                oReporte.SetDataSource(datos);
-                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                crvVisor.ReportSource = oReporte;
+                
             }
             else if (opc == 3) //Reporte de stock de productos
             {
-                REP.RepStockProducto oReporte = new REP.RepStockProducto();
-                datos = DataManager.DBConsultas.VerProductos();
-                oReporte.SetDataSource(datos);
-                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                crvVisor.ReportSource = oReporte;
+                
             }
             else if (opc == 4) //Reporte de entas por fechas
             {
                 if (FechaInicio != string.Empty && FechaFinal != string.Empty)
                 {
-                    REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
-                    datos = DataManager.DBConsultas.VentasPorfecha(FechaInicio, FechaFinal);
-                    oReporte.SetDataSource(datos);
-                    oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-                    oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                    oReporte.SetParameterValue("FechaInicio", FechaInicio);
-                    oReporte.SetParameterValue("FechaFinal", FechaFinal);
-                    crvVisor.ReportSource = oReporte;
+                    
                 }
             }
         }

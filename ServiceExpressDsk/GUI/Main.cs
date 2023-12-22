@@ -359,12 +359,6 @@ namespace ServiceExpressDsk.GUI
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
-            f.ShowDialog();
-        }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TPV.GUI.TicketsProcesados f = new TPV.GUI.TicketsProcesados();
@@ -564,16 +558,18 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton27_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            f.opc = 3;
-            f.ShowDialog();
+            Reportes.REP.RepStockProducto oReporte = new Reportes.REP.RepStockProducto();
+            DataTable datos = DataManager.DBConsultas.VerProductos();
+            oReporte.SetDataSource(datos);
+            GenerarReporte(oReporte, datos, "", "", "");
         }
 
         private void toolStripButton31_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            f.opc = 2;
-            f.ShowDialog();
+            Reportes.REP.RepProveedores oReporte = new Reportes.REP.RepProveedores();
+            DataTable datos = DataManager.DBConsultas.Proveedor();
+            oReporte.SetDataSource(datos);
+            GenerarReporte(oReporte, datos, "", "", "");
         }
 
         private void toolStripButton28_Click(object sender, EventArgs e)
@@ -678,6 +674,14 @@ namespace ServiceExpressDsk.GUI
                     });
                 }
             }
+        }
+
+        private void tpvClientes_Click(object sender, EventArgs e)
+        {
+            Reportes.REP.RepClientes oReporte = new Reportes.REP.RepClientes();
+            DataTable datos = DataManager.DBConsultas.Clientes();
+            oReporte.SetDataSource(datos);
+            GenerarReporte(oReporte, datos, "", "", "");
         }
     }
 }

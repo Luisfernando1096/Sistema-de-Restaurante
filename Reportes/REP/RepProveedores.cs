@@ -98,7 +98,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Slogan {
+        public CrystalDecisions.Shared.IParameterField Parameter_Footer {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }

@@ -80,7 +80,7 @@ namespace Reportes.GUI
                         //Generar reporte de ventas
                         if (cmbTipoVetas.SelectedIndex == 0)
                         {
-                            //Ventas Resumen por periodo
+                            //Ventas por periodo
                             DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
                             GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
@@ -117,10 +117,14 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
-                            //Agrupado por productos
-                            DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            //Agrupado por productos Resumen
+                            /*DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasProductosResumen rep = new REP.RepVentasProductosResumen();
-                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");*/
+
+                            REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
+                            DataTable datos = DataManager.DBConsultas.VentasPorfecha(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            GenerarReporte(oReporte, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                         }
                         else
                         {
@@ -241,16 +245,5 @@ namespace Reportes.GUI
             ProcesoImpresionReportes("propinas");
         }
 
-        private void btnVentas_Click(object sender, EventArgs e)
-        {
-            if (cmbTipoVetas.SelectedIndex == 7)
-            {
-                Reportes.GUI.VisorGeneral rg = new Reportes.GUI.VisorGeneral();
-                rg.opc = 4;
-                rg.FechaInicio = dtpInicio.Value.ToString("yyyy-MM-dd");
-                rg.FechaFinal = dtpFin.Value.ToString("yyyy-MM-dd");
-                rg.ShowDialog();
-            }
-        }
     }
 }

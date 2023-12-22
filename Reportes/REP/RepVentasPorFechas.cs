@@ -98,7 +98,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Slogan {
+        public CrystalDecisions.Shared.IParameterField Parameter_Footer {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +106,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_FechaInicio {
+        public CrystalDecisions.Shared.IParameterField Parameter_fInicio {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,7 +114,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_FechaFinal {
+        public CrystalDecisions.Shared.IParameterField Parameter_fFin {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
