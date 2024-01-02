@@ -123,7 +123,7 @@ namespace Reportes.GUI
                             GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");*/
 
                             REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
-                            DataTable datos = DataManager.DBConsultas.VentasPorfecha(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             GenerarReporte(oReporte, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                         }
                         else
