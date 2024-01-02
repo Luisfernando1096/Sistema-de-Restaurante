@@ -293,6 +293,7 @@ namespace Compras.GUI
                                 fila.Cells[2].Value = txtDescripcion.Text;
                                 fila.Cells[3].Value = txtPrecio.Text;
                                 fila.Cells[4].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
+                                fila.Cells[13].Value = cmbTipoCompra.Text.ToString().ToUpper();
 
                                 dgvDatos.Rows.Add(fila);
 
@@ -307,6 +308,7 @@ namespace Compras.GUI
                                 fila.Cells[2].Value = txtDescripcion.Text;
                                 fila.Cells[3].Value = txtPrecio.Text;
                                 fila.Cells[4].Value = decimal.Parse(txtCantidad.Text) * decimal.Parse(txtPrecio.Text);
+                                fila.Cells[13].Value = cmbTipoCompra.Text.ToString().ToUpper();
 
                                 dgvDatos.Rows.Add(fila); // Asegúrate de agregar la fila después de establecer los valores de las celdas
                             }
@@ -345,39 +347,8 @@ namespace Compras.GUI
 
         private void cmbTipoCompra_SelectedValueChanged(object sender, EventArgs e)
         {
-            int indiceActual = cmbTipoCompra.SelectedIndex;
-            if (!estadoCmb)
-            {
-                if (indiceActual != indiceAnterior)
-                {
-                    if (dgvDatos.Rows.Count != 0)
-                    {
-                        DialogResult respuesta = MessageBox.Show("¡Al cambiar el tipo de comprobante se eliminarán los registros actuales sin guardar! ¿Estás seguro?", "Información", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
-                        if (respuesta == DialogResult.OK)
-                        {
-                            while (dgvDatos.Rows.Count > 0)
-                            {
-                                dgvDatos.Rows.RemoveAt(0);
-                            }
-                            MessageBox.Show("¡Datos borrados, nuevo tipo de comprobante listo!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            txtSumas.Text = string.Empty;
-                            txtTotales.Text = string.Empty;
-                            txtDescripcion.Text = string.Empty;
-                            txtDescripcion.Tag = null;
-                        }
-                        else
-                        {
-                            // El usuario ha cancelado la advertencia, no permitir el cambio en el ComboBox.
-                            cmbTipoCompra.SelectedIndex = indiceAnterior; // Restaurar el índice anterior
-                        }
-                    }
-                    indiceAnterior = cmbTipoCompra.SelectedIndex; // Actualizar el índice anterior
-                }
-                txtDescripcion.Text = string.Empty;
-                txtDescripcion.Tag = null;
-            }
-            estadoCmb = false;
+            txtDescripcion.Tag = null;
+            txtDescripcion.Text = "";
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -446,9 +417,9 @@ namespace Compras.GUI
                                     Mantenimiento.CLS.Compra_detalle compra_detalle = new Mantenimiento.CLS.Compra_detalle();
                                     compra_detalle.IdCompra = idCompraInsertada; /*DataManager.DBConsultas.ConsultarUltimoRegistro(int.Parse(SessionManager.Session.Instancia.IdUsuario));*/
 
-                                    if (cmbTipoCompra.Text == "Productos")
+                                    foreach (DataGridViewRow item in dgvDatos.Rows)
                                     {
-                                        foreach (DataGridViewRow item in dgvDatos.Rows)
+                                        if (item.Cells["Tipo"].Value.ToString().Equals("PRODUCTOS"))
                                         {
                                             compra_detalle.IdProducto = int.Parse(item.Cells["ID"].Value.ToString());
                                             compra_detalle.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());
@@ -469,10 +440,7 @@ namespace Compras.GUI
                                                 producto.ActualizarStockProductos();
                                             }
                                         }
-                                    }
-                                    else if (cmbTipoCompra.Text == "Ingredientes")
-                                    {
-                                        foreach (DataGridViewRow item in dgvDatos.Rows)
+                                        else if (item.Cells["Tipo"].Value.ToString().Equals("INGREDIENTES"))
                                         {
                                             compra_detalle.IdIngrediente = int.Parse(item.Cells["ID"].Value.ToString());
                                             compra_detalle.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());

@@ -1482,30 +1482,16 @@ namespace DataManager
                 DataTable resultado = new DataTable();
                 DBOperacion operacion = new DBOperacion();
                 String sentencia = null;
-                if (identificador == 1)
-                {
-                    sentencia = @"SELECT 
-                                         dt.cantidad, c.idCompra, c.tipoCompra, c.nComprobante, c.fecha, c.totalPago, c.descuento, c.iva,
-                                         pd.idProducto idTipo, pd.nombre, cm.idComprobante, cm.Tipo, dt.precio, dt.subTotal 
-                                    FROM compra_detalle AS dt
-                                        JOIN producto AS pd ON dt.idProducto = pd.idProducto
-                                        JOIN compra AS c ON dt.idCompra = c.idCompra
-                                        JOIN proveedor AS pv ON c.idProveedor = pv.idProveedor
-                                        JOIN comprobante AS cm ON c.idComprobante = cm.idComprobante
-                                    WHERE pv.idProveedor = " + id + " AND c.nComprobante = '" + nComprobante + "' ;";
-                }
-                else if (identificador == 2)
-                {
-                    sentencia = @"SELECT 
-                                         dt.cantidad, c.idCompra, c.tipoCompra, c.nComprobante, c.fecha, c.totalPago, c.descuento, c.iva,
-                                        ig.idIngrediente AS idTipo, ig.nombre, cm.idComprobante, cm.Tipo, dt.precio, dt.subTotal 
-                                    FROM compra_detalle AS dt
-                                        JOIN ingrediente AS ig ON dt.idIngrediente = ig.idIngrediente
-                                        JOIN compra AS c ON dt.idCompra = c.idCompra
-                                        JOIN proveedor AS pv ON c.idProveedor = pv.idProveedor
-                                        JOIN comprobante AS cm ON c.idComprobante = cm.idComprobante
-                                    WHERE pv.idProveedor = " + id + " AND c.nComprobante = '" + nComprobante + "' ;";
-                }
+                sentencia = @"SELECT 
+                                        dt.cantidad, c.idCompra, c.tipoCompra, c.nComprobante, c.fecha, c.totalPago, c.descuento, c.iva,
+                                        IFNULL(pd.idProducto, ig.idIngrediente) idTipo, IFNULL(pd.nombre, ig.nombre) as nombre, cm.idComprobante, cm.Tipo, dt.precio, dt.subTotal 
+                                FROM compra_detalle AS dt
+									LEFT JOIN ingrediente AS ig ON dt.idIngrediente = ig.idIngrediente
+                                    LEFT JOIN producto AS pd ON dt.idProducto = pd.idProducto
+                                    LEFT JOIN compra AS c ON dt.idCompra = c.idCompra
+                                    LEFT JOIN proveedor AS pv ON c.idProveedor = pv.idProveedor
+                                    LEFT JOIN comprobante AS cm ON c.idComprobante = cm.idComprobante
+                                WHERE pv.idProveedor = " + id + " AND c.nComprobante = '" + nComprobante + "' ;";
                 resultado = operacion.Consultar(sentencia);
                 return resultado;
             }
