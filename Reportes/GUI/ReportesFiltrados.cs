@@ -74,8 +74,26 @@ namespace Reportes.GUI
                     if (valor.Equals("compras"))
                     {
                         //Generar reporte de compras
+                        if (cmbTipoCompras.SelectedIndex == 0)
+                        {
+                            //Programar reporte de compras
 
-                    }else if (valor.Equals("ventas"))
+                        }
+                        else if (cmbTipoCompras.SelectedIndex == 1)
+                        {
+                            
+                        }
+                        else if (cmbTipoCompras.SelectedIndex == 2)
+                        {
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Debe seleccionar un tipo de reporte.");
+                        }
+
+                    }
+                    else if (valor.Equals("ventas"))
                     {
                         //Generar reporte de ventas
                         if (cmbTipoVetas.SelectedIndex == 0)
