@@ -136,9 +136,6 @@ namespace Reportes.GUI
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
                             //Agrupado por productos Resumen
-                            /*DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasProductosResumen rep = new REP.RepVentasProductosResumen();
-                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");*/
 
                             REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
                             DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(dtpInicio.Text.ToString(), dtpFin.Text.ToString());

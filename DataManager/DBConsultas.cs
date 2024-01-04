@@ -295,7 +295,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM familia;";
+                String sentencia = @"SELECT * FROM familia WHERE activo = 1;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -440,7 +440,10 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT pr.nombre as producto, SUM(pd.cantidad) as cantidad FROM pedido_detalle pd JOIN pedido p ON p.idPedido = pd.idPedido JOIN producto pr ON pr.idProducto = pd.idProducto WHERE p.fecha BETWEEN '" + fechaInicio + "' AND '" + fechaFinal + "' AND p.cancelado = 1 group by pr.nombre order by pr.nombre asc;";
+                String sentencia = @"SELECT pr.nombre as producto, SUM(pd.cantidad) as cantidad FROM pedido_detalle pd 
+                                     JOIN pedido p ON p.idPedido = pd.idPedido JOIN producto pr ON pr.idProducto = pd.idProducto 
+                                     WHERE p.fecha >= '" + fechaInicio + "' AND p.fecha < DATE_ADD('" + fechaFinal + "', " +
+                                     "INTERVAL 1 DAY) AND p.cancelado = 1 group by pr.nombre order by pr.nombre asc;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1606,7 +1609,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago
+                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
