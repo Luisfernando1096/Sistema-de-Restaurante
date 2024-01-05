@@ -15,8 +15,8 @@ namespace Ingredientes_y_Productos.GUI
         public int IdProducto;
         public string NombreProducto;
         BindingSource datosIgredientes = new BindingSource();
+        DataTable datos;
         BindingSource datosUnidad = new BindingSource();
-        Boolean variable = false;
 
         public void CargarDatos() 
         {
@@ -189,11 +189,15 @@ namespace Ingredientes_y_Productos.GUI
         {
             try
             {
+                dgvReceta.DataSource = null;
                 txtIDProducto.Text = string.Empty;
                 txtNombreProducto.Text = string.Empty;
                 txtID.Text = string.Empty;
+                txtID.Tag = null;
                 txtNombre.Text = string.Empty;
                 txtCantidad.Text = string.Empty;
+                lblCantidad.Text = "Cantidad (3 decimales maximo)";
+                btnBuscarIngrediente.Text = "Buscar Ingrediente";
             }
             catch (Exception)
             {
@@ -204,6 +208,7 @@ namespace Ingredientes_y_Productos.GUI
         {
             // Limpiar el contenido de los TextBox
             txtID.Text = "";
+            txtID.Tag = null;
             txtNombre.Text = "";
             txtCantidad.Text = "";
         }
@@ -237,6 +242,7 @@ namespace Ingredientes_y_Productos.GUI
         public Ingredientes()
         {
             InitializeComponent();
+            txtCantidad.KeyPress += txtCantidad_KeyPress;
         }
 
         private void Ingredientes_Load(object sender, EventArgs e)
@@ -275,7 +281,19 @@ namespace Ingredientes_y_Productos.GUI
             {
                 txtIDProducto.Text = f.IDProducto.ToString();
                 txtNombreProducto.Text = f.NombreProducto;
+
+                //De haber ingredientes se mostraran en el datagrid
+                CargarIngredientesDeProducto(f.IDProducto.ToString());
             }
+
+            
+        }
+
+        private void CargarIngredientesDeProducto(string idProd)
+        {
+            datos = DataManager.DBConsultas.IngredientesPorProducto(idProd);
+            dgvReceta.DataSource = datos;
+            dgvReceta.AutoGenerateColumns = false;
         }
 
         private void btnBuscarIngrediente_Click(object sender, EventArgs e)
@@ -418,15 +436,11 @@ namespace Ingredientes_y_Productos.GUI
         private void btnLimpiarReceta_Click(object sender, EventArgs e)
         {
             LimpiarCamposReceta();
-            lblCantidad.Text = "Cantidad (3 digitos maximo)";
-            btnBuscarIngrediente.Text = "Buscar Ingrediente";
-            btnGuardarReceta.Enabled = true;
+            
         }
 
-        private void btnGuardarReceta_Click(object sender, EventArgs e)
+        private void MantenimientoADataGridRecetas()
         {
-            Boolean resultado = false;
-            int filas = 0;
             try
             {
                 if (txtIDProducto.Text == "" || txtNombreProducto.Text == "")
@@ -440,28 +454,47 @@ namespace Ingredientes_y_Productos.GUI
                     {
                         IdProducto = int.Parse(txtIDProducto.Text)
                     };
-                    foreach (DataGridViewRow item in dgvReceta.Rows)
+
+                    mantenimiento.IdIngrediente = Int32.Parse(txtID.Text);
+                    mantenimiento.Cantidad = double.Parse(txtCantidad.Text);
+                        
+                    if (txtID.Tag != null)
                     {
-                        mantenimiento.IdIngrediente = int.Parse(item.Cells["idIngredienteReceta"].Value.ToString());
-                        mantenimiento.Cantidad = int.Parse(item.Cells["cantidad"].Value.ToString());
-                        if (mantenimiento.Insertar())
+                        mantenimiento.Id = Int32.Parse(txtID.Tag.ToString());
+                        if (mantenimiento.Actualizar())
                         {
-                            resultado = true;
-                            filas++;
+                            //registro actualizados
+                            CargarIngredientesDeProducto(txtIDProducto.Text);
+                            MessageBox.Show("Registro actualizado correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LimpiarTextBox();
+                            lblCantidad.Text = "Cantidad (3 decimales maximo)";
+                            btnBuscarIngrediente.Text = "Buscar Ingrediente";
+                        }
+                            
+                    }
+                    else
+                    {
+                        if (!ExisteIDEnDataGridView(txtID.Text))
+                        {
+                            if (mantenimiento.Insertar())
+                            {
+                                //Registro isertado
+                                CargarIngredientesDeProducto(txtIDProducto.Text);
+                                MessageBox.Show("Registro insertado correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                LimpiarTextBox();
+                                lblCantidad.Text = "Cantidad (3 decimales maximo)";
+                                btnBuscarIngrediente.Text = "Buscar Ingrediente";
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo registrar porque ya existe un ingrediente de esta clase.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
                         }
                     }
+
                 }
-                if (resultado)
-                {
-                    MessageBox.Show(filas + " ¡registros insertados correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvReceta.Rows.Clear();
-                    txtIDProducto.Text = "";
-                    txtNombreProducto.Text = "";
-                } 
-                else
-                {
-                    MessageBox.Show("¡Error al insertar registro!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                
             }
             catch (Exception)
             {
@@ -471,64 +504,42 @@ namespace Ingredientes_y_Productos.GUI
 
         private void bntAgregar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string idBuscar = txtID.Text;
-                if (txtCantidad.Text == "" || txtID.Text == "")
-                {
-                    MessageBox.Show("¡Asegurse de llenar todos los campos necesario!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                if (variable)
-                {
-                    if (ExisteIDEnDataGridView(idBuscar))
-                    {
-                        // Actualizar los valores de la fila existente
-                        foreach (DataGridViewRow row in dgvReceta.Rows)
-                        {
-                            string idExistente = row.Cells["idIngredienteReceta"].Value.ToString();
-
-                            if (idBuscar == idExistente)
-                            {
-                                row.Cells["nombreReceta"].Value = txtNombre.Text;
-                                row.Cells["cantidad"].Value = txtCantidad.Text;
-                                break;
-                            }
-                        }
-                        MessageBox.Show("¡El se ha modificado con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        lblCantidad.Text = "Cantidad (3 dígitos máximo)";
-                        btnBuscarIngrediente.Text = "Buscar Ingrediente";
-                        btnGuardarReceta.Enabled = true;
-                        LimpiarTextBox();
-                        variable = false;
-                    }
-                }
-                else
-                {
-                    if (ExisteIDEnDataGridView(idBuscar))
-                    {
-                        MessageBox.Show("¡El registro ya existe agregado, si desea cambiar sus datos por favor de click sobre editar!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-
-                    DataGridViewRow fila = new DataGridViewRow();
-                    fila.CreateCells(dgvReceta);
-
-                    fila.Cells[0].Value = txtID.Text;
-                    fila.Cells[1].Value = txtNombre.Text;
-                    fila.Cells[2].Value = txtCantidad.Text;
-
-                    dgvReceta.Rows.Add(fila);
-
-                    // Limpiar los TextBox después de agregar los datos
-                    LimpiarTextBox();
-                }
+            if(Validacion()){
+                MantenimientoADataGridRecetas();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Asegurese de seleccionar el producto, el ingrediente y la cantidad.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+
+        }
+
+        private bool Validacion()
+        {
+            Boolean pasar = true;
+
+            if (txtIDProducto.Text.ToString().Equals("")) {
+                pasar = false;
+            }
+            if(txtNombreProducto.Text.ToString().Equals("")) {
+                pasar = false;
+            }
+            if (txtID.Text.ToString().Equals(""))
+            {
+                pasar = false;
+            }
+            if(txtID.Text.ToString().Equals("")) {
+                pasar = false;
+            }
+            if (txtNombre.Text.ToString().Equals(""))
+            {
+                pasar = false;
+            }
+            if(txtCantidad.Text.ToString().Equals("")) 
+            {
+                pasar = false;
+            }
+            return pasar;
         }
 
         private void btnEliminarReceta_Click(object sender, EventArgs e)
@@ -541,12 +552,15 @@ namespace Ingredientes_y_Productos.GUI
                     {
                         if (dgvReceta.SelectedRows.Count != 0)
                         {
-                            int rowIndex = dgvReceta.SelectedRows[0].Index;
-                            dgvReceta.Rows.RemoveAt(rowIndex);
-                            MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Mantenimiento.CLS.IngredienteProducto ingredienteEliminar = new Mantenimiento.CLS.IngredienteProducto();
+                            ingredienteEliminar.Id = Int32.Parse(dgvReceta.CurrentRow.Cells["idIngProd"].Value.ToString());
+                            if(ingredienteEliminar.Eliminar()){
+
+                                CargarIngredientesDeProducto(txtIDProducto.Text);
+                                MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                             lblCantidad.Text = "Cantidad (3 digitos maximo)";
                             btnBuscarIngrediente.Text = "Buscar Ingrediente";
-                            btnGuardarReceta.Enabled = true;
                             LimpiarTextBox();
                         }
                         else
@@ -568,13 +582,12 @@ namespace Ingredientes_y_Productos.GUI
             {
                 if (dgvReceta.SelectedRows.Count > 0)
                 {
+                    txtID.Tag = dgvReceta.CurrentRow.Cells["idIngProd"].Value.ToString();
                     txtID.Text = dgvReceta.CurrentRow.Cells["idIngredienteReceta"].Value.ToString();
                     txtNombre.Text = dgvReceta.CurrentRow.Cells["nombreReceta"].Value.ToString();
                     txtCantidad.Text = dgvReceta.CurrentRow.Cells["cantidad"].Value.ToString();
                     btnBuscarIngrediente.Text = "Cambiar Ingrediente";
                     lblCantidad.Text = "Editar Cantidad(3 digitos Maximo)";
-                    btnGuardarReceta.Enabled = false;
-                    variable = true;
                 }
             }
             catch (Exception)
@@ -743,9 +756,28 @@ namespace Ingredientes_y_Productos.GUI
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Permitir solo números, el carácter de control (como retroceso) y el punto decimal
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
+            }
+
+            // Permitir solo un punto decimal y asegurarse de que no haya más de 3 dígitos después del punto
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar != '.' && char.IsDigit(e.KeyChar))
+            {
+                TextBox textBox = sender as TextBox;
+                string currentText = textBox.Text.Insert(textBox.SelectionStart, e.KeyChar.ToString());
+                string[] parts = currentText.Split('.');
+
+                if (parts.Length > 1 && parts[1].Length > 3)
+                {
+                    e.Handled = true;
+                }
             }
         }
     }

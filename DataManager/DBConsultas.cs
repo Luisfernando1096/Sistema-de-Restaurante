@@ -1652,5 +1652,25 @@ namespace DataManager
             }
         }
 
+        public static DataTable IngredientesPorProducto(String idProducto)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT ip.id, i.idIngrediente, p.idProducto, i.nombre, round(ip.cantidad, 3) cantidad 
+                                        FROM ingrediente_producto ip, ingrediente i, producto p WHERE p.idProducto = " + idProducto + @"
+                                        AND i.idIngrediente=ip.idIngrediente AND p.idProducto=ip.idProducto;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
     }
 }
