@@ -99,16 +99,21 @@ namespace Reportes.GUI
                         if (cmbTipoVetas.SelectedIndex == 0)
                         {
                             //Ventas por periodo
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
-                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
                         } else if (cmbTipoVetas.SelectedIndex == 1)
                         {
                             //Ventas Resumen por periodo
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
-                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                        } else if (cmbTipoVetas.SelectedIndex == 2)
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
+                        }
+                        else if (cmbTipoVetas.SelectedIndex == 2)
                         {
 
                         } else if (cmbTipoVetas.SelectedIndex == 3)
@@ -129,9 +134,11 @@ namespace Reportes.GUI
                         else if (cmbTipoVetas.SelectedIndex == 7)
                         {
                             //Agrupado por productos
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasAgrupadoPorProducto rep = new REP.RepVentasAgrupadoPorProducto();
-                            GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
                         }
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
@@ -140,9 +147,11 @@ namespace Reportes.GUI
                             REP.RepVentasProductosResumen rep = new REP.RepVentasProductosResumen();
                             GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");*/
 
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
                             DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            GenerarReporte(oReporte, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.GenerarReporte(oReporte, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
                         }
                         else
                         {
@@ -166,92 +175,92 @@ namespace Reportes.GUI
             }
         }
 
-        private void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
-        {
-            oReporte.SetDataSource(datos);
-            if (!f.Equals(""))
-            {
-                // Convertir la cadena a DateTime
-                if (DateTime.TryParse(f, out DateTime fecha))
-                {
-                    // Formatear la fecha
-                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+        //private void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
+        //{
+        //    oReporte.SetDataSource(datos);
+        //    if (!f.Equals(""))
+        //    {
+        //        // Convertir la cadena a DateTime
+        //        if (DateTime.TryParse(f, out DateTime fecha))
+        //        {
+        //            // Formatear la fecha
+        //            string fechaFormateada = fecha.ToString("dd-MM-yyyy");
 
-                    oReporte.SetParameterValue("Fecha", fechaFormateada);
-                }
-                else
-                {
-                    Console.WriteLine("La cadena no es un formato de fecha válido.");
-                }
+        //            oReporte.SetParameterValue("Fecha", fechaFormateada);
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("La cadena no es un formato de fecha válido.");
+        //        }
                 
-            }
-            if (!fi.Equals(""))
-            {
-                // Convertir la cadena a DateTime
-                if (DateTime.TryParse(fi, out DateTime fecha))
-                {
-                    // Formatear la fecha
-                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+        //    }
+        //    if (!fi.Equals(""))
+        //    {
+        //        // Convertir la cadena a DateTime
+        //        if (DateTime.TryParse(fi, out DateTime fecha))
+        //        {
+        //            // Formatear la fecha
+        //            string fechaFormateada = fecha.ToString("dd-MM-yyyy");
 
-                    oReporte.SetParameterValue("fInicio", fechaFormateada);
-                }
-                else
-                {
-                    Console.WriteLine("La cadena no es un formato de fecha válido.");
-                }
-            }
-            if (!ff.Equals(""))
-            {
-                // Convertir la cadena a DateTime
-                if (DateTime.TryParse(ff, out DateTime fecha))
-                {
-                    // Formatear la fecha
-                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+        //            oReporte.SetParameterValue("fInicio", fechaFormateada);
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("La cadena no es un formato de fecha válido.");
+        //        }
+        //    }
+        //    if (!ff.Equals(""))
+        //    {
+        //        // Convertir la cadena a DateTime
+        //        if (DateTime.TryParse(ff, out DateTime fecha))
+        //        {
+        //            // Formatear la fecha
+        //            string fechaFormateada = fecha.ToString("dd-MM-yyyy");
 
-                    oReporte.SetParameterValue("fFin", fechaFormateada);
-                }
-                else
-                {
-                    Console.WriteLine("La cadena no es un formato de fecha válido.");
-                }
-            }
-            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-            if (Boolean.Parse(oTicket.ShowSaludo))
-            {
-                oReporte.SetParameterValue("Footer", oTicket.Footer3);
-            }
-            else
-            {
-                oReporte.SetParameterValue("Footer", "");
-            }
+        //            oReporte.SetParameterValue("fFin", fechaFormateada);
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("La cadena no es un formato de fecha válido.");
+        //        }
+        //    }
+        //    oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+        //    if (Boolean.Parse(oTicket.ShowSaludo))
+        //    {
+        //        oReporte.SetParameterValue("Footer", oTicket.Footer3);
+        //    }
+        //    else
+        //    {
+        //        oReporte.SetParameterValue("Footer", "");
+        //    }
             
-            if (oReporte != null)
-            {
-                try
-                {
-                    // Imprimir el informe en la impresora seleccionada
-                    PrinterSettings settings = new PrinterSettings
-                    {
-                        PrinterName = oConfiguracion.PrinterInformes
-                    };
+        //    if (oReporte != null)
+        //    {
+        //        try
+        //        {
+        //            // Imprimir el informe en la impresora seleccionada
+        //            PrinterSettings settings = new PrinterSettings
+        //            {
+        //                PrinterName = oConfiguracion.PrinterInformes
+        //            };
 
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
+        //            oReporte.PrintOptions.PrinterName = settings.PrinterName;
+        //            oReporte.PrintToPrinter(1, false, 0, 0);
 
-                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    this.Invoke((MethodInvoker)delegate {
-                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    });
-                }
-                catch (Exception ex)
-                {
-                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                    this.Invoke((MethodInvoker)delegate {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    });
-                }
-            }
-        }
+        //            // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+        //            this.Invoke((MethodInvoker)delegate {
+        //                MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            });
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+        //            this.Invoke((MethodInvoker)delegate {
+        //                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            });
+        //        }
+        //    }
+        //}
 
         private void btnVentas_Click(object sender, EventArgs e)
         {

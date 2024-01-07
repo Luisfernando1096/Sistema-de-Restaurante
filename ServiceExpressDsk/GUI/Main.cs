@@ -558,130 +558,50 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton27_Click(object sender, EventArgs e)
         {
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
             Reportes.REP.RepStockProducto oReporte = new Reportes.REP.RepStockProducto();
             DataTable datos = DataManager.DBConsultas.VerProductos();
             oReporte.SetDataSource(datos);
-            GenerarReporte(oReporte, datos, "", "", "");
+            f.GenerarReporte(oReporte, datos, "", "", "");
+            f.Show();
         }
 
         private void toolStripButton31_Click(object sender, EventArgs e)
         {
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
             Reportes.REP.RepProveedores oReporte = new Reportes.REP.RepProveedores();
             DataTable datos = DataManager.DBConsultas.Proveedor();
             oReporte.SetDataSource(datos);
-            GenerarReporte(oReporte, datos, "", "", "");
+            f.GenerarReporte(oReporte, datos, "", "", "");
+            f.Show();
         }
 
         private void toolStripButton28_Click(object sender, EventArgs e)
         {
             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            f.opc = 1;
-            f.ShowDialog();
+            Reportes.REP.RepClientes oReporte = new Reportes.REP.RepClientes();
+            DataTable datos = DataManager.DBConsultas.Clientes();
+            oReporte.SetDataSource(datos);
+            f.GenerarReporte(oReporte, datos, "", "", "");
+            f.Show();
         }
 
         private void toolStripButton29_Click(object sender, EventArgs e)
         {
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
             String fechaBD = DateTime.Now.ToString("yyyy/MM/dd");
             String fechaREP = DateTime.Now.ToString("dd/MM/yyyy");
 
             DataTable datos = DataManager.DBConsultas.RepVentasDiarias(fechaBD);
             Reportes.REP.RepVentasDiarias rep = new Reportes.REP.RepVentasDiarias();
-            GenerarReporte(rep, datos, "", "", fechaREP);
-        }
-
-        private void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
-        {
-            oReporte.SetDataSource(datos);
-            if (!f.Equals(""))
-            {
-                // Convertir la cadena a DateTime
-                if (DateTime.TryParse(f, out DateTime fecha))
-                {
-                    // Formatear la fecha
-                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
-
-                    oReporte.SetParameterValue("Fecha", fechaFormateada);
-                }
-                else
-                {
-                    Console.WriteLine("La cadena no es un formato de fecha válido.");
-                }
-
-            }
-            if (!fi.Equals(""))
-            {
-                // Convertir la cadena a DateTime
-                if (DateTime.TryParse(fi, out DateTime fecha))
-                {
-                    // Formatear la fecha
-                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
-
-                    oReporte.SetParameterValue("fInicio", fechaFormateada);
-                }
-                else
-                {
-                    Console.WriteLine("La cadena no es un formato de fecha válido.");
-                }
-            }
-            if (!ff.Equals(""))
-            {
-                // Convertir la cadena a DateTime
-                if (DateTime.TryParse(ff, out DateTime fecha))
-                {
-                    // Formatear la fecha
-                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
-
-                    oReporte.SetParameterValue("fFin", fechaFormateada);
-                }
-                else
-                {
-                    Console.WriteLine("La cadena no es un formato de fecha válido.");
-                }
-            }
-            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-            if (Boolean.Parse(oTicket.ShowSaludo))
-            {
-                oReporte.SetParameterValue("Footer", oTicket.Footer3);
-            }
-            else
-            {
-                oReporte.SetParameterValue("Footer", "");
-            }
-
-            if (oReporte != null)
-            {
-                try
-                {
-                    // Imprimir el informe en la impresora seleccionada
-                    PrinterSettings settings = new PrinterSettings
-                    {
-                        PrinterName = oConfiguracion.PrinterInformes
-                    };
-
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
-
-                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    this.Invoke((MethodInvoker)delegate {
-                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    });
-                }
-                catch (Exception ex)
-                {
-                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                    this.Invoke((MethodInvoker)delegate {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    });
-                }
-            }
+            f.GenerarReporte(rep, datos, "", "", fechaREP);
+            f.Show();
         }
 
         private void tpvClientes_Click(object sender, EventArgs e)
         {
-            Reportes.REP.RepClientes oReporte = new Reportes.REP.RepClientes();
-            DataTable datos = DataManager.DBConsultas.Clientes();
-            oReporte.SetDataSource(datos);
-            GenerarReporte(oReporte, datos, "", "", "");
+            TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
+            f.ShowDialog();
         }
     }
 }

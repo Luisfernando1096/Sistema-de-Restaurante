@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,42 +14,112 @@ namespace Reportes.GUI
     public partial class VisorGeneral : Form
     {
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
-        public int opc { get; set; }
-        public string FechaInicio { get; set; }
-        public string FechaFinal { get; set; }
+        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
+        private ReportDocument reporteActual;
 
         public VisorGeneral()
         {
             InitializeComponent();
         }
 
-        private void CargarReporte()
+        public void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
         {
-            DataTable datos = new DataTable();
-
-            if (opc == 1) //Reporte de clientes
+            oReporte.SetDataSource(datos);
+            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            if (!f.Equals(""))
             {
-                
-            }
-            else if(opc == 2) //Reporte de proveedores
-            {
-                
-            }
-            else if (opc == 3) //Reporte de stock de productos
-            {
-                
-            }
-            else if (opc == 4) //Reporte de entas por fechas
-            {
-                if (FechaInicio != string.Empty && FechaFinal != string.Empty)
+                // Convertir la cadena a DateTime
+                if (DateTime.TryParse(f, out DateTime fecha))
                 {
-                    
+                    // Formatear la fecha
+                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+
+                    oReporte.SetParameterValue("Fecha", fechaFormateada);
+                }
+                else
+                {
+                    Console.WriteLine("La cadena no es un formato de fecha válido.");
+                }
+
+            }
+            if (!fi.Equals(""))
+            {
+                // Convertir la cadena a DateTime
+                if (DateTime.TryParse(fi, out DateTime fecha))
+                {
+                    // Formatear la fecha
+                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+
+                    oReporte.SetParameterValue("fInicio", fechaFormateada);
+                }
+                else
+                {
+                    Console.WriteLine("La cadena no es un formato de fecha válido.");
+                }
+            }
+            if (!ff.Equals(""))
+            {
+                // Convertir la cadena a DateTime
+                if (DateTime.TryParse(ff, out DateTime fecha))
+                {
+                    // Formatear la fecha
+                    string fechaFormateada = fecha.ToString("dd-MM-yyyy");
+
+                    oReporte.SetParameterValue("fFin", fechaFormateada);
+                }
+                else
+                {
+                    Console.WriteLine("La cadena no es un formato de fecha válido.");
+                }
+            }
+            if (Boolean.Parse(oTicket.ShowSlogan))
+            {
+                oReporte.SetParameterValue("Footer", oEmpresa.Slogan);
+            }
+            else
+            {
+                oReporte.SetParameterValue("Footer", "");
+            }
+
+            if (oReporte != null)
+            {
+                try
+                {
+                    this.reporteActual = oReporte;
+                    //// Imprimir el informe en la impresora seleccionada
+                    //PrinterSettings settings = new PrinterSettings
+                    //{
+                    //    PrinterName = oConfiguracion.PrinterInformes
+                    //};
+
+                    //oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    //oReporte.PrintToPrinter(1, false, 0, 0);
+
+                    //// Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                    //this.Invoke((MethodInvoker)delegate {
+                    //    MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //});
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    this.Invoke((MethodInvoker)delegate {
+                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
                 }
             }
         }
+
         private void crvVisor_Load(object sender, EventArgs e)
         {
-            CargarReporte();
+            if (reporteActual != null && crvVisor != null)
+            {
+                crvVisor.ReportSource = reporteActual;
+            }
+            else
+            {
+                MessageBox.Show("Error: reporteActual o crvVisor es nulo.");
+            }
         }
     }
 }
