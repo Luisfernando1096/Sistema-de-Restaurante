@@ -30,8 +30,8 @@ namespace Compras.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Compras));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label111 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -61,6 +61,10 @@ namespace Compras.GUI
             this.txtProveedor = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.txtDescuento = new System.Windows.Forms.TextBox();
             this.txtIva = new System.Windows.Forms.TextBox();
             this.txtSumas = new System.Windows.Forms.TextBox();
@@ -92,12 +96,14 @@ namespace Compras.GUI
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAtras = new System.Windows.Forms.ToolStripButton();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rbCalcularIva = new System.Windows.Forms.RadioButton();
+            this.rbIncluirIva = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -164,6 +170,7 @@ namespace Compras.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.cmbComprobante);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label16);
@@ -198,7 +205,7 @@ namespace Compras.GUI
             // 
             this.cmbComprobante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbComprobante.FormattingEnabled = true;
-            this.cmbComprobante.Location = new System.Drawing.Point(544, 41);
+            this.cmbComprobante.Location = new System.Drawing.Point(465, 41);
             this.cmbComprobante.Margin = new System.Windows.Forms.Padding(2);
             this.cmbComprobante.Name = "cmbComprobante";
             this.cmbComprobante.Size = new System.Drawing.Size(129, 28);
@@ -208,7 +215,7 @@ namespace Compras.GUI
             // 
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point(830, 128);
+            this.button3.Location = new System.Drawing.Point(751, 128);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(28, 26);
             this.button3.TabIndex = 65;
@@ -219,7 +226,7 @@ namespace Compras.GUI
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(688, 129);
+            this.label16.Location = new System.Drawing.Point(609, 129);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(52, 20);
             this.label16.TabIndex = 63;
@@ -229,7 +236,7 @@ namespace Compras.GUI
             // 
             this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrecio.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio.Location = new System.Drawing.Point(746, 127);
+            this.txtPrecio.Location = new System.Drawing.Point(667, 127);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(76, 26);
             this.txtPrecio.TabIndex = 64;
@@ -239,7 +246,7 @@ namespace Compras.GUI
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(539, 130);
+            this.label15.Location = new System.Drawing.Point(460, 130);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 20);
             this.label15.TabIndex = 61;
@@ -249,7 +256,7 @@ namespace Compras.GUI
             // 
             this.txtCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCantidad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidad.Location = new System.Drawing.Point(610, 128);
+            this.txtCantidad.Location = new System.Drawing.Point(531, 128);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(71, 26);
             this.txtCantidad.TabIndex = 62;
@@ -290,7 +297,7 @@ namespace Compras.GUI
             // 
             // dtpFechaCompra
             // 
-            this.dtpFechaCompra.Location = new System.Drawing.Point(544, 96);
+            this.dtpFechaCompra.Location = new System.Drawing.Point(465, 96);
             this.dtpFechaCompra.Name = "dtpFechaCompra";
             this.dtpFechaCompra.Size = new System.Drawing.Size(274, 26);
             this.dtpFechaCompra.TabIndex = 57;
@@ -299,7 +306,7 @@ namespace Compras.GUI
             // 
             this.txtNoComprobante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNoComprobante.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNoComprobante.Location = new System.Drawing.Point(688, 44);
+            this.txtNoComprobante.Location = new System.Drawing.Point(609, 44);
             this.txtNoComprobante.Name = "txtNoComprobante";
             this.txtNoComprobante.Size = new System.Drawing.Size(130, 26);
             this.txtNoComprobante.TabIndex = 56;
@@ -331,7 +338,7 @@ namespace Compras.GUI
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(539, 21);
+            this.label13.Location = new System.Drawing.Point(460, 21);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(94, 20);
             this.label13.TabIndex = 51;
@@ -351,7 +358,7 @@ namespace Compras.GUI
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(539, 73);
+            this.label6.Location = new System.Drawing.Point(460, 73);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(125, 20);
             this.label6.TabIndex = 46;
@@ -362,7 +369,7 @@ namespace Compras.GUI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(683, 23);
+            this.label3.Location = new System.Drawing.Point(604, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 20);
             this.label3.TabIndex = 45;
@@ -412,6 +419,8 @@ namespace Compras.GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label18);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.txtDescuento);
@@ -429,6 +438,50 @@ namespace Compras.GUI
             this.groupBox2.TabIndex = 49;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Otros Datos";
+            // 
+            // label18
+            // 
+            this.label18.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(765, 35);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(32, 30);
+            this.label18.TabIndex = 74;
+            this.label18.Text = "$";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(386, 35);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 30);
+            this.label11.TabIndex = 73;
+            this.label11.Text = "$";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(765, 94);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 30);
+            this.label7.TabIndex = 72;
+            this.label7.Text = "$";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(386, 94);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 30);
+            this.label17.TabIndex = 71;
+            this.label17.Text = "$";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtDescuento
             // 
@@ -449,6 +502,7 @@ namespace Compras.GUI
             this.txtIva.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIva.Location = new System.Drawing.Point(182, 96);
             this.txtIva.Name = "txtIva";
+            this.txtIva.ReadOnly = true;
             this.txtIva.Size = new System.Drawing.Size(202, 26);
             this.txtIva.TabIndex = 67;
             this.txtIva.TextChanged += new System.EventHandler(this.txtIva_TextChanged);
@@ -479,8 +533,8 @@ namespace Compras.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -499,14 +553,14 @@ namespace Compras.GUI
             this.iva,
             this.idComprobante,
             this.Tipo});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvDatos.Location = new System.Drawing.Point(30, 228);
             this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.MultiSelect = false;
@@ -769,33 +823,46 @@ namespace Compras.GUI
             this.btnAtras.Text = "Atras";
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
-            // label17
+            // groupBox3
             // 
-            this.label17.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(384, 94);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(32, 30);
-            this.label17.TabIndex = 71;
-            this.label17.Text = "%";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox3.Controls.Add(this.rbIncluirIva);
+            this.groupBox3.Controls.Add(this.rbCalcularIva);
+            this.groupBox3.Location = new System.Drawing.Point(745, 25);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(158, 96);
+            this.groupBox3.TabIndex = 67;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Opciones IVA";
             // 
-            // label7
+            // rbCalcularIva
             // 
-            this.label7.Font = new System.Drawing.Font("Arial", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(763, 94);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 30);
-            this.label7.TabIndex = 72;
-            this.label7.Text = "%";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbCalcularIva.AutoSize = true;
+            this.rbCalcularIva.Checked = true;
+            this.rbCalcularIva.Location = new System.Drawing.Point(36, 28);
+            this.rbCalcularIva.Name = "rbCalcularIva";
+            this.rbCalcularIva.Size = new System.Drawing.Size(95, 24);
+            this.rbCalcularIva.TabIndex = 0;
+            this.rbCalcularIva.TabStop = true;
+            this.rbCalcularIva.Text = "Calcular iva";
+            this.rbCalcularIva.UseVisualStyleBackColor = true;
+            this.rbCalcularIva.CheckedChanged += new System.EventHandler(this.rbCalcularIva_CheckedChanged);
+            // 
+            // rbIncluirIva
+            // 
+            this.rbIncluirIva.AutoSize = true;
+            this.rbIncluirIva.Location = new System.Drawing.Point(35, 59);
+            this.rbIncluirIva.Name = "rbIncluirIva";
+            this.rbIncluirIva.Size = new System.Drawing.Size(82, 24);
+            this.rbIncluirIva.TabIndex = 1;
+            this.rbIncluirIva.Text = "Incluir iva";
+            this.rbIncluirIva.UseVisualStyleBackColor = true;
+            this.rbIncluirIva.CheckedChanged += new System.EventHandler(this.rbIncluirIva_CheckedChanged);
             // 
             // Compras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(961, 630);
+            this.ClientSize = new System.Drawing.Size(961, 662);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label111);
@@ -812,6 +879,8 @@ namespace Compras.GUI
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -881,5 +950,10 @@ namespace Compras.GUI
         private System.Windows.Forms.ToolStripButton btnAtras;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton rbIncluirIva;
+        private System.Windows.Forms.RadioButton rbCalcularIva;
     }
 }

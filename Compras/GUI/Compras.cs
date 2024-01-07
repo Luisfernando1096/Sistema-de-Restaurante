@@ -81,7 +81,7 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    decimal SumaTotal = Acumulado - ((descuento / 100) * Acumulado) + ((iva / 100) * Acumulado);
+                    decimal SumaTotal = Acumulado - (descuento) + (iva);
                     txtSumas.Text = Acumulado.ToString("0.00");
                     txtTotales.Text = SumaTotal.ToString("0.00");
                 }
@@ -96,7 +96,7 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    decimal SumaTotal = Acumulado - ((descuento / 100) * Acumulado);
+                    decimal SumaTotal = Acumulado - (descuento);
                     txtSumas.Text = Acumulado.ToString("0.00");
                     txtTotales.Text = SumaTotal.ToString("0.00");
                 }
@@ -111,7 +111,7 @@ namespace Compras.GUI
                             Acumulado += valorCelda;
                         }
                     }
-                    decimal SumaTotal = Acumulado + ((iva / 100) * Acumulado);
+                    decimal SumaTotal = Acumulado + (iva);
                     txtSumas.Text = Acumulado.ToString("0.00");
                     txtTotales.Text = SumaTotal.ToString("0.00");
                 }
@@ -232,8 +232,10 @@ namespace Compras.GUI
             btnAtras.Visible = false;
             cmbTipoCompra.Items.Insert(0, "Productos");
             cmbTipoCompra.Items.Insert(1, "Ingredientes");
-            txtIva.Text = "0";
-            txtDescuento.Text = "0";
+            txtIva.Text = "0.00";
+            txtDescuento.Text = "0.00";
+            txtSumas.Text = "0.00";
+            txtTotales.Text = "0.00";
 
             CargarComprobante();
         }
@@ -318,6 +320,7 @@ namespace Compras.GUI
                     }
                 }
                 CalcularTotal();
+                CalcularIva();
             }
             catch (Exception)
             {
@@ -402,8 +405,8 @@ namespace Compras.GUI
                                 compra.Fecha = fechaFormateada;
 
                                 compra.Total = double.Parse(txtSumas.Text.ToString());
-                                compra.Descuento = (double.Parse(txtDescuento.Text) / 100);
-                                compra.Iva = (double.Parse(txtIva.Text) / 100);
+                                compra.Descuento = (double.Parse(txtDescuento.Text));
+                                compra.Iva = (double.Parse(txtIva.Text));
                                 compra.TotalPago = double.Parse(txtTotales.Text);
 
                                 int idCompraInsertada;
@@ -520,6 +523,7 @@ namespace Compras.GUI
                     }
                 }
                 CalcularTotal();
+                CalcularIva();
             }
             catch (Exception)
             {
@@ -644,6 +648,8 @@ namespace Compras.GUI
                 dtpFechaCompra.Enabled = false;
                 txtIva.Enabled = false;
                 txtDescuento.Enabled = false;
+                rbCalcularIva.Enabled = false;
+                rbIncluirIva.Enabled = false;
                 
                 decimal subTotal = 0;
                 cmbTipoCompra.Enabled = false;
@@ -687,6 +693,8 @@ namespace Compras.GUI
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
+            rbCalcularIva.Enabled = true;
+            rbIncluirIva.Enabled = true;
             txtIva.Enabled = true;
             txtDescuento.Enabled = true;
             btnBuscarProveedor.Enabled = true;
@@ -734,6 +742,34 @@ namespace Compras.GUI
             txtDescuento.Text = string.Empty;
             txtTotales.Text = string.Empty;
             dtpFechaCompra.Value = DateTime.Now;
+        }
+
+        private void rbCalcularIva_CheckedChanged(object sender, EventArgs e)
+        {
+            CalcularIva();
+        }
+
+        private void CalcularIva()
+        {
+            double sumas = double.Parse(txtSumas.Text);
+
+            if (rbCalcularIva.Checked)
+            {
+                double iva = sumas * 0.13;
+                txtIva.Text = iva.ToString("0.00");
+                CalcularTotal();
+            }
+            else
+            {
+                double iva = 0;
+                txtIva.Text = iva.ToString("0.00");
+                CalcularTotal();
+            }
+        }
+
+        private void rbIncluirIva_CheckedChanged(object sender, EventArgs e)
+        {
+            CalcularIva();
         }
     }
 }
