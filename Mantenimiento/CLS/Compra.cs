@@ -19,6 +19,8 @@ namespace Mantenimiento.CLS
         double _descuento;
         double _iva;
         double _totalPago;
+        String _formaPago;
+        String _tipoFactura;
 
         public int IdCompra { get => _idCompra; set => _idCompra = value; }
         public string TipoCompra { get => _tipoCompra; set => _tipoCompra = value; }
@@ -31,13 +33,15 @@ namespace Mantenimiento.CLS
         public double Descuento { get => _descuento; set => _descuento = value; }
         public double Iva { get => _iva; set => _iva = value; }
         public double TotalPago { get => _totalPago; set => _totalPago = value; }
+        public string FormaPago { get => _formaPago; set => _formaPago = value; }
+        public string TipoFactura { get => _tipoFactura; set => _tipoFactura = value; }
 
         public Boolean Insertar(out int idInsertado)
         {
             Boolean resultado = false;
             idInsertado = -1; // Valor predeterminado en caso de error
             string sentencia;
-            sentencia = @"insert into compra(tipoCompra,idProveedor,idComprobante,nComprobante,idUsuario,fecha,total,descuento,iva,totalPago) values('"+_tipoCompra+"',"+_idProveedor+","+_idComprobante+",'"+_nComprobante+"',"+_idUsuario+",'"+_fecha+"',"+_total+","+_descuento+","+_iva+","+_totalPago+");";
+            sentencia = @"insert into compra(tipoCompra,idProveedor,idComprobante,nComprobante,idUsuario,fecha,total,descuento,iva,totalPago,formaPago,tipoFactura) values('"+_tipoCompra+"',"+_idProveedor+","+_idComprobante+",'"+_nComprobante+"',"+_idUsuario+",'"+_fecha+"',"+_total+","+_descuento+","+_iva+","+_totalPago+ ",'" + _formaPago + "','" + _tipoFactura + "');";
 
             try
             {

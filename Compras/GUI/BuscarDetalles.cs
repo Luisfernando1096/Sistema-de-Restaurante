@@ -26,6 +26,8 @@ namespace Compras.GUI
         public decimal Descuento { get; set; }
         public decimal Iva { get; set; }
         public decimal Total { get; set; }
+        public string FormaPago { get; set; }
+        public string TipoFactura { get; set; }
 
         private void CargarDatos(int id) 
         {
@@ -128,9 +130,11 @@ namespace Compras.GUI
                 IdUsuario = int.Parse(dgvBuscar.CurrentRow.Cells["idUsuario"].Value.ToString());
                 Fecha = DateTime.Parse(dgvBuscar.CurrentRow.Cells["fecha"].Value.ToString());
                 SubTotal = decimal.Parse(dgvBuscar.CurrentRow.Cells["total"].Value.ToString());
-                Descuento = (decimal.Parse(dgvBuscar.CurrentRow.Cells["descuento"].Value.ToString()) * 100);
-                Iva = (decimal.Parse(dgvBuscar.CurrentRow.Cells["iva"].Value.ToString())*100);
+                Descuento = (decimal.Parse(dgvBuscar.CurrentRow.Cells["descuento"].Value.ToString()));
+                Iva = (decimal.Parse(dgvBuscar.CurrentRow.Cells["iva"].Value.ToString()));
                 Total = decimal.Parse(dgvBuscar.CurrentRow.Cells["totalPago"].Value.ToString());
+                FormaPago = dgvBuscar.CurrentRow.Cells["formaPago"].Value.ToString();
+                TipoFactura = dgvBuscar.CurrentRow.Cells["tipoFactura"].Value.ToString();
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

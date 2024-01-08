@@ -1452,19 +1452,19 @@ namespace DataManager
                 string producto = "PRODUCTOS";
                 if (id == 1)
                 {
-                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + producto + "';";
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + producto + "';";
                 } 
                 else if (id == 2)
                 {
-                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + Ingrediente + "';";
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + Ingrediente + "';";
                 }
                 else if(id == 3)
                 {
-                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
                 }
                 else
                 {
-                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
+                    sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
                 }
 
                 DBOperacion operacion = new DBOperacion();

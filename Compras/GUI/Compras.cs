@@ -8,9 +8,7 @@ namespace Compras.GUI
     {
         BindingSource datos = new BindingSource();
         Boolean variable = false;
-        Boolean estadoCmb = false;
         Boolean editar = false;
-        private int indiceAnterior = -1;
 
         public Compras()
         {
@@ -405,9 +403,26 @@ namespace Compras.GUI
                                 compra.Fecha = fechaFormateada;
 
                                 compra.Total = double.Parse(txtSumas.Text.ToString());
-                                compra.Descuento = (double.Parse(txtDescuento.Text));
-                                compra.Iva = (double.Parse(txtIva.Text));
-                                compra.TotalPago = double.Parse(txtTotales.Text);
+                                compra.Descuento = (double.Parse(txtDescuento.Text.ToString()));
+                                compra.Iva = (double.Parse(txtIva.Text.ToString()));
+                                compra.TotalPago = double.Parse(txtTotales.Text.ToString());
+                                if (rbTarjeta.Checked)
+                                {
+                                    compra.FormaPago = rbTarjeta.Text.ToString().ToUpper();
+                                }
+                                else
+                                {
+                                    compra.FormaPago = rbEfectivo.Text.ToString().ToUpper();
+                                }
+
+                                if (rbCalcularIva.Checked)
+                                {
+                                    compra.TipoFactura = rbCalcularIva.Text.ToString().ToUpper();
+                                }
+                                else
+                                {
+                                    compra.TipoFactura = rbIncluirIva.Text.ToString().ToUpper();
+                                }
 
                                 int idCompraInsertada;
                                 if (compra.Insertar(out idCompraInsertada))
@@ -475,6 +490,8 @@ namespace Compras.GUI
                                     txtProveedor.Tag = "";
                                     txtSumas.Text = string.Empty;
                                     txtTotales.Text = string.Empty;
+                                    txtDescuento.Text = string.Empty;
+                                    txtIva.Text = string.Empty;
                                     txtNoComprobante.Text = string.Empty;
                                 }
                                 else
@@ -534,12 +551,25 @@ namespace Compras.GUI
 
         private void txtIva_TextChanged(object sender, EventArgs e)
         {
-            CalcularTotal();
+            //CalcularTotal();
         }
 
         private void txtDescuento_TextChanged(object sender, EventArgs e)
         {
-            CalcularTotal();
+            if (!string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
+            {
+                txtTotales.Text = (double.Parse(txtIva.Text) + double.Parse(txtSumas.Text) - double.Parse(txtDescuento.Text)).ToString("0.00");
+            } else if (string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
+            {
+                txtTotales.Text = (double.Parse(txtIva.Text) + double.Parse(txtSumas.Text)).ToString("0.00");
+            } else if (!string.IsNullOrEmpty(txtDescuento.Text) && string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
+            {
+                txtTotales.Text = (double.Parse(txtSumas.Text) - double.Parse(txtDescuento.Text)).ToString("0.00");
+            }else if (!string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && string.IsNullOrEmpty(txtSumas.Text))
+            {
+                txtTotales.Text = (double.Parse(txtIva.Text) - double.Parse(txtDescuento.Text)).ToString("0.00");
+            }
+
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -628,7 +658,6 @@ namespace Compras.GUI
             buscarDetalle.bntSelecionar.Visible = true;
             var resultado = buscarDetalle.ShowDialog();
 
-            estadoCmb = true;
             if (resultado == DialogResult.OK)
             {
                 txtDescripcion.Text = string.Empty;
@@ -650,7 +679,9 @@ namespace Compras.GUI
                 txtDescuento.Enabled = false;
                 rbCalcularIva.Enabled = false;
                 rbIncluirIva.Enabled = false;
-                
+                rbEfectivo.Enabled = false;
+                rbTarjeta.Enabled = false;
+
                 decimal subTotal = 0;
                 cmbTipoCompra.Enabled = false;
                 txtNoComprobante.Enabled = false;
@@ -666,6 +697,28 @@ namespace Compras.GUI
                 txtDescuento.Text = buscarDetalle.Descuento.ToString();
                 txtIva.Text = buscarDetalle.Iva.ToString();
                 txtTotales.Text = buscarDetalle.Total.ToString();
+                txtSumas.Text = buscarDetalle.SubTotal.ToString();
+                if (rbTarjeta.Text.ToUpper().Equals(buscarDetalle.FormaPago.ToString()))
+                {
+                    rbTarjeta.Checked = true;
+                    rbEfectivo.Checked = false;
+                }
+                else
+                {
+                    rbTarjeta.Checked = false;
+                    rbEfectivo.Checked = true;
+                }
+
+                if (rbIncluirIva.Text.Equals(buscarDetalle.TipoFactura.ToString()))
+                {
+                    rbIncluirIva.Checked = true;
+                    rbCalcularIva.Checked = false;
+                }
+                else
+                {
+                    rbIncluirIva.Checked = false;
+                    rbCalcularIva.Checked = true;
+                }
                 editar = true;
 
                 if (cmbTipoCompra.Text == "Productos")
@@ -677,13 +730,6 @@ namespace Compras.GUI
                     CargarDatos(2, buscarDetalle.IdProveedor, buscarDetalle.NComprobante);
                 }
 
-                foreach (DataGridViewRow item in dgvDatos.Rows)
-                {
-                    decimal subTotalItem = Convert.ToDecimal(item.Cells["ventasGravadas"].Value);
-
-                    subTotal += subTotalItem;
-                }
-                txtSumas.Text = subTotal.ToString();
             }
             else
             {
@@ -695,6 +741,8 @@ namespace Compras.GUI
         {
             rbCalcularIva.Enabled = true;
             rbIncluirIva.Enabled = true;
+            rbEfectivo.Enabled = true;
+            rbTarjeta.Enabled = true;
             txtIva.Enabled = true;
             txtDescuento.Enabled = true;
             btnBuscarProveedor.Enabled = true;
@@ -764,8 +812,17 @@ namespace Compras.GUI
                 double sumas = double.Parse(txtSumas.Text);
                 double iva = sumas * 0.13;
                 txtIva.Text = iva.ToString("0.00");
-                txtSumas.Text = (sumas-iva).ToString("0.00");
-                txtTotales.Text = (sumas).ToString("0.00");
+                txtSumas.Text = (sumas - iva).ToString("0.00");
+                if (!txtDescuento.Text.Equals(""))
+                {
+                    double descuento = double.Parse(txtDescuento.Text);
+                    txtTotales.Text = (sumas - descuento).ToString("0.00");
+                }
+                else
+                {
+                    txtTotales.Text = (sumas).ToString("0.00");
+                }
+                
             }
         }
 
