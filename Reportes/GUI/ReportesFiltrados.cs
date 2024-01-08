@@ -98,7 +98,7 @@ namespace Reportes.GUI
                         //Generar reporte de ventas
                         if (cmbTipoVetas.SelectedIndex == 0)
                         {
-                            //Ventas por periodo
+                            //Ventas
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
@@ -106,7 +106,7 @@ namespace Reportes.GUI
                             f.Show();
                         } else if (cmbTipoVetas.SelectedIndex == 1)
                         {
-                            //Ventas Resumen por periodo
+                            //Ventas Resumen
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
@@ -115,25 +115,36 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoVetas.SelectedIndex == 2)
                         {
+                            //Ventas / Mesero
+
 
                         } else if (cmbTipoVetas.SelectedIndex == 3)
                         {
+                            //Ventas / Mesero Resumen
+                            
 
                         } else if (cmbTipoVetas.SelectedIndex == 4)
                         {
-
+                            //Ventas Facturadas
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                            DataTable datos = DataManager.DBConsultas.RepVentasFacturadas(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
                         }
                         else if (cmbTipoVetas.SelectedIndex == 5)
                         {
-
+                            //Facturas Anuladas
+                            
                         }
                         else if (cmbTipoVetas.SelectedIndex == 6)
                         {
-
+                            //Ventas Productos
+                            
                         }
                         else if (cmbTipoVetas.SelectedIndex == 7)
                         {
-                            //Agrupado por productos
+                            //Ventas Productos Agrupados
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
                             REP.RepVentasAgrupadoPorProducto rep = new REP.RepVentasAgrupadoPorProducto();
@@ -142,7 +153,7 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoVetas.SelectedIndex == 8)
                         {
-                            //Agrupado por productos Resumen
+                            //Ventas Productos Resumen
 
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                             REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();

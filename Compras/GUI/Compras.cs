@@ -117,8 +117,8 @@ namespace Compras.GUI
                 }
                 else
                 {
-                    txtDescuento.Text = "0";
-                    txtIva.Text = "0";
+                    txtDescuento.Text = "0.00";
+                    txtIva.Text = "0.00";
 
                     // Ni txtDescuento ni txtIva son números válidos o están vacíos.
                     foreach (DataGridViewRow item in dgvDatos.Rows)
@@ -130,7 +130,7 @@ namespace Compras.GUI
                         }
                     }
                     txtSumas.Text = Acumulado.ToString("0.00");
-                    txtTotales.Text = txtSumas.Text;
+                    txtTotales.Text = double.Parse(txtSumas.Text).ToString("0.00");
                 }
             }
             catch (Exception)
@@ -751,19 +751,21 @@ namespace Compras.GUI
 
         private void CalcularIva()
         {
-            double sumas = double.Parse(txtSumas.Text);
-
             if (rbCalcularIva.Checked)
             {
+                double sumas = double.Parse(txtSumas.Text);
                 double iva = sumas * 0.13;
                 txtIva.Text = iva.ToString("0.00");
                 CalcularTotal();
             }
             else
             {
-                double iva = 0;
-                txtIva.Text = iva.ToString("0.00");
                 CalcularTotal();
+                double sumas = double.Parse(txtSumas.Text);
+                double iva = sumas * 0.13;
+                txtIva.Text = iva.ToString("0.00");
+                txtSumas.Text = (sumas-iva).ToString("0.00");
+                txtTotales.Text = (sumas).ToString("0.00");
             }
         }
 

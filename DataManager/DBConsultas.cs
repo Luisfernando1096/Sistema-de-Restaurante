@@ -1633,7 +1633,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago
+                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
@@ -1660,6 +1660,32 @@ namespace DataManager
                 String sentencia = @"SELECT ip.id, i.idIngrediente, p.idProducto, i.nombre, round(ip.cantidad, 3) cantidad 
                                         FROM ingrediente_producto ip, ingrediente i, producto p WHERE p.idProducto = " + idProducto + @"
                                         AND i.idIngrediente=ip.idIngrediente AND p.idProducto=ip.idProducto;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable RepVentasFacturadas(String fInicio, String fFin)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
+                                        FROM pedido_detalle pd
+                                        JOIN pedido p ON p.idPedido = pd.idPedido
+                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                        JOIN producto pr ON pr.idProducto = pd.idProducto
+                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) 
+                                        AND p.cancelado = 1 AND p.nFactura != 0 GROUP BY ticket
+                                        ORDER BY c.nombreCuenta, p.fecha ASC;   
+";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
