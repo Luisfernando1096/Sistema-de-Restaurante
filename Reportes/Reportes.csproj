@@ -184,6 +184,18 @@
       <DependentUpon>RepPagoTarjeta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepProductoSinStock.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepProductoSinStock.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="REP\RepProductoStockMinimo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepProductoStockMinimo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepProveedores.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -385,6 +397,14 @@
     <EmbeddedResource Include="REP\RepPagoTarjeta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepPagoTarjeta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepProductoSinStock.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepProductoSinStock.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepProductoStockMinimo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepProductoStockMinimo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepProveedores.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

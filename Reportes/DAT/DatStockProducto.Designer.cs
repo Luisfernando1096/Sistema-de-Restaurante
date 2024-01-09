@@ -295,6 +295,8 @@ namespace Reportes.DAT {
             
             private global::System.Data.DataColumn columnstock;
             
+            private global::System.Data.DataColumn columnstockMinimo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ProductosDataTable() {
@@ -394,6 +396,14 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn stockMinimoColumn {
+                get {
+                    return this.columnstockMinimo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProductosRow AddProductosRow(string idProducto, string familia, string unidadMedida, string nombre, string precio, string costo, string conIngrediente, string stock) {
+            public ProductosRow AddProductosRow(string idProducto, string familia, string unidadMedida, string nombre, string precio, string costo, string conIngrediente, string stock, string stockMinimo) {
                 ProductosRow rowProductosRow = ((ProductosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         idProducto,
@@ -439,7 +449,8 @@ namespace Reportes.DAT {
                         precio,
                         costo,
                         conIngrediente,
-                        stock};
+                        stock,
+                        stockMinimo};
                 rowProductosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProductosRow);
                 return rowProductosRow;
@@ -470,6 +481,7 @@ namespace Reportes.DAT {
                 this.columncosto = base.Columns["costo"];
                 this.columnconIngrediente = base.Columns["conIngrediente"];
                 this.columnstock = base.Columns["stock"];
+                this.columnstockMinimo = base.Columns["stockMinimo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,6 +503,8 @@ namespace Reportes.DAT {
                 base.Columns.Add(this.columnconIngrediente);
                 this.columnstock = new global::System.Data.DataColumn("stock", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstock);
+                this.columnstockMinimo = new global::System.Data.DataColumn("stockMinimo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstockMinimo);
                 this.columnidProducto.Caption = "DataColumn1";
                 this.columnfamilia.Caption = "DataColumn1";
                 this.columnunidadMedida.Caption = "DataColumn1";
@@ -768,6 +782,22 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string stockMinimo {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductos.stockMinimoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'stockMinimo\' de la tabla \'Productos\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductos.stockMinimoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsidProductoNull() {
                 return this.IsNull(this.tableProductos.idProductoColumn);
             }
@@ -860,6 +890,18 @@ namespace Reportes.DAT {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetstockNull() {
                 this[this.tableProductos.stockColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsstockMinimoNull() {
+                return this.IsNull(this.tableProductos.stockMinimoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetstockMinimoNull() {
+                this[this.tableProductos.stockMinimoColumn] = global::System.Convert.DBNull;
             }
         }
         

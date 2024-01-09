@@ -269,5 +269,32 @@ namespace Reportes.GUI
             ProcesoImpresionReportes("propinas");
         }
 
+        private void btnVerInforme_Click(object sender, EventArgs e)
+        {
+            if (cmbVerInforme.SelectedIndex == 0)
+            {
+                //Productos con stock minimo
+                Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                Reportes.REP.RepProductoSinStock oReporte = new Reportes.REP.RepProductoSinStock();
+                DataTable datos = DataManager.DBConsultas.ProductosSinStock();
+                oReporte.SetDataSource(datos);
+                f.GenerarReporte(oReporte, datos, "", "", "");
+                f.Show();
+            }
+            else if (cmbVerInforme.SelectedIndex == 1)
+            {
+
+            }
+            else if (cmbVerInforme.SelectedIndex == 2)
+            {
+                //Productos con stock minimo
+                Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                Reportes.REP.RepProductoStockMinimo oReporte = new Reportes.REP.RepProductoStockMinimo();
+                DataTable datos = DataManager.DBConsultas.ProductosStockMinimo();
+                oReporte.SetDataSource(datos);
+                f.GenerarReporte(oReporte, datos, "", "", "");
+                f.Show();
+            }
+        }
     }
 }

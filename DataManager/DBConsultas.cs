@@ -435,6 +435,45 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable ProductosStockMinimo()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT p.idProducto, f.familia, u.unidadMedida, p.nombre, p.descripcion, p.precio, p.costo, p.foto, p.inventariable, p.conIngrediente, p.stock, p.stockMinimo, p.activo
+                                    FROM producto p
+                                    JOIN familia f ON p.idFamilia = f.idFamilia
+                                    JOIN unidadmedida u ON p.idUnidad = u.idUnidad
+                                    WHERE p.stock <= p.stockMinimo AND p.stock > 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable ProductosSinStock()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"select p.idProducto, f.familia, u.unidadMedida, p.nombre, p.descripcion, p.precio, p.costo, p.foto, p.inventariable, p.conIngrediente, p.stock, p.stockMinimo, p.activo from producto p, familia f, unidadmedida u where p.idFamilia = f.idFamilia and p.idUnidad = u.idUnidad and p.stock <= 0;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
         public static DataTable RepVentasAgrupadasPorProductoResumen(string fechaInicio, string fechaFinal)
         {
             try
