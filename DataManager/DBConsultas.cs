@@ -85,6 +85,29 @@ namespace DataManager
             }
         }
 
+        public static DataTable RepComprasProveedorComprobante(string fInicio, string fFin)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT p.nombre as proveedor, c.nComprobante, com.Tipo as comprobante, c.fecha, c.total as subTotal, c.iva, c.descuento, c.totalPago, c.tipoFactura, c.formaPago 
+										FROM compra c
+										JOIN proveedor p ON p.idProveedor = c.idProveedor
+                                        JOIN comprobante com ON com.idComprobante = c.idComprobante
+                                        WHERE c.fecha >= '" + fInicio + "' AND c.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY)
+                                        order by c.fecha asc;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable Meseros()
         {
             try

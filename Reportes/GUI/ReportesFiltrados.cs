@@ -81,7 +81,12 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoCompras.SelectedIndex == 1)
                         {
-                            
+                            //Programar reporte compras / proveedor
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                            DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepComprasProveedor rep = new REP.RepComprasProveedor();
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
                         }
                         else if (cmbTipoCompras.SelectedIndex == 2)
                         {

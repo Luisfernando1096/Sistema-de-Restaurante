@@ -64,6 +64,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatComprasProveedorComprobante.cs">
+      <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatComprasProveedorComprobante.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatProveedores.cs">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </Compile>
@@ -146,6 +154,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RepComandaParcial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="REP\RepComprasProveedor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComprasProveedor.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="REP\RepImprimirPuntoPago.cs">
@@ -273,6 +287,17 @@
     <None Include="DAT\DatComandaCompleta.xss">
       <DependentUpon>DatComandaCompleta.xsd</DependentUpon>
     </None>
+    <None Include="DAT\DatComprasProveedorComprobante.xsc">
+      <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatComprasProveedorComprobante.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatComprasProveedorComprobante.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatComprasProveedorComprobante.xss">
+      <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
+    </None>
     <None Include="DAT\DatProveedores.xsc">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </None>
@@ -361,6 +386,10 @@
     <EmbeddedResource Include="REP\RepComandaParcial.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComandaParcial.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepComprasProveedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprasProveedor.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepImprimirPuntoPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
