@@ -90,7 +90,12 @@ namespace Reportes.GUI
                         }
                         else if (cmbTipoCompras.SelectedIndex == 2)
                         {
-
+                            //Programar reporte compras / comprobante
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                            DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            REP.RepComprasComprobante rep = new REP.RepComprasComprobante();
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
                         }
                         else
                         {
