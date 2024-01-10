@@ -1671,7 +1671,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
+                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, '' as mesero
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
@@ -1690,18 +1690,30 @@ namespace DataManager
             }
         }
 
-        public static DataTable RepResumenVentasPorPeriodo(String fInicio, String fFin)
+        public static DataTable RepResumenVentasPorPeriodo(String fInicio, String fFin, Boolean empleados)
         {
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
+                String sentencia;
+                if (empleados) {
+                    sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, CONCAT(em.nombres, em.apellidos) as mesero
+                                        FROM pedido_detalle pd
+                                        JOIN pedido p ON p.idPedido = pd.idPedido
+                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                        JOIN producto pr ON pr.idProducto = pd.idProducto
+                                        JOIN empleado em ON em.idEmpleado = p.idMesero
+                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 GROUP BY ticket
+                                        ORDER BY c.nombreCuenta, p.fecha ASC;";
+                } else {
+                    sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, '' as mesero
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
                                         WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 GROUP BY ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;";
+                }
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

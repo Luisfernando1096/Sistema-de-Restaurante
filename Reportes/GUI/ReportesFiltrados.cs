@@ -110,7 +110,7 @@ namespace Reportes.GUI
                         {
                             //Ventas
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString(), false);
                             REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
                             f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                             f.Show();
@@ -118,7 +118,7 @@ namespace Reportes.GUI
                         {
                             //Ventas Resumen
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString(), false);
                             REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
                             f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                             f.Show();
@@ -126,12 +126,20 @@ namespace Reportes.GUI
                         else if (cmbTipoVetas.SelectedIndex == 2)
                         {
                             //Ventas / Mesero
-
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString(), true);
+                            REP.RepVentasMesero rep = new REP.RepVentasMesero();
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
 
                         } else if (cmbTipoVetas.SelectedIndex == 3)
                         {
                             //Ventas / Mesero Resumen
-                            
+                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString(), true);
+                            REP.RepVentasMeseroResumen rep = new REP.RepVentasMeseroResumen();
+                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
+                            f.Show();
 
                         } else if (cmbTipoVetas.SelectedIndex == 4)
                         {
