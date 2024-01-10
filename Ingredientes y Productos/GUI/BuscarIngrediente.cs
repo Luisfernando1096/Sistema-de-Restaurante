@@ -14,6 +14,7 @@ namespace Ingredientes_y_Productos.GUI
     {
         public int IDIngrediente { get; set; }
         public string NombreIngrediente { get; set; }
+        public string CantidadInicial { get; private set; }
 
         readonly BindingSource datos = new BindingSource();
         private void CargarDatos() 
@@ -247,6 +248,7 @@ namespace Ingredientes_y_Productos.GUI
             {
                 IDIngrediente = int.Parse(dgvBuscarIngrediente.CurrentRow.Cells["ID"].Value.ToString());
                 NombreIngrediente = dgvBuscarIngrediente.CurrentRow.Cells["nombreIngrediente"].Value.ToString();
+                CantidadInicial = dgvBuscarIngrediente.CurrentRow.Cells["Stock"].Value.ToString();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

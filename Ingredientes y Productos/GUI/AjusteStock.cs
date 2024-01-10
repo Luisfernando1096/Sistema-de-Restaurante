@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mantenimiento.CLS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -67,6 +68,7 @@ namespace Ingredientes_y_Productos.GUI
                 cmbAjusteProducto.SelectedIndex = -1;
                 txtCantidadProducto.Text = "";
                 txtJustificacionProducto.Text = "";
+                txtProductos.Tag = "";
             }
             catch (Exception)
             {
@@ -92,7 +94,7 @@ namespace Ingredientes_y_Productos.GUI
         {
             foreach (DataGridViewRow row in dgvIngredientes.Rows)
             {
-                string idExistente = row.Cells["dgvIngredientes"].Value.ToString();
+                string idExistente = row.Cells["idIngrediente"].Value.ToString();
 
                 if (idBuscar == idExistente)
                 {
@@ -111,6 +113,7 @@ namespace Ingredientes_y_Productos.GUI
                 cmbAjusteIngrediente.SelectedIndex = -1;
                 txtCantidadIngrediente.Text = "";
                 txtJustificacionIngrediente.Text = "";
+                txtIngrediente.Tag = "";
             }
             catch (Exception)
             {
@@ -1779,11 +1782,9 @@ namespace Ingredientes_y_Productos.GUI
 
             dtpFechaInicio.Format = DateTimePickerFormat.Custom;
             dtpFechaInicio.CustomFormat = "yyyy-MM-dd";
-            dtpFechaInicio.Value = dtpFechaInicio.MinDate;
 
             dtpFechaFinal.Format = DateTimePickerFormat.Custom;
             dtpFechaFinal.CustomFormat = "yyyy-MM-dd";
-            dtpFechaFinal.Value = dtpFechaFinal.MinDate;
 
             // Centrar el formulario en la pantalla
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -1816,6 +1817,7 @@ namespace Ingredientes_y_Productos.GUI
             {
                 txtIdProducto.Text = producto.IDProducto.ToString();
                 txtProductos.Text = producto.NombreProducto;
+                txtProductos.Tag = producto.CantidadInicial;
             }
         }
 
@@ -1855,8 +1857,30 @@ namespace Ingredientes_y_Productos.GUI
                         ajuste.Justificacion = row.Cells["justificacionProducto"].Value.ToString();
                         if (ajuste.Insertar())
                         {
+                            //Modificar el ajuste en productos
+                            Producto producto;
+                            if (row.Cells["ajusteProducto"].Value.ToString().Equals("INCREMENTO"))
+                            {
+                                producto = new Producto
+                                {
+                                    IdProducto = Int32.Parse(row.Cells["idProducto"].Value.ToString()),
+                                    Stock = Int32.Parse(row.Cells["cantidadInicial"].Value.ToString()) + Int32.Parse(row.Cells["cantidadProducto"].Value.ToString())
+                                };
+                                producto.ActualizarStock();
+                            }
+                            else
+                            {
+                                producto = new Producto
+                                {
+                                    IdProducto = Int32.Parse(row.Cells["idProducto"].Value.ToString()),
+                                    Stock = Int32.Parse(row.Cells["cantidadInicial"].Value.ToString()) - Int32.Parse(row.Cells["cantidadProducto"].Value.ToString())
+                                };
+                                producto.ActualizarStock();
+                            }
                             resultado = true;
+
                         }
+                            
                     }
                     if (resultado)
                     {
@@ -1909,6 +1933,7 @@ namespace Ingredientes_y_Productos.GUI
                                     row.Cells["cantidadProducto"].Value = txtCantidadProducto.Text;
                                     row.Cells["ajusteProducto"].Value = cmbAjusteProducto.Text;
                                     row.Cells["justificacionProducto"].Value = txtJustificacionProducto.Text;
+                                    row.Cells["cantidadInicial"].Value = txtProductos.Tag;
                                     break;
                                 }
                             }
@@ -1935,6 +1960,7 @@ namespace Ingredientes_y_Productos.GUI
                         fila.Cells[2].Value = txtCantidadProducto.Text;
                         fila.Cells[3].Value = cmbAjusteProducto.Text;
                         fila.Cells[4].Value = txtJustificacionProducto.Text;
+                        fila.Cells[5].Value = txtProductos.Tag;
 
                         dgvProductos.Rows.Add(fila);
 
@@ -1964,6 +1990,7 @@ namespace Ingredientes_y_Productos.GUI
                     txtCantidadProducto.Text = dgvProductos.CurrentRow.Cells["cantidadProducto"].Value.ToString();
                     cmbAjusteProducto.Text = dgvProductos.CurrentRow.Cells["ajusteProducto"].Value.ToString();
                     txtJustificacionProducto.Text = dgvProductos.CurrentRow.Cells["justificacionProducto"].Value.ToString();
+                    txtProductos.Tag = dgvProductos.CurrentRow.Cells["cantidadInicial"].Value.ToString();
                     bntGuardarProducto.Enabled = false;
                     variable = true;
                 }
@@ -2051,6 +2078,7 @@ namespace Ingredientes_y_Productos.GUI
                     txtCantidadIngrediente.Text = dgvIngredientes.CurrentRow.Cells["cantidadIngrediente"].Value.ToString();
                     cmbAjusteIngrediente.Text = dgvIngredientes.CurrentRow.Cells["ajusteIngrediente"].Value.ToString();
                     txtJustificacionIngrediente.Text = dgvIngredientes.CurrentRow.Cells["justificacionIngrediente"].Value.ToString();
+                    txtIdIngrediente.Tag = dgvIngredientes.CurrentRow.Cells["CntidadInicial"].Value.ToString();
                     bntGuardarIngrediente.Enabled = false;
                     variable2 = true;
                 }
@@ -2071,7 +2099,7 @@ namespace Ingredientes_y_Productos.GUI
                 {
                     Mantenimiento.CLS.Ajuste_Stock ajuste = new Mantenimiento.CLS.Ajuste_Stock
                     {
-                        Fecha = dtpFechaProducto.Text,
+                        Fecha = dtpFechaIngrediente.Text,
                         IdUsuario = int.Parse(oUsuario.IdUsuario)
                     };
 
@@ -2092,6 +2120,26 @@ namespace Ingredientes_y_Productos.GUI
                         ajuste.Justificacion = row.Cells["justificacionIngrediente"].Value.ToString();
                         if (ajuste.Insertar())
                         {
+                            //Hacer el ajuste de stock en ingredientes
+                            Ingrediente ingrediente;
+                            if (row.Cells["ajusteIngrediente"].Value.ToString().Equals("INCREMENTO"))
+                            {
+                                ingrediente = new Ingrediente
+                                {
+                                    IdIngrediente = Int32.Parse(row.Cells["idIngrediente"].Value.ToString()),
+                                    Stock = Decimal.Parse(row.Cells["CntidadInicial"].Value.ToString()) + Decimal.Parse(row.Cells["cantidadIngrediente"].Value.ToString())
+                                };
+                                ingrediente.ActualizarStock();
+                            }
+                            else
+                            {
+                                ingrediente = new Ingrediente
+                                {
+                                    IdIngrediente = Int32.Parse(row.Cells["idIngrediente"].Value.ToString()),
+                                    Stock = Decimal.Parse(row.Cells["CntidadInicial"].Value.ToString()) - Decimal.Parse(row.Cells["cantidadIngrediente"].Value.ToString())
+                                };
+                                ingrediente.ActualizarStock();
+                            }
                             resultado = true;
                         }
                     }
@@ -2146,6 +2194,7 @@ namespace Ingredientes_y_Productos.GUI
                                     row.Cells["cantidadIngrediente"].Value = txtCantidadIngrediente.Text;
                                     row.Cells["ajusteIngrediente"].Value = cmbAjusteIngrediente.Text;
                                     row.Cells["justificacionIngrediente"].Value = txtJustificacionIngrediente.Text;
+                                    row.Cells["CntidadInicial"].Value = txtIngrediente.Tag.ToString();
                                     break;
                                 }
                             }
@@ -2172,6 +2221,7 @@ namespace Ingredientes_y_Productos.GUI
                         fila.Cells[2].Value = txtCantidadIngrediente.Text;
                         fila.Cells[3].Value = cmbAjusteIngrediente.Text;
                         fila.Cells[4].Value = txtJustificacionIngrediente.Text;
+                        fila.Cells[5].Value = txtIngrediente.Tag;
 
                         dgvIngredientes.Rows.Add(fila);
 
@@ -2209,6 +2259,7 @@ namespace Ingredientes_y_Productos.GUI
             {
                 txtIdIngrediente.Text = ingrediente.IDIngrediente.ToString();
                 txtIngrediente.Text = ingrediente.NombreIngrediente;
+                txtIngrediente.Tag = ingrediente.CantidadInicial;
             }
         }
 
