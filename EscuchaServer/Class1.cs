@@ -221,8 +221,9 @@ public class Server
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
             oReporte.SetParameterValue("Salon", detallesDelGrupo[0].Salon);
+            oReporte.SetParameterValue("Grupo", kvp.Key.ToString());
 
-            
+
             oReporte.SetParameterValue("Mesero", detallesDelGrupo[0].Mesero);
 
             oReporte.SetParameterValue("Cliente", detallesDelGrupo[0].Cliente);

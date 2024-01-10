@@ -951,7 +951,7 @@ namespace TPV.GUI
                 oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
                 oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
                 oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value);
-
+                oReporte.SetParameterValue("Grupo", kvp.Key.ToString());
                 if (!lblMesero.Text.Equals(""))
                 {
                     oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
