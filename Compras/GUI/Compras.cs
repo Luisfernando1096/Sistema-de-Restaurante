@@ -628,27 +628,16 @@ namespace Compras.GUI
 
         private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verifica si la tecla presionada es un número o una tecla de control (por ejemplo, retroceso)
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            // Verificar si la tecla presionada no es un número, un punto decimal o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
-                // Si no es un número o una tecla de control, indica que el evento ya ha sido manejado
-                e.Handled = true;
+                e.Handled = true; // Evita que se ingrese el carácter no permitido
             }
-            else
-            {
-                // Obtiene el texto actual del TextBox después de la inserción de la nueva tecla
-                string nuevoTexto = txtDescuento.Text + e.KeyChar;
 
-                // Intenta convertir el contenido del TextBox a un número
-                if (int.TryParse(nuevoTexto, out int numero))
-                {
-                    // Verifica si el número está en el rango de 1 a 100
-                    if (numero < 0 || numero > 100)
-                    {
-                        // Si no está en el rango, indica que el evento ya ha sido manejado
-                        e.Handled = true;
-                    }
-                }
+            // Verificar si ya se ha ingresado un punto decimal y se intenta ingresar otro
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true; // Evita que se ingrese el segundo punto decimal
             }
         }
 
