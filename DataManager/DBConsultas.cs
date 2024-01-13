@@ -1535,7 +1535,7 @@ namespace DataManager
                 throw;
             }
         }
-        public static DataTable Compras(int identificador, int id, string nComprobante)
+        public static DataTable Compras(int id, string nComprobante)
         {
             try
             {
