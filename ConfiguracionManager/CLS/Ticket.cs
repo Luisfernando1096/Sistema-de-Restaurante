@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConfiguracionManager.CLS
 {
@@ -84,7 +80,7 @@ namespace ConfiguracionManager.CLS
                     header3 = OpticketTable.Rows[0]["header3"].ToString();
 
                     footer1 = OpticketTable.Rows[0]["footer1"].ToString();
-                    footer2 = OpticketTable.Rows[0]["footer2"].ToString(); 
+                    footer2 = OpticketTable.Rows[0]["footer2"].ToString();
                     footer3 = OpticketTable.Rows[0]["footer3"].ToString();
 
                     seCortePapel = OpticketTable.Rows[0]["seCortePapel"].ToString();

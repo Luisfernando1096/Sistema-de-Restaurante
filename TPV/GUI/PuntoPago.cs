@@ -1,14 +1,8 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -231,7 +225,7 @@ namespace TPV.GUI
             {
                 txtPagoRegistrar.Text += btn9.Text;
             }
-            
+
         }
 
         private void btn8_Click(object sender, EventArgs e)
@@ -352,7 +346,7 @@ namespace TPV.GUI
                     escritoUnPunto = true;
                 }
             }
-            
+
         }
 
         private void btnC_Click(object sender, EventArgs e)
@@ -468,7 +462,7 @@ namespace TPV.GUI
                 descuento = 0;
             }
             double cambio = Math.Round(CalcularCambio(totalPagar), 2);
-            ActualizarCampos(propina,descuento,totalPagar, iva, cambio);
+            ActualizarCampos(propina, descuento, totalPagar, iva, cambio);
         }
 
         private double CalcularIva()
@@ -477,14 +471,14 @@ namespace TPV.GUI
             bool incluirIva = bool.Parse(oConfiguracion.IncluirImpuesto);
             if (incluirIva)
             {
-                iva = Double.Parse(lblSaldo.Tag.ToString()) * (Double.Parse(oConfiguracion.Iva)/100);
+                iva = Double.Parse(lblSaldo.Tag.ToString()) * (Double.Parse(oConfiguracion.Iva) / 100);
 
             }
             else
             {
                 iva = 0;
             }
-            
+
             return iva;
         }
 
@@ -501,7 +495,7 @@ namespace TPV.GUI
 
             txtTotalPagar.Text = Math.Round(total, 2).ToString();
             txtTotalPagar.Tag = Math.Round(total, 2);
-            
+
         }
 
         private double CalcularCambio(double totalPagar)
@@ -523,7 +517,7 @@ namespace TPV.GUI
 
         private void cbPropina_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtPorcentaje_TextChanged(object sender, EventArgs e)
@@ -569,8 +563,8 @@ namespace TPV.GUI
             // Verificar si el carácter ingresado no es un dígito
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-                if(e.KeyChar != '.' || !hasEnteredNumber)
-                e.Handled = true; // Ignorar el carácter si no es un dígito ni una tecla de control
+                if (e.KeyChar != '.' || !hasEnteredNumber)
+                    e.Handled = true; // Ignorar el carácter si no es un dígito ni una tecla de control
             }
             if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar))
             {
@@ -625,7 +619,7 @@ namespace TPV.GUI
                         }
                     }
                 }
-                
+
             }
             else
             {
@@ -699,7 +693,7 @@ namespace TPV.GUI
             //Programar pago en efectivo
             if (!txtPagoRegistrar.Text.Equals(""))
             {
-                pedido.Saldo = Double.Parse(lblCambio.Tag.ToString())*(-1);
+                pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
                 pedido.IdCuenta = 1;
                 ProcesarPago();
             }
@@ -739,7 +733,7 @@ namespace TPV.GUI
                 Tag = txtTotalPagar.Text//Mandamos el total a pagar en el tag
             };
             f.ShowDialog();
-            
+
         }
 
         private void btnExacto_Click(object sender, EventArgs e)
@@ -846,11 +840,11 @@ namespace TPV.GUI
             {
                 //Lleva factura
                 //Obtener la ultima factura y crear una nueva
-                if (actualFactura.Rows.Count>0)
+                if (actualFactura.Rows.Count > 0)
                 {
                     foreach (DataRow item in actualFactura.Rows)
                     {
-                        pedido.NFactura  = (Int32.Parse(item["actual"].ToString())+1).ToString();
+                        pedido.NFactura = (Int32.Parse(item["actual"].ToString()) + 1).ToString();
                         siguiente = (Int32.Parse(item["actual"].ToString()) + 1);
                         idTiraje = Int32.Parse(item["idTiraje"].ToString());
                     }
@@ -860,7 +854,8 @@ namespace TPV.GUI
                     {
                         tiraje.IdTiraje = idTiraje;
                         tiraje.Actual = siguiente;
-                        if (!tiraje.ActualizarTirajeActual()){
+                        if (!tiraje.ActualizarTirajeActual())
+                        {
                             MessageBox.Show("Fallo al actualizar el tiraje actual");
                         }
                     }
@@ -908,7 +903,8 @@ namespace TPV.GUI
                         return;
                     }
                 }
-                else if(pagoTarjeta){
+                else if (pagoTarjeta)
+                {
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
                     {
@@ -923,7 +919,8 @@ namespace TPV.GUI
                         return;
                     }
 
-                } else if(pagoCortesia)
+                }
+                else if (pagoCortesia)
                 {
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
@@ -939,7 +936,8 @@ namespace TPV.GUI
                         return;
                     }
 
-                } else if (pagoExacto)
+                }
+                else if (pagoExacto)
                 {
                     //MessageBox.Show("Imprimir el ticket Exacto");
                     if (dgvDatos.Rows.Count > 0)
@@ -1079,7 +1077,7 @@ namespace TPV.GUI
             if (dgvDatos.Rows.Count > 0)
             {
                 // Cargar los datos en un DataTable
-                
+
                 Reportes.REP.RepImprimirPuntoPago oReporte = new Reportes.REP.RepImprimirPuntoPago();
                 GenerarTicket(oReporte);
 
@@ -1130,14 +1128,16 @@ namespace TPV.GUI
                     oReporte.PrintToPrinter(1, false, 0, 0);
 
                     // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    this.Invoke((MethodInvoker)delegate {
+                    this.Invoke((MethodInvoker)delegate
+                    {
                         MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     });
                 }
                 catch (Exception ex)
                 {
                     // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                    this.Invoke((MethodInvoker)delegate {
+                    this.Invoke((MethodInvoker)delegate
+                    {
                         MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     });
                 }

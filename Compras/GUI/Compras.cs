@@ -29,14 +29,14 @@ namespace Compras.GUI
                 if (identificador == 1)
                 {
                     datos.DataSource = DataManager.DBConsultas.Compras(1, idProveedor, nComprobante);
-                    dgvDatos.DataSource = datos;
-                    dgvDatos.AutoGenerateColumns = false;
+                    dgvDatosAux.DataSource = datos;
+                    dgvDatosAux.AutoGenerateColumns = false;
                 }
                 else if (identificador == 2)
                 {
                     datos.DataSource = DataManager.DBConsultas.Compras(2, idProveedor, nComprobante);
-                    dgvDatos.DataSource = datos;
-                    dgvDatos.AutoGenerateColumns = false;
+                    dgvDatosAux.DataSource = datos;
+                    dgvDatosAux.AutoGenerateColumns = false;
                 }
                 else if (identificador == 3)
                 {
@@ -138,7 +138,7 @@ namespace Compras.GUI
         }
 
 
-        private bool ExisteID(string ID) 
+        private bool ExisteID(string ID)
         {
             foreach (DataGridViewRow item in dgvDatos.Rows)
             {
@@ -153,13 +153,37 @@ namespace Compras.GUI
             return false;
         }
 
-        private void LimpiarCampos() 
+        private void LimpiarUnosCampos()
         {
             try
             {
-                txtDescripcion.Text = string.Empty;
-                txtPrecio.Text = string.Empty;
-                txtCantidad.Text = string.Empty;
+                txtDescripcion.Text = "";
+                txtDescripcion.Tag = "";
+                txtCantidad.Text = "";
+                txtPrecio.Text = "";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void LimpiarTodosCampos()
+        {
+            try
+            {
+                dgvDatos.Rows.Clear();
+                txtCantidad.Text = "";
+                txtPrecio.Text = "";
+                txtProveedor.Text = "";
+                txtProveedor.Tag = "";
+                txtDescripcion.Text = "";
+                txtDescripcion.Tag = "";
+                txtSumas.Text = "0.00";
+                txtTotales.Text = "0.00";
+                txtDescuento.Text = "0.00";
+                txtIva.Text = "0.00";
+                txtNoComprobante.Text = string.Empty;
             }
             catch (Exception)
             {
@@ -227,6 +251,8 @@ namespace Compras.GUI
 
         private void Compras_Load(object sender, EventArgs e)
         {
+            dgvDatosAux.Visible = false;
+            dgvDatos.Visible = true;
             btnAtras.Visible = false;
             cmbTipoCompra.Items.Insert(0, "Productos");
             cmbTipoCompra.Items.Insert(1, "Ingredientes");
@@ -249,7 +275,7 @@ namespace Compras.GUI
                 }
                 else
                 {
-                    if (txtDescripcion.Tag != null) 
+                    if (txtDescripcion.Tag != null)
                     {
                         string idBuscar = txtDescripcion.Tag.ToString();
 
@@ -272,7 +298,7 @@ namespace Compras.GUI
                                 }
                                 MessageBox.Show("¡El se ha modificado con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                LimpiarCampos();
+                                LimpiarUnosCampos();
                                 variable = false;
                             }
                         }
@@ -301,7 +327,7 @@ namespace Compras.GUI
                             else
                             {
                                 DataGridViewRow fila = new DataGridViewRow();
-                                fila.CreateCells(dgvDatos);
+                                fila.CreateCells(dgvDatosAux);
 
                                 fila.Cells[0].Value = txtCantidad.Text;
                                 fila.Cells[1].Value = txtDescripcion.Tag;
@@ -313,7 +339,7 @@ namespace Compras.GUI
                                 dgvDatos.Rows.Add(fila); // Asegúrate de agregar la fila después de establecer los valores de las celdas
                             }
 
-                            LimpiarCampos();
+                            LimpiarUnosCampos();
                         }
                     }
                 }
@@ -354,7 +380,7 @@ namespace Compras.GUI
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            LimpiarCampos();
+            LimpiarTodosCampos();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -485,14 +511,7 @@ namespace Compras.GUI
                                 if (resultadoComprasDetalles & resultadoCompra)
                                 {
                                     MessageBox.Show("!" + filasComprasDetalles + " registros insertados correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    dgvDatos.Rows.Clear();
-                                    txtProveedor.Text = "";
-                                    txtProveedor.Tag = "";
-                                    txtSumas.Text = string.Empty;
-                                    txtTotales.Text = string.Empty;
-                                    txtDescuento.Text = string.Empty;
-                                    txtIva.Text = string.Empty;
-                                    txtNoComprobante.Text = string.Empty;
+                                    LimpiarTodosCampos();
                                 }
                                 else
                                 {
@@ -531,7 +550,6 @@ namespace Compras.GUI
                             int rowIndex = dgvDatos.SelectedRows[0].Index;
                             dgvDatos.Rows.RemoveAt(rowIndex);
                             MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LimpiarCampos();
                         }
                         else
                         {
@@ -559,13 +577,16 @@ namespace Compras.GUI
             if (!string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
             {
                 txtTotales.Text = (double.Parse(txtIva.Text) + double.Parse(txtSumas.Text) - double.Parse(txtDescuento.Text)).ToString("0.00");
-            } else if (string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
+            }
+            else if (string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
             {
                 txtTotales.Text = (double.Parse(txtIva.Text) + double.Parse(txtSumas.Text)).ToString("0.00");
-            } else if (!string.IsNullOrEmpty(txtDescuento.Text) && string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
+            }
+            else if (!string.IsNullOrEmpty(txtDescuento.Text) && string.IsNullOrEmpty(txtIva.Text) && !string.IsNullOrEmpty(txtSumas.Text))
             {
                 txtTotales.Text = (double.Parse(txtSumas.Text) - double.Parse(txtDescuento.Text)).ToString("0.00");
-            }else if (!string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && string.IsNullOrEmpty(txtSumas.Text))
+            }
+            else if (!string.IsNullOrEmpty(txtDescuento.Text) && !string.IsNullOrEmpty(txtIva.Text) && string.IsNullOrEmpty(txtSumas.Text))
             {
                 txtTotales.Text = (double.Parse(txtIva.Text) - double.Parse(txtDescuento.Text)).ToString("0.00");
             }
@@ -643,6 +664,9 @@ namespace Compras.GUI
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            dgvDatos.Rows.Clear();
+            dgvDatosAux.Visible = true;
+            dgvDatos.Visible = false;
             BuscarDetalles buscarDetalle = new BuscarDetalles();
             buscarDetalle.bntSelecionar.Visible = true;
             var resultado = buscarDetalle.ShowDialog();
@@ -664,29 +688,29 @@ namespace Compras.GUI
                 btnBuscar.Enabled = false;
                 cmbComprobante.Enabled = false;
                 dtpFechaCompra.Enabled = false;
-                txtIva.Enabled = false;
-                txtDescuento.Enabled = false;
                 rbCalcularIva.Enabled = false;
                 rbIncluirIva.Enabled = false;
                 rbEfectivo.Enabled = false;
                 rbTarjeta.Enabled = false;
 
-                decimal subTotal = 0;
                 cmbTipoCompra.Enabled = false;
                 txtNoComprobante.Enabled = false;
 
                 txtIdCompra.Text = buscarDetalle.IdCompra.ToString();
-                cmbTipoCompra.Text = buscarDetalle.TCompra.ToString();
+                cmbTipoCompra.Text = buscarDetalle.TCompra;
                 txtProveedor.Tag = buscarDetalle.IdProveedor.ToString();
                 txtProveedor.Text = buscarDetalle.Nombre;
                 cmbComprobante.Tag = buscarDetalle.IdComprobante.ToString();
                 cmbComprobante.Text = buscarDetalle.tipo.ToString();
                 txtNoComprobante.Text = buscarDetalle.NComprobante;
                 dtpFechaCompra.Value = buscarDetalle.Fecha;
-                txtDescuento.Text = buscarDetalle.Descuento.ToString();
+                txtIva.Enabled = true;
+                txtDescuento.ReadOnly = true;
                 txtIva.Text = buscarDetalle.Iva.ToString();
                 txtTotales.Text = buscarDetalle.Total.ToString();
                 txtSumas.Text = buscarDetalle.SubTotal.ToString();
+                txtDescuento.Text = buscarDetalle.Descuento.ToString();
+
                 if (rbTarjeta.Text.ToUpper().Equals(buscarDetalle.FormaPago.ToString()))
                 {
                     rbTarjeta.Checked = true;
@@ -698,7 +722,7 @@ namespace Compras.GUI
                     rbEfectivo.Checked = true;
                 }
 
-                if (rbIncluirIva.Text.Equals(buscarDetalle.TipoFactura.ToString()))
+                if (rbIncluirIva.Text.ToUpper().Equals(buscarDetalle.TipoFactura.ToString()))
                 {
                     rbIncluirIva.Checked = true;
                     rbCalcularIva.Checked = false;
@@ -722,12 +746,15 @@ namespace Compras.GUI
             }
             else
             {
-               /// MessageBox.Show("¡No se seleciono ningun proveedor!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                /// MessageBox.Show("¡No se seleciono ningun proveedor!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
+            dgvDatosAux.Visible = false;
+            dgvDatos.Visible = true;
+            editar = false;
             rbCalcularIva.Enabled = true;
             rbIncluirIva.Enabled = true;
             rbEfectivo.Enabled = true;
@@ -745,25 +772,25 @@ namespace Compras.GUI
             button3.Visible = true;
             btnAtras.Visible = false;
             txtNoComprobante.Enabled = true;
-            LimpiarCampos();
+            LimpiarTodosCampos();
 
             dgvDatos.DataSource = null;
-            dgvDatos.Rows.Clear();
-            // Borrar todas las columnas existentes en el DataGridView
-            dgvDatos.Columns.Clear();
+
+
             // Agregar nuevas columnas al DataGridView con ancho y propiedades personalizadas
-            AgregarColumnaConAncho("Cantidad", "Cantidad", 150).DataPropertyName = "cantidad";
+            /*AgregarColumnaConAncho("Cantidad", "Cantidad", 150).DataPropertyName = "cantidad";
             AgregarColumnaConAncho("ID", "ID", 80).DataPropertyName = "idTipo";
             AgregarColumnaConAncho("Descripcion", "Descripción", 455).DataPropertyName = "nombre";
             AgregarColumnaConAncho("precioUnitario", "Precio Unitario", 150).DataPropertyName = "precio";
             AgregarColumnaConAncho("ventasGravadas", "Ventas Gravadas", 150).DataPropertyName = "subtotal";
+            AgregarColumnaConAncho("Tipo", "Tipo", 150).DataPropertyName = "Tipo";
             // Crear una nueva fila
             DataGridViewRow fila = new DataGridViewRow();
             fila.CreateCells(dgvDatos);
             if (dgvDatos.Columns.Contains("ID"))
             {
                 dgvDatos.Columns["ID"].Visible = false;
-            }
+            }*/
 
             cmbComprobante.SelectedIndex = 0;
             cmbTipoCompra.Enabled = true;
@@ -774,10 +801,10 @@ namespace Compras.GUI
 
             btnLimpiar.Visible = true;
             txtNoComprobante.Text = string.Empty;
-            txtSumas.Text = string.Empty;
-            txtIva.Text = string.Empty;
-            txtDescuento.Text = string.Empty;
-            txtTotales.Text = string.Empty;
+            txtSumas.Text = "0.00";
+            txtIva.Text = "0.00";
+            txtDescuento.Text = "0.00";
+            txtTotales.Text = "0.00";
             dtpFechaCompra.Value = DateTime.Now;
         }
 
@@ -811,7 +838,7 @@ namespace Compras.GUI
                 {
                     txtTotales.Text = (sumas).ToString("0.00");
                 }
-                
+
             }
         }
 

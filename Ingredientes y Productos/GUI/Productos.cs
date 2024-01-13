@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Ingredientes_y_Productos.GUI
 {
@@ -202,7 +197,7 @@ namespace Ingredientes_y_Productos.GUI
             }
         }
 
-        private void LimpiarCamposProductos() 
+        private void LimpiarCamposProductos()
         {
             try
             {
@@ -226,7 +221,7 @@ namespace Ingredientes_y_Productos.GUI
             }
         }
         ///METODOS FAMILIA
-        private void LimpiarCamposFamilia() 
+        private void LimpiarCamposFamilia()
         {
             try
             {
@@ -391,7 +386,7 @@ namespace Ingredientes_y_Productos.GUI
         {
             try
             {
-                if (txtNombre.Text != "" & cmbFamilia.SelectedIndex != 0 && cmbUnidad.SelectedIndex !=0)
+                if (txtNombre.Text != "" & cmbFamilia.SelectedIndex != 0 && cmbUnidad.SelectedIndex != 0)
                 {
                     Mantenimiento.CLS.Producto mantenimiento = new Mantenimiento.CLS.Producto();
                     mantenimiento.Foto = SeleccionarImg;
@@ -430,7 +425,7 @@ namespace Ingredientes_y_Productos.GUI
                             SeleccionarImg = selectedImageFileName;
                         }
                     }
-                    
+
 
                     if (txtID.Text == "")
                     {

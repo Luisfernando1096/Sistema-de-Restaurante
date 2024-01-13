@@ -1,13 +1,5 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Reportes.GUI
@@ -118,7 +110,8 @@ namespace Reportes.GUI
                             REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
                             f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                             f.Show();
-                        } else if (cmbTipoVetas.SelectedIndex == 1)
+                        }
+                        else if (cmbTipoVetas.SelectedIndex == 1)
                         {
                             //Ventas Resumen
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
@@ -136,7 +129,8 @@ namespace Reportes.GUI
                             f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                             f.Show();
 
-                        } else if (cmbTipoVetas.SelectedIndex == 3)
+                        }
+                        else if (cmbTipoVetas.SelectedIndex == 3)
                         {
                             //Ventas / Mesero Resumen
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
@@ -145,7 +139,8 @@ namespace Reportes.GUI
                             f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
                             f.Show();
 
-                        } else if (cmbTipoVetas.SelectedIndex == 4)
+                        }
+                        else if (cmbTipoVetas.SelectedIndex == 4)
                         {
                             //Ventas Facturadas
                             Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
@@ -157,12 +152,12 @@ namespace Reportes.GUI
                         else if (cmbTipoVetas.SelectedIndex == 5)
                         {
                             //Facturas Anuladas
-                            
+
                         }
                         else if (cmbTipoVetas.SelectedIndex == 6)
                         {
                             //Ventas Productos
-                            
+
                         }
                         else if (cmbTipoVetas.SelectedIndex == 7)
                         {
@@ -222,7 +217,7 @@ namespace Reportes.GUI
         //        {
         //            Console.WriteLine("La cadena no es un formato de fecha válido.");
         //        }
-                
+
         //    }
         //    if (!fi.Equals(""))
         //    {
@@ -263,7 +258,7 @@ namespace Reportes.GUI
         //    {
         //        oReporte.SetParameterValue("Footer", "");
         //    }
-            
+
         //    if (oReporte != null)
         //    {
         //        try

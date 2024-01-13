@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ingredientes_y_Productos.GUI
@@ -18,7 +12,7 @@ namespace Ingredientes_y_Productos.GUI
         DataTable datos;
         BindingSource datosUnidad = new BindingSource();
 
-        public void CargarDatos() 
+        public void CargarDatos()
         {
             try
             {
@@ -142,7 +136,7 @@ namespace Ingredientes_y_Productos.GUI
             }
         }
         /// METODOS PARA INGREDIENTES
-        private void CargarPresentacion() 
+        private void CargarPresentacion()
         {
             try
             {
@@ -185,7 +179,7 @@ namespace Ingredientes_y_Productos.GUI
         }
 
         /// METODOS PARA RECETAS 
-        private void LimpiarCamposReceta() 
+        private void LimpiarCamposReceta()
         {
             try
             {
@@ -227,7 +221,7 @@ namespace Ingredientes_y_Productos.GUI
             return false;
         }
         /// METODOS PARA UNIDAD DE MEDIDA
-        private void LimpiarTextBoxUnidad() 
+        private void LimpiarTextBoxUnidad()
         {
             try
             {
@@ -286,7 +280,7 @@ namespace Ingredientes_y_Productos.GUI
                 CargarIngredientesDeProducto(f.IDProducto.ToString());
             }
 
-            
+
         }
 
         private void CargarIngredientesDeProducto(string idProd)
@@ -419,7 +413,7 @@ namespace Ingredientes_y_Productos.GUI
                         txtStockIngrediente.Text = dgvIngredientes.CurrentRow.Cells["Stock"].Value.ToString();
                         txtPrecioIngrediente.Text = dgvIngredientes.CurrentRow.Cells["Precio"].Value.ToString();
                     }
-                }   
+                }
             }
             catch (Exception)
             {
@@ -427,7 +421,7 @@ namespace Ingredientes_y_Productos.GUI
             }
         }
 
- 
+
         private void dgvIngredientes_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             BuscarDatosEnCombo();
@@ -436,7 +430,7 @@ namespace Ingredientes_y_Productos.GUI
         private void btnLimpiarReceta_Click(object sender, EventArgs e)
         {
             LimpiarCamposReceta();
-            
+
         }
 
         private void MantenimientoADataGridRecetas()
@@ -457,7 +451,7 @@ namespace Ingredientes_y_Productos.GUI
 
                     mantenimiento.IdIngrediente = Int32.Parse(txtID.Text);
                     mantenimiento.Cantidad = double.Parse(txtCantidad.Text);
-                        
+
                     if (txtID.Tag != null)
                     {
                         mantenimiento.Id = Int32.Parse(txtID.Tag.ToString());
@@ -470,7 +464,7 @@ namespace Ingredientes_y_Productos.GUI
                             lblCantidad.Text = "Cantidad (3 decimales maximo)";
                             btnBuscarIngrediente.Text = "Buscar Ingrediente";
                         }
-                            
+
                     }
                     else
                     {
@@ -494,7 +488,7 @@ namespace Ingredientes_y_Productos.GUI
                     }
 
                 }
-                
+
             }
             catch (Exception)
             {
@@ -504,7 +498,8 @@ namespace Ingredientes_y_Productos.GUI
 
         private void bntAgregar_Click(object sender, EventArgs e)
         {
-            if(Validacion()){
+            if (Validacion())
+            {
                 MantenimientoADataGridRecetas();
             }
             else
@@ -518,24 +513,27 @@ namespace Ingredientes_y_Productos.GUI
         {
             Boolean pasar = true;
 
-            if (txtIDProducto.Text.ToString().Equals("")) {
+            if (txtIDProducto.Text.ToString().Equals(""))
+            {
                 pasar = false;
             }
-            if(txtNombreProducto.Text.ToString().Equals("")) {
+            if (txtNombreProducto.Text.ToString().Equals(""))
+            {
                 pasar = false;
             }
             if (txtID.Text.ToString().Equals(""))
             {
                 pasar = false;
             }
-            if(txtID.Text.ToString().Equals("")) {
+            if (txtID.Text.ToString().Equals(""))
+            {
                 pasar = false;
             }
             if (txtNombre.Text.ToString().Equals(""))
             {
                 pasar = false;
             }
-            if(txtCantidad.Text.ToString().Equals("")) 
+            if (txtCantidad.Text.ToString().Equals(""))
             {
                 pasar = false;
             }
@@ -554,7 +552,8 @@ namespace Ingredientes_y_Productos.GUI
                         {
                             Mantenimiento.CLS.IngredienteProducto ingredienteEliminar = new Mantenimiento.CLS.IngredienteProducto();
                             ingredienteEliminar.Id = Int32.Parse(dgvReceta.CurrentRow.Cells["idIngProd"].Value.ToString());
-                            if(ingredienteEliminar.Eliminar()){
+                            if (ingredienteEliminar.Eliminar())
+                            {
 
                                 CargarIngredientesDeProducto(txtIDProducto.Text);
                                 MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);

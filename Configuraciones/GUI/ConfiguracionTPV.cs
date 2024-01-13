@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -350,7 +349,7 @@ namespace Configuraciones.GUI
                 {
                     config.MesaVIP = double.Parse(txtImpuestoVIP.Text);
                 }
-                
+
 
                 //Multisesiones
                 if (checkMultiSe.Checked)
@@ -665,7 +664,7 @@ namespace Configuraciones.GUI
             {
                 ticket.ExtraLine = false;
             }
-            if (txtEncabezado1.Text != string.Empty )
+            if (txtEncabezado1.Text != string.Empty)
             {
                 ticket.Header1 = txtEncabezado1.Text;
             }

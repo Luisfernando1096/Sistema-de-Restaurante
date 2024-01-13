@@ -1,13 +1,5 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServiceExpressDsk.GUI
@@ -52,7 +44,7 @@ namespace ServiceExpressDsk.GUI
                 // Detener el servidor (por ejemplo, cuando la aplicación se cierra)
                 myServer.StopServer();
             }
-                 
+
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -196,7 +188,8 @@ namespace ServiceExpressDsk.GUI
                 {
                     //Administrador
 
-                } else if (oUsuario.IdRol.ToString().Equals("2"))
+                }
+                else if (oUsuario.IdRol.ToString().Equals("2"))
                 {
                     //Mesero
                     this.Hide();
@@ -204,12 +197,14 @@ namespace ServiceExpressDsk.GUI
                     f.ShowDialog();
                     this.Show();
 
-                } else if (oUsuario.IdRol.ToString().Equals("3"))
+                }
+                else if (oUsuario.IdRol.ToString().Equals("3"))
                 {
                     //Cajero
                     CargarPuntoPago();
 
-                } else if (oUsuario.IdRol.ToString().Equals("4"))
+                }
+                else if (oUsuario.IdRol.ToString().Equals("4"))
                 {
                     //Mantenimiento
 
@@ -309,7 +304,7 @@ namespace ServiceExpressDsk.GUI
                     f2.lblMesa.Text = f3.lblMesa.Text.ToString();
                     f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
                 }
-                
+
 
             }
 
@@ -332,13 +327,13 @@ namespace ServiceExpressDsk.GUI
                     f2.ShowDialog();
                     cerrar = f2.cerrarSesion;
                 }
-                
+
                 if (!cerrar)
                 {
                     if (!f.admin)
                     {
                         f.cambiarMesa = f2.cambiarMesa;
-                        if(f2.lblMesa.Tag != null)
+                        if (f2.lblMesa.Tag != null)
                         {
                             f.idMesaAnterior = Int32.Parse(f2.lblMesa.Tag.ToString());
                             if (!f2.lblTicket.Text.Equals(""))
@@ -346,11 +341,11 @@ namespace ServiceExpressDsk.GUI
                                 f.idPedidoCambioMesa = int.Parse(f2.lblTicket.Text);
                             }
                         }
-                        
+
                         f.ShowDialog();
                         cerrar = f.cerrarSesion;
                     }
-                    
+
                     if (!cerrar)
                     {
                         this.Show();
@@ -552,8 +547,8 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton26_Click(object sender, EventArgs e)
         {
-             Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
-             f.ShowDialog();
+            Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
+            f.ShowDialog();
         }
 
         private void toolStripButton27_Click(object sender, EventArgs e)

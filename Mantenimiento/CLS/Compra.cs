@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -41,7 +37,7 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             idInsertado = -1; // Valor predeterminado en caso de error
             string sentencia;
-            sentencia = @"insert into compra(tipoCompra,idProveedor,idComprobante,nComprobante,idUsuario,fecha,total,descuento,iva,totalPago,formaPago,tipoFactura) values('"+_tipoCompra+"',"+_idProveedor+","+_idComprobante+",'"+_nComprobante+"',"+_idUsuario+",'"+_fecha+"',"+_total+","+_descuento+","+_iva+","+_totalPago+ ",'" + _formaPago + "','" + _tipoFactura + "');";
+            sentencia = @"insert into compra(tipoCompra,idProveedor,idComprobante,nComprobante,idUsuario,fecha,total,descuento,iva,totalPago,formaPago,tipoFactura) values('" + _tipoCompra + "'," + _idProveedor + "," + _idComprobante + ",'" + _nComprobante + "'," + _idUsuario + ",'" + _fecha + "'," + _total + "," + _descuento + "," + _iva + "," + _totalPago + ",'" + _formaPago + "','" + _tipoFactura + "');";
 
             try
             {
@@ -70,7 +66,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update compra set tipoCompra = '"+_tipoCompra+"', idProveedor = "+_idProveedor+", idComprobante = "+_idComprobante+", nComprobante ='"+_nComprobante+"', idUsuario = "+_idUsuario+", fecha = '"+_fecha+"', total = "+_total+", descuento = "+_descuento+", iva = "+_iva+", totalPago = "+_totalPago+" where idCompra = "+_idCompra+";";
+            sentencia = @"update compra set tipoCompra = '" + _tipoCompra + "', idProveedor = " + _idProveedor + ", idComprobante = " + _idComprobante + ", nComprobante ='" + _nComprobante + "', idUsuario = " + _idUsuario + ", fecha = '" + _fecha + "', total = " + _total + ", descuento = " + _descuento + ", iva = " + _iva + ", totalPago = " + _totalPago + " where idCompra = " + _idCompra + ";";
 
             try
             {
@@ -95,7 +91,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from compra where idCompra = "+_idCompra+";";
+            sentencia = @"delete from compra where idCompra = " + _idCompra + ";";
 
             try
             {

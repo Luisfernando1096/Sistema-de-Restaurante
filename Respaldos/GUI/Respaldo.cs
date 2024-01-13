@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using DataManager;
-using Respaldos.Extra;
 
 namespace Respaldos.GUI
 {

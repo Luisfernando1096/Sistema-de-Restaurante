@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -30,7 +26,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into caja(idCajero,estado,fechaApertura,saldoInicial,efectivo,saldo) values ("+_idCajero+","+_Estado+",'"+_FechaApertura+"',"+_SaldoInicial+","+_Efectivo+","+_Saldo+");";
+            sentencia = @"insert into caja(idCajero,estado,fechaApertura,saldoInicial,efectivo,saldo) values (" + _idCajero + "," + _Estado + ",'" + _FechaApertura + "'," + _SaldoInicial + "," + _Efectivo + "," + _Saldo + ");";
 
             try
             {
@@ -65,7 +61,7 @@ namespace Mantenimiento.CLS
                 {
                     sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
                 }
-                
+
             }
             else
             {
@@ -77,9 +73,9 @@ namespace Mantenimiento.CLS
                 {
                     sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
                 }
-                
+
             }
-            
+
             try
             {
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
@@ -153,7 +149,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from caja where idCaja = "+_idCaja+";";
+            sentencia = @"delete from caja where idCaja = " + _idCaja + ";";
 
             try
             {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -20,7 +16,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into cocinero(tiempoOcuapdo, idEmpleado) values ("+_tiempoOcuapdo+","+_idEmpleado+");";
+            sentencia = @"insert into cocinero(tiempoOcuapdo, idEmpleado) values (" + _tiempoOcuapdo + "," + _idEmpleado + ");";
 
             try
             {
@@ -45,7 +41,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update cocinero set tiempoOcuapdo = "+_tiempoOcuapdo+", idEmpleado = "+_idEmpleado+" where idCocinero = "+_idCocinero+";";
+            sentencia = @"update cocinero set tiempoOcuapdo = " + _tiempoOcuapdo + ", idEmpleado = " + _idEmpleado + " where idCocinero = " + _idCocinero + ";";
 
             try
             {
@@ -70,7 +66,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from cocinero where idCocinero ="+_idCocinero+";";
+            sentencia = @"delete from cocinero where idCocinero =" + _idCocinero + ";";
 
             try
             {

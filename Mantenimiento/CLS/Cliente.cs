@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -28,7 +24,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into cliente(nombre,direccion,email,telefono,NIT,regContable) values('"+_nombre+"','"+_direccion+"','"+_email+"','"+_telefono+"','"+_NIT+"','"+_regContable+"');";
+            sentencia = @"insert into cliente(nombre,direccion,email,telefono,NIT,regContable) values('" + _nombre + "','" + _direccion + "','" + _email + "','" + _telefono + "','" + _NIT + "','" + _regContable + "');";
 
             try
             {
@@ -53,7 +49,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update cliente set nombre = '"+_nombre+"', direccion = '"+_direccion+"', email = '"+_email+"', telefono = '"+_telefono+"', NIT = '"+_NIT+"', regContable = '"+_regContable+"' where idCliente = "+_idCliente+";";
+            sentencia = @"update cliente set nombre = '" + _nombre + "', direccion = '" + _direccion + "', email = '" + _email + "', telefono = '" + _telefono + "', NIT = '" + _NIT + "', regContable = '" + _regContable + "' where idCliente = " + _idCliente + ";";
 
             try
             {
@@ -78,7 +74,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from cliente where idCliente = "+_idCliente+";";
+            sentencia = @"delete from cliente where idCliente = " + _idCliente + ";";
 
             try
             {

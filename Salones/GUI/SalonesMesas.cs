@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Salones.GUI
@@ -18,7 +12,8 @@ namespace Salones.GUI
         {
             InitializeComponent();
         }
-        private void CargarDatos() {
+        private void CargarDatos()
+        {
             try
             {
                 datos.DataSource = DataManager.DBConsultas.Mesas();
@@ -30,7 +25,8 @@ namespace Salones.GUI
                 throw;
             }
         }
-        private void LimpiarCampos() {
+        private void LimpiarCampos()
+        {
             try
             {
                 cmbSalones.Text = string.Empty;
@@ -91,7 +87,8 @@ namespace Salones.GUI
                 throw;
             }
         }
-        private void compararDatos() {
+        private void compararDatos()
+        {
             try
             {
                 if (cmbSalones.SelectedValue != null)
@@ -126,7 +123,7 @@ namespace Salones.GUI
                     VolverCargarDatos();
                 }
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 throw;
             }
@@ -145,7 +142,7 @@ namespace Salones.GUI
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (cmbSalones.Text != string.Empty )
+            if (cmbSalones.Text != string.Empty)
             {
                 btnGuardar.Visible = true;
                 btnEditar.Visible = false;

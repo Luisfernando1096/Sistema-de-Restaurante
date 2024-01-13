@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ingredientes_y_Productos.GUI
@@ -17,7 +11,7 @@ namespace Ingredientes_y_Productos.GUI
         public string CantidadInicial { get; private set; }
 
         readonly BindingSource datos = new BindingSource();
-        private void CargarDatos() 
+        private void CargarDatos()
         {
             try
             {
@@ -83,62 +77,62 @@ namespace Ingredientes_y_Productos.GUI
             }
         }
 
-       /*private void BuscarDatos()
-        {
-            try
-            {
-                if (rbtnIngrediente.Checked == true)
-                {
-                    if (txtBuscar.Text != "")
-                    {
-                        dgvBuscarIngrediente.CurrentCell = null;
-                        foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
-                        {
-                            r.Visible = false;
-                        }
-                        foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
-                        {
+        /*private void BuscarDatos()
+         {
+             try
+             {
+                 if (rbtnIngrediente.Checked == true)
+                 {
+                     if (txtBuscar.Text != "")
+                     {
+                         dgvBuscarIngrediente.CurrentCell = null;
+                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
+                         {
+                             r.Visible = false;
+                         }
+                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
+                         {
 
-                            if (r.Cells["nombreIngrediente"].Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
-                            {
-                                r.Visible = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        CargarDatos();
-                    }
-                }
-                else if (rbtnPresentacion.Checked == true)
-                {
-                    if (txtBuscar.Text != "")
-                    {
-                        dgvBuscarIngrediente.CurrentCell = null;
-                        foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
-                        {
-                            r.Visible = false;
-                        }
-                        foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
-                        {
+                             if (r.Cells["nombreIngrediente"].Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
+                             {
+                                 r.Visible = true;
+                             }
+                         }
+                     }
+                     else
+                     {
+                         CargarDatos();
+                     }
+                 }
+                 else if (rbtnPresentacion.Checked == true)
+                 {
+                     if (txtBuscar.Text != "")
+                     {
+                         dgvBuscarIngrediente.CurrentCell = null;
+                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
+                         {
+                             r.Visible = false;
+                         }
+                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
+                         {
 
-                            if (r.Cells["Presentacion"].Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
-                            {
-                                r.Visible = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        CargarDatos();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }*/
+                             if (r.Cells["Presentacion"].Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
+                             {
+                                 r.Visible = true;
+                             }
+                         }
+                     }
+                     else
+                     {
+                         CargarDatos();
+                     }
+                 }
+             }
+             catch (Exception)
+             {
+                 throw;
+             }
+         }*/
 
         private void BuscarDatosEnCombo()
         {

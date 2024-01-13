@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -122,7 +116,7 @@ namespace TPV.GUI
         private void btnPasar_Click(object sender, EventArgs e)
         {
             pasar = true;
-            if(dgvActual.CurrentRow != null)
+            if (dgvActual.CurrentRow != null)
             {
                 CantidadSeparar cantidadSeparar = new CantidadSeparar();
                 int cantidad = Int32.Parse(dgvActual.CurrentRow.Cells["cantidad"].Value.ToString());
@@ -328,7 +322,7 @@ namespace TPV.GUI
 
                 }
             }
-            
+
 
         }
 
@@ -342,7 +336,7 @@ namespace TPV.GUI
             int idPedido = Int32.Parse(lblTicket.Tag.ToString());
             int idMesa = Int32.Parse(lblMesa.Tag.ToString());
 
-            if (datosSiguiente.Rows.Count>0)
+            if (datosSiguiente.Rows.Count > 0)
             {
                 //Programado para el pedido principal
                 Mantenimiento.CLS.PedidoDetalle pedidoDetalle;

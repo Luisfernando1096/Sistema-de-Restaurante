@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -21,19 +14,19 @@ namespace TPV.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(txtCantidad.Text.Equals(""))
+            if (txtCantidad.Text.Equals(""))
             {
                 MessageBox.Show("Debe ingresar la cantidad de productos. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (Int32.Parse(txtCantidad.Text)<=0)
+            if (Int32.Parse(txtCantidad.Text) <= 0)
             {
                 MessageBox.Show("Debe ingresar una cantidad valida. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             cerrarPorBoton = true;
             Close();
-            
+
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)

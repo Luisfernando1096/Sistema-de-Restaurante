@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -23,7 +19,7 @@ namespace Mantenimiento.CLS
         public int IdMesa { get => idMesa; set => idMesa = value; }
 
         /*OPREACIONES BASICAS*/
-        public Boolean Insertar() 
+        public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;

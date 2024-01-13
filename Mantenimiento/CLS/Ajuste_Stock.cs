@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    public  class Ajuste_Stock
+    public class Ajuste_Stock
     {
         int _idAjuste;
         int _idProducto;
@@ -60,7 +55,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update ajuste_stock set idProducto = "+_idProducto+",idIngrediente = "+_idIngrediente+",tipoAjuste='"+_tipoAjuste+"',cantidad = "+_cantidad+",justificacion = '"+_justificacion+"',fecha='"+_fecha+"',idUsuario = "+_idUsuario+" where idAjuste ="+_idAjuste+";";
+            sentencia = @"update ajuste_stock set idProducto = " + _idProducto + ",idIngrediente = " + _idIngrediente + ",tipoAjuste='" + _tipoAjuste + "',cantidad = " + _cantidad + ",justificacion = '" + _justificacion + "',fecha='" + _fecha + "',idUsuario = " + _idUsuario + " where idAjuste =" + _idAjuste + ";";
 
             try
             {
@@ -85,7 +80,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from ajuste_stock where idAjuste = "+_idAjuste+";";
+            sentencia = @"delete from ajuste_stock where idAjuste = " + _idAjuste + ";";
 
             try
             {

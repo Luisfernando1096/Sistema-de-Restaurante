@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Finanzas.GUI
@@ -89,7 +83,7 @@ namespace Finanzas.GUI
             caja.SaldoInicial = Double.Parse(txtSaldoInicial.Text);
             caja.Efectivo = 0;
             caja.Saldo = Double.Parse(txtSaldoInicial.Text);
-            
+
             if (txtIdCaja.Text.Equals(""))
             {
                 if (cajaAbierta.Rows.Count > 0)
@@ -155,7 +149,7 @@ namespace Finanzas.GUI
             {
                 MessageBox.Show("No se puede editar una caja cerrada.", "No admitible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
 
 
         }

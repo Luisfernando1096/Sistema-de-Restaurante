@@ -1,12 +1,6 @@
 ﻿using Mantenimiento.CLS;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ingredientes_y_Productos.GUI
@@ -59,7 +53,7 @@ namespace Ingredientes_y_Productos.GUI
                 throw;
             }
         }
-        private void LimpiarProductos() 
+        private void LimpiarProductos()
         {
             try
             {
@@ -1880,7 +1874,7 @@ namespace Ingredientes_y_Productos.GUI
                             resultado = true;
 
                         }
-                            
+
                     }
                     if (resultado)
                     {
@@ -1983,7 +1977,7 @@ namespace Ingredientes_y_Productos.GUI
         {
             try
             {
-                if (dgvProductos.SelectedRows.Count > 0 )
+                if (dgvProductos.SelectedRows.Count > 0)
                 {
                     txtIdProducto.Text = dgvProductos.CurrentRow.Cells["idProducto"].Value.ToString();
                     txtProductos.Text = dgvProductos.CurrentRow.Cells["nombreProducto"].Value.ToString();

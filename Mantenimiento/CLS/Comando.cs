@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -18,7 +14,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into comando(comando) values('"+_Comando1+"');";
+            sentencia = @"insert into comando(comando) values('" + _Comando1 + "');";
 
             try
             {
@@ -43,7 +39,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update comando set comando = '" + _Comando1 + "' where idComando =" +_idComando+";";
+            sentencia = @"update comando set comando = '" + _Comando1 + "' where idComando =" + _idComando + ";";
 
             try
             {
@@ -68,7 +64,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from comando where idComando = "+_idComando+";";
+            sentencia = @"delete from comando where idComando = " + _idComando + ";";
 
             try
             {

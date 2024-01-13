@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -28,7 +24,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into compra_detalle(idCompra,idProducto,cantidad,precio,subtotal) values("+_idCompra+","+_idProducto+","+_cantidad+","+_precio+","+_subTotal+");";
+            sentencia = @"insert into compra_detalle(idCompra,idProducto,cantidad,precio,subtotal) values(" + _idCompra + "," + _idProducto + "," + _cantidad + "," + _precio + "," + _subTotal + ");";
 
             try
             {
@@ -79,7 +75,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update compra_detalle set idCompra = "+_idCompra+", idProducto = "+_idProducto+", idIngrediente = "+_idIngrediente+", cantidad = "+_cantidad+", precio = "+_precio+", subTotal = "+_subTotal+" where idDetalleCompra = "+_idDetalleCompra+";";
+            sentencia = @"update compra_detalle set idCompra = " + _idCompra + ", idProducto = " + _idProducto + ", idIngrediente = " + _idIngrediente + ", cantidad = " + _cantidad + ", precio = " + _precio + ", subTotal = " + _subTotal + " where idDetalleCompra = " + _idDetalleCompra + ";";
 
             try
             {
@@ -104,7 +100,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from compra_detalle where idDetalleCompra = "+_idDetalleCompra+";";
+            sentencia = @"delete from compra_detalle where idDetalleCompra = " + _idDetalleCompra + ";";
 
             try
             {

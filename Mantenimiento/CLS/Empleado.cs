@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -36,7 +32,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into empleado(nombres,apellidos,direccion,email,telefono,DUI,NIT,sueldoBase,comision,regContable) values('"+nombres+"','"+apellidos+"','"+direccion+"','"+email+"','"+telefono+"','"+dui+"','"+nit+"',"+sueldoBase+","+comision+",'"+regContable+"');";
+            sentencia = @"insert into empleado(nombres,apellidos,direccion,email,telefono,DUI,NIT,sueldoBase,comision,regContable) values('" + nombres + "','" + apellidos + "','" + direccion + "','" + email + "','" + telefono + "','" + dui + "','" + nit + "'," + sueldoBase + "," + comision + ",'" + regContable + "');";
 
             try
             {
@@ -61,7 +57,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update empleado set nombres = '"+nombres+"', apellidos = '"+apellidos+"', direccion = '"+direccion+"', email = '"+email+"', telefono = '"+telefono+"', DUI = '"+dui+"', NIT = '"+nit+"', SueldoBase = "+sueldoBase+", Comision = "+comision+" Where idEmpleado = "+idEmpleado+";";
+            sentencia = @"update empleado set nombres = '" + nombres + "', apellidos = '" + apellidos + "', direccion = '" + direccion + "', email = '" + email + "', telefono = '" + telefono + "', DUI = '" + dui + "', NIT = '" + nit + "', SueldoBase = " + sueldoBase + ", Comision = " + comision + " Where idEmpleado = " + idEmpleado + ";";
 
             try
             {
@@ -86,7 +82,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from empleado where idEmpleado = "+idEmpleado+";";
+            sentencia = @"delete from empleado where idEmpleado = " + idEmpleado + ";";
 
             try
             {

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Compras.GUI
@@ -13,7 +6,8 @@ namespace Compras.GUI
     public partial class Proveedores : Form
     {
         BindingSource datos = new BindingSource();
-        private void CargarDatos() {
+        private void CargarDatos()
+        {
             try
             {
                 datos.DataSource = DataManager.DBConsultas.Proveedor();
@@ -44,7 +38,7 @@ namespace Compras.GUI
                 throw;
             }
         }
-        private void BuscarDatos() 
+        private void BuscarDatos()
         {
             try
             {

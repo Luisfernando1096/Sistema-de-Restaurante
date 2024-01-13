@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Personal.GUI
@@ -83,7 +76,7 @@ namespace Personal.GUI
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Mantenimiento.CLS.Roles r = new Mantenimiento.CLS.Roles();
-            r.IdRol =Convert.ToInt32(dgvDatos.CurrentRow.Cells["idRol"].Value);
+            r.IdRol = Convert.ToInt32(dgvDatos.CurrentRow.Cells["idRol"].Value);
             if (r.Eliminar())
             {
                 MessageBox.Show("Eliminacion Exitosa");

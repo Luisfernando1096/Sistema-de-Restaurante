@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 
 namespace Finanzas.GUI
@@ -136,7 +129,7 @@ namespace Finanzas.GUI
         //}
 
 
-        private void FiltrarDatos() 
+        private void FiltrarDatos()
         {
             try
             {
@@ -168,7 +161,7 @@ namespace Finanzas.GUI
                 throw;
             }
         }
-        private void Limpiar() 
+        private void Limpiar()
         {
             try
             {
@@ -310,13 +303,14 @@ namespace Finanzas.GUI
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dgvDatos.Rows.Count > 0) {
+            if (dgvDatos.Rows.Count > 0)
+            {
                 txtDescripcion.Tag = dgvDatos.CurrentRow.Cells["idEgreso1"].Value.ToString();
                 txtDescripcion.Text = dgvDatos.CurrentRow.Cells["descripcion1"].Value.ToString();
                 txtCantidad.Text = dgvDatos.CurrentRow.Cells["cantidad1"].Value.ToString();
                 txtCantidad.Tag = dgvDatos.CurrentRow.Cells["cantidad1"].Value.ToString();
             }
-            
+
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -359,7 +353,7 @@ namespace Finanzas.GUI
                 double cantAnterior = Double.Parse(txtCantidad.Tag.ToString());
                 double cantActual = Double.Parse(txtCantidad.Text.ToString());
 
-                if (cantAnterior!=cantActual)
+                if (cantAnterior != cantActual)
                 {
                     if (cantAnterior > cantActual)
                     {
@@ -383,7 +377,7 @@ namespace Finanzas.GUI
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
         }
 
         private void txtCantidad_TextChanged(object sender, EventArgs e)

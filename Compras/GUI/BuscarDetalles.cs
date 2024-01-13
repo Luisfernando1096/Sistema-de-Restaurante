@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Compras.GUI
@@ -29,7 +22,7 @@ namespace Compras.GUI
         public string FormaPago { get; set; }
         public string TipoFactura { get; set; }
 
-        private void CargarDatos(int id) 
+        private void CargarDatos(int id)
         {
             try
             {
@@ -42,7 +35,7 @@ namespace Compras.GUI
                 throw;
             }
         }
-        private void BuscarDatos() 
+        private void BuscarDatos()
         {
             try
             {
@@ -130,8 +123,8 @@ namespace Compras.GUI
                 IdUsuario = int.Parse(dgvBuscar.CurrentRow.Cells["idUsuario"].Value.ToString());
                 Fecha = DateTime.Parse(dgvBuscar.CurrentRow.Cells["fecha"].Value.ToString());
                 SubTotal = decimal.Parse(dgvBuscar.CurrentRow.Cells["total"].Value.ToString());
-                Descuento = (decimal.Parse(dgvBuscar.CurrentRow.Cells["descuento"].Value.ToString()));
-                Iva = (decimal.Parse(dgvBuscar.CurrentRow.Cells["iva"].Value.ToString()));
+                Descuento = decimal.Parse(dgvBuscar.CurrentRow.Cells["descuento"].Value.ToString());
+                Iva = decimal.Parse(dgvBuscar.CurrentRow.Cells["iva"].Value.ToString());
                 Total = decimal.Parse(dgvBuscar.CurrentRow.Cells["totalPago"].Value.ToString());
                 FormaPago = dgvBuscar.CurrentRow.Cells["formaPago"].Value.ToString();
                 TipoFactura = dgvBuscar.CurrentRow.Cells["tipoFactura"].Value.ToString();

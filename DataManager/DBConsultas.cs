@@ -1,10 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataManager
 {
@@ -37,7 +32,7 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia;
-                if (nFactura!="")
+                if (nFactura != "")
                 {
                     sentencia = @"SELECT p.idPedido, c.nombre, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago, p.saldo,
                                      p.idTiraje, p.nFactura, p.efectivo
@@ -53,7 +48,7 @@ namespace DataManager
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
                                     WHERE p.nFactura > 0 AND p.anular != 1; ";
                 }
-                
+
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -628,7 +623,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"Select e.idEmpleado,concat(e.nombres,' ',e.apellidos)Empleado From empleado e, usuario u, rol r where e.idEmpleado = u.idUsuario and u.idRol = r.idRol and r.idRol = "+IDROL+";";
+                String sentencia = @"Select e.idEmpleado,concat(e.nombres,' ',e.apellidos)Empleado From empleado e, usuario u, rol r where e.idEmpleado = u.idUsuario and u.idRol = r.idRol and r.idRol = " + IDROL + ";";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -988,7 +983,7 @@ namespace DataManager
                                 c.saldo,
                                 e.nombres;";
                 }
-                
+
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1114,7 +1109,7 @@ namespace DataManager
                         string fechaConvertidaStringDesde = fechaConvertidaDesde.ToString("yyyy-MM-dd");
                         string fechaConvertidaStringHasta = fechaConvertidaHasta.ToString("yyyy-MM-dd");
 
-                        if ((txtFechaDesde == fechaConvertidaStringDesde)&&(txtFechaHasta == fechaConvertidaStringHasta))
+                        if ((txtFechaDesde == fechaConvertidaStringDesde) && (txtFechaHasta == fechaConvertidaStringHasta))
                         {
                             string nuevoTxtDesde = txtFechaDesde + " 00:00:00";
                             string nuevoTxtHasta = txtFechaHasta + " 23:59:59";
@@ -1276,7 +1271,7 @@ namespace DataManager
             {
                 Boolean existe = false;
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM compra WHERE nComprobante =  '"+ nComprbante +"';";
+                String sentencia = @"SELECT * FROM compra WHERE nComprobante =  '" + nComprbante + "';";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1515,12 +1510,12 @@ namespace DataManager
                 if (id == 1)
                 {
                     sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + producto + "';";
-                } 
+                }
                 else if (id == 2)
                 {
                     sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante AND cop.tipoCompra = '" + Ingrediente + "';";
                 }
-                else if(id == 3)
+                else if (id == 3)
                 {
                     sentencia = "SELECT cop.idCompra, cop.tipoCompra, pv.idProveedor, pv.nombre, cm.idComprobante, cm.Tipo, cop.nComprobante, cop.idUsuario, cop.fecha, cop.total, cop.descuento, cop.iva, cop.totalPago, cop.formaPago, cop.tipoFactura FROM compra cop, proveedor pv, comprobante cm WHERE cop.idProveedor = pv.idProveedor AND cop.idComprobante = cm.idComprobante;";
                 }
@@ -1644,7 +1639,7 @@ namespace DataManager
             }
         }
 
-        public static DataTable RepVentasAgrupadasPorProducto(String fInicio,String  fFin)
+        public static DataTable RepVentasAgrupadasPorProducto(String fInicio, String fFin)
         {
             try
             {
@@ -1696,7 +1691,8 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia;
-                if (empleados) {
+                if (empleados)
+                {
                     sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, CONCAT(em.nombres, em.apellidos) as mesero
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
@@ -1705,7 +1701,9 @@ namespace DataManager
                                         JOIN empleado em ON em.idEmpleado = p.idMesero
                                         WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 GROUP BY ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;";
-                } else {
+                }
+                else
+                {
                     sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, '' as mesero
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido

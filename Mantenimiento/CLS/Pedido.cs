@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -111,7 +107,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE pedido SET idCliente = " + idCliente + 
+            sentencia = @"UPDATE pedido SET idCliente = " + idCliente +
                 " WHERE idPedido = " + idPedido + ";";
 
             try
@@ -241,7 +237,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            if(nFactura != null)
+            if (nFactura != null)
             {
                 sentencia = @"UPDATE pedido SET total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + ", idCuenta = " + idCuenta + " " +
                                 "WHERE idPedido = " + idPedido + ";";

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Finanzas.GUI
@@ -41,7 +34,7 @@ namespace Finanzas.GUI
             timer1.Start();
             CargarDatos();
 
-            if (dgvCajas.Rows.Count>0)
+            if (dgvCajas.Rows.Count > 0)
             {
                 // La cadena de fecha y hora en formato original
                 string fechaHoraString = dgvCajas.CurrentRow.Cells["fechaApertura"].Value.ToString();
@@ -78,7 +71,7 @@ namespace Finanzas.GUI
                 txtCajero.Tag = oUsuario.IdUsuario;
                 txtIdCaja.Text = idCaja.ToString();
             }
-            
+
         }
 
         private void CierreCaja_FormClosing(object sender, FormClosingEventArgs e)
@@ -103,7 +96,7 @@ namespace Finanzas.GUI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvCajas.Rows.Count>0)
+            if (dgvCajas.Rows.Count > 0)
             {
                 //Cerrar Caja
                 if (MessageBox.Show("¿Esta seguro que desea cerrar la caja? Una vez cerrado el formulario no podra revertir los cambios.", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -111,7 +104,8 @@ namespace Finanzas.GUI
                     dtpFecha.Tag = dtpFecha.Text;
                     caja.Estado = false;
                     cerreCaja = true;
-                    if(caja.Actualizar()){
+                    if (caja.Actualizar())
+                    {
                         MessageBox.Show("¡Se cerro la caja exitosamente!", "Cierre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else

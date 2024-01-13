@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -51,7 +47,7 @@ namespace Mantenimiento.CLS
         public int NCaracteres { get => nCaracteres; set => nCaracteres = value; }
 
         /*OPERACIONES BASICAS*/
-        public Boolean Insertar() 
+        public Boolean Insertar()
         {
             Boolean resultado = false;
             DataManager.DBOperacion op = new DataManager.DBOperacion();

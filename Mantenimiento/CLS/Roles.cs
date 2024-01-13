@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -17,7 +13,7 @@ namespace Mantenimiento.CLS
         public string Rol { get => rol; set => rol = value; }
 
         /*OPREACIONES BASICAS*/
-        public Boolean Insertar() 
+        public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;

@@ -1,18 +1,12 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
 using Mantenimiento.CLS;
 using Reportes.REP;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -63,7 +57,7 @@ namespace TPV.GUI
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
 
-                if(dgvDatos.Rows.Count > 0)
+                if (dgvDatos.Rows.Count > 0)
                 {
                     lblTicket.Text = dgvDatos.Rows[0].Cells["idPedido"].Value.ToString();//Accedemos a la primera posicion de la tabla
 
@@ -118,7 +112,7 @@ namespace TPV.GUI
         {
             tFecha.Start();
             WindowState = FormWindowState.Maximized;
-            if (dgvDatos.Rows.Count>0)
+            if (dgvDatos.Rows.Count > 0)
             {
                 btnComanda.Enabled = true;
                 btnDisminuir.Enabled = true;
@@ -159,7 +153,7 @@ namespace TPV.GUI
 
         private void BotonFamilia_Click(object sender, EventArgs e)
         {
-            if(flpProductos.Controls.Count > 0)
+            if (flpProductos.Controls.Count > 0)
             {
                 flpProductos.Controls.Clear();
             }
@@ -214,7 +208,7 @@ namespace TPV.GUI
                     }
 
                 }
-                
+
                 btnProducto.TextAlign = ContentAlignment.BottomCenter;
                 btnProducto.Size = new Size(130, 130);
                 btnProducto.Click += BotonProducto_Click;
@@ -240,9 +234,9 @@ namespace TPV.GUI
 
         private double CalcularSubTotal(int cantidad, int id, double precio)
         {
-            
+
             double subTotal;
-            subTotal = precio*cantidad;
+            subTotal = precio * cantidad;
             return subTotal;
         }
 
@@ -250,17 +244,17 @@ namespace TPV.GUI
         {
             Button botonProducto = (Button)sender;
             int cantidad;
-                
+
             if (bool.Parse(oConfiguracion.MuchosProductos))
             {
                 // Agregar muchos productos
                 CantidadProductos f = new CantidadProductos();
                 f.ShowDialog();
                 cantidad = Int32.Parse(f.txtCantidad.Text);
-                if (cantidad!=0)
+                if (cantidad != 0)
                 {
                     AgregarProductos(botonProducto, cantidad);
-                } 
+                }
             }
             else
             {
@@ -308,7 +302,8 @@ namespace TPV.GUI
                 {
                     lstDetalle.Add(pDetalle);
                 }
-            }else if (dgvDatos.Rows.Count > 0)
+            }
+            else if (dgvDatos.Rows.Count > 0)
             {
                 lstDetalle.Add(pDetalle);
             }
@@ -332,9 +327,9 @@ namespace TPV.GUI
                         aumentarUnProducto = true;
                     }
                 }
-                
+
                 PedidoDetalle pedidoDetalle = new PedidoDetalle();
-                    
+
                 if (aumentarUnProducto)
                 {
                     //Ya existe un producto igual en el datgrid, hay que aumentar
@@ -531,7 +526,7 @@ namespace TPV.GUI
 
         private decimal CalcularCantidad(int cantidad, decimal v)
         {
-            return cantidad*v;
+            return cantidad * v;
         }
 
         private void btnSalir_Click_1(object sender, EventArgs e)
@@ -548,7 +543,7 @@ namespace TPV.GUI
                 RepComandaParcial oReporte = new RepComandaParcial();
                 GenerarComandaParcial(oReporte);
             }
-            
+
         }
 
         private void ComandaGestion_Resize(object sender, EventArgs e)
@@ -567,7 +562,7 @@ namespace TPV.GUI
             PuntoPago f = new PuntoPago(this);
 
             //Si comanda gestion va vacia
-            if(lblMesa.Tag != null || !lblTicket.Text.Equals(""))
+            if (lblMesa.Tag != null || !lblTicket.Text.Equals(""))
             {
                 if (idPedidoSiguiente != 0 || !lblTicket.Text.Equals(""))
                 {
@@ -621,7 +616,7 @@ namespace TPV.GUI
             {
                 f.ShowDialog();
             }
-            
+
             //Procedimiento luego de presionar el boton regresar para traer la informacion de la orden que se ha seleccionado
             if (f.lblTicket.Tag != null)
             {
@@ -636,7 +631,7 @@ namespace TPV.GUI
             {
                 Show();
             }
-            
+
         }
 
         public void ActualizarLabelsRetroceder(int id)
@@ -685,7 +680,7 @@ namespace TPV.GUI
                 pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
                 pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
 
-                if(pedidoDetalle.Cantidad != 0)
+                if (pedidoDetalle.Cantidad != 0)
                 {
                     pedidoDetalle.ActualizarCompra();
                     CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
@@ -734,7 +729,7 @@ namespace TPV.GUI
                 ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
             }
 
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -758,13 +753,13 @@ namespace TPV.GUI
             {
                 cg.idPedido = Int32.Parse(lblTicket.Text.ToString());
             }
-            
+
             cg.ShowDialog();
             if (!lblTicket.Text.ToString().Equals(""))
             {
                 ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()));
             }
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -796,7 +791,7 @@ namespace TPV.GUI
                 punto_venta.Close();
                 this.Close();
             }
-            
+
         }
 
         private void ComandaGestion_FormClosing(object sender, FormClosingEventArgs e)
@@ -828,7 +823,7 @@ namespace TPV.GUI
                 CargarProductosPorMesa(lblMesa.Tag.ToString());
             }
             CargarPedidosEnMesa(lblMesa.Tag.ToString());
-            
+
         }
 
         private void btnCuentas_Click(object sender, EventArgs e)
@@ -911,14 +906,16 @@ namespace TPV.GUI
                 oReporte.PrintToPrinter(1, false, 0, 0);
 
                 // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                this.Invoke((MethodInvoker)delegate {
+                this.Invoke((MethodInvoker)delegate
+                {
                     MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 });
             }
             catch (Exception ex)
             {
                 // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                this.Invoke((MethodInvoker)delegate {
+                this.Invoke((MethodInvoker)delegate
+                {
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             }
@@ -974,7 +971,7 @@ namespace TPV.GUI
                 {
                     try
                     {
-                         // Imprimir el informe en la impresora seleccionada
+                        // Imprimir el informe en la impresora seleccionada
                         PrinterSettings settings = new PrinterSettings
                         {
                             PrinterName = oConfiguracion.PrinterComanda
@@ -984,14 +981,16 @@ namespace TPV.GUI
                         oReporte.PrintToPrinter(1, false, 0, 0);
 
                         // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                        this.Invoke((MethodInvoker)delegate {
+                        this.Invoke((MethodInvoker)delegate
+                        {
                             MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         });
                     }
                     catch (Exception ex)
                     {
                         // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                        this.Invoke((MethodInvoker)delegate {
+                        this.Invoke((MethodInvoker)delegate
+                        {
                             MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         });
                     }

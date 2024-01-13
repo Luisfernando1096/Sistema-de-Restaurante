@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Finanzas.GUI
@@ -13,7 +6,7 @@ namespace Finanzas.GUI
     public partial class AdministrarCuentas : Form
     {
         BindingSource datos = new BindingSource();
-        public void CargarDatos() 
+        public void CargarDatos()
         {
             try
             {
@@ -26,7 +19,7 @@ namespace Finanzas.GUI
                 throw;
             }
         }
-        public void LimpiarCampos() 
+        public void LimpiarCampos()
         {
             try
             {
@@ -48,7 +41,7 @@ namespace Finanzas.GUI
         {
             CargarDatos();
             txtSaldo.Text = "0";
-            
+
         }
 
         private void btnSalirIngrediente_Click(object sender, EventArgs e)

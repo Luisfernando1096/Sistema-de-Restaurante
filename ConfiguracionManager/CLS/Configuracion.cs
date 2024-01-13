@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConfiguracionManager.CLS
 {
@@ -56,7 +52,7 @@ namespace ConfiguracionManager.CLS
 
         }
 
-        public Boolean  ObtenerConfiguracion()
+        public Boolean ObtenerConfiguracion()
         {
             Boolean result = false;
 

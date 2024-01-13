@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -167,7 +160,7 @@ namespace TPV.GUI
         {
             if (seleccionCliente)
             {
-                if(idPedido != 0)
+                if (idPedido != 0)
                 {
                     Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
                     {
@@ -181,7 +174,7 @@ namespace TPV.GUI
                 {
                     MessageBox.Show("No hay ningun pedido seleccionado para asignar un cliente");
                 }
-                
+
             }
         }
     }

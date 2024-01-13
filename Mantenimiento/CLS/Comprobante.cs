@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
@@ -18,7 +14,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into comprobante(tipo) values('"+_tipo+"');";
+            sentencia = @"insert into comprobante(tipo) values('" + _tipo + "');";
 
             try
             {
@@ -43,7 +39,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update comprobante set tipo = '"+_tipo+"' where idComprobante = "+_idComprobante+";";
+            sentencia = @"update comprobante set tipo = '" + _tipo + "' where idComprobante = " + _idComprobante + ";";
 
             try
             {
@@ -68,7 +64,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"delete from comprobante where idComprobante = "+_idComprobante+";";
+            sentencia = @"delete from comprobante where idComprobante = " + _idComprobante + ";";
 
             try
             {

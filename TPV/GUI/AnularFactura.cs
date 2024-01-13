@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -133,7 +127,7 @@ namespace TPV.GUI
                     else
                     {
                         //Vamos actualizar caja
-                        
+
                         caja.Saldo = saldo - Double.Parse(txtTotales.Text);
                         caja.Efectivo = efectivo - Double.Parse(txtTotales.Text);
                         if (caja.Actualizar())
@@ -156,7 +150,7 @@ namespace TPV.GUI
             {
                 MessageBox.Show("Verifique que haya una caja abierta.", "¡Informacion!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            Limpiar();   
+            Limpiar();
         }
     }
 }

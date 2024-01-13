@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -48,11 +43,11 @@ namespace TPV.GUI
                 btnSalon = new Button();
                 btnSalon.Text = salon["nombre"].ToString().ToUpper();
                 btnSalon.Tag = salon["idSalon"].ToString().ToUpper();
-                btnSalon.Size = new Size(200,80);
+                btnSalon.Size = new Size(200, 80);
                 btnSalon.Click += BotonSalon_Click;
                 flpSalones.Controls.Add(btnSalon);
                 flpSalones.ScrollControlIntoView(btnSalon);
-                
+
             }
         }
 
@@ -115,7 +110,7 @@ namespace TPV.GUI
                 {
                     MessageBox.Show("ERROR AL ACTUALIZAR Pedido");
                 }
-                
+
                 //Aqui el codigo para cambiar de mesa
                 Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
                 mesa.Disponible = false;
@@ -144,7 +139,7 @@ namespace TPV.GUI
                 }
 
             }
-          
+
             DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, 0);
             ComandaGestion f = new ComandaGestion(this);
             f.borrarData = false;
@@ -170,7 +165,7 @@ namespace TPV.GUI
             }
             f.lblMesa.Text = botonMesa.Text.ToString();
             f.lblMesa.Tag = botonMesa.Tag.ToString();
-            
+
 
             f.ShowDialog();
             cambiarMesa = f.cambiarMesa;
@@ -183,7 +178,7 @@ namespace TPV.GUI
                 idMesaAnterior = Int32.Parse(f.lblMesa.Tag.ToString());
             }
             this.Close();
-            
+
             //Si no di click en el formulario anterior a ir a administracion
             if (!admin && !cerrarSesion)
             {
