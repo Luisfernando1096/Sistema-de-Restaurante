@@ -25,7 +25,7 @@ namespace Reportes.GUI
 
         private void VisorComandaCompleta_Load(object sender, EventArgs e)
         {
-            CargarReporte();
+            //CargarReporte();
         }
     }
 }

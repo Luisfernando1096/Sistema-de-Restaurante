@@ -39,19 +39,19 @@ namespace Reportes.GUI
             this.crvVisor.Cursor = System.Windows.Forms.Cursors.Default;
             this.crvVisor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crvVisor.Location = new System.Drawing.Point(0, 0);
-            this.crvVisor.Margin = new System.Windows.Forms.Padding(4);
             this.crvVisor.Name = "crvVisor";
-            this.crvVisor.Size = new System.Drawing.Size(1182, 608);
+            this.crvVisor.Size = new System.Drawing.Size(886, 494);
             this.crvVisor.TabIndex = 1;
             this.crvVisor.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             this.crvVisor.Load += new System.EventHandler(this.crvVisor_Load);
             // 
             // VisorGeneral
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 608);
+            this.ClientSize = new System.Drawing.Size(886, 494);
             this.Controls.Add(this.crvVisor);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "VisorGeneral";
             this.Text = "VisorGeneral";
             this.ResumeLayout(false);
@@ -60,6 +60,6 @@ namespace Reportes.GUI
 
         #endregion
 
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crvVisor;
+        public CrystalDecisions.Windows.Forms.CrystalReportViewer crvVisor;
     }
 }
