@@ -1113,10 +1113,7 @@ namespace TPV.GUI
             oReporte.SetParameterValue("Cambio", lblCambio.Text);
             oReporte.SetParameterValue("TipoPago", "Efectivo");
 
-            Reportes.GUI.VisorComandaCompleta visor = new Reportes.GUI.VisorComandaCompleta();
-            visor.crvVisor.ReportSource = oReporte;
-            visor.ShowDialog();
-
+            
             if (oReporte != null)
             {
                 try
