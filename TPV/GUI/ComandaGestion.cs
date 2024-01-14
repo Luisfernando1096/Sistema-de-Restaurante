@@ -394,6 +394,16 @@ namespace TPV.GUI
                 if (pedido.Insertar(out int idPedidoInsertado))
                 {
                     //MessageBox.Show("SE INSERTO CON EXITO");
+                    //Se agregara el mesero tambien si entro un mesero
+                    if (oUsuario.IdRol.Equals("2"))
+                    {
+                        //Entro un mesero
+                        Pedido pedido3 = new Pedido();
+                        pedido3.IdPedido = idPedidoInsertado;
+                        pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
+                        pedido3.ActualizarMesero();
+                        ActualizarLabelsRetroceder(idPedidoInsertado);
+                    }
                 }
                 else
                 {
@@ -947,11 +957,11 @@ namespace TPV.GUI
                 oReporte.SetDataSource(detallesDelGrupo);
                 oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
                 oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value);
+                oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value.ToString());
                 oReporte.SetParameterValue("Grupo", kvp.Key.ToString());
                 if (!lblMesero.Text.Equals(""))
                 {
-                    oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
+                    oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value.ToString());
                 }
                 else
                 {
@@ -960,7 +970,7 @@ namespace TPV.GUI
 
                 if (!lblCliente.Text.Equals(""))
                 {
-                    oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
+                    oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value.ToString());
                 }
                 else
                 {

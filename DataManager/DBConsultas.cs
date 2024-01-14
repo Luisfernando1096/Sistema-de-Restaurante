@@ -712,8 +712,8 @@ namespace DataManager
                                     f.grupoPrinter as grupo,
                                     pd.idDetalle,
                                     pd.cocinando,
-                                    pe.nombre as nombreMesero,
-                                    pe.nombres,
+                                    pe.nombres as nombreMesero,
+                                    pe.nombre as nombres,
                                     pe.mesa,
                                     pe.salon
                                         
@@ -757,8 +757,8 @@ namespace DataManager
                                     f.grupoPrinter as grupo,
                                     pd.idDetalle,
                                     pd.cocinando,
-                                    pe.nombre as nombreMesero,
-                                    pe.nombres,
+                                    pe.nombres as nombreMesero,
+                                    pe.nombre as nombres,
                                     pe.mesa,
                                     pe.salon
                                         
@@ -814,8 +814,8 @@ namespace DataManager
                                 pro.nombre, 
                                 pd.subTotal, 
                                 pe.fecha,
-                                pe.nombre as nombreMesero,
-                                pe.nombres as nombreCliente,
+                                pe.nombres as nombreMesero,
+                                pe.nombre as nombreCliente,
                                 pe.mesa,
                                 pe.descuento,
                                 pe.iva,
