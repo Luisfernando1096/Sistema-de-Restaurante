@@ -829,12 +829,14 @@ namespace TPV.GUI
 
         private void RegistrarPago()
         {
+            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             int siguiente = 0, idTiraje = 0;
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
             pedido.Total = Double.Parse(lblSaldo.Tag.ToString());
             pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
             pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
             pedido.Cancelado = true;
+            pedido.Fecha = fecha;
 
             if (activarFactura)
             {
@@ -845,6 +847,7 @@ namespace TPV.GUI
                     foreach (DataRow item in actualFactura.Rows)
                     {
                         pedido.NFactura = (Int32.Parse(item["actual"].ToString()) + 1).ToString();
+                        pedido.IdTiraje = Int32.Parse(item["idTiraje"].ToString());
                         siguiente = (Int32.Parse(item["actual"].ToString()) + 1);
                         idTiraje = Int32.Parse(item["idTiraje"].ToString());
                     }
