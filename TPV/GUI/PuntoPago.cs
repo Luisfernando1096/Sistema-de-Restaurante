@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using Humanizer;
 
 namespace TPV.GUI
 {
@@ -830,6 +831,7 @@ namespace TPV.GUI
         private void RegistrarPago()
         {
             int siguiente = 0, idTiraje = 0;
+            String serie = string.Empty;
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
             pedido.Total = Double.Parse(lblSaldo.Tag.ToString());
             pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
@@ -847,6 +849,7 @@ namespace TPV.GUI
                         pedido.NFactura = (Int32.Parse(item["actual"].ToString()) + 1).ToString();
                         siguiente = (Int32.Parse(item["actual"].ToString()) + 1);
                         idTiraje = Int32.Parse(item["idTiraje"].ToString());
+                        serie = item["serie"].ToString();
                     }
 
                     Mantenimiento.CLS.Tiraje_Factura tiraje = new Mantenimiento.CLS.Tiraje_Factura();
@@ -868,6 +871,8 @@ namespace TPV.GUI
                 if (pagoEfectivo)
                 {
                     MessageBox.Show("Imprimir el factura Efectivo");
+                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
+                    GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
                 }
                 else if (pagoTarjeta)
                 {
@@ -882,8 +887,9 @@ namespace TPV.GUI
                 else if (pagoExacto)
                 {
                     MessageBox.Show("Imprimir el factura Exacto");
+                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
+                    GenerarFactura(oReporte, serie, siguiente, "EXACTO");// se envia el nFactura y la serie que corresponde
                 }
-
             }
             if (activarTicket)
             {
@@ -1086,6 +1092,70 @@ namespace TPV.GUI
             {
                 MessageBox.Show("No hay datos que mostrar en el reporte", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
+            }
+        }
+
+        private void GenerarFactura(ReportClass oReporte, string serie, int nFactura,string tipoPago)
+        {
+            DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            oReporte.SetDataSource(datos);
+            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            oReporte.SetParameterValue("Direccion", oEmpresa.Direccion.ToUpper());
+            oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
+            oReporte.SetParameterValue("Subtotal", lblSaldo.Text.ToString());
+            oReporte.SetParameterValue("TipoPago", tipoPago);
+            oReporte.SetParameterValue("Serie", serie);
+            oReporte.SetParameterValue("nFactura", nFactura);
+            oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
+            oReporte.SetParameterValue("Total", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
+            string totalStr = txtTotalPagar.Text;
+
+            // Convierte la cadena a un número decimal
+            if (decimal.TryParse(totalStr, out decimal total))
+            {
+                // Dividir la parte entera y la parte decimal
+                int parteEntera = (int)Math.Truncate(total);
+                int parteDecimal = (int)((total - parteEntera) * 100);
+
+                // Convierte cada parte a palabras utilizando Humanizer
+                string parteEnteraEnLetras = parteEntera.ToWords().ToUpper();
+                string parteDecimalEnLetras = parteDecimal.ToWords().ToUpper();
+
+                // Asigna el valor en letras al parámetro del reporte
+                oReporte.SetParameterValue("CantidadTexto", $"{parteEnteraEnLetras} CON {parteDecimalEnLetras} CENTAVOS");
+            }
+            else
+            {
+                Console.WriteLine("La entrada no es un número válido.");
+            }
+
+            if (oReporte != null)
+            {
+                try
+                {
+                    // Imprimir el informe en la impresora seleccionada
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda
+                    };
+
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
+
+                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
             }
         }
 

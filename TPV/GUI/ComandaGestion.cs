@@ -951,7 +951,8 @@ namespace TPV.GUI
                 oReporte.SetParameterValue("Grupo", kvp.Key.ToString());
                 if (!lblMesero.Text.Equals(""))
                 {
-                    oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
+                    //oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value);
+                    oReporte.SetParameterValue("Mesero", lblMesero.Text);
                 }
                 else
                 {
@@ -960,7 +961,8 @@ namespace TPV.GUI
 
                 if (!lblCliente.Text.Equals(""))
                 {
-                    oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
+                    //oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value);
+                    oReporte.SetParameterValue("Cliente", lblCliente.Text);
                 }
                 else
                 {
