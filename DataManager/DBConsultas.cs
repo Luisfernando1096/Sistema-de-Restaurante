@@ -712,8 +712,8 @@ namespace DataManager
                                     f.grupoPrinter as grupo,
                                     pd.idDetalle,
                                     pd.cocinando,
-                                    pe.nombre as nombreMesero,
-                                    pe.nombres,
+                                    pe.nombre as nombres,
+                                    pe.nombres as nombreMesero,
                                     pe.mesa,
                                     pe.salon
                                         
@@ -757,8 +757,8 @@ namespace DataManager
                                     f.grupoPrinter as grupo,
                                     pd.idDetalle,
                                     pd.cocinando,
-                                    pe.nombre as nombreMesero,
-                                    pe.nombres,
+                                    pe.nombre as nombres,
+                                    pe.nombres as nombreMesero,
                                     pe.mesa,
                                     pe.salon
                                         
@@ -1001,7 +1001,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                string sentencia = @"SELECT idTiraje, actual, fin FROM tiraje_factura where activo=1;";
+                string sentencia = @"SELECT idTiraje, actual, fin, serie FROM tiraje_factura where activo=1;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
