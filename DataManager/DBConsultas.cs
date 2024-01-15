@@ -462,7 +462,7 @@ namespace DataManager
                                     FROM producto p
                                     JOIN familia f ON p.idFamilia = f.idFamilia
                                     JOIN unidadmedida u ON p.idUnidad = u.idUnidad
-                                    WHERE p.stock <= p.stockMinimo AND p.stock > 1;";
+                                    WHERE p.stock <= p.stockMinimo;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -814,8 +814,8 @@ namespace DataManager
                                 pro.nombre, 
                                 pd.subTotal, 
                                 pe.fecha,
-                                pe.nombre as nombreMesero,
-                                pe.nombres as nombreCliente,
+                                pe.nombres as nombreMesero,
+                                pe.nombre as nombreCliente,
                                 pe.mesa,
                                 pe.descuento,
                                 pe.iva,
@@ -1648,7 +1648,7 @@ namespace DataManager
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + "', INTERVAL 1 DAY) AND p.cancelado = 1 ORDER BY pr.nombre, p.fecha ASC;";
+                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + "', INTERVAL 1 DAY) AND p.cancelado = 1 AND anular = 0 ORDER BY pr.nombre, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1671,7 +1671,7 @@ namespace DataManager
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        WHERE DATE(p.fecha) = '" + fInicio + @"' AND p.cancelado = 1 GROUP BY ticket
+                                        WHERE DATE(p.fecha) = '" + fInicio + @"' AND p.cancelado = 1 AND anular = 0  GROUP BY ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
@@ -1685,33 +1685,20 @@ namespace DataManager
             }
         }
 
-        public static DataTable RepResumenVentasPorPeriodo(String fInicio, String fFin, Boolean empleados)
+        public static DataTable RepResumenVentasPorPeriodo(String fInicio, String fFin)
         {
             try
             {
                 DataTable resultado = new DataTable();
                 String sentencia;
-                if (empleados)
-                {
-                    sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, CONCAT(em.nombres, em.apellidos) as mesero
-                                        FROM pedido_detalle pd
-                                        JOIN pedido p ON p.idPedido = pd.idPedido
-                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
-                                        JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        JOIN empleado em ON em.idEmpleado = p.idMesero
-                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 GROUP BY ticket
-                                        ORDER BY c.nombreCuenta, p.fecha ASC;";
-                }
-                else
-                {
-                    sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, '' as mesero
-                                        FROM pedido_detalle pd
-                                        JOIN pedido p ON p.idPedido = pd.idPedido
-                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
-                                        JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 GROUP BY ticket
-                                        ORDER BY c.nombreCuenta, p.fecha ASC;";
-                }
+                sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, IFNULL(CONCAT(em.nombres, em.apellidos), 'Sin Mesero') as mesero
+                                    FROM pedido_detalle pd
+                                    JOIN pedido p ON p.idPedido = pd.idPedido
+                                    JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                    JOIN producto pr ON pr.idProducto = pd.idProducto
+                                    LEFT JOIN empleado em ON em.idEmpleado = p.idMesero
+                                    WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 AND anular = 0 GROUP BY ticket
+                                    ORDER BY c.nombreCuenta, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1755,7 +1742,7 @@ namespace DataManager
                                         JOIN cuenta c ON c.idCuenta = p.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
                                         WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) 
-                                        AND p.cancelado = 1 AND p.nFactura != 0 GROUP BY ticket
+                                        AND p.cancelado = 1 AND p.nFactura != 0 AND anular = 0 GROUP BY ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;   
 ";
                 DBOperacion operacion = new DBOperacion();
