@@ -60,139 +60,139 @@ namespace Reportes.GUI
         {
             if (pbInicio.Visible)
             {
-                if (pbFin.Visible)
+                String inicio = dtpInicio.Text.ToString();
+                String fin = dtpFin.Text.ToString();
+                if (!pbFin.Visible)
                 {
-                    //Rango de fechas seleccionado
-                    if (valor.Equals("compras"))
+                    fin = dtpInicio.Text.ToString();
+                }
+                //Rango de fechas seleccionado
+                if (valor.Equals("compras"))
+                {
+                    //Generar reporte de compras
+                    if (cmbTipoCompras.SelectedIndex == 0)
                     {
-                        //Generar reporte de compras
-                        if (cmbTipoCompras.SelectedIndex == 0)
-                        {
-                            //Programar reporte de compras
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepCompras rep = new REP.RepCompras();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else if (cmbTipoCompras.SelectedIndex == 1)
-                        {
-                            //Programar reporte compras / proveedor
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepComprasProveedor rep = new REP.RepComprasProveedor();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else if (cmbTipoCompras.SelectedIndex == 2)
-                        {
-                            //Programar reporte compras / comprobante
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepComprasComprobante rep = new REP.RepComprasComprobante();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Debe seleccionar un tipo de reporte.");
-                        }
+                        //Programar reporte de compras
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
+                        REP.RepCompras rep = new REP.RepCompras();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoCompras.SelectedIndex == 1)
+                    {
+                        //Programar reporte compras / proveedor
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
+                        REP.RepComprasProveedor rep = new REP.RepComprasProveedor();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoCompras.SelectedIndex == 2)
+                    {
+                        //Programar reporte compras / comprobante
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
+                        REP.RepComprasComprobante rep = new REP.RepComprasComprobante();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe seleccionar un tipo de reporte.");
+                    }
+
+                }
+                else if (valor.Equals("ventas"))
+                {
+                    //Generar reporte de ventas
+                    if (cmbTipoVetas.SelectedIndex == 0)
+                    {
+                        //Ventas
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                        REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 1)
+                    {
+                        //Ventas Resumen
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                        REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 2)
+                    {
+                        //Ventas / Mesero
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                        REP.RepVentasMesero rep = new REP.RepVentasMesero();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
 
                     }
-                    else if (valor.Equals("ventas"))
+                    else if (cmbTipoVetas.SelectedIndex == 3)
                     {
-                        //Generar reporte de ventas
-                        if (cmbTipoVetas.SelectedIndex == 0)
-                        {
-                            //Ventas
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 1)
-                        {
-                            //Ventas Resumen
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 2)
-                        {
-                            //Ventas / Mesero
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasMesero rep = new REP.RepVentasMesero();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
+                        //Ventas / Mesero Resumen
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                        REP.RepVentasMeseroResumen rep = new REP.RepVentasMeseroResumen();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
 
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 3)
-                        {
-                            //Ventas / Mesero Resumen
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasMeseroResumen rep = new REP.RepVentasMeseroResumen();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 4)
-                        {
-                            //Ventas Facturadas
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepVentasFacturadas(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 5)
-                        {
-                            //Facturas Anuladas
-
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 6)
-                        {
-                            //Ventas Productos
-
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 7)
-                        {
-                            //Ventas Productos Agrupados
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            REP.RepVentasAgrupadoPorProducto rep = new REP.RepVentasAgrupadoPorProducto();
-                            f.GenerarReporte(rep, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else if (cmbTipoVetas.SelectedIndex == 8)
-                        {
-                            //Ventas Productos Resumen
-
-                            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                            REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
-                            DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(dtpInicio.Text.ToString(), dtpFin.Text.ToString());
-                            f.GenerarReporte(oReporte, datos, dtpInicio.Text.ToString(), dtpFin.Text.ToString(), "");
-                            f.Show();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Debe seleccionar un tipo de reporte.");
-                        }
                     }
-                    else if (valor.Equals("propinas"))
+                    else if (cmbTipoVetas.SelectedIndex == 4)
                     {
-                        //Generar reporte de propinas
+                        //Ventas Facturadas
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepVentasFacturadas(inicio, fin);
+                        REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 5)
+                    {
+                        //Facturas Anuladas
 
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 6)
+                    {
+                        //Ventas Productos
+
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 7)
+                    {
+                        //Ventas Productos Agrupados
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(inicio, fin);
+                        REP.RepVentasAgrupadoPorProducto rep = new REP.RepVentasAgrupadoPorProducto();
+                        f.GenerarReporte(rep, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 8)
+                    {
+                        //Ventas Productos Resumen
+
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
+                        DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(inicio, fin);
+                        f.GenerarReporte(oReporte, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe seleccionar un tipo de reporte.");
                     }
                 }
-                else
+                else if (valor.Equals("propinas"))
                 {
-                    MessageBox.Show("Debe seleccionar la fecha final.");
+                    //Generar reporte de propinas
+
                 }
+                
             }
             else
             {
