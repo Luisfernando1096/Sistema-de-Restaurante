@@ -646,12 +646,22 @@ namespace TPV.GUI
 
         public void ActualizarLabelsRetroceder(int id)
         {
+            int longitud = lstDetalle.Count;
             //Obtengo el pedido que estaba abierto en el punto de pago.
             DataTable pedido = DataManager.DBConsultas.PedidoPorId(id);
             if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
             {
                 lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
                 lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                
+                if (longitud > 0)
+                {
+                    for (int i = 0; i < longitud; i++)
+                    {
+                        lstDetalle[i].Mesero = pedido.Rows[0]["nombres"].ToString();
+                    }
+                    
+                }
             }
             else
             {
@@ -662,6 +672,16 @@ namespace TPV.GUI
             {
                 lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
                 lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+
+                if (longitud > 0)
+                {
+                    for (int i = 0; i < longitud; i++)
+                    {
+                        lstDetalle[i].Cliente = pedido.Rows[0]["nombre"].ToString();
+                    }
+
+                }
+
             }
             else
             {
@@ -961,7 +981,7 @@ namespace TPV.GUI
                 oReporte.SetParameterValue("Grupo", kvp.Key.ToString());
                 if (!lblMesero.Text.Equals(""))
                 {
-                    oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value.ToString());
+                    oReporte.SetParameterValue("Mesero", lblMesero.Text.ToString());
                 }
                 else
                 {
@@ -970,7 +990,7 @@ namespace TPV.GUI
 
                 if (!lblCliente.Text.Equals(""))
                 {
-                    oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value.ToString());
+                    oReporte.SetParameterValue("Cliente", lblCliente.Text.ToString());
                 }
                 else
                 {
