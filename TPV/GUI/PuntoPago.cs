@@ -839,6 +839,7 @@ namespace TPV.GUI
             pedido.Total = Double.Parse(lblSaldo.Tag.ToString());
             pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
             pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
+            pedido.Iva = Double.Parse(lblIva.Tag.ToString());
             pedido.Cancelado = true;
             pedido.Fecha = fecha;
 
