@@ -405,7 +405,6 @@ namespace TPV.GUI
                     Pedido pedido3 = new Pedido();
                     pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
                     primerProductoEnPedido.Add(pedido3.ActualizarMesero(true));
-                    ActualizarLabelsRetroceder(0, true);
                 }
                 
                 lstDetalle.Add(pDetalle);
@@ -474,6 +473,8 @@ namespace TPV.GUI
                             MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
                         }
 
+                        ActualizarLabelsRetroceder(idPedido, false);
+
                     }
                 }
                 else
@@ -512,9 +513,9 @@ namespace TPV.GUI
                 {
                     MessageBox.Show("ERROR EN TRANSACCION AL AUMENTAR EL DETALLE DEL PEDIDO, CONTACTE AL PROGRAMADOR.");
                 }
-
-                ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
             }
+
+            ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
 
         }
 

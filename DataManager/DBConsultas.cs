@@ -1777,7 +1777,7 @@ namespace DataManager
             try
             {
                 int resultado;
-                String sentencia = @"(SELECT LAST_INSERT_ID());";
+                String sentencia = @"(SELECT MAX(idPedido) FROM pedido);";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = (int) operacion.ConsultarScalar(sentencia);
