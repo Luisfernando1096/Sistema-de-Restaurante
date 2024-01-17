@@ -23,7 +23,7 @@ namespace TPV.GUI
             {
                 try
                 {
-                    datos.DataSource = DataManager.DBConsultas.PedidoPorId(Int32.Parse(txtidPedido.Text));
+                    datos.DataSource = DataManager.DBConsultas.PedidoPorId(Int32.Parse(txtidPedido.Text), false);
                     dgvClientes.DataSource = datos;
                     dgvClientes.AutoGenerateColumns = false;
                 }

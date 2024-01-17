@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -91,6 +92,7 @@ namespace TPV.GUI
 
         private void BotonMesa_Click(object sender, EventArgs e)
         {
+            List<String> lstCambioMesa = new List<string>();
             this.Hide();
             Button botonMesa = (Button)sender;
             String idMesa = botonMesa.Tag.ToString();
@@ -102,42 +104,33 @@ namespace TPV.GUI
                 pedido.IdPedido = idPedidoCambioMesa;
                 pedido.IdMesa = Int32.Parse(botonMesa.Tag.ToString());
 
-                if (pedido.ActualizarMesa())
-                {
-                    //MessageBox.Show("SE ACTUALIZO CON EXITO");
-                }
-                else
-                {
-                    MessageBox.Show("ERROR AL ACTUALIZAR Pedido");
-                }
+                lstCambioMesa.Add(pedido.ActualizarMesa());
 
                 //Aqui el codigo para cambiar de mesa
                 Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa();
                 mesa.Disponible = false;
                 mesa.IdMesa = Int32.Parse(botonMesa.Tag.ToString());
-                if (mesa.ActualizarEstado())
+                lstCambioMesa.Add(mesa.ActualizarEstado());
+                
+                if (datosEnMesa.Rows.Count == 1)
                 {
-                    if (datosEnMesa.Rows.Count == 1)
-                    {
-                        //Hacer disponible la mesa anterior
-                        Mantenimiento.CLS.Mesa mesa2 = new Mantenimiento.CLS.Mesa();
-                        mesa2.Disponible = true;
-                        mesa2.IdMesa = idMesaAnterior;
-                        if (mesa2.ActualizarEstado())
-                        {
-                            //MessageBox.Show("SE ACTUALIZO CON EXITO");
-                        }
-                        else
-                        {
-                            MessageBox.Show("ERROR AL ACTUALIZAR");
-                        }
-                    }
+                    //Hacer disponible la mesa anterior
+                    Mantenimiento.CLS.Mesa mesa2 = new Mantenimiento.CLS.Mesa();
+                    mesa2.Disponible = true;
+                    mesa2.IdMesa = idMesaAnterior;
+                    lstCambioMesa.Add(mesa2.ActualizarEstado());
+                }
+
+                //Hacer la transaccion aqui
+                DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
+                if (transaccion1.EjecutarTransaccion(lstCambioMesa) > 0)
+                {
+                    
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL ACTUALIZAR FALSE MESA");
+                    MessageBox.Show("ERROR EN TRANSACCION AL CAMBIAR DE MESA, CONTACTE AL PROGRAMADOR.");
                 }
-
             }
 
             DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, 0);
@@ -151,7 +144,7 @@ namespace TPV.GUI
                 f.CargarPedidosEnMesa(idMesa);
 
                 //Agregando datos mesero y cliente si los hay
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()));
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()), false);
                 if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                 {
                     f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();

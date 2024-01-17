@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -52,7 +53,21 @@ namespace TPV.GUI
                 Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
                 pedido.IdPedido = idPedido;
                 pedido.IdMesero = Int32.Parse(botonMesero.Tag.ToString());
-                pedido.ActualizarMesero();
+
+                List<String> lstMesero = new List<string>();
+                lstMesero.Add(pedido.ActualizarMesero(false));
+
+                //Hacer la transaccion aqui
+                DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
+                if (transaccion1.EjecutarTransaccion(lstMesero) > 0)
+                {
+                    //lblTicket.Text = idPedidoInsertado.ToString(); //Debo colocar el id del pedido
+                }
+                else
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR EL MESERO DEL PEDIDO, CONTACTE AL PROGRAMADOR.");
+                }
+
                 Close();
             }
             else

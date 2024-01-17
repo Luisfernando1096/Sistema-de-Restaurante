@@ -266,7 +266,9 @@ namespace TPV.GUI
 
         private void AgregarProductos(Button botonProducto, int cantidad)
         {
+            List<String> yaHayProductoEnPedido = new List<string>();
             int cant = cantidad;
+            Boolean primerProducto;
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             String[] aux = (string[])botonProducto.Tag;
             DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
@@ -339,10 +341,8 @@ namespace TPV.GUI
                     pedidoDetalle.Cantidad = cantidad;
                     pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, idProducto, precio);
 
-                    if (pedidoDetalle.ActualizarCompra())
-                    {
-
-                    }
+                    yaHayProductoEnPedido.Add(pedidoDetalle.ActualizarCompra(false));
+                    
                 }
                 else
                 {
@@ -360,14 +360,15 @@ namespace TPV.GUI
                     pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(productoNuevo.Rows[0]["precio"].ToString()));
                     pedidoDetalle.Grupo = "0";
                     pedidoDetalle.Usuario = oUsuario.IdUsuario;
-                    pedidoDetalle.Insertar();
+                    yaHayProductoEnPedido.Add(pedidoDetalle.Insertar(false));
+                    
                 }
-
+                primerProducto = false;
             }
             else
             {
                 //Creamos un nuevo pedido
-
+                primerProducto = true;
                 //No hay productos, se inicia el pedido
                 //Creamos el pedido
                 Pedido pedido = new Pedido
@@ -390,26 +391,23 @@ namespace TPV.GUI
                     Btc = 0
                 };
 
+                //Iniciamos las transacciones si no hay productos
+                List<String> primerProductoEnPedido = new List<string>();
+
+                
+
                 //Insertamos en la base de datos el pedido
-                if (pedido.Insertar(out int idPedidoInsertado))
+                primerProductoEnPedido.Add(pedido.Insertar());
+                //Se agregara el mesero tambien si entro un mesero
+                if (oUsuario.IdRol.Equals("2"))
                 {
-                    //MessageBox.Show("SE INSERTO CON EXITO");
-                    //Se agregara el mesero tambien si entro un mesero
-                    if (oUsuario.IdRol.Equals("2"))
-                    {
-                        //Entro un mesero
-                        Pedido pedido3 = new Pedido();
-                        pedido3.IdPedido = idPedidoInsertado;
-                        pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
-                        pedido3.ActualizarMesero();
-                        ActualizarLabelsRetroceder(idPedidoInsertado);
-                    }
+                    //Entro un mesero
+                    Pedido pedido3 = new Pedido();
+                    pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
+                    primerProductoEnPedido.Add(pedido3.ActualizarMesero(true));
+                    ActualizarLabelsRetroceder(0, true);
                 }
-                else
-                {
-                    MessageBox.Show("ERROR AL INSERTAR PEDIDO");
-                }
-                pDetalle.IdPedido = idPedidoInsertado;
+                
                 lstDetalle.Add(pDetalle);
 
                 //Agregamos detalles al pedido
@@ -421,10 +419,9 @@ namespace TPV.GUI
                     HoraEntregado = fecha,
                     HoraPedido = fecha,
                     //pedidoDetalle.IdCocinero = null;
-                    IdProducto = Int32.Parse(aux[0].ToString()),
-                    IdPedido = idPedidoInsertado
+                    IdProducto = Int32.Parse(aux[0].ToString())
                 };
-                lblTicket.Text = idPedidoInsertado.ToString();
+                
                 pedidoDetalle.Cantidad = cantidad;
                 DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
@@ -433,45 +430,91 @@ namespace TPV.GUI
                 pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
 
-                if (pedidoDetalle.Insertar())
+                //Insertamos el detalle del pedido
+                primerProductoEnPedido.Add(pedidoDetalle.Insertar(true));
+                Mesa mesa = new Mesa
                 {
-                    Mesa mesa = new Mesa
+                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                    Disponible = false
+                };
+                //Se actualiza el estado de la mesa
+                primerProductoEnPedido.Add(mesa.ActualizarEstado());
+
+                DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
+                if (transaccion1.EjecutarTransaccion(primerProductoEnPedido) > 0)
+                {
+                    int idPedido = DataManager.DBConsultas.ObtenerUltimoPedido();
+                    lblTicket.Text = idPedido.ToString();//Debo actualizar el ticket
+                    pDetalle.IdPedido = idPedido;//Debo asignar un id Para mostrar en la comanda parcial
+                    //Todo esto si el resultado es exitoso
+                    btnComanda.Enabled = true;
+                    btnDisminuir.Enabled = true;
+                    btnExtras.Enabled = true;
+
+                    //Actualizar al final el datagrid
+                    CargarProductosPorMesa(lblMesa.Tag.ToString());
+
+                    if (primerProducto)
                     {
-                        IdMesa = Int32.Parse(lblMesa.Tag.ToString())
-                    };
-                    if (mesa.ActualizarEstado())
-                    {
-                        //MessageBox.Show("SE ACTUALIZO CON EXITO");
-                        btnComanda.Enabled = true;
-                        btnDisminuir.Enabled = true;
-                        btnExtras.Enabled = true;
+                        //Vamos a actualizar el total del pedido
+                        Pedido pedido2 = new Pedido
+                        {
+                            IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                            IdPedido = Int32.Parse(lblTicket.Text.ToString())
+                        };
+                        double total = CalcularTotal();
+
+                        //Actualizamos el total en el pedido recien insertado
+                        List<String> actualizarTotal = new List<string>();
+                        actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+
+                        DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                        if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+                        {
+                            MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
+                        }
+
                     }
-                    else
-                    {
-                        MessageBox.Show("ERROR AL ACTUALIZAR MESAO");
-                    }
-                    //MessageBox.Show("SE INSERTO CON EXITO");
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL INSERTAR DETALLE PEDIDO");
+                    MessageBox.Show("ERROR EN TRANSACCION AL INSERTAR UN NUEVO PEDIDO, CONTACTE AL PROGRAMADOR.");
                 }
-
             }
 
-            //Actualizar al final el datagrid
-            CargarProductosPorMesa(lblMesa.Tag.ToString());
-
-            //Vamos a actualizar el total del pedido
-            Pedido pedido2 = new Pedido
+            if (!primerProducto)
             {
-                IdPedido = Int32.Parse(lblTicket.Text.ToString()),
-                IdMesa = Int32.Parse(lblMesa.Tag.ToString())
-            };
-            double total = CalcularTotal();
-            pedido2.ActualizarTotal(total);
+                DataManager.DBOperacion transaccion2 = new DataManager.DBOperacion();
+                if(transaccion2.EjecutarTransaccion(yaHayProductoEnPedido) > 0)
+                {
+                    //Actualizar al final el datagrid
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text.ToString()));
 
-            ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
+                    //Vamos a actualizar el total del pedido
+                    Pedido pedido2 = new Pedido
+                    {
+                        IdPedido = Int32.Parse(lblTicket.Text.ToString()),
+                        IdMesa = Int32.Parse(lblMesa.Tag.ToString())
+                    };
+                    double total = CalcularTotal();
+
+                    //Actualizamos el total en el pedido recien insertado
+                    List<String> actualizarTotal = new List<string>();
+                    actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+
+                    DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                    if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+                    {
+                        MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL AUMENTAR EL DETALLE DEL PEDIDO, CONTACTE AL PROGRAMADOR.");
+                }
+
+                ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
+            }
 
         }
 
@@ -587,7 +630,7 @@ namespace TPV.GUI
                                 f.CargarPedidosEnMesa(idMesa);
                                 f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
 
-                                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text));
+                                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text), false);
                                 //Agregando datos mesero y cliente si los hay
                                 if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                                 {
@@ -633,7 +676,7 @@ namespace TPV.GUI
                 this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
                 this.CargarPedidosEnMesa(f.lblMesa.Tag.ToString());
 
-                ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()));
+                ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()), false);
                 lblMesa.Text = f.lblMesa.Text.ToString();
                 lblMesa.Tag = f.lblMesa.Tag.ToString();
             }
@@ -644,11 +687,11 @@ namespace TPV.GUI
 
         }
 
-        public void ActualizarLabelsRetroceder(int id)
+        public void ActualizarLabelsRetroceder(int id, Boolean primerPedido)
         {
             int longitud = lstDetalle.Count;
             //Obtengo el pedido que estaba abierto en el punto de pago.
-            DataTable pedido = DataManager.DBConsultas.PedidoPorId(id);
+            DataTable pedido = DataManager.DBConsultas.PedidoPorId(id, primerPedido);
             if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
             {
                 lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
@@ -699,6 +742,8 @@ namespace TPV.GUI
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Actualizamos el total en el pedido recien insertado
+            List<String> eliminacion = new List<string>();
 
             //Programando boton de disminuir
             PedidoDetalle pedidoDetalle = new PedidoDetalle();
@@ -712,28 +757,29 @@ namespace TPV.GUI
 
                 if (pedidoDetalle.Cantidad != 0)
                 {
-                    pedidoDetalle.ActualizarCompra();
-                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    //Actualizamos el total en el pedido recien insertado
+                    List<String> actualizarTotal = new List<string>();
+                    actualizarTotal.Add(pedidoDetalle.ActualizarCompra(false));
+
+                    EliminarPedidoOActualizarDetalle(false, actualizarTotal);
+
                 }
                 else
                 {
+                    
                     //Se eliminara el producto
-                    pedidoDetalle.Eliminar();
-
+                    eliminacion.Add(pedidoDetalle.Eliminar());
+                    
                     if (dgvDatos.Rows.Count == 1)
                     {
                         Pedido pedido = new Pedido
                         {
                             IdPedido = Int32.Parse(lblTicket.Text)
                         };
-                        pedido.Eliminar();
-                        CargarProductosPorMesa(lblMesa.Tag.ToString());
+                        eliminacion.Add(pedido.Eliminar());
 
                     }
-                    else
-                    {
-                        CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                    }
+                    EliminarPedidoOActualizarDetalle(true, eliminacion);
                 }
 
                 CargarPedidosEnMesa(lblMesa.Tag.ToString());
@@ -762,6 +808,98 @@ namespace TPV.GUI
 
         }
 
+        private void EliminarPedidoOActualizarDetalle(bool eliminar, List<string> accion)
+        {
+            DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
+            if (eliminar)
+            {
+                if (transaccion.EjecutarTransaccion(accion) > 0)
+                {
+
+                    if (dgvDatos.Rows.Count == 1)
+                    {
+                        CargarProductosPorMesa(lblMesa.Tag.ToString());
+                    }
+                    else
+                    {
+                        CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL ELIMINAR PEDIDO O SU DETALLE, CONTACTE AL PROGRAMADOR.");
+                }
+            }
+            else
+            {
+                
+                if (transaccion.EjecutarTransaccion(accion) > 0)
+                {
+
+                    if (dgvDatos.Rows.Count == 1)
+                    {
+                        CargarProductosPorMesa(lblMesa.Tag.ToString());
+                    }
+                    else
+                    {
+                        CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL ELIMINAR PEDIDO O SU DETALLE, CONTACTE AL PROGRAMADOR.");
+                }
+            }
+
+            if (dgvDatos.Rows.Count > 0)
+            {
+                //Vamos a actualizar el total del pedido
+                Pedido pedido3 = new Pedido
+                {
+                    IdPedido = Int32.Parse(lblTicket.Text.ToString()),
+                    IdMesa = Int32.Parse(lblMesa.Tag.ToString())
+                };
+                double total = CalcularTotal();
+
+                //Actualizamos el total en el pedido recien insertado
+                List<String> actualizarTotal = new List<string>();
+                actualizarTotal.Add(pedido3.ActualizarTotal(total, false));
+
+                DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
+                }
+            }
+            else
+            {
+                //Lista para actualizar el estado de la mesa
+                List<String> actualizarLaMesa = new List<string>();
+                
+                Mesa mesa = new Mesa
+                {
+                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                    Disponible = true
+                };
+
+                //Se actualiza el estado de la mesa
+                actualizarLaMesa.Add(mesa.ActualizarEstado());
+                DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                if (transaccion3.EjecutarTransaccion(actualizarLaMesa) < 0)
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR EL ESTADO DE LA MESA, CONTACTE AL PROGRAMADOR.");
+                }
+
+                lblTicket.Text = "";
+                lblMesero.Text = "";
+                lblMesero.Tag = "";
+                lblCliente.Text = "";
+                lblCliente.Tag = "";
+            }
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             idPedidoCambioMesa = Int32.Parse(lblTicket.Text.ToString());
@@ -787,7 +925,7 @@ namespace TPV.GUI
             cg.ShowDialog();
             if (!lblTicket.Text.ToString().Equals(""))
             {
-                ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()));
+                ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()), false);
             }
 
         }
@@ -807,7 +945,7 @@ namespace TPV.GUI
             m.ShowDialog();
             if (!lblTicket.Text.ToString().Equals(""))
             {
-                ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()));
+                ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text.ToString()), false);
             }
         }
 
@@ -847,10 +985,30 @@ namespace TPV.GUI
             if (idPedidoSiguiente > 0)
             {
                 CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+
             }
             else
             {
                 CargarProductosPorMesa(lblMesa.Tag.ToString());
+            }
+
+            //AQUI MODIFICAR EL TOTAL DEL PEDIDO
+            //Vamos a actualizar el total del pedido
+            Pedido pedido2 = new Pedido
+            {
+                IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                IdPedido = Int32.Parse(lblTicket.Text.ToString())
+            };
+            double total = CalcularTotal();
+
+            //Actualizamos el total en el pedido recien insertado
+            List<String> actualizarTotal = new List<string>();
+            actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+
+            DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+            if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+            {
+                MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
             }
             CargarPedidosEnMesa(lblMesa.Tag.ToString());
 
@@ -872,7 +1030,7 @@ namespace TPV.GUI
                 CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
                 lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
 
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente, false);
                 //Agregando datos mesero y cliente si los hay
                 if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                 {
@@ -922,9 +1080,9 @@ namespace TPV.GUI
                 oReporte.SetDataSource(datos);
                 oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
                 oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
-                oReporte.SetParameterValue("Mesero", dgvDatos.Rows[0].Cells["nombreMesero"].Value.ToString());
-                oReporte.SetParameterValue("Cliente", dgvDatos.Rows[0].Cells["nombres"].Value.ToString());
-                oReporte.SetParameterValue("Salon", dgvDatos.Rows[0].Cells["salon"].Value.ToString());
+                oReporte.SetParameterValue("Mesero", datos.Rows[0]["nombreMesero"].ToString());
+                oReporte.SetParameterValue("Cliente", datos.Rows[0]["nombres"].ToString());
+                oReporte.SetParameterValue("Salon", datos.Rows[0]["salon"].ToString());
 
                 // Imprimir el informe en la impresora seleccionada
                 PrinterSettings settings = new PrinterSettings

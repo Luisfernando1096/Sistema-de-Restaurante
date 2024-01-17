@@ -46,56 +46,41 @@ namespace Mantenimiento.CLS
         public string Salon { get => salon; set => salon = value; }
         public string Mesero { get => mesero; set => mesero = value; }
 
-        public Boolean Insertar()
+        public String Insertar(Boolean primerPedido)
         {
-            Boolean resultado = false;
             string sentencia;
-            sentencia = @"INSERT INTO pedido_detalle(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuario + "');";
-
-            try
+            if (primerPedido)
             {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasInsertadas = 0;
-                filasInsertadas = op.EjecutarSentencia(sentencia);
-                if (filasInsertadas > 0)
-                {
-                    resultado = true;
-                }
+                sentencia = @"INSERT INTO pedido_detalle(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", (SELECT MAX(ultimoId) FROM(SELECT idPedido AS ultimoId FROM pedido) AS subconsulta), " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuario + "');";
+
             }
-            catch (Exception)
+            else
             {
+                sentencia = @"INSERT INTO pedido_detalle(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuario + "');";
 
-                throw;
             }
 
-            return resultado;
+            return sentencia;
         }
 
-        public Boolean ActualizarCompra()
+        public String ActualizarCompra(Boolean primerPedido)
         {
-            Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @" 
+            if (primerPedido)
+            {
+                sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @" 
+                            WHERE pe.idPedido=pd.idPedido AND pe.idPedido = (SELECT LAST_INSERT_ID()) AND pd.idProducto = " + idProducto + @"
+                            AND pd.idDetalle = " + IdDetalle + ";";
+            }
+            else
+            {
+                sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @" 
                             WHERE pe.idPedido=pd.idPedido AND pe.idPedido = " + idPedido + @" AND pd.idProducto = " + idProducto + @"
                             AND pd.idDetalle = " + IdDetalle + ";";
-
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
-                {
-                    resultado = true;
-                }
             }
-            catch (Exception)
-            {
+            
 
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
 
         public Boolean ActualizarDatos()
@@ -124,30 +109,13 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Eliminar()
+        public String Eliminar()
         {
-            Boolean resultado = false;
             string sentencia;
             sentencia = @"DELETE FROM pedido_detalle " +
                 "WHERE idDetalle = " + idDetalle + ";";
 
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasEliminadas = 0;
-                filasEliminadas = op.EjecutarSentencia(sentencia);
-                if (filasEliminadas > 0)
-                {
-                    resultado = true;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
     }
 }

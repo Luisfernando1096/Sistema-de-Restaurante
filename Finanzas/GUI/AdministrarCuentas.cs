@@ -132,7 +132,7 @@ namespace Finanzas.GUI
                     {
                         cuenta.IdCuenta = int.Parse(txtIdCuenta.Text);
 
-                        if (cuenta.Actualizar())
+                        if (cuenta.ActualizarSinTransaccion())
                         {
                             MessageBox.Show("¡Registro actualizado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             CargarDatos();

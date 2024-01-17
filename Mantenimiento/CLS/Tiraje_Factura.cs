@@ -66,26 +66,12 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean ActualizarTirajeActual()
+        public String ActualizarTirajeActual()
         {
-            Boolean resultado = false;
-            DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
             sentencia = "UPDATE tiraje_factura SET actual = " + actual + " WHERE idTiraje = " + idTiraje + ";";
-            try
-            {
-                int filasAfectadas = 0;
-                filasAfectadas = op.EjecutarSentencia(sentencia);
-                if (filasAfectadas > 0)
-                {
-                    resultado = true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return resultado;
+            
+            return sentencia;
         }
         public Boolean Eliminar()
         {

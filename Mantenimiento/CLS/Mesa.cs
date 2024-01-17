@@ -113,31 +113,15 @@ namespace Mantenimiento.CLS
             }
         }
 
-        public Boolean ActualizarEstado()
+        public String ActualizarEstado()
         {
 
-            try
-            {
-                Boolean resultado = false;
                 string sentencia;
-                sentencia = @"UPDATE mesa SET disponible = " + disponible + " " +
+                
+                    sentencia = @"UPDATE mesa SET disponible = " + disponible + " " +
                     "WHERE idMesa = " + idMesa + ";";
-
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
-                {
-                    resultado = true;
-                }
-                return resultado;
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+                
+                return sentencia;
 
         }
 

@@ -142,18 +142,33 @@ namespace DataManager
             }
         }
 
-        public static DataTable PedidoPorId(int idPedido)
+        public static DataTable PedidoPorId(int idPedido, Boolean primerPedido)
         {
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
+                String sentencia;
+                if (primerPedido)
+                {
+                    sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
+                                     p.totalPago
+                                    FROM pedido p
+                                    LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
+                                    JOIN mesa m ON p.idMesa = m.idMesa
+                                    WHERE p.idPedido = (SELECT LAST_INSERT_ID())); ";
+                }
+                else
+                {
+                    sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
                                      p.totalPago
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
                                     LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
                                     JOIN mesa m ON p.idMesa = m.idMesa
                                     WHERE p.idPedido = " + idPedido + "; ";
+                }
+                
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1757,5 +1772,24 @@ namespace DataManager
             }
         }
 
+        public static int ObtenerUltimoPedido()
+        {
+            try
+            {
+                int resultado;
+                String sentencia = @"(SELECT LAST_INSERT_ID());";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = (int) operacion.ConsultarScalar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+                throw;
+            }
+        }
+
     }
+
 }

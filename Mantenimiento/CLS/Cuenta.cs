@@ -39,7 +39,15 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean Actualizar()
+        public String Actualizar()
+        {
+            string sentencia;
+            sentencia = @"update cuenta set nombreCuenta = '" + nombreCuenta + "', numero = '" + numero + "', saldo = " + saldo + " where idCuenta = " + idCuenta + ";";
+
+            return sentencia;
+        }
+
+        public Boolean ActualizarSinTransaccion()
         {
             Boolean resultado = false;
             string sentencia;
@@ -48,9 +56,9 @@ namespace Mantenimiento.CLS
             try
             {
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
+                Int32 filasInsertadas = 0;
+                filasInsertadas = op.EjecutarSentencia(sentencia);
+                if (filasInsertadas > 0)
                 {
                     resultado = true;
                 }

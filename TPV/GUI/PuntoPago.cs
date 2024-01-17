@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using Humanizer;
+using System.Collections.Generic;
 
 namespace TPV.GUI
 {
@@ -165,7 +166,7 @@ namespace TPV.GUI
                     comandaGestion.lblTicket.Text = lblTicket.Text;
                     comandaGestion.lblMesa.Text = lblMesa.Text;
                     comandaGestion.lblMesa.Tag = lblMesa.Tag.ToString();
-                    comandaGestion.ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text));
+                    comandaGestion.ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text), false);
                 }
 
             }
@@ -189,7 +190,7 @@ namespace TPV.GUI
                 CargarPedidosEnMesa(SeleccionSalonMesa.idMesa.ToString());
                 lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
                 lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()));
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()), false);
                 if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                 {
                     lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
@@ -830,6 +831,7 @@ namespace TPV.GUI
 
         private void RegistrarPago()
         {
+            List<String> lstPago = new List<string>();
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             int siguiente = 0, idTiraje = 0;
             String serie = string.Empty;
@@ -860,10 +862,7 @@ namespace TPV.GUI
                     {
                         tiraje.IdTiraje = idTiraje;
                         tiraje.Actual = siguiente;
-                        if (!tiraje.ActualizarTirajeActual())
-                        {
-                            MessageBox.Show("Fallo al actualizar el tiraje actual");
-                        }
+                        lstPago.Add(tiraje.ActualizarTirajeActual());
                     }
 
                 }
@@ -873,23 +872,22 @@ namespace TPV.GUI
                 }
                 if (pagoEfectivo)
                 {
-                    MessageBox.Show("Imprimir el factura Efectivo");
                     Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
                     GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
                 }
                 else if (pagoTarjeta)
                 {
-                    MessageBox.Show("Imprimir el factura Tarjeta");
+                    MessageBox.Show("Imprimir la factura Tarjeta");
 
                 }
                 else if (pagoCortesia)
                 {
-                    MessageBox.Show("Imprimir el factura Cortesia");
+                    MessageBox.Show("Imprimir la factura Cortesia");
 
                 }
                 else if (pagoExacto)
                 {
-                    MessageBox.Show("Imprimir el factura Exacto");
+                    MessageBox.Show("Imprimir la factura Exacto");
                     Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
                     GenerarFactura(oReporte, serie, siguiente, "EXACTO");// se envia el nFactura y la serie que corresponde
                 }
@@ -964,62 +962,55 @@ namespace TPV.GUI
                 }
             }
 
-            if (!pedido.ActualizarPedidoPagado())
+            lstPago.Add(pedido.ActualizarPedidoPagado());
+
+            if (datosEnMesa.Rows.Count == 1)
             {
-                MessageBox.Show("Ocurrio un error al guardar pago, contacte al programador.");
+                //Actualizar estado de la mesa
+                Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+                {
+                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                    Disponible = true
+                };
+                lstPago.Add(mesa.ActualizarEstado());
+                
             }
-            else
+
+            //Proceso para agregar el efectivo cancelado
+            DataTable cuenta = null;
+            Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
+            if (pagoTarjeta)
             {
-                if (datosEnMesa.Rows.Count == 1)
-                {
-                    //Actualizar estado de la mesa
-                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
-                    {
-                        IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
-                        Disponible = true
-                    };
-                    if (mesa.ActualizarEstado())
-                    {
-                        //MessageBox.Show("SE ACTUALIZO CON EXITO");
+                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
+            }
+            else if (!pagoCortesia)
+            {
+                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
+            }
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR AL ACTUALIZAR");
-                    }
-                }
+            if (cuenta != null)
+            {
+                int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
+                String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
+                String numero = cuenta.Rows[0]["numero"].ToString();
+                Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
+                oCuenta.IdCuenta = idCuenta;
+                oCuenta.NombreCuenta = nombreCuenta;
+                oCuenta.Numero = numero;
+                oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
 
-                //Proceso para agregar el efectivo cancelado
-                DataTable cuenta = null;
-                Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
-                if (pagoTarjeta)
-                {
-                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
-                }
-                else if (!pagoCortesia)
-                {
-                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
-                }
+                lstPago.Add(oCuenta.Actualizar());
+            }
 
-                if (cuenta != null)
-                {
-                    int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
-                    String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
-                    String numero = cuenta.Rows[0]["numero"].ToString();
-                    Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
-                    oCuenta.IdCuenta = idCuenta;
-                    oCuenta.NombreCuenta = nombreCuenta;
-                    oCuenta.Numero = numero;
-                    oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
-
-                    oCuenta.Actualizar();
-                }
-
+            DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
+            if (transaccion.EjecutarTransaccion(lstPago) > 0)
+            {
                 //IRa tpv
                 comandaGestion.tpv = true;
                 comandaGestion.Close();
                 Close();
             }
+            
         }
 
         public void CargarProductosPorMesayIdPedido(string idMesa, int idPedido)
@@ -1053,7 +1044,7 @@ namespace TPV.GUI
                 CargarProductosPorMesayIdPedido(pedidosSeparados.idMesa, idPedidoSiguiente);
                 lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
 
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text));
+                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text), false);
                 //Agregando datos mesero y cliente si los hay
                 if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                 {
@@ -1252,7 +1243,7 @@ namespace TPV.GUI
         private void ActualizarLabels(int id)
         {
             //Obtengo el pedido que estaba abierto en el punto de pago.
-            DataTable pedido = DataManager.DBConsultas.PedidoPorId(id);
+            DataTable pedido = DataManager.DBConsultas.PedidoPorId(id, false);
             if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
             {
                 lblMesero.Text = pedido.Rows[0]["nombres"].ToString();

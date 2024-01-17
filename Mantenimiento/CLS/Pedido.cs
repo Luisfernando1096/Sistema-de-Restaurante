@@ -46,34 +46,12 @@ namespace Mantenimiento.CLS
         public double Credito { get => credito; set => credito = value; }
         public double Btc { get => btc; set => btc = value; }
 
-        public Boolean Insertar(out int idPedidoInsertado)
+        public String Insertar()
         {
-            Boolean resultado = false;
-            idPedidoInsertado = -1; // Valor predeterminado en caso de error
-            string sentencia;
-            sentencia = @"INSERT INTO pedido(idMesa, idCuenta, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
+            String sentencia = @"INSERT INTO pedido(idMesa, idCuenta, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
                  VALUES(" + idMesa + ", " + idCuenta + ", " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
 
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasInsertadas = 0;
-                filasInsertadas = op.EjecutarSentencia(sentencia);
-                if (filasInsertadas > 0)
-                {
-                    resultado = true;
-
-                    // Ahora, obtén el ID del pedido insertado usando una consulta adicional
-                    string consultaId = "SELECT LAST_INSERT_ID();";
-                    idPedidoInsertado = Convert.ToInt32(op.ConsultarScalar(consultaId));
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
 
 
@@ -129,113 +107,63 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
-        public Boolean ActualizarMesero()
+        public String  ActualizarMesero(Boolean primerPedido)
         {
-            Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE pedido SET idMesero = " + idMesero +
+            if (primerPedido)
+            {
+                sentencia = @"UPDATE pedido SET idMesero = " + idMesero +
+                " WHERE idPedido = (SELECT LAST_INSERT_ID()) ;";
+            }
+            else
+            {
+                sentencia = @"UPDATE pedido SET idMesero = " + idMesero +
                 " WHERE idPedido = " + idPedido + ";";
-
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
-                {
-                    resultado = true;
-                }
             }
-            catch (Exception)
-            {
+            
 
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
 
-        public Boolean ActualizarMesa()
+        public String ActualizarMesa()
         {
-            Boolean resultado = false;
             string sentencia;
             sentencia = @"UPDATE pedido SET idMesa = " + idMesa + " " +
                 "WHERE idPedido = " + idPedido + ";";
 
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
-                {
-                    resultado = true;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
 
-        public Boolean ActualizarTotal(double total)
+        public String ActualizarTotal(double total, Boolean primerPedido)
         {
-            Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE pedido SET total = " + total + " " +
+            if (primerPedido)
+            {
+                sentencia = @"UPDATE pedido SET total = " + total + " " +
+                "WHERE idMesa = " + idMesa + " AND idPedido = (SELECT MAX(ultimoId) FROM(SELECT idPedido AS ultimoId FROM pedido) AS subconsulta)" +
+                "; ";
+            }
+            else
+            {
+                sentencia = @"UPDATE pedido SET total = " + total + " " +
                 "WHERE idMesa = " + idMesa + " AND idPedido = " + idPedido + ";";
-
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
-                {
-                    resultado = true;
-                }
             }
-            catch (Exception)
-            {
+            
 
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
 
-        public Boolean Eliminar()
+        public String Eliminar()
         {
-            Boolean resultado = false;
             string sentencia;
             sentencia = @"DELETE FROM pedido " +
                 "WHERE idPedido = " + idPedido + ";";
 
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasEliminadas = 0;
-                filasEliminadas = op.EjecutarSentencia(sentencia);
-                if (filasEliminadas > 0)
-                {
-                    resultado = true;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
 
-        public Boolean ActualizarPedidoPagado()
+        public String ActualizarPedidoPagado()
         {
-            Boolean resultado = false;
             string sentencia;
             if (nFactura != null)
             {
@@ -248,23 +176,7 @@ namespace Mantenimiento.CLS
                                 "WHERE idPedido = " + idPedido + ";";
             }
 
-            try
-            {
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasActualizadas = 0;
-                filasActualizadas = op.EjecutarSentencia(sentencia);
-                if (filasActualizadas > 0)
-                {
-                    resultado = true;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return resultado;
+            return sentencia;
         }
     }
 }

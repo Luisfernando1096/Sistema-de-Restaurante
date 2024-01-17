@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -333,6 +334,7 @@ namespace TPV.GUI
 
         private void btnExtras_Click(object sender, EventArgs e)
         {
+            List<String> lstSeparar = new List<string>();
             int idPedido = Int32.Parse(lblTicket.Tag.ToString());
             int idMesa = Int32.Parse(lblMesa.Tag.ToString());
 
@@ -357,7 +359,7 @@ namespace TPV.GUI
                                     Cantidad = Int32.Parse(actual["cantidad"].ToString()),
                                     SubTotal = Double.Parse(actual["subTotal"].ToString())
                                 };
-                                pedidoDetalle.ActualizarCompra();
+                                lstSeparar.Add(pedidoDetalle.ActualizarCompra(false));
 
                             }
                         }
@@ -382,7 +384,8 @@ namespace TPV.GUI
                                     Cantidad = Int32.Parse(actual["cantidad"].ToString()),
                                     SubTotal = Double.Parse(actual["subTotal"].ToString())
                                 };
-                                pedidoDetalle.ActualizarCompra();
+                                lstSeparar.Add(pedidoDetalle.ActualizarCompra(false));
+                                
                                 eliminar = false;
                                 break;
                             }
@@ -398,7 +401,8 @@ namespace TPV.GUI
                             {
                                 IdDetalle = Int32.Parse(siguiente["idDetalleSiguiente"].ToString())
                             };
-                            pedidoDetalle.Eliminar();
+                            lstSeparar.Add(pedidoDetalle.Eliminar());
+                            
                         }
                         //Vamos a actualizar el total del pedido
                         Mantenimiento.CLS.Pedido pedido2 = new Mantenimiento.CLS.Pedido
@@ -406,8 +410,10 @@ namespace TPV.GUI
                             IdPedido = idPedido,
                             IdMesa = idMesa
                         };
-                        double total = CalcularTotal(dgvActual, "subTotal");
-                        pedido2.ActualizarTotal(total);
+                        double total2 = CalcularTotal(dgvActual, "subTotal");
+                        lstSeparar.Add(pedido2.ActualizarTotal(total2, false));
+                        //HAcer la transaccion
+                        
                     }
 
                 }
@@ -436,38 +442,42 @@ namespace TPV.GUI
 
                 //Agregamos detalles al pedido
                 Mantenimiento.CLS.PedidoDetalle pedidoDetalle2;
+
                 //Insertamos en la base de datos el pedido
-                if (pedido.Insertar(out int idPedidoInsertado))
+                lstSeparar.Add(pedido.Insertar());
+                foreach (DataRow siguiente in datosSiguiente.Rows)
                 {
-                    foreach (DataRow siguiente in datosSiguiente.Rows)
+                    pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle
                     {
-                        pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle
-                        {
-                            IdDetalle = 0,
-                            Cocinando = true,
-                            Extras = "",
-                            HoraEntregado = fecha,
-                            HoraPedido = fecha,
-                            //pedidoDetalle2.IdCocinero = null;
-                            IdProducto = Int32.Parse(siguiente["idProductoSiguiente"].ToString()),
-                            IdPedido = idPedidoInsertado,
-                            Cantidad = Int32.Parse(siguiente["cantidadSiguiente"].ToString()),
-                            Precio = Double.Parse(siguiente["precioSiguiente"].ToString()),
-                            SubTotal = Double.Parse(siguiente["subTotalSiguiente"].ToString()),
-                            Grupo = "0",
-                            Usuario = oUsuario.IdUsuario
-                        };
-                        //pedidoDetalle2.Fecha = null;
-                        pedidoDetalle2.Insertar();
-                        lblTicket.Text = idPedidoInsertado.ToString();
-                    }
-                    double total = CalcularTotal(dgvSiguiente, "subTotalSiguiente");
-                    pedido.IdPedido = idPedidoInsertado;
-                    pedido.ActualizarTotal(total);
+                        IdDetalle = 0,
+                        Cocinando = true,
+                        Extras = "",
+                        HoraEntregado = fecha,
+                        HoraPedido = fecha,
+                        //pedidoDetalle2.IdCocinero = null;
+                        IdProducto = Int32.Parse(siguiente["idProductoSiguiente"].ToString()),
+                        Cantidad = Int32.Parse(siguiente["cantidadSiguiente"].ToString()),
+                        Precio = Double.Parse(siguiente["precioSiguiente"].ToString()),
+                        SubTotal = Double.Parse(siguiente["subTotalSiguiente"].ToString()),
+                        Grupo = "0",
+                        Usuario = oUsuario.IdUsuario
+                    };
+                    //pedidoDetalle2.Fecha = null;
+                    lstSeparar.Add(pedidoDetalle2.Insertar(true));
+                        
+                }
+                double total = CalcularTotal(dgvSiguiente, "subTotalSiguiente");
+                lstSeparar.Add(pedido.ActualizarTotal(total, true));
+                    
+                //Hacer la transaccion aqui
+                DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
+                if (transaccion1.EjecutarTransaccion(lstSeparar) > 0)
+                {
+                    //lblTicket.Text = idPedidoInsertado.ToString(); //Debo colocar el id del pedido
                 }
                 else
                 {
-                    MessageBox.Show("ERROR AL INSERTAR PEDIDO");
+                    MessageBox.Show("ERROR EN TRANSACCION AL SEPARAR PEDIDO, CONTACTE AL PROGRAMADOR.");
                 }
                 Close();
             }

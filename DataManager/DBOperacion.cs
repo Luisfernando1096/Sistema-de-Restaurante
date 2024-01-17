@@ -64,7 +64,7 @@ namespace DataManager
 
 
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     if (transaction != null)
                     {

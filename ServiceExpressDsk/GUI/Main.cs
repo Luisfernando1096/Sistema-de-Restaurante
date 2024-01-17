@@ -269,13 +269,13 @@ namespace ServiceExpressDsk.GUI
                         {
                             f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), idPedidoSiguiente);
                             f2.lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
-                            pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente);
+                            pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente, false);
                         }
                         else
                         {
                             f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
                             f2.lblTicket.Text = f3.lblTicket.Text;//Accedemos a la primera posicion de la tabla
-                            pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f3.lblTicket.Text));
+                            pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f3.lblTicket.Text), false);
                         }
 
                         f2.CargarPedidosEnMesa(f3.lblMesa.Tag.ToString());
