@@ -444,6 +444,15 @@ namespace Ingredientes_y_Productos.GUI
                 }
                 else
                 {
+                    if (dgvReceta.Rows.Count == 0)
+                    {
+                        //Si no esta definido como producto que tiene ingrediente se define aqui
+                        Mantenimiento.CLS.Producto producto = new Mantenimiento.CLS.Producto();
+                        producto.IdProducto = int.Parse(txtIDProducto.Text);
+                        producto.ConIngrediente = 1;
+                        producto.Stock = 0;
+                        producto.DefinirConIngrediente();
+                    }
                     Mantenimiento.CLS.IngredienteProducto mantenimiento = new Mantenimiento.CLS.IngredienteProducto
                     {
                         IdProducto = int.Parse(txtIDProducto.Text)
@@ -454,6 +463,7 @@ namespace Ingredientes_y_Productos.GUI
 
                     if (txtID.Tag != null)
                     {
+
                         mantenimiento.Id = Int32.Parse(txtID.Tag.ToString());
                         if (mantenimiento.Actualizar())
                         {
