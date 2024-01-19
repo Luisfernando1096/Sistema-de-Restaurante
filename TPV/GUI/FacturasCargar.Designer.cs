@@ -48,6 +48,7 @@ namespace TPV.GUI
             this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.SuspendLayout();
@@ -117,7 +118,8 @@ namespace TPV.GUI
             this.propina,
             this.iva,
             this.descuento,
-            this.total});
+            this.total,
+            this.serie});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -237,6 +239,14 @@ namespace TPV.GUI
             this.total.Visible = false;
             this.total.Width = 70;
             // 
+            // serie
+            // 
+            this.serie.DataPropertyName = "serie";
+            this.serie.HeaderText = "No Serie";
+            this.serie.Name = "serie";
+            this.serie.ReadOnly = true;
+            this.serie.Visible = false;
+            // 
             // FacturasCargar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,5 +284,6 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn iva;
         private System.Windows.Forms.DataGridViewTextBoxColumn descuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serie;
     }
 }

@@ -26,6 +26,24 @@ namespace DataManager
 
         }
 
+        public static object Comandos()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idComando, comando FROM comando;";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable TicketsFacturados(String nFactura)
         {
             try
@@ -35,18 +53,20 @@ namespace DataManager
                 if (nFactura != "")
                 {
                     sentencia = @"SELECT p.idPedido, c.nombre, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago, p.saldo,
-                                     p.idTiraje, p.nFactura, p.efectivo
+                                     p.idTiraje, p.nFactura, p.efectivo, tf.serie
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                    LEFT JOIN tiraje_factura tf ON tf.idTiraje = p.idTiraje
                                     WHERE p.nFactura = '" + nFactura + @"' AND p.anular != 1; ";
                 }
                 else
                 {
                     sentencia = @"SELECT p.idPedido, c.nombre, p.fecha, p.total, p.descuento, p.iva, p.propina, p.totalPago, p.saldo,
-                                     p.idTiraje, p.nFactura, p.efectivo
+                                     p.idTiraje, p.nFactura, p.efectivo, tf.serie
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
-                                    WHERE p.nFactura > 0 AND p.anular != 1; ";
+                                    LEFT JOIN tiraje_factura tf ON tf.idTiraje = p.idTiraje
+                                    WHERE p.nFactura > 0 AND p.anular != 1;  ";
                 }
 
                 DBOperacion operacion = new DBOperacion();
@@ -126,10 +146,19 @@ namespace DataManager
         {
             try
             {
+                String sentencia;
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.idComando FROM comando c, rol r, permiso p, usuario u
+                if (rol.Equals(""))
+                {
+                    sentencia = @"SELECT c.idComando, c.comando FROM comando c;";
+                }
+                else
+                {
+                    sentencia = @"SELECT c.idComando, c.comando FROM comando c, rol r, permiso p, usuario u
                                     WHERE p.idComando = c.idComando AND p.idRol = r.idRol AND u.idRol = r.idRol AND r.idRol=" + rol + @" 
                                     group by c.idComando;";
+                }
+                
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

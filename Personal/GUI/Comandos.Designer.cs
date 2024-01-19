@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Comandos));
-            this.dgvCategorias = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvComandos = new System.Windows.Forms.DataGridView();
+            this.idComando = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comando = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtIdComando = new System.Windows.Forms.TextBox();
             this.lblIdComando = new System.Windows.Forms.Label();
@@ -43,63 +43,66 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnGuardar = new System.Windows.Forms.ToolStripButton();
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtComando = new System.Windows.Forms.TextBox();
             this.lblComando = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComandos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvCategorias
+            // dgvComandos
             // 
-            this.dgvCategorias.AllowUserToAddRows = false;
-            this.dgvCategorias.AllowUserToDeleteRows = false;
-            this.dgvCategorias.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCategorias.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dgvCategorias.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvCategorias.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvCategorias.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvCategorias.Location = new System.Drawing.Point(0, 183);
-            this.dgvCategorias.MultiSelect = false;
-            this.dgvCategorias.Name = "dgvCategorias";
-            this.dgvCategorias.ReadOnly = true;
-            this.dgvCategorias.RowHeadersVisible = false;
-            this.dgvCategorias.RowHeadersWidth = 51;
-            this.dgvCategorias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategorias.Size = new System.Drawing.Size(679, 222);
-            this.dgvCategorias.TabIndex = 52;
+            this.dgvComandos.AllowUserToAddRows = false;
+            this.dgvComandos.AllowUserToDeleteRows = false;
+            this.dgvComandos.AllowUserToResizeRows = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            this.dgvComandos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvComandos.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.dgvComandos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvComandos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvComandos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComandos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idComando,
+            this.comando});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvComandos.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvComandos.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvComandos.Location = new System.Drawing.Point(0, 183);
+            this.dgvComandos.MultiSelect = false;
+            this.dgvComandos.Name = "dgvComandos";
+            this.dgvComandos.ReadOnly = true;
+            this.dgvComandos.RowHeadersVisible = false;
+            this.dgvComandos.RowHeadersWidth = 51;
+            this.dgvComandos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvComandos.Size = new System.Drawing.Size(894, 222);
+            this.dgvComandos.TabIndex = 52;
             // 
-            // Column1
+            // idComando
             // 
-            this.Column1.HeaderText = "IdComando";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 175;
+            this.idComando.DataPropertyName = "idComando";
+            this.idComando.HeaderText = "IdComando";
+            this.idComando.Name = "idComando";
+            this.idComando.ReadOnly = true;
+            this.idComando.Width = 175;
             // 
-            // Column2
+            // comando
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Comando";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.comando.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.comando.DataPropertyName = "comando";
+            this.comando.HeaderText = "Comando";
+            this.comando.Name = "comando";
+            this.comando.ReadOnly = true;
             // 
             // lblEmail
             // 
@@ -140,13 +143,14 @@
             this.toolStripSeparator1,
             this.btnEditar,
             this.toolStripSeparator3,
-            this.btnGuardar,
-            this.btnLimpiar,
             this.btnSalir,
-            this.toolStripSeparator2});
+            this.toolStripButton1,
+            this.toolStripSeparator2,
+            this.btnGuardar,
+            this.btnLimpiar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(679, 62);
+            this.toolStrip1.Size = new System.Drawing.Size(894, 62);
             this.toolStrip1.TabIndex = 31;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -163,6 +167,7 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(157, 59);
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -177,29 +182,12 @@
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(112, 59);
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 62);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(146, 59);
-            this.btnGuardar.Text = "Guardar";
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(126, 59);
-            this.btnLimpiar.Text = "Limpiar";
             // 
             // btnSalir
             // 
@@ -210,6 +198,18 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(109, 59);
             this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(177, 59);
+            this.toolStripButton1.Text = "CargarLista";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator2
             // 
@@ -217,12 +217,32 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 62);
             // 
-            // textBox1
+            // btnGuardar
             // 
-            this.textBox1.Location = new System.Drawing.Point(79, 127);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(350, 20);
-            this.textBox1.TabIndex = 54;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(146, 59);
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(126, 59);
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // txtComando
+            // 
+            this.txtComando.Location = new System.Drawing.Point(79, 127);
+            this.txtComando.Name = "txtComando";
+            this.txtComando.Size = new System.Drawing.Size(350, 20);
+            this.txtComando.TabIndex = 54;
             // 
             // lblComando
             // 
@@ -246,11 +266,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(679, 405);
+            this.ClientSize = new System.Drawing.Size(894, 405);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtComando);
             this.Controls.Add(this.lblComando);
-            this.Controls.Add(this.dgvCategorias);
+            this.Controls.Add(this.dgvComandos);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.txtIdComando);
             this.Controls.Add(this.lblIdComando);
@@ -258,7 +278,8 @@
             this.Name = "Comandos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comandos";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
+            this.Load += new System.EventHandler(this.Comandos_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComandos)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -268,7 +289,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvCategorias;
+        private System.Windows.Forms.DataGridView dgvComandos;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.TextBox txtIdComando;
         private System.Windows.Forms.Label lblIdComando;
@@ -282,10 +303,11 @@
         private System.Windows.Forms.ToolStripButton btnLimpiar;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtComando;
         private System.Windows.Forms.Label lblComando;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idComando;
+        private System.Windows.Forms.DataGridViewTextBoxColumn comando;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

@@ -28,6 +28,7 @@ namespace TPV.GUI
                 txtSumas.Text = datos.Cells["total"].Value.ToString();
                 txtTotales.Text = datos.Cells["totalPago"].Value.ToString();
                 txtIva.Text = datos.Cells["iva"].Value.ToString();
+                lblSerie.Text = datos.Cells["serie"].Value.ToString();
 
                 LlenarDetalle();
                 btnAnular.Enabled = true;
@@ -55,6 +56,7 @@ namespace TPV.GUI
 
         private void Limpiar()
         {
+            lblSerie.Text = "";
             txtCliente.Text = "";
             txtNumeroFactura.Text = "";
             txtNumeroPedido.Text = "";

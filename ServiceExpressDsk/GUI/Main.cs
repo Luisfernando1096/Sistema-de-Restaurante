@@ -58,126 +58,126 @@ namespace ServiceExpressDsk.GUI
                 this.SuspendLayout();
                 foreach (DataRow comando in comandos.Rows)
                 {
-                    switch (Int32.Parse(comando["idComando"].ToString()))
+                    switch (comando["comando"].ToString().Trim())
                     {
-                        case 1:
+                        case "TPV - Ventas":
                             tpvPuntoVenta.Enabled = true;
                             break;
-                        case 2:
+                        case "TPV - Pagos":
                             tpvPuntoPago.Enabled = true;
                             break;
-                        case 3:
+                        case "Administrar Clientes":
                             tpvClientes.Enabled = true;
                             break;
-                        case 4:
+                        case "Tickets procesados":
                             tpvTickets.Enabled = true;
                             break;
-                        case 10:
+                        case "Administrar productos":
                             toolStripButton2.Enabled = true;
                             break;
-                        case 11:
+                        case "Consultar productos":
                             toolStripButton3.Enabled = true;
                             break;
-                        case 12:
+                        case "Administrar ingredientes":
                             toolStripButton4.Enabled = true;
                             break;
-                        case 13:
+                        case "Consultar ingredientes":
                             toolStripButton5.Enabled = true;
                             break;
-                        case 14:
+                        case "Administrar Recetas":
                             toolStripButton6.Enabled = true;
                             break;
-                        case 15:
+                        case "Administrar categorías":
                             toolStripButton7.Enabled = true;
                             break;
-                        case 16:
+                        case "Administrar unidades de medida":
                             toolStripButton9.Enabled = true;
                             break;
-                        case 17:
+                        case "Ajustar stock":
                             toolStripButton8.Enabled = true;
                             break;
-                        case 20:
+                        case "Compras":
                             toolStripButton10.Enabled = true;
                             break;
-                        case 21:
+                        case "Proveedores":
                             toolStripButton11.Enabled = true;
                             break;
-                        case 22:
+                        case "Consultar proveedores":
                             toolStripButton12.Enabled = true;
                             break;
-                        case 23:
+                        case "Administrar Comprobantes de compra":
                             toolStripButton13.Enabled = true;
                             break;
-                        case 30:
+                        case "Salones y mesas":
                             toolStripButton15.Enabled = true;
                             break;
-                        case 40:
+                        case "Apertura de caja":
                             toolStripButton14.Enabled = true;
                             break;
-                        case 41:
+                        case "Cerrar caja":
                             toolStripButton16.Enabled = true;
                             break;
-                        case 42:
+                        case "Administrar salida de efectivo":
                             toolStripButton17.Enabled = true;
                             break;
-                        case 43:
+                        case "Administración cuentas":
                             toolStripButton18.Enabled = true;
                             break;
-                        case 50:
+                        case "Empleados":
                             toolStripButton19.Enabled = true;
                             break;
-                        case 51:
+                        case "Roles":
                             toolStripButton20.Enabled = true;
                             break;
-                        case 52:
+                        case "Asignar roles":
                             toolStripButton21.Enabled = true;
                             break;
-                        case 53:
+                        case "Comandos del sistema":
                             toolStripButton22.Enabled = true;
                             break;
-                        case 54:
+                        case "Permisos":
                             toolStripButton23.Enabled = true;
                             break;
-                        case 55:
+                        case "Visor de eventos":
                             toolStripButton24.Enabled = true;
                             break;
-                        case 56:
+                        case "Administrar sesiones":
                             toolStripButton25.Enabled = true;
                             break;
-                        case 60:
+                        case "Reportes avanzados y financieros":
                             toolStripButton26.Enabled = true;
                             break;
-                        case 61:
+                        case "Reportes básicos":
                             toolStripButton27.Enabled = true;
                             toolStripButton28.Enabled = true;
                             toolStripButton30.Enabled = true;
                             toolStripButton31.Enabled = true;
                             break;
-                        case 62:
+                        case "Reportes de Ventas diarias":
                             toolStripButton29.Enabled = true;
                             break;
-                        case 70:
+                        case "Respaldo de BD":
                             toolStripButton32.Enabled = true;
                             break;
-                        case 71:
+                        case "Restaurar respaldos":
                             toolStripButton33.Enabled = true;
                             break;
-                        case 72:
+                        case "Vaciar BD":
                             toolStripButton34.Enabled = true;
                             break;
-                        case 80:
+                        case "Configuración TPV":
                             toolStripButton35.Enabled = true;
                             break;
-                        case 81:
+                        case "Administrar datos de la empresa":
                             toolStripButton36.Enabled = true;
                             break;
-                        case 82:
+                        case "Configurar tickets":
                             toolStripButton37.Enabled = true;
                             break;
-                        case 83:
+                        case "Tiraje de factura":
                             toolStripButton39.Enabled = true;
                             break;
-                        case 90:
+                        case "Cambiar usuario":
                             //cambiarUsuario.Enabled = true;
                             break;
                     }
@@ -596,6 +596,12 @@ namespace ServiceExpressDsk.GUI
         private void tpvClientes_Click(object sender, EventArgs e)
         {
             TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton22_Click(object sender, EventArgs e)
+        {
+            Personal.GUI.Comandos f = new Personal.GUI.Comandos();
             f.ShowDialog();
         }
     }

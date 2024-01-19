@@ -207,7 +207,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 37);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(1020, 568);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TPV";
@@ -245,7 +245,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(690, 82);
+            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -315,7 +315,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 37);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(1020, 568);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Productos e Ingredientes";
@@ -735,7 +735,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton25});
             this.toolStrip6.Location = new System.Drawing.Point(3, 0);
             this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.Size = new System.Drawing.Size(805, 79);
+            this.toolStrip6.Size = new System.Drawing.Size(836, 79);
             this.toolStrip6.TabIndex = 11;
             this.toolStrip6.Text = "toolStrip6";
             // 
@@ -785,6 +785,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton22.Size = new System.Drawing.Size(101, 76);
             this.toolStripButton22.Text = "Comandos";
             this.toolStripButton22.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton22.Click += new System.EventHandler(this.toolStripButton22_Click);
             // 
             // toolStripButton23
             // 
@@ -1134,7 +1135,7 @@ namespace ServiceExpressDsk.GUI
             this.tabPage10.Controls.Add(this.toolStripContainer2);
             this.tabPage10.Location = new System.Drawing.Point(4, 37);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage10.Size = new System.Drawing.Size(1020, 568);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Cuentas por cobrar";

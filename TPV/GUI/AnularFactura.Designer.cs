@@ -68,6 +68,7 @@ namespace TPV.GUI
             this.txtSumas = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.lblSerie = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -249,6 +250,7 @@ namespace TPV.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblSerie);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtNumeroFactura);
             this.groupBox1.Controls.Add(this.label6);
@@ -312,7 +314,7 @@ namespace TPV.GUI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(619, 20);
+            this.label3.Location = new System.Drawing.Point(603, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 20);
             this.label3.TabIndex = 45;
@@ -469,6 +471,16 @@ namespace TPV.GUI
             this.txtDescuento.Size = new System.Drawing.Size(202, 26);
             this.txtDescuento.TabIndex = 42;
             // 
+            // lblSerie
+            // 
+            this.lblSerie.AutoSize = true;
+            this.lblSerie.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSerie.ForeColor = System.Drawing.Color.White;
+            this.lblSerie.Location = new System.Drawing.Point(687, 20);
+            this.lblSerie.Name = "lblSerie";
+            this.lblSerie.Size = new System.Drawing.Size(0, 20);
+            this.lblSerie.TabIndex = 51;
+            // 
             // AnularFactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,5 +546,6 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
+        private System.Windows.Forms.Label lblSerie;
     }
 }

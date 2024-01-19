@@ -32,7 +32,7 @@ namespace ServiceExpressDsk.GUI
         {
             if (txtClave.Text.Equals(""))
             {
-                MessageBox.Show("El campo de categoria no puede estar vacío. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El campo para el pin no puede estar vacío. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (oSesion.IniciarSesion(txtClave.Text))
