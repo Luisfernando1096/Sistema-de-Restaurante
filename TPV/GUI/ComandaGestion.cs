@@ -270,6 +270,7 @@ namespace TPV.GUI
             int cant = cantidad;
             Boolean primerProducto;
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            String fechaParaComandaParcial = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
             String[] aux = (string[])botonProducto.Tag;
             DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
             PedidoDetalle pDetalle = new PedidoDetalle
@@ -282,7 +283,7 @@ namespace TPV.GUI
             }
             pDetalle.Mesa = lblMesa.Text;
             pDetalle.IdProducto = Int32.Parse(aux[0].ToString());
-            pDetalle.Fecha = fecha;
+            pDetalle.Fecha = fechaParaComandaParcial;
             pDetalle.Nombre = botonProducto.Text;
             pDetalle.Grupo = aux[1].ToString();
 
