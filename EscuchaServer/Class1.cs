@@ -242,7 +242,7 @@ public class Server
                     oReporte.PrintToPrinter(1, false, 0, 0);
 
                     // Muestra un mensaje de éxito
-                    MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    /*MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
                 }
                 catch (Exception ex)
                 {
@@ -288,7 +288,7 @@ public class Server
                     oReporte.PrintToPrinter(1, false, 0, 0);
 
                     // Muestra un mensaje de éxito
-                    MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    /*MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
                 }
                 catch (Exception ex)
                 {

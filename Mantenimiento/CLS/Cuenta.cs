@@ -96,5 +96,20 @@ namespace Mantenimiento.CLS
 
             return resultado;
         }
+
+        public String ActualizarSaldo(Boolean aumentar)
+        {
+            string sentencia;
+            if (aumentar)
+            {
+                sentencia = @"UPDATE cuenta SET saldo = (SELECT saldo FROM(SELECT saldo FROM cuenta WHERE idCuenta = " + idCuenta + ") AS subconsulta) + " + saldo + " where idCuenta = " + idCuenta + ";";
+            }
+            else
+            {
+                sentencia = @"UPDATE cuenta SET saldo = (SELECT saldo FROM(SELECT saldo FROM cuenta WHERE idCuenta = " + idCuenta + ") AS subconsulta) - " + saldo + " where idCuenta = " + idCuenta + ";";
+
+            }
+            return sentencia;
+        }
     }
 }

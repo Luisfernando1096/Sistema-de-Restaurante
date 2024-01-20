@@ -8,7 +8,7 @@ namespace ConfiguracionManager.CLS
         //Atributos
         static Configuracion instancia = null;
         static readonly Object codelock = new object();
-        string controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos;
+        string controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos, imprimirDosTicketsPago;
         //Propiedades
 
         public static Configuracion Instancia//Esta es una propiedad y retorna el valor de un atributo
@@ -43,6 +43,7 @@ namespace ConfiguracionManager.CLS
         public string Multisesion { get => multisesion; set => multisesion = value; }
         public string NumSesiones { get => numSesiones; set => numSesiones = value; }
         public string MuchosProductos { get => muchosProductos; set => muchosProductos = value; }
+        public string ImprimirDosTicketsPago { get => imprimirDosTicketsPago; set => imprimirDosTicketsPago = value; }
 
 
 
@@ -76,6 +77,7 @@ namespace ConfiguracionManager.CLS
                     multisesion = datosConfiguracion.Rows[0]["multisesion"].ToString();
                     numSesiones = datosConfiguracion.Rows[0]["numSesiones"].ToString();
                     muchosProductos = datosConfiguracion.Rows[0]["muchosProductos"].ToString();
+                    imprimirDosTicketsPago = datosConfiguracion.Rows[0]["imprimirDosTicketsPago"].ToString();
                     result = true;
                 }
                 else

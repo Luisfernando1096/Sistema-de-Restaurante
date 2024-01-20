@@ -19,6 +19,7 @@ namespace Mantenimiento.CLS
         int multisesion;
         int numSesiones;
         int muchosProductos;
+        int imprimirDosTicketsPago;
 
         public int IdConfiguracion { get => idConfiguracion; set => idConfiguracion = value; }
         public int ControlStock { get => controlStock; set => controlStock = value; }
@@ -35,12 +36,13 @@ namespace Mantenimiento.CLS
         public int NumSesiones { get => numSesiones; set => numSesiones = value; }
         public string PrinterInformes { get => printerInformes; set => printerInformes = value; }
         public int MuchosProductos { get => muchosProductos; set => muchosProductos = value; }
+        public int ImprimirDosTicketsPago { get => imprimirDosTicketsPago; set => imprimirDosTicketsPago = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"INSERT INTO configuracion(controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones) VALUES(" + controlStock + ", " + incluirPropina + ", " + propina + ", " + incluirImpuesto + ", " + iva + ", " + mesaVIP + ", " + autorizarDescProp + ", '" + printerComanda + "', '" + printerFactura + "', '" + PrinterInformes + "', " + alertaCaja + ", " + multisesion + ", " + numSesiones + ");";
+            sentencia = @"INSERT INTO configuracion(controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, imprimirDosTicketsPago) VALUES(" + controlStock + ", " + incluirPropina + ", " + propina + ", " + incluirImpuesto + ", " + iva + ", " + mesaVIP + ", " + autorizarDescProp + ", '" + printerComanda + "', '" + printerFactura + "', '" + PrinterInformes + "', " + alertaCaja + ", " + multisesion + ", " + numSesiones + ", " + imprimirDosTicketsPago + ");";
 
             try
             {
@@ -65,7 +67,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE configuracion SET controlStock = " + controlStock + ", incluirPropina = " + incluirPropina + ", propina = " + propina + ", incluirImpuesto = " + incluirImpuesto + ", iva = " + iva + ", mesaVIP = " + mesaVIP + ", autorizarDescProp = " + autorizarDescProp + ", printerComanda = '" + printerComanda + "', printerFactura = '" + printerFactura + "', printerInformes = '" + printerInformes + "', alertaCaja = " + alertaCaja + ", multisesion = " + multisesion + ", numSesiones = " + numSesiones + ", muchosProductos = " + muchosProductos + " WHERE idConfiguracion = " + idConfiguracion + ";";
+            sentencia = @"UPDATE configuracion SET controlStock = " + controlStock + ", incluirPropina = " + incluirPropina + ", propina = " + propina + ", incluirImpuesto = " + incluirImpuesto + ", iva = " + iva + ", mesaVIP = " + mesaVIP + ", autorizarDescProp = " + autorizarDescProp + ", printerComanda = '" + printerComanda + "', printerFactura = '" + printerFactura + "', printerInformes = '" + printerInformes + "', alertaCaja = " + alertaCaja + ", multisesion = " + multisesion + ", numSesiones = " + numSesiones + ", muchosProductos = " + muchosProductos + ", imprimirDosTicketsPago = " + imprimirDosTicketsPago + " WHERE idConfiguracion = " + idConfiguracion + ";";
 
             try
             {

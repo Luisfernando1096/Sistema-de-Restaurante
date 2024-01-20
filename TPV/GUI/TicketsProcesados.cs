@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -15,22 +16,47 @@ namespace TPV.GUI
         public TicketsProcesados()
         {
             InitializeComponent();
+            rbEfectivo.Enabled = false;
+            rbTarjeta.Enabled = false;
         }
 
         private void CargarDatos()
         {
+            int idPedido = 0;
             if (!txtidPedido.Text.Equals(""))
             {
-                try
+                idPedido = Int32.Parse(txtidPedido.Text);
+            }
+
+            try
+            {
+                datos.DataSource = DataManager.DBConsultas.PedidoPorId(idPedido, false);
+                dgvClientes.DataSource = datos;
+                dgvClientes.AutoGenerateColumns = false;
+                if (dgvClientes.Rows.Count == 0)
                 {
-                    datos.DataSource = DataManager.DBConsultas.PedidoPorId(Int32.Parse(txtidPedido.Text), false);
-                    dgvClientes.DataSource = datos;
-                    dgvClientes.AutoGenerateColumns = false;
+                    rbEfectivo.Enabled = false;
+                    rbTarjeta.Enabled = false;
+                    rbEfectivo.Checked = false;
+                    rbTarjeta.Checked = false;
                 }
-                catch (Exception)
+                else
                 {
-                    throw;
+                    if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
+                    {
+                        rbTarjeta.Checked = false;
+                        rbEfectivo.Checked = true;
+                    }
+                    else
+                    {
+                        rbEfectivo.Checked = false;
+                        rbTarjeta.Checked = true;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -106,6 +132,95 @@ namespace TPV.GUI
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+            CargarDatos();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvClientes.Rows.Count>0)
+            {
+                txtidPedido.Enabled = false;
+                rbEfectivo.Enabled = true;
+                rbTarjeta.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("No hay datos para editar");
+            }
+            
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+
+        private void Limpiar()
+        {
+            txtidPedido.Enabled = true;
+            txtidPedido.Text = "";
+            rbEfectivo.Enabled = false;
+            rbTarjeta.Enabled = false;
+
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (dgvClientes.Rows.Count > 0)
+            {
+                if (rbEfectivo.Checked)
+                {
+                    if (!dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
+                    {
+                        CambiarFormaPago(1);
+                    }
+                }
+                else
+                {
+                    if (!dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("2"))
+                    {
+                        CambiarFormaPago(2);
+                    }
+                }
+            }
+
+            Limpiar();
+        }
+
+        private void CambiarFormaPago(int idCuentaSiguiente)
+        {
+            List<String> lstCambioFormaPago = new List<string>();
+
+            int idPedido = Int32.Parse(txtidPedido.Text);
+            Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+            pedido.IdCuenta = idCuentaSiguiente;
+            pedido.IdPedido = idPedido;
+            lstCambioFormaPago.Add(pedido.ActualizarCuenta());
+
+            int idCuentaAnterior = Int32.Parse(dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString());
+            Double totalPago = Double.Parse(dgvClientes.CurrentRow.Cells["totalPago"].Value.ToString());
+
+            //Disminuimos el saldo de la cuenta anterior
+            Mantenimiento.CLS.Cuenta cuenta1 = new Mantenimiento.CLS.Cuenta();
+            cuenta1.IdCuenta = idCuentaAnterior;
+            cuenta1.Saldo = totalPago;
+            lstCambioFormaPago.Add(cuenta1.ActualizarSaldo(false));
+
+            //Aumentamos el saldo de la cuenta siguiente
+            Mantenimiento.CLS.Cuenta cuenta2 = new Mantenimiento.CLS.Cuenta();
+            cuenta2.IdCuenta = idCuentaSiguiente;
+            cuenta2.Saldo = totalPago;
+            lstCambioFormaPago.Add(cuenta2.ActualizarSaldo(true));
+
+            DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
+            if (transaccion.EjecutarTransaccion(lstCambioFormaPago) < 0)
+            {
+                MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR, CONTACTE AL PROGRAMADOR.");
+            }
+            else
+            {
+                MessageBox.Show("CAMBIO REALIZADO CON EXITO.");
             }
         }
     }

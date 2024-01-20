@@ -34,6 +34,7 @@ namespace Configuraciones.GUI
                     checkMultiSe.Checked = Boolean.Parse(oConfiguracion.Multisesion);
                     checkMuchosPro.Checked = Boolean.Parse(oConfiguracion.MuchosProductos);
                     checkAutorizacion.Checked = Boolean.Parse(oConfiguracion.AutorizarDescProp);
+                    chkTicketDoble.Checked = Boolean.Parse(oConfiguracion.ImprimirDosTicketsPago);
                     if (Boolean.Parse(oConfiguracion.IncluirImpuesto))
                     {
                         checkActivarIVip.Checked = true;
@@ -47,6 +48,7 @@ namespace Configuraciones.GUI
                     txtImpuesto.Text = oConfiguracion.Iva.ToString();
                     txtImpuestoVIP.Text = oConfiguracion.MesaVIP.ToString();
                     txtMultiSe.Text = oConfiguracion.NumSesiones.ToString();
+
 
 
                     txtComandas.Text = oConfiguracion.PrinterComanda.ToString();
@@ -395,6 +397,15 @@ namespace Configuraciones.GUI
                 else
                 {
                     config.MuchosProductos = 0;
+                }
+
+                if (chkTicketDoble.Checked)
+                {
+                    config.ImprimirDosTicketsPago = 1;
+                }
+                else
+                {
+                    config.ImprimirDosTicketsPago = 0;
                 }
 
                 //if (cmbComandas.SelectedIndex != -1)
@@ -904,36 +915,6 @@ namespace Configuraciones.GUI
 
                 // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
                 //MessageBox.Show($"Impresora seleccionada: {txtComandas.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                // El usuario canceló la selección de la impresora
-                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btt2_Click(object sender, EventArgs e)
-        {
-            // Crea un cuadro de diálogo de impresión
-            PrintDialog printDialog = new PrintDialog();
-
-            // Habilita la opción para mostrar impresoras de red
-            printDialog.ShowNetwork = true;
-
-            // Muestra el cuadro de diálogo de impresión
-            if (printDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Actualiza el nombre de la impresora en el TextBox
-                TxtComandaTick.Text = printDialog.PrinterSettings.PrinterName;
-
-                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
-                oConfiguracion.PrinterComanda = TxtComandaTick.Text;
-
-                // Puedes imprimir el informe si es necesario
-                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
-
-                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                //MessageBox.Show($"Impresora seleccionada: {TxtComandaTick.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {

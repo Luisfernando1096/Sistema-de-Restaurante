@@ -178,5 +178,14 @@ namespace Mantenimiento.CLS
 
             return sentencia;
         }
+
+        public String ActualizarCuenta()
+        {
+            string sentencia;
+            sentencia = @"UPDATE pedido SET idCuenta = " + idCuenta + " " +
+                "WHERE idPedido = " + idPedido + ";";
+
+            return sentencia;
+        }
     }
 }
