@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 
 public class Server
 {
@@ -23,7 +24,7 @@ public class Server
 
     public void StartServer()
     {
-
+        /*
         //OBETNER IP AUTOMATICAMENTE
         string hostName = Dns.GetHostName();
         // Inicializar la variable
@@ -31,13 +32,25 @@ public class Server
         // Filtrar las direcciones IPv4
         IPAddress ipv4Address = localIPs.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
         isServerRunning = true;
-        tcpListener = new TcpListener(IPAddress.Parse(ipv4Address.ToString()), 4000);
+        tcpListener = new TcpListener(IPAddress.Parse(ipv4Address.ToString()), 4000);*/
 
-        //isServerRunning = true;
-        //tcpListener = new TcpListener(IPAddress.Parse("192.168.2.105"), 4000);
-        listenerThread = new Thread(new ThreadStart(ListenForClients));
-        listenerThread.Start();
-        Console.WriteLine("Servidor iniciado. Esperando conexiones...");
+        string archivoConfiguracion = "configuracion.xml";
+
+        if (File.Exists(archivoConfiguracion))
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(archivoConfiguracion);
+
+            string ipLocal = xmlDoc.SelectSingleNode("/Configuracion/IpLocal").InnerText;
+            isServerRunning = true;
+            tcpListener = new TcpListener(IPAddress.Parse(ipLocal), 4000);
+            listenerThread = new Thread(new ThreadStart(ListenForClients));
+            listenerThread.Start();
+            Console.WriteLine("Servidor iniciado. Esperando conexiones...");
+
+        }
+
+        
     }
 
     public void StopServer()
