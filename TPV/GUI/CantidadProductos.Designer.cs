@@ -43,6 +43,7 @@ namespace TPV.GUI
             this.label1.Size = new System.Drawing.Size(228, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "¿Cuantos productos desea agregar?";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtCantidad
             // 
@@ -52,6 +53,7 @@ namespace TPV.GUI
             this.txtCantidad.Size = new System.Drawing.Size(100, 26);
             this.txtCantidad.TabIndex = 1;
             this.txtCantidad.Text = "1";
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // button1

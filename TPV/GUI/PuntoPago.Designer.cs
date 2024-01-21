@@ -486,6 +486,7 @@ namespace TPV.GUI
             this.cbDescuento.Text = "Con Descuento";
             this.cbDescuento.UseVisualStyleBackColor = true;
             this.cbDescuento.CheckedChanged += new System.EventHandler(this.cbDescuento_CheckedChanged);
+            this.cbDescuento.Click += new System.EventHandler(this.cbDescuento_Click);
             // 
             // txtPorcentaje
             // 

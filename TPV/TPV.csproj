@@ -55,6 +55,12 @@
     <Compile Include="GUI\AnularFactura.Designer.cs">
       <DependentUpon>AnularFactura.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\AutorizarCambio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\AutorizarCambio.Designer.cs">
+      <DependentUpon>AutorizarCambio.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\CantidadProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\AnularFactura.resx">
       <DependentUpon>AnularFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\AutorizarCambio.resx">
+      <DependentUpon>AutorizarCambio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\CantidadProductos.resx">
       <DependentUpon>CantidadProductos.cs</DependentUpon>

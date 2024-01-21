@@ -272,9 +272,9 @@ namespace Configuraciones.GUI
             this.checkAutorizacion.Location = new System.Drawing.Point(85, 225);
             this.checkAutorizacion.Margin = new System.Windows.Forms.Padding(2);
             this.checkAutorizacion.Name = "checkAutorizacion";
-            this.checkAutorizacion.Size = new System.Drawing.Size(395, 17);
+            this.checkAutorizacion.Size = new System.Drawing.Size(397, 17);
             this.checkAutorizacion.TabIndex = 25;
-            this.checkAutorizacion.Text = "Requerir autorizacion del administrador para anuar propina y aplicar descuento";
+            this.checkAutorizacion.Text = "Requerir autorizacion del administrador para anular propina y aplicar descuento";
             this.checkAutorizacion.UseVisualStyleBackColor = true;
             // 
             // checkMuchosPro

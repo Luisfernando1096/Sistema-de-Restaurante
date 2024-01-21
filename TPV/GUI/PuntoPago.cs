@@ -421,18 +421,8 @@ namespace TPV.GUI
 
         private void cbDescuento_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbDescuento.Checked)
-            {
-                lblPorcentaje.Visible = true;
-                txtPorcentaje.Visible = true;
-            }
-            else
-            {
-                txtPorcentaje.Text = "";
-                lblPorcentaje.Visible = false;
-                txtPorcentaje.Visible = false;
-            }
-            CalcularTodo();
+            
+            
         }
 
         private void CalcularTodo()
@@ -651,6 +641,30 @@ namespace TPV.GUI
             {
                 //Codigo para mostrar la interfaz y autorizar
                 bool exito = false;
+                AutorizarCambio f = new AutorizarCambio();
+                f.ShowDialog();
+                int pin = Int32.Parse(f.txtPin.Text);
+                if (pin != 0)
+                {
+                    DataTable filas = DataManager.DBConsultas.IniciarSesion(pin.ToString());
+                    if (filas.Rows.Count > 0)
+                    {
+                        if (Int32.Parse(filas.Rows[0]["idRol"].ToString()) == 1)
+                        {
+                            exito = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No tiene permiso para esta accion!");
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pin incorrecto, intentelo nuevamente!");
+                    }
+
+                }
 
                 if (exito)
                 {
@@ -667,7 +681,6 @@ namespace TPV.GUI
                         cbPropina.Checked = true;
                     }
                 }
-                MessageBox.Show("Necesita autorizar");
             }
             else
             {
@@ -846,49 +859,62 @@ namespace TPV.GUI
             if (activarFactura)
             {
                 //Lleva factura
+                Boolean generar = false;
                 //Obtener la ultima factura y crear una nueva
                 if (actualFactura.Rows.Count > 0)
                 {
+                    
                     foreach (DataRow item in actualFactura.Rows)
                     {
-                        pedido.NFactura = (Int32.Parse(item["actual"].ToString()) + 1).ToString();
-                        pedido.IdTiraje = Int32.Parse(item["idTiraje"].ToString());
-                        siguiente = (Int32.Parse(item["actual"].ToString()) + 1);
-                        idTiraje = Int32.Parse(item["idTiraje"].ToString());
-                        serie = item["serie"].ToString();
+                        if ((Int32.Parse(item["actual"].ToString()) + 1) <= (Int32.Parse(item["fin"].ToString())))
+                        {
+                            pedido.NFactura = (Int32.Parse(item["actual"].ToString()) + 1).ToString();
+                            pedido.IdTiraje = Int32.Parse(item["idTiraje"].ToString());
+                            siguiente = (Int32.Parse(item["actual"].ToString()) + 1);
+                            idTiraje = Int32.Parse(item["idTiraje"].ToString());
+                            serie = item["serie"].ToString();
+                            generar = true;
+                        }
                     }
 
-                    Mantenimiento.CLS.Tiraje_Factura tiraje = new Mantenimiento.CLS.Tiraje_Factura();
-                    if (siguiente != 0)
+                    if (generar)
                     {
-                        tiraje.IdTiraje = idTiraje;
-                        tiraje.Actual = siguiente;
-                        lstPago.Add(tiraje.ActualizarTirajeActual());
+                        Mantenimiento.CLS.Tiraje_Factura tiraje = new Mantenimiento.CLS.Tiraje_Factura();
+                        if (siguiente != 0)
+                        {
+                            tiraje.IdTiraje = idTiraje;
+                            tiraje.Actual = siguiente;
+                            lstPago.Add(tiraje.ActualizarTirajeActual());
+                        }
                     }
-
+                    else
+                    {
+                        MessageBox.Show("No se genero la factura, se llego al limite del tiraje activado, active uno nuevo para generar facturas.");
+                    }
+                    
                 }
                 else
                 {
                     MessageBox.Show("Ocurrio un error al buscar ultima factura, contacte al programador.");
                 }
-                if (pagoEfectivo)
+
+                if (pagoEfectivo && generar)
                 {
                     Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
                     GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
                 }
-                else if (pagoTarjeta)
+                else if (pagoTarjeta && generar)
                 {
-                    MessageBox.Show("Imprimir la factura Tarjeta");
-
+                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
+                    GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
                 }
-                else if (pagoCortesia)
+                else if (pagoCortesia && generar)
                 {
-                    MessageBox.Show("Imprimir la factura Cortesia");
-
+                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
+                    GenerarFactura(oReporte, serie, siguiente, "CORTESIA");// se envia el nFactura y la serie que corresponde
                 }
-                else if (pagoExacto)
+                else if (pagoExacto )
                 {
-                    MessageBox.Show("Imprimir la factura Exacto");
                     Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
                     GenerarFactura(oReporte, serie, siguiente, "EXACTO");// se envia el nFactura y la serie que corresponde
                 }
@@ -1138,10 +1164,10 @@ namespace TPV.GUI
                     oReporte.PrintToPrinter(1, false, 0, 0);
 
                     // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    this.Invoke((MethodInvoker)delegate
+                    /*this.Invoke((MethodInvoker)delegate
                     {
                         MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    });
+                    });*/
                 }
                 catch (Exception ex)
                 {
@@ -1274,6 +1300,92 @@ namespace TPV.GUI
             {
                 lblCliente.Text = "";
                 lblCliente.Tag = "";
+            }
+        }
+
+        private void cbDescuento_Click(object sender, EventArgs e)
+        {
+            //Autorizar
+            bool autorizar = bool.Parse(oConfiguracion.AutorizarDescProp);
+            if (autorizar)
+            {
+                //Codigo para mostrar la interfaz y autorizar
+                bool exito = false;
+                AutorizarCambio f = new AutorizarCambio();
+                f.ShowDialog();
+                int pin = Int32.Parse(f.txtPin.Text);
+                if (pin != 0)
+                {
+                    DataTable filas = DataManager.DBConsultas.IniciarSesion(pin.ToString());
+                    if (filas.Rows.Count > 0)
+                    {
+                        if (Int32.Parse(filas.Rows[0]["idRol"].ToString()) == 1)
+                        {
+                            exito = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No tiene permiso para esta accion!");
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pin incorrecto, intentelo nuevamente!");
+                    }
+                    
+                }
+
+                if (exito)
+                {
+                    if (cbDescuento.Checked)
+                    {
+                        lblPorcentaje.Visible = true;
+                        txtPorcentaje.Visible = true;
+                        txtPorcentaje.Text = "";
+                    }
+                    else
+                    {
+                        lblPorcentaje.Visible = false;
+                        txtPorcentaje.Visible = false;
+                        txtPorcentaje.Text = "";
+                    }
+                    CalcularTodo();
+                }
+                else
+                {
+                    if (cbDescuento.Checked)
+                    {
+                        cbDescuento.Checked = false;
+                        lblPorcentaje.Visible = false;
+                        txtPorcentaje.Visible = false;
+                        txtPorcentaje.Text = "";
+                    }
+                    else
+                    {
+                        cbDescuento.Checked = true;
+                        lblPorcentaje.Visible = true;
+                        txtPorcentaje.Visible = true;
+                        txtPorcentaje.Text = "";
+                    }
+                    CalcularTodo();
+                }
+            }
+            else
+            {
+                if (cbDescuento.Checked)
+                {
+                    lblPorcentaje.Visible = true;
+                    txtPorcentaje.Visible = true;
+                    txtPorcentaje.Text = "";
+                }
+                else
+                {
+                    lblPorcentaje.Visible = false;
+                    txtPorcentaje.Visible = false;
+                    txtPorcentaje.Text = "";
+                }
+                CalcularTodo();
             }
         }
     }
