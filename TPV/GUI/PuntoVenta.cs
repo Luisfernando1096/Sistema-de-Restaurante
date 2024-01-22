@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace TPV.GUI
 {
@@ -15,6 +17,14 @@ namespace TPV.GUI
         public bool admin;
         public bool tpv;
         public bool cerrarSesion;
+        //Salones
+        string AnchoSalon;
+        string AltoSalon;
+        string SeparadorSalon;
+        //Mesas
+        string AnchoMesa;
+        string AltoMesa;
+        string SeparadorMesa;
 
         public PuntoVenta()
         {
@@ -22,6 +32,7 @@ namespace TPV.GUI
             flpSalones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             flpMesas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             AjustarPosicionBoton();
+            CargarDimensiones();
         }
         private void AjustarPosicionBoton()
         {
@@ -34,8 +45,47 @@ namespace TPV.GUI
             btnSalir.Top = 0;
         }
 
+        private void CargarDimensiones()
+        {
+            string archivoConfiguracion = "dimensiones.xml";
+
+            if (File.Exists(archivoConfiguracion))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(archivoConfiguracion);
+
+                //Salones
+                AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
+                AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
+                SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
+
+                //Mesas
+                AnchoMesa = xmlDoc.SelectSingleNode("/Dimension/AnchoMesa").InnerText;
+                AltoMesa = xmlDoc.SelectSingleNode("/Dimension/AltoMesa").InnerText;
+                SeparadorMesa = xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa").InnerText;
+            }
+        }
+
         private void PuntoVenta_Load(object sender, EventArgs e)
         {
+            /*
+             string archivoConfiguracion = "dimensiones.xml";
+            //Salones
+            string AnchoSalon = "10";
+            string AltoSalon = "10";
+            string SeparadorSalon = "10";
+
+            if (File.Exists(archivoConfiguracion))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(archivoConfiguracion);
+
+                //Salones
+                AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
+                AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
+                SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
+            }
+             */
             WindowState = FormWindowState.Maximized;
             DataTable salones = DataManager.DBConsultas.Salones();
             // Crear y agregar botones al FlowLayoutPanel para cada salon
@@ -44,7 +94,8 @@ namespace TPV.GUI
                 btnSalon = new Button();
                 btnSalon.Text = salon["nombre"].ToString().ToUpper();
                 btnSalon.Tag = salon["idSalon"].ToString().ToUpper();
-                btnSalon.Size = new Size(200, 80);
+                btnSalon.Size = new Size(Int32.Parse(AnchoSalon), Int32.Parse(AltoSalon));//Establecer ancho y alto
+                btnSalon.Margin = new Padding(Int32.Parse(SeparadorSalon));//Establecer margen
                 btnSalon.Click += BotonSalon_Click;
                 flpSalones.Controls.Add(btnSalon);
                 flpSalones.ScrollControlIntoView(btnSalon);
@@ -54,7 +105,6 @@ namespace TPV.GUI
 
         private void BotonSalon_Click(object sender, EventArgs e)
         {
-
             if (flpMesas.Controls.Count > 0)
             {
                 flpMesas.Controls.Clear();
@@ -83,7 +133,8 @@ namespace TPV.GUI
 
                     }
                 }
-                btnMesa.Size = new Size(110, 90);
+                btnMesa.Margin = new Padding(Int32.Parse(SeparadorMesa));
+                btnMesa.Size = new Size(Int32.Parse(AnchoMesa), Int32.Parse(AltoMesa));
                 btnMesa.Click += BotonMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
                 flpMesas.ScrollControlIntoView(btnMesa);

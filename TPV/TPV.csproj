@@ -232,5 +232,8 @@
     <None Include="packages.config" />
     <None Include="Resources\mesa.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="dimensiones.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

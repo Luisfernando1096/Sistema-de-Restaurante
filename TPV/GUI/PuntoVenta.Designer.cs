@@ -43,9 +43,9 @@ namespace TPV.GUI
             // 
             this.flpSalones.AutoScroll = true;
             this.flpSalones.Controls.Add(this.btnSalon);
-            this.flpSalones.Location = new System.Drawing.Point(12, 98);
+            this.flpSalones.Location = new System.Drawing.Point(12, 74);
             this.flpSalones.Name = "flpSalones";
-            this.flpSalones.Size = new System.Drawing.Size(1357, 180);
+            this.flpSalones.Size = new System.Drawing.Size(1357, 160);
             this.flpSalones.TabIndex = 0;
             // 
             // btnSalon

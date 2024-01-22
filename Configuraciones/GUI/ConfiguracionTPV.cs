@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Configuraciones.GUI
 {
@@ -64,6 +65,55 @@ namespace Configuraciones.GUI
                 else
                 {
                     // Manejar el caso donde no se encontraron datos de configuración
+                }
+
+                string archivoConfiguracion = "dimensiones.xml";
+
+                if (File.Exists(archivoConfiguracion))
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(archivoConfiguracion);
+
+                    //Salones
+                    string AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
+                    string AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
+                    string SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
+
+                    //Mesas
+                    string AnchoMesa = xmlDoc.SelectSingleNode("/Dimension/AnchoMesa").InnerText;
+                    string AltoMesa = xmlDoc.SelectSingleNode("/Dimension/AltoMesa").InnerText;
+                    string SeparadorMesa = xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa").InnerText;
+
+                    //Familias
+                    string AnchoFamilia = xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia").InnerText;
+                    string AltoFamilia = xmlDoc.SelectSingleNode("/Dimension/AltoFamilia").InnerText;
+                    string SeparadorFamilia = xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia").InnerText;
+
+                    //Productos
+                    string AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
+                    string AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
+                    string SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
+
+
+                    //Salones
+                    UpSalonesAncho.Text = AnchoSalon;
+                    UpSalonesAlto.Text = AltoSalon;
+                    UpSalonesSeparador.Text = SeparadorSalon;
+
+                    //Mesas
+                    UpMesasAncho.Text = AnchoMesa;
+                    UpMesasAlto.Text = AltoMesa;
+                    UpMesasSeparador.Text = SeparadorMesa;
+
+                    //Familias
+                    UpFaAncho.Text = AnchoFamilia;
+                    UpFaAlto.Text = AltoFamilia;
+                    UpFaSeparador.Text = SeparadorFamilia;
+
+                    //Productos
+                    UpProAncho.Text = AnchoProducto;
+                    UpProAlto.Text = AltoProducto;
+                    UpProSeparador.Text = SeparadorProducto;
                 }
             }
             catch (Exception ex)
@@ -436,6 +486,57 @@ namespace Configuraciones.GUI
 
                 if (config.Actualizar())
                 {
+                    //Tambien actualizar valores en las dimensiones
+
+                    //Salones
+                    string AnchoSalon = UpSalonesAncho.Text.Trim();
+                    string AltoSalon = UpSalonesAlto.Text.Trim();
+                    string SeparadorSalon = UpSalonesSeparador.Text.Trim();
+
+                    //Mesas
+                    string AnchoMesa = UpMesasAncho.Text.Trim();
+                    string AltoMesa = UpMesasAlto.Text.Trim();
+                    string SeparadorMesa = UpMesasSeparador.Text.Trim();
+
+                    //Familias
+                    string AnchoFamilia = UpFaAncho.Text.Trim();
+                    string AltoFamilia = UpFaAlto.Text.Trim();
+                    string SeparadorFamilia = UpFaSeparador.Text.Trim();
+
+                    //Productos
+                    string AnchoProducto = UpProAncho.Text.Trim();
+                    string AltoProducto = UpProAlto.Text.Trim();
+                    string SeparadorProducto = UpProSeparador.Text.Trim();
+
+                    string archivoConfiguracion = "dimensiones.xml";
+
+                    XmlWriterSettings settings = new XmlWriterSettings();
+                    settings.Indent = true;
+
+                    using (XmlWriter writer = XmlWriter.Create(archivoConfiguracion, settings))
+                    {
+                        writer.WriteStartDocument();
+                        writer.WriteStartElement("Dimension");
+
+                        writer.WriteElementString("AnchoSalon", AnchoSalon);
+                        writer.WriteElementString("AltoSalon", AltoSalon);
+                        writer.WriteElementString("SeparadorSalon", SeparadorSalon);
+
+                        writer.WriteElementString("AnchoMesa", AnchoMesa);
+                        writer.WriteElementString("AltoMesa", AltoMesa);
+                        writer.WriteElementString("SeparadorMesa", SeparadorMesa);
+
+                        writer.WriteElementString("AnchoFamilia", AnchoFamilia);
+                        writer.WriteElementString("AltoFamilia", AltoFamilia);
+                        writer.WriteElementString("SeparadorFamilia", SeparadorFamilia);
+
+                        writer.WriteElementString("AnchoProducto", AnchoProducto);
+                        writer.WriteElementString("AltoProducto", AltoProducto);
+                        writer.WriteElementString("SeparadorProducto", SeparadorProducto);
+
+                        writer.WriteEndElement();
+                        writer.WriteEndDocument();
+                    }
                     MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     oConfiguracion.ObtenerConfiguracion();
                     CargarDatosConfig();

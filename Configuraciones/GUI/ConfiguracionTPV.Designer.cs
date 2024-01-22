@@ -504,6 +504,11 @@ namespace Configuraciones.GUI
             // 
             this.UpFaSeparador.Location = new System.Drawing.Point(662, 63);
             this.UpFaSeparador.Margin = new System.Windows.Forms.Padding(2);
+            this.UpFaSeparador.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.UpFaSeparador.Name = "UpFaSeparador";
             this.UpFaSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpFaSeparador.TabIndex = 30;
@@ -512,6 +517,11 @@ namespace Configuraciones.GUI
             // 
             this.UpFaAlto.Location = new System.Drawing.Point(570, 63);
             this.UpFaAlto.Margin = new System.Windows.Forms.Padding(2);
+            this.UpFaAlto.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpFaAlto.Name = "UpFaAlto";
             this.UpFaAlto.Size = new System.Drawing.Size(74, 19);
             this.UpFaAlto.TabIndex = 29;
@@ -520,6 +530,11 @@ namespace Configuraciones.GUI
             // 
             this.UpFaAncho.Location = new System.Drawing.Point(478, 63);
             this.UpFaAncho.Margin = new System.Windows.Forms.Padding(2);
+            this.UpFaAncho.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpFaAncho.Name = "UpFaAncho";
             this.UpFaAncho.Size = new System.Drawing.Size(74, 19);
             this.UpFaAncho.TabIndex = 28;
@@ -571,6 +586,11 @@ namespace Configuraciones.GUI
             // 
             this.UpProSeparador.Location = new System.Drawing.Point(255, 63);
             this.UpProSeparador.Margin = new System.Windows.Forms.Padding(2);
+            this.UpProSeparador.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.UpProSeparador.Name = "UpProSeparador";
             this.UpProSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpProSeparador.TabIndex = 23;
@@ -579,6 +599,11 @@ namespace Configuraciones.GUI
             // 
             this.UpProAlto.Location = new System.Drawing.Point(164, 63);
             this.UpProAlto.Margin = new System.Windows.Forms.Padding(2);
+            this.UpProAlto.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpProAlto.Name = "UpProAlto";
             this.UpProAlto.Size = new System.Drawing.Size(74, 19);
             this.UpProAlto.TabIndex = 22;
@@ -587,6 +612,11 @@ namespace Configuraciones.GUI
             // 
             this.UpProAncho.Location = new System.Drawing.Point(71, 63);
             this.UpProAncho.Margin = new System.Windows.Forms.Padding(2);
+            this.UpProAncho.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpProAncho.Name = "UpProAncho";
             this.UpProAncho.Size = new System.Drawing.Size(74, 19);
             this.UpProAncho.TabIndex = 21;
@@ -665,6 +695,11 @@ namespace Configuraciones.GUI
             this.UpMesasSeparador.AutoSize = true;
             this.UpMesasSeparador.Location = new System.Drawing.Point(662, 59);
             this.UpMesasSeparador.Margin = new System.Windows.Forms.Padding(2);
+            this.UpMesasSeparador.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.UpMesasSeparador.Name = "UpMesasSeparador";
             this.UpMesasSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpMesasSeparador.TabIndex = 16;
@@ -674,6 +709,11 @@ namespace Configuraciones.GUI
             this.UpMesasAlto.AutoSize = true;
             this.UpMesasAlto.Location = new System.Drawing.Point(570, 59);
             this.UpMesasAlto.Margin = new System.Windows.Forms.Padding(2);
+            this.UpMesasAlto.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpMesasAlto.Name = "UpMesasAlto";
             this.UpMesasAlto.Size = new System.Drawing.Size(74, 19);
             this.UpMesasAlto.TabIndex = 15;
@@ -683,6 +723,11 @@ namespace Configuraciones.GUI
             this.UpMesasAncho.AutoSize = true;
             this.UpMesasAncho.Location = new System.Drawing.Point(478, 59);
             this.UpMesasAncho.Margin = new System.Windows.Forms.Padding(2);
+            this.UpMesasAncho.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpMesasAncho.Name = "UpMesasAncho";
             this.UpMesasAncho.Size = new System.Drawing.Size(74, 19);
             this.UpMesasAncho.TabIndex = 14;
@@ -735,6 +780,11 @@ namespace Configuraciones.GUI
             this.UpSalonesSeparador.AutoSize = true;
             this.UpSalonesSeparador.Location = new System.Drawing.Point(255, 59);
             this.UpSalonesSeparador.Margin = new System.Windows.Forms.Padding(2);
+            this.UpSalonesSeparador.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.UpSalonesSeparador.Name = "UpSalonesSeparador";
             this.UpSalonesSeparador.Size = new System.Drawing.Size(74, 19);
             this.UpSalonesSeparador.TabIndex = 9;
@@ -744,6 +794,11 @@ namespace Configuraciones.GUI
             this.UpSalonesAlto.AutoSize = true;
             this.UpSalonesAlto.Location = new System.Drawing.Point(164, 59);
             this.UpSalonesAlto.Margin = new System.Windows.Forms.Padding(2);
+            this.UpSalonesAlto.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpSalonesAlto.Name = "UpSalonesAlto";
             this.UpSalonesAlto.Size = new System.Drawing.Size(74, 19);
             this.UpSalonesAlto.TabIndex = 8;
@@ -752,6 +807,11 @@ namespace Configuraciones.GUI
             // 
             this.UpSalonesAncho.Location = new System.Drawing.Point(71, 59);
             this.UpSalonesAncho.Margin = new System.Windows.Forms.Padding(2);
+            this.UpSalonesAncho.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.UpSalonesAncho.Name = "UpSalonesAncho";
             this.UpSalonesAncho.Size = new System.Drawing.Size(74, 19);
             this.UpSalonesAncho.TabIndex = 7;

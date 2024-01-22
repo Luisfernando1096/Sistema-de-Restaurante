@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dimension>
+
+	<AnchoSalon></AnchoSalon>
+	<AltoSalon></AltoSalon>
+	<SeparadorSalon></SeparadorSalon>
+	<AnchoMesa></AnchoMesa>
+	<AltoMesa></AltoMesa>
+	<SeparadorMesa></SeparadorMesa>
+	<AnchoFamilia></AnchoFamilia>
+	<AltoFamilia></AltoFamilia>
+	<SeparadorFamilia></SeparadorFamilia>
+	<AnchoProducto></AnchoProducto>
+	<AltoProducto></AltoProducto>
+	<SeparadorProducto></SeparadorProducto>
+
+</Dimension>

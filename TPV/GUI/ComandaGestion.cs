@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace TPV.GUI
 {
@@ -30,12 +31,41 @@ namespace TPV.GUI
         public bool borrarData;
         private String SeleccionarImg;
 
+        string AnchoProducto;
+        string AltoProducto;
+        string SeparadorProducto;
+        string AnchoFamilia;
+        string AltoFamilia;
+        string SeparadorFamilia;
+
         public ComandaGestion(PuntoVenta punto_venta)
         {
             InitializeComponent();
             AjustarPosicionBoton();
             this.punto_venta = punto_venta;
             lblFecha.Text = DateTime.Now.ToString();
+            CargarDimensiones();
+        }
+
+        private void CargarDimensiones()
+        {
+            string archivoConfiguracion = "dimensiones.xml";
+
+            if (File.Exists(archivoConfiguracion))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(archivoConfiguracion);
+
+                //Productos
+                AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
+                AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
+                SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
+                //Familias
+                AnchoFamilia = xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia").InnerText;
+                AltoFamilia = xmlDoc.SelectSingleNode("/Dimension/AltoFamilia").InnerText;
+                SeparadorFamilia = xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia").InnerText;
+
+            }
         }
 
         private void AjustarPosicionBoton()
@@ -139,7 +169,8 @@ namespace TPV.GUI
                 {
                     Text = salon["familia"].ToString().ToUpper(),
                     Tag = salon["idFamilia"].ToString().ToUpper(),
-                    Size = new Size(150, 60)
+                    Size = new Size(Int32.Parse(AnchoFamilia), Int32.Parse(AltoFamilia)),
+                    Margin = new Padding(Int32.Parse(SeparadorFamilia))
                 };
                 btnFamilia.Click += BotonFamilia_Click;
                 flpFamilias.Controls.Add(btnFamilia);
@@ -153,6 +184,25 @@ namespace TPV.GUI
 
         private void BotonFamilia_Click(object sender, EventArgs e)
         {
+            /*
+             string archivoConfiguracion = "dimensiones.xml";
+
+            string AnchoProducto = "10";
+            string AltoProducto = "10";
+            string SeparadorProducto = "10";
+
+            if (File.Exists(archivoConfiguracion))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(archivoConfiguracion);
+
+                //Productos
+                AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
+                AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
+                SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
+
+            }
+             */
             if (flpProductos.Controls.Count > 0)
             {
                 flpProductos.Controls.Clear();
@@ -196,8 +246,17 @@ namespace TPV.GUI
                         Image originalImage = Image.FromFile(fullPath);
 
                         // Define las dimensiones deseadas para la imagen
-                        int nuevoAncho = 100; // Cambia este valor al ancho deseado
-                        int nuevoAlto = 100; // Cambia este valor al alto deseado
+                        int nuevoAncho = Int32.Parse(AnchoProducto) - 30; // Cambia este valor al ancho deseado
+                        int nuevoAlto = Int32.Parse(AltoProducto) - 30; // Cambia este valor al alto deseado
+
+                        if (nuevoAncho < 0)
+                        {
+                            nuevoAncho = 0;
+                        }
+                        if (nuevoAlto < 0)
+                        {
+                            nuevoAlto = 0;
+                        }
 
                         // Crea una nueva imagen con las dimensiones deseadas
                         Image imagenRedimensionada = new Bitmap(originalImage, new Size(nuevoAncho, nuevoAlto));
@@ -210,7 +269,8 @@ namespace TPV.GUI
                 }
 
                 btnProducto.TextAlign = ContentAlignment.BottomCenter;
-                btnProducto.Size = new Size(130, 130);
+                btnProducto.Size = new Size(Int32.Parse(AnchoProducto), Int32.Parse(AltoProducto));
+                btnProducto.Margin = new Padding(Int32.Parse(SeparadorProducto));
                 btnProducto.Click += BotonProducto_Click;
                 flpProductos.Controls.Add(btnProducto);
             }
