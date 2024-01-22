@@ -16,7 +16,7 @@ namespace TPV.GUI
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
-        DataTable actualFactura = DataManager.DBConsultas.ObtenerTirajeActual();
+        DataTable actualFactura;
         private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
@@ -75,6 +75,7 @@ namespace TPV.GUI
 
         private void PuntoPago_Load(object sender, EventArgs e)
         {
+            actualFactura = DataManager.DBConsultas.ObtenerTirajeActual(Boolean.Parse(oConfiguracion.IncluirImpuesto));
             tFecha.Start();
             WindowState = FormWindowState.Maximized;
             // Creamos un Panel para envolver el FlowLayoutPanel

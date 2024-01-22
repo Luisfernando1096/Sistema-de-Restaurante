@@ -604,5 +604,11 @@ namespace ServiceExpressDsk.GUI
             Personal.GUI.Comandos f = new Personal.GUI.Comandos();
             f.ShowDialog();
         }
+
+        private void toolStripButton39_Click(object sender, EventArgs e)
+        {
+            Configuraciones.GUI.TirajeFactura f = new Configuraciones.GUI.TirajeFactura();
+            f.ShowDialog();
+        }
     }
 }

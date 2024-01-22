@@ -735,7 +735,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton25});
             this.toolStrip6.Location = new System.Drawing.Point(3, 0);
             this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.Size = new System.Drawing.Size(836, 79);
+            this.toolStrip6.Size = new System.Drawing.Size(805, 79);
             this.toolStrip6.TabIndex = 11;
             this.toolStrip6.Text = "toolStrip6";
             // 
@@ -1059,7 +1059,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton40});
             this.toolStrip9.Location = new System.Drawing.Point(3, 0);
             this.toolStrip9.Name = "toolStrip9";
-            this.toolStrip9.Size = new System.Drawing.Size(846, 82);
+            this.toolStrip9.Size = new System.Drawing.Size(877, 82);
             this.toolStrip9.TabIndex = 13;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -1118,6 +1118,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton39.Size = new System.Drawing.Size(127, 79);
             this.toolStripButton39.Text = "Tiraje Factura";
             this.toolStripButton39.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton39.Click += new System.EventHandler(this.toolStripButton39_Click);
             // 
             // toolStripButton40
             // 

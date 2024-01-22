@@ -26,6 +26,24 @@ namespace DataManager
 
         }
 
+        public static DataTable TirajeFactura()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idTiraje, tipoFactura, serie, inicio, fin, actual, activo FROM tiraje_factura WHERE activo = true;";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static object Comandos()
         {
             try
@@ -1040,12 +1058,21 @@ namespace DataManager
             }
         }
 
-        public static DataTable ObtenerTirajeActual()
+        public static DataTable ObtenerTirajeActual(Boolean conIva)
         {
             try
             {
                 DataTable resultado = new DataTable();
-                string sentencia = @"SELECT idTiraje, actual, fin, serie FROM tiraje_factura where activo=1;";
+                string sentencia;
+                if (conIva)
+                {
+                    sentencia = @"SELECT idTiraje, actual, fin, serie FROM tiraje_factura where activo = 1 AND tipoFactura = 'CRÉDITO FISCAL';";
+                }
+                else
+                {
+                    sentencia = @"SELECT idTiraje, actual, fin, serie FROM tiraje_factura where activo = 1 AND tipoFactura = 'CONSUMIDOR FINAL';";
+                }
+
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
