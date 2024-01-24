@@ -75,32 +75,50 @@ namespace Personal.GUI
                     // Obtener los comandos desde la base de datos
                     DataTable comandos = DataManager.DBConsultas.ComandosPorRol("");
 
-                    // Comparar y agregar nuevos comandos
-                    for (int row = 1; row <= rowCount; row++)
+                    //Comparar que la primer celda tenga el valor de comandos
+                    string primerValor = worksheet.Cells[1, 1].Text;
+
+                    if (primerValor.Equals("comandos"))
                     {
-                        // Obtener el valor de la celda en la columna A y fila actual
-                        string cellValue = worksheet.Cells[row, 1].Text;
-
-                        // Verificar si el comando ya existe en la DataTable
-                        DataRow[] foundRows = comandos.Select("comando = '" + cellValue.Trim() + "'");
-                        if (foundRows.Length == 0)
+                        // Comparar y agregar nuevos comandos
+                        for (int row = 2; row <= rowCount; row++)
                         {
-                            // El comando no existe, agregarlo a la DataTable
-                            DataRow newRow = comandos.NewRow();
-                            comando = new Mantenimiento.CLS.Comando();
-                            comando.Comando1 = cellValue;
+                            // Obtener el valor de la celda en la columna A y fila actual
+                            string cellValue = worksheet.Cells[row, 1].Text;
 
-                            lstComandos.Add(comando);
+                            // Verificar si el comando ya existe en la DataTable
+                            DataRow[] foundRows = comandos.Select("comando = '" + cellValue.Trim() + "'");
+                            if (foundRows.Length == 0)
+                            {
+                                // El comando no existe, agregarlo a la DataTable
+                                DataRow newRow = comandos.NewRow();
+                                comando = new Mantenimiento.CLS.Comando();
+                                comando.Comando1 = cellValue;
+
+                                lstComandos.Add(comando);
+                            }
+
+                            // Puedes realizar aquí cualquier operación que necesites con el valor de cada fila.
                         }
-
-                        // Puedes realizar aquí cualquier operación que necesites con el valor de cada fila.
                     }
 
+                    int filasAfectadas = 0;
                     // Actualizar la base de datos con los nuevos comandos
                     foreach (Mantenimiento.CLS.Comando com in lstComandos)
                     {
                         // Agregar lógica para guardar el nuevoComando en tu base de datos si es necesario
-                        com.Insertar(); ;
+                        if(com.Insertar()){
+                            filasAfectadas++;
+                        }
+                    }
+
+                    if (filasAfectadas > 0)
+                    {
+                        MessageBox.Show("Se insertaron " + filasAfectadas + " comandos que faltaban.", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se inserto ningun comando, estaban completos.", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     Console.ReadLine(); // Esta línea ahora está dentro del bloque 'if'
