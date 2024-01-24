@@ -594,7 +594,7 @@ namespace TPV.GUI
             {
                 foreach (DataRow item in actualFactura.Rows)
                 {
-                    if (Int32.Parse(item["actual"].ToString()) == Int32.Parse(item["fin"].ToString()))
+                    if (Int32.Parse(item["actual"].ToString()) <= Int32.Parse(item["fin"].ToString()))
                     {
                         MessageBox.Show("Se ha alcanzado el maximo de facturas, solicite al administrador un nuevo tiraje.");
                     }

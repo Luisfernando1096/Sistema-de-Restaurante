@@ -103,6 +103,10 @@
       <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
       <Name>Mantenimiento</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TPV\TPV.csproj">
+      <Project>{ec2deb8e-2e16-4c46-86e1-25b77483bdb6}</Project>
+      <Name>TPV</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

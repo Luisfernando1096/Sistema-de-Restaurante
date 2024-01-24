@@ -99,5 +99,78 @@ namespace Configuraciones.GUI
         {
             PermitirSoloSeisDigitos(sender, e);
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (txtInicio.Text.Equals(""))
+            {
+                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtFin.Text.Equals(""))
+            {
+                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtActual.Text.Equals(""))
+            {
+                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtSerie.Text.Equals(""))
+            {
+                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Int32.Parse(txtInicio.Text) > Int32.Parse(txtFin.Text))
+            {
+                MessageBox.Show("el inicio no puede ser mayor al fin!", "Campos No validos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            TPV.GUI.AutorizarCambio f = new TPV.GUI.AutorizarCambio();
+            f.ShowDialog();
+
+            int pin = Int32.Parse(f.txtPin.Text);
+            if (pin != 0)
+            {
+                DataTable filas = DataManager.DBConsultas.IniciarSesion(pin.ToString());
+                if (filas.Rows.Count > 0)
+                {
+                    if (Int32.Parse(filas.Rows[0]["idRol"].ToString()) == 1)
+                    {
+                        Mantenimiento.CLS.Tiraje_Factura tiraje_Factura = new Mantenimiento.CLS.Tiraje_Factura();
+                        tiraje_Factura.IdTiraje = Int32.Parse(cmbTipoFactura.SelectedValue.ToString());
+                        tiraje_Factura.Inicio = Int32.Parse(txtInicio.Text);
+                        tiraje_Factura.Fin = Int32.Parse(txtFin.Text);
+                        tiraje_Factura.Actual = Int32.Parse(txtActual.Text);
+                        tiraje_Factura.Serie = txtSerie.Text.ToString();
+                        tiraje_Factura.TipoFactura = cmbTipoFactura.Text.ToString();
+                        tiraje_Factura.Activo = true;
+
+                        if (tiraje_Factura.Actualizar())
+                        {
+                            MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No tiene permiso para esta accion!");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Pin incorrecto, intentelo nuevamente!");
+                }
+
+            }
+
+        }
     }
 }
