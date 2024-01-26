@@ -13,6 +13,7 @@ namespace Configuraciones.GUI
     public partial class TirajeFactura : Form
     {
         DataTable tf;
+        BindingSource datos = new BindingSource();
         public TirajeFactura()
         {
             InitializeComponent();
@@ -23,23 +24,102 @@ namespace Configuraciones.GUI
             txtActual.KeyPress += txtActual_KeyPress;
         }
 
-        private void TirajeFactura_Load(object sender, EventArgs e)
-        {
-            CargarDatos();
-        }
-
-        private void CargarDatos()
+        private void CargarElementos()
         {
             try
             {
-                tf = DataManager.DBConsultas.TirajeFactura();
+                datos.DataSource = DataManager.DBConsultas.TFactura();
+                dgvDatos.DataSource = datos;
+                dgvDatos.AutoGenerateColumns = false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void ActivarCampos() 
+        {
+            try
+            {
+                btnCancelar.Visible = true;
+                btnNuevo.Visible = false;
+                cmbTipoFactura.Enabled = true;
+                txtSerie.Enabled = true;
+                txtInicio.Enabled = true;
+                txtFin.Enabled = true;
+                txtActual.Enabled = true;
+                btnActivar.Enabled = false;
+                btnEliminar.Enabled = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DesactivarCampos()
+        {
+            try
+            {
+                btnCancelar.Visible = false;
+                btnNuevo.Visible = true;
+                cmbTipoFactura.Enabled = false;
+                txtSerie.Enabled = false;
+                txtInicio.Enabled = false;
+                txtFin.Enabled = false;
+                txtActual.Enabled = false;
+                btnActivar.Enabled = true;
+                btnEliminar.Enabled = true;
+                txtSerie.Text = "";
+                txtInicio.Text = "";
+                txtFin.Text = "";
+                txtActual.Text = "";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void TirajeFactura_Load(object sender, EventArgs e)
+        {
+            CargarLista1();
+            CargarLista2();
+            DesactivarCampos();
+            CargarElementos();
+        }
+
+        private void CargarLista1()
+        {
+            try
+            {
+                tf = DataManager.DBConsultas.Factura();
                 
                 cmbTipoFactura.DataSource = tf;
                 cmbTipoFactura.DisplayMember = "tipoFactura";
-                cmbTipoFactura.ValueMember = "idTiraje";
+                cmbTipoFactura.ValueMember = "idFactura";
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error al cargar datos: " + e);
+                throw;
+            }
+        }
 
-                LlenarTexto();
+        private void CargarLista2()
+        {
+            try
+            {
+                DataTable presentacion = DataManager.DBConsultas.Factura();
 
+                DataTable dt = presentacion.Clone();
+                dt.Rows.Add(0, "TODOS");
+                dt.Merge(presentacion);
+
+                comboBox2.DataSource = dt;
+                comboBox2.DisplayMember = "tipoFactura";
+                comboBox2.ValueMember = "idFactura";
             }
             catch (Exception e)
             {
@@ -63,7 +143,6 @@ namespace Configuraciones.GUI
 
         private void cmbTipoFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenarTexto();
         }
 
         private void PermitirSoloSeisDigitos(object sender, KeyPressEventArgs e) 
@@ -102,60 +181,281 @@ namespace Configuraciones.GUI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtInicio.Text.Equals(""))
+            if (txtInicio.Text.Equals("") || txtFin.Text.Equals("") || txtActual.Text.Equals("") || txtSerie.Text.Equals(""))
             {
                 MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            if (txtFin.Text.Equals(""))
+            else
             {
-                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                if (Int32.Parse(txtInicio.Text) > Int32.Parse(txtFin.Text))
+                {
+                    MessageBox.Show("el inicio no puede ser mayor al fin!", "Campos No validos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    String tipo = cmbTipoFactura.Text;
+                    bool existe = false;
+                    Mantenimiento.CLS.Tiraje_Factura tiraje_Factura = new Mantenimiento.CLS.Tiraje_Factura();
+                    tiraje_Factura.Inicio = Int32.Parse(txtInicio.Text);
+                    tiraje_Factura.Fin = Int32.Parse(txtFin.Text);
+                    tiraje_Factura.Actual = Int32.Parse(txtActual.Text);
+                    tiraje_Factura.Serie = txtSerie.Text.ToString();
+                    tiraje_Factura.TipoFactura = cmbTipoFactura.Text.ToString();
+                    tiraje_Factura.Activo = true;
 
-            if (txtActual.Text.Equals(""))
+                    DataTable result = DataManager.DBConsultas.BuscarTipoFactura(tipo);
+                    if (result.Rows.Count > 0)
+                    {
+                        existe = true;
+                    }
+
+                    if (existe)
+                    {
+                        if (DesactivarEstado(tipo))
+                        {
+                            if (tiraje_Factura.Insertar())
+                            {
+                                MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (tiraje_Factura.Insertar())
+                        {
+                            MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                CargarElementos();
+                ListaPorTipo(comboBox2.Text);
+                DesactivarCampos();
+            }
+        }
+
+        private Boolean CambiarEstado(int id, bool estado, string tipo) 
+        {
+            Mantenimiento.CLS.Tiraje_Factura tf = new Mantenimiento.CLS.Tiraje_Factura();
+            bool result = false;
+            try
             {
-                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                tf.IdTiraje = id;
+                tf.Activo = estado;
+                tf.ActualizarEstado(tipo);
 
-            if (txtSerie.Text.Equals(""))
+                result = true;
+                return result;
+            }
+            catch (Exception)
             {
-                MessageBox.Show("No debe dejar campos vacios!", "Campos Vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return result;
             }
-
-            if (Int32.Parse(txtInicio.Text) > Int32.Parse(txtFin.Text))
+        }
+        private bool DesactivarEstado(String tipo) 
+        {
+            bool resultado = false;
+            try
             {
-                MessageBox.Show("el inicio no puede ser mayor al fin!", "Campos No validos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                DataTable result = DataManager.DBConsultas.TirajeFact(tipo);
+                if (result.Rows.Count > 0)
+                {
+                    foreach (DataRow fila in result.Rows)
+                    {
+                        // Accediendo a los datos de cada columna en la fila
+                        int idTiraje = Convert.ToInt32(fila["idTiraje"]);
+                        string tipoFactura = fila["tipoFactura"].ToString();
+                        bool activo = Convert.ToBoolean(fila["activo"]);
+                        CambiarEstado(idTiraje, false, tipoFactura);
+                    }
+                    resultado = true;
+                }
+                return resultado;
             }
+            catch (Exception)
+            {
+                return resultado;
+            }
+        }
 
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            ActivarCampos();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DesactivarCampos();
+        }
+        private void ListaPorTipo(String tipo)
+        {
+            try
+            {
+                if (dgvDatos.Rows.Count > 0)
+                {
+                    if (comboBox2.SelectedIndex == 0)
+                    {
+                        if (checkBox1.Checked)
+                        {
+                            datos.DataSource = DataManager.DBConsultas.TirajeFactura();
+                            dgvDatos.DataSource = datos;
+                            dgvDatos.AutoGenerateColumns = false;
+                        }
+                        else
+                        {
+                            CargarElementos();
+                        }
+                    }
+                    else
+                    {
+                        if (checkBox1.Checked)
+                        {
+                            datos.DataSource = DataManager.DBConsultas.TirajeFact(tipo);
+                            dgvDatos.DataSource = datos;
+                            dgvDatos.AutoGenerateColumns = false;
+                        }
+                        else
+                        {
+                            datos.DataSource = DataManager.DBConsultas.BuscarTipoFactura(tipo);
+                            dgvDatos.DataSource = datos;
+                            dgvDatos.AutoGenerateColumns = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en ListaPorTipo: {ex.Message}");
+            }
+        }
+
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListaPorTipo(comboBox2.Text);
+        }
+        private bool Mensaje(String tipo)
+        {
+            bool resultado = false;
+            int fin = 0;
+            int actual = 0;
+            int disponible = 0;
+            try
+            {
+                DataTable result = DataManager.DBConsultas.TirajeFact(tipo);
+                if (result.Rows.Count > 0)
+                {
+                    foreach (DataRow fila in result.Rows)
+                    {
+                        // Accediendo a los datos de cada columna en la fila
+                        fin = Convert.ToInt32(fila["fin"]);
+                        actual = Convert.ToInt32(fila["actual"]);
+                        disponible = fin - actual;
+                    }
+                }
+                string mensaje = "El tiraje actual de las facturas aún no ha concluido.\n" +
+                                 "Es recomendable crear un nuevo tiraje hasta que se agote el anterior.\n\n" +
+                                 "Final del tiraje: " + fin + "\n" +
+                                 "Factura actual: " + actual + "\n" +
+                                 "Disponible: " + disponible + "\n\n" +
+                                 "Al agregar un nuevo tiraje, se DESACTIVARA el tiraje actual y el nuevo tiraje se establecerá como ACTIVO.\n\n" +
+                                 "¿Deseas continuar con la creación del nuevo tiraje?";
+                if (MessageBox.Show(mensaje, "Mensaje de advertencia CAMBIO DE TIRAJE EN: " + tipo.ToUpper() , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    resultado = true;
+                }
+                else
+                {
+                    resultado = false;
+                }
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return resultado;
+            }
+        }
+
+        private void btnActivar_Click(object sender, EventArgs e)
+        {
             TPV.GUI.AutorizarCambio f = new TPV.GUI.AutorizarCambio();
             f.ShowDialog();
 
             int pin = Int32.Parse(f.txtPin.Text);
+            int fin = 0;
+            int actual = 0;
             if (pin != 0)
             {
                 DataTable filas = DataManager.DBConsultas.IniciarSesion(pin.ToString());
+                int id = int.Parse(dgvDatos.CurrentRow.Cells["idTiraje"].Value.ToString());
+                String tipo = dgvDatos.CurrentRow.Cells["tipoFactura"].Value.ToString();
+                bool estado = true;
+                bool existe = false;
+
+                DataTable result = DataManager.DBConsultas.TirajeFact(tipo);
+                if (result.Rows.Count > 0)
+                {
+                    existe = true;
+                    foreach (DataRow fila in result.Rows)
+                    {
+                        // Accediendo a los datos de cada columna en la fila
+                        fin = Convert.ToInt32(fila["fin"]);
+                        actual = Convert.ToInt32(fila["actual"]);
+                    }
+                }
                 if (filas.Rows.Count > 0)
                 {
                     if (Int32.Parse(filas.Rows[0]["idRol"].ToString()) == 1)
                     {
-                        Mantenimiento.CLS.Tiraje_Factura tiraje_Factura = new Mantenimiento.CLS.Tiraje_Factura();
-                        tiraje_Factura.IdTiraje = Int32.Parse(cmbTipoFactura.SelectedValue.ToString());
-                        tiraje_Factura.Inicio = Int32.Parse(txtInicio.Text);
-                        tiraje_Factura.Fin = Int32.Parse(txtFin.Text);
-                        tiraje_Factura.Actual = Int32.Parse(txtActual.Text);
-                        tiraje_Factura.Serie = txtSerie.Text.ToString();
-                        tiraje_Factura.TipoFactura = cmbTipoFactura.Text.ToString();
-                        tiraje_Factura.Activo = true;
-
-                        if (tiraje_Factura.Actualizar())
+                        if (existe)
                         {
-                            MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Close();
+                            if (fin > actual)
+                            {
+                                if (Mensaje(tipo))
+                                {
+                                    if (DesactivarEstado(tipo))
+                                    {
+                                        if (CambiarEstado(id, estado, tipo))
+                                        {
+                                            MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            ListaPorTipo(comboBox2.Text);
+                                        }
+                                    }
+                                }
+                            }
+                            else if (fin == actual)
+                            {
+                                if (DesactivarEstado(tipo))
+                                {
+                                    if (CambiarEstado(id, estado, tipo))
+                                    {
+                                        MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        ListaPorTipo(comboBox2.Text);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Ha ocurrido un problema!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        else
+                        {
+                            if (CambiarEstado(id, estado, tipo))
+                            {
+                                MessageBox.Show("Cambios realizados con exito!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ListaPorTipo(comboBox2.Text);
+                            }
                         }
                     }
                     else
@@ -168,9 +468,39 @@ namespace Configuraciones.GUI
                 {
                     MessageBox.Show("Pin incorrecto, intentelo nuevamente!");
                 }
-
             }
+        }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            ListaPorTipo(comboBox2.Text);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Mantenimiento.CLS.Tiraje_Factura tf = new Mantenimiento.CLS.Tiraje_Factura();
+            tf.IdTiraje = int.Parse(dgvDatos.CurrentRow.Cells["idTiraje"].Value.ToString());
+            bool estado = Convert.ToBoolean((dgvDatos.CurrentRow.Cells["activo"].Value.ToString()));
+
+            if (MessageBox.Show("¿Esta seguro que desea eliminar?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (estado)
+                {
+                    MessageBox.Show("¡No se puede eliminar el tiraje porque se encuentra activo!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (tf.Eliminar())
+                    {
+                        MessageBox.Show("¡Registro eliminado correctamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ListaPorTipo(comboBox2.Text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No es posible eliminar este tiraje porque ya ha sido utilizado en registros de facturas.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
         }
     }
 }
