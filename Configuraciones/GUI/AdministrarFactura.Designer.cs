@@ -1,7 +1,7 @@
 ﻿
 namespace Configuraciones.GUI
 {
-    partial class TirajeFactura
+    partial class AdministrarFactura
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace Configuraciones.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TirajeFactura));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrarFactura));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmbTipoFactura = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();

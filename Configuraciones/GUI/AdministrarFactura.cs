@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Configuraciones.GUI
 {
-    public partial class TirajeFactura : Form
+    public partial class AdministrarFactura : Form
     {
         DataTable tf;
         BindingSource datos = new BindingSource();
-        public TirajeFactura()
+        public AdministrarFactura()
         {
             InitializeComponent();
 
