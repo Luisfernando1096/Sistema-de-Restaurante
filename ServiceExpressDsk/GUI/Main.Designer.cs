@@ -1129,6 +1129,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton40.Size = new System.Drawing.Size(174, 79);
             this.toolStripButton40.Text = "Administrar facturas";
             this.toolStripButton40.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton40.Click += new System.EventHandler(this.toolStripButton40_Click);
             // 
             // tabPage10
             // 

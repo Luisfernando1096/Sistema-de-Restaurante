@@ -73,10 +73,9 @@ namespace Configuraciones.GUI
             this.cmbTipoFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoFactura.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipoFactura.FormattingEnabled = true;
-            this.cmbTipoFactura.Location = new System.Drawing.Point(13, 39);
-            this.cmbTipoFactura.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbTipoFactura.Location = new System.Drawing.Point(10, 32);
             this.cmbTipoFactura.Name = "cmbTipoFactura";
-            this.cmbTipoFactura.Size = new System.Drawing.Size(253, 32);
+            this.cmbTipoFactura.Size = new System.Drawing.Size(191, 28);
             this.cmbTipoFactura.TabIndex = 0;
             this.cmbTipoFactura.SelectedIndexChanged += new System.EventHandler(this.cmbTipoFactura_SelectedIndexChanged);
             // 
@@ -84,10 +83,9 @@ namespace Configuraciones.GUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(10, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 24);
+            this.label1.Size = new System.Drawing.Size(97, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tipo de factura";
             // 
@@ -95,29 +93,26 @@ namespace Configuraciones.GUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(269, 13);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(202, 11);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 24);
+            this.label2.Size = new System.Drawing.Size(41, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Serie";
             // 
             // txtSerie
             // 
             this.txtSerie.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSerie.Location = new System.Drawing.Point(274, 41);
-            this.txtSerie.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSerie.Location = new System.Drawing.Point(206, 33);
             this.txtSerie.Name = "txtSerie";
-            this.txtSerie.Size = new System.Drawing.Size(188, 30);
+            this.txtSerie.Size = new System.Drawing.Size(142, 26);
             this.txtSerie.TabIndex = 3;
             // 
             // txtInicio
             // 
             this.txtInicio.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInicio.Location = new System.Drawing.Point(470, 40);
-            this.txtInicio.Margin = new System.Windows.Forms.Padding(4);
+            this.txtInicio.Location = new System.Drawing.Point(352, 32);
             this.txtInicio.Name = "txtInicio";
-            this.txtInicio.Size = new System.Drawing.Size(153, 30);
+            this.txtInicio.Size = new System.Drawing.Size(116, 26);
             this.txtInicio.TabIndex = 5;
             this.txtInicio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInicio_KeyPress);
             // 
@@ -125,20 +120,18 @@ namespace Configuraciones.GUI
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(465, 11);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(349, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 24);
+            this.label3.Size = new System.Drawing.Size(40, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Inicio";
             // 
             // txtFin
             // 
             this.txtFin.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFin.Location = new System.Drawing.Point(631, 39);
-            this.txtFin.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFin.Location = new System.Drawing.Point(473, 32);
             this.txtFin.Name = "txtFin";
-            this.txtFin.Size = new System.Drawing.Size(153, 30);
+            this.txtFin.Size = new System.Drawing.Size(116, 26);
             this.txtFin.TabIndex = 7;
             this.txtFin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFin_KeyPress);
             // 
@@ -146,20 +139,18 @@ namespace Configuraciones.GUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(626, 10);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(470, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 24);
+            this.label4.Size = new System.Drawing.Size(27, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Fin";
             // 
             // txtActual
             // 
             this.txtActual.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtActual.Location = new System.Drawing.Point(792, 39);
-            this.txtActual.Margin = new System.Windows.Forms.Padding(4);
+            this.txtActual.Location = new System.Drawing.Point(594, 32);
             this.txtActual.Name = "txtActual";
-            this.txtActual.Size = new System.Drawing.Size(153, 30);
+            this.txtActual.Size = new System.Drawing.Size(116, 26);
             this.txtActual.TabIndex = 9;
             this.txtActual.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtActual_KeyPress);
             // 
@@ -167,10 +158,9 @@ namespace Configuraciones.GUI
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(787, 10);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(590, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 24);
+            this.label5.Size = new System.Drawing.Size(45, 20);
             this.label5.TabIndex = 8;
             this.label5.Text = "Actual";
             // 
@@ -190,7 +180,7 @@ namespace Configuraciones.GUI
             this.btnActivar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1387, 62);
+            this.toolStrip1.Size = new System.Drawing.Size(1028, 62);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -205,7 +195,7 @@ namespace Configuraciones.GUI
             this.btnCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(164, 59);
+            this.btnCancelar.Size = new System.Drawing.Size(146, 59);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -215,7 +205,7 @@ namespace Configuraciones.GUI
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(129, 59);
+            this.btnNuevo.Size = new System.Drawing.Size(115, 59);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
@@ -225,7 +215,7 @@ namespace Configuraciones.GUI
             this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(149, 59);
+            this.btnGuardar.Size = new System.Drawing.Size(133, 59);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -236,7 +226,7 @@ namespace Configuraciones.GUI
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(112, 59);
+            this.btnSalir.Size = new System.Drawing.Size(101, 59);
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -252,7 +242,7 @@ namespace Configuraciones.GUI
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(214, 59);
+            this.btnEliminar.Size = new System.Drawing.Size(187, 59);
             this.btnEliminar.Text = "Eliminar tiraje";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -262,7 +252,7 @@ namespace Configuraciones.GUI
             this.btnActivar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnActivar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnActivar.Name = "btnActivar";
-            this.btnActivar.Size = new System.Drawing.Size(190, 59);
+            this.btnActivar.Size = new System.Drawing.Size(166, 59);
             this.btnActivar.Text = "Activar tiraje";
             this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
             // 
@@ -280,8 +270,9 @@ namespace Configuraciones.GUI
             this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 62);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1387, 100);
+            this.panel1.Size = new System.Drawing.Size(1028, 81);
             this.panel1.TabIndex = 11;
             // 
             // dgvDatos
@@ -311,15 +302,15 @@ namespace Configuraciones.GUI
             this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvDatos.Location = new System.Drawing.Point(0, 162);
-            this.dgvDatos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvDatos.Location = new System.Drawing.Point(0, 143);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.RowTemplate.Height = 24;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(1387, 388);
+            this.dgvDatos.Size = new System.Drawing.Size(1028, 304);
             this.dgvDatos.TabIndex = 12;
             // 
             // IdTiraje
@@ -393,11 +384,11 @@ namespace Configuraciones.GUI
             this.groupBox3.Controls.Add(this.checkBox1);
             this.groupBox3.Controls.Add(this.comboBox2);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(0, 550);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Location = new System.Drawing.Point(0, 447);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(1387, 83);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(1028, 67);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
@@ -405,9 +396,10 @@ namespace Configuraciones.GUI
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(285, 41);
+            this.checkBox1.Location = new System.Drawing.Point(214, 33);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(68, 21);
+            this.checkBox1.Size = new System.Drawing.Size(56, 17);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Activo";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -418,26 +410,24 @@ namespace Configuraciones.GUI
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(13, 33);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox2.Location = new System.Drawing.Point(10, 27);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(253, 32);
+            this.comboBox2.Size = new System.Drawing.Size(191, 28);
             this.comboBox2.TabIndex = 1;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // TirajeFactura
+            // AdministrarFactura
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1387, 633);
+            this.ClientSize = new System.Drawing.Size(1028, 514);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "TirajeFactura";
+            this.Name = "AdministrarFactura";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Tiraje de Factura";
+            this.Text = "Administrar Facturas";
             this.Load += new System.EventHandler(this.TirajeFactura_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

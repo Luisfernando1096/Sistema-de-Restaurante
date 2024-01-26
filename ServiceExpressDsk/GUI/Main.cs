@@ -607,6 +607,12 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton39_Click(object sender, EventArgs e)
         {
+            Configuraciones.GUI.TirajeFactura f = new Configuraciones.GUI.TirajeFactura();
+            f.ShowDialog();
+        }
+
+        private void toolStripButton40_Click(object sender, EventArgs e)
+        {
             Configuraciones.GUI.AdministrarFactura f = new Configuraciones.GUI.AdministrarFactura();
             f.ShowDialog();
         }
