@@ -4,4 +4,6 @@
 	<BaseDeDatos></BaseDeDatos>
 	<Usuario></Usuario>
 	<Contraseña></Contraseña>
+	<IpLocal></IpLocal>
+	<Host></Host>
 </Configuracion>

@@ -18,6 +18,8 @@ namespace ServiceExpressDsk.GUI
             string baseDeDatos = txtBaseDatos.Text.Trim();
             string usuario = txtUsuarioBD.Text.Trim();
             string contraseña = txtContraseniaBD.Text.Trim();
+            string ipLocal = txtIpLocal.Text.Trim();
+            string host = txtHost.Text.Trim();
 
             string archivoConfiguracion = "configuracion.xml";
 
@@ -33,6 +35,8 @@ namespace ServiceExpressDsk.GUI
                 writer.WriteElementString("BaseDeDatos", baseDeDatos);
                 writer.WriteElementString("Usuario", usuario);
                 writer.WriteElementString("Contraseña", contraseña);
+                writer.WriteElementString("IpLocal", ipLocal);
+                writer.WriteElementString("Host", host);
 
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
@@ -59,11 +63,15 @@ namespace ServiceExpressDsk.GUI
                 string baseDeDatos = xmlDoc.SelectSingleNode("/Configuracion/BaseDeDatos").InnerText;
                 string usuario = xmlDoc.SelectSingleNode("/Configuracion/Usuario").InnerText;
                 string contraseña = xmlDoc.SelectSingleNode("/Configuracion/Contraseña").InnerText;
+                string ipLocal = xmlDoc.SelectSingleNode("/Configuracion/IpLocal").InnerText;
+                string host = xmlDoc.SelectSingleNode("/Configuracion/Host").InnerText;
 
                 txtBaseDatos.Text = baseDeDatos;
                 txtServidorBD.Text = servidor;
                 txtUsuarioBD.Text = usuario;
                 txtContraseniaBD.Text = contraseña;
+                txtIpLocal.Text = ipLocal;
+                txtHost.Text = host;
                 // Utiliza los valores de la cadena de conexión como desees
                 string cadenaConexion = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contraseña};";
             }
