@@ -642,6 +642,27 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable RepIngredientes()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idIngrediente, u.unidadMedida, nombre, stock, precio 
+                                    FROM ingrediente i, unidadmedida u
+                                    WHERE i.idUnidad = u.idUnidad;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable RepVentasAgrupadasPorProductoResumen(string fechaInicio, string fechaFinal)
         {
             try

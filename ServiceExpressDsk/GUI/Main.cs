@@ -616,5 +616,16 @@ namespace ServiceExpressDsk.GUI
             Configuraciones.GUI.AdministrarFactura f = new Configuraciones.GUI.AdministrarFactura();
             f.ShowDialog();
         }
+
+        private void toolStripButton30_Click(object sender, EventArgs e)
+        {
+            //Ingredientes sin stock 
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+            Reportes.REP.RepIngredientes oReporte = new Reportes.REP.RepIngredientes();
+            DataTable datos = DataManager.DBConsultas.RepIngredientes();
+            oReporte.SetDataSource(datos);
+            f.GenerarReporte(oReporte, datos, "", "", "");
+            f.Show();
+        }
     }
 }

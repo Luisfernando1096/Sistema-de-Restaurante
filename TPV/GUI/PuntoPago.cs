@@ -899,25 +899,15 @@ namespace TPV.GUI
                     MessageBox.Show("Ocurrio un error al buscar ultima factura, contacte al programador.");
                 }
 
-                if (pagoEfectivo && generar)
-                {
-                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                    GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
-                }
-                else if (pagoTarjeta && generar)
+                if (pagoTarjeta && generar)
                 {
                     Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
                     GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
                 }
-                else if (pagoCortesia && generar)
+                else if (generar)
                 {
                     Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                    GenerarFactura(oReporte, serie, siguiente, "CORTESIA");// se envia el nFactura y la serie que corresponde
-                }
-                else if (pagoExacto )
-                {
-                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                    GenerarFactura(oReporte, serie, siguiente, "EXACTO");// se envia el nFactura y la serie que corresponde
+                    GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
                 }
             }
             if (activarTicket)
@@ -1158,7 +1148,7 @@ namespace TPV.GUI
                     // Imprimir el informe en la impresora seleccionada
                     PrinterSettings settings = new PrinterSettings
                     {
-                        PrinterName = oConfiguracion.PrinterComanda
+                        PrinterName = oConfiguracion.PrinterFactura
                     };
 
                     oReporte.PrintOptions.PrinterName = settings.PrinterName;
