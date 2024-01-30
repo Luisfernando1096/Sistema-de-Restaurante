@@ -24,15 +24,12 @@ public class Server
 
     public void StartServer()
     {
-        /*
         //OBETNER IP AUTOMATICAMENTE
         string hostName = Dns.GetHostName();
         // Inicializar la variable
         IPAddress[] localIPs = Dns.GetHostAddresses(hostName);
         // Filtrar las direcciones IPv4
         IPAddress ipv4Address = localIPs.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
-        isServerRunning = true;
-        tcpListener = new TcpListener(IPAddress.Parse(ipv4Address.ToString()), 4000);*/
 
         string archivoConfiguracion = "configuracion.xml";
 
@@ -41,12 +38,28 @@ public class Server
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(archivoConfiguracion);
 
-            string ipLocal = xmlDoc.SelectSingleNode("/Configuracion/IpLocal").InnerText;
-            isServerRunning = true;
-            tcpListener = new TcpListener(IPAddress.Parse(ipLocal), 4000);
-            listenerThread = new Thread(new ThreadStart(ListenForClients));
-            listenerThread.Start();
-            Console.WriteLine("Servidor iniciado. Esperando conexiones...");
+            if (xmlDoc.SelectSingleNode("/Configuracion/IpLocal") != null
+                && xmlDoc.SelectSingleNode("/Configuracion/Puerto") != null)
+            {
+                string ipLocal = xmlDoc.SelectSingleNode("/Configuracion/IpLocal").InnerText;
+                string puerto = xmlDoc.SelectSingleNode("/Configuracion/Puerto").InnerText;
+                if(ipv4Address.ToString().Equals(ipLocal)){
+                    isServerRunning = true;
+                    tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
+                    listenerThread = new Thread(new ThreadStart(ListenForClients));
+                    listenerThread.Start();
+                    Console.WriteLine("Servidor iniciado. Esperando conexiones...");
+                }
+                else
+                {
+                    MessageBox.Show("El servidor no se pudo iniciar verifique la direccion Ip.", "Ip incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("El servidor no se pudo iniciar verifique establecer puerto e Ip.", "Ip null", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
@@ -55,10 +68,14 @@ public class Server
 
     public void StopServer()
     {
-        isServerRunning = false;
-        tcpListener.Stop();
-        listenerThread.Join(); // Esperar a que el hilo del escuchador termine
-        Console.WriteLine("Servidor detenido.");
+        if (isServerRunning)
+        {
+            isServerRunning = false;
+            tcpListener.Stop();
+            listenerThread.Join(); // Esperar a que el hilo del escuchador termine
+            Console.WriteLine("Servidor detenido.");
+        }
+        
     }
 
     private void ListenForClients()

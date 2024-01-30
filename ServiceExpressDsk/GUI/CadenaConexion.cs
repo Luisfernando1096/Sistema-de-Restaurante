@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -19,13 +21,44 @@ namespace ServiceExpressDsk.GUI
             string usuario = txtUsuarioBD.Text.Trim();
             string contraseña = txtContraseniaBD.Text.Trim();
             string ipLocal = txtIpLocal.Text.Trim();
-            //Validar la ip
-            if (ValidariP())
+            string puerto = txtPuerto.Text.Trim();
+
+            if (txtServidorBD.Text.Equals(""))
             {
-                MessageBox.Show("La ip no es valida, por favor escriba una ip valida", "");
+                MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string host = txtHost.Text.Trim();
+            if (txtBaseDatos.Text.Equals(""))
+            {
+                MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txtUsuarioBD.Text.Equals(""))
+            {
+                MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txtContraseniaBD.Text.Equals(""))
+            {
+                MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txtIpLocal.Text.Equals(""))
+            {
+                MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txtPuerto.Text.Equals(""))
+            {
+                MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            //Validar la ip
+            if (!ValidariP())
+            {
+                MessageBox.Show("La ip no es valida, por favor escriba una ip valida", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             string archivoConfiguracion = "configuracion.xml";
 
@@ -42,7 +75,7 @@ namespace ServiceExpressDsk.GUI
                 writer.WriteElementString("Usuario", usuario);
                 writer.WriteElementString("Contraseña", contraseña);
                 writer.WriteElementString("IpLocal", ipLocal);
-                writer.WriteElementString("Host", host);
+                writer.WriteElementString("Puerto", puerto);
 
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
@@ -53,7 +86,8 @@ namespace ServiceExpressDsk.GUI
 
         private bool ValidariP()
         {
-            throw new NotImplementedException();
+            IPAddress ipAddress;
+            return IPAddress.TryParse(txtIpLocal.Text.ToString().Trim(), out ipAddress) && ipAddress.ToString().Equals(txtIpLocal.Text.ToString().Trim());
         }
 
         private void CadenaConexion_FormClosing(object sender, FormClosingEventArgs e)
@@ -70,27 +104,61 @@ namespace ServiceExpressDsk.GUI
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(archivoConfiguracion);
 
-                string servidor = xmlDoc.SelectSingleNode("/Configuracion/Servidor").InnerText;
-                string baseDeDatos = xmlDoc.SelectSingleNode("/Configuracion/BaseDeDatos").InnerText;
-                string usuario = xmlDoc.SelectSingleNode("/Configuracion/Usuario").InnerText;
-                string contraseña = xmlDoc.SelectSingleNode("/Configuracion/Contraseña").InnerText;
-                string ipLocal = xmlDoc.SelectSingleNode("/Configuracion/IpLocal").InnerText;
-                string host = xmlDoc.SelectSingleNode("/Configuracion/Host").InnerText;
+                if (xmlDoc.SelectSingleNode("/Configuracion/Servidor") != null)
+                {
+                    string baseDeDatos = xmlDoc.SelectSingleNode("/Configuracion/BaseDeDatos").InnerText;
+                    txtBaseDatos.Text = baseDeDatos;
+                }
+                if (xmlDoc.SelectSingleNode("/Configuracion/BaseDeDatos") != null)
+                {
+                    string servidor = xmlDoc.SelectSingleNode("/Configuracion/Servidor").InnerText;
+                    txtServidorBD.Text = servidor;
+                }
+                if (xmlDoc.SelectSingleNode("/Configuracion/Usuario") != null)
+                {
+                    string usuario = xmlDoc.SelectSingleNode("/Configuracion/Usuario").InnerText;
+                    txtUsuarioBD.Text = usuario;
+                }
+                if (xmlDoc.SelectSingleNode("/Configuracion/Contraseña") != null)
+                {
+                    string contraseña = xmlDoc.SelectSingleNode("/Configuracion/Contraseña").InnerText;
+                    txtContraseniaBD.Text = contraseña;
+                }
+                if (xmlDoc.SelectSingleNode("/Configuracion/IpLocal") != null)
+                {
+                    string ipLocal = xmlDoc.SelectSingleNode("/Configuracion/IpLocal").InnerText;
+                    txtIpLocal.Text = ipLocal;
+                }
+                if (xmlDoc.SelectSingleNode("/Configuracion/Puerto") != null)
+                {
+                    string puerto = xmlDoc.SelectSingleNode("/Configuracion/Puerto").InnerText;
+                    txtPuerto.Text = puerto;
+                }
+                
 
-                txtBaseDatos.Text = baseDeDatos;
-                txtServidorBD.Text = servidor;
-                txtUsuarioBD.Text = usuario;
-                txtContraseniaBD.Text = contraseña;
-                txtIpLocal.Text = ipLocal;
-                txtHost.Text = host;
-                // Utiliza los valores de la cadena de conexión como desees
-                string cadenaConexion = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contraseña};";
+                
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtPuerto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void btnIpAutomatica_Click(object sender, EventArgs e)
+        {
+            //OBETNER IP AUTOMATICAMENTE
+            string hostName = Dns.GetHostName();
+            // Inicializar la variable
+            IPAddress[] localIPs = Dns.GetHostAddresses(hostName);
+            // Filtrar las direcciones IPv4
+            IPAddress ipv4Address = localIPs.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+            txtIpLocal.Text = ipv4Address.ToString();
         }
     }
 }

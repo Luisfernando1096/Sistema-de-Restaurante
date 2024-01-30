@@ -5,5 +5,5 @@
 	<Usuario></Usuario>
 	<Contraseña></Contraseña>
 	<IpLocal></IpLocal>
-	<Host></Host>
+	<Puerto></Puerto>
 </Configuracion>
