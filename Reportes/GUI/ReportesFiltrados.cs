@@ -311,6 +311,13 @@ namespace Reportes.GUI
             }
             else if (cmbVerInforme.SelectedIndex == 1)
             {
+                //Ingredientes sin stock 
+                Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                Reportes.REP.RepIngredientes oReporte = new Reportes.REP.RepIngredientes();
+                DataTable datos = DataManager.DBConsultas.IngredientesSinStock();
+                oReporte.SetDataSource(datos);
+                f.GenerarReporte(oReporte, datos, "", "", "");
+                f.Show();
 
             }
             else if (cmbVerInforme.SelectedIndex == 2)
@@ -323,6 +330,7 @@ namespace Reportes.GUI
                 f.GenerarReporte(oReporte, datos, "", "", "");
                 f.Show();
             }
+           
         }
     }
 }

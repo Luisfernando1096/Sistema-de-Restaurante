@@ -72,6 +72,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatIngredientes.cs">
+      <DependentUpon>DatIngredientes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatIngredientes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatIngredientes.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatProveedores.cs">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </Compile>
@@ -190,6 +198,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RepComandaCompleta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="REP\RepIngredientes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepIngredientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="REP\RepPagoCortesia.cs">
@@ -334,6 +348,17 @@
     <None Include="DAT\DatComprasProveedorComprobante.xss">
       <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
     </None>
+    <None Include="DAT\DatIngredientes.xsc">
+      <DependentUpon>DatIngredientes.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatIngredientes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatIngredientes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatIngredientes.xss">
+      <DependentUpon>DatIngredientes.xsd</DependentUpon>
+    </None>
     <None Include="DAT\DatProveedores.xsc">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </None>
@@ -446,6 +471,10 @@
     <EmbeddedResource Include="REP\RepComandaCompleta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComandaCompleta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepIngredientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepIngredientes.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepPagoCortesia.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

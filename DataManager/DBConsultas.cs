@@ -605,6 +605,25 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable IngredientesSinStock()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idIngrediente, u.unidadMedida, nombre, stock, precio 
+                                    FROM ingrediente i, unidadmedida u
+                                    WHERE i.idUnidad = u.idUnidad AND i.stock < 0;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
 
         public static DataTable ProductosSinStock()
         {
