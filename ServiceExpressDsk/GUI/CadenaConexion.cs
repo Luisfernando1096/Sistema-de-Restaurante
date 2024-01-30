@@ -19,6 +19,12 @@ namespace ServiceExpressDsk.GUI
             string usuario = txtUsuarioBD.Text.Trim();
             string contraseña = txtContraseniaBD.Text.Trim();
             string ipLocal = txtIpLocal.Text.Trim();
+            //Validar la ip
+            if (ValidariP())
+            {
+                MessageBox.Show("La ip no es valida, por favor escriba una ip valida", "");
+                return;
+            }
             string host = txtHost.Text.Trim();
 
             string archivoConfiguracion = "configuracion.xml";
@@ -43,6 +49,11 @@ namespace ServiceExpressDsk.GUI
             }
             Close();
 
+        }
+
+        private bool ValidariP()
+        {
+            throw new NotImplementedException();
         }
 
         private void CadenaConexion_FormClosing(object sender, FormClosingEventArgs e)
