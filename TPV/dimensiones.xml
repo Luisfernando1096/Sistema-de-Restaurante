@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dimension>
 
-	<AnchoSalon>200</AnchoSalon>
-	<AltoSalon>60</AltoSalon>
-	<SeparadorSalon>4</SeparadorSalon>
-	<AnchoMesa>150</AnchoMesa>
-	<AltoMesa>100</AltoMesa>
-	<SeparadorMesa>4</SeparadorMesa>
-	<AnchoFamilia>120</AnchoFamilia>
-	<AltoFamilia>58</AltoFamilia>
-	<SeparadorFamilia>2</SeparadorFamilia>
-	<AnchoProducto>150</AnchoProducto>
-	<AltoProducto>120</AltoProducto>
-	<SeparadorProducto>2</SeparadorProducto>
+	<AnchoSalon></AnchoSalon>
+	<AltoSalon></AltoSalon>
+	<SeparadorSalon></SeparadorSalon>
+	<AnchoMesa></AnchoMesa>
+	<AltoMesa></AltoMesa>
+	<SeparadorMesa></SeparadorMesa>
+	<AnchoFamilia></AnchoFamilia>
+	<AltoFamilia></AltoFamilia>
+	<SeparadorFamilia></SeparadorFamilia>
+	<AnchoProducto></AnchoProducto>
+	<AltoProducto></AltoProducto>
+	<SeparadorProducto></SeparadorProducto>
 
 </Dimension>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -36,30 +37,21 @@ namespace Configuraciones.GUI
                     checkMuchosPro.Checked = Boolean.Parse(oConfiguracion.MuchosProductos);
                     checkAutorizacion.Checked = Boolean.Parse(oConfiguracion.AutorizarDescProp);
                     chkTicketDoble.Checked = Boolean.Parse(oConfiguracion.ImprimirDosTicketsPago);
-                    if (Boolean.Parse(oConfiguracion.IncluirImpuesto))
-                    {
-                        checkActivarIVip.Checked = true;
-                    }
-                    else
-                    {
-                        checkActivarIVip.Checked = false;
-                    }
+                    chkFacturaElectronica.Checked = Boolean.Parse(oConfiguracion.FacturaElectronica);
 
                     txtPropinas.Text = oConfiguracion.Propina.ToString();
                     txtImpuesto.Text = oConfiguracion.Iva.ToString();
                     txtImpuestoVIP.Text = oConfiguracion.MesaVIP.ToString();
                     txtMultiSe.Text = oConfiguracion.NumSesiones.ToString();
 
-
-
-                    txtComandas.Text = oConfiguracion.PrinterComanda.ToString();
-                    TxtFacturas.Text = oConfiguracion.PrinterFactura.ToString();
-                    TxtInformes.Text = oConfiguracion.PrinterInformes.ToString();
-
-                    // Configura los ComboBox para mostrar la opción que coincide con el valor del campo en la base de datos
-                    //cmbComandas.SelectedIndex = cmbComandas.FindStringExact((oConfiguracion.PrinterComanda).ToString());
-                    //cmbFacturas.SelectedIndex = cmbFacturas.FindStringExact((oConfiguracion.PrinterFactura).ToString());
-                    //cmbInformes.SelectedIndex = cmbInformes.FindStringExact((oConfiguracion.PrinterInformes).ToString());
+                    cmbComandasTickets.Text = oConfiguracion.PrinterComanda.ToString();
+                    cmbFacturas.Text = oConfiguracion.PrinterFactura.ToString();
+                    cmbInformes.Text = oConfiguracion.PrinterInformes.ToString();
+                    cmbAppMovil.Text = oConfiguracion.ImpresoraAppMovil.ToString();
+                    cmbCocina.Text = oConfiguracion.ImpresoraCocina.ToString();
+                    cmbBar.Text = oConfiguracion.ImpresoraBar.ToString();
+                    cmbUno.Text = oConfiguracion.ImpresoraGrupoUno.ToString();
+                    cmbDos.Text = oConfiguracion.ImpresoraGrupoDos.ToString();
 
                 }
                 else
@@ -74,46 +66,61 @@ namespace Configuraciones.GUI
                     XmlDocument xmlDoc = new XmlDocument();
                     xmlDoc.Load(archivoConfiguracion);
 
-                    //Salones
-                    string AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
-                    string AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
-                    string SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
+                    if (xmlDoc.SelectSingleNode("/Dimension/AnchoSalon") != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AltoSalon") != null
+                        && xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon") != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AnchoMesa") != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AltoMesa")  != null
+                        && xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa")  != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia")  != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AltoFamilia")  != null
+                        && xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia")  != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AnchoProducto")  != null
+                        && xmlDoc.SelectSingleNode("/Dimension/AltoProducto") != null
+                        && xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto")  != null)
+                    {
+                        //Salones
+                        string AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
+                        string AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
+                        string SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
 
-                    //Mesas
-                    string AnchoMesa = xmlDoc.SelectSingleNode("/Dimension/AnchoMesa").InnerText;
-                    string AltoMesa = xmlDoc.SelectSingleNode("/Dimension/AltoMesa").InnerText;
-                    string SeparadorMesa = xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa").InnerText;
+                        //Mesas
+                        string AnchoMesa = xmlDoc.SelectSingleNode("/Dimension/AnchoMesa").InnerText;
+                        string AltoMesa = xmlDoc.SelectSingleNode("/Dimension/AltoMesa").InnerText;
+                        string SeparadorMesa = xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa").InnerText;
 
-                    //Familias
-                    string AnchoFamilia = xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia").InnerText;
-                    string AltoFamilia = xmlDoc.SelectSingleNode("/Dimension/AltoFamilia").InnerText;
-                    string SeparadorFamilia = xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia").InnerText;
+                        //Familias
+                        string AnchoFamilia = xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia").InnerText;
+                        string AltoFamilia = xmlDoc.SelectSingleNode("/Dimension/AltoFamilia").InnerText;
+                        string SeparadorFamilia = xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia").InnerText;
 
-                    //Productos
-                    string AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
-                    string AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
-                    string SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
+                        //Productos
+                        string AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
+                        string AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
+                        string SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
 
 
-                    //Salones
-                    UpSalonesAncho.Text = AnchoSalon;
-                    UpSalonesAlto.Text = AltoSalon;
-                    UpSalonesSeparador.Text = SeparadorSalon;
+                        //Salones
+                        UpSalonesAncho.Text = AnchoSalon;
+                        UpSalonesAlto.Text = AltoSalon;
+                        UpSalonesSeparador.Text = SeparadorSalon;
 
-                    //Mesas
-                    UpMesasAncho.Text = AnchoMesa;
-                    UpMesasAlto.Text = AltoMesa;
-                    UpMesasSeparador.Text = SeparadorMesa;
+                        //Mesas
+                        UpMesasAncho.Text = AnchoMesa;
+                        UpMesasAlto.Text = AltoMesa;
+                        UpMesasSeparador.Text = SeparadorMesa;
 
-                    //Familias
-                    UpFaAncho.Text = AnchoFamilia;
-                    UpFaAlto.Text = AltoFamilia;
-                    UpFaSeparador.Text = SeparadorFamilia;
+                        //Familias
+                        UpFaAncho.Text = AnchoFamilia;
+                        UpFaAlto.Text = AltoFamilia;
+                        UpFaSeparador.Text = SeparadorFamilia;
 
-                    //Productos
-                    UpProAncho.Text = AnchoProducto;
-                    UpProAlto.Text = AltoProducto;
-                    UpProSeparador.Text = SeparadorProducto;
+                        //Productos
+                        UpProAncho.Text = AnchoProducto;
+                        UpProAlto.Text = AltoProducto;
+                        UpProSeparador.Text = SeparadorProducto;
+                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -328,21 +335,11 @@ namespace Configuraciones.GUI
         public ConfiguracionTPV()
         {
             InitializeComponent();
+            FillPrinterComboBox();
         }
 
         private void ConfiguracionTPV_Load(object sender, EventArgs e)
         {
-            // Crea una lista de impresoras
-            //List<string> lstImpresoras = new List<string>();
-            //lstImpresoras.Add("Microsoft Print to PDF");
-            //lstImpresoras.Add("Microsoft XPS Document Writer");
-
-            //// Asigna la lista de impresoras a los ComboBoxes
-            //cmbComandas.Items.AddRange(lstImpresoras.ToArray());
-            //cmbComandaTick.Items.AddRange(lstImpresoras.ToArray());
-            //cmbFacturas.Items.AddRange(lstImpresoras.ToArray());
-            //cmbInformes.Items.AddRange(lstImpresoras.ToArray());
-
             CargarDatosConfig();
             CargarDatosEmpresa();
             CargarDatosOpTicket();
@@ -458,30 +455,46 @@ namespace Configuraciones.GUI
                     config.ImprimirDosTicketsPago = 0;
                 }
 
-                //if (cmbComandas.SelectedIndex != -1)
-                //{
-                //    config.PrinterComanda = cmbComandas.Text;
-                //}
-                //if (cmbInformes.SelectedIndex != -1)
-                //{
-                //    config.PrinterInformes = cmbInformes.Text;
-                //}
-                //if (cmbFacturas.SelectedIndex != -1)
-                //{
-                //    config.PrinterFactura = cmbFacturas.Text;
-                //}
+                if (chkFacturaElectronica.Checked)
+                {
+                    config.FacturaElectronica = 1;
+                }
+                else
+                {
+                    config.FacturaElectronica = 0;
+                }
 
-                if (txtComandas.Text != string.Empty)
+                if (cmbComandasTickets.Text != string.Empty)
                 {
-                    config.PrinterComanda = txtComandas.Text;
+                    config.PrinterComanda = cmbComandasTickets.Text;
                 }
-                if (TxtInformes.Text != string.Empty)
+                if (cmbInformes.Text != string.Empty)
                 {
-                    config.PrinterInformes = TxtInformes.Text;
+                    config.PrinterInformes = cmbInformes.Text;
                 }
-                if (TxtFacturas.Text != string.Empty)
+                if (cmbFacturas.Text != string.Empty)
                 {
-                    config.PrinterFactura = TxtFacturas.Text;
+                    config.PrinterFactura = cmbFacturas.Text;
+                }
+                if (cmbAppMovil.Text != string.Empty)
+                {
+                    config.ImpresoraAppMovil = cmbAppMovil.Text;
+                }
+                if (cmbCocina.Text != string.Empty)
+                {
+                    config.ImpresoraCocina = cmbCocina.Text;
+                }
+                if (cmbBar.Text != string.Empty)
+                {
+                    config.ImpresoraBar = cmbBar.Text;
+                }
+                if (cmbUno.Text != string.Empty)
+                {
+                    config.ImpresoraGrupoUno = cmbUno.Text;
+                }
+                if (cmbDos.Text != string.Empty)
+                {
+                    config.ImpresoraGrupoDos = cmbDos.Text;
                 }
 
                 if (config.Actualizar())
@@ -539,9 +552,7 @@ namespace Configuraciones.GUI
                     }
                     MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     oConfiguracion.ObtenerConfiguracion();
-                    CargarDatosConfig();
-                    this.Focus();
-
+                    Close();
                 }
             }
             catch (Exception)
@@ -994,93 +1005,19 @@ namespace Configuraciones.GUI
             }
         }
 
-        private void btt1_Click(object sender, EventArgs e)
+        private void FillPrinterComboBox()
         {
-            // Crea un cuadro de diálogo de impresión
-            PrintDialog printDialog = new PrintDialog();
-
-            // Habilita la opción para mostrar impresoras de red
-            printDialog.ShowNetwork = true;
-
-            // Muestra el cuadro de diálogo de impresión
-            if (printDialog.ShowDialog() == DialogResult.OK)
+            PrinterSettings.StringCollection printers = PrinterSettings.InstalledPrinters;
+            foreach (string printer in printers)
             {
-                // Actualiza el nombre de la impresora en el TextBox
-                txtComandas.Text = printDialog.PrinterSettings.PrinterName;
-
-                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
-                oConfiguracion.PrinterComanda = txtComandas.Text;
-
-                // Puedes imprimir el informe si es necesario
-                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
-
-                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                //MessageBox.Show($"Impresora seleccionada: {txtComandas.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                // El usuario canceló la selección de la impresora
-                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btt3_Click(object sender, EventArgs e)
-        {
-            // Crea un cuadro de diálogo de impresión
-            PrintDialog printDialog = new PrintDialog();
-
-            // Habilita la opción para mostrar impresoras de red
-            printDialog.ShowNetwork = true;
-
-            // Muestra el cuadro de diálogo de impresión
-            if (printDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Actualiza el nombre de la impresora en el TextBox
-                TxtFacturas.Text = printDialog.PrinterSettings.PrinterName;
-
-                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
-                oConfiguracion.PrinterComanda = TxtFacturas.Text;
-
-                // Puedes imprimir el informe si es necesario
-                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
-
-                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                //MessageBox.Show($"Impresora seleccionada: {TxtFacturas.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                // El usuario canceló la selección de la impresora
-                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btt4_Click(object sender, EventArgs e)
-        {
-            // Crea un cuadro de diálogo de impresión
-            PrintDialog printDialog = new PrintDialog();
-
-            // Habilita la opción para mostrar impresoras de red
-            printDialog.ShowNetwork = true;
-
-            // Muestra el cuadro de diálogo de impresión
-            if (printDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Actualiza el nombre de la impresora en el TextBox
-                TxtInformes.Text = printDialog.PrinterSettings.PrinterName;
-
-                // Puedes guardar el nombre de la impresora en tu configuración o donde lo necesites
-                oConfiguracion.PrinterComanda = TxtInformes.Text;
-
-                // Puedes imprimir el informe si es necesario
-                // Aquí puedes agregar código para imprimir el informe en la impresora seleccionada
-
-                // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                //MessageBox.Show($"Impresora seleccionada: {TxtInformes.Text}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                // El usuario canceló la selección de la impresora
-                //MessageBox.Show("Impresión cancelada por el usuario.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cmbComandasTickets.Items.Add(printer);
+                cmbFacturas.Items.Add(printer);
+                cmbInformes.Items.Add(printer);
+                cmbAppMovil.Items.Add(printer);
+                cmbCocina.Items.Add(printer);
+                cmbBar.Items.Add(printer);
+                cmbUno.Items.Add(printer);
+                cmbDos.Items.Add(printer);
             }
         }
 

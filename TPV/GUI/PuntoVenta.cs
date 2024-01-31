@@ -54,38 +54,42 @@ namespace TPV.GUI
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(archivoConfiguracion);
 
-                //Salones
-                AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
-                AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
-                SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
+                if (xmlDoc.SelectSingleNode("/Dimension/AnchoSalon") != null 
+                    && xmlDoc.SelectSingleNode("/Dimension/AltoSalon") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon") != null)
+                {
+                    //Salones
+                    AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
+                    AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
+                    SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
+                }
+                else
+                {
+                    MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                }
 
-                //Mesas
-                AnchoMesa = xmlDoc.SelectSingleNode("/Dimension/AnchoMesa").InnerText;
-                AltoMesa = xmlDoc.SelectSingleNode("/Dimension/AltoMesa").InnerText;
-                SeparadorMesa = xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa").InnerText;
+                if (xmlDoc.SelectSingleNode("/Dimension/AnchoMesa") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/AltoMesa") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa")  != null)
+                {
+                    //Mesas
+                    AnchoMesa = xmlDoc.SelectSingleNode("/Dimension/AnchoMesa").InnerText;
+                    AltoMesa = xmlDoc.SelectSingleNode("/Dimension/AltoMesa").InnerText;
+                    SeparadorMesa = xmlDoc.SelectSingleNode("/Dimension/SeparadorMesa").InnerText;
+                }
+                else
+                {
+                    MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                }
+
+
             }
         }
 
         private void PuntoVenta_Load(object sender, EventArgs e)
         {
-            /*
-             string archivoConfiguracion = "dimensiones.xml";
-            //Salones
-            string AnchoSalon = "10";
-            string AltoSalon = "10";
-            string SeparadorSalon = "10";
-
-            if (File.Exists(archivoConfiguracion))
-            {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(archivoConfiguracion);
-
-                //Salones
-                AnchoSalon = xmlDoc.SelectSingleNode("/Dimension/AnchoSalon").InnerText;
-                AltoSalon = xmlDoc.SelectSingleNode("/Dimension/AltoSalon").InnerText;
-                SeparadorSalon = xmlDoc.SelectSingleNode("/Dimension/SeparadorSalon").InnerText;
-            }
-             */
             WindowState = FormWindowState.Maximized;
             DataTable salones = DataManager.DBConsultas.Salones();
             // Crear y agregar botones al FlowLayoutPanel para cada salon

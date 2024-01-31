@@ -20,6 +20,12 @@ namespace Mantenimiento.CLS
         int numSesiones;
         int muchosProductos;
         int imprimirDosTicketsPago;
+        String impresoraAppMovil;
+        int facturaElectronica;
+        String impresoraCocina;
+        String impresoraBar;
+        String impresoraGrupoUno;
+        String impresoraGrupoDos;
 
         public int IdConfiguracion { get => idConfiguracion; set => idConfiguracion = value; }
         public int ControlStock { get => controlStock; set => controlStock = value; }
@@ -37,12 +43,18 @@ namespace Mantenimiento.CLS
         public string PrinterInformes { get => printerInformes; set => printerInformes = value; }
         public int MuchosProductos { get => muchosProductos; set => muchosProductos = value; }
         public int ImprimirDosTicketsPago { get => imprimirDosTicketsPago; set => imprimirDosTicketsPago = value; }
+        public string ImpresoraAppMovil { get => impresoraAppMovil; set => impresoraAppMovil = value; }
+        public int FacturaElectronica { get => facturaElectronica; set => facturaElectronica = value; }
+        public string ImpresoraCocina { get => impresoraCocina; set => impresoraCocina = value; }
+        public string ImpresoraBar { get => impresoraBar; set => impresoraBar = value; }
+        public string ImpresoraGrupoUno { get => impresoraGrupoUno; set => impresoraGrupoUno = value; }
+        public string ImpresoraGrupoDos { get => impresoraGrupoDos; set => impresoraGrupoDos = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"INSERT INTO configuracion(controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, imprimirDosTicketsPago) VALUES(" + controlStock + ", " + incluirPropina + ", " + propina + ", " + incluirImpuesto + ", " + iva + ", " + mesaVIP + ", " + autorizarDescProp + ", '" + printerComanda + "', '" + printerFactura + "', '" + PrinterInformes + "', " + alertaCaja + ", " + multisesion + ", " + numSesiones + ", " + imprimirDosTicketsPago + ");";
+            sentencia = @"INSERT INTO configuracion(controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, imprimirDosTicketsPago, impresoraAppMovil, facturaElectronica, impresoraCocina, impresoraBar, impresoraGrupoUno, impresoraGrupoDos) VALUES(" + controlStock + ", " + incluirPropina + ", " + propina + ", " + incluirImpuesto + ", " + iva + ", " + mesaVIP + ", " + autorizarDescProp + ", '" + printerComanda + "', '" + printerFactura + "', '" + PrinterInformes + "', " + alertaCaja + ", " + multisesion + ", " + numSesiones + ", " + imprimirDosTicketsPago + ", '" + impresoraAppMovil + "', " + facturaElectronica + ", " + impresoraCocina + ", " + impresoraBar + ", " + impresoraGrupoUno + ", " + impresoraGrupoDos + ");";
 
             try
             {
@@ -67,7 +79,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"UPDATE configuracion SET controlStock = " + controlStock + ", incluirPropina = " + incluirPropina + ", propina = " + propina + ", incluirImpuesto = " + incluirImpuesto + ", iva = " + iva + ", mesaVIP = " + mesaVIP + ", autorizarDescProp = " + autorizarDescProp + ", printerComanda = '" + printerComanda + "', printerFactura = '" + printerFactura + "', printerInformes = '" + printerInformes + "', alertaCaja = " + alertaCaja + ", multisesion = " + multisesion + ", numSesiones = " + numSesiones + ", muchosProductos = " + muchosProductos + ", imprimirDosTicketsPago = " + imprimirDosTicketsPago + " WHERE idConfiguracion = " + idConfiguracion + ";";
+            sentencia = @"UPDATE configuracion SET controlStock = " + controlStock + ", incluirPropina = " + incluirPropina + ", propina = " + propina + ", incluirImpuesto = " + incluirImpuesto + ", iva = " + iva + ", mesaVIP = " + mesaVIP + ", autorizarDescProp = " + autorizarDescProp + ", printerComanda = '" + printerComanda + "', printerFactura = '" + printerFactura + "', printerInformes = '" + printerInformes + "', alertaCaja = " + alertaCaja + ", multisesion = " + multisesion + ", numSesiones = " + numSesiones + ", muchosProductos = " + muchosProductos + ", imprimirDosTicketsPago = " + imprimirDosTicketsPago + ", impresoraAppMovil = '" + impresoraAppMovil + "', facturaElectronica = " + facturaElectronica + ", impresoraCocina = '" + impresoraCocina + "', impresoraBar = '" + impresoraBar + "', impresoraGrupoUno = '" + impresoraGrupoUno + "', impresoraGrupoDos = '" + impresoraGrupoDos + "' WHERE idConfiguracion = " + idConfiguracion + ";";
 
             try
             {

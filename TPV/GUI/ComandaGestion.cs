@@ -56,14 +56,35 @@ namespace TPV.GUI
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(archivoConfiguracion);
 
-                //Productos
-                AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
-                AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
-                SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
-                //Familias
-                AnchoFamilia = xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia").InnerText;
-                AltoFamilia = xmlDoc.SelectSingleNode("/Dimension/AltoFamilia").InnerText;
-                SeparadorFamilia = xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia").InnerText;
+                if (xmlDoc.SelectSingleNode("/Dimension/AnchoProducto") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/AltoProducto") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto") != null)
+                {
+                    //Productos
+                    AnchoProducto = xmlDoc.SelectSingleNode("/Dimension/AnchoProducto").InnerText;
+                    AltoProducto = xmlDoc.SelectSingleNode("/Dimension/AltoProducto").InnerText;
+                    SeparadorProducto = xmlDoc.SelectSingleNode("/Dimension/SeparadorProducto").InnerText;
+                }
+                else
+                {
+                    MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                }
+
+                if (xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/AltoFamilia") != null
+                    && xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia") != null)
+                {
+                    //Familias
+                    AnchoFamilia = xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia").InnerText;
+                    AltoFamilia = xmlDoc.SelectSingleNode("/Dimension/AltoFamilia").InnerText;
+                    SeparadorFamilia = xmlDoc.SelectSingleNode("/Dimension/SeparadorFamilia").InnerText;
+                }
+                else
+                {
+                    MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Close();
+                }
 
             }
         }

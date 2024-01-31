@@ -8,7 +8,11 @@ namespace ConfiguracionManager.CLS
         //Atributos
         static Configuracion instancia = null;
         static readonly Object codelock = new object();
-        string controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos, imprimirDosTicketsPago;
+        string controlStock, incluirPropina, propina, incluirImpuesto, 
+            iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura,
+            printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos,
+            imprimirDosTicketsPago, impresoraAppMovil, facturaElectronica, impresoraCocina,
+            impresoraBar, impresoraGrupoUno, impresoraGrupoDos;
         //Propiedades
 
         public static Configuracion Instancia//Esta es una propiedad y retorna el valor de un atributo
@@ -44,6 +48,12 @@ namespace ConfiguracionManager.CLS
         public string NumSesiones { get => numSesiones; set => numSesiones = value; }
         public string MuchosProductos { get => muchosProductos; set => muchosProductos = value; }
         public string ImprimirDosTicketsPago { get => imprimirDosTicketsPago; set => imprimirDosTicketsPago = value; }
+        public string ImpresoraAppMovil { get => impresoraAppMovil; set => impresoraAppMovil = value; }
+        public string FacturaElectronica { get => facturaElectronica; set => facturaElectronica = value; }
+        public string ImpresoraCocina { get => impresoraCocina; set => impresoraCocina = value; }
+        public string ImpresoraBar { get => impresoraBar; set => impresoraBar = value; }
+        public string ImpresoraGrupoUno { get => impresoraGrupoUno; set => impresoraGrupoUno = value; }
+        public string ImpresoraGrupoDos { get => impresoraGrupoDos; set => impresoraGrupoDos = value; }
 
 
 
@@ -78,6 +88,12 @@ namespace ConfiguracionManager.CLS
                     numSesiones = datosConfiguracion.Rows[0]["numSesiones"].ToString();
                     muchosProductos = datosConfiguracion.Rows[0]["muchosProductos"].ToString();
                     imprimirDosTicketsPago = datosConfiguracion.Rows[0]["imprimirDosTicketsPago"].ToString();
+                    impresoraAppMovil = datosConfiguracion.Rows[0]["impresoraAppMovil"].ToString();
+                    facturaElectronica = datosConfiguracion.Rows[0]["facturaElectronica"].ToString();
+                    impresoraBar = datosConfiguracion.Rows[0]["impresoraBar"].ToString();
+                    impresoraCocina = datosConfiguracion.Rows[0]["impresoraCocina"].ToString();
+                    impresoraGrupoUno = datosConfiguracion.Rows[0]["impresoraGrupoUno"].ToString();
+                    ImpresoraGrupoDos = datosConfiguracion.Rows[0]["ImpresoraGrupoDos"].ToString();
                     result = true;
                 }
                 else

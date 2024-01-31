@@ -604,11 +604,15 @@ namespace TPV.GUI
                         {
                             activarFactura = false;
                             btnFactura.BackColor = Color.White;
+                            activarTicket = true;
+                            btnTicket.BackColor = Color.CadetBlue;
                         }
                         else
                         {
                             activarFactura = true;
                             btnFactura.BackColor = Color.CadetBlue;
+                            activarTicket = false;
+                            btnTicket.BackColor = Color.White;
                         }
                     }
                 }
@@ -626,11 +630,15 @@ namespace TPV.GUI
             {
                 activarTicket = false;
                 btnTicket.BackColor = Color.White;
+                activarFactura = true;
+                btnFactura.BackColor = Color.CadetBlue;
             }
             else
             {
                 activarTicket = true;
                 btnTicket.BackColor = Color.CadetBlue;
+                activarFactura = false;
+                btnFactura.BackColor = Color.White;
             }
         }
 
@@ -901,13 +909,30 @@ namespace TPV.GUI
 
                 if (pagoTarjeta && generar)
                 {
-                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                    GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
+                    if (Boolean.Parse(oConfiguracion.FacturaElectronica))
+                    {
+                        Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
+                        GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
+                    }
+                    else
+                    {
+                        Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
+                        GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
+                    } 
+                    
                 }
                 else if (generar)
                 {
-                    Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                    GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
+                    if (Boolean.Parse(oConfiguracion.FacturaElectronica))
+                    {
+                        Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
+                        GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
+                    }
+                    else
+                    {
+                        Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
+                        GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
+                    }
                 }
             }
             if (activarTicket)
@@ -1110,65 +1135,88 @@ namespace TPV.GUI
         private void GenerarFactura(ReportClass oReporte, string serie, int nFactura,string tipoPago)
         {
             DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-            oReporte.SetDataSource(datos);
-            oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-            oReporte.SetParameterValue("Direccion", oEmpresa.Direccion.ToUpper());
-            oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
-            oReporte.SetParameterValue("Subtotal", lblSaldo.Text.ToString());
-            oReporte.SetParameterValue("TipoPago", tipoPago);
-            oReporte.SetParameterValue("Serie", serie);
-            oReporte.SetParameterValue("nFactura", nFactura);
-            oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
-            oReporte.SetParameterValue("Total", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
-            string totalStr = txtTotalPagar.Text;
+            List<DataTable> lstFacturas = new List<DataTable>();
 
-            // Convierte la cadena a un número decimal
-            if (decimal.TryParse(totalStr, out decimal total))
+            int totalFilas = datos.Rows.Count;
+            int filasPorCopia = 20;
+
+            for (int i = 0; i < totalFilas; i += filasPorCopia)
             {
-                // Dividir la parte entera y la parte decimal
-                int parteEntera = (int)Math.Truncate(total);
-                int parteDecimal = (int)((total - parteEntera) * 100);
+                DataTable data = datos.Clone(); // Clonar la estructura de la tabla original
+                int copiaActual = Math.Min(filasPorCopia, totalFilas - i); // Determinar cuántas filas copiar en esta iteración
 
-                // Convierte cada parte a palabras utilizando Humanizer
-                string parteEnteraEnLetras = parteEntera.ToWords().ToUpper();
-                string parteDecimalEnLetras = parteDecimal.ToWords().ToUpper();
-
-                // Asigna el valor en letras al parámetro del reporte
-                oReporte.SetParameterValue("CantidadTexto", $"{parteEnteraEnLetras} CON {parteDecimalEnLetras} CENTAVOS");
-            }
-            else
-            {
-                Console.WriteLine("La entrada no es un número válido.");
-            }
-
-            if (oReporte != null)
-            {
-                try
+                for (int j = 0; j < copiaActual; j++)
                 {
-                    // Imprimir el informe en la impresora seleccionada
-                    PrinterSettings settings = new PrinterSettings
-                    {
-                        PrinterName = oConfiguracion.PrinterFactura
-                    };
-
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
-
-                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    /*this.Invoke((MethodInvoker)delegate
-                    {
-                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    });*/
+                    DataRow row = datos.Rows[i + j];
+                    data.ImportRow(row); // Importar la fila a la nueva tabla
                 }
-                catch (Exception ex)
+
+                lstFacturas.Add(data); // Agregar la tabla copiada a la lista
+            }
+
+            foreach (DataTable item in lstFacturas)
+            {
+                oReporte.SetDataSource(item);
+                oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                oReporte.SetParameterValue("Direccion", oEmpresa.Direccion.ToUpper());
+                oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
+                oReporte.SetParameterValue("Subtotal", lblSaldo.Text.ToString());
+                oReporte.SetParameterValue("TipoPago", tipoPago);
+                oReporte.SetParameterValue("Serie", serie);
+                oReporte.SetParameterValue("nFactura", nFactura.ToString("00000"));
+                oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
+                oReporte.SetParameterValue("Total", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
+                string totalStr = txtTotalPagar.Text;
+
+                // Convierte la cadena a un número decimal
+                if (decimal.TryParse(totalStr, out decimal total))
                 {
-                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                    this.Invoke((MethodInvoker)delegate
+                    // Dividir la parte entera y la parte decimal
+                    int parteEntera = (int)Math.Truncate(total);
+                    int parteDecimal = (int)((total - parteEntera) * 100);
+
+                    // Convierte cada parte a palabras utilizando Humanizer
+                    string parteEnteraEnLetras = parteEntera.ToWords().ToUpper();
+                    string parteDecimalEnLetras = parteDecimal.ToWords().ToUpper();
+
+                    // Asigna el valor en letras al parámetro del reporte
+                    oReporte.SetParameterValue("CantidadTexto", $"{parteEnteraEnLetras} CON {parteDecimalEnLetras} CENTAVOS");
+                }
+                else
+                {
+                    Console.WriteLine("La entrada no es un número válido.");
+                }
+
+                if (oReporte != null)
+                {
+                    try
                     {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    });
+                        // Imprimir el informe en la impresora seleccionada
+                        PrinterSettings settings = new PrinterSettings
+                        {
+                            PrinterName = oConfiguracion.PrinterFactura
+                        };
+
+                        oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                        oReporte.PrintToPrinter(1, false, 0, 0);
+
+                        // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
+                        /*this.Invoke((MethodInvoker)delegate
+                        {
+                            MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        });*/
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        });
+                    }
                 }
             }
+            
         }
 
         private void GenerarTicket(ReportClass oReporte)

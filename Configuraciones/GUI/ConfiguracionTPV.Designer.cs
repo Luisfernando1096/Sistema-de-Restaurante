@@ -33,16 +33,12 @@ namespace Configuraciones.GUI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkFacturaElectronica = new System.Windows.Forms.CheckBox();
             this.chkTicketDoble = new System.Windows.Forms.CheckBox();
             this.checkAutorizacion = new System.Windows.Forms.CheckBox();
             this.checkMuchosPro = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btt4 = new System.Windows.Forms.Button();
-            this.btt3 = new System.Windows.Forms.Button();
-            this.TxtInformes = new System.Windows.Forms.TextBox();
-            this.TxtFacturas = new System.Windows.Forms.TextBox();
-            this.txtComandas = new System.Windows.Forms.TextBox();
-            this.btt1 = new System.Windows.Forms.Button();
+            this.cmbComandasTickets = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -165,6 +161,18 @@ namespace Configuraciones.GUI
             this.btnGuardarOpT = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmbFacturas = new System.Windows.Forms.ComboBox();
+            this.cmbInformes = new System.Windows.Forms.ComboBox();
+            this.cmbUno = new System.Windows.Forms.ComboBox();
+            this.cmbBar = new System.Windows.Forms.ComboBox();
+            this.cmbCocina = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cmbDos = new System.Windows.Forms.ComboBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.cmbAppMovil = new System.Windows.Forms.ComboBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -227,6 +235,7 @@ namespace Configuraciones.GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkFacturaElectronica);
             this.groupBox2.Controls.Add(this.chkTicketDoble);
             this.groupBox2.Controls.Add(this.checkAutorizacion);
             this.groupBox2.Controls.Add(this.checkMuchosPro);
@@ -254,6 +263,17 @@ namespace Configuraciones.GUI
             this.groupBox2.Size = new System.Drawing.Size(1016, 535);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
+            // 
+            // chkFacturaElectronica
+            // 
+            this.chkFacturaElectronica.AutoSize = true;
+            this.chkFacturaElectronica.Location = new System.Drawing.Point(746, 224);
+            this.chkFacturaElectronica.Margin = new System.Windows.Forms.Padding(2);
+            this.chkFacturaElectronica.Name = "chkFacturaElectronica";
+            this.chkFacturaElectronica.Size = new System.Drawing.Size(150, 17);
+            this.chkFacturaElectronica.TabIndex = 27;
+            this.chkFacturaElectronica.Text = "Activar factura electronica";
+            this.chkFacturaElectronica.UseVisualStyleBackColor = true;
             // 
             // chkTicketDoble
             // 
@@ -290,12 +310,19 @@ namespace Configuraciones.GUI
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.btt4);
-            this.groupBox4.Controls.Add(this.btt3);
-            this.groupBox4.Controls.Add(this.TxtInformes);
-            this.groupBox4.Controls.Add(this.TxtFacturas);
-            this.groupBox4.Controls.Add(this.txtComandas);
-            this.groupBox4.Controls.Add(this.btt1);
+            this.groupBox4.Controls.Add(this.cmbDos);
+            this.groupBox4.Controls.Add(this.label35);
+            this.groupBox4.Controls.Add(this.cmbAppMovil);
+            this.groupBox4.Controls.Add(this.label36);
+            this.groupBox4.Controls.Add(this.cmbUno);
+            this.groupBox4.Controls.Add(this.cmbBar);
+            this.groupBox4.Controls.Add(this.cmbCocina);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.label19);
+            this.groupBox4.Controls.Add(this.cmbInformes);
+            this.groupBox4.Controls.Add(this.cmbFacturas);
+            this.groupBox4.Controls.Add(this.cmbComandasTickets);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.label2);
@@ -304,78 +331,24 @@ namespace Configuraciones.GUI
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(545, 202);
+            this.groupBox4.Size = new System.Drawing.Size(574, 202);
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Configuracion de impresiones";
             // 
-            // btt4
+            // cmbComandasTickets
             // 
-            this.btt4.Location = new System.Drawing.Point(400, 120);
-            this.btt4.Margin = new System.Windows.Forms.Padding(2);
-            this.btt4.Name = "btt4";
-            this.btt4.Size = new System.Drawing.Size(76, 26);
-            this.btt4.TabIndex = 51;
-            this.btt4.Text = "Selecionar";
-            this.btt4.UseVisualStyleBackColor = true;
-            this.btt4.Click += new System.EventHandler(this.btt4_Click);
-            // 
-            // btt3
-            // 
-            this.btt3.Location = new System.Drawing.Point(400, 76);
-            this.btt3.Margin = new System.Windows.Forms.Padding(2);
-            this.btt3.Name = "btt3";
-            this.btt3.Size = new System.Drawing.Size(76, 26);
-            this.btt3.TabIndex = 50;
-            this.btt3.Text = "Selecionar";
-            this.btt3.UseVisualStyleBackColor = true;
-            this.btt3.Click += new System.EventHandler(this.btt3_Click);
-            // 
-            // TxtInformes
-            // 
-            this.TxtInformes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtInformes.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtInformes.Location = new System.Drawing.Point(152, 122);
-            this.TxtInformes.Name = "TxtInformes";
-            this.TxtInformes.ReadOnly = true;
-            this.TxtInformes.Size = new System.Drawing.Size(231, 26);
-            this.TxtInformes.TabIndex = 48;
-            // 
-            // TxtFacturas
-            // 
-            this.TxtFacturas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtFacturas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFacturas.Location = new System.Drawing.Point(152, 78);
-            this.TxtFacturas.Name = "TxtFacturas";
-            this.TxtFacturas.ReadOnly = true;
-            this.TxtFacturas.Size = new System.Drawing.Size(231, 26);
-            this.TxtFacturas.TabIndex = 47;
-            // 
-            // txtComandas
-            // 
-            this.txtComandas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtComandas.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComandas.Location = new System.Drawing.Point(152, 27);
-            this.txtComandas.Name = "txtComandas";
-            this.txtComandas.ReadOnly = true;
-            this.txtComandas.Size = new System.Drawing.Size(231, 26);
-            this.txtComandas.TabIndex = 45;
-            // 
-            // btt1
-            // 
-            this.btt1.Location = new System.Drawing.Point(400, 25);
-            this.btt1.Margin = new System.Windows.Forms.Padding(2);
-            this.btt1.Name = "btt1";
-            this.btt1.Size = new System.Drawing.Size(76, 26);
-            this.btt1.TabIndex = 30;
-            this.btt1.Text = "Selecionar";
-            this.btt1.UseVisualStyleBackColor = true;
-            this.btt1.Click += new System.EventHandler(this.btt1_Click);
+            this.cmbComandasTickets.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbComandasTickets.FormattingEnabled = true;
+            this.cmbComandasTickets.Location = new System.Drawing.Point(79, 33);
+            this.cmbComandasTickets.Name = "cmbComandasTickets";
+            this.cmbComandasTickets.Size = new System.Drawing.Size(196, 24);
+            this.cmbComandasTickets.TabIndex = 52;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 128);
+            this.label4.Location = new System.Drawing.Point(11, 122);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
@@ -385,7 +358,7 @@ namespace Configuraciones.GUI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 83);
+            this.label3.Location = new System.Drawing.Point(18, 79);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
@@ -394,11 +367,10 @@ namespace Configuraciones.GUI
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(11, 33);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 13);
+            this.label2.Size = new System.Drawing.Size(73, 30);
             this.label2.TabIndex = 2;
             this.label2.Text = "Comandas y Tickets";
             // 
@@ -1768,6 +1740,118 @@ namespace Configuraciones.GUI
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 59);
             // 
+            // cmbFacturas
+            // 
+            this.cmbFacturas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbFacturas.FormattingEnabled = true;
+            this.cmbFacturas.Location = new System.Drawing.Point(79, 74);
+            this.cmbFacturas.Name = "cmbFacturas";
+            this.cmbFacturas.Size = new System.Drawing.Size(196, 24);
+            this.cmbFacturas.TabIndex = 53;
+            // 
+            // cmbInformes
+            // 
+            this.cmbInformes.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbInformes.FormattingEnabled = true;
+            this.cmbInformes.Location = new System.Drawing.Point(79, 117);
+            this.cmbInformes.Name = "cmbInformes";
+            this.cmbInformes.Size = new System.Drawing.Size(196, 24);
+            this.cmbInformes.TabIndex = 54;
+            // 
+            // cmbUno
+            // 
+            this.cmbUno.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbUno.FormattingEnabled = true;
+            this.cmbUno.Location = new System.Drawing.Point(351, 117);
+            this.cmbUno.Name = "cmbUno";
+            this.cmbUno.Size = new System.Drawing.Size(196, 24);
+            this.cmbUno.TabIndex = 60;
+            // 
+            // cmbBar
+            // 
+            this.cmbBar.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBar.FormattingEnabled = true;
+            this.cmbBar.Location = new System.Drawing.Point(351, 74);
+            this.cmbBar.Name = "cmbBar";
+            this.cmbBar.Size = new System.Drawing.Size(196, 24);
+            this.cmbBar.TabIndex = 59;
+            // 
+            // cmbCocina
+            // 
+            this.cmbCocina.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCocina.FormattingEnabled = true;
+            this.cmbCocina.Location = new System.Drawing.Point(351, 33);
+            this.cmbCocina.Name = "cmbCocina";
+            this.cmbCocina.Size = new System.Drawing.Size(196, 24);
+            this.cmbCocina.TabIndex = 58;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(283, 122);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 57;
+            this.label1.Text = "Grupo Uno";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(290, 79);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(26, 13);
+            this.label18.TabIndex = 56;
+            this.label18.Text = "Bar";
+            // 
+            // label19
+            // 
+            this.label19.Location = new System.Drawing.Point(283, 33);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(63, 30);
+            this.label19.TabIndex = 55;
+            this.label19.Text = "Cocina";
+            // 
+            // cmbDos
+            // 
+            this.cmbDos.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDos.FormattingEnabled = true;
+            this.cmbDos.Location = new System.Drawing.Point(351, 160);
+            this.cmbDos.Name = "cmbDos";
+            this.cmbDos.Size = new System.Drawing.Size(196, 24);
+            this.cmbDos.TabIndex = 64;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(283, 165);
+            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(67, 13);
+            this.label35.TabIndex = 63;
+            this.label35.Text = "Grupo Dos";
+            // 
+            // cmbAppMovil
+            // 
+            this.cmbAppMovil.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAppMovil.FormattingEnabled = true;
+            this.cmbAppMovil.Location = new System.Drawing.Point(79, 160);
+            this.cmbAppMovil.Name = "cmbAppMovil";
+            this.cmbAppMovil.Size = new System.Drawing.Size(196, 24);
+            this.cmbAppMovil.TabIndex = 62;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(11, 165);
+            this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(63, 13);
+            this.label36.TabIndex = 61;
+            this.label36.Text = "App Movil";
+            // 
             // ConfiguracionTPV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1958,12 +2042,20 @@ namespace Configuraciones.GUI
         private System.Windows.Forms.CheckBox chkMostrarDireccion;
         private System.Windows.Forms.CheckBox chkMostrarSlogan;
         private System.Windows.Forms.CheckBox chkMostrarEmpresa;
-        private System.Windows.Forms.Button btt1;
-        public System.Windows.Forms.TextBox txtComandas;
-        public System.Windows.Forms.TextBox TxtFacturas;
-        public System.Windows.Forms.TextBox TxtInformes;
-        private System.Windows.Forms.Button btt4;
-        private System.Windows.Forms.Button btt3;
         private System.Windows.Forms.CheckBox chkTicketDoble;
+        private System.Windows.Forms.CheckBox chkFacturaElectronica;
+        private System.Windows.Forms.ComboBox cmbComandasTickets;
+        private System.Windows.Forms.ComboBox cmbDos;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.ComboBox cmbAppMovil;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.ComboBox cmbUno;
+        private System.Windows.Forms.ComboBox cmbBar;
+        private System.Windows.Forms.ComboBox cmbCocina;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox cmbInformes;
+        private System.Windows.Forms.ComboBox cmbFacturas;
     }
 }
