@@ -262,17 +262,29 @@ public class Server
             {
                 try
                 {
-                    // Imprimir el informe en la impresora seleccionada
-                    PrinterSettings settings = new PrinterSettings
+                    // Crear un diccionario para asociar cada grupo con su impresora
+                    Dictionary<string, string> impresorasPorGrupo = new Dictionary<string, string>{
+                                { "COCINA", oConfiguracion.ImpresoraCocina },
+                                { "BAR", oConfiguracion.ImpresoraBar },
+                                { "GRUPO1", oConfiguracion.ImpresoraGrupoUno },
+                                { "GRUPO2", oConfiguracion.ImpresoraGrupoDos },
+                            };
+
+                    if (impresorasPorGrupo.TryGetValue(kvp.Key, out string nombreImpresora))
                     {
-                        PrinterName = oConfiguracion.PrinterComanda
-                    };
+                        // Configurar impresora según el grupo
+                        PrinterSettings settings = new PrinterSettings
+                        {
+                            PrinterName = nombreImpresora
+                        };
 
-                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    oReporte.PrintToPrinter(1, false, 0, 0);
-
-                    // Muestra un mensaje de éxito
-                    /*MessageBox.Show($"Informe para el grupo {kvp.Key} finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+                        oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                        oReporte.PrintToPrinter(1, false, 0, 0);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontró una impresora asociada al grupo: {kvp.Key}, se recomienda revisar los nombres de los grupos para evitar fallas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception ex)
                 {
