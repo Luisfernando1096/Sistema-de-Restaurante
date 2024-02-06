@@ -564,9 +564,9 @@ namespace Finanzas.GUI
             this.lblEfectivo.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEfectivo.Location = new System.Drawing.Point(609, 9);
             this.lblEfectivo.Name = "lblEfectivo";
-            this.lblEfectivo.Size = new System.Drawing.Size(47, 37);
+            this.lblEfectivo.Size = new System.Drawing.Size(69, 37);
             this.lblEfectivo.TabIndex = 20;
-            this.lblEfectivo.Text = "25";
+            this.lblEfectivo.Text = "0.00";
             // 
             // toolStrip2
             // 

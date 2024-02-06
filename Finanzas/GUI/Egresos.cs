@@ -294,6 +294,7 @@ namespace Finanzas.GUI
                 MessageBox.Show("Operacion exitosa. ", "Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+            
         }
 
         private void btnSalirIngrediente_Click(object sender, EventArgs e)
@@ -327,52 +328,60 @@ namespace Finanzas.GUI
             }
             double res;
 
-            Mantenimiento.CLS.Egreso egreso = new Mantenimiento.CLS.Egreso();
-            egreso.IdCaja = idCajaAbierta;
-            egreso.IdUsuario = Int32.Parse(oUsuario.IdUsuario);
-            egreso.Fecha = dtpFecha.Text;
-            egreso.Descripcion = txtDescripcion.Text;
-            egreso.Cantidad = Double.Parse(txtCantidad.Text);
-
-            Mantenimiento.CLS.Caja caja = new Mantenimiento.CLS.Caja();
-            caja.IdCaja = idCajaAbierta;
-
-            if (txtDescripcion.Tag == null)
+            if (idCajaAbierta > 0)
             {
-                //Se insertara
-                egreso.Insertar();
-                caja.Saldo = Double.Parse(lblEfectivo.Text) - Double.Parse(txtCantidad.Text.ToString());
-                caja.ActualizarSaldo();
+                Mantenimiento.CLS.Egreso egreso = new Mantenimiento.CLS.Egreso();
+                egreso.IdCaja = idCajaAbierta;
+                egreso.IdUsuario = Int32.Parse(oUsuario.IdUsuario);
+                egreso.Fecha = dtpFecha.Text;
+                egreso.Descripcion = txtDescripcion.Text;
+                egreso.Cantidad = Double.Parse(txtCantidad.Text);
+
+                Mantenimiento.CLS.Caja caja = new Mantenimiento.CLS.Caja();
+                caja.IdCaja = idCajaAbierta;
+
+                if (txtDescripcion.Tag == null)
+                {
+                    //Se insertara
+                    egreso.Insertar();
+                    caja.Saldo = Double.Parse(lblEfectivo.Text) - Double.Parse(txtCantidad.Text.ToString());
+                    caja.ActualizarSaldo();
+                }
+                else
+                {
+                    //Se actualizara
+                    egreso.IdEgreso = Int32.Parse(txtDescripcion.Tag.ToString());
+                    egreso.Actualizar();
+
+                    double cantAnterior = Double.Parse(txtCantidad.Tag.ToString());
+                    double cantActual = Double.Parse(txtCantidad.Text.ToString());
+
+                    if (cantAnterior != cantActual)
+                    {
+                        if (cantAnterior > cantActual)
+                        {
+                            res = cantAnterior - cantActual;
+                            caja.Saldo = Double.Parse(lblEfectivo.Text) + res;
+                        }
+                        else
+                        {
+                            res = cantActual - cantAnterior;
+                            caja.Saldo = Double.Parse(lblEfectivo.Text) - res;
+                        }
+                        caja.ActualizarSaldo();
+                    }
+
+                }
+                Limpiar();
+                CargarDatos(idCajaAbierta);
+                ConsultarCaja();
+                MessageBox.Show("Operacion exitosa. ", "Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                //Se actualizara
-                egreso.IdEgreso = Int32.Parse(txtDescripcion.Tag.ToString());
-                egreso.Actualizar();
-
-                double cantAnterior = Double.Parse(txtCantidad.Tag.ToString());
-                double cantActual = Double.Parse(txtCantidad.Text.ToString());
-
-                if (cantAnterior != cantActual)
-                {
-                    if (cantAnterior > cantActual)
-                    {
-                        res = cantAnterior - cantActual;
-                        caja.Saldo = Double.Parse(lblEfectivo.Text) + res;
-                    }
-                    else
-                    {
-                        res = cantActual - cantAnterior;
-                        caja.Saldo = Double.Parse(lblEfectivo.Text) - res;
-                    }
-                    caja.ActualizarSaldo();
-                }
+                MessageBox.Show("No se realizo, no hay ninguna caja abierta. ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            Limpiar();
-            CargarDatos(idCajaAbierta);
-            ConsultarCaja();
-            MessageBox.Show("Operacion exitosa. ", "Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -424,8 +433,12 @@ namespace Finanzas.GUI
         private void ConsultarCaja()
         {
             DataTable cajaAbierta = DataManager.DBConsultas.CajaAbierta();
-            lblEfectivo.Text = cajaAbierta.Rows[0]["saldo"].ToString();
-            idCajaAbierta = Int32.Parse(cajaAbierta.Rows[0]["idCaja"].ToString());
+            if (cajaAbierta.Rows.Count > 0)
+            {
+                lblEfectivo.Text = cajaAbierta.Rows[0]["saldo"].ToString();
+                idCajaAbierta = Int32.Parse(cajaAbierta.Rows[0]["idCaja"].ToString());
+            }
+            
         }
     }
 }

@@ -80,19 +80,7 @@ namespace Reportes.GUI
                 try
                 {
                     this.reporteActual = oReporte;
-                    //// Imprimir el informe en la impresora seleccionada
-                    //PrinterSettings settings = new PrinterSettings
-                    //{
-                    //    PrinterName = oConfiguracion.PrinterInformes
-                    //};
-
-                    //oReporte.PrintOptions.PrinterName = settings.PrinterName;
-                    //oReporte.PrintToPrinter(1, false, 0, 0);
-
-                    //// Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    //this.Invoke((MethodInvoker)delegate {
-                    //    MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //});
+                    
                 }
                 catch (Exception ex)
                 {
@@ -111,10 +99,7 @@ namespace Reportes.GUI
             {
                 crvVisor.ReportSource = reporteActual;
             }
-            else
-            {
-                MessageBox.Show("Error: reporteActual o crvVisor es nulo.");
-            }
+            
         }
     }
 }

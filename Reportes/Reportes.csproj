@@ -51,6 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLS\CrystalReportExporter.cs" />
+    <Compile Include="DAT\DatCaja.cs">
+      <DependentUpon>DatCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatCaja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatCaja.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatClientes.cs">
       <DependentUpon>DatClientes.xsd</DependentUpon>
     </Compile>
@@ -151,6 +159,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="REP\RepCierreCaja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepCierreCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="REP\RepClientes.cs">
       <AutoGen>True</AutoGen>
@@ -321,6 +335,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="DAT\DatCaja.xsc">
+      <DependentUpon>DatCaja.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatCaja.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatCaja.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatCaja.xss">
+      <DependentUpon>DatCaja.xsd</DependentUpon>
+    </None>
     <None Include="DAT\DatClientes.xsc">
       <DependentUpon>DatClientes.xsd</DependentUpon>
     </None>
@@ -445,6 +470,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepCierreCaja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepCierreCaja.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

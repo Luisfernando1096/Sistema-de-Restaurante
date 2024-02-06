@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Finanzas.GUI
@@ -81,6 +82,7 @@ namespace Finanzas.GUI
             {
                 caja.FechaCierre = dtpFecha.Tag.ToString();
                 caja.Actualizar();
+
             }
         }
 
@@ -100,13 +102,22 @@ namespace Finanzas.GUI
             {
                 //Cerrar Caja
                 if (MessageBox.Show("¿Esta seguro que desea cerrar la caja? Una vez cerrado el formulario no podra revertir los cambios.", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
+                {   
+                    DataTable info = DataManager.DBConsultas.Cajas(true);
                     dtpFecha.Tag = dtpFecha.Text;
                     caja.Estado = false;
                     cerreCaja = true;
                     if (caja.Actualizar())
                     {
                         MessageBox.Show("¡Se cerro la caja exitosamente!", "Cierre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja();
+                        rep.SetDataSource(info);
+                        rep.SetParameterValue("Titulo", "Corte de Caja");
+
+                        f.crvVisor.ReportSource = rep;
+                        f.Show();
                     }
                     else
                     {
@@ -139,6 +150,18 @@ namespace Finanzas.GUI
                 }
                 CargarDatos();
             }
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            DataTable info = DataManager.DBConsultas.Cajas(true);
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+            Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja();
+            rep.SetDataSource(info);
+            rep.SetParameterValue("Titulo", "Estado de Caja");
+            
+            f.crvVisor.ReportSource = rep;
+            f.Show();
         }
     }
 }

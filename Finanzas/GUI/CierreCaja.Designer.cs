@@ -40,6 +40,7 @@ namespace Finanzas.GUI
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.txtCajero = new System.Windows.Forms.TextBox();
@@ -67,7 +68,6 @@ namespace Finanzas.GUI
             this.label6 = new System.Windows.Forms.Label();
             this.txtEfectivoRecaudado = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCajas)).BeginInit();
             this.SuspendLayout();
@@ -117,7 +117,7 @@ namespace Finanzas.GUI
             this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(132, 54);
+            this.btnEditar.Size = new System.Drawing.Size(140, 54);
             this.btnEditar.Text = "Deshacer";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
@@ -137,6 +137,17 @@ namespace Finanzas.GUI
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 57);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
+            this.toolStripButton6.Text = "Imprimir";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // label4
             // 
@@ -415,16 +426,6 @@ namespace Finanzas.GUI
             this.label7.Size = new System.Drawing.Size(125, 20);
             this.label7.TabIndex = 64;
             this.label7.Text = "Efectivo recaudado";
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
-            this.toolStripButton6.Text = "Imprimir";
             // 
             // CierreCaja
             // 
