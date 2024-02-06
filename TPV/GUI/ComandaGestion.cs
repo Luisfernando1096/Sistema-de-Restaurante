@@ -31,15 +31,16 @@ namespace TPV.GUI
         public bool borrarData;
         private String SeleccionarImg;
 
-        string AnchoProducto;
-        string AltoProducto;
-        string SeparadorProducto;
-        string AnchoFamilia;
-        string AltoFamilia;
-        string SeparadorFamilia;
+        string AnchoProducto = "0";
+        string AltoProducto = "0";
+        string SeparadorProducto = "0";
+        string AnchoFamilia = "0";
+        string AltoFamilia = "0";
+        string SeparadorFamilia = "0";
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
+            
             InitializeComponent();
             AjustarPosicionBoton();
             this.punto_venta = punto_venta;
@@ -68,7 +69,6 @@ namespace TPV.GUI
                 else
                 {
                     MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Close();
                 }
 
                 if (xmlDoc.SelectSingleNode("/Dimension/AnchoFamilia") != null
@@ -83,7 +83,6 @@ namespace TPV.GUI
                 else
                 {
                     MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Close();
                 }
 
             }

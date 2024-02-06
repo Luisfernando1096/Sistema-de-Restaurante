@@ -18,16 +18,17 @@ namespace TPV.GUI
         public bool tpv;
         public bool cerrarSesion;
         //Salones
-        string AnchoSalon;
-        string AltoSalon;
-        string SeparadorSalon;
+        string AnchoSalon = "0";
+        string AltoSalon = "0";
+        string SeparadorSalon = "0";
         //Mesas
-        string AnchoMesa;
-        string AltoMesa;
-        string SeparadorMesa;
+        string AnchoMesa = "0";
+        string AltoMesa = "0";
+        string SeparadorMesa = "0";
 
         public PuntoVenta()
-        {
+        {   
+            
             InitializeComponent();
             flpSalones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             flpMesas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
@@ -66,7 +67,6 @@ namespace TPV.GUI
                 else
                 {
                     MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Close();
                 }
 
                 if (xmlDoc.SelectSingleNode("/Dimension/AnchoMesa") != null
@@ -81,9 +81,7 @@ namespace TPV.GUI
                 else
                 {
                     MessageBox.Show("No ha establecido medidas para las mesas y salones, por favor defina medidas.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Close();
                 }
-
 
             }
         }
