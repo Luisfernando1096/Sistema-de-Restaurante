@@ -61,6 +61,12 @@
     <Compile Include="GUI\AdministrarFactura.Designer.cs">
       <DependentUpon>AdministrarFactura.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Recomendada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Recomendada.Designer.cs">
+      <DependentUpon>Recomendada.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\TirajeFactura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\AdministrarFactura.resx">
       <DependentUpon>AdministrarFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Recomendada.resx">
+      <DependentUpon>Recomendada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\TirajeFactura.resx">
       <DependentUpon>TirajeFactura.cs</DependentUpon>

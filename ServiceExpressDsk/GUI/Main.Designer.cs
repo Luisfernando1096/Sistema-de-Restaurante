@@ -863,7 +863,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton31});
             this.toolStrip7.Location = new System.Drawing.Point(3, 0);
             this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.Size = new System.Drawing.Size(734, 82);
+            this.toolStrip7.Size = new System.Drawing.Size(703, 82);
             this.toolStrip7.TabIndex = 12;
             this.toolStrip7.Text = "toolStrip7";
             // 
@@ -1060,7 +1060,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton40});
             this.toolStrip9.Location = new System.Drawing.Point(3, 0);
             this.toolStrip9.Name = "toolStrip9";
-            this.toolStrip9.Size = new System.Drawing.Size(846, 82);
+            this.toolStrip9.Size = new System.Drawing.Size(877, 82);
             this.toolStrip9.TabIndex = 13;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -1108,6 +1108,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton38.Size = new System.Drawing.Size(246, 79);
             this.toolStripButton38.Text = "Configuracion Recomendada";
             this.toolStripButton38.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton38.Click += new System.EventHandler(this.toolStripButton38_Click);
             // 
             // toolStripButton39
             // 

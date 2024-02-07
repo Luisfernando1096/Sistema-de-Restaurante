@@ -627,5 +627,11 @@ namespace ServiceExpressDsk.GUI
             f.GenerarReporte(oReporte, datos, "", "", "");
             f.Show();
         }
+
+        private void toolStripButton38_Click(object sender, EventArgs e)
+        {
+            Configuraciones.GUI.Recomendada f = new Configuraciones.GUI.Recomendada();
+            f.ShowDialog();
+        }
     }
 }
