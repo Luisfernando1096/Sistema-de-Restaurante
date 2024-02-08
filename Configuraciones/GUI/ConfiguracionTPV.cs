@@ -1021,6 +1021,25 @@ namespace Configuraciones.GUI
             }
         }
 
+        private void bttDimensiones_Click(object sender, EventArgs e)
+        {
+            UpSalonesAlto.Value = 100;
+            UpSalonesAncho.Value = 200;
+            UpProSeparador.Value = 2;
+
+            UpMesasAlto.Value = 100;
+            UpMesasAncho.Value = 100;
+            UpFaSeparador.Value = 2;
+
+            UpProAlto.Value = 150;
+            UpProAncho.Value = 150;
+            UpProSeparador.Value = 2;
+
+            UpFaAlto.Value = 80;
+            UpFaAncho.Value = 150;
+            UpFaSeparador.Value = 2;
+        }
+
         private void txtImpuestoVIP_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verificar si la tecla presionada no es un número, un punto decimal o la tecla de retroceso
