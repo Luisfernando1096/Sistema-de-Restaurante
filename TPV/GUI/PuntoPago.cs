@@ -1074,7 +1074,7 @@ namespace TPV.GUI
 
         private void btnCuentas_Click(object sender, EventArgs e)
         {
-            PedidosSeparados pedidosSeparados = new PedidosSeparados
+            PedidosSeparados pedidosSeparados = new PedidosSeparados(lblTicket.Text)
             {
                 idMesa = lblMesa.Tag.ToString(),
                 pedidosEnMesa = datosEnMesa

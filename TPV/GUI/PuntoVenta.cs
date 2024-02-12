@@ -208,12 +208,28 @@ namespace TPV.GUI
                     f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
                     f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
                 }
+                f.lblMesa.Text = botonMesa.Text.ToString();
+                f.lblMesa.Tag = botonMesa.Tag.ToString();
+
+
+                f.ShowDialog();
             }
-            f.lblMesa.Text = botonMesa.Text.ToString();
-            f.lblMesa.Tag = botonMesa.Tag.ToString();
+            else
+            {
+                AgregarCuentas ag = new AgregarCuentas(botonMesa, this);
+                ag.ShowDialog();
 
+                f.cambiarMesa = ag.cambiarMesa;
+                if (ag.idPedidoCambio != string.Empty && ag.idPedidoCambio != null)
+                {
+                    idPedidoCambioMesa = int.Parse(ag.idPedidoCambio);
+                }
+                if (ag.idMesaAnterior != string.Empty && ag.idMesaAnterior != null)
+                {
+                    idMesaAnterior = int.Parse(ag.idMesaAnterior);
+                }
+            }
 
-            f.ShowDialog();
             cambiarMesa = f.cambiarMesa;
             if (!f.lblTicket.Text.ToString().Equals(""))
             {

@@ -40,7 +40,7 @@ namespace TPV.GUI
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
-            
+
             InitializeComponent();
             AjustarPosicionBoton();
             this.punto_venta = punto_venta;
@@ -127,7 +127,6 @@ namespace TPV.GUI
                 datos.DataSource = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
-
             }
             catch (Exception)
             {
@@ -149,6 +148,20 @@ namespace TPV.GUI
                 {
                     btnCuentas.Visible = false;
                 }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void CargarPedidos(String id)
+        {
+            try
+            {
+                datosEnMesa = DataManager.DBConsultas.Pedidos(id);
+                btnCuentas.Visible = true;
 
             }
             catch (Exception)
@@ -324,7 +337,7 @@ namespace TPV.GUI
         {
             Button botonProducto = (Button)sender;
             int cantidad;
-
+            //Actualizar al final el datagrid
             if (bool.Parse(oConfiguracion.MuchosProductos))
             {
                 // Agregar muchos productos
@@ -333,14 +346,145 @@ namespace TPV.GUI
                 cantidad = Int32.Parse(f.txtCantidad.Text);
                 if (cantidad != 0)
                 {
-                    AgregarProductos(botonProducto, cantidad);
+                    if (dgvDatos.Rows.Count == 0 && lblTicket.Text != string.Empty) 
+                    {
+                        AgregarOtrosProductos(botonProducto, cantidad);
+                    }
+                    else
+                    {
+                        AgregarProductos(botonProducto, cantidad);
+                    }
                 }
             }
             else
             {
-                // Agregar un producto
                 cantidad = 1;
-                AgregarProductos(botonProducto, cantidad);
+                if (dgvDatos.Rows.Count == 0 && lblTicket.Text != string.Empty)
+                {
+                    AgregarOtrosProductos(botonProducto, cantidad);
+                }
+                else
+                {
+                    // Agregar un producto
+                    AgregarProductos(botonProducto, cantidad);
+                }
+            }
+        }
+        private void AgregarOtrosProductos(Button botonProducto, int cantidad) 
+        {
+            int cant = cantidad;
+            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            String fechaParaComandaParcial = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+            String[] aux = (string[])botonProducto.Tag;
+            List<String> primerProductoEnPedido = new List<string>();
+            List<String> actualizarTotal = new List<string>();
+            DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
+            DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
+            PedidoDetalle pedidoDetalle = new PedidoDetalle();
+
+            try
+            {
+                PedidoDetalle pDetalle = new PedidoDetalle
+                {
+                    Cantidad = cantidad
+                };
+                if (!lblTicket.Text.Equals(""))
+                {
+                    pDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+                }
+                pDetalle.Mesa = lblMesa.Text;
+                pDetalle.IdProducto = Int32.Parse(aux[0].ToString());
+                pDetalle.Fecha = fechaParaComandaParcial;
+                pDetalle.Nombre = botonProducto.Text;
+                pDetalle.Grupo = aux[1].ToString();
+
+                Boolean encontrado = false;
+
+                if (lstDetalle.Count > 0)
+                {
+                    foreach (PedidoDetalle item in lstDetalle)
+                    {
+                        if (aux[0].ToString().Equals(item.IdProducto.ToString()))
+                        {
+                            encontrado = true;
+                            item.Cantidad += cantidad;
+                            break;
+                        }
+                    }
+                    if (!encontrado)
+                    {
+                        lstDetalle.Add(pDetalle);
+                    }
+                }
+                else
+                {
+                    lstDetalle.Add(pDetalle);
+                }
+
+                pedidoDetalle.Cocinando = true;
+                pedidoDetalle.Extras = "";
+                pedidoDetalle.HoraEntregado = fecha;
+                pedidoDetalle.HoraPedido = fecha;
+                //pedidoDetalle.IdCocinero = null;
+                pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
+                pedidoDetalle.IdPedido = int.Parse(lblTicket.Text);
+                pedidoDetalle.Cantidad = cantidad;
+                DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
+                pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
+                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
+                pedidoDetalle.Grupo = "0";
+                pedidoDetalle.Usuario = oUsuario.IdUsuario;
+                //pedidoDetalle.Fecha = null;
+                if (oUsuario.IdRol.Equals("2"))
+                {
+                    //Entro un mesero
+                    Pedido pedido3 = new Pedido();
+                    pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
+                    primerProductoEnPedido.Add(pedido3.ActualizarMesero(true));
+                }
+                //Insertamos el detalle del pedido
+                primerProductoEnPedido.Add(pedidoDetalle.Insertar(false));
+
+                if (transaccion1.EjecutarTransaccion(primerProductoEnPedido) > 0)
+                {
+                    int idPedido = int.Parse(lblTicket.Text);
+                    //Todo esto si el resultado es exitoso
+                    btnComanda.Enabled = true;
+                    btnDisminuir.Enabled = true;
+                    btnExtras.Enabled = true;
+
+                    //Actualizar al final el datagrid
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), int.Parse(lblTicket.Text));
+
+                    bool primerProducto = true;
+                    if (primerProducto)
+                    {
+                        //Vamos a actualizar el total del pedido
+                        Pedido pedido2 = new Pedido
+                        {
+                            IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                            IdPedido = Int32.Parse(lblTicket.Text.ToString())
+                        };
+                        double total = CalcularTotal();
+
+                        //Actualizamos el total en el pedido recien insertado
+                        actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+
+                        DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                        if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+                        {
+                            MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
+                        }
+                    }
+                    ActualizarLabelsRetroceder(idPedido, false);
+                }
+                ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
+                //Actualizar al final el datagrid
+                CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), int.Parse(lblTicket.Text));
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -366,7 +510,6 @@ namespace TPV.GUI
             pDetalle.Fecha = fechaParaComandaParcial;
             pDetalle.Nombre = botonProducto.Text;
             pDetalle.Grupo = aux[1].ToString();
-
 
             Boolean encontrado = false;
 
@@ -475,8 +618,6 @@ namespace TPV.GUI
                 //Iniciamos las transacciones si no hay productos
                 List<String> primerProductoEnPedido = new List<string>();
 
-                
-
                 //Insertamos en la base de datos el pedido
                 primerProductoEnPedido.Add(pedido.Insertar());
                 //Se agregara el mesero tambien si entro un mesero
@@ -526,13 +667,12 @@ namespace TPV.GUI
                     int idPedido = DataManager.DBConsultas.ObtenerUltimoPedido();
                     lblTicket.Text = idPedido.ToString();//Debo actualizar el ticket
                     pDetalle.IdPedido = idPedido;//Debo asignar un id Para mostrar en la comanda parcial
-                    //Todo esto si el resultado es exitoso
+                    //Todo esto si el resultado es exit1oso
                     btnComanda.Enabled = true;
                     btnDisminuir.Enabled = true;
                     btnExtras.Enabled = true;
 
-                    //Actualizar al final el datagrid
-                    CargarProductosPorMesa(lblMesa.Tag.ToString());
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), idPedido);
 
                     if (primerProducto)
                     {
@@ -666,8 +806,50 @@ namespace TPV.GUI
 
         private void btnSalir_Click_1(object sender, EventArgs e)
         {
-            ImprimirComandaActual();
-            Close();
+            Salir();
+        }
+        private void Salir() ///SE AAJUSTARON DETALLES ANTES DE SALIR PARA EVITAR ERRORES
+        {
+            try
+            {
+                DataTable dt = DataManager.DBConsultas.Pedidos(idMesa);
+                DataTable dt1 = new DataTable();
+                int idPedido;
+                bool existe = false;
+                foreach (DataRow row in dt.Rows)
+                {
+                    idPedido = Convert.ToInt32(row["idPedido"]);
+                    dt1 = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
+                    if (dt1.Rows.Count != 0)
+                    {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (existe)
+                {
+                    if (dgvDatos.Rows.Count != 0)
+                    {
+                        BorrarPedidosVacios(lblMesa.Tag.ToString());
+                        ImprimirComandaActual();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Antes de salir, por favor selecciona una cuenta no vacía. Ten en cuenta que las cuentas vacías serán eliminadas.", "Información Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    BorrarPedidosVacios(lblMesa.Tag.ToString());
+                    Close();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void ImprimirComandaActual()
@@ -693,80 +875,82 @@ namespace TPV.GUI
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            PuntoPago f = new PuntoPago(this);
-
-            //Si comanda gestion va vacia
-            if (lblMesa.Tag != null || !lblTicket.Text.Equals(""))
+            if (dgvDatos.Rows.Count != 0)
             {
-                if (idPedidoSiguiente != 0 || !lblTicket.Text.Equals(""))
-                {
-                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, Int32.Parse(lblTicket.Text));
-                    if (productoEnMesas.Rows.Count > 0)
-                    {
-                        if (lblMesa.Tag != null)
-                        {
-                            if (productoEnMesas.Rows.Count > 0)
-                            {
-                                f.CargarProductosPorMesayIdPedido(idMesa, Int32.Parse(lblTicket.Text));
-                                f.CargarPedidosEnMesa(idMesa);
-                                f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+                this.Hide();
+                PuntoPago f = new PuntoPago(this);
 
-                                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text), false);
-                                //Agregando datos mesero y cliente si los hay
-                                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                //Si comanda gestion va vacia
+                if (lblMesa.Tag != null || !lblTicket.Text.Equals(""))
+                {
+                    if (idPedidoSiguiente != 0 || !lblTicket.Text.Equals(""))
+                    {
+                        DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, Int32.Parse(lblTicket.Text));
+                        if (productoEnMesas.Rows.Count > 0)
+                        {
+                            if (lblMesa.Tag != null)
+                            {
+                                if (productoEnMesas.Rows.Count > 0)
                                 {
-                                    f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                                    f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                                    f.CargarProductosPorMesayIdPedido(idMesa, Int32.Parse(lblTicket.Text));
+                                    f.CargarPedidosEnMesa(idMesa);
+                                    f.lblTicket.Text = productoEnMesas.Rows[0][0].ToString();//Accedemos a la primera posicion de la tabla
+
+                                    DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text), false);
+                                    //Agregando datos mesero y cliente si los hay
+                                    if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                                    {
+                                        f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                                        f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                                    }
+                                    else
+                                    {
+                                        f.lblMesero.Text = "";
+                                        f.lblMesero.Tag = "";
+                                    }
+                                    if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                                    {
+                                        f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                                        f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                                    }
+                                    else
+                                    {
+                                        f.lblCliente.Text = "";
+                                        f.lblCliente.Tag = "";
+                                    }
                                 }
-                                else
-                                {
-                                    f.lblMesero.Text = "";
-                                    f.lblMesero.Tag = "";
-                                }
-                                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                                {
-                                    f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                                    f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                                }
-                                else
-                                {
-                                    f.lblCliente.Text = "";
-                                    f.lblCliente.Tag = "";
-                                }
+                                f.lblMesa.Text = lblMesa.Text.ToString();
+                                f.lblMesa.Tag = lblMesa.Tag.ToString();
                             }
-                            f.lblMesa.Text = lblMesa.Text.ToString();
-                            f.lblMesa.Tag = lblMesa.Tag.ToString();
                         }
                     }
+                    else
+                    {
+                        f.lblMesa.Text = lblMesa.Text.ToString();
+                        f.lblMesa.Tag = lblMesa.Tag.ToString();
+                    }
                 }
-                else
+                //Hacer algo aqui al cerrar sesion
+                if (!cerrarSesion)
                 {
-                    f.lblMesa.Text = lblMesa.Text.ToString();
-                    f.lblMesa.Tag = lblMesa.Tag.ToString();
+                    f.ShowDialog();
+                }
+
+                //Procedimiento luego de presionar el boton regresar para traer la informacion de la orden que se ha seleccionado
+                if (f.lblTicket.Tag != null)
+                {
+                    this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
+                    this.CargarPedidosEnMesa(f.lblMesa.Tag.ToString());
+
+                    ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()), false);
+                    lblMesa.Text = f.lblMesa.Text.ToString();
+                    lblMesa.Tag = f.lblMesa.Tag.ToString();
+                }
+                if (!cerrarSesion)
+                {
+                    Show();
                 }
             }
-            //Hacer algo aqui al cerrar sesion
-            if (!cerrarSesion)
-            {
-                f.ShowDialog();
-            }
-
-            //Procedimiento luego de presionar el boton regresar para traer la informacion de la orden que se ha seleccionado
-            if (f.lblTicket.Tag != null)
-            {
-                this.CargarProductosPorMesa(f.lblMesa.Tag.ToString());
-                this.CargarPedidosEnMesa(f.lblMesa.Tag.ToString());
-
-                ActualizarLabelsRetroceder(Int32.Parse(f.lblTicket.Text.ToString()), false);
-                lblMesa.Text = f.lblMesa.Text.ToString();
-                lblMesa.Tag = f.lblMesa.Tag.ToString();
-            }
-            if (!cerrarSesion)
-            {
-                Show();
-            }
-
         }
 
         public void ActualizarLabelsRetroceder(int id, Boolean primerPedido)
@@ -829,68 +1013,127 @@ namespace TPV.GUI
 
             //Programando boton de disminuir
             PedidoDetalle pedidoDetalle = new PedidoDetalle();
-            if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvDatos.Rows.Count > 0)
             {
-                pedidoDetalle.IdDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
-                pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
-                pedidoDetalle.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
-                pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
-                pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
-
-                if (pedidoDetalle.Cantidad != 0)
+                if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //Actualizamos el total en el pedido recien insertado
-                    List<String> actualizarTotal = new List<string>();
-                    actualizarTotal.Add(pedidoDetalle.ActualizarCompra(false));
+                    pedidoDetalle.IdDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
+                    pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
+                    pedidoDetalle.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                    pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
+                    pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
 
-                    EliminarPedidoOActualizarDetalle(false, actualizarTotal);
-
-                }
-                else
-                {
-                    
-                    //Se eliminara el producto
-                    eliminacion.Add(pedidoDetalle.Eliminar());
-                    
-                    if (dgvDatos.Rows.Count == 1)
+                    if (pedidoDetalle.Cantidad != 0)
                     {
-                        Pedido pedido = new Pedido
-                        {
-                            IdPedido = Int32.Parse(lblTicket.Text)
-                        };
-                        eliminacion.Add(pedido.Eliminar());
+                        //Actualizamos el total en el pedido recien insertado
+                        List<String> actualizarTotal = new List<string>();
+                        actualizarTotal.Add(pedidoDetalle.ActualizarCompra(false));
 
+                        EliminarPedidoOActualizarDetalle(false, actualizarTotal, 0);
                     }
-                    EliminarPedidoOActualizarDetalle(true, eliminacion);
-                }
-
-                CargarPedidosEnMesa(lblMesa.Tag.ToString());
-                if (lstDetalle.Count > 0)
-                {
-                    foreach (PedidoDetalle item in lstDetalle)
+                    else
                     {
-                        if (dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item.IdProducto.ToString()))
+                        //Se eliminara el producto
+                        eliminacion.Add(pedidoDetalle.Eliminar());
+
+                        if (dgvDatos.Rows.Count == 1)
                         {
-                            item.IdPedido = item.IdPedido;
-                            item.IdProducto = item.IdProducto;
-                            item.Cantidad--;
-                            if (item.Cantidad == 0)
+                            Pedido pedido = new Pedido
                             {
-                                lstDetalle.Remove(item);
-                            }
-                            break;
+                                IdPedido = Int32.Parse(lblTicket.Text)
+                            };
+                            eliminacion.Add(pedido.Eliminar());
+                        }
+                        EliminarPedidoOActualizarDetalle(true, eliminacion, 1);
+                    }
+
+                    if (dgvDatos.Rows.Count == 0)
+                    {
+                        lstDetalle.Clear();
+                        DataTable dt = DataManager.DBConsultas.Pedidos(lblMesa.Tag.ToString());
+
+                        // Verificar si hay filas en el DataTable
+                        if (dt.Rows.Count > 0)
+                        {
+                            // Tomar el IDPedido de la primera fila (índice 0)
+                            int idPedidoSeleccionado = Convert.ToInt32(dt.Rows[0]["idPedido"]);
+
+                            // Puedes asignar este IDPedido a donde sea necesario, por ejemplo, a un TextBox
+                            lblTicket.Text = idPedidoSeleccionado.ToString();
+                        }
+                        else
+                        {
+                            btnCuentas.Visible = false;
                         }
                     }
+                    if (lstDetalle.Count > 0 )
+                    {
+                        foreach (PedidoDetalle item in lstDetalle)
+                        {
+                            if (dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item.IdProducto.ToString()))
+                            {
+                                item.IdPedido = item.IdPedido;
+                                item.IdProducto = item.IdProducto;
+                                item.Cantidad--;
+                                if (item.Cantidad == 0)
+                                {
+                                    lstDetalle.Remove(item);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
+                    ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
                 }
-
-                DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
-                ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
             }
+        }
+        public void BorrarPedidosVacios(String idMesa) 
+        {
+            try
+            {
+                DataTable dt = DataManager.DBConsultas.Pedidos(idMesa);
+                Mantenimiento.CLS.Pedido pd = new Mantenimiento.CLS.Pedido();
+                DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
+                List<String> lista = new List<string>();
+                List<String> lista2 = new List<string>();
+                int idPedido;
+                int contador = 0;
+                int contador1 = 0;
 
-
+                DataTable dt1 = new DataTable();
+                foreach (DataRow row in dt.Rows)
+                {
+                    idPedido = Convert.ToInt32(row["idPedido"]);
+                    contador1++;
+                    Console.WriteLine("ID Pedido: " + row["idPedido"]);
+                    dt1 = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, idPedido);
+                    if (dt1.Rows.Count == 0)
+                    {
+                        contador++;
+                        pd.IdPedido = idPedido;
+                        lista.Add(pd.Eliminar()) ;
+                    }
+                }
+                transaccion.EjecutarTransaccion(lista);
+                if (contador == contador1)
+                {
+                    Mesa mesa = new Mesa
+                    {
+                        IdMesa = int.Parse(idMesa),
+                        Disponible = true
+                    };
+                    lista2.Add(mesa.ActualizarEstado());
+                    transaccion.EjecutarTransaccion(lista2);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        private void EliminarPedidoOActualizarDetalle(bool eliminar, List<string> accion)
+        private void EliminarPedidoOActualizarDetalle(bool eliminar, List<string> accion, int id)
         {
             DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
             if (eliminar)
@@ -919,19 +1162,29 @@ namespace TPV.GUI
                 if (transaccion.EjecutarTransaccion(accion) > 0)
                 {
 
-                    if (dgvDatos.Rows.Count == 1)
-                    {
-                        CargarProductosPorMesa(lblMesa.Tag.ToString());
-                    }
-                    else
-                    {
-                        CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                    }
+                    //if (dgvDatos.Rows.Count == 1)
+                    //{
+                    //    CargarProductosPorMesa(lblMesa.Tag.ToString());
+                    //}
+                    //else
+                    //{
+                    //    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    //}
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
 
                 }
                 else
                 {
                     MessageBox.Show("ERROR EN TRANSACCION AL ELIMINAR PEDIDO O SU DETALLE, CONTACTE AL PROGRAMADOR.");
+                }
+            }
+            if (id == 1 )
+            {
+                CargarPedidos(lblMesa.Tag.ToString());
+                DataTable  dt = DataManager.DBConsultas.Pedidos(lblMesa.Tag.ToString());
+                if (dt.Rows.Count == 1)
+                {
+                    btnCuentas.Visible = false;
                 }
             }
 
@@ -960,14 +1213,6 @@ namespace TPV.GUI
                 //Lista para actualizar el estado de la mesa
                 List<String> actualizarLaMesa = new List<string>();
                 
-                Mesa mesa = new Mesa
-                {
-                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
-                    Disponible = true
-                };
-
-                //Se actualiza el estado de la mesa
-                actualizarLaMesa.Add(mesa.ActualizarEstado());
                 DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
                 if (transaccion3.EjecutarTransaccion(actualizarLaMesa) < 0)
                 {
@@ -984,9 +1229,12 @@ namespace TPV.GUI
 
         private void button4_Click(object sender, EventArgs e)
         {
-            idPedidoCambioMesa = Int32.Parse(lblTicket.Text.ToString());
-            cambiarMesa = true;
-            Close();
+            if (dgvDatos.Rows.Count > 0)
+            {
+                idPedidoCambioMesa = Int32.Parse(lblTicket.Text.ToString());
+                cambiarMesa = true;
+                Close();
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1058,47 +1306,49 @@ namespace TPV.GUI
 
         private void btnExtras_Click(object sender, EventArgs e)
         {
-            SepararCuenta separar = new SepararCuenta();
-            separar.lblMesa.Tag = lblMesa.Tag;
-            separar.lblMesa.Text = "#Mesa: " + lblMesa.Tag;
-            separar.lblTicket.Tag = lblTicket.Text;
-            separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
-            separar.ShowDialog();
-            if (idPedidoSiguiente > 0)
+            if (dgvDatos.Rows.Count != 0)
             {
+                SepararCuenta separar = new SepararCuenta();
+                separar.lblMesa.Tag = lblMesa.Tag;
+                separar.lblMesa.Text = "#Mesa: " + lblMesa.Tag;
+                separar.lblTicket.Tag = lblTicket.Text;
+                separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
+                separar.ShowDialog();
                 CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                if (idPedidoSiguiente > 0)
+                {
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                }
+                else
+                {
+                    CargarPedidos(lblMesa.Tag.ToString());
+                }
 
+                //AQUI MODIFICAR EL TOTAL DEL PEDIDO
+                //Vamos a actualizar el total del pedido
+                Pedido pedido2 = new Pedido
+                {
+                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                    IdPedido = Int32.Parse(lblTicket.Text.ToString())
+                };
+                double total = CalcularTotal();
+
+                //Actualizamos el total en el pedido recien insertado
+                List<String> actualizarTotal = new List<string>();
+                actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+
+                DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
+                }
+                CargarPedidos(lblMesa.Tag.ToString());
             }
-            else
-            {
-                CargarProductosPorMesa(lblMesa.Tag.ToString());
-            }
-
-            //AQUI MODIFICAR EL TOTAL DEL PEDIDO
-            //Vamos a actualizar el total del pedido
-            Pedido pedido2 = new Pedido
-            {
-                IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
-                IdPedido = Int32.Parse(lblTicket.Text.ToString())
-            };
-            double total = CalcularTotal();
-
-            //Actualizamos el total en el pedido recien insertado
-            List<String> actualizarTotal = new List<string>();
-            actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
-
-            DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
-            if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
-            {
-                MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
-            }
-            CargarPedidosEnMesa(lblMesa.Tag.ToString());
-
         }
 
         private void btnCuentas_Click(object sender, EventArgs e)
         {
-            PedidosSeparados pedidosSeparados = new PedidosSeparados
+            PedidosSeparados pedidosSeparados = new PedidosSeparados(lblTicket.Text)
             {
                 idMesa = lblMesa.Tag.ToString(),
                 pedidosEnMesa = datosEnMesa

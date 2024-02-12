@@ -39,27 +39,30 @@ namespace TPV.GUI
             this.flpPedidos.AutoScroll = true;
             this.flpPedidos.AutoSize = true;
             this.flpPedidos.Controls.Add(this.btnPedido);
-            this.flpPedidos.Location = new System.Drawing.Point(5, 12);
+            this.flpPedidos.Location = new System.Drawing.Point(7, 15);
+            this.flpPedidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flpPedidos.Name = "flpPedidos";
-            this.flpPedidos.Size = new System.Drawing.Size(633, 249);
+            this.flpPedidos.Size = new System.Drawing.Size(844, 306);
             this.flpPedidos.TabIndex = 5;
             // 
             // btnPedido
             // 
             this.btnPedido.AutoSize = true;
-            this.btnPedido.Location = new System.Drawing.Point(3, 3);
+            this.btnPedido.Location = new System.Drawing.Point(4, 4);
+            this.btnPedido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPedido.Name = "btnPedido";
-            this.btnPedido.Size = new System.Drawing.Size(200, 80);
+            this.btnPedido.Size = new System.Drawing.Size(267, 98);
             this.btnPedido.TabIndex = 14;
             this.btnPedido.UseVisualStyleBackColor = true;
             this.btnPedido.Visible = false;
             // 
             // PedidosSeparados
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 273);
+            this.ClientSize = new System.Drawing.Size(855, 336);
             this.Controls.Add(this.flpPedidos);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PedidosSeparados";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PedidosSeparados";
@@ -74,6 +77,6 @@ namespace TPV.GUI
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flpPedidos;
-        private System.Windows.Forms.Button btnPedido;
+        public System.Windows.Forms.Button btnPedido;
     }
 }
