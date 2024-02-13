@@ -74,6 +74,9 @@
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -135,6 +138,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -169,6 +173,10 @@
     <ProjectReference Include="..\EscuchaServer\EscuchaServer.csproj">
       <Project>{3b988c48-b277-4089-a6b8-11adcd6c2909}</Project>
       <Name>EscuchaServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacturacionElectronica\FacturacionElectronica.csproj">
+      <Project>{12151993-9F94-44FA-B2E9-F0302B60D669}</Project>
+      <Name>FacturacionElectronica</Name>
     </ProjectReference>
     <ProjectReference Include="..\Personal\Personal.csproj">
       <Project>{df452496-63e3-4aa2-8e9a-09517b20fc50}</Project>

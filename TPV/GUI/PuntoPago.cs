@@ -718,7 +718,7 @@ namespace TPV.GUI
             if (!txtPagoRegistrar.Text.Equals(""))
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
-                pedido.IdCuenta = 1;
+                //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
             }
             else
@@ -737,7 +737,7 @@ namespace TPV.GUI
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
                 pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
-                pedido.IdCuenta = 2;
+                //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
                 //Registrar pago en cuenta
             }
@@ -772,7 +772,7 @@ namespace TPV.GUI
             //Programar pago exacto
             pedido.Saldo = 0.00;
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
-            pedido.IdCuenta = 1;
+            //Aqui insertar en la tabla pagos combinados
             RegistrarPago();
             ActualizarCaja(true);
         }
@@ -787,7 +787,7 @@ namespace TPV.GUI
             //Programar pago cortesia
             pedido.Saldo = 0.00;
             pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
-            pedido.IdCuenta = 1;
+            //Aqui insertar en la tabla pagos combinados
             RegistrarPago();
         }
 

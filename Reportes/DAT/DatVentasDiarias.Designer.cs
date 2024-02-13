@@ -297,6 +297,8 @@ namespace Reportes.DAT {
             
             private global::System.Data.DataColumn columnmesero;
             
+            private global::System.Data.DataColumn columnmonto;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ventasdiariasDataTable() {
@@ -404,6 +406,14 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn montoColumn {
+                get {
+                    return this.columnmonto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -439,7 +449,7 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ventasdiariasRow AddventasdiariasRow(string nombreCuenta, string ticket, string fecha, string total, string descuento, string iva, string propina, string totalPago, string mesero) {
+            public ventasdiariasRow AddventasdiariasRow(string nombreCuenta, string ticket, string fecha, string total, string descuento, string iva, string propina, string totalPago, string mesero, double monto) {
                 ventasdiariasRow rowventasdiariasRow = ((ventasdiariasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         nombreCuenta,
@@ -450,7 +460,8 @@ namespace Reportes.DAT {
                         iva,
                         propina,
                         totalPago,
-                        mesero};
+                        mesero,
+                        monto};
                 rowventasdiariasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowventasdiariasRow);
                 return rowventasdiariasRow;
@@ -482,6 +493,7 @@ namespace Reportes.DAT {
                 this.columnpropina = base.Columns["propina"];
                 this.columntotalPago = base.Columns["totalPago"];
                 this.columnmesero = base.Columns["mesero"];
+                this.columnmonto = base.Columns["monto"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -505,6 +517,8 @@ namespace Reportes.DAT {
                 base.Columns.Add(this.columntotalPago);
                 this.columnmesero = new global::System.Data.DataColumn("mesero", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmesero);
+                this.columnmonto = new global::System.Data.DataColumn("monto", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmonto);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -791,6 +805,22 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public double monto {
+                get {
+                    try {
+                        return ((double)(this[this.tableventasdiarias.montoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'monto\' de la tabla \'ventasdiarias\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableventasdiarias.montoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsnombreCuentaNull() {
                 return this.IsNull(this.tableventasdiarias.nombreCuentaColumn);
             }
@@ -895,6 +925,18 @@ namespace Reportes.DAT {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetmeseroNull() {
                 this[this.tableventasdiarias.meseroColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsmontoNull() {
+                return this.IsNull(this.tableventasdiarias.montoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetmontoNull() {
+                this[this.tableventasdiarias.montoColumn] = global::System.Convert.DBNull;
             }
         }
         

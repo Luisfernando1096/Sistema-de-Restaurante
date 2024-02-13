@@ -167,7 +167,7 @@ namespace TPV.GUI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.Rows.Count > 0)
+            /*if (dgvClientes.Rows.Count > 0)
             {
                 if (rbEfectivo.Checked)
                 {
@@ -183,14 +183,14 @@ namespace TPV.GUI
                         CambiarFormaPago(2);
                     }
                 }
-            }
+            }*/
 
             Limpiar();
         }
 
         private void CambiarFormaPago(int idCuentaSiguiente)
         {
-            List<String> lstCambioFormaPago = new List<string>();
+            /*List<String> lstCambioFormaPago = new List<string>();
 
             int idPedido = Int32.Parse(txtidPedido.Text);
             Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
@@ -221,7 +221,7 @@ namespace TPV.GUI
             else
             {
                 MessageBox.Show("CAMBIO REALIZADO CON EXITO.");
-            }
+            }*/
         }
     }
 }

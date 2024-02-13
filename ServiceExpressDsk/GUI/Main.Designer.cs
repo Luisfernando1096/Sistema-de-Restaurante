@@ -1060,7 +1060,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton40});
             this.toolStrip9.Location = new System.Drawing.Point(3, 0);
             this.toolStrip9.Name = "toolStrip9";
-            this.toolStrip9.Size = new System.Drawing.Size(877, 82);
+            this.toolStrip9.Size = new System.Drawing.Size(846, 82);
             this.toolStrip9.TabIndex = 13;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -1171,7 +1171,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton42});
             this.toolStrip11.Location = new System.Drawing.Point(3, 0);
             this.toolStrip11.Name = "toolStrip11";
-            this.toolStrip11.Size = new System.Drawing.Size(151, 82);
+            this.toolStrip11.Size = new System.Drawing.Size(182, 82);
             this.toolStrip11.TabIndex = 14;
             this.toolStrip11.Text = "toolStrip11";
             // 
@@ -1184,6 +1184,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton42.Size = new System.Drawing.Size(148, 79);
             this.toolStripButton42.Text = "Cuenta X Cobrar";
             this.toolStripButton42.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton42.Click += new System.EventHandler(this.toolStripButton42_Click);
             // 
             // tabPage11
             // 

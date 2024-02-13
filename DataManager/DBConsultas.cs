@@ -266,7 +266,7 @@ namespace DataManager
                 String sentencia;
                 if (primerPedido)
                 {
-                    sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
+                    sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
                                      p.totalPago
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
@@ -276,7 +276,7 @@ namespace DataManager
                 }
                 else
                 {
-                    sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idCuenta, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
+                    sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idMesero, e.nombres, p.fecha, p.iva, p.descuento, p.propina,
                                      p.totalPago
                                     FROM pedido p
                                     LEFT JOIN cliente c ON p.idCliente = c.idCliente
@@ -1875,12 +1875,13 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, '' as mesero
+                String sentencia = @"SELECT c.nombreCuenta, pc.monto pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, '' as mesero
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
-                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                        JOIN pago_combinado pc ON pc.idPedido = p.idPedido
+                                        JOIN cuenta c ON c.idCuenta = pc.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
-                                        WHERE DATE(p.fecha) = '" + fInicio + @"' AND p.cancelado = 1 AND anular = 0  GROUP BY ticket
+                                        WHERE DATE(p.fecha) = '" + fInicio + @"' AND p.cancelado = 1 AND anular = 0  GROUP BY c.nombreCuenta, pc.monto ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
@@ -1900,13 +1901,14 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia;
-                sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, IFNULL(CONCAT(em.nombres, em.apellidos), 'Sin Mesero') as mesero
+                sentencia = @"SELECT c.nombreCuenta, pc.monto, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, IFNULL(CONCAT(em.nombres, em.apellidos), 'Sin Mesero') as mesero
                                     FROM pedido_detalle pd
                                     JOIN pedido p ON p.idPedido = pd.idPedido
-                                    JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                    JOIN pago_combinado pc ON pc.idPedido = p.idPedido
+                                    JOIN cuenta c ON c.idCuenta = pc.idCuenta
                                     JOIN producto pr ON pr.idProducto = pd.idProducto
                                     LEFT JOIN empleado em ON em.idEmpleado = p.idMesero
-                                    WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 AND anular = 0 GROUP BY ticket
+                                    WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) AND p.cancelado = 1 AND anular = 0 GROUP BY c.nombreCuenta, pc.monto, ticket
                                     ORDER BY c.nombreCuenta, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
@@ -1945,13 +1947,14 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
+                String sentencia = @"SELECT c.nombreCuenta, pc.monto pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
-                                        JOIN cuenta c ON c.idCuenta = p.idCuenta
+                                        JOIN pago_combinado pc ON pc.idPedido = p.idPedido
+                                        JOIN cuenta c ON c.idCuenta = pc.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
                                         WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) 
-                                        AND p.cancelado = 1 AND p.nFactura != 0 AND anular = 0 GROUP BY ticket
+                                        AND p.cancelado = 1 AND p.nFactura != 0 AND anular = 0 GROUP BY c.nombreCuenta, pc.monto ticket
                                         ORDER BY c.nombreCuenta, p.fecha ASC;   
 ";
                 DBOperacion operacion = new DBOperacion();
