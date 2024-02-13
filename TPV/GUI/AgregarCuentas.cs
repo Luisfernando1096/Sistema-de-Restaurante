@@ -71,7 +71,6 @@ namespace TPV.GUI
                         Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
                         {
                             IdMesa = idMesa,
-                            IdCuenta = 1,
                             Cancelado = false,
                             Fecha = fecha,
                             Listo = false,
