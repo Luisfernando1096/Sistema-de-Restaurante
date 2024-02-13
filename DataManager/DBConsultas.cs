@@ -566,6 +566,35 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable Pedidos(string idMesa)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT
+                                        pe.idPedido,
+                                        pe.idMesa
+                                    FROM
+                                        pedido pe
+                                    JOIN
+                                        mesa m ON pe.idMesa = m.idMesa
+                                    WHERE
+                                        pe.idMesa = " + idMesa + @"
+                                        AND pe.cancelado = 0
+                                        AND m.disponible = 0
+                                    GROUP BY
+                                        pe.idPedido;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
 
         public static DataTable VerProductos()
         {

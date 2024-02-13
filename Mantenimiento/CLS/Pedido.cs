@@ -148,8 +148,6 @@ namespace Mantenimiento.CLS
                 sentencia = @"UPDATE pedido SET total = " + total + " " +
                 "WHERE idMesa = " + idMesa + " AND idPedido = " + idPedido + ";";
             }
-            
-
             return sentencia;
         }
 

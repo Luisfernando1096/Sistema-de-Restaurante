@@ -37,6 +37,7 @@
       <HintPath>..\packages\Humanizer.Core.2.14.1\lib\netstandard2.0\Humanizer.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -49,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\AgregarCuentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\AgregarCuentas.Designer.cs">
+      <DependentUpon>AgregarCuentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\AnularFactura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +158,9 @@
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\AgregarCuentas.resx">
+      <DependentUpon>AgregarCuentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\AnularFactura.resx">
       <DependentUpon>AnularFactura.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,11 +10,12 @@ namespace TPV.GUI
         public string idMesa;
         public int idPedido;
         public DataTable pedidosEnMesa;
-        public PedidosSeparados()
+        public string BotonTag;
+        public PedidosSeparados(string BotonTag)
         {
             InitializeComponent();
             flpPedidos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-
+            this.BotonTag = BotonTag;
         }
 
         private void PedidosSeparados_Load(object sender, EventArgs e)
@@ -26,8 +27,15 @@ namespace TPV.GUI
                 btnPedido.Text = pedido["idPedido"].ToString().ToUpper();
                 btnPedido.Size = new Size(200, 80);
                 btnPedido.Click += BotonPedido_Click;
+                btnPedido.TabStop = false; ///QUITA EL CALOR DE ENFOQUE
                 flpPedidos.Controls.Add(btnPedido);
                 flpPedidos.ScrollControlIntoView(btnPedido);
+                if (btnPedido.Text == BotonTag)
+                {
+                    btnPedido.FlatStyle = FlatStyle.Flat;
+                    btnPedido.FlatAppearance.BorderSize = 1;
+                    btnPedido.BackColor = Color.LightBlue;
+                }
             }
         }
 
