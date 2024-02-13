@@ -7,7 +7,6 @@ namespace Mantenimiento.CLS
         int idPedido;
         int idCliente;
         int idMesa;
-        int idCuenta;
         int idMesero;
         bool cancelado;
         String fecha;
@@ -28,7 +27,6 @@ namespace Mantenimiento.CLS
         public int IdPedido { get => idPedido; set => idPedido = value; }
         public int IdCliente { get => idCliente; set => idCliente = value; }
         public int IdMesa { get => idMesa; set => idMesa = value; }
-        public int IdCuenta { get => idCuenta; set => idCuenta = value; }
         public int IdMesero { get => idMesero; set => idMesero = value; }
         public bool Cancelado { get => cancelado; set => cancelado = value; }
         public string Fecha { get => fecha; set => fecha = value; }
@@ -48,8 +46,8 @@ namespace Mantenimiento.CLS
 
         public String Insertar()
         {
-            String sentencia = @"INSERT INTO pedido(idMesa, idCuenta, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
-                 VALUES(" + idMesa + ", " + idCuenta + ", " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
+            String sentencia = @"INSERT INTO pedido(idMesa, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
+                 VALUES(" + idMesa + ", " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
 
             return sentencia;
         }
@@ -167,25 +165,17 @@ namespace Mantenimiento.CLS
             string sentencia;
             if (nFactura != null)
             {
-                sentencia = @"UPDATE pedido SET iva = " + iva + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + ", idCuenta = " + idCuenta + ", fecha = '" + Fecha + "', idTiraje = " + IdTiraje + " " +
+                sentencia = @"UPDATE pedido SET iva = " + iva + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + ", fecha = '" + Fecha + "', idTiraje = " + IdTiraje + " " +
                                 "WHERE idPedido = " + idPedido + ";";
             }
             else
             {
-                sentencia = @"UPDATE pedido SET iva = " + iva + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", saldo = " + saldo + ", idCuenta = " + idCuenta + ", fecha = '" + Fecha + "' " +
+                sentencia = @"UPDATE pedido SET iva = " + iva + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", saldo = " + saldo + ", fecha = '" + Fecha + "' " +
                                 "WHERE idPedido = " + idPedido + ";";
             }
 
             return sentencia;
         }
 
-        public String ActualizarCuenta()
-        {
-            string sentencia;
-            sentencia = @"UPDATE pedido SET idCuenta = " + idCuenta + " " +
-                "WHERE idPedido = " + idPedido + ";";
-
-            return sentencia;
-        }
     }
 }

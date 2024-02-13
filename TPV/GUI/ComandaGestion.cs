@@ -455,7 +455,6 @@ namespace TPV.GUI
                 Pedido pedido = new Pedido
                 {
                     IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
-                    IdCuenta = 1,
                     Cancelado = false,
                     Fecha = fecha,
                     Listo = false,
