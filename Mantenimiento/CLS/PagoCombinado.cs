@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantenimiento.CLS
 {
-    class PagoCombinado
+    public class PagoCombinado
     {
         int idPagoCombinado;
         Double monto;
@@ -19,5 +19,29 @@ namespace Mantenimiento.CLS
         public string FechaPago { get => fechaPago; set => fechaPago = value; }
         public int IdPedido { get => idPedido; set => idPedido = value; }
         public int IdCuenta { get => idCuenta; set => idCuenta = value; }
+
+        public Boolean Insertar()
+        {
+            try
+            {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = "INSERT INTO pago_combinado(monto, fechaPago, idPedido, idCuenta) VALUES(" + monto + ", '" + fechaPago + "', " + idPedido + ", " + idCuenta + ")";
+
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasInsertadas = 0;
+                filasInsertadas = op.EjecutarSentencia(sentencia);
+                if (filasInsertadas > 0)
+                {
+                    resultado = true;
+                }
+                return resultado;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

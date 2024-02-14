@@ -116,6 +116,7 @@ namespace TPV.GUI
             this.lblCambio = new System.Windows.Forms.Label();
             this.btnCuentas = new System.Windows.Forms.Button();
             this.tFecha = new System.Windows.Forms.Timer(this.components);
+            this.btnBtc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flpDinero.SuspendLayout();
@@ -829,7 +830,7 @@ namespace TPV.GUI
             // 
             this.button14.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button14.Image = ((System.Drawing.Image)(resources.GetObject("button14.Image")));
-            this.button14.Location = new System.Drawing.Point(1198, 115);
+            this.button14.Location = new System.Drawing.Point(1202, 77);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(138, 118);
             this.button14.TabIndex = 42;
@@ -841,60 +842,67 @@ namespace TPV.GUI
             // btnEfectivo
             // 
             this.btnEfectivo.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEfectivo.Location = new System.Drawing.Point(1126, 270);
+            this.btnEfectivo.Image = ((System.Drawing.Image)(resources.GetObject("btnEfectivo.Image")));
+            this.btnEfectivo.Location = new System.Drawing.Point(1118, 346);
             this.btnEfectivo.Name = "btnEfectivo";
-            this.btnEfectivo.Size = new System.Drawing.Size(240, 100);
+            this.btnEfectivo.Size = new System.Drawing.Size(240, 68);
             this.btnEfectivo.TabIndex = 43;
             this.btnEfectivo.Text = "Pago en efectivo";
-            this.btnEfectivo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEfectivo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEfectivo.UseVisualStyleBackColor = true;
             this.btnEfectivo.Click += new System.EventHandler(this.btnEfectivo_Click);
             // 
             // btnTarjeta
             // 
             this.btnTarjeta.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTarjeta.Location = new System.Drawing.Point(1126, 376);
+            this.btnTarjeta.Image = ((System.Drawing.Image)(resources.GetObject("btnTarjeta.Image")));
+            this.btnTarjeta.Location = new System.Drawing.Point(1126, 420);
             this.btnTarjeta.Name = "btnTarjeta";
-            this.btnTarjeta.Size = new System.Drawing.Size(240, 100);
+            this.btnTarjeta.Size = new System.Drawing.Size(240, 66);
             this.btnTarjeta.TabIndex = 44;
             this.btnTarjeta.Text = "Pago con tarjeta";
-            this.btnTarjeta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnTarjeta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTarjeta.UseVisualStyleBackColor = true;
             this.btnTarjeta.Click += new System.EventHandler(this.btnTarjeta_Click);
             // 
             // btnMuchos
             // 
             this.btnMuchos.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMuchos.Location = new System.Drawing.Point(1126, 482);
+            this.btnMuchos.Image = ((System.Drawing.Image)(resources.GetObject("btnMuchos.Image")));
+            this.btnMuchos.Location = new System.Drawing.Point(1126, 487);
             this.btnMuchos.Name = "btnMuchos";
             this.btnMuchos.Size = new System.Drawing.Size(240, 66);
             this.btnMuchos.TabIndex = 45;
             this.btnMuchos.Text = "Pago entre muchos";
-            this.btnMuchos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnMuchos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMuchos.UseVisualStyleBackColor = true;
             this.btnMuchos.Click += new System.EventHandler(this.btnMuchos_Click);
             // 
             // btnExacto
             // 
             this.btnExacto.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExacto.Location = new System.Drawing.Point(1126, 554);
+            this.btnExacto.Image = ((System.Drawing.Image)(resources.GetObject("btnExacto.Image")));
+            this.btnExacto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExacto.Location = new System.Drawing.Point(1126, 555);
             this.btnExacto.Name = "btnExacto";
-            this.btnExacto.Size = new System.Drawing.Size(240, 68);
+            this.btnExacto.Size = new System.Drawing.Size(240, 66);
             this.btnExacto.TabIndex = 46;
             this.btnExacto.Text = "Pago exacto";
-            this.btnExacto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExacto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExacto.UseVisualStyleBackColor = true;
             this.btnExacto.Click += new System.EventHandler(this.btnExacto_Click);
             // 
             // btnCortesia
             // 
             this.btnCortesia.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCortesia.Location = new System.Drawing.Point(1126, 628);
+            this.btnCortesia.Image = ((System.Drawing.Image)(resources.GetObject("btnCortesia.Image")));
+            this.btnCortesia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCortesia.Location = new System.Drawing.Point(1126, 623);
             this.btnCortesia.Name = "btnCortesia";
-            this.btnCortesia.Size = new System.Drawing.Size(240, 60);
+            this.btnCortesia.Size = new System.Drawing.Size(240, 73);
             this.btnCortesia.TabIndex = 47;
             this.btnCortesia.Text = "Pago cortesia";
-            this.btnCortesia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCortesia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCortesia.UseVisualStyleBackColor = true;
             this.btnCortesia.Click += new System.EventHandler(this.btnCortesia_Click);
             // 
@@ -1084,12 +1092,28 @@ namespace TPV.GUI
             this.tFecha.Interval = 1000;
             this.tFecha.Tick += new System.EventHandler(this.tFecha_Tick);
             // 
+            // btnBtc
+            // 
+            this.btnBtc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBtc.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBtc.Image = ((System.Drawing.Image)(resources.GetObject("btnBtc.Image")));
+            this.btnBtc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBtc.Location = new System.Drawing.Point(1126, 274);
+            this.btnBtc.Name = "btnBtc";
+            this.btnBtc.Size = new System.Drawing.Size(240, 77);
+            this.btnBtc.TabIndex = 63;
+            this.btnBtc.Text = "Pago en BTC";
+            this.btnBtc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBtc.UseVisualStyleBackColor = true;
+            this.btnBtc.Click += new System.EventHandler(this.btnBtc_Click);
+            // 
             // PuntoPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
             this.ControlBox = false;
+            this.Controls.Add(this.btnBtc);
             this.Controls.Add(this.btnCuentas);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnC);
@@ -1238,5 +1262,6 @@ namespace TPV.GUI
         private DataGridViewTextBoxColumn mesa;
         private DataGridViewTextBoxColumn salon;
         private Timer tFecha;
+        private Button btnBtc;
     }
 }
