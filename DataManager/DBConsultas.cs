@@ -1901,7 +1901,12 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia;
-                sentencia = @"SELECT c.nombreCuenta, pc.monto, pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago, IFNULL(CONCAT(em.nombres, em.apellidos), 'Sin Mesero') as mesero
+                sentencia = @"SELECT c.nombreCuenta, pc.monto, pd.idPedido as ticket, p.fecha,
+                                    (pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as total,
+                                    (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)) as descuento, (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) as iva,
+                                    (pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) as propina,
+                                    ((pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) + ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as totalPago,
+                                    IFNULL(CONCAT(em.nombres, em.apellidos), 'Sin Mesero') as mesero
                                     FROM pedido_detalle pd
                                     JOIN pedido p ON p.idPedido = pd.idPedido
                                     JOIN pago_combinado pc ON pc.idPedido = p.idPedido
@@ -1947,16 +1952,19 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.nombreCuenta, pc.monto pd.idPedido as ticket, p.fecha, p.total, p.descuento, p.iva, p.propina, (p.total - p.descuento + p.iva + p.propina) totalPago
+                String sentencia = @"SELECT c.nombreCuenta, pc.monto, pd.idPedido as ticket, p.fecha,
+                                        (pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as total,
+                                        (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)) as descuento, (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) as iva,
+                                        (pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) as propina,
+                                        ((pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) + ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as totalPago
                                         FROM pedido_detalle pd
                                         JOIN pedido p ON p.idPedido = pd.idPedido
                                         JOIN pago_combinado pc ON pc.idPedido = p.idPedido
                                         JOIN cuenta c ON c.idCuenta = pc.idCuenta
                                         JOIN producto pr ON pr.idProducto = pd.idProducto
                                         WHERE p.fecha >= '" + fInicio + "' AND p.fecha < DATE_ADD('" + fFin + @"', INTERVAL 1 DAY) 
-                                        AND p.cancelado = 1 AND p.nFactura != 0 AND anular = 0 GROUP BY c.nombreCuenta, pc.monto ticket
-                                        ORDER BY c.nombreCuenta, p.fecha ASC;   
-";
+                                        AND p.cancelado = 1 AND p.nFactura != 0 AND anular = 0 GROUP BY c.nombreCuenta, pc.monto, ticket
+                                        ORDER BY c.nombreCuenta, p.fecha ASC;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
