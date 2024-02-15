@@ -29,6 +29,7 @@ namespace TPV.GUI
         private bool pagoCortesia;
         private bool pagoExacto;
         private bool pagoBtc;
+        private String fechaPago = "";
 
         public PuntoPago(ComandaGestion comandaGestion)
         {
@@ -1036,7 +1037,7 @@ namespace TPV.GUI
         private void RegistrarPago()
         {
             List<String> lstPago = new List<string>();
-            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            fechaPago = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             int siguiente = 0, idTiraje = 0;
             String serie = string.Empty;
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
@@ -1045,7 +1046,7 @@ namespace TPV.GUI
             pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
             pedido.Iva = Double.Parse(lblIva.Tag.ToString());
             pedido.Cancelado = true;
-            pedido.Fecha = fecha;
+            pedido.Fecha = fechaPago;
 
             if (activarFactura)
             {
@@ -1445,6 +1446,7 @@ namespace TPV.GUI
                 oReporte.SetParameterValue("nFactura", nFactura.ToString("00000"));
                 oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
                 oReporte.SetParameterValue("Total", "$" + totalPagar.ToString("0.00"));
+                oReporte.SetParameterValue("FechaPago", fechaPago);
                 string totalStr = totalPagar.ToString().Trim();
 
                 // Convierte la cadena a un número decimal
@@ -1543,6 +1545,7 @@ namespace TPV.GUI
             oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
             oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
             oReporte.SetParameterValue("TotalPagar", "$" + totalPagar.ToString("0.00"));
+            oReporte.SetParameterValue("FechaPago", fechaPago);
             if (Boolean.Parse(oTicket.ShowSaludo))
             {
                 oReporte.SetParameterValue("Footer3", oTicket.Footer3);

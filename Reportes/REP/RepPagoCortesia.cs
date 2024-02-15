@@ -183,6 +183,14 @@ namespace Reportes.REP {
                 return this.DataDefinition.ParameterFields[11];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_FechaPago {
+            get {
+                return this.DataDefinition.ParameterFields[12];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
