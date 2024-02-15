@@ -1254,8 +1254,8 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM pago_combinado
-                                    WHERE idPedido = " + id + "; ";
+                String sentencia = @"SELECT IF(c.idCuenta = 1,'EFECTIVO',IF(c.idCuenta = 2,'TARJETA','BITCOIN')) as formaPago, pc.monto FROM pago_combinado pc, cuenta c 
+                                    WHERE idPedido = " + id + " AND c.idCuenta = pc.idCuenta; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

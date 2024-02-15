@@ -88,6 +88,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatIngredientes.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatPagos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatPagos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatProveedores.cs">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </Compile>
@@ -286,6 +291,12 @@
       <DependentUpon>RepTicket.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepTicketPagoCombinado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepTicketPagoCombinado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepVentasAgrupadoPorProducto.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -395,6 +406,17 @@
     </None>
     <None Include="DAT\DatIngredientes.xss">
       <DependentUpon>DatIngredientes.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatPagos.xsc">
+      <DependentUpon>DatPagos.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatPagos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatPagos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatPagos.xss">
+      <DependentUpon>DatPagos.xsd</DependentUpon>
     </None>
     <None Include="DAT\DatProveedores.xsc">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
@@ -560,6 +582,10 @@
     <EmbeddedResource Include="REP\RepTicket.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepTicket.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepTicketPagoCombinado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepTicketPagoCombinado.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepVentasAgrupadoPorProducto.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

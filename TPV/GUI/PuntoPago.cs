@@ -758,9 +758,6 @@ namespace TPV.GUI
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
 
-                Double totalPago = Double.Parse(txtTotalPagar.Text) + SumaMontos(); ;
-
-                pedido.TotalPago = totalPago;
                 //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
                 //Registrar pago en cuenta
@@ -831,7 +828,7 @@ namespace TPV.GUI
 
                 //Aqui insertar en la tabla pagos combinados
                 RegistrarPago();
-                HacerPago(Int32.Parse(lblTicket.Text));
+                HacerPago(Int32.Parse(lblTicket.Text), false);
                 ActualizarCaja(true);
             }
         }
@@ -860,7 +857,16 @@ namespace TPV.GUI
 
         private void ProcesarPago()
         {
-            Double totalPago = Double.Parse(txtTotalPagar.Text) + SumaMontos();
+            Double totalPago;
+            if (SumaMontos() > 1)
+            {
+                totalPago = Double.Parse(txtPagoRegistrar.Text) + SumaMontos();
+            }
+            else
+            {
+                totalPago = Double.Parse(txtPagoRegistrar.Text);
+            }
+            
 
             pedido.TotalPago = totalPago;
 
@@ -870,7 +876,7 @@ namespace TPV.GUI
                 if (MessageBox.Show("¿Desea continuar pagando? Si presiona 'No' se creara una cuenta por cobrar.", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     //Proceso para pagar combinado
-                    HacerPago(Int32.Parse(lblTicket.Text));
+                    HacerPago(Int32.Parse(lblTicket.Text), false);
                     
                 }
                 else
@@ -886,43 +892,24 @@ namespace TPV.GUI
                 TerminarPago();
             }
 
+            CalcularTodo();
+            txtPagoRegistrar.Text = "0";
+            escritoUnPunto = false;
+
         }
 
         private void TerminarPago()
         {
+            
+            HacerPago(Int32.Parse(lblTicket.Text), true);
             RegistrarPago();
-            HacerPago(Int32.Parse(lblTicket.Text));
+            ActualizarCuentaYMesa();
             ActualizarCaja(false);
         }
 
-        private void HacerPago(int idP)
+        private void ActualizarCuentaYMesa()
         {
             List<String> lstPago = new List<string>();
-            int idC;
-            if (pagoBtc)
-            {
-                idC = 3;
-            }else if (pagoEfectivo || pagoExacto)
-            {
-                idC = 1;
-            } else if (pagoTarjeta)
-            {
-                idC = 2;
-            }
-            else
-            {
-                MessageBox.Show("Ocurrio un error, contacte al programador.");
-                return;
-            }
-            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Mantenimiento.CLS.PagoCombinado pago = new Mantenimiento.CLS.PagoCombinado();
-            pago.FechaPago = fecha;
-            pago.Monto = Double.Parse(txtPagoRegistrar.Text);
-            pago.IdPedido = idP;
-            pago.IdCuenta = idC;
-
-            pago.Insertar();
-
             if (datosEnMesa.Rows.Count == 1 && Double.Parse(txtPagoRegistrar.Text) >= Double.Parse(txtTotalPagar.Text))
             {
                 //Actualizar estado de la mesa
@@ -973,6 +960,43 @@ namespace TPV.GUI
             CalcularTodo();
             txtPagoRegistrar.Text = "0";
             escritoUnPunto = false;
+        }
+
+        private void HacerPago(int idP, bool terminar)
+        {
+            int idC;
+            if (pagoBtc)
+            {
+                idC = 3;
+            }else if (pagoEfectivo || pagoExacto)
+            {
+                idC = 1;
+            } else if (pagoTarjeta)
+            {
+                idC = 2;
+            }
+            else
+            {
+                MessageBox.Show("Ocurrio un error, contacte al programador.");
+                return;
+            }
+            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Mantenimiento.CLS.PagoCombinado pago = new Mantenimiento.CLS.PagoCombinado();
+            pago.FechaPago = fecha;
+            if (terminar)
+            {
+                pago.Monto = Double.Parse(txtPagoRegistrar.Text) - Double.Parse(lblCambio.Tag.ToString());
+            }
+            else
+            {
+                pago.Monto = Double.Parse(txtPagoRegistrar.Text);
+            }
+            
+            pago.IdPedido = idP;
+            pago.IdCuenta = idC;
+
+            pago.Insertar();
+
         }
 
         private void ActualizarCaja(Boolean exacto)
@@ -1068,7 +1092,7 @@ namespace TPV.GUI
 
                 if (pagoTarjeta && generar)
                 {
-                    if (ObtenerPagosAnteriores() > 0)
+                    if (ObtenerPagosAnteriores() > 1)
                     {
                         MessageBox.Show("Facturas con mas de una forma de pago estan en proceso.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -1089,7 +1113,7 @@ namespace TPV.GUI
                 }
                 else if (pagoBtc && generar)
                 {
-                    if (ObtenerPagosAnteriores() > 0)
+                    if (ObtenerPagosAnteriores() > 1)
                     {
                         MessageBox.Show("Facturas con mas de una forma de pago estan en proceso.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -1109,7 +1133,7 @@ namespace TPV.GUI
                 }
                 else if (generar)
                 {
-                    if (ObtenerPagosAnteriores() > 0)
+                    if (ObtenerPagosAnteriores() > 1)
                     {
                         MessageBox.Show("Facturas con mas de una forma de pago estan en proceso.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -1135,9 +1159,17 @@ namespace TPV.GUI
                 {
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        // Cargar los datos en un DataTable
-                        Reportes.REP.RepPagoEfectivo oReporte = new Reportes.REP.RepPagoEfectivo();
-                        GenerarTicket(oReporte);
+                        if (ObtenerPagosAnteriores() > 1)
+                        {
+                            Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                            GenerarTicket(oReporte, true);
+                        }
+                        else
+                        {
+                            // Cargar los datos en un DataTable
+                            Reportes.REP.RepPagoEfectivo oReporte = new Reportes.REP.RepPagoEfectivo();
+                            GenerarTicket(oReporte, false);
+                        }
 
                     }
                     else
@@ -1151,9 +1183,17 @@ namespace TPV.GUI
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        // Cargar los datos en un DataTable
-                        Reportes.REP.RepPagoTarjeta oReporte = new Reportes.REP.RepPagoTarjeta();
-                        GenerarTicket(oReporte);
+                        if (ObtenerPagosAnteriores() > 1)
+                        {
+                            Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                            GenerarTicket(oReporte, true);
+                        }
+                        else
+                        {
+                            // Cargar los datos en un DataTable
+                            Reportes.REP.RepPagoTarjeta oReporte = new Reportes.REP.RepPagoTarjeta();
+                            GenerarTicket(oReporte, false);
+                        }
 
                     }
                     else
@@ -1168,9 +1208,17 @@ namespace TPV.GUI
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        // Cargar los datos en un DataTable
-                        Reportes.REP.RepPagoBtc oReporte = new Reportes.REP.RepPagoBtc();
-                        GenerarTicket(oReporte);
+                        if (ObtenerPagosAnteriores() > 1)
+                        {
+                            Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                            GenerarTicket(oReporte, true);
+                        }
+                        else
+                        {
+                            // Cargar los datos en un DataTable
+                            Reportes.REP.RepPagoBtc oReporte = new Reportes.REP.RepPagoBtc();
+                            GenerarTicket(oReporte, false);
+                        }
 
                     }
                     else
@@ -1187,7 +1235,7 @@ namespace TPV.GUI
                     {
                         // Cargar los datos en un DataTable
                         Reportes.REP.RepPagoCortesia oReporte = new Reportes.REP.RepPagoCortesia();
-                        GenerarTicket(oReporte);
+                        GenerarTicket(oReporte, false);
 
                     }
                     else
@@ -1204,7 +1252,7 @@ namespace TPV.GUI
                     {
                         // Cargar los datos en un DataTable
                         Reportes.REP.RepPagoExacto oReporte = new Reportes.REP.RepPagoExacto();
-                        GenerarTicket(oReporte);
+                        GenerarTicket(oReporte, false);
 
                     }
                     else
@@ -1307,7 +1355,7 @@ namespace TPV.GUI
                 // Cargar los datos en un DataTable
 
                 Reportes.REP.RepImprimirPuntoPago oReporte = new Reportes.REP.RepImprimirPuntoPago();
-                GenerarTicket(oReporte);
+                GenerarTicket(oReporte, false);
 
             }
             else
@@ -1404,10 +1452,40 @@ namespace TPV.GUI
             
         }
 
-        private void GenerarTicket(ReportClass oReporte)
+        private void GenerarTicket(ReportClass oReporte, Boolean pc)
         {
             DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
             oReporte.SetDataSource(datos);
+            Double totalPagar = 0;
+            Double efectivo = 0;
+            Double tarjeta = 0;
+            Double btc = 0;
+            if (pc)
+            {
+                DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
+
+                
+                
+                foreach (DataRow item in datos2.Rows)
+                {
+                    if (item["formaPago"].ToString().Equals("EFECTIVO"))
+                    {
+                        efectivo = Double.Parse(item["monto"].ToString());
+                    }
+                    else if (item["formaPago"].ToString().Equals("TARJETA"))
+                    {
+                        tarjeta = Double.Parse(item["monto"].ToString());
+                    }
+                    else if (item["formaPago"].ToString().Equals("BITCOIN"))
+                    {
+                        btc = Double.Parse(item["monto"].ToString());
+                    }
+                    totalPagar += Double.Parse(item["monto"].ToString());
+                }
+                oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: " + efectivo.ToString("0.00"));
+                oReporte.SetParameterValue("PagoTarjeta", "TARJETA: " + tarjeta.ToString("0.00"));
+                oReporte.SetParameterValue("PagoBtc", "BITCOIN: " + btc.ToString("0.00"));
+            }
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
             oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
@@ -1415,7 +1493,7 @@ namespace TPV.GUI
             oReporte.SetParameterValue("Descuento", lblDescuento.Text.ToString());
             oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
             oReporte.SetParameterValue("Iva", lblIva.Text.ToString());
-            oReporte.SetParameterValue("TotalPagar", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
+            oReporte.SetParameterValue("TotalPagar", "$" + totalPagar.ToString("0.00"));
             if (Boolean.Parse(oTicket.ShowSaludo))
             {
                 oReporte.SetParameterValue("Footer3", oTicket.Footer3);
@@ -1426,7 +1504,6 @@ namespace TPV.GUI
             }
             oReporte.SetParameterValue("Pago", "$" + Double.Parse(txtPagoRegistrar.Text).ToString("0.00"));
             oReporte.SetParameterValue("Cambio", lblCambio.Text);
-            oReporte.SetParameterValue("TipoPago", "Efectivo");
 
             
             if (oReporte != null)
@@ -1627,9 +1704,6 @@ namespace TPV.GUI
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
 
-                Double totalPago = Double.Parse(txtTotalPagar.Text) + SumaMontos(); ;
-
-                pedido.TotalPago = totalPago;
                 //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
                 //Registrar pago en cuenta

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DatPagos" targetNamespace="http://tempuri.org/DatPagos.xsd" xmlns:mstns="http://tempuri.org/DatPagos.xsd" xmlns="http://tempuri.org/DatPagos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DatPagos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DatPagos" msprop:Generator_UserDSName="DatPagos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="pago_combinado" msprop:Generator_TableClassName="pago_combinadoDataTable" msprop:Generator_TableVarName="tablepago_combinado" msprop:Generator_TablePropName="pago_combinado" msprop:Generator_RowDeletingName="pago_combinadoRowDeleting" msprop:Generator_RowChangingName="pago_combinadoRowChanging" msprop:Generator_RowEvHandlerName="pago_combinadoRowChangeEventHandler" msprop:Generator_RowDeletedName="pago_combinadoRowDeleted" msprop:Generator_UserTableName="pago_combinado" msprop:Generator_RowChangedName="pago_combinadoRowChanged" msprop:Generator_RowEvArgName="pago_combinadoRowChangeEvent" msprop:Generator_RowClassName="pago_combinadoRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

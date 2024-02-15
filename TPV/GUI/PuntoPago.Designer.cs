@@ -883,7 +883,7 @@ namespace TPV.GUI
             this.btnExacto.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExacto.Image = ((System.Drawing.Image)(resources.GetObject("btnExacto.Image")));
             this.btnExacto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExacto.Location = new System.Drawing.Point(1118, 551);
+            this.btnExacto.Location = new System.Drawing.Point(1118, 553);
             this.btnExacto.Name = "btnExacto";
             this.btnExacto.Size = new System.Drawing.Size(240, 66);
             this.btnExacto.TabIndex = 46;
