@@ -827,9 +827,7 @@ namespace TPV.GUI
                 }
 
                 //Aqui insertar en la tabla pagos combinados
-                RegistrarPago();
-                HacerPago(Int32.Parse(lblTicket.Text), false);
-                ActualizarCaja(true);
+                TerminarPago(true);
             }
         }
 
@@ -877,7 +875,9 @@ namespace TPV.GUI
                 {
                     //Proceso para pagar combinado
                     HacerPago(Int32.Parse(lblTicket.Text), false);
-                    
+                    CalcularTodo();
+                    txtPagoRegistrar.Text = "0";
+                    escritoUnPunto = false;
                 }
                 else
                 {
@@ -889,22 +889,21 @@ namespace TPV.GUI
             else
             {
                 //Culminamos el pago
-                TerminarPago();
+                TerminarPago(false);
             }
+
+        }
+
+        private void TerminarPago(bool actualizar)
+        {
+            HacerPago(Int32.Parse(lblTicket.Text), true);
+            RegistrarPago();
+            ActualizarCuentaYMesa();
+            ActualizarCaja(actualizar);
 
             CalcularTodo();
             txtPagoRegistrar.Text = "0";
             escritoUnPunto = false;
-
-        }
-
-        private void TerminarPago()
-        {
-            
-            HacerPago(Int32.Parse(lblTicket.Text), true);
-            RegistrarPago();
-            ActualizarCuentaYMesa();
-            ActualizarCaja(false);
         }
 
         private void ActualizarCuentaYMesa()
@@ -1094,19 +1093,19 @@ namespace TPV.GUI
                 {
                     if (ObtenerPagosAnteriores() > 1)
                     {
-                        MessageBox.Show("Facturas con mas de una forma de pago estan en proceso.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ElegirFactura(serie, siguiente);
                     }
                     else
                     {
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
                             Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
-                            GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
+                            GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);// se envia el nFactura y la serie que corresponde
                         }
                         else
                         {
                             Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                            GenerarFactura(oReporte, serie, siguiente, "TARJETA");// se envia el nFactura y la serie que corresponde
+                            GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);// se envia el nFactura y la serie que corresponde
                         }
                     }
                     
@@ -1115,39 +1114,39 @@ namespace TPV.GUI
                 {
                     if (ObtenerPagosAnteriores() > 1)
                     {
-                        MessageBox.Show("Facturas con mas de una forma de pago estan en proceso.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ElegirFactura(serie, siguiente);
                     }
                     else
                     {
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
                             Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
-                            GenerarFactura(oReporte, serie, siguiente, "BITCOIN");// se envia el nFactura y la serie que corresponde
+                            GenerarFactura(oReporte, serie, siguiente, "BITCOIN", false);// se envia el nFactura y la serie que corresponde
                         }
                         else
                         {
                             Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                            GenerarFactura(oReporte, serie, siguiente, "BITCOIN");// se envia el nFactura y la serie que corresponde
+                            GenerarFactura(oReporte, serie, siguiente, "BITCOIN", false);// se envia el nFactura y la serie que corresponde
                         }
                     }
                 }
-                else if (generar)
+                else if (generar && (pagoEfectivo || pagoExacto))
                 {
                     if (ObtenerPagosAnteriores() > 1)
                     {
-                        MessageBox.Show("Facturas con mas de una forma de pago estan en proceso.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ElegirFactura(serie, siguiente);
                     }
                     else
                     {
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
                             Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
-                            GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
+                            GenerarFactura(oReporte, serie, siguiente, "EFECTIVO", false);// se envia el nFactura y la serie que corresponde
                         }
                         else
                         {
                             Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                            GenerarFactura(oReporte, serie, siguiente, "EFECTIVO");// se envia el nFactura y la serie que corresponde
+                            GenerarFactura(oReporte, serie, siguiente, "EFECTIVO", false);// se envia el nFactura y la serie que corresponde
                         }
                     }
                 }
@@ -1276,6 +1275,20 @@ namespace TPV.GUI
             
         }
 
+        private void ElegirFactura(string serie, int siguiente)
+        {
+            if (Boolean.Parse(oConfiguracion.FacturaElectronica))
+            {
+                Reportes.REP.RepFacturaElectronicaMuchosPagos oReporte = new Reportes.REP.RepFacturaElectronicaMuchosPagos();
+                GenerarFactura(oReporte, serie, siguiente, "", true);// se envia el nFactura y la serie que corresponde
+            }
+            else
+            {
+                Reportes.REP.RepFacturaMuchosPagos oReporte = new Reportes.REP.RepFacturaMuchosPagos();
+                GenerarFactura(oReporte, serie, siguiente, "", true);// se envia el nFactura y la serie que corresponde
+            }
+        }
+
         private int ObtenerPagosAnteriores()
         {
             int resultado = 0;
@@ -1365,7 +1378,7 @@ namespace TPV.GUI
             }
         }
 
-        private void GenerarFactura(ReportClass oReporte, string serie, int nFactura,string tipoPago)
+        private void GenerarFactura(ReportClass oReporte, string serie, int nFactura,string tipoPago, Boolean pc)
         {
             DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
             List<DataTable> lstFacturas = new List<DataTable>();
@@ -1390,16 +1403,49 @@ namespace TPV.GUI
             foreach (DataTable item in lstFacturas)
             {
                 oReporte.SetDataSource(item);
+                Double totalPagar = 0;
+                Double efectivo = 0;
+                Double tarjeta = 0;
+                Double btc = 0;
+                if (pc)
+                {
+                    DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
+
+                    foreach (DataRow item2 in datos2.Rows)
+                    {
+                        if (item2["formaPago"].ToString().Equals("EFECTIVO"))
+                        {
+                            efectivo = Double.Parse(item2["monto"].ToString());
+                        }
+                        else if (item2["formaPago"].ToString().Equals("TARJETA"))
+                        {
+                            tarjeta = Double.Parse(item2["monto"].ToString());
+                        }
+                        else if (item2["formaPago"].ToString().Equals("BITCOIN"))
+                        {
+                            btc = Double.Parse(item2["monto"].ToString());
+                        }
+                        totalPagar += Double.Parse(item2["monto"].ToString());
+                    }
+                    oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: " + efectivo.ToString("0.00"));
+                    oReporte.SetParameterValue("PagoTarjeta", "TARJETA: " + tarjeta.ToString("0.00"));
+                    oReporte.SetParameterValue("PagoBtc", "BITCOIN: " + btc.ToString("0.00"));
+                }
+                else
+                {
+                    totalPagar = Double.Parse(txtTotalPagar.Text);
+                    oReporte.SetParameterValue("TipoPago", tipoPago);
+                }
                 oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
                 oReporte.SetParameterValue("Direccion", oEmpresa.Direccion.ToUpper());
                 oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
                 oReporte.SetParameterValue("Subtotal", lblSaldo.Text.ToString());
-                oReporte.SetParameterValue("TipoPago", tipoPago);
+                
                 oReporte.SetParameterValue("Serie", serie);
                 oReporte.SetParameterValue("nFactura", nFactura.ToString("00000"));
                 oReporte.SetParameterValue("Propina", lblPropina.Text.ToString());
-                oReporte.SetParameterValue("Total", "$" + Double.Parse(txtTotalPagar.Text).ToString("0.00"));
-                string totalStr = txtTotalPagar.Text;
+                oReporte.SetParameterValue("Total", "$" + totalPagar.ToString("0.00"));
+                string totalStr = totalPagar.ToString().Trim();
 
                 // Convierte la cadena a un número decimal
                 if (decimal.TryParse(totalStr, out decimal total))
@@ -1464,8 +1510,6 @@ namespace TPV.GUI
             {
                 DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
 
-                
-                
                 foreach (DataRow item in datos2.Rows)
                 {
                     if (item["formaPago"].ToString().Equals("EFECTIVO"))
@@ -1486,6 +1530,11 @@ namespace TPV.GUI
                 oReporte.SetParameterValue("PagoTarjeta", "TARJETA: " + tarjeta.ToString("0.00"));
                 oReporte.SetParameterValue("PagoBtc", "BITCOIN: " + btc.ToString("0.00"));
             }
+            else
+            {
+                totalPagar = Double.Parse(txtTotalPagar.Text);
+            }
+
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
             oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
