@@ -297,6 +297,39 @@ namespace DataManager
             }
         }
 
+        public static DataTable PedidoPorIdConDetallePagos(int idPedido, Boolean primerPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia;
+
+                sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idMesero, e.nombres, p.fecha,
+                                (pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as total,
+                                (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)) as descuento, (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) as iva,
+                                (pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) as propina,
+                                ((pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) + ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as totalPago,
+                                pc.idCuenta, pc.idPagoCombinado
+                                FROM pedido p
+                                LEFT JOIN cliente c ON p.idCliente = c.idCliente
+                                LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
+                                JOIN pago_combinado pc ON pc.idPedido = p.idPedido
+								JOIN cuenta cu ON cu.idCuenta = pc.idCuenta
+                                JOIN mesa m ON p.idMesa = m.idMesa
+                                WHERE p.idPedido = " + idPedido + "; ";
+
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable Clientes()
         {
             try

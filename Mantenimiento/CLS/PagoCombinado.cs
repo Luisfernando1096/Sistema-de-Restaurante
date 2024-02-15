@@ -43,5 +43,30 @@ namespace Mantenimiento.CLS
                 throw;
             }
         }
+
+        public Boolean CambiarFormaPago()
+        {
+            try
+            {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = "UPDATE pago_combinado SET idCuenta = " + idCuenta + " " +
+                    "WHERE idPedido = " + idPedido + " AND idPagoCombinado = " + idPagoCombinado + ";";
+
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasInsertadas = 0;
+                filasInsertadas = op.EjecutarSentencia(sentencia);
+                if (filasInsertadas > 0)
+                {
+                    resultado = true;
+                }
+                return resultado;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

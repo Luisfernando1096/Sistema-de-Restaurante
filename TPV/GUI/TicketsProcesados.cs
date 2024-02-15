@@ -16,8 +16,6 @@ namespace TPV.GUI
         public TicketsProcesados()
         {
             InitializeComponent();
-            rbEfectivo.Enabled = false;
-            rbTarjeta.Enabled = false;
         }
 
         private void CargarDatos()
@@ -30,29 +28,10 @@ namespace TPV.GUI
 
             try
             {
-                datos.DataSource = DataManager.DBConsultas.PedidoPorId(idPedido, false);
+                datos.DataSource = DataManager.DBConsultas.PedidoPorIdConDetallePagos(idPedido, false);
                 dgvClientes.DataSource = datos;
                 dgvClientes.AutoGenerateColumns = false;
-                if (dgvClientes.Rows.Count == 0)
-                {
-                    rbEfectivo.Enabled = false;
-                    rbTarjeta.Enabled = false;
-                    rbEfectivo.Checked = false;
-                    rbTarjeta.Checked = false;
-                }
-                else
-                {
-                    if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
-                    {
-                        rbTarjeta.Checked = false;
-                        rbEfectivo.Checked = true;
-                    }
-                    else
-                    {
-                        rbEfectivo.Checked = false;
-                        rbTarjeta.Checked = true;
-                    }
-                }
+                
             }
             catch (Exception)
             {
@@ -138,11 +117,27 @@ namespace TPV.GUI
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.Rows.Count>0)
+            if (dgvClientes.Rows.Count > 0)
             {
-                txtidPedido.Enabled = false;
-                rbEfectivo.Enabled = true;
-                rbTarjeta.Enabled = true;
+                EditarTicket f = new EditarTicket();
+                f.lblTicket.Text = dgvClientes.CurrentRow.Cells["idPedido"].Value.ToString(); ;
+                f.lblTicket.Tag = dgvClientes.CurrentRow.Cells["idPagoCombinado"].Value.ToString();
+
+                if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
+                {
+                    f.rbEfectivo.Checked = true;
+                } else if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("2"))
+                {
+                    f.rbTarjeta.Checked = true;
+                }
+                else
+                {
+                    f.rbBtc.Checked = true;
+                }
+
+                f.ShowDialog();
+
+                CargarDatos();
             }
             else
             {
@@ -160,9 +155,6 @@ namespace TPV.GUI
         {
             txtidPedido.Enabled = true;
             txtidPedido.Text = "";
-            rbEfectivo.Enabled = false;
-            rbTarjeta.Enabled = false;
-
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)

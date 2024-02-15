@@ -843,7 +843,7 @@ namespace TPV.GUI
             // 
             this.btnEfectivo.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEfectivo.Image = ((System.Drawing.Image)(resources.GetObject("btnEfectivo.Image")));
-            this.btnEfectivo.Location = new System.Drawing.Point(1118, 346);
+            this.btnEfectivo.Location = new System.Drawing.Point(1118, 348);
             this.btnEfectivo.Name = "btnEfectivo";
             this.btnEfectivo.Size = new System.Drawing.Size(240, 68);
             this.btnEfectivo.TabIndex = 43;
@@ -856,7 +856,7 @@ namespace TPV.GUI
             // 
             this.btnTarjeta.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTarjeta.Image = ((System.Drawing.Image)(resources.GetObject("btnTarjeta.Image")));
-            this.btnTarjeta.Location = new System.Drawing.Point(1126, 420);
+            this.btnTarjeta.Location = new System.Drawing.Point(1118, 418);
             this.btnTarjeta.Name = "btnTarjeta";
             this.btnTarjeta.Size = new System.Drawing.Size(240, 66);
             this.btnTarjeta.TabIndex = 44;
@@ -869,7 +869,7 @@ namespace TPV.GUI
             // 
             this.btnMuchos.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMuchos.Image = ((System.Drawing.Image)(resources.GetObject("btnMuchos.Image")));
-            this.btnMuchos.Location = new System.Drawing.Point(1126, 487);
+            this.btnMuchos.Location = new System.Drawing.Point(1118, 486);
             this.btnMuchos.Name = "btnMuchos";
             this.btnMuchos.Size = new System.Drawing.Size(240, 66);
             this.btnMuchos.TabIndex = 45;
@@ -883,7 +883,7 @@ namespace TPV.GUI
             this.btnExacto.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExacto.Image = ((System.Drawing.Image)(resources.GetObject("btnExacto.Image")));
             this.btnExacto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExacto.Location = new System.Drawing.Point(1126, 555);
+            this.btnExacto.Location = new System.Drawing.Point(1118, 551);
             this.btnExacto.Name = "btnExacto";
             this.btnExacto.Size = new System.Drawing.Size(240, 66);
             this.btnExacto.TabIndex = 46;
@@ -897,7 +897,7 @@ namespace TPV.GUI
             this.btnCortesia.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCortesia.Image = ((System.Drawing.Image)(resources.GetObject("btnCortesia.Image")));
             this.btnCortesia.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCortesia.Location = new System.Drawing.Point(1126, 623);
+            this.btnCortesia.Location = new System.Drawing.Point(1118, 621);
             this.btnCortesia.Name = "btnCortesia";
             this.btnCortesia.Size = new System.Drawing.Size(240, 73);
             this.btnCortesia.TabIndex = 47;
@@ -1098,7 +1098,7 @@ namespace TPV.GUI
             this.btnBtc.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBtc.Image = ((System.Drawing.Image)(resources.GetObject("btnBtc.Image")));
             this.btnBtc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBtc.Location = new System.Drawing.Point(1126, 274);
+            this.btnBtc.Location = new System.Drawing.Point(1118, 270);
             this.btnBtc.Name = "btnBtc";
             this.btnBtc.Size = new System.Drawing.Size(240, 77);
             this.btnBtc.TabIndex = 63;
