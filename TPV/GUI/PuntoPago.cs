@@ -742,6 +742,9 @@ namespace TPV.GUI
             if (!txtPagoRegistrar.Text.Equals("") && !txtPagoRegistrar.Text.Equals("0"))
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
+                //Registrar pago en cuenta
+                AumentarCuenta();
+
                 //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
             }
@@ -762,10 +765,13 @@ namespace TPV.GUI
             if (!txtPagoRegistrar.Text.Equals("") && !txtPagoRegistrar.Text.Equals("0"))
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
+                
+                //Registrar pago en cuenta
+                AumentarCuenta();
 
                 //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
-                //Registrar pago en cuenta
+                
             }
             else
             {
@@ -830,9 +836,13 @@ namespace TPV.GUI
                 {
                     pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
                 }
+                
+                //Registrar pago en cuenta
+                AumentarCuenta();
 
                 //Aqui insertar en la tabla pagos combinados
                 TerminarPago(true);
+                
             }
         }
 
@@ -871,7 +881,6 @@ namespace TPV.GUI
                 totalPago = Double.Parse(txtPagoRegistrar.Text);
             }
             
-
             pedido.TotalPago = totalPago;
 
             if (Double.Parse(txtPagoRegistrar.Text) < Double.Parse(txtTotalPagar.Text))
@@ -900,6 +909,39 @@ namespace TPV.GUI
 
         }
 
+        private void AumentarCuenta()
+        {
+            //Proceso para agregar el efectivo cancelado
+            DataTable cuenta = null;
+            Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
+            if (pagoTarjeta)
+            {
+                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
+            }
+            else if (pagoEfectivo || pagoExacto)
+            {
+                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
+            }
+            else if (pagoBtc)
+            {
+                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("3");
+            }
+
+            if (cuenta != null)
+            {
+                int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
+                String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
+                String numero = cuenta.Rows[0]["numero"].ToString();
+                Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
+                oCuenta.IdCuenta = idCuenta;
+                oCuenta.NombreCuenta = nombreCuenta;
+                oCuenta.Numero = numero;
+                oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
+
+                oCuenta.ActualizarSinTransaccion();
+            }
+        }
+
         private void TerminarPago(bool actualizar)
         {
             HacerPago(Int32.Parse(lblTicket.Text), true);
@@ -917,8 +959,6 @@ namespace TPV.GUI
             List<String> lstPago = new List<string>();
             if (!cortesia)
             {
-
-
                 if (datosEnMesa.Rows.Count == 1 && Double.Parse(txtPagoRegistrar.Text) >= Double.Parse(txtTotalPagar.Text))
                 {
                     //Actualizar estado de la mesa
@@ -931,35 +971,6 @@ namespace TPV.GUI
 
                 }
 
-                //Proceso para agregar el efectivo cancelado
-                DataTable cuenta = null;
-                Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
-                if (pagoTarjeta)
-                {
-                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
-                }
-                else if (pagoEfectivo && !pagoCortesia)
-                {
-                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
-                }
-                else if (pagoBtc)
-                {
-                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("3");
-                }
-
-                if (cuenta != null)
-                {
-                    int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
-                    String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
-                    String numero = cuenta.Rows[0]["numero"].ToString();
-                    Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
-                    oCuenta.IdCuenta = idCuenta;
-                    oCuenta.NombreCuenta = nombreCuenta;
-                    oCuenta.Numero = numero;
-                    oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
-
-                    lstPago.Add(oCuenta.Actualizar());
-                }
             }
             else
             {
@@ -977,7 +988,7 @@ namespace TPV.GUI
             }
 
             DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
-            if (transaccion.EjecutarTransaccion(lstPago) <= 0)
+            if (transaccion.EjecutarTransaccion(lstPago) < 0)
             {
                 MessageBox.Show("Ocurrio un error al hacer el pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1784,9 +1795,12 @@ namespace TPV.GUI
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
 
+                //Registrar pago en cuenta
+                AumentarCuenta();
+
                 //Aqui insertar en la tabla pagos combinados
                 ProcesarPago();
-                //Registrar pago en cuenta
+                
             }
             else
             {
