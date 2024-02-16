@@ -66,6 +66,10 @@ namespace TPV.GUI
                 {
                     btnCuentas.Visible = true;
                 }
+                else
+                {
+                    btnCuentas.Visible = false;
+                }
 
             }
             catch (Exception)
@@ -850,6 +854,7 @@ namespace TPV.GUI
                 pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
                 //Aqui insertar en la tabla pagos combinados
                 RegistrarPago();
+                ActualizarCuentaYMesa(true);
             }
             
         }
@@ -899,7 +904,7 @@ namespace TPV.GUI
         {
             HacerPago(Int32.Parse(lblTicket.Text), true);
             RegistrarPago();
-            ActualizarCuentaYMesa();
+            ActualizarCuentaYMesa(false);
             ActualizarCaja(actualizar);
 
             CalcularTodo();
@@ -907,59 +912,82 @@ namespace TPV.GUI
             escritoUnPunto = false;
         }
 
-        private void ActualizarCuentaYMesa()
+        private void ActualizarCuentaYMesa(Boolean cortesia)
         {
             List<String> lstPago = new List<string>();
-            if (datosEnMesa.Rows.Count == 1 && Double.Parse(txtPagoRegistrar.Text) >= Double.Parse(txtTotalPagar.Text))
+            if (!cortesia)
             {
-                //Actualizar estado de la mesa
-                Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+
+
+                if (datosEnMesa.Rows.Count == 1 && Double.Parse(txtPagoRegistrar.Text) >= Double.Parse(txtTotalPagar.Text))
                 {
-                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
-                    Disponible = true
-                };
-                lstPago.Add(mesa.ActualizarEstado());
+                    //Actualizar estado de la mesa
+                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+                    {
+                        IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                        Disponible = true
+                    };
+                    lstPago.Add(mesa.ActualizarEstado());
 
-            }
+                }
 
-            //Proceso para agregar el efectivo cancelado
-            DataTable cuenta = null;
-            Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
-            if (pagoTarjeta)
-            {
-                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
-            }
-            else if (pagoEfectivo && !pagoCortesia)
-            {
-                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
-            }
-            else if (pagoBtc)
-            {
-                cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("3");
-            }
+                //Proceso para agregar el efectivo cancelado
+                DataTable cuenta = null;
+                Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
+                if (pagoTarjeta)
+                {
+                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
+                }
+                else if (pagoEfectivo && !pagoCortesia)
+                {
+                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
+                }
+                else if (pagoBtc)
+                {
+                    cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("3");
+                }
 
-            if (cuenta != null)
-            {
-                int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
-                String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
-                String numero = cuenta.Rows[0]["numero"].ToString();
-                Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
-                oCuenta.IdCuenta = idCuenta;
-                oCuenta.NombreCuenta = nombreCuenta;
-                oCuenta.Numero = numero;
-                oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
+                if (cuenta != null)
+                {
+                    int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
+                    String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
+                    String numero = cuenta.Rows[0]["numero"].ToString();
+                    Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
+                    oCuenta.IdCuenta = idCuenta;
+                    oCuenta.NombreCuenta = nombreCuenta;
+                    oCuenta.Numero = numero;
+                    oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
 
-                lstPago.Add(oCuenta.Actualizar());
+                    lstPago.Add(oCuenta.Actualizar());
+                }
+            }
+            else
+            {
+                if (datosEnMesa.Rows.Count == 1)
+                {
+                    //Actualizar estado de la mesa
+                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+                    {
+                        IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                        Disponible = true
+                    };
+                    lstPago.Add(mesa.ActualizarEstado());
+
+                }
             }
 
             DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
-            if (transaccion.EjecutarTransaccion(lstPago) > 0)
+            if (transaccion.EjecutarTransaccion(lstPago) <= 0)
             {
-                MessageBox.Show("Pago exitoso", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ocurrio un error al hacer el pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            CalcularTodo();
-            txtPagoRegistrar.Text = "0";
-            escritoUnPunto = false;
+            else
+            {
+                CalcularTodo();
+                txtPagoRegistrar.Text = "0";
+                escritoUnPunto = false;
+            }
+            
         }
 
         private void HacerPago(int idP, bool terminar)
@@ -1428,9 +1456,9 @@ namespace TPV.GUI
                         }
                         totalPagar += Double.Parse(item2["monto"].ToString());
                     }
-                    oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: " + efectivo.ToString("0.00"));
-                    oReporte.SetParameterValue("PagoTarjeta", "TARJETA: " + tarjeta.ToString("0.00"));
-                    oReporte.SetParameterValue("PagoBtc", "BITCOIN: " + btc.ToString("0.00"));
+                    oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
+                    oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
+                    oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
                 }
                 else
                 {
@@ -1528,9 +1556,9 @@ namespace TPV.GUI
                     }
                     totalPagar += Double.Parse(item["monto"].ToString());
                 }
-                oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: " + efectivo.ToString("0.00"));
-                oReporte.SetParameterValue("PagoTarjeta", "TARJETA: " + tarjeta.ToString("0.00"));
-                oReporte.SetParameterValue("PagoBtc", "BITCOIN: " + btc.ToString("0.00"));
+                oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
+                oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
+                oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
             }
             else
             {
