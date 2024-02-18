@@ -26,6 +26,61 @@ namespace DataManager
 
         }
 
+        public static DataTable Departamentos()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idDepartamento, nombre FROM departamento;";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static object Direcciones()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idDireccion, idMunicipio, complemento FROM direccion;";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable MunicipiosPorDepartamento(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT idMunicipio, codigo, nombre, idDepartamento FROM municipio
+                                        WHERE idDepartamento = " + id + ";";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable TirajeFactura()
         {
             try
@@ -335,24 +390,14 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = "SELECT idCliente, nombre, direccion, email, telefono, NIT, regContable FROM cliente;";
-                DBOperacion operacion = new DBOperacion();
-
-                resultado = operacion.Consultar(sentencia);
-                return resultado;
-            }
-            catch (Exception)
-            {
-                return new DataTable();
-                throw;
-            }
-        }
-        public static DataTable UltimoPedido()
-        {
-            try
-            {
-                DataTable resultado = new DataTable();
-                String sentencia = "SELECT idPedido FROM pedido order by idPedido desc limit 1;";
+                String sentencia = @"SELECT 
+                                            c.idCliente, c.regContable, c.nombre, c.codActividad, c.desActividad, c.telefono, c.email, c.NIT, c.tipoDocumento, c.idDireccion,
+                                            CONCAT(IFNULL(CONCAT(de.nombre, ', '), ''), IFNULL(CONCAT(m.nombre, ', '), ''), IFNULL(d.complemento, '')) as direccion
+                                        FROM 
+                                            cliente c
+                                            LEFT JOIN direccion d ON c.idDireccion = d.idDireccion
+                                            LEFT JOIN municipio m ON m.idMunicipio = d.idMunicipio
+                                            LEFT JOIN departamento de ON de.idDepartamento = m.idDepartamento; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
