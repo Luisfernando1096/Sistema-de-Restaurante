@@ -16,14 +16,14 @@ namespace Reportes.REP {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RepTicketPagoCombinado : ReportClass {
+    public class RepPagoCombinado : ReportClass {
         
-        public RepTicketPagoCombinado() {
+        public RepPagoCombinado() {
         }
         
         public override string ResourceName {
             get {
-                return "RepTicketPagoCombinado.rpt";
+                return "RepPagoCombinado.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Reportes.REP {
         
         public override string FullResourceName {
             get {
-                return "Reportes.REP.RepTicketPagoCombinado.rpt";
+                return "Reportes.REP.RepPagoCombinado.rpt";
             }
             set {
                 // Do nothing
@@ -114,7 +114,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Footer3 {
+        public CrystalDecisions.Shared.IParameterField Parameter_Total {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -122,7 +122,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PagoBtc {
+        public CrystalDecisions.Shared.IParameterField Parameter_Descuento {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -130,7 +130,7 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PagoEfectivo {
+        public CrystalDecisions.Shared.IParameterField Parameter_Propina {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -138,17 +138,81 @@ namespace Reportes.REP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PagoTarjeta {
+        public CrystalDecisions.Shared.IParameterField Parameter_Iva {
             get {
                 return this.DataDefinition.ParameterFields[6];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_TotalPagar {
+            get {
+                return this.DataDefinition.ParameterFields[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Footer3 {
+            get {
+                return this.DataDefinition.ParameterFields[8];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Pago {
+            get {
+                return this.DataDefinition.ParameterFields[9];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Cambio {
+            get {
+                return this.DataDefinition.ParameterFields[10];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_PagoBtc {
+            get {
+                return this.DataDefinition.ParameterFields[11];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_PagoEfectivo {
+            get {
+                return this.DataDefinition.ParameterFields[12];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_PagoTarjeta {
+            get {
+                return this.DataDefinition.ParameterFields[13];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_FechaPago {
+            get {
+                return this.DataDefinition.ParameterFields[14];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRepTicketPagoCombinado : Component, ICachedReport {
+    public class CachedRepPagoCombinado : Component, ICachedReport {
         
-        public CachedRepTicketPagoCombinado() {
+        public CachedRepPagoCombinado() {
         }
         
         [Browsable(false)]
@@ -185,7 +249,7 @@ namespace Reportes.REP {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RepTicketPagoCombinado rpt = new RepTicketPagoCombinado();
+            RepPagoCombinado rpt = new RepPagoCombinado();
             rpt.Site = this.Site;
             return rpt;
         }

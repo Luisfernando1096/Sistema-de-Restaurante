@@ -303,6 +303,12 @@
       <DependentUpon>RepTicket.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepPagoCombinado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepPagoCombinado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepTicketPagoCombinado.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -602,6 +608,10 @@
     <EmbeddedResource Include="REP\RepTicket.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepTicket.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepPagoCombinado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepPagoCombinado.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepTicketPagoCombinado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -1078,6 +1078,7 @@ namespace DataManager
                                 CASE pe.idCuenta
 									WHEN 1 THEN 'Efectivo'
 									WHEN 2 THEN 'Tarjeta de crédito'
+                                    WHEN 3 THEN 'Bitcoin'
 									ELSE 'Otro'
 								END AS metodoPago
                             FROM 
@@ -1087,9 +1088,11 @@ namespace DataManager
                             JOIN
 							    familia f ON pro.idFamilia = f.idFamilia
                             JOIN 
-                                (SELECT pe.idCuenta, pe.idPedido, pe.descuento, pe.iva, pe.propina, pe.total, (pe.iva + pe.propina + pe.descuento + pe.total) as totalPagar, pe.idMesa, pe.fecha, em.nombres,
+                                (SELECT pc.idCuenta, pe.idPedido, pe.descuento, pe.iva, pe.propina, pe.total, (pe.iva + pe.propina + pe.descuento + pe.total) as totalPagar, pe.idMesa, pe.fecha, em.nombres,
                                 cli.nombre, m.nombre as mesa
 							    FROM pedido pe
+                                JOIN 
+									pago_combinado pc ON pc.idPedido = pe.idPedido
 							    JOIN 
 								    mesa m ON pe.idMesa = m.idMesa
 							    JOIN 

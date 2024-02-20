@@ -1200,7 +1200,7 @@ namespace TPV.GUI
                     {
                         if (ObtenerPagosAnteriores() > 1)
                         {
-                            Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                            Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado();
                             GenerarTicket(oReporte, true);
                         }
                         else
@@ -1224,7 +1224,7 @@ namespace TPV.GUI
                     {
                         if (ObtenerPagosAnteriores() > 1)
                         {
-                            Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                            Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado();
                             GenerarTicket(oReporte, true);
                         }
                         else
@@ -1249,7 +1249,7 @@ namespace TPV.GUI
                     {
                         if (ObtenerPagosAnteriores() > 1)
                         {
-                            Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                            Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado();
                             GenerarTicket(oReporte, true);
                         }
                         else

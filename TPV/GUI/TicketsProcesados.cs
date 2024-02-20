@@ -61,15 +61,55 @@ namespace TPV.GUI
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            //Imprimir ticket
-            Reportes.REP.RepTicket oReporte = new Reportes.REP.RepTicket();
-            GenerarTicket(oReporte);
+            DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(txtidPedido.Text));
+            
+            if (datos2.Rows.Count > 1)
+            {
+                //Imprimir ticket
+                Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
+                GenerarTicket(oReporte, true);
+            }
+            else
+            {
+                //Imprimir ticket
+                Reportes.REP.RepTicket oReporte = new Reportes.REP.RepTicket();
+                GenerarTicket(oReporte, false);
+            }
+            
         }
 
-        private void GenerarTicket(ReportClass oReporte)
+        private void GenerarTicket(ReportClass oReporte, Boolean pc)
         {
             DataTable datos = DataManager.DBConsultas.ImprimirTicket(Int32.Parse(txtidPedido.Text));
             oReporte.SetDataSource(datos);
+
+            Double efectivo = 0;
+            Double tarjeta = 0;
+            Double btc = 0;
+            if (pc)
+            {
+                DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(txtidPedido.Text));
+
+                foreach (DataRow item in datos2.Rows)
+                {
+                    if (item["formaPago"].ToString().Equals("EFECTIVO"))
+                    {
+                        efectivo = Double.Parse(item["monto"].ToString());
+                    }
+                    else if (item["formaPago"].ToString().Equals("TARJETA"))
+                    {
+                        tarjeta = Double.Parse(item["monto"].ToString());
+                    }
+                    else if (item["formaPago"].ToString().Equals("BITCOIN"))
+                    {
+                        btc = Double.Parse(item["monto"].ToString());
+                    }
+                }
+                oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
+                oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
+                oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
+            }
+
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
             oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
