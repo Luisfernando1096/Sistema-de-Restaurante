@@ -434,5 +434,11 @@ namespace Finanzas.GUI
             }
             
         }
+
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+            FiltrarDatos();
+        }
     }
 }
