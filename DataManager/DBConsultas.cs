@@ -1316,7 +1316,24 @@ namespace DataManager
                 throw;
             }
         }
-        public static DataTable Egreso(int id)
+        public static DataTable Egreso()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT e.idEgreso, e.idCaja, em.nombres, e.fecha, e.descripcion, e.cantidad FROM egreso e, empleado em where e.idUsuario = em.idEmpleado;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+        public static DataTable EgresoPorIdCaja(int id)
         {
             try
             {

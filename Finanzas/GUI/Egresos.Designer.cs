@@ -52,6 +52,7 @@ namespace Finanzas.GUI
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.rbCaja = new System.Windows.Forms.RadioButton();
@@ -250,6 +251,7 @@ namespace Finanzas.GUI
             this.txtHasta.Location = new System.Drawing.Point(65, 49);
             this.txtHasta.Margin = new System.Windows.Forms.Padding(2);
             this.txtHasta.Name = "txtHasta";
+            this.txtHasta.ReadOnly = true;
             this.txtHasta.Size = new System.Drawing.Size(152, 20);
             this.txtHasta.TabIndex = 19;
             this.txtHasta.TextChanged += new System.EventHandler(this.txtHasta_TextChanged);
@@ -270,6 +272,7 @@ namespace Finanzas.GUI
             this.txtDesde.Location = new System.Drawing.Point(65, 15);
             this.txtDesde.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesde.Name = "txtDesde";
+            this.txtDesde.ReadOnly = true;
             this.txtDesde.Size = new System.Drawing.Size(152, 20);
             this.txtDesde.TabIndex = 10;
             this.txtDesde.TextChanged += new System.EventHandler(this.txtDesde_TextChanged);
@@ -293,7 +296,8 @@ namespace Finanzas.GUI
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton5,
             this.toolStripSeparator4,
-            this.toolStripLabel2});
+            this.toolStripLabel2,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(2, 2);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1016, 57);
@@ -321,6 +325,16 @@ namespace Finanzas.GUI
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(0, 54);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(155, 54);
+            this.toolStripButton1.Text = "Ver informe";
             // 
             // groupBox4
             // 
@@ -528,7 +542,6 @@ namespace Finanzas.GUI
             this.txtCantidad.Size = new System.Drawing.Size(65, 20);
             this.txtCantidad.TabIndex = 16;
             this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
-            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // label4
             // 
@@ -690,7 +703,6 @@ namespace Finanzas.GUI
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1028, 535);
             this.tabControl1.TabIndex = 2;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // Egresos
             // 
@@ -780,5 +792,6 @@ namespace Finanzas.GUI
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblEfectivo;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

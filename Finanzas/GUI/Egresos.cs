@@ -22,11 +22,7 @@ namespace Finanzas.GUI
         {
             try
             {
-                datos.DataSource = DataManager.DBConsultas.Egreso(id);
-                dgvDatosCaja.DataSource = datos;
-                dgvDatosCaja.AutoGenerateColumns = false;
-
-                datos1.DataSource = DataManager.DBConsultas.Egreso(id);
+                datos1.DataSource = DataManager.DBConsultas.EgresoPorIdCaja(id);
                 dgvDatos.DataSource = datos1;
                 dgvDatos.AutoGenerateColumns = false;
             }
@@ -35,24 +31,20 @@ namespace Finanzas.GUI
                 throw;
             }
         }
-        private void CargarListaCaja()
+        private void CargarDatos()
         {
             try
             {
-                // Obtener los datos
-                DataTable caja = DataManager.DBConsultas.Cajas(false);
-
-                // Crear un nuevo DataTable con la estructura
-                DataTable dt = caja.Clone();
-
-                // Fusionar los datos de categoría con el nuevo DataTable
-                dt.Merge(caja);
+                datos.DataSource = DataManager.DBConsultas.Egreso();
+                dgvDatosCaja.DataSource = datos;
+                dgvDatosCaja.AutoGenerateColumns = false;
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        
         //private void FiltrarDatosDgv() 
         //{
         //    try
@@ -133,11 +125,11 @@ namespace Finanzas.GUI
         {
             try
             {
-                if (!txtDesde.Text.Equals("") && !txtHasta.Text.Equals(""))
+                string Desde = txtDesde.Text;
+                string hasta = txtHasta.Text;
+                if (!txtDesde.Text.Equals("") || !txtHasta.Text.Equals(""))
                 {
-                    string Desde = txtDesde.Text;
-                    string hasta = txtHasta.Text;
-
+                    
                     if (rbNinguno.Checked)
                     {
                         datos.DataSource = DataManager.DBConsultas.ConsultaFiltros1(Desde, hasta);
@@ -153,6 +145,23 @@ namespace Finanzas.GUI
                             dgvDatosCaja.AutoGenerateColumns = false;
                         }
                     }
+                }
+                else
+                {
+                    if (rbCaja.Checked)
+                    {
+                        if (!txtNumero.Text.Equals(""))
+                        {
+                            datos.DataSource = DataManager.DBConsultas.ConsultaFiltros2(Desde, hasta, Int32.Parse(txtNumero.Text));
+                            dgvDatosCaja.DataSource = datos;
+                            dgvDatosCaja.AutoGenerateColumns = false;
+                        }
+                    }
+                    else
+                    {
+                        CargarDatos();
+                    }
+                    
                 }
 
             }
@@ -194,7 +203,7 @@ namespace Finanzas.GUI
         {
             rbNinguno.Checked = true;
             FiltrarDatos();
-            CargarListaCaja();
+            CargarDatos();
             CargarDatos(idCajaAbierta);
         }
 
@@ -204,11 +213,6 @@ namespace Finanzas.GUI
         }
 
         private void txtHasta_TextChanged(object sender, EventArgs e)
-        {
-            FiltrarDatos();
-        }
-
-        private void cmbCaja_SelectedIndexChanged(object sender, EventArgs e)
         {
             FiltrarDatos();
         }
@@ -268,11 +272,6 @@ namespace Finanzas.GUI
                 e.Handled = true; // Evita que el carácter ingresado se muestre en el TextBox
                 MessageBox.Show("El formato debe ser YYYY-MM-DD");
             }
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -382,11 +381,6 @@ namespace Finanzas.GUI
                 MessageBox.Show("No se realizo, no hay ninguna caja abierta. ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-        }
-
-        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void txtCantidad_TextChanged(object sender, EventArgs e)
