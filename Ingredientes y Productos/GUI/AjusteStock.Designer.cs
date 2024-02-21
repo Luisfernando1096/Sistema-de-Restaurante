@@ -36,6 +36,12 @@ namespace Ingredientes_y_Productos.GUI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageProductos = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ajusteProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.justificacionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmbAjusteProducto = new System.Windows.Forms.ComboBox();
             this.txtIdProducto = new System.Windows.Forms.TextBox();
@@ -66,6 +72,12 @@ namespace Ingredientes_y_Productos.GUI
             this.dtpFechaProducto = new System.Windows.Forms.DateTimePicker();
             this.tabPageIngredientes = new System.Windows.Forms.TabPage();
             this.dgvIngredientes = new System.Windows.Forms.DataGridView();
+            this.idIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ajusteIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.justificacionIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CntidadInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblUsuario1 = new System.Windows.Forms.Label();
@@ -131,18 +143,6 @@ namespace Ingredientes_y_Productos.GUI
             this.bntSalirAjuste = new System.Windows.Forms.ToolStripButton();
             this.btnImprimir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ajusteProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.justificacionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ajusteIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.justificacionIngrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CntidadInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPageProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
@@ -172,7 +172,7 @@ namespace Ingredientes_y_Productos.GUI
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(200, 40);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1028, 574);
@@ -185,9 +185,9 @@ namespace Ingredientes_y_Productos.GUI
             this.tabPageProductos.Controls.Add(this.toolStrip2);
             this.tabPageProductos.Controls.Add(this.groupBox3);
             this.tabPageProductos.Location = new System.Drawing.Point(4, 44);
-            this.tabPageProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageProductos.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageProductos.Name = "tabPageProductos";
-            this.tabPageProductos.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageProductos.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageProductos.Size = new System.Drawing.Size(1020, 526);
             this.tabPageProductos.TabIndex = 0;
             this.tabPageProductos.Text = "       Productos        ";
@@ -220,7 +220,8 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvProductos.Location = new System.Drawing.Point(2, 162);
-            this.dgvProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvProductos.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvProductos.MultiSelect = false;
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
             this.dgvProductos.RowHeadersVisible = false;
@@ -229,6 +230,53 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(1016, 316);
             this.dgvProductos.TabIndex = 0;
+            // 
+            // idProducto
+            // 
+            this.idProducto.HeaderText = "ID";
+            this.idProducto.MinimumWidth = 6;
+            this.idProducto.Name = "idProducto";
+            this.idProducto.ReadOnly = true;
+            this.idProducto.Width = 40;
+            // 
+            // nombreProducto
+            // 
+            this.nombreProducto.HeaderText = "Nombre del producto";
+            this.nombreProducto.MinimumWidth = 6;
+            this.nombreProducto.Name = "nombreProducto";
+            this.nombreProducto.ReadOnly = true;
+            this.nombreProducto.Width = 260;
+            // 
+            // cantidadProducto
+            // 
+            this.cantidadProducto.HeaderText = "Cantidad";
+            this.cantidadProducto.MinimumWidth = 6;
+            this.cantidadProducto.Name = "cantidadProducto";
+            this.cantidadProducto.ReadOnly = true;
+            this.cantidadProducto.Width = 125;
+            // 
+            // ajusteProducto
+            // 
+            this.ajusteProducto.HeaderText = "Ajuste";
+            this.ajusteProducto.MinimumWidth = 6;
+            this.ajusteProducto.Name = "ajusteProducto";
+            this.ajusteProducto.ReadOnly = true;
+            this.ajusteProducto.Width = 125;
+            // 
+            // justificacionProducto
+            // 
+            this.justificacionProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.justificacionProducto.HeaderText = "Justificacion";
+            this.justificacionProducto.MinimumWidth = 6;
+            this.justificacionProducto.Name = "justificacionProducto";
+            this.justificacionProducto.ReadOnly = true;
+            // 
+            // cantidadInicial
+            // 
+            this.cantidadInicial.HeaderText = "Cantidad Inicial";
+            this.cantidadInicial.Name = "cantidadInicial";
+            this.cantidadInicial.ReadOnly = true;
+            this.cantidadInicial.Visible = false;
             // 
             // groupBox2
             // 
@@ -246,9 +294,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(2, 64);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(1016, 98);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
@@ -258,7 +306,7 @@ namespace Ingredientes_y_Productos.GUI
             this.cmbAjusteProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAjusteProducto.FormattingEnabled = true;
             this.cmbAjusteProducto.Location = new System.Drawing.Point(337, 48);
-            this.cmbAjusteProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbAjusteProducto.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAjusteProducto.Name = "cmbAjusteProducto";
             this.cmbAjusteProducto.Size = new System.Drawing.Size(127, 21);
             this.cmbAjusteProducto.TabIndex = 13;
@@ -267,7 +315,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.txtIdProducto.Enabled = false;
             this.txtIdProducto.Location = new System.Drawing.Point(141, 47);
-            this.txtIdProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIdProducto.Margin = new System.Windows.Forms.Padding(2);
             this.txtIdProducto.Name = "txtIdProducto";
             this.txtIdProducto.Size = new System.Drawing.Size(19, 20);
             this.txtIdProducto.TabIndex = 12;
@@ -276,7 +324,7 @@ namespace Ingredientes_y_Productos.GUI
             // bntAgregarProducto
             // 
             this.bntAgregarProducto.Location = new System.Drawing.Point(956, 44);
-            this.bntAgregarProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bntAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.bntAgregarProducto.Name = "bntAgregarProducto";
             this.bntAgregarProducto.Size = new System.Drawing.Size(98, 24);
             this.bntAgregarProducto.TabIndex = 11;
@@ -287,7 +335,7 @@ namespace Ingredientes_y_Productos.GUI
             // bntBuscarProductos
             // 
             this.bntBuscarProductos.Location = new System.Drawing.Point(171, 46);
-            this.bntBuscarProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bntBuscarProductos.Margin = new System.Windows.Forms.Padding(2);
             this.bntBuscarProductos.Name = "bntBuscarProductos";
             this.bntBuscarProductos.Size = new System.Drawing.Size(80, 21);
             this.bntBuscarProductos.TabIndex = 10;
@@ -308,7 +356,7 @@ namespace Ingredientes_y_Productos.GUI
             // txtJustificacionProducto
             // 
             this.txtJustificacionProducto.Location = new System.Drawing.Point(678, 48);
-            this.txtJustificacionProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtJustificacionProducto.Margin = new System.Windows.Forms.Padding(2);
             this.txtJustificacionProducto.Name = "txtJustificacionProducto";
             this.txtJustificacionProducto.Size = new System.Drawing.Size(264, 20);
             this.txtJustificacionProducto.TabIndex = 8;
@@ -326,7 +374,7 @@ namespace Ingredientes_y_Productos.GUI
             // txtCantidadProducto
             // 
             this.txtCantidadProducto.Location = new System.Drawing.Point(520, 48);
-            this.txtCantidadProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCantidadProducto.Margin = new System.Windows.Forms.Padding(2);
             this.txtCantidadProducto.Name = "txtCantidadProducto";
             this.txtCantidadProducto.Size = new System.Drawing.Size(76, 20);
             this.txtCantidadProducto.TabIndex = 6;
@@ -356,7 +404,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.txtProductos.Enabled = false;
             this.txtProductos.Location = new System.Drawing.Point(14, 71);
-            this.txtProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProductos.Margin = new System.Windows.Forms.Padding(2);
             this.txtProductos.Name = "txtProductos";
             this.txtProductos.Size = new System.Drawing.Size(239, 20);
             this.txtProductos.TabIndex = 2;
@@ -473,9 +521,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.Controls.Add(this.dtpFechaProducto);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox3.Location = new System.Drawing.Point(2, 478);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(1016, 46);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
@@ -484,7 +532,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(4, 10);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(33, 33);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -516,7 +564,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dtpFechaProducto.CustomFormat = "yyyy/MM/dd";
             this.dtpFechaProducto.Enabled = false;
             this.dtpFechaProducto.Location = new System.Drawing.Point(944, 15);
-            this.dtpFechaProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFechaProducto.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFechaProducto.Name = "dtpFechaProducto";
             this.dtpFechaProducto.Size = new System.Drawing.Size(111, 20);
             this.dtpFechaProducto.TabIndex = 0;
@@ -528,9 +576,9 @@ namespace Ingredientes_y_Productos.GUI
             this.tabPageIngredientes.Controls.Add(this.groupBox5);
             this.tabPageIngredientes.Controls.Add(this.toolStrip1);
             this.tabPageIngredientes.Location = new System.Drawing.Point(4, 44);
-            this.tabPageIngredientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageIngredientes.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageIngredientes.Name = "tabPageIngredientes";
-            this.tabPageIngredientes.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageIngredientes.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageIngredientes.Size = new System.Drawing.Size(1020, 526);
             this.tabPageIngredientes.TabIndex = 1;
             this.tabPageIngredientes.Text = "       Ingredientes       ";
@@ -563,7 +611,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvIngredientes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIngredientes.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvIngredientes.Location = new System.Drawing.Point(2, 162);
-            this.dgvIngredientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvIngredientes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvIngredientes.Name = "dgvIngredientes";
             this.dgvIngredientes.ReadOnly = true;
             this.dgvIngredientes.RowHeadersVisible = false;
@@ -573,6 +621,53 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvIngredientes.Size = new System.Drawing.Size(1016, 316);
             this.dgvIngredientes.TabIndex = 15;
             // 
+            // idIngrediente
+            // 
+            this.idIngrediente.HeaderText = "ID";
+            this.idIngrediente.MinimumWidth = 6;
+            this.idIngrediente.Name = "idIngrediente";
+            this.idIngrediente.ReadOnly = true;
+            this.idIngrediente.Width = 40;
+            // 
+            // nombreIngrediente
+            // 
+            this.nombreIngrediente.HeaderText = "Nombre del ingrediente";
+            this.nombreIngrediente.MinimumWidth = 6;
+            this.nombreIngrediente.Name = "nombreIngrediente";
+            this.nombreIngrediente.ReadOnly = true;
+            this.nombreIngrediente.Width = 260;
+            // 
+            // cantidadIngrediente
+            // 
+            this.cantidadIngrediente.HeaderText = "Cantidad";
+            this.cantidadIngrediente.MinimumWidth = 6;
+            this.cantidadIngrediente.Name = "cantidadIngrediente";
+            this.cantidadIngrediente.ReadOnly = true;
+            this.cantidadIngrediente.Width = 125;
+            // 
+            // ajusteIngrediente
+            // 
+            this.ajusteIngrediente.HeaderText = "Ajuste";
+            this.ajusteIngrediente.MinimumWidth = 6;
+            this.ajusteIngrediente.Name = "ajusteIngrediente";
+            this.ajusteIngrediente.ReadOnly = true;
+            this.ajusteIngrediente.Width = 125;
+            // 
+            // justificacionIngrediente
+            // 
+            this.justificacionIngrediente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.justificacionIngrediente.HeaderText = "Justificacion";
+            this.justificacionIngrediente.MinimumWidth = 6;
+            this.justificacionIngrediente.Name = "justificacionIngrediente";
+            this.justificacionIngrediente.ReadOnly = true;
+            // 
+            // CntidadInicial
+            // 
+            this.CntidadInicial.HeaderText = "Cantidad Inicial";
+            this.CntidadInicial.Name = "CntidadInicial";
+            this.CntidadInicial.ReadOnly = true;
+            this.CntidadInicial.Visible = false;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox1);
@@ -581,9 +676,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox1.Controls.Add(this.dtpFechaIngrediente);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(2, 478);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1016, 46);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
@@ -592,7 +687,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(4, 10);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(33, 33);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -623,7 +718,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.dtpFechaIngrediente.Enabled = false;
             this.dtpFechaIngrediente.Location = new System.Drawing.Point(944, 15);
-            this.dtpFechaIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFechaIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFechaIngrediente.Name = "dtpFechaIngrediente";
             this.dtpFechaIngrediente.Size = new System.Drawing.Size(111, 20);
             this.dtpFechaIngrediente.TabIndex = 0;
@@ -644,9 +739,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox5.Controls.Add(this.label11);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(2, 64);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(1016, 98);
             this.groupBox5.TabIndex = 18;
             this.groupBox5.TabStop = false;
@@ -656,7 +751,7 @@ namespace Ingredientes_y_Productos.GUI
             this.cmbAjusteIngrediente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAjusteIngrediente.FormattingEnabled = true;
             this.cmbAjusteIngrediente.Location = new System.Drawing.Point(340, 46);
-            this.cmbAjusteIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbAjusteIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAjusteIngrediente.Name = "cmbAjusteIngrediente";
             this.cmbAjusteIngrediente.Size = new System.Drawing.Size(127, 21);
             this.cmbAjusteIngrediente.TabIndex = 14;
@@ -665,7 +760,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.txtIdIngrediente.Enabled = false;
             this.txtIdIngrediente.Location = new System.Drawing.Point(148, 46);
-            this.txtIdIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIdIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.txtIdIngrediente.Name = "txtIdIngrediente";
             this.txtIdIngrediente.Size = new System.Drawing.Size(19, 20);
             this.txtIdIngrediente.TabIndex = 13;
@@ -674,7 +769,7 @@ namespace Ingredientes_y_Productos.GUI
             // bntAgregarIngrediente
             // 
             this.bntAgregarIngrediente.Location = new System.Drawing.Point(956, 44);
-            this.bntAgregarIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bntAgregarIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.bntAgregarIngrediente.Name = "bntAgregarIngrediente";
             this.bntAgregarIngrediente.Size = new System.Drawing.Size(98, 24);
             this.bntAgregarIngrediente.TabIndex = 11;
@@ -685,7 +780,7 @@ namespace Ingredientes_y_Productos.GUI
             // bntBuscarIngrediente
             // 
             this.bntBuscarIngrediente.Location = new System.Drawing.Point(171, 46);
-            this.bntBuscarIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bntBuscarIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.bntBuscarIngrediente.Name = "bntBuscarIngrediente";
             this.bntBuscarIngrediente.Size = new System.Drawing.Size(80, 21);
             this.bntBuscarIngrediente.TabIndex = 10;
@@ -706,7 +801,7 @@ namespace Ingredientes_y_Productos.GUI
             // txtJustificacionIngrediente
             // 
             this.txtJustificacionIngrediente.Location = new System.Drawing.Point(678, 48);
-            this.txtJustificacionIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtJustificacionIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.txtJustificacionIngrediente.Name = "txtJustificacionIngrediente";
             this.txtJustificacionIngrediente.Size = new System.Drawing.Size(264, 20);
             this.txtJustificacionIngrediente.TabIndex = 8;
@@ -724,7 +819,7 @@ namespace Ingredientes_y_Productos.GUI
             // txtCantidadIngrediente
             // 
             this.txtCantidadIngrediente.Location = new System.Drawing.Point(520, 48);
-            this.txtCantidadIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCantidadIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.txtCantidadIngrediente.Name = "txtCantidadIngrediente";
             this.txtCantidadIngrediente.Size = new System.Drawing.Size(76, 20);
             this.txtCantidadIngrediente.TabIndex = 6;
@@ -754,7 +849,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.txtIngrediente.Enabled = false;
             this.txtIngrediente.Location = new System.Drawing.Point(14, 71);
-            this.txtIngrediente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIngrediente.Margin = new System.Windows.Forms.Padding(2);
             this.txtIngrediente.Name = "txtIngrediente";
             this.txtIngrediente.Size = new System.Drawing.Size(239, 20);
             this.txtIngrediente.TabIndex = 2;
@@ -870,9 +965,9 @@ namespace Ingredientes_y_Productos.GUI
             this.tabPageAjuste.Controls.Add(this.groupBox4);
             this.tabPageAjuste.Controls.Add(this.toolStrip3);
             this.tabPageAjuste.Location = new System.Drawing.Point(4, 44);
-            this.tabPageAjuste.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageAjuste.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageAjuste.Name = "tabPageAjuste";
-            this.tabPageAjuste.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageAjuste.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageAjuste.Size = new System.Drawing.Size(1020, 526);
             this.tabPageAjuste.TabIndex = 2;
             this.tabPageAjuste.Text = "       Consultar ajustes       ";
@@ -909,7 +1004,8 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvAjusteStock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAjusteStock.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvAjusteStock.Location = new System.Drawing.Point(2, 147);
-            this.dgvAjusteStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvAjusteStock.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvAjusteStock.MultiSelect = false;
             this.dgvAjusteStock.Name = "dgvAjusteStock";
             this.dgvAjusteStock.ReadOnly = true;
             this.dgvAjusteStock.RowHeadersVisible = false;
@@ -1020,9 +1116,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox6.Controls.Add(this.dtpFechaStock);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox6.Location = new System.Drawing.Point(2, 478);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox6.Size = new System.Drawing.Size(1016, 46);
             this.groupBox6.TabIndex = 18;
             this.groupBox6.TabStop = false;
@@ -1031,7 +1127,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(4, 10);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(33, 33);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1062,7 +1158,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             this.dtpFechaStock.Enabled = false;
             this.dtpFechaStock.Location = new System.Drawing.Point(944, 15);
-            this.dtpFechaStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFechaStock.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFechaStock.Name = "dtpFechaStock";
             this.dtpFechaStock.Size = new System.Drawing.Size(111, 20);
             this.dtpFechaStock.TabIndex = 0;
@@ -1083,9 +1179,9 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(2, 59);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(1016, 88);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
@@ -1093,7 +1189,7 @@ namespace Ingredientes_y_Productos.GUI
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(407, 58);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 22);
             this.button1.TabIndex = 14;
@@ -1104,7 +1200,7 @@ namespace Ingredientes_y_Productos.GUI
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(833, 33);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(116, 24);
             this.button4.TabIndex = 13;
@@ -1115,7 +1211,7 @@ namespace Ingredientes_y_Productos.GUI
             // dtpFechaFinal
             // 
             this.dtpFechaFinal.Location = new System.Drawing.Point(717, 37);
-            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
             this.dtpFechaFinal.Size = new System.Drawing.Size(106, 20);
             this.dtpFechaFinal.TabIndex = 12;
@@ -1124,7 +1220,7 @@ namespace Ingredientes_y_Productos.GUI
             // dtpFechaInicio
             // 
             this.dtpFechaInicio.Location = new System.Drawing.Point(584, 37);
-            this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFechaInicio.Name = "dtpFechaInicio";
             this.dtpFechaInicio.Size = new System.Drawing.Size(110, 20);
             this.dtpFechaInicio.TabIndex = 11;
@@ -1153,7 +1249,7 @@ namespace Ingredientes_y_Productos.GUI
             // txtBuscar
             // 
             this.txtBuscar.Location = new System.Drawing.Point(163, 59);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(241, 20);
             this.txtBuscar.TabIndex = 8;
@@ -1174,7 +1270,7 @@ namespace Ingredientes_y_Productos.GUI
             this.cmbTipoAjusteStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoAjusteStock.FormattingEnabled = true;
             this.cmbTipoAjusteStock.Location = new System.Drawing.Point(328, 31);
-            this.cmbTipoAjusteStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbTipoAjusteStock.Margin = new System.Windows.Forms.Padding(2);
             this.cmbTipoAjusteStock.Name = "cmbTipoAjusteStock";
             this.cmbTipoAjusteStock.Size = new System.Drawing.Size(142, 21);
             this.cmbTipoAjusteStock.TabIndex = 3;
@@ -1195,7 +1291,7 @@ namespace Ingredientes_y_Productos.GUI
             this.cmbAjusteEn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAjusteEn.FormattingEnabled = true;
             this.cmbAjusteEn.Location = new System.Drawing.Point(164, 31);
-            this.cmbAjusteEn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbAjusteEn.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAjusteEn.Name = "cmbAjusteEn";
             this.cmbAjusteEn.Size = new System.Drawing.Size(140, 21);
             this.cmbAjusteEn.TabIndex = 1;
@@ -1271,107 +1367,13 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 57);
             // 
-            // idProducto
-            // 
-            this.idProducto.HeaderText = "ID";
-            this.idProducto.MinimumWidth = 6;
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Width = 40;
-            // 
-            // nombreProducto
-            // 
-            this.nombreProducto.HeaderText = "Nombre del producto";
-            this.nombreProducto.MinimumWidth = 6;
-            this.nombreProducto.Name = "nombreProducto";
-            this.nombreProducto.ReadOnly = true;
-            this.nombreProducto.Width = 260;
-            // 
-            // cantidadProducto
-            // 
-            this.cantidadProducto.HeaderText = "Cantidad";
-            this.cantidadProducto.MinimumWidth = 6;
-            this.cantidadProducto.Name = "cantidadProducto";
-            this.cantidadProducto.ReadOnly = true;
-            this.cantidadProducto.Width = 125;
-            // 
-            // ajusteProducto
-            // 
-            this.ajusteProducto.HeaderText = "Ajuste";
-            this.ajusteProducto.MinimumWidth = 6;
-            this.ajusteProducto.Name = "ajusteProducto";
-            this.ajusteProducto.ReadOnly = true;
-            this.ajusteProducto.Width = 125;
-            // 
-            // justificacionProducto
-            // 
-            this.justificacionProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.justificacionProducto.HeaderText = "Justificacion";
-            this.justificacionProducto.MinimumWidth = 6;
-            this.justificacionProducto.Name = "justificacionProducto";
-            this.justificacionProducto.ReadOnly = true;
-            // 
-            // cantidadInicial
-            // 
-            this.cantidadInicial.HeaderText = "Cantidad Inicial";
-            this.cantidadInicial.Name = "cantidadInicial";
-            this.cantidadInicial.ReadOnly = true;
-            this.cantidadInicial.Visible = false;
-            // 
-            // idIngrediente
-            // 
-            this.idIngrediente.HeaderText = "ID";
-            this.idIngrediente.MinimumWidth = 6;
-            this.idIngrediente.Name = "idIngrediente";
-            this.idIngrediente.ReadOnly = true;
-            this.idIngrediente.Width = 40;
-            // 
-            // nombreIngrediente
-            // 
-            this.nombreIngrediente.HeaderText = "Nombre del ingrediente";
-            this.nombreIngrediente.MinimumWidth = 6;
-            this.nombreIngrediente.Name = "nombreIngrediente";
-            this.nombreIngrediente.ReadOnly = true;
-            this.nombreIngrediente.Width = 260;
-            // 
-            // cantidadIngrediente
-            // 
-            this.cantidadIngrediente.HeaderText = "Cantidad";
-            this.cantidadIngrediente.MinimumWidth = 6;
-            this.cantidadIngrediente.Name = "cantidadIngrediente";
-            this.cantidadIngrediente.ReadOnly = true;
-            this.cantidadIngrediente.Width = 125;
-            // 
-            // ajusteIngrediente
-            // 
-            this.ajusteIngrediente.HeaderText = "Ajuste";
-            this.ajusteIngrediente.MinimumWidth = 6;
-            this.ajusteIngrediente.Name = "ajusteIngrediente";
-            this.ajusteIngrediente.ReadOnly = true;
-            this.ajusteIngrediente.Width = 125;
-            // 
-            // justificacionIngrediente
-            // 
-            this.justificacionIngrediente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.justificacionIngrediente.HeaderText = "Justificacion";
-            this.justificacionIngrediente.MinimumWidth = 6;
-            this.justificacionIngrediente.Name = "justificacionIngrediente";
-            this.justificacionIngrediente.ReadOnly = true;
-            // 
-            // CntidadInicial
-            // 
-            this.CntidadInicial.HeaderText = "Cantidad Inicial";
-            this.CntidadInicial.Name = "CntidadInicial";
-            this.CntidadInicial.ReadOnly = true;
-            this.CntidadInicial.Visible = false;
-            // 
             // AjusteStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 574);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AjusteStock";
             this.Text = "AjusteStock";
             this.Load += new System.EventHandler(this.AjusteStock_Load);

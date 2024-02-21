@@ -167,6 +167,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvProductos.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvProductos.Location = new System.Drawing.Point(0, 50);
             this.dgvProductos.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvProductos.MultiSelect = false;
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
             this.dgvProductos.RowHeadersVisible = false;

@@ -41,7 +41,6 @@ namespace Ingredientes_y_Productos.GUI
             this.Presentacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-//            this.CantidadInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Selecionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarIngrediente)).BeginInit();
@@ -139,12 +138,12 @@ namespace Ingredientes_y_Productos.GUI
             this.Presentacion,
             this.Stock,
             this.Precio,
-            //this.CantidadInicial,
             this.Selecionar});
             this.dgvBuscarIngrediente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBuscarIngrediente.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvBuscarIngrediente.Location = new System.Drawing.Point(0, 50);
             this.dgvBuscarIngrediente.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvBuscarIngrediente.MultiSelect = false;
             this.dgvBuscarIngrediente.Name = "dgvBuscarIngrediente";
             this.dgvBuscarIngrediente.ReadOnly = true;
             this.dgvBuscarIngrediente.RowHeadersVisible = false;
@@ -201,9 +200,6 @@ namespace Ingredientes_y_Productos.GUI
             this.Precio.ReadOnly = true;
             this.Precio.Visible = false;
             this.Precio.Width = 6;
-            // 
-            // CantidadInicial
-            // 
             // 
             // Selecionar
             // 

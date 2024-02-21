@@ -29,9 +29,9 @@ namespace Finanzas.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Egresos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tanConsultas = new System.Windows.Forms.TabPage();
             this.dgvDatosCaja = new System.Windows.Forms.DataGridView();
             this.idEgreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -134,6 +134,7 @@ namespace Finanzas.GUI
             this.dgvDatosCaja.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvDatosCaja.Location = new System.Drawing.Point(2, 137);
             this.dgvDatosCaja.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvDatosCaja.MultiSelect = false;
             this.dgvDatosCaja.Name = "dgvDatosCaja";
             this.dgvDatosCaja.ReadOnly = true;
             this.dgvDatosCaja.RowHeadersVisible = false;
@@ -173,8 +174,8 @@ namespace Finanzas.GUI
             // fecha
             // 
             this.fecha.DataPropertyName = "fecha";
-            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha.DefaultCellStyle = dataGridViewCellStyle3;
             this.fecha.HeaderText = "Fecha";
             this.fecha.MinimumWidth = 6;
             this.fecha.Name = "fecha";
@@ -420,6 +421,7 @@ namespace Finanzas.GUI
             this.dgvDatos.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvDatos.Location = new System.Drawing.Point(2, 169);
             this.dgvDatos.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
@@ -435,7 +437,6 @@ namespace Finanzas.GUI
             this.idEgreso1.HeaderText = "ID";
             this.idEgreso1.MinimumWidth = 6;
             this.idEgreso1.Name = "idEgreso1";
-            this.idEgreso1.ReadOnly = true;
             this.idEgreso1.Width = 70;
             // 
             // idCaja1
@@ -444,7 +445,6 @@ namespace Finanzas.GUI
             this.idCaja1.HeaderText = "idCaja";
             this.idCaja1.MinimumWidth = 6;
             this.idCaja1.Name = "idCaja1";
-            this.idCaja1.ReadOnly = true;
             this.idCaja1.Width = 70;
             // 
             // Usuario1
@@ -453,14 +453,13 @@ namespace Finanzas.GUI
             this.Usuario1.HeaderText = "Usuario";
             this.Usuario1.MinimumWidth = 6;
             this.Usuario1.Name = "Usuario1";
-            this.Usuario1.ReadOnly = true;
             this.Usuario1.Width = 175;
             // 
             // fecha1
             // 
             this.fecha1.DataPropertyName = "fecha";
-            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha1.DefaultCellStyle = dataGridViewCellStyle4;
             this.fecha1.HeaderText = "Fecha";
             this.fecha1.MinimumWidth = 6;
             this.fecha1.Name = "fecha1";
@@ -473,7 +472,6 @@ namespace Finanzas.GUI
             this.cantidad1.HeaderText = "Cantidad";
             this.cantidad1.MinimumWidth = 6;
             this.cantidad1.Name = "cantidad1";
-            this.cantidad1.ReadOnly = true;
             this.cantidad1.Width = 125;
             // 
             // descripcion1
@@ -483,7 +481,6 @@ namespace Finanzas.GUI
             this.descripcion1.HeaderText = "Descripcion/justifiacion";
             this.descripcion1.MinimumWidth = 6;
             this.descripcion1.Name = "descripcion1";
-            this.descripcion1.ReadOnly = true;
             // 
             // groupBox2
             // 

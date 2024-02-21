@@ -89,15 +89,16 @@
             this.nMesas});
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dgvDatos.Location = new System.Drawing.Point(0, 126);
-            this.dgvDatos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvDatos.Location = new System.Drawing.Point(0, 115);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.RowTemplate.Height = 24;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(1354, 441);
+            this.dgvDatos.Size = new System.Drawing.Size(1016, 346);
             this.dgvDatos.TabIndex = 21;
             this.dgvDatos.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDatos_ColumnHeaderMouseClick);
             // 
@@ -196,10 +197,10 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(0, 67);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(1354, 59);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(1016, 48);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             // 
@@ -207,47 +208,50 @@
             // 
             this.cmbSalones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalones.FormattingEnabled = true;
-            this.cmbSalones.Location = new System.Drawing.Point(143, 17);
+            this.cmbSalones.Location = new System.Drawing.Point(107, 14);
+            this.cmbSalones.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbSalones.Name = "cmbSalones";
-            this.cmbSalones.Size = new System.Drawing.Size(263, 24);
+            this.cmbSalones.Size = new System.Drawing.Size(198, 21);
             this.cmbSalones.TabIndex = 18;
             this.cmbSalones.SelectedIndexChanged += new System.EventHandler(this.cmbSalones_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(437, 20);
+            this.label5.Location = new System.Drawing.Point(328, 16);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(129, 17);
+            this.label5.Size = new System.Drawing.Size(97, 13);
             this.label5.TabIndex = 17;
             this.label5.Text = "Cantidad de mesas";
             // 
             // txtNumeroMesa
             // 
             this.txtNumeroMesa.Enabled = false;
-            this.txtNumeroMesa.Location = new System.Drawing.Point(570, 17);
-            this.txtNumeroMesa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNumeroMesa.Location = new System.Drawing.Point(428, 14);
+            this.txtNumeroMesa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNumeroMesa.Name = "txtNumeroMesa";
-            this.txtNumeroMesa.Size = new System.Drawing.Size(85, 22);
+            this.txtNumeroMesa.Size = new System.Drawing.Size(65, 20);
             this.txtNumeroMesa.TabIndex = 16;
             this.txtNumeroMesa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroMesa_KeyPress);
             // 
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(743, 19);
-            this.txtID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtID.Location = new System.Drawing.Point(557, 15);
+            this.txtID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(27, 22);
+            this.txtID.Size = new System.Drawing.Size(21, 20);
             this.txtID.TabIndex = 11;
             this.txtID.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(715, 22);
+            this.label2.Location = new System.Drawing.Point(536, 18);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 17);
+            this.label2.Size = new System.Drawing.Size(18, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "ID";
             this.label2.Visible = false;
@@ -255,9 +259,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 20);
+            this.label3.Location = new System.Drawing.Point(9, 16);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 17);
+            this.label3.Size = new System.Drawing.Size(94, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Nombre del Salon:";
             // 
@@ -267,11 +272,11 @@
             this.groupBox1.Controls.Add(this.lblNota);
             this.groupBox1.Controls.Add(this.txtContador);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 567);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(0, 461);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1354, 62);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(1016, 50);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             // 
@@ -279,9 +284,10 @@
             // 
             this.lblNotaEs.AutoSize = true;
             this.lblNotaEs.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaEs.Location = new System.Drawing.Point(746, 25);
+            this.lblNotaEs.Location = new System.Drawing.Point(560, 20);
+            this.lblNotaEs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNotaEs.Name = "lblNotaEs";
-            this.lblNotaEs.Size = new System.Drawing.Size(511, 17);
+            this.lblNotaEs.Size = new System.Drawing.Size(441, 15);
             this.lblNotaEs.TabIndex = 12;
             this.lblNotaEs.Text = "Las mesas que han sido usadas al menos una ves no es posibles eliminarlas";
             this.lblNotaEs.Visible = false;
@@ -289,9 +295,10 @@
             // lblNota
             // 
             this.lblNota.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNota.Location = new System.Drawing.Point(693, 25);
+            this.lblNota.Location = new System.Drawing.Point(520, 20);
+            this.lblNota.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNota.Name = "lblNota";
-            this.lblNota.Size = new System.Drawing.Size(57, 26);
+            this.lblNota.Size = new System.Drawing.Size(43, 21);
             this.lblNota.TabIndex = 11;
             this.lblNota.Text = "Nota:";
             this.lblNota.Visible = false;
@@ -299,9 +306,10 @@
             // txtContador
             // 
             this.txtContador.AutoSize = true;
-            this.txtContador.Location = new System.Drawing.Point(12, 26);
+            this.txtContador.Location = new System.Drawing.Point(9, 21);
+            this.txtContador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtContador.Name = "txtContador";
-            this.txtContador.Size = new System.Drawing.Size(154, 17);
+            this.txtContador.Size = new System.Drawing.Size(115, 13);
             this.txtContador.TabIndex = 10;
             this.txtContador.Text = "Numero de Registros : ";
             // 
@@ -324,7 +332,7 @@
             this.toolStripLabel1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1354, 67);
+            this.toolStrip2.Size = new System.Drawing.Size(1016, 67);
             this.toolStrip2.TabIndex = 23;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -339,7 +347,7 @@
             this.btnCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(123, 64);
+            this.btnCancelar.Size = new System.Drawing.Size(111, 64);
             this.btnCancelar.Text = "Atras";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -349,7 +357,7 @@
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(135, 64);
+            this.btnNuevo.Size = new System.Drawing.Size(121, 64);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
@@ -360,7 +368,7 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(112, 64);
+            this.btnSalir.Size = new System.Drawing.Size(101, 64);
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -371,7 +379,7 @@
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(29, 64);
+            this.toolStripButton7.Size = new System.Drawing.Size(23, 64);
             // 
             // btnEliminar
             // 
@@ -380,7 +388,7 @@
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(220, 64);
+            this.btnEliminar.Size = new System.Drawing.Size(191, 64);
             this.btnEliminar.Text = "Eliminar mesa";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -390,7 +398,7 @@
             this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(115, 64);
+            this.btnEditar.Size = new System.Drawing.Size(102, 64);
             this.btnEditar.Text = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
@@ -400,7 +408,7 @@
             this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(149, 64);
+            this.btnGuardar.Size = new System.Drawing.Size(133, 64);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -410,7 +418,7 @@
             this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(129, 64);
+            this.btnLimpiar.Size = new System.Drawing.Size(114, 64);
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
@@ -421,7 +429,7 @@
             this.btnAgregarMesa.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAgregarMesa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAgregarMesa.Name = "btnAgregarMesa";
-            this.btnAgregarMesa.Size = new System.Drawing.Size(208, 64);
+            this.btnAgregarMesa.Size = new System.Drawing.Size(181, 64);
             this.btnAgregarMesa.Text = "Agregar mesa";
             this.btnAgregarMesa.Visible = false;
             this.btnAgregarMesa.Click += new System.EventHandler(this.btnAgregarMesa_Click);
@@ -433,14 +441,13 @@
             // 
             // SalonesMesas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 629);
+            this.ClientSize = new System.Drawing.Size(1016, 511);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip2);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SalonesMesas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SalonesMesas";

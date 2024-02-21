@@ -56,6 +56,7 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalirIngrediente = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
@@ -119,7 +120,6 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnGuardar = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPageIngredientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredientes)).BeginInit();
@@ -185,6 +185,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvIngredientes.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvIngredientes.Location = new System.Drawing.Point(2, 104);
             this.dgvIngredientes.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvIngredientes.MultiSelect = false;
             this.dgvIngredientes.Name = "dgvIngredientes";
             this.dgvIngredientes.ReadOnly = true;
             this.dgvIngredientes.RowHeadersVisible = false;
@@ -424,6 +425,16 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 62);
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(133, 59);
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // btnLimpiar
             // 
             this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
@@ -578,6 +589,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvReceta.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvReceta.Location = new System.Drawing.Point(2, 130);
             this.dgvReceta.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvReceta.MultiSelect = false;
             this.dgvReceta.Name = "dgvReceta";
             this.dgvReceta.ReadOnly = true;
             this.dgvReceta.RowHeadersVisible = false;
@@ -892,6 +904,7 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvUnidad.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvUnidad.Location = new System.Drawing.Point(2, 104);
             this.dgvUnidad.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvUnidad.MultiSelect = false;
             this.dgvUnidad.Name = "dgvUnidad";
             this.dgvUnidad.ReadOnly = true;
             this.dgvUnidad.RowHeadersVisible = false;
@@ -1091,16 +1104,6 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox6.Size = new System.Drawing.Size(991, 50);
             this.groupBox6.TabIndex = 7;
             this.groupBox6.TabStop = false;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(133, 59);
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // Ingredientes
             // 
