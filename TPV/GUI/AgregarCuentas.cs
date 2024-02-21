@@ -19,6 +19,7 @@ namespace TPV.GUI
         PuntoVenta punto_venta;
         public string idPedidoCambio;
         public string idMesaAnterior;
+        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
 
         public AgregarCuentas(Button botonMesa, PuntoVenta punto_venta)
         {
@@ -66,29 +67,66 @@ namespace TPV.GUI
                 cantidad = int.Parse(cantidadSeparar.txtCantidad.Text);
                 if (cantidad > 1)
                 {
-                    for (int i = 0; i < cantidad; i++)
+                    int idMesero = 0;
+                    if (oUsuario.IdRol.Equals("2"))
                     {
-                        Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
-                        {
-                            IdMesa = idMesa,
-                            Cancelado = false,
-                            Fecha = fecha,
-                            Listo = false,
-                            Total = 0,
-                            Descuento = 0,
-                            Iva = 0,
-                            Propina = 0,
-                            TotalPago = 0,
-                            Saldo = 0,
-                            NFactura = "0",
-                            Anular = false,
-                            Efectivo = 0,
-                            Credito = 0,
-                            Btc = 0
-                        };
-
-                        lstPedido.Add(pedido.Insertar());
+                        idMesero = Int32.Parse(oUsuario.IdUsuario);
                     }
+
+                    if (idMesero > 0)
+                    {
+                        for (int i = 0; i < cantidad; i++)
+                        {
+                            Pedido pedido = new Pedido
+                            {
+                                IdMesa = idMesa,
+                                IdMesero = idMesero,
+                                Cancelado = false,
+                                Fecha = fecha,
+                                Listo = false,
+                                Total = 0,
+                                Descuento = 0,
+                                Iva = 0,
+                                Propina = 0,
+                                TotalPago = 0,
+                                Saldo = 0,
+                                NFactura = "0",
+                                Anular = false,
+                                Efectivo = 0,
+                                Credito = 0,
+                                Btc = 0
+                            };
+
+                            lstPedido.Add(pedido.Insertar(true));
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < cantidad; i++)
+                        {
+                            Pedido pedido = new Pedido
+                            {
+                                IdMesa = idMesa,
+                                Cancelado = false,
+                                Fecha = fecha,
+                                Listo = false,
+                                Total = 0,
+                                Descuento = 0,
+                                Iva = 0,
+                                Propina = 0,
+                                TotalPago = 0,
+                                Saldo = 0,
+                                NFactura = "0",
+                                Anular = false,
+                                Efectivo = 0,
+                                Credito = 0,
+                                Btc = 0
+                            };
+
+                            lstPedido.Add(pedido.Insertar(false));
+                        }
+                    }
+                    
                     Mesa mesa = new Mesa
                     {
                         IdMesa = Int32.Parse(botonMesa.Tag.ToString()),
@@ -100,7 +138,7 @@ namespace TPV.GUI
                     {
                         f.lblMesa.Text = botonMesa.Text.ToString();
                         f.lblMesa.Tag = botonMesa.Tag.ToString();
-                        this.Hide();
+                        this.Close();
 
                         // Obtener el ID del último pedido insertado
                         int.TryParse(transaccion1.ConsultarScalar("SELECT LAST_INSERT_ID()").ToString(), out int ultimoPedidoID);

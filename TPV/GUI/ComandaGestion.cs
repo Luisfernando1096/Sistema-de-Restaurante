@@ -435,7 +435,7 @@ namespace TPV.GUI
                 pedidoDetalle.Grupo = "0";
                 pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
-                if (oUsuario.IdRol.Equals("2"))
+                if (oUsuario.IdRol.Equals("2") && !btnCuentas.Visible)
                 {
                     //Entro un mesero
                     Pedido pedido3 = new Pedido();
@@ -618,9 +618,9 @@ namespace TPV.GUI
                 List<String> primerProductoEnPedido = new List<string>();
 
                 //Insertamos en la base de datos el pedido
-                primerProductoEnPedido.Add(pedido.Insertar());
+                primerProductoEnPedido.Add(pedido.Insertar(false));
                 //Se agregara el mesero tambien si entro un mesero
-                if (oUsuario.IdRol.Equals("2"))
+                if (oUsuario.IdRol.Equals("2") && !btnCuentas.Visible)
                 {
                     //Entro un mesero
                     Pedido pedido3 = new Pedido();

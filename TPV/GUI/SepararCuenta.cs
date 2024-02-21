@@ -443,7 +443,7 @@ namespace TPV.GUI
                 Mantenimiento.CLS.PedidoDetalle pedidoDetalle2;
 
                 //Insertamos en la base de datos el pedido
-                lstSeparar.Add(pedido.Insertar());
+                lstSeparar.Add(pedido.Insertar(false));
                 foreach (DataRow siguiente in datosSiguiente.Rows)
                 {
                     pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle

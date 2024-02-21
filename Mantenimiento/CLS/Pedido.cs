@@ -44,14 +44,22 @@ namespace Mantenimiento.CLS
         public double Credito { get => credito; set => credito = value; }
         public double Btc { get => btc; set => btc = value; }
 
-        public String Insertar()
+        public String Insertar(Boolean conMesero)
         {
-            String sentencia = @"INSERT INTO pedido(idMesa, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
-                 VALUES(" + idMesa + ", " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
+            String sentencia;
+            if (conMesero)
+            {
+                sentencia = @"INSERT INTO pedido(idMesa, idMesero, idCliente, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
+                 VALUES(" + idMesa + ", " + idMesero + ", 10, " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
+            }
+            else
+            {
+                sentencia = @"INSERT INTO pedido(idMesa, idCliente, cancelado, fecha, listo, total, descuento, iva, propina, totalPago, saldo, nFactura, anular, efectivo, credito, btc) 
+                 VALUES(" + idMesa + ", 10, " + cancelado + ", '" + fecha + "', " + listo + ", " + total + ", " + descuento + ", " + iva + ", " + propina + ", " + totalPago + ", " + saldo + ", '" + nFactura + "', " + anular + ", " + efectivo + ", " + credito + ", " + btc + ");";
 
+            }
             return sentencia;
         }
-
 
         public Boolean ActualizarFactura()
         {
