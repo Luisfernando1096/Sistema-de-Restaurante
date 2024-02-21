@@ -7,6 +7,7 @@ namespace Finanzas.GUI
     public partial class CierreCaja : Form
     {
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
+        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         BindingSource datos = new BindingSource();
         Boolean cerreCaja = false;
         Mantenimiento.CLS.Caja caja = new Mantenimiento.CLS.Caja();
@@ -115,6 +116,7 @@ namespace Finanzas.GUI
                         Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja();
                         rep.SetDataSource(info);
                         rep.SetParameterValue("Titulo", "Corte de Caja");
+                        rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
 
                         f.crvVisor.ReportSource = rep;
                         f.Show();
@@ -159,7 +161,8 @@ namespace Finanzas.GUI
             Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja();
             rep.SetDataSource(info);
             rep.SetParameterValue("Titulo", "Estado de Caja");
-            
+            rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+
             f.crvVisor.ReportSource = rep;
             f.Show();
         }
