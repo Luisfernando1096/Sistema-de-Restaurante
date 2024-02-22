@@ -315,6 +315,12 @@
       <DependentUpon>RepTicketPagoCombinado.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepTotalPedido.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepTotalPedido.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepVentasAgrupadoPorProducto.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -616,6 +622,10 @@
     <EmbeddedResource Include="REP\RepTicketPagoCombinado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepTicketPagoCombinado.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepTotalPedido.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepTotalPedido.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepVentasAgrupadoPorProducto.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
