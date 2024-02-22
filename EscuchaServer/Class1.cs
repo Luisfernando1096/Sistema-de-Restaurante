@@ -21,6 +21,7 @@ public class Server
     private bool isServerRunning;
     ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
     ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+    ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
 
     public void StartServer()
     {
@@ -154,12 +155,7 @@ public class Server
                             Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("Solicitud no reconocida.");
-                    }
-
-                    if (ruta.StartsWith("/comandaCompleta"))
+                    else if (ruta.StartsWith("/comandaCompleta"))
                     {
                         //MessageBox.Show("Generando comanda completa");
                         // Procesar la solicitud solo si está en la ruta '/comanda'
@@ -185,7 +181,32 @@ public class Server
                             Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
                         }
                     }
-                    else
+                    else if (ruta.StartsWith("/datosPrecuenta"))
+                    {
+                        //MessageBox.Show("Generando comanda completa");
+                        // Procesar la solicitud solo si está en la ruta '/comanda'
+                        Console.WriteLine($"Solicitud POST en la ruta '/datosPrecuenta'.");
+                        // Imprimir el contenido para ayudar a diagnosticar el problema
+                        Console.WriteLine($"Contenido recibido: {contenido}");
+
+                        try
+                        {
+                            // Intentar deserializar la solicitud como una lista de objetos
+                            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
+
+                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
+                            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
+
+                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            ImprimirPrecuenta(listaObjetos);
+
+                        }
+                        catch (JsonException ex)
+                        {
+                            // Imprimir detalles completos de la excepción
+                            Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
+                        }
+                    }
                     {
                         Console.WriteLine("Solicitud no reconocida.");
                     }
@@ -201,6 +222,99 @@ public class Server
         {
             client.Close();
         }
+    }
+
+    private void ImprimirPrecuenta(List<PedidoDetalle> listaObjetos)
+    {
+        if (listaObjetos.Count > 0)
+        {
+            // Cargar los datos en un DataTable
+            RepImprimirPrecuenta oReporte = new RepImprimirPrecuenta();
+            GenerarPrecuenta(oReporte, listaObjetos);
+        }
+    }
+
+    private void GenerarPrecuenta(RepImprimirPrecuenta oReporte, List<PedidoDetalle> listaObjetos)
+    {
+        // Crear un solo grupo para almacenar todos los detalles
+        var grupoUnico = new List<PedidoDetalle>();
+
+        // Iterar a través de los detalles y agregarlos al grupo único
+        foreach (PedidoDetalle detalle in listaObjetos)
+        {
+            grupoUnico.Add(detalle);
+        }
+
+        Double total = CalcularSubTotal(listaObjetos);
+        Double descuento = 0;
+        Double propina = CalcularPropina(total);
+        Double iva = 0;
+        Double totalPagar = total + propina;
+
+        // Configurar el informe con los detalles del grupo único
+        oReporte.SetDataSource(grupoUnico);
+        oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+        oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
+        oReporte.SetParameterValue("Telefono", oEmpresa.Telefono);
+        oReporte.SetParameterValue("Mesero", grupoUnico[0].Mesero);
+        oReporte.SetParameterValue("Cliente", grupoUnico[0].Cliente);
+        oReporte.SetParameterValue("Total", "$" + total.ToString("0.00"));
+        oReporte.SetParameterValue("Descuento", "$" + descuento.ToString("0.00"));
+        oReporte.SetParameterValue("Propina", "$" + propina.ToString("0.00"));
+        oReporte.SetParameterValue("Iva", "$" + iva.ToString("0.00"));
+        oReporte.SetParameterValue("TotalPagar", "$" + totalPagar.ToString("0.00"));
+
+        if (Boolean.Parse(oTicket.ShowSaludo))
+        {
+            oReporte.SetParameterValue("Footer3", oTicket.Footer3);
+        }
+        else
+        {
+            oReporte.SetParameterValue("Footer3", "");
+        }
+
+        try
+        {
+            if (oReporte != null)
+            {
+                try
+                {
+                    // Imprimir el informe en la impresora seleccionada
+                    PrinterSettings settings = new PrinterSettings
+                    {
+                        PrinterName = oConfiguracion.PrinterComanda
+                    };
+
+                    oReporte.PrintOptions.PrinterName = settings.PrinterName;
+                    oReporte.PrintToPrinter(1, false, 0, 0);
+
+                    // Muestra un mensaje de éxito
+                    /*MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Manejar excepciones específicas de Crystal Reports si es necesario
+            MessageBox.Show($"Error al imprimir el informe: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    private double CalcularPropina(Double total)
+    {
+        Double propina = 0;
+        Double porcentaje;
+        if (Boolean.Parse(oConfiguracion.IncluirPropina))
+        {
+            porcentaje = Double.Parse(oConfiguracion.Propina) / 100;
+            propina = porcentaje * total;
+        }
+        return Math.Round(propina, 2);
     }
 
     private void ImprimirComandaActual(List<PedidoDetalle> listaObjetos)
@@ -344,5 +458,16 @@ public class Server
             // Manejar excepciones específicas de Crystal Reports si es necesario
             MessageBox.Show($"Error al imprimir el informe: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
+
+    private Double CalcularSubTotal(List<PedidoDetalle> lst)
+    {
+        Double total = 0;
+        foreach (PedidoDetalle item in lst)
+        {
+            total += item.SubTotal;
+        }
+
+        return Math.Round(total, 2);
     }
 }
