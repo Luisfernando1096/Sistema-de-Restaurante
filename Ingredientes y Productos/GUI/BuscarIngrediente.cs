@@ -24,58 +24,6 @@ namespace Ingredientes_y_Productos.GUI
                 throw;
             }
         }
-        private void CargarListaIngrediente()
-        {
-            try
-            {
-                // Obtener los datos
-                DataTable familia = DataManager.DBConsultas.VerIngrediente();
-
-                // Crear un nuevo DataTable con la estructura
-                DataTable dt = familia.Clone();
-
-                // Agregar la fila de "Seleccione" al nuevo DataTable
-                dt.Rows.Add(0, "Selecionar");
-
-                // Fusionar los datos de categoría con el nuevo DataTable
-                dt.Merge(familia);
-
-                // Asignar el origen de datos al ComboBox
-                cmbLista.DataSource = dt;
-                cmbLista.DisplayMember = "nombre";
-                cmbLista.ValueMember = "idIngrediente";
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        private void CargarPresentacion()
-        {
-            try
-            {
-                // Obtener los datos
-                DataTable presentacion = DataManager.DBConsultas.VerUnidad();
-
-                // Crear un nuevo DataTable con la estructura
-                DataTable dt = presentacion.Clone();
-
-                // Agregar la fila de "Seleccione" al nuevo DataTable
-                dt.Rows.Add(0, "Selecionar");
-
-                // Fusionar los datos de categoría con el nuevo DataTable
-                dt.Merge(presentacion);
-
-                // Asignar el origen de datos al ComboBox
-                cmbLista.DataSource = dt;
-                cmbLista.DisplayMember = "unidadMedida";
-                cmbLista.ValueMember = "idUnidad";
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         /*private void BuscarDatos()
          {
@@ -140,7 +88,7 @@ namespace Ingredientes_y_Productos.GUI
             {
                 if (rbtnIngrediente.Checked == true)
                 {
-                    if (cmbLista.Text != "")
+                    if (txtNombre.Text != "")
                     {
                         dgvBuscarIngrediente.CurrentCell = null;
                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
@@ -149,7 +97,7 @@ namespace Ingredientes_y_Productos.GUI
                         }
                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
                         {
-                            if (r.Cells["nombreIngrediente"].Value.ToString().ToUpper().IndexOf(cmbLista.Text.ToUpper()) == 0)
+                            if (r.Cells["nombreIngrediente"].Value.ToString().ToUpper().IndexOf(txtNombre.Text.ToUpper()) == 0)
                             {
                                 r.Visible = true;
                             }
@@ -162,7 +110,7 @@ namespace Ingredientes_y_Productos.GUI
                 }
                 else if (rbtnPresentacion.Checked == true)
                 {
-                    if (cmbLista.Text != "")
+                    if (txtNombre.Text != "")
                     {
                         dgvBuscarIngrediente.CurrentCell = null;
                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
@@ -171,7 +119,7 @@ namespace Ingredientes_y_Productos.GUI
                         }
                         foreach (DataGridViewRow r in dgvBuscarIngrediente.Rows)
                         {
-                            if (r.Cells["Presentacion"].Value.ToString().ToUpper().IndexOf(cmbLista.Text.ToUpper()) == 0)
+                            if (r.Cells["Presentacion"].Value.ToString().ToUpper().IndexOf(txtNombre.Text.ToUpper()) == 0)
                             {
                                 r.Visible = true;
                             }
@@ -209,14 +157,12 @@ namespace Ingredientes_y_Productos.GUI
 
         private void rbtnIngrediente_CheckedChanged(object sender, EventArgs e)
         {
-            CargarListaIngrediente();
-            cmbLista.Visible = true;
+            txtNombre.Visible = true;
         }
 
         private void rbtnPresentacion_CheckedChanged(object sender, EventArgs e)
         {
-            CargarPresentacion();
-            cmbLista.Visible = true;
+            txtNombre.Visible = true;
         }
 
         private void dgvBuscarIngrediente_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -224,16 +170,10 @@ namespace Ingredientes_y_Productos.GUI
             BuscarDatosEnCombo();
         }
 
-
-        private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BuscarDatosEnCombo();
-        }
-
         private void rbtNinguno_CheckedChanged(object sender, EventArgs e)
         {
             CargarDatos();
-            cmbLista.Visible = false;
+            txtNombre.Visible = false;
         }
 
         private void dgvBuscarIngrediente_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -250,6 +190,11 @@ namespace Ingredientes_y_Productos.GUI
             {
                 MessageBox.Show("Debe seleccionar un Ingrediente.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            BuscarDatosEnCombo();
         }
     }
 }

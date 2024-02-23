@@ -30,8 +30,8 @@ namespace Ingredientes_y_Productos.GUI
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.rbtNinguno = new System.Windows.Forms.RadioButton();
-            this.cmbLista = new System.Windows.Forms.ComboBox();
             this.rbtnPresentacion = new System.Windows.Forms.RadioButton();
             this.rbtnIngrediente = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -48,8 +48,8 @@ namespace Ingredientes_y_Productos.GUI
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtNombre);
             this.groupBox3.Controls.Add(this.rbtNinguno);
-            this.groupBox3.Controls.Add(this.cmbLista);
             this.groupBox3.Controls.Add(this.rbtnPresentacion);
             this.groupBox3.Controls.Add(this.rbtnIngrediente);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -61,6 +61,15 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(286, 19);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(203, 20);
+            this.txtNombre.TabIndex = 30;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+//            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // rbtNinguno
             // 
@@ -74,17 +83,6 @@ namespace Ingredientes_y_Productos.GUI
             this.rbtNinguno.Text = "Sin filtro";
             this.rbtNinguno.UseVisualStyleBackColor = true;
             this.rbtNinguno.CheckedChanged += new System.EventHandler(this.rbtNinguno_CheckedChanged);
-            // 
-            // cmbLista
-            // 
-            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(283, 18);
-            this.cmbLista.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(283, 21);
-            this.cmbLista.TabIndex = 26;
-            this.cmbLista.SelectedIndexChanged += new System.EventHandler(this.cmbLista_SelectedIndexChanged);
             // 
             // rbtnPresentacion
             // 
@@ -238,7 +236,6 @@ namespace Ingredientes_y_Productos.GUI
         private System.Windows.Forms.RadioButton rbtnIngrediente;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.DataGridView dgvBuscarIngrediente;
-        private System.Windows.Forms.ComboBox cmbLista;
         private System.Windows.Forms.RadioButton rbtNinguno;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreIngrediente;
@@ -246,5 +243,6 @@ namespace Ingredientes_y_Productos.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Selecionar;
+        private System.Windows.Forms.TextBox txtNombre;
     }
 }

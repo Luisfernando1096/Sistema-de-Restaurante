@@ -29,9 +29,9 @@ namespace Ingredientes_y_Productos.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Productos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageProductos = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
@@ -86,7 +86,6 @@ namespace Ingredientes_y_Productos.GUI
             this.btnImprimir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cmbLista = new System.Windows.Forms.ComboBox();
             this.rbtNinguno = new System.Windows.Forms.RadioButton();
             this.rbtnFamilia = new System.Windows.Forms.RadioButton();
             this.rbtnProducto = new System.Windows.Forms.RadioButton();
@@ -141,6 +140,7 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtBuscarNombre = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPageProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
@@ -211,14 +211,14 @@ namespace Ingredientes_y_Productos.GUI
             this.ConIngrediente,
             this.Foto,
             this.Activo});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dgvProductos.Location = new System.Drawing.Point(2, 174);
@@ -745,7 +745,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.cmbLista);
+            this.groupBox3.Controls.Add(this.txtBuscarNombre);
             this.groupBox3.Controls.Add(this.rbtNinguno);
             this.groupBox3.Controls.Add(this.rbtnFamilia);
             this.groupBox3.Controls.Add(this.rbtnProducto);
@@ -758,17 +758,6 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
-            // 
-            // cmbLista
-            // 
-            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(202, 20);
-            this.cmbLista.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(283, 21);
-            this.cmbLista.TabIndex = 33;
-            this.cmbLista.SelectedIndexChanged += new System.EventHandler(this.cmbLista_SelectedIndexChanged);
             // 
             // rbtNinguno
             // 
@@ -832,14 +821,14 @@ namespace Ingredientes_y_Productos.GUI
             this.dgvFamilia.AllowUserToResizeRows = false;
             this.dgvFamilia.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvFamilia.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFamilia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFamilia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFamilia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFamilia.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idFamilia,
@@ -1371,6 +1360,16 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox6.TabIndex = 7;
             this.groupBox6.TabStop = false;
             // 
+            // txtBuscarNombre
+            // 
+            this.txtBuscarNombre.Location = new System.Drawing.Point(203, 19);
+            this.txtBuscarNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBuscarNombre.Name = "txtBuscarNombre";
+            this.txtBuscarNombre.Size = new System.Drawing.Size(221, 20);
+            this.txtBuscarNombre.TabIndex = 33;
+            this.txtBuscarNombre.TextChanged += new System.EventHandler(this.txtBuscarNombre_TextChanged);
+//            this.txtBuscarNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarNombre_KeyPress);
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1518,10 +1517,10 @@ namespace Ingredientes_y_Productos.GUI
         private System.Windows.Forms.TabPage tabPageProductos;
         private System.Windows.Forms.TabPage tabPageFamilia;
         private System.Windows.Forms.TabPage tabPageUnidadMedida;
-        private System.Windows.Forms.ComboBox cmbLista;
         private System.Windows.Forms.RadioButton rbtNinguno;
         private System.Windows.Forms.RadioButton rbtnFamilia;
         private System.Windows.Forms.RadioButton rbtnProducto;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtBuscarNombre;
     }
 }

@@ -63,8 +63,8 @@ namespace Ingredientes_y_Productos.GUI
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtBuscarNombre = new System.Windows.Forms.TextBox();
             this.rbtNinguno = new System.Windows.Forms.RadioButton();
-            this.cmbLista = new System.Windows.Forms.ComboBox();
             this.rbtnPresentacion = new System.Windows.Forms.RadioButton();
             this.rbtnIngrediente = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
@@ -479,8 +479,8 @@ namespace Ingredientes_y_Productos.GUI
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtBuscarNombre);
             this.groupBox3.Controls.Add(this.rbtNinguno);
-            this.groupBox3.Controls.Add(this.cmbLista);
             this.groupBox3.Controls.Add(this.rbtnPresentacion);
             this.groupBox3.Controls.Add(this.rbtnIngrediente);
             this.groupBox3.Controls.Add(this.label9);
@@ -494,6 +494,16 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
             // 
+            // txtBuscarNombre
+            // 
+            this.txtBuscarNombre.Location = new System.Drawing.Point(249, 20);
+            this.txtBuscarNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBuscarNombre.Name = "txtBuscarNombre";
+            this.txtBuscarNombre.Size = new System.Drawing.Size(221, 20);
+            this.txtBuscarNombre.TabIndex = 18;
+            this.txtBuscarNombre.TextChanged += new System.EventHandler(this.txtBuscarNombre_TextChanged);
+//            this.txtBuscarNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarNombre_KeyPress);
+            // 
             // rbtNinguno
             // 
             this.rbtNinguno.AutoSize = true;
@@ -506,17 +516,6 @@ namespace Ingredientes_y_Productos.GUI
             this.rbtNinguno.Text = "Sin filtro";
             this.rbtNinguno.UseVisualStyleBackColor = true;
             this.rbtNinguno.CheckedChanged += new System.EventHandler(this.rbtNinguno_CheckedChanged);
-            // 
-            // cmbLista
-            // 
-            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(247, 20);
-            this.cmbLista.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(283, 21);
-            this.cmbLista.TabIndex = 30;
-            this.cmbLista.SelectedIndexChanged += new System.EventHandler(this.cmbLista_SelectedIndexChanged);
             // 
             // rbtnPresentacion
             // 
@@ -1225,7 +1224,6 @@ namespace Ingredientes_y_Productos.GUI
         protected System.Windows.Forms.TextBox txtID;
         public System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.RadioButton rbtNinguno;
-        private System.Windows.Forms.ComboBox cmbLista;
         private System.Windows.Forms.RadioButton rbtnPresentacion;
         private System.Windows.Forms.RadioButton rbtnIngrediente;
         private System.Windows.Forms.DataGridViewTextBoxColumn idIngredienteReceta;
@@ -1234,5 +1232,6 @@ namespace Ingredientes_y_Productos.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreReceta;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.ToolStripButton btnGuardar;
+        private System.Windows.Forms.TextBox txtBuscarNombre;
     }
 }

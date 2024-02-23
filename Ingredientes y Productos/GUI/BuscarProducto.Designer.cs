@@ -31,7 +31,7 @@ namespace Ingredientes_y_Productos.GUI
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cmbLista = new System.Windows.Forms.ComboBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.rbtNinguno = new System.Windows.Forms.RadioButton();
             this.rbtnFamilia = new System.Windows.Forms.RadioButton();
             this.rbtnProducto = new System.Windows.Forms.RadioButton();
@@ -56,7 +56,7 @@ namespace Ingredientes_y_Productos.GUI
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.cmbLista);
+            this.groupBox3.Controls.Add(this.txtNombre);
             this.groupBox3.Controls.Add(this.rbtNinguno);
             this.groupBox3.Controls.Add(this.rbtnFamilia);
             this.groupBox3.Controls.Add(this.rbtnProducto);
@@ -70,16 +70,14 @@ namespace Ingredientes_y_Productos.GUI
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar datos por: ";
             // 
-            // cmbLista
+            // txtNombre
             // 
-            this.cmbLista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(242, 20);
-            this.cmbLista.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(283, 21);
-            this.cmbLista.TabIndex = 29;
-            this.cmbLista.SelectedIndexChanged += new System.EventHandler(this.cmbLista_SelectedIndexChanged);
+            this.txtNombre.Location = new System.Drawing.Point(246, 20);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(188, 20);
+            this.txtNombre.TabIndex = 29;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+//            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // rbtNinguno
             // 
@@ -342,6 +340,6 @@ namespace Ingredientes_y_Productos.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn Foto;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Activo;
         private System.Windows.Forms.RadioButton rbtNinguno;
-        private System.Windows.Forms.ComboBox cmbLista;
+        private System.Windows.Forms.TextBox txtNombre;
     }
 }

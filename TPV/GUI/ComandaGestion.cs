@@ -840,7 +840,10 @@ namespace TPV.GUI
                 }
                 else
                 {
-                    BorrarPedidosVacios(lblMesa.Tag.ToString());
+                    if (lblMesa.Tag != null)
+                    {
+                        BorrarPedidosVacios(lblMesa.Tag.ToString());
+                    }
                     Close();
                 }
             }
@@ -1092,7 +1095,7 @@ namespace TPV.GUI
             try
             {
                 DataTable dt = DataManager.DBConsultas.Pedidos(idMesa);
-                Mantenimiento.CLS.Pedido pd = new Mantenimiento.CLS.Pedido();
+                Pedido pd = new Pedido();
                 DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
                 List<String> lista = new List<string>();
                 List<String> lista2 = new List<string>();
