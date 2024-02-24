@@ -2,7 +2,7 @@
 
 namespace Mantenimiento.CLS
 {
-    class PedidoDetalleLog
+    public class PedidoDetalleLog
     {
         int idDeleted;
         int idDetalle;
@@ -40,7 +40,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"INSERT INTO pedido_detalle_log(cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuarioDelete, fechaDelete) VALUES(" + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuarioDelete + "', '" + fechaDelete + "');";
+            sentencia = @"INSERT INTO pedido_detalle_log(idDetalle, cocinando, extras, horaEntregado, horaPedido, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuarioDelete, fechaDelete) VALUES(" + idDetalle + " ," + cocinando + ", '" + extras + "', '" + horaEntregado + "', '" + horaPedido + "', " + idProducto + ", " + idPedido + ", " + cantidad + ", " + precio + ", " + subTotal + ", '" + grupo + "', '" + usuarioDelete + "', '" + fechaDelete + "');";
 
             try
             {
@@ -67,7 +67,6 @@ namespace Mantenimiento.CLS
             string sentencia;
             sentencia = @"UPDATE pedido_detalle_log SET cocinando = " + cocinando + ", extras = '" + extras + "', horaEntregado= '" + horaEntregado + "', horaPedido = '" + horaPedido + "', idProducto = " + idProducto + ", idPedido = " + idPedido + ", cantidad = " + cantidad + ", precio = " + precio + ", subTotal = " + subTotal + ", grupo = '" + grupo + "', usuarioDelete = '" + usuarioDelete + "', fechaDelete = '" + fechaDelete + "' " +
                 "WHERE idDeleted = " + idDeleted + ";";
-
             try
             {
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
@@ -80,7 +79,30 @@ namespace Mantenimiento.CLS
             }
             catch (Exception)
             {
+                throw;
+            }
 
+            return resultado;
+        }
+
+        public Boolean ModificarRegistro()
+        {
+            Boolean resultado = false;
+            string sentencia;
+            sentencia = @"UPDATE pedido_detalle_log SET cantidad = " + cantidad + ", precio = " + precio + ", subTotal = " + subTotal + ", usuarioDelete = '" + usuarioDelete + "', fechaDelete = '" + fechaDelete + "' " +
+                "WHERE idDetalle = " + idDetalle + ";";
+            try
+            {
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasActualizadas = 0;
+                filasActualizadas = op.EjecutarSentencia(sentencia);
+                if (filasActualizadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
 
