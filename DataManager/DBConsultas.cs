@@ -365,6 +365,36 @@ namespace DataManager
             }
         }
 
+        public static DataTable UltimoPedidoDeMesa(int idMesa)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT
+                                        pe.idPedido,
+                                        pe.idMesa
+                                    FROM
+                                        pedido pe
+                                    JOIN
+                                        mesa m ON pe.idMesa = m.idMesa
+                                    WHERE
+                                        pe.idMesa = " + idMesa + @"
+                                        AND pe.cancelado = 0
+                                        AND m.disponible = 0
+                                    GROUP BY
+                                        pe.idPedido desc limit 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable UsuariosPin(String pin)
         {
             try
@@ -402,6 +432,25 @@ namespace DataManager
             }
         }
 
+        public static DataTable ObtenerCantidadLog(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT cantidad FROM pedido_detalle_log
+                                    WHERE idDetalle = " + id + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable ObtenerDetallePedidoConId(int id)
         {
             try
@@ -409,6 +458,24 @@ namespace DataManager
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT idDetalle, cocinando, extras, horaEntregado, horaPedido, idCocinero, idProducto, idPedido, cantidad, precio, subTotal, grupo, usuario, fecha FROM pedido_detalle
                                     WHERE idDetalle= " + id + "; ";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable DetallesProducto(int id)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT p.nombre, f.grupoPrinter FROM producto p, familia f WHERE p.idFamilia = f.idFamilia AND p.idProducto = " + id + "; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -14,7 +15,10 @@ namespace TPV.GUI
 {
     public partial class ComandaGestion : Form
     {
-        private List<PedidoDetalle> lstDetalle = new List<PedidoDetalle>();
+        public List<PedidoDetalle> lstDetalle = new List<PedidoDetalle>();
+        private Dictionary<string, List<PedidoDetalle>> miDiccionario = new Dictionary<string, List<PedidoDetalle>>();
+        public List<Tuple<int, int>> listaIdProductos = new List<Tuple<int, int>>();
+
         PuntoVenta punto_venta;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
@@ -156,6 +160,171 @@ namespace TPV.GUI
                 throw;
             }
         }
+        public void CargarListaPedidos(String id)
+        {
+            try
+            {
+                // Limpiar el diccionario antes de cargar nuevos datos (si es necesario)
+                miDiccionario.Clear();
+
+                // Consulta para obtener los idPedido
+                DataTable datosIdPedido = DataManager.DBConsultas.PedidosEnMesa(id);
+
+                foreach (DataRow fila in datosIdPedido.Rows)
+                {
+                    // Asumiendo que la columna que contiene el idPedido se llama "idPedido"
+                    string idPedidoClave = fila["idPedido"].ToString();
+
+                    // Realizar la segunda consulta según el idPedido
+                    DataTable detallesPorIdPedido = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, int.Parse(idPedidoClave));
+
+                    // Crear una lista para almacenar los detalles
+                    List<PedidoDetalle> detallesLista = new List<PedidoDetalle>();
+
+                    foreach (DataRow filaDetalle in detallesPorIdPedido.Rows)
+                    {
+                        // Crear objeto PedidoDetalle y asignar propiedades
+                        PedidoDetalle detalle = new PedidoDetalle
+                        {
+                            IdPedido = Convert.ToInt32(filaDetalle["IdPedido"]),
+                            IdProducto = Convert.ToInt32(filaDetalle["IdProducto"]),
+                            Cantidad = Convert.ToInt32(filaDetalle["Cantidad"]),
+                        };
+
+                        detallesLista.Add(detalle);
+                    }
+
+                    // Agregar la lista de detalles directamente al diccionario
+                    miDiccionario[idPedidoClave] = detallesLista;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void MostrarClavesYDetalles()//SIRVE PARA REVISAR EL DICCIONARIA DE LOS PEDIDOS
+        {
+            foreach (var clave in miDiccionario.Keys)
+            {
+                Console.WriteLine($"Clave: {clave}");
+
+                // Obtener la lista de detalles asociada con la clave
+                List<PedidoDetalle> detallesLista = miDiccionario[clave];
+
+                // Mostrar cada detalle en la consola
+                foreach (var detalle in detallesLista)
+                {
+                    Console.WriteLine($"  Detalle: IdPedido = {detalle.IdPedido}, IdProducto = {detalle.IdProducto}, ..."); // Reemplaza con las propiedades reales de PedidoDetalle
+                }
+
+                // Separador entre claves
+                Console.WriteLine(new string('-', 30));
+            }
+        }
+        private void CompararLista(int idPedidoEspecifico, int idProductoEspecifico, int idDetalle, double precio, String fecha)
+        {
+            try
+            {
+                Boolean existePedido = false;
+                Boolean existeProducto = false;
+                Boolean existeDiccionario = false;
+                // Paso 1: Buscar en lstDetalle
+                var detalleEspecifico = lstDetalle.FirstOrDefault(det => det.IdPedido == idPedidoEspecifico && det.IdProducto == idProductoEspecifico);
+
+                if (detalleEspecifico != null)
+                {
+                    existePedido = true;
+
+                    // Paso 2: Verificar si el IdPedido está en el diccionario
+                    String idPedidoClave = idPedidoEspecifico.ToString();
+                    if (miDiccionario.ContainsKey(idPedidoClave))
+                    {
+                        existeDiccionario = true;
+                        // Paso 3: Buscar el idProductoEspecifico en lstDetalle (no en los detalles del diccionario)
+                        var productoEnDetalles = lstDetalle.Any(det => det.IdPedido == idPedidoEspecifico && det.IdProducto == idProductoEspecifico);
+                        if (productoEnDetalles)
+                        {
+                            existeProducto = true;
+                        }
+                    }
+                    else
+                    {
+                        //Console.WriteLine($"Paso 2: IdPedido {idPedidoEspecifico} no encontrado en el diccionario.");
+                    }
+                }
+                InsertarLogDetalles(existePedido, existeProducto, idProductoEspecifico, idPedidoEspecifico, idDetalle, precio, fecha, existeDiccionario);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        public void VerListaDetalle() 
+        {
+            foreach (var detalle in lstDetalle)
+            {
+                // Accede a las propiedades del objeto detalle y muestra los datos
+                Console.WriteLine($"IdPedido: {detalle.IdPedido}, idProducto: {detalle.IdProducto}, Nombre: {detalle.Nombre}, Cantidad: {detalle.Cantidad}, Mesa: {detalle.Mesa}, fecha: {detalle.Fecha}, Grupo: {detalle.Grupo} ");
+                // Reemplaza "OtroDato" con el nombre real de otras propiedades que puedan tener tus objetos
+            }
+            Console.WriteLine($"----------------------------------------------------------------------------- ");
+
+        }
+
+        private void InsertarLogDetalles(Boolean existeP,Boolean existePro,int idProductoI, int idPedidoI, int idDetalle, double precio, String fechaPedido, Boolean existeDiccionario) 
+        {
+            if (!existeP)
+            {
+                if (!existePro)//No existe en lstDetalles, significa que ya fue impreso
+                {
+                    String fechaMod = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    String fechaPed = DateTime.Parse(fechaPedido).ToString("yyyy-MM-dd HH:mm:ss");
+                    Mantenimiento.CLS.PedidoDetalleLog log = new Mantenimiento.CLS.PedidoDetalleLog();
+                    log.IdDetalle = idDetalle;
+                    log.Cocinando = false;
+                    log.Extras = "";
+                    log.HoraEntregado = fechaMod;
+                    log.HoraPedido = fechaPed;
+                    log.IdCocinero = 0;
+                    log.IdProducto = idProductoI;
+                    log.IdPedido = idPedidoI;
+                    log.Cantidad = 1;
+                    log.Precio = precio;
+                    log.SubTotal = log.Cantidad * log.Precio;
+                    log.Grupo = "";
+                    log.UsuarioDelete = oUsuario.IdUsuario;
+                    log.FechaDelete = fechaMod;
+
+                    if (log.Insertar())
+                    {
+
+                    }
+                    else
+                    {
+                        log.IdDetalle = idDetalle;
+                        DataTable dt = DataManager.DBConsultas.ObtenerCantidadLog(idDetalle);
+                        if (dt.Rows.Count > 0)
+                        {
+                            int cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+                            log.Cantidad = cantidad + 1;
+                            log.Grupo = "2";
+                            log.SubTotal = log.Cantidad * log.Precio;
+                            log.FechaDelete = fechaMod;
+                        }
+                        if (log.ModificarRegistro())
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+
+
         public void CargarPedidos(String id)
         {
             try
@@ -380,8 +549,8 @@ namespace TPV.GUI
             List<String> actualizarTotal = new List<string>();
             DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
             DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
-            PedidoDetalle pedidoDetalle = new PedidoDetalle();
 
+            PedidoDetalle pedidoDetalle = new PedidoDetalle();
             try
             {
                 PedidoDetalle pDetalle = new PedidoDetalle
@@ -400,26 +569,15 @@ namespace TPV.GUI
 
                 Boolean encontrado = false;
 
-                if (lstDetalle.Count > 0)
+                if (lstDetalle.Any(item => item.IdPedido == pDetalle.IdPedido && item.IdProducto == pDetalle.IdProducto))
                 {
-                    foreach (PedidoDetalle item in lstDetalle)
-                    {
-                        if (aux[0].ToString().Equals(item.IdProducto.ToString()))
-                        {
-                            encontrado = true;
-                            item.Cantidad += cantidad;
-                            break;
-                        }
-                    }
-                    if (!encontrado)
-                    {
-                        lstDetalle.Add(pDetalle);
-                    }
+                    lstDetalle.First(item => item.IdPedido == pDetalle.IdPedido && item.IdProducto == pDetalle.IdProducto).Cantidad += pDetalle.Cantidad;
                 }
                 else
                 {
                     lstDetalle.Add(pDetalle);
                 }
+
 
                 pedidoDetalle.Cocinando = true;
                 pedidoDetalle.Extras = "";
@@ -513,23 +671,11 @@ namespace TPV.GUI
 
             Boolean encontrado = false;
 
-            if (lstDetalle.Count > 0)
+            if (lstDetalle.Any(item => item.IdPedido == pDetalle.IdPedido && item.IdProducto == pDetalle.IdProducto))
             {
-                foreach (PedidoDetalle item in lstDetalle)
-                {
-                    if (aux[0].ToString().Equals(item.IdProducto.ToString()))
-                    {
-                        encontrado = true;
-                        item.Cantidad += cantidad;
-                        break;
-                    }
-                }
-                if (!encontrado)
-                {
-                    lstDetalle.Add(pDetalle);
-                }
+                lstDetalle.First(item => item.IdPedido == pDetalle.IdPedido && item.IdProducto == pDetalle.IdProducto).Cantidad += pDetalle.Cantidad;
             }
-            else if (dgvDatos.Rows.Count > 0)
+            else
             {
                 lstDetalle.Add(pDetalle);
             }
@@ -627,8 +773,10 @@ namespace TPV.GUI
                     pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
                     primerProductoEnPedido.Add(pedido3.ActualizarMesero(true));
                 }
-                
-                lstDetalle.Add(pDetalle);
+                if (lstDetalle.Count == 0)
+                {
+                    lstDetalle.Add(pDetalle);
+                }
 
                 //Agregamos detalles al pedido
                 PedidoDetalle pedidoDetalle = new PedidoDetalle
@@ -734,9 +882,7 @@ namespace TPV.GUI
                     MessageBox.Show("ERROR EN TRANSACCION AL AUMENTAR EL DETALLE DEL PEDIDO, CONTACTE AL PROGRAMADOR.");
                 }
             }
-
             ActualizarStockProductosIngredientes(aux[0].ToString(), cant, productoNuevo, true);
-
         }
 
         private void ActualizarStockProductosIngredientes(string id, int cantidad, DataTable productoNuevo, bool aumentar)
@@ -1016,11 +1162,18 @@ namespace TPV.GUI
             {
                 if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    pedidoDetalle.IdDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
-                    pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
-                    pedidoDetalle.IdProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                    int idDetall = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
+                    int idPed = Int32.Parse(lblTicket.Text.ToString());
+                    int idPro = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                    double precio = double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString());
+                    String fecha = dgvDatos.CurrentRow.Cells["fecha"].Value.ToString();
+                    pedidoDetalle.IdDetalle = idDetall;
+                    pedidoDetalle.IdPedido = idPed;
+                    pedidoDetalle.IdProducto = idPro;
                     pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
                     pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
+
+                    CompararLista(idPed, idPro, idDetall, precio, fecha);
 
                     if (pedidoDetalle.Cantidad != 0)
                     {
@@ -1065,23 +1218,23 @@ namespace TPV.GUI
                             btnCuentas.Visible = false;
                         }
                     }
-                    if (lstDetalle.Count > 0 )
+                    if (lstDetalle.Count > 0)
+                    
                     {
-                        foreach (PedidoDetalle item in lstDetalle)
+                        // Actualiza la cantidad solo para el IdPedido e IdProducto actual
+                        foreach (var item in lstDetalle.ToList())
                         {
-                            if (dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item.IdProducto.ToString()))
+                            if (item.IdPedido == idPed && item.IdProducto == idPro && item.Cantidad > 0)
                             {
-                                item.IdPedido = item.IdPedido;
-                                item.IdProducto = item.IdProducto;
                                 item.Cantidad--;
                                 if (item.Cantidad == 0)
                                 {
                                     lstDetalle.Remove(item);
                                 }
-                                break;
                             }
                         }
                     }
+
                     DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
                     ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
                 }
@@ -1313,6 +1466,16 @@ namespace TPV.GUI
                 separar.lblTicket.Tag = lblTicket.Text;
                 separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
                 separar.ShowDialog();
+                DataTable dt = DataManager.DBConsultas.UltimoPedidoDeMesa(int.Parse(lblMesa.Tag.ToString()));
+                int idPedidoInsertado = Convert.ToInt32(dt.Rows[0]["IdPedido"]);
+                if (dt.Rows.Count > 0)
+                {
+                    if (separar.cerrar)
+                    {
+                        listaIdProductos = separar.listaIdProductos;
+                        ModificarLista(int.Parse(lblTicket.Text), listaIdProductos, idPedidoInsertado);
+                    }
+                }
                 CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
                 if (idPedidoSiguiente > 0)
                 {
@@ -1343,6 +1506,125 @@ namespace TPV.GUI
                 }
                 CargarPedidos(lblMesa.Tag.ToString());
             }
+        }
+
+        private void ModificarLista(int idPedidoList, List<Tuple<int, int>> listaIdProductos, int idPedidoInsert)
+        {
+            try
+            {
+                foreach (var tupla in listaIdProductos)
+                {
+                    int idProducto = tupla.Item1;
+                    int Cantidad = tupla.Item2;
+
+                    ///Consulta para trear los datos del producto. grupo, nombre  
+                    string claveDiccionario = idPedidoList.ToString(); //CLAVE IDPEDIDO
+                    Boolean agregarElemento = false;
+
+                    if (miDiccionario.ContainsKey(claveDiccionario)) ///BUSCA EL PEDIDO IDPEDIDO ES LA CLAVE
+                    {
+                        List<PedidoDetalle> DetallesDiccionario = miDiccionario[claveDiccionario];
+                        var diccionario = DetallesDiccionario.FirstOrDefault(detalle => detalle.IdPedido == idPedidoList && detalle.IdProducto == idProducto); // Buscar el detalle correspondiente en la lista según idPedido
+                        if (diccionario != null) /// SI EXISTE EL PEDIDO Y PRODUCTO EN EL DICCIONARIO
+                        {
+                            ///BUSCAR EN LA LISTA EL MISMO ID Y PRDOCUTO
+                            foreach (var item in lstDetalle)
+                            {
+                                if (item.IdPedido == diccionario.IdPedido && item.IdProducto == diccionario.IdProducto) ///EXISTE EN LA LISTA Y EN EL PEDIDO EL IDPEDIDO Y PRODUCTO
+                                {
+                                    if (Cantidad >= item.Cantidad)
+                                    {
+                                        item.IdPedido = idPedidoInsert;
+                                    }
+                                    else if (Cantidad < item.Cantidad)
+                                    {
+                                        item.Cantidad = item.Cantidad - Cantidad ;
+                                        agregarElemento = true;
+                                    }
+                                    break; // Se encontró el detalle, salimos del bucle
+                                }
+                            }
+                        }
+                        else
+                        {
+                            AgregarProductoLista(idProducto, Cantidad,idPedidoList ,idPedidoInsert);
+                        }
+                    }
+                    else// NO HAY CLAVE CON DE ESTE PEDIDO
+                    {
+                        AgregarProductoLista(idProducto, Cantidad, idPedidoList, idPedidoInsert);
+                    }
+
+                    if (agregarElemento) //// SOLO CUANDO SE VA AGREGAR UN NUEVO ELEMENTO
+                    {
+                        AgregarElemento(Cantidad, idPedidoInsert, idProducto);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void AgregarProductoLista(int idProducto, int Cantidad,int idPedido, int idPedidoInsert) 
+        {
+            try
+            {
+                Boolean agregarElemento = false;
+                foreach (var item in lstDetalle)
+                {
+                    if (item.IdProducto == idProducto && item.IdPedido == idPedido)
+                    {
+                        if (Cantidad >= item.Cantidad)
+                        {
+                            item.IdPedido = idPedidoInsert;
+                        }
+                        else if (Cantidad < item.Cantidad)
+                        {
+                            item.Cantidad = item.Cantidad - Cantidad;
+                            agregarElemento = true;
+                        }
+                        break; // Se encontró el detalle, salimos del bucle
+                    }
+                }
+                //VerListaDetalle();
+                if (agregarElemento)
+                {
+                    AgregarElemento(Cantidad, idPedidoInsert, idProducto);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void AgregarElemento(int Cantidad,int idPedidoInsert, int idProducto) 
+        {
+            ///Obtener detalles del productp
+            DataTable dt = DataManager.DBConsultas.DetallesProducto(idProducto);
+            String Nombre = "";
+            String Grupo = "";
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    Nombre = row["nombre"].ToString();
+                    Grupo = row["grupoPrinter"].ToString();
+                }
+            }
+            PedidoDetalle pDetalle = new PedidoDetalle
+            {
+                Cantidad = Cantidad,
+                IdPedido = idPedidoInsert,
+                Mesa = lblMesa.Text,
+                IdProducto = idProducto,
+                Fecha = "",
+                Nombre = Nombre,
+                Grupo = Grupo,
+            };
+            lstDetalle.Add(pDetalle);
+            //VerListaDetalle();
         }
 
         private void btnCuentas_Click(object sender, EventArgs e)
@@ -1446,17 +1728,35 @@ namespace TPV.GUI
             // Crear un diccionario para almacenar listas de detalles por grupo
             var grupos = new Dictionary<string, List<PedidoDetalle>>();
 
-            // Iterar a través de los detalles y agregar los detalles a las listas de grupos correspondientes
             foreach (PedidoDetalle detalle in lstDetalle)
             {
-                string grupoKey = detalle.Grupo; // Asegúrate de tener una propiedad "Grupo" en tu clase PedidoDetalle
+                string grupoKey = detalle.Grupo;
 
-                if (!grupos.ContainsKey(grupoKey))
+                Console.WriteLine($"idPedido {detalle.IdPedido}, idProducto {detalle.IdProducto}, Grupo {detalle.Grupo}");
+
+                if (grupos.ContainsKey(grupoKey))
                 {
-                    grupos[grupoKey] = new List<PedidoDetalle>();
+                    // Si el grupo ya existe, busca el detalle en la lista por IdProducto
+                    var detalleExistente = grupos[grupoKey].FirstOrDefault(item => item.IdProducto == detalle.IdProducto);
+
+                    if (detalleExistente != null)
+                    {
+                        // Si existe, suma las cantidades al detalle existente
+                        detalleExistente.Cantidad += detalle.Cantidad;
+                    }
+                    else
+                    {
+                        // Si no existe, agrega el detalle a la lista del grupo
+                        grupos[grupoKey].Add(detalle);
+                    }
                 }
-                grupos[grupoKey].Add(detalle);
+                else
+                {
+                    // Si el grupo no existe, crea una nueva lista y agrega el detalle al grupo
+                    grupos[grupoKey] = new List<PedidoDetalle> { detalle };
+                }
             }
+
 
             // Ahora, itera a través de los grupos y crea e imprime el informe para cada grupo
             foreach (var kvp in grupos)
@@ -1524,7 +1824,6 @@ namespace TPV.GUI
                     }
                 }
             }
-
         }
     }
 }

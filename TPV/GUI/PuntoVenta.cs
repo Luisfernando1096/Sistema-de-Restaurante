@@ -195,6 +195,7 @@ namespace TPV.GUI
                 //Asignamos datos al futuro formulario a abrir.
                 f.CargarProductosPorMesa(idMesa);
                 f.CargarPedidosEnMesa(idMesa);
+                f.CargarListaPedidos(idMesa);
 
                 //Agregando datos mesero y cliente si los hay
                 DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()), false);

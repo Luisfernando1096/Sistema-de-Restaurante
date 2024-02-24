@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Mantenimiento.CLS;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TPV.GUI
@@ -10,8 +12,12 @@ namespace TPV.GUI
         private DataTable datosActual = new DataTable();
         private DataTable datosSiguiente = new DataTable();
         private DataTable datosPrincipales = new DataTable();
+        int CantidadLista = 0;
+        int idPedido1 = 0;
+        public List<Tuple<int, int>> listaIdProductos = new List<Tuple<int, int>>();
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         Boolean pasar = false;
+        public Boolean cerrar;
         public SepararCuenta()
         {
             InitializeComponent();
@@ -22,7 +28,7 @@ namespace TPV.GUI
             try
             {
                 datosActual = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, idPedido);
-                datosPrincipales = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, 0);
+                datosPrincipales = DataManager.DBConsultas.ProductosEnMesaConIdPedido(id, idPedido);
                 dgvActual.DataSource = datosActual;
                 dgvActual.AutoGenerateColumns = false;
 
@@ -127,6 +133,8 @@ namespace TPV.GUI
                 int indiceSiguiente = -1; // Inicializar con un valor que indique que no se encontró ninguna coincidencia
                 int indiceActual = dgvActual.CurrentRow.Index;
                 double precio = Double.Parse(dgvActual.CurrentRow.Cells["precio"].Value.ToString());
+                int idPLocal = Int32.Parse(dgvActual.CurrentRow.Cells["idProducto"].Value.ToString());
+                idPedido1 = idPLocal;
 
                 foreach (DataRow item in datosSiguiente.Rows)
                 {
@@ -161,6 +169,9 @@ namespace TPV.GUI
                 {
 
                     separar = Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
+                    CantidadLista = separar; ///Cantidad que se va separar
+                    listaIdProductos.Add(new Tuple<int, int>(idPedido1, CantidadLista));
+
                     quedaran = cantidad - Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
                     precio = Double.Parse(dgvActual.CurrentRow.Cells["precio"].Value.ToString());
 
@@ -360,11 +371,9 @@ namespace TPV.GUI
                                     SubTotal = Double.Parse(actual["subTotal"].ToString())
                                 };
                                 lstSeparar.Add(pedidoDetalle.ActualizarCompra(false));
-
                             }
                         }
                     }
-
                 }
                 else
                 {
@@ -413,11 +422,8 @@ namespace TPV.GUI
                         double total2 = CalcularTotal(dgvActual, "subTotal");
                         lstSeparar.Add(pedido2.ActualizarTotal(total2, false));
                         //HAcer la transaccion
-                        
                     }
-
                 }
-
                 String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 //Creamos un nuevo pedido y despues los detalles
                 Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
@@ -473,6 +479,7 @@ namespace TPV.GUI
                 if (transaccion1.EjecutarTransaccion(lstSeparar) > 0)
                 {
                     //lblTicket.Text = idPedidoInsertado.ToString(); //Debo colocar el id del pedido
+                    cerrar = true;
                 }
                 else
                 {
