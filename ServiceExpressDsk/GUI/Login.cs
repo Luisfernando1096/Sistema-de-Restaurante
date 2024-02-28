@@ -71,5 +71,13 @@ namespace ServiceExpressDsk.GUI
                 btnIngresar.PerformClick(); // Ejecutar el evento Click del botón
             }
         }
+
+        private void lblContaseña_Click(object sender, EventArgs e)
+        {
+            CambioContraseña f = new CambioContraseña();
+            this.Hide();
+            f.FormClosed += (s, args) => this.Show();
+            f.ShowDialog();
+        }
     }
 }

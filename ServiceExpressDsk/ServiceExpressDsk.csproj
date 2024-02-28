@@ -97,6 +97,12 @@
     <Compile Include="GUI\CadenaConexion.Designer.cs">
       <DependentUpon>CadenaConexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\CambioContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CambioContraseña.Designer.cs">
+      <DependentUpon>CambioContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     <EmbeddedResource Include="GUI\CadenaConexion.resx">
       <DependentUpon>CadenaConexion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CambioContraseña.resx">
+      <DependentUpon>CambioContraseña.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,19 +140,20 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -177,6 +187,10 @@
     <ProjectReference Include="..\FacturacionElectronica\FacturacionElectronica.csproj">
       <Project>{12151993-9F94-44FA-B2E9-F0302B60D669}</Project>
       <Name>FacturacionElectronica</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
+      <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
+      <Name>Mantenimiento</Name>
     </ProjectReference>
     <ProjectReference Include="..\Personal\Personal.csproj">
       <Project>{df452496-63e3-4aa2-8e9a-09517b20fc50}</Project>
@@ -214,6 +228,8 @@
   <ItemGroup>
     <Content Include="Extras\configuracion.xml" />
     <Content Include="icono.ico" />
+    <None Include="Resources\verdadero.png" />
+    <None Include="Resources\falso.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

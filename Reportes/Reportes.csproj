@@ -93,6 +93,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatPagos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatProductosEliminadoDePedidos.cs">
+      <DependentUpon>DatProductosEliminadoDePedidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAT\DatProductosEliminadoDePedidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatProductosEliminadoDePedidos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatProveedores.cs">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </Compile>
@@ -279,6 +287,12 @@
       <DependentUpon>RepPagoTarjeta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="REP\RepProductosEliminadosDePedido.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepProductosEliminadosDePedido.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="REP\RepProductoSinStock.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -448,6 +462,17 @@
     <None Include="DAT\DatPagos.xss">
       <DependentUpon>DatPagos.xsd</DependentUpon>
     </None>
+    <None Include="DAT\DatProductosEliminadoDePedidos.xsc">
+      <DependentUpon>DatProductosEliminadoDePedidos.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatProductosEliminadoDePedidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatProductosEliminadoDePedidos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatProductosEliminadoDePedidos.xss">
+      <DependentUpon>DatProductosEliminadoDePedidos.xsd</DependentUpon>
+    </None>
     <None Include="DAT\DatProveedores.xsc">
       <DependentUpon>DatProveedores.xsd</DependentUpon>
     </None>
@@ -604,6 +629,10 @@
     <EmbeddedResource Include="REP\RepPagoTarjeta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepPagoTarjeta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepProductosEliminadosDePedido.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepProductosEliminadosDePedido.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepProductoSinStock.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

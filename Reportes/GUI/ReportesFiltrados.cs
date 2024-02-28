@@ -175,11 +175,19 @@ namespace Reportes.GUI
                     else if (cmbTipoVetas.SelectedIndex == 8)
                     {
                         //Ventas Productos Resumen
-
                         Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
                         REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
                         DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(inicio, fin);
                         f.GenerarReporte(oReporte, datos, inicio, fin, "");
+                        f.Show();
+                    }
+                    else if (cmbTipoVetas.SelectedIndex == 9)
+                    {
+                        //Productos Eliminados
+                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+                        REP.RepProductosEliminadosDePedido oReporte = new REP.RepProductosEliminadosDePedido();
+                        DataTable datos = DataManager.DBConsultas.RepProductosEliminadosDePedidos((inicio + " 00:00:00"), (fin + " 23:59:59"));
+                        f.GenerarReporte(oReporte, datos, "", "", "");
                         f.Show();
                     }
                     else

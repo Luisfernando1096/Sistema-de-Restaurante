@@ -57,6 +57,27 @@ namespace Mantenimiento.CLS
             }
             return resultado;
         }
+        public Boolean Contraseña()
+        {
+            Boolean resultado = false;
+            DataManager.DBOperacion op = new DataManager.DBOperacion();
+            string sentencia;
+            sentencia = "UPDATE usuario SET pinCode = MD5('" + pinCode + "') WHERE idUsuario = " + idUsuario + ";";
+            try
+            {
+                int filasAfectadas = 0;
+                filasAfectadas = op.EjecutarSentencia(sentencia);
+                if (filasAfectadas > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
+        }
         public Boolean Eliminar()
         {
             Boolean resultado = false;

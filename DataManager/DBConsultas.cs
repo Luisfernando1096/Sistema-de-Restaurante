@@ -832,6 +832,28 @@ namespace DataManager
                 throw;
             }
         }
+        public static DataTable RepProductosEliminadosDePedidos(string fechaInicio, string fechaFinal)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT log.idDeleted, log.idPedido, pro.nombre AS producto, log.cantidad, log.precio, log.subTotal, CONCAT(e.nombres, ' ', e.apellidos) AS Usuario
+                                            FROM pedido_detalle_log log
+                                            INNER JOIN producto pro ON log.idProducto = pro.idProducto
+                                            INNER JOIN usuario u ON log.usuarioDelete = u.idUsuario
+                                            INNER JOIN empleado e ON e.idEmpleado = u.idUsuario
+                                    WHERE log.fechaDelete >= '" + fechaInicio + "' AND log.fechaDelete <= '" + fechaFinal + "';";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
         public static DataTable ListaProductos()
         {
             try
