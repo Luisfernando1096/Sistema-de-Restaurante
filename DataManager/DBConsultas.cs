@@ -305,10 +305,11 @@ namespace DataManager
                 String sentencia;
 
                 sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idMesero, e.nombres, p.fecha,
-                                (pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as total,
-                                (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)) as descuento, (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) as iva,
-                                (pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) as propina,
-                                ((pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) + ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) as totalPago,
+                                ROUND((pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)), 2) as descuento, 
+                                ROUND((pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)), 2) as iva,
+                                ROUND((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)), 2) as propina,
+                                ROUND((pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))), 2) as total,
+                                ROUND(((pc.monto - ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))) + ((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)) + (pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)) - (pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)))), 2) as totalPago,
                                 pc.idCuenta, pc.idPagoCombinado
                                 FROM pedido p
                                 LEFT JOIN cliente c ON p.idCliente = c.idCliente

@@ -29,28 +29,29 @@ namespace TPV.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TicketsProcesados));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTicket = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.txtidPedido = new System.Windows.Forms.TextBox();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.txtidPedido = new System.Windows.Forms.TextBox();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idMesero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPagoCombinado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.propina = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,19 +87,61 @@ namespace TPV.GUI
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
+            // btnEditar
+            // 
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(204, 54);
+            this.btnEditar.Text = "Editar Forma Pago";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(101, 54);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(126, 54);
+            this.toolStripButton6.Text = "Imprimir";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 59);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 57);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(114, 54);
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // dgvClientes
             // 
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -106,24 +149,25 @@ namespace TPV.GUI
             this.idPedido,
             this.nombre,
             this.mesa,
-            this.idMesero,
             this.idCuenta,
+            this.idMesero,
             this.idPagoCombinado,
             this.fecha,
             this.descuento,
             this.iva,
             this.propina,
+            this.total,
             this.totalPago,
             this.nombres,
             this.idCliente});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClientes.Location = new System.Drawing.Point(6, 115);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
@@ -144,48 +188,6 @@ namespace TPV.GUI
             this.txtidPedido.TabIndex = 28;
             this.txtidPedido.TextChanged += new System.EventHandler(this.txtidPedido_TextChanged);
             this.txtidPedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtidPedido_KeyPress);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
-            this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(204, 54);
-            this.btnEditar.Text = "Editar Forma Pago";
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(101, 56);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(126, 56);
-            this.toolStripButton6.Text = "Imprimir";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(114, 56);
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // idPedido
             // 
@@ -209,15 +211,8 @@ namespace TPV.GUI
             this.mesa.HeaderText = "Mesa";
             this.mesa.Name = "mesa";
             this.mesa.ReadOnly = true;
+            this.mesa.Visible = false;
             this.mesa.Width = 70;
-            // 
-            // idMesero
-            // 
-            this.idMesero.DataPropertyName = "idMesero";
-            this.idMesero.HeaderText = "IdMesero";
-            this.idMesero.Name = "idMesero";
-            this.idMesero.ReadOnly = true;
-            this.idMesero.Width = 60;
             // 
             // idCuenta
             // 
@@ -225,7 +220,17 @@ namespace TPV.GUI
             this.idCuenta.HeaderText = "Cuenta";
             this.idCuenta.Name = "idCuenta";
             this.idCuenta.ReadOnly = true;
+            this.idCuenta.Visible = false;
             this.idCuenta.Width = 50;
+            // 
+            // idMesero
+            // 
+            this.idMesero.DataPropertyName = "idMesero";
+            this.idMesero.HeaderText = "IdMesero";
+            this.idMesero.Name = "idMesero";
+            this.idMesero.ReadOnly = true;
+            this.idMesero.Visible = false;
+            this.idMesero.Width = 60;
             // 
             // idPagoCombinado
             // 
@@ -249,7 +254,7 @@ namespace TPV.GUI
             this.descuento.HeaderText = "Descuento";
             this.descuento.Name = "descuento";
             this.descuento.ReadOnly = true;
-            this.descuento.Width = 60;
+            this.descuento.Width = 70;
             // 
             // iva
             // 
@@ -267,10 +272,18 @@ namespace TPV.GUI
             this.propina.ReadOnly = true;
             this.propina.Width = 60;
             // 
+            // total
+            // 
+            this.total.DataPropertyName = "total";
+            this.total.HeaderText = "Total";
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            this.total.Width = 70;
+            // 
             // totalPago
             // 
             this.totalPago.DataPropertyName = "totalPago";
-            this.totalPago.HeaderText = "Total";
+            this.totalPago.HeaderText = "TotalPago";
             this.totalPago.Name = "totalPago";
             this.totalPago.ReadOnly = true;
             this.totalPago.Width = 60;
@@ -328,13 +341,14 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idMesero;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idMesero;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPagoCombinado;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn descuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn iva;
         private System.Windows.Forms.DataGridViewTextBoxColumn propina;
+        private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPago;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCliente;

@@ -30,6 +30,7 @@ namespace ServiceExpressDsk.GUI
                     txtClaveNueva.Enabled = true;
                     pBox.Image = Properties.Resources.verdadero;
                     estado = true;
+                    txtClave.Enabled = false;
                 }
                 else
                 {
@@ -79,6 +80,24 @@ namespace ServiceExpressDsk.GUI
                         MessageBox.Show("Los pin de seguridad no son iguales", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+            }
+        }
+
+        private void txtClave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                btnIngresar.PerformClick(); // Ejecutar el evento Click del botón
+            }
+        }
+
+        private void txtClaveNueva_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Suprimir la acción predeterminada del Enter (como insertar un salto de línea)
+                bttGuardar.PerformClick(); // Ejecutar el evento Click del botón
             }
         }
     }
