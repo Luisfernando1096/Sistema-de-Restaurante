@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +53,8 @@
     <Compile Include="CLS\Comprobante.cs" />
     <Compile Include="CLS\Configuracion.cs" />
     <Compile Include="CLS\Cuenta.cs" />
+    <Compile Include="CLS\Departamento.cs" />
+    <Compile Include="CLS\Direccion.cs" />
     <Compile Include="CLS\Egreso.cs" />
     <Compile Include="CLS\Empleado.cs" />
     <Compile Include="CLS\IngredienteProducto.cs" />
@@ -60,6 +64,7 @@
     <Compile Include="CLS\Factura.cs" />
     <Compile Include="CLS\Familia.cs" />
     <Compile Include="CLS\Ingrediente.cs" />
+    <Compile Include="CLS\Municipio.cs" />
     <Compile Include="CLS\PagoCombinado.cs" />
     <Compile Include="CLS\Pedido.cs" />
     <Compile Include="CLS\PedidoAbonos.cs" />
@@ -76,11 +81,15 @@
     <Compile Include="CLS\PedidoDetalleLog.cs" />
     <Compile Include="CLS\Permiso.cs" />
     <Compile Include="CLS\Producto.cs" />
+    <Compile Include="GUI\AgregarDireccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\AgregarDireccion.Designer.cs">
+      <DependentUpon>AgregarDireccion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj">
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
@@ -89,6 +98,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\AgregarDireccion.resx">
+      <DependentUpon>AgregarDireccion.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

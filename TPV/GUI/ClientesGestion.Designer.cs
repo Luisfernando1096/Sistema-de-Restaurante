@@ -29,12 +29,16 @@ namespace TPV.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientesGestion));
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +74,16 @@ namespace TPV.GUI
             this.label8 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtCodActividad = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtDesActividad = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtTipoDoc = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -80,29 +94,33 @@ namespace TPV.GUI
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
+            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCliente,
+            this.codActividad,
+            this.desActividad,
+            this.tipoDocumento,
             this.nombre,
+            this.idDireccion,
             this.direccion,
             this.email,
             this.telefono,
             this.NIT,
             this.regContable});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClientes.Location = new System.Drawing.Point(5, 227);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvClientes.Location = new System.Drawing.Point(8, 227);
             this.dgvClientes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
@@ -110,10 +128,9 @@ namespace TPV.GUI
             this.dgvClientes.RowHeadersVisible = false;
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(797, 181);
+            this.dgvClientes.Size = new System.Drawing.Size(1083, 258);
             this.dgvClientes.TabIndex = 7;
             this.dgvClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClientes_CellClick);
-            //this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             // 
             // idCliente
             // 
@@ -123,13 +140,45 @@ namespace TPV.GUI
             this.idCliente.ReadOnly = true;
             this.idCliente.Width = 40;
             // 
+            // codActividad
+            // 
+            this.codActividad.DataPropertyName = "codActividad";
+            this.codActividad.HeaderText = "Codigo Actividad";
+            this.codActividad.Name = "codActividad";
+            this.codActividad.ReadOnly = true;
+            this.codActividad.Visible = false;
+            // 
+            // desActividad
+            // 
+            this.desActividad.DataPropertyName = "desActividad";
+            this.desActividad.HeaderText = "Descripcion Actividad";
+            this.desActividad.Name = "desActividad";
+            this.desActividad.ReadOnly = true;
+            this.desActividad.Visible = false;
+            // 
+            // tipoDocumento
+            // 
+            this.tipoDocumento.DataPropertyName = "tipoDocumento";
+            this.tipoDocumento.HeaderText = "Tipo Documento";
+            this.tipoDocumento.Name = "tipoDocumento";
+            this.tipoDocumento.ReadOnly = true;
+            this.tipoDocumento.Visible = false;
+            // 
             // nombre
             // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.nombre.DataPropertyName = "nombre";
             this.nombre.HeaderText = "Nombres";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
+            this.nombre.Width = 250;
+            // 
+            // idDireccion
+            // 
+            this.idDireccion.DataPropertyName = "idDireccion";
+            this.idDireccion.HeaderText = "Id Direccion";
+            this.idDireccion.Name = "idDireccion";
+            this.idDireccion.ReadOnly = true;
+            this.idDireccion.Visible = false;
             // 
             // direccion
             // 
@@ -141,11 +190,11 @@ namespace TPV.GUI
             // 
             // email
             // 
-            this.email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.email.DataPropertyName = "email";
             this.email.HeaderText = "Email";
             this.email.Name = "email";
             this.email.ReadOnly = true;
+            this.email.Width = 200;
             // 
             // telefono
             // 
@@ -160,6 +209,7 @@ namespace TPV.GUI
             this.NIT.HeaderText = "Nit";
             this.NIT.Name = "NIT";
             this.NIT.ReadOnly = true;
+            this.NIT.Visible = false;
             // 
             // regContable
             // 
@@ -167,6 +217,7 @@ namespace TPV.GUI
             this.regContable.HeaderText = "Reg. Contable";
             this.regContable.Name = "regContable";
             this.regContable.ReadOnly = true;
+            this.regContable.Visible = false;
             // 
             // statusStrip1
             // 
@@ -174,10 +225,10 @@ namespace TPV.GUI
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblRegistros});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 410);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 487);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(808, 23);
+            this.statusStrip1.Size = new System.Drawing.Size(1102, 23);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -207,7 +258,7 @@ namespace TPV.GUI
             this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(808, 62);
+            this.toolStrip1.Size = new System.Drawing.Size(1102, 62);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -373,6 +424,7 @@ namespace TPV.GUI
             this.txtNit.Name = "txtNit";
             this.txtNit.Size = new System.Drawing.Size(138, 26);
             this.txtNit.TabIndex = 35;
+            this.txtNit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNit_KeyPress);
             // 
             // label5
             // 
@@ -391,7 +443,8 @@ namespace TPV.GUI
             this.txtDireccion.Location = new System.Drawing.Point(388, 140);
             this.txtDireccion.Multiline = true;
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(264, 64);
+            this.txtDireccion.ReadOnly = true;
+            this.txtDireccion.Size = new System.Drawing.Size(207, 78);
             this.txtDireccion.TabIndex = 37;
             // 
             // label6
@@ -408,7 +461,7 @@ namespace TPV.GUI
             // 
             this.txtRegContable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRegContable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegContable.Location = new System.Drawing.Point(660, 169);
+            this.txtRegContable.Location = new System.Drawing.Point(798, 110);
             this.txtRegContable.Margin = new System.Windows.Forms.Padding(2);
             this.txtRegContable.Name = "txtRegContable";
             this.txtRegContable.Size = new System.Drawing.Size(142, 26);
@@ -418,7 +471,7 @@ namespace TPV.GUI
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(657, 146);
+            this.label7.Location = new System.Drawing.Point(795, 87);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(99, 20);
@@ -441,7 +494,7 @@ namespace TPV.GUI
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(614, 88);
+            this.textBox1.Location = new System.Drawing.Point(439, 87);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(183, 26);
@@ -452,19 +505,139 @@ namespace TPV.GUI
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(493, 91);
+            this.label9.Location = new System.Drawing.Point(318, 90);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(119, 20);
             this.label9.TabIndex = 41;
             this.label9.Text = "Filtrar por nombre:";
             // 
+            // txtCodActividad
+            // 
+            this.txtCodActividad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCodActividad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodActividad.Location = new System.Drawing.Point(649, 110);
+            this.txtCodActividad.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCodActividad.Name = "txtCodActividad";
+            this.txtCodActividad.Size = new System.Drawing.Size(142, 26);
+            this.txtCodActividad.TabIndex = 44;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(646, 87);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(116, 20);
+            this.label10.TabIndex = 43;
+            this.label10.Text = "Codigo Actividad:";
+            // 
+            // txtDesActividad
+            // 
+            this.txtDesActividad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDesActividad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDesActividad.Location = new System.Drawing.Point(681, 169);
+            this.txtDesActividad.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDesActividad.Multiline = true;
+            this.txtDesActividad.Name = "txtDesActividad";
+            this.txtDesActividad.Size = new System.Drawing.Size(408, 48);
+            this.txtDesActividad.TabIndex = 46;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(678, 146);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(147, 20);
+            this.label11.TabIndex = 45;
+            this.label11.Text = "Descripcion Actividad: ";
+            // 
+            // txtTipoDoc
+            // 
+            this.txtTipoDoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTipoDoc.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTipoDoc.Location = new System.Drawing.Point(947, 110);
+            this.txtTipoDoc.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTipoDoc.Name = "txtTipoDoc";
+            this.txtTipoDoc.Size = new System.Drawing.Size(142, 26);
+            this.txtTipoDoc.TabIndex = 48;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(944, 87);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(111, 20);
+            this.label12.TabIndex = 47;
+            this.label12.Text = "Tipo Documento:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(601, 161);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 56);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "Agregar Direccion";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Red;
+            this.label13.Location = new System.Drawing.Point(262, 169);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(14, 20);
+            this.label13.TabIndex = 50;
+            this.label13.Text = "*";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(76, 117);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(14, 20);
+            this.label14.TabIndex = 51;
+            this.label14.Text = "*";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(1048, 87);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(14, 20);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "*";
+            // 
             // ClientesGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(808, 433);
+            this.ClientSize = new System.Drawing.Size(1102, 510);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtTipoDoc);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtDesActividad);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txtCodActividad);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -531,15 +704,29 @@ namespace TPV.GUI
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label9;
+        public System.Windows.Forms.TextBox txtCodActividad;
+        private System.Windows.Forms.Label label10;
+        public System.Windows.Forms.TextBox txtDesActividad;
+        private System.Windows.Forms.Label label11;
+        public System.Windows.Forms.TextBox txtTipoDoc;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codActividad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desActividad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDireccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn NIT;
         private System.Windows.Forms.DataGridViewTextBoxColumn regContable;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
     }
 }

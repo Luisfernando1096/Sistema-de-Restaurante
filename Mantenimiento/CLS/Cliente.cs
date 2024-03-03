@@ -4,27 +4,34 @@ namespace Mantenimiento.CLS
 {
     public class Cliente
     {
-        int _idCliente;
-        String _nombre;
-        String _direccion;
-        String _email;
-        String _telefono;
-        String _NIT;
+        String _idCliente;
         String _regContable;
+        String _nombre;
+        String _codActividad;
+        String _desActividad;
+        Direccion _direccion;
+        String _telefono;
+        String _email;
+        String _NIT;
+        String _tipoDocumento;
 
-        public int IdCliente { get => _idCliente; set => _idCliente = value; }
+
+        public String IdCliente { get => _idCliente; set => _idCliente = value; }
         public string Nombre { get => _nombre; set => _nombre = value; }
-        public string Direccion { get => _direccion; set => _direccion = value; }
         public string Email { get => _email; set => _email = value; }
         public string Telefono { get => _telefono; set => _telefono = value; }
         public string NIT { get => _NIT; set => _NIT = value; }
         public string RegContable { get => _regContable; set => _regContable = value; }
+        public Direccion Direccion { get => _direccion; set => _direccion = value; }
+        public string CodActividad { get => _codActividad; set => _codActividad = value; }
+        public string DesActividad { get => _desActividad; set => _desActividad = value; }
+        public string TipoDocumento { get => _tipoDocumento; set => _tipoDocumento = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into cliente(nombre,direccion,email,telefono,NIT,regContable) values('" + _nombre + "','" + _direccion + "','" + _email + "','" + _telefono + "','" + _NIT + "','" + _regContable + "');";
+            sentencia = @"insert into cliente(nombre,idDireccion,email,telefono,NIT,regContable,codActividad,desActividad,tipoDocumento) values('" + _nombre + "'," + DireccionNull() + "," + EmailNull() + "," + TelefonoNull() + ",'" + _NIT + "'," + RegContNull() + "," + CodActividadNull() + "," + DescActividadNull() + ",'" + _tipoDocumento + "');";
 
             try
             {
@@ -45,11 +52,83 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
+        private String DireccionNull()
+        {
+            if (_direccion.IdDireccion == null || _direccion.Equals(""))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return _direccion.IdDireccion;
+            }
+        }
+
+        private String EmailNull()
+        {
+            if (_email == null || _email.Equals(""))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return "'" + _email + "'";
+            }
+        }
+
+        private String TelefonoNull()
+        {
+            if (_telefono == null || _telefono.Equals(""))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return "'" + _telefono + "'";
+            }
+        }
+
+        private String RegContNull()
+        {
+            if (_regContable == null || _regContable.Equals(""))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return "'" + _regContable + "'";
+            }
+        }
+
+        private String CodActividadNull()
+        {
+            if (_codActividad == null || _codActividad.Equals(""))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return "'" + _codActividad + "'";
+            }
+        }
+
+        private String DescActividadNull()
+        {
+            if (_desActividad == null || _desActividad.Equals(""))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return "'" + _desActividad + "'";
+            }
+        }
+
         public Boolean Actualizar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update cliente set nombre = '" + _nombre + "', direccion = '" + _direccion + "', email = '" + _email + "', telefono = '" + _telefono + "', NIT = '" + _NIT + "', regContable = '" + _regContable + "' where idCliente = " + _idCliente + ";";
+            sentencia = @"update cliente set nombre = '" + _nombre + "', idDireccion = " + DireccionNull() + ", email = " + EmailNull() + ", telefono = " + TelefonoNull() + ", NIT = '" + _NIT + "', regContable = " + RegContNull() + ", codActividad = " + CodActividadNull() + ", desActividad = " + DescActividadNull() + ", tipoDocumento = '" + _tipoDocumento + "' WHERE idCliente = " + _idCliente + ";";
 
             try
             {
