@@ -10,20 +10,20 @@ namespace FacturacionElectronica.CLS
     {
         public int totalNoSuj { get; set; }
         public int totalExenta { get; set; }
-        public int totalGravada { get; set; }
-        public int subTotalVentas { get; set; }
+        public Double totalGravada { get; set; }
+        public Double subTotalVentas { get; set; }
         public int descuNoSuj { get; set; }
         public int descuExenta { get; set; }
         public int descuGravada { get; set; }
         public int porcentajeDescuento { get; set; }
         public int totalDescu { get; set; }
         public object tributos { get; set; }
-        public int subTotal { get; set; }
+        public Double subTotal { get; set; }
         public int ivaRete1 { get; set; }
         public int reteRenta { get; set; }
-        public int montoTotalOperacion { get; set; }
+        public Double montoTotalOperacion { get; set; }
         public int totalNoGravado { get; set; }
-        public int totalPagar { get; set; }
+        public Double totalPagar { get; set; }
         public string totalLetras { get; set; }
         public int totalIva { get; set; }
         public int saldoFavor { get; set; }

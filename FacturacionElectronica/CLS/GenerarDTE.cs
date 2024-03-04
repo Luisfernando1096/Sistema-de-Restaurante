@@ -14,8 +14,12 @@ namespace FacturacionElectronica.CLS
     {
 
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         List<PagoCombinado> lstPago_Combinado = new List<PagoCombinado>();
         List<PedidoDetalle> lstPedido_Detalle = new List<PedidoDetalle>();
+        String totalLetras;
+
+        public string TotalLetras { get => totalLetras; set => totalLetras = value; }
 
         public GenerarDTE(List<PagoCombinado> lst, List<PedidoDetalle> lstPd)
         {
@@ -100,21 +104,21 @@ namespace FacturacionElectronica.CLS
                     {
                         totalNoSuj = 0,
                         totalExenta = 0,
-                        totalGravada = 2000,
-                        subTotalVentas = 2000,
+                        totalGravada = Double.Parse(CalcularSubTotal().ToString("0.00")),
+                        subTotalVentas = Double.Parse(CalcularSubTotal().ToString("0.00")),
                         descuNoSuj = 0,
                         descuExenta = 0,
                         descuGravada = 0,
                         porcentajeDescuento = 0,
                         totalDescu = 0,
                         tributos = null,
-                        subTotal = 2000,
+                        subTotal = Double.Parse(CalcularSubTotal().ToString("0.00")),
                         ivaRete1 = 0,
                         reteRenta = 0,
-                        montoTotalOperacion = 2260,
+                        montoTotalOperacion = Double.Parse(CalcularTotalPagar().ToString("0.00")),
                         totalNoGravado = 0,
-                        totalPagar = 2260,
-                        totalLetras = "DOS MIL DOSCIENTOS SESENTA DÓLARES",
+                        totalPagar = Double.Parse(CalcularTotalPagar().ToString("0.00")),
+                        totalLetras = totalLetras,
                         totalIva = 0,
                         saldoFavor = 0,
                         condicionOperacion = 1,
@@ -145,6 +149,42 @@ namespace FacturacionElectronica.CLS
             return nuevoJson;
         }
 
+        private double CalcularTotalPagar()
+        {
+            Double total;
+
+            total = Math.Round(CalcularSubTotal(), 2) + Math.Round(CalcularPropina(), 2);
+
+            return total;
+        }
+
+        private double CalcularPropina()
+        {
+            if (oConfiguracion != null)
+            {
+                if (Boolean.Parse(oConfiguracion.IncluirPropina))
+                {
+                    double porcentaje = Double.Parse(oConfiguracion.Propina);
+                    double total = CalcularSubTotal();
+                    return total * (porcentaje / 100);
+                }
+                
+            }
+            return 0;
+        }
+
+        private Double CalcularSubTotal()
+        {
+            Double sub = 0;
+
+            foreach (PedidoDetalle item in lstPedido_Detalle)
+            {
+                sub += item.SubTotal;
+            }
+
+            return sub;
+        }
+
         private List<cuerpoDocumento> AgregarCuerpo()
         {
             List<cuerpoDocumento> lst = new List<cuerpoDocumento>();
@@ -164,7 +204,7 @@ namespace FacturacionElectronica.CLS
                 cd.montoDescu = 0;
                 cd.ventaNoSuj = 0;
                 cd.ventaExenta = 0;
-                cd.ventaGravada = item.SubTotal;
+                cd.ventaGravada = Double.Parse(item.SubTotal.ToString("0.00"));
                 cd.tributos = null;
                 cd.psv = 1.00;
                 cd.noGravado = 0;
@@ -187,19 +227,19 @@ namespace FacturacionElectronica.CLS
                 if (item.IdCuenta == 1)
                 {
                     p.codigo = "01";
-                    p.montoPago = item.Monto;
+                    p.montoPago = Double.Parse(item.Monto.ToString("0.00"));
                     p.referencia = "";
                 }
                 else if (item.IdCuenta == 2)
                 {
                     p.codigo = "03";
-                    p.montoPago = item.Monto;
+                    p.montoPago = Double.Parse(item.Monto.ToString("0.00"));
                     p.referencia = "";
                 }
                 else if (item.IdCuenta == 3)
                 {
                     p.codigo = "11";
-                    p.montoPago = item.Monto;
+                    p.montoPago = Double.Parse(item.Monto.ToString("0.00"));
                     p.referencia = "";
                 }
                 p.plazo = null;

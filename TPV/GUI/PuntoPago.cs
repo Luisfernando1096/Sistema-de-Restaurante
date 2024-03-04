@@ -1091,12 +1091,49 @@ namespace TPV.GUI
 
             if (activarFactura)
             {
+                //Total en letras
+                Double totalPagar = 0;
+                String totalStr;
+                DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
+                if (datos2.Rows.Count > 1)
+                {
+                    foreach (DataRow item2 in datos2.Rows)
+                    {
+                        totalPagar += Math.Round(Double.Parse(item2["monto"].ToString()), 2);
+                    }
+                }
+                else
+                {
+                    totalPagar = Math.Round(Double.Parse(txtTotalPagar.Text), 2);
+                }
+
+                totalStr = totalPagar.ToString().Trim();
+                String totalLetras = "";
+                // Convierte la cadena a un número decimal
+                if (decimal.TryParse(totalStr, out decimal total))
+                {
+                    // Dividir la parte entera y la parte decimal
+                    int parteEntera = (int)Math.Truncate(total);
+                    int parteDecimal = (int)((total - parteEntera) * 100);
+
+                    // Convierte cada parte a palabras utilizando Humanizer
+                    string parteEnteraEnLetras = parteEntera.ToWords().ToUpper();
+                    string parteDecimalEnLetras = parteDecimal.ToWords().ToUpper();
+
+                    // Asigna el valor en letras al parámetro del reporte
+                    totalLetras = parteEnteraEnLetras + " CON " + parteDecimalEnLetras + " CENTAVOS";
+                }
+                else
+                {
+                    Console.WriteLine("La entrada no es un número válido.");
+                }
                 //Lleva factura
                 //Generar JSON
                 //Aqui se guardara el JSON como prueba
                 string path = @"C:\Users\fruiz\OneDrive\Escritorio\Respaldos\factura.json";
 
                 GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles());
+                generarDTE.TotalLetras = totalLetras;
 
                 dteJson dte = generarDTE.GenerarFactura();
 
@@ -1108,7 +1145,6 @@ namespace TPV.GUI
                 //Obtener la ultima factura y crear una nueva
                 if (actualFactura.Rows.Count > 0)
                 {
-                    
                     foreach (DataRow item in actualFactura.Rows)
                     {
                         if ((Int32.Parse(item["actual"].ToString()) + 1) <= (Int32.Parse(item["fin"].ToString())))
