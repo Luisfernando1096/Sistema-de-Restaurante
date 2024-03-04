@@ -9,7 +9,9 @@ namespace ConfiguracionManager.CLS
         //Atributos
         static Empresa instancia = null;
         static readonly Object codelock = new object();
-        string nombreEmpresa, slogan, direccion, telefono, logo, firma, sello, saludo, nrc, nit, numAutorizacion;
+        string nombreEmpresa, slogan, direccion, telefono, logo, firma, sello, saludo, nrc, nit, desActividad, establecimiento, correo, complemento;
+        int idEstablecimiento, idActividad, idDireccion, codEstablecimiento, codActividad, codDepartamento, codMunicipio;
+
         //Propiedades
 
         public static Empresa Instancia//Esta es una propiedad y retorna el valor de un atributo
@@ -40,7 +42,17 @@ namespace ConfiguracionManager.CLS
         public string Saludo { get => saludo; set => saludo = value; }
         public string Nrc { get => nrc; set => nrc = value; }
         public string Nit { get => nit; set => nit = value; }
-        public string NumAutorizacion { get => numAutorizacion; set => numAutorizacion = value; }
+        public int IdEstablecimiento { get => idEstablecimiento; set => idEstablecimiento = value; }
+        public int IdActividad { get => idActividad; set => idActividad = value; }
+        public string DesActividad { get => desActividad; set => desActividad = value; }
+        public string Establecimiento { get => establecimiento; set => establecimiento = value; }
+        public int IdDireccion { get => idDireccion; set => idDireccion = value; }
+        public string Correo { get => correo; set => correo = value; }
+        public int CodEstablecimiento { get => codEstablecimiento; set => codEstablecimiento = value; }
+        public int CodActividad { get => codActividad; set => codActividad = value; }
+        public int CodDepartamento { get => codDepartamento; set => codDepartamento = value; }
+        public String Complemento { get => complemento; set => complemento = value; }
+        public int CodMunicipio { get => codMunicipio; set => codMunicipio = value; }
 
 
 
@@ -58,12 +70,12 @@ namespace ConfiguracionManager.CLS
             try
             {
                 DataTable datosEmpresa = new DataTable();
-                datosEmpresa = DataManager.DBConsultas.Empresa(1);
+                datosEmpresa = DataManager.DBConsultas.Empresa(2);
                 if (datosEmpresa.Rows.Count == 1)
                 {
 
-                    nombreEmpresa = datosEmpresa.Rows[0]["nombreEmpresa"].ToString();
-                    slogan = datosEmpresa.Rows[0]["slogan"].ToString();
+                    NombreEmpresa = datosEmpresa.Rows[0]["nombreEmpresa"].ToString();
+                    Slogan = datosEmpresa.Rows[0]["slogan"].ToString();
                     direccion = datosEmpresa.Rows[0]["direccion"].ToString();
                     telefono = datosEmpresa.Rows[0]["telefono"].ToString();
                     logo = datosEmpresa.Rows[0]["logo"].ToString();
@@ -72,7 +84,18 @@ namespace ConfiguracionManager.CLS
                     saludo = datosEmpresa.Rows[0]["saludo"].ToString();
                     nrc = datosEmpresa.Rows[0]["NRC"].ToString();
                     nit = datosEmpresa.Rows[0]["NIT"].ToString();
-                    numAutorizacion = datosEmpresa.Rows[0]["numAutorizacion"].ToString();
+                    desActividad = datosEmpresa.Rows[0]["descripcion"].ToString();
+                    establecimiento = datosEmpresa.Rows[0]["establecimiento"].ToString();
+                    idActividad = Int32.Parse(datosEmpresa.Rows[0]["idActividad"].ToString());
+                    idEstablecimiento = Int32.Parse(datosEmpresa.Rows[0]["idEstablecimiento"].ToString());
+                    idDireccion = Int32.Parse(datosEmpresa.Rows[0]["idDireccion"].ToString());
+                    Correo = datosEmpresa.Rows[0]["correo"].ToString();
+                    codEstablecimiento = Int32.Parse(datosEmpresa.Rows[0]["codEstablecimiento"].ToString()); ;
+                    codActividad = Int32.Parse(datosEmpresa.Rows[0]["codActividad"].ToString()); ;
+                    codDepartamento = Int32.Parse(datosEmpresa.Rows[0]["codDepartamento"].ToString()); ;
+                    complemento = datosEmpresa.Rows[0]["complemento"].ToString(); ;
+                    codMunicipio = Int32.Parse(datosEmpresa.Rows[0]["codMunicipio"].ToString()); ;
+
                     result = true;
                 }
                 else

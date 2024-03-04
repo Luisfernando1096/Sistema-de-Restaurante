@@ -44,6 +44,24 @@ namespace DataManager
             }
         }
 
+        public static DataTable Documentos()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM documento;";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static object Direcciones()
         {
             try
@@ -392,12 +410,13 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT 
-                                            c.idCliente, c.regContable, c.nombre, c.codActividad, c.desActividad, c.telefono, c.email, c.NIT, c.tipoDocumento, c.idDireccion,
+                                            c.idCliente, c.regContable, c.nombre, c.codActividad, c.desActividad, c.telefono, c.email, c.NIT, doc.tipoDocumento, doc.valorEnNumero, doc.idDocumento, c.idDireccion,
                                             CONCAT(IFNULL(CONCAT(de.nombre, ', '), ''), IFNULL(CONCAT(m.nombre, ', '), ''), IFNULL(d.complemento, '')) as direccion
                                         FROM 
                                             cliente c
                                             LEFT JOIN direccion d ON c.idDireccion = d.idDireccion
                                             LEFT JOIN municipio m ON m.idMunicipio = d.idMunicipio
+                                            LEFT JOIN documento doc ON doc.idDocumento = c.idDocumento
                                             LEFT JOIN departamento de ON de.idDepartamento = m.idDepartamento; ";
                 DBOperacion operacion = new DBOperacion();
 
@@ -429,6 +448,42 @@ namespace DataManager
                                         AND m.disponible = 0
                                     GROUP BY
                                         pe.idPedido desc limit 1;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable Actividades()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM actividad;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable Establecimientoss()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT * FROM establecimiento;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -592,7 +647,17 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = "SELECT idEmpresa, nombreEmpresa, slogan, direccion, telefono, logo, firma, sello, saludo, NRC, NIT, numAutorizacion FROM empresa WHERE idEmpresa = " + idEmpresa + ";";
+                String sentencia = @"SELECT e.idEmpresa, e.correo, e.nombreEmpresa, e.slogan, a.idActividad, a.descripcion, es.idEstablecimiento, es.establecimiento, d.idDireccion, 
+                                            m.codigo as codMunicipio, d.complemento, de.codigo as codDepartamento, a.codigo as codActividad, es.codigo as codEstablecimiento,
+                                            CONCAT(IFNULL(CONCAT(de.nombre, ', '), ''), IFNULL(CONCAT(m.nombre, ', '), ''), IFNULL(d.complemento, '')) as direccion,
+											 telefono, logo, firma, sello, saludo, NRC, NIT
+                                            FROM empresa e
+
+											LEFT JOIN actividad a ON a.idActividad = e.idActividad
+                                            LEFT JOIN establecimiento es ON es.idEstablecimiento = e.idEstablecimiento
+                                            LEFT JOIN direccion d ON e.idDireccion = d.idDireccion
+                                            LEFT JOIN municipio m ON m.idMunicipio = d.idMunicipio
+                                            LEFT JOIN departamento de ON de.idDepartamento = m.idDepartamento WHERE idEmpresa = " + idEmpresa + ";";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mantenimiento.CLS;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -21,6 +22,8 @@ namespace Configuraciones.GUI
         String seleccionLogoAnterior;
         String seleccionFirmaAnterior;
         String seleccionSelloAnterior;
+        private Municipio municipio;
+        private String complemento;
 
         private void CargarDatosConfig()
         {
@@ -177,7 +180,7 @@ namespace Configuraciones.GUI
         {
             try
             {
-                DataTable empresa = DataManager.DBConsultas.Empresa(1);
+                DataTable empresa = DataManager.DBConsultas.Empresa(2);
 
                 if (empresa.Rows.Count > 0)
                 {
@@ -185,18 +188,21 @@ namespace Configuraciones.GUI
 
                     txtEmpresa.Text = configuracionRow["nombreEmpresa"].ToString();
                     txtDireccion.Text = configuracionRow["direccion"].ToString();
+                    txtDireccion.Tag = configuracionRow["idDireccion"].ToString();
                     txtSlogan.Text = configuracionRow["slogan"].ToString();
                     txtTelefono.Text = configuracionRow["telefono"].ToString();
                     txtSaludo.Text = configuracionRow["saludo"].ToString();
                     txtNRC.Text = configuracionRow["NRC"].ToString();
                     txtNIT.Text = configuracionRow["NIT"].ToString();
-                    txtAutorizacionTicket.Text = configuracionRow["numAutorizacion"].ToString();
+                    txtCorreo.Text = configuracionRow["correo"].ToString();
                     SeleccionarLogo = configuracionRow["logo"].ToString();
                     seleccionLogoAnterior = configuracionRow["logo"].ToString();//Establezco cual era la imagen anterior
                     SeleccionarFirma = configuracionRow["firma"].ToString();
                     seleccionFirmaAnterior = configuracionRow["firma"].ToString();
                     SeleccionarSello = configuracionRow["sello"].ToString();
                     seleccionSelloAnterior = configuracionRow["sello"].ToString();
+                    cmbActividad.SelectedValue = configuracionRow["idActividad"].ToString();
+                    cmbEstablecimiento.SelectedValue = configuracionRow["idEstablecimiento"].ToString();
 
                     if (!string.IsNullOrEmpty(SeleccionarLogo))
                     {
@@ -340,10 +346,44 @@ namespace Configuraciones.GUI
 
         private void ConfiguracionTPV_Load(object sender, EventArgs e)
         {
+            CargarActividades();
+            CargarEstablecimientos();
             CargarDatosConfig();
             CargarDatosEmpresa();
             CargarDatosOpTicket();
             SeleccionDatos();
+        }
+
+        private void CargarEstablecimientos()
+        {
+            try
+            {
+                DataTable doc = DataManager.DBConsultas.Establecimientoss();
+
+                cmbEstablecimiento.DataSource = doc;
+                cmbEstablecimiento.DisplayMember = "establecimiento";
+                cmbEstablecimiento.ValueMember = "idEstablecimiento";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void CargarActividades()
+        {
+            try
+            {
+                DataTable doc = DataManager.DBConsultas.Actividades();
+
+                cmbActividad.DataSource = doc;
+                cmbActividad.DisplayMember = "descripcion";
+                cmbActividad.ValueMember = "idActividad";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -565,8 +605,8 @@ namespace Configuraciones.GUI
         {
             try
             {
-                Mantenimiento.CLS.Empresa empresa = new Mantenimiento.CLS.Empresa();
-                empresa.IdEmpresa = 1;
+                Empresa empresa = new Empresa();
+                empresa.IdEmpresa = 2;
                 empresa.Logo = SeleccionarLogo;
                 empresa.Firma = SeleccionarFirma;
                 empresa.Sello = SeleccionarSello;
@@ -578,14 +618,63 @@ namespace Configuraciones.GUI
                 {
                     empresa.NombreEmpresa = "";
                 }
-                if (txtDireccion.Text != string.Empty)
+                empresa.Correo = txtCorreo.Text;
+
+                Direccion direccion = null;
+                if (!txtDireccion.Tag.ToString().Equals(""))
                 {
-                    empresa.Direccion = txtDireccion.Text;
+                    //Agregaremos una direccion
+                    direccion = new Direccion
+                    {
+                        IdDireccion = txtDireccion.Tag.ToString()
+                    };
+
+                }
+                else if (txtDireccion.Tag.ToString().Equals("") && complemento != null)
+                {
+                    //Insertaremos una direccion
+                    Direccion direccion2 = new Direccion
+                    {
+                        Municipio = municipio,
+                        Complemento = complemento
+                    };
+
+                    if (direccion2.Insertar())
+                    {
+                        DataManager.DBOperacion op = new DataManager.DBOperacion();
+                        string consultaId = "SELECT LAST_INSERT_ID();";
+                        int idInsertado = Convert.ToInt32(op.ConsultarScalar(consultaId));
+
+                        //Obtenemos el id de la direccion agregada
+                        direccion = new Direccion
+                        {
+                            IdDireccion = idInsertado.ToString()
+                        };
+                    }
+
                 }
                 else
                 {
-                    empresa.Direccion = "";
+                    direccion = new Direccion
+                    {
+                        IdDireccion = null
+                    };
                 }
+
+                empresa.Direccion = direccion;
+
+                Actividad act = new Actividad
+                {
+                    IdActividad = Int32.Parse(cmbActividad.SelectedValue.ToString())
+                };
+                empresa.Actividad = act;
+
+                Establecimiento est = new Establecimiento
+                {
+                    IdEstablecimiento = Int32.Parse(cmbEstablecimiento.SelectedValue.ToString())
+                };
+                empresa.Establecimiento = est;
+
                 if (txtSaludo.Text != string.Empty)
                 {
                     empresa.Saludo = txtSaludo.Text;
@@ -625,14 +714,6 @@ namespace Configuraciones.GUI
                 else
                 {
                     empresa.NIT1 = "";
-                }
-                if (txtAutorizacionTicket.Text != string.Empty)
-                {
-                    empresa.NumAutorizacion = txtAutorizacionTicket.Text;
-                }
-                else
-                {
-                    empresa.NumAutorizacion = "";
                 }
 
                 if (empresa.Actualizar())
@@ -702,6 +783,10 @@ namespace Configuraciones.GUI
                     CargarDatosEmpresa();
 
                     this.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Error al actualizar empresa! Contacte al programador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 oEmpresa.ObtenerConfiguracion();
             }
@@ -1038,6 +1123,23 @@ namespace Configuraciones.GUI
             UpFaAlto.Value = 80;
             UpFaAncho.Value = 150;
             UpFaSeparador.Value = 2;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Mantenimiento.GUI.fr f = new Mantenimiento.GUI.fr();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                txtDireccion.Tag = "";
+                complemento = f.txtComplemento.Text;
+                txtDireccion.Text = f.cmbDepartamento.Text + ", " + f.cmbMunicipio.Text + ", " + f.txtComplemento.Text; //Direccion
+
+                municipio = new Municipio
+                {
+                    IdMunicipio = f.cmbMunicipio.SelectedValue.ToString()
+                };
+
+            }
         }
 
         private void txtImpuestoVIP_KeyPress(object sender, KeyPressEventArgs e)

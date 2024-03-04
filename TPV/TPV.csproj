@@ -229,6 +229,10 @@
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FacturacionElectronica\FacturacionElectronica.csproj">
+      <Project>{12151993-9F94-44FA-B2E9-F0302B60D669}</Project>
+      <Name>FacturacionElectronica</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ingredientes y Productos\Ingredientes y Productos.csproj">
       <Project>{5a6cd6ab-96fd-4bb3-a348-d1e87add4f19}</Project>
       <Name>Ingredientes y Productos</Name>

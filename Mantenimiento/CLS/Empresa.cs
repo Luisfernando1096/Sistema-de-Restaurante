@@ -8,7 +8,9 @@ namespace Mantenimiento.CLS
         int idEmpresa;
         string nombreEmpresa;
         string slogan;
-        string direccion;
+        Direccion direccion;
+        Actividad actividad;
+        Establecimiento establecimiento;
         string telefono;
         string logo;
         string firma;
@@ -16,13 +18,13 @@ namespace Mantenimiento.CLS
         string saludo;
         string NRC;
         string NIT;
-        string numAutorizacion;
+        String correo;
 
         /*DECLARACION DE PROPIEDADES*/
         public int IdEmpresa { get => idEmpresa; set => idEmpresa = value; }
         public string NombreEmpresa { get => nombreEmpresa; set => nombreEmpresa = value; }
         public string Slogan { get => slogan; set => slogan = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
+        public Direccion Direccion { get => direccion; set => direccion = value; }
         public string Telefono { get => telefono; set => telefono = value; }
         public string Logo { get => logo; set => logo = value; }
         public string Firma { get => firma; set => firma = value; }
@@ -30,7 +32,9 @@ namespace Mantenimiento.CLS
         public string Saludo { get => saludo; set => saludo = value; }
         public string NRC1 { get => NRC; set => NRC = value; }
         public string NIT1 { get => NIT; set => NIT = value; }
-        public string NumAutorizacion { get => numAutorizacion; set => numAutorizacion = value; }
+        public Actividad Actividad { get => actividad; set => actividad = value; }
+        public Establecimiento Establecimiento { get => establecimiento; set => establecimiento = value; }
+        public string Correo { get => correo; set => correo = value; }
 
         /*OPERACIONES BASICAS*/
         public Boolean Insertar()
@@ -38,7 +42,7 @@ namespace Mantenimiento.CLS
             Boolean resultado = false;
             DataManager.DBOperacion op = new DataManager.DBOperacion();
             string sentencia;
-            sentencia = "INSERT INTO empresa(nombreEmpresa, slogan, direccion, telefono, logo, firma, sello, saludo, NRC, NIT, numAutorizacion) VALUES('" + nombreEmpresa + "','" + slogan + "','" + direccion + "','" + telefono + "','" + logo + "','" + firma + "','" + sello + "','" + saludo + "','" + NRC + "','" + NIT + "','" + numAutorizacion + "');";
+            sentencia = "INSERT INTO empresa(nombreEmpresa, slogan, idDireccion, telefono, logo, firma, sello, saludo, NRC, NIT, idActividad, idEstablecimiento) VALUES('" + nombreEmpresa + "','" + slogan + "'," + direccion.IdDireccion + ",'" + telefono + "','" + logo + "','" + firma + "','" + sello + "','" + saludo + "','" + NRC + "','" + NIT + "'," + Actividad.IdActividad + ", " + Establecimiento.IdEstablecimiento + ");";
             try
             {
                 int filasAfectadas = 0;
@@ -61,7 +65,7 @@ namespace Mantenimiento.CLS
             string sentencia;
 
 
-            sentencia = "UPDATE empresa SET  nombreEmpresa = '" + nombreEmpresa + "', slogan = '" + slogan + "', direccion = '" + direccion + "', telefono = '" + telefono + "', logo = '" + logo + "', firma = '" + firma + "', sello = '" + sello + "', saludo = '" + saludo + "', NRC = '" + NRC + "' , NIT  = '" + NIT + "', numAutorizacion = '" + numAutorizacion + "' " +
+            sentencia = "UPDATE empresa SET  nombreEmpresa = '" + nombreEmpresa + "', slogan = '" + slogan + "', idDireccion = " + direccion.IdDireccion + ", telefono = '" + telefono + "', logo = '" + logo + "', firma = '" + firma + "', sello = '" + sello + "', saludo = '" + saludo + "', NRC = '" + NRC + "' , NIT  = '" + NIT + "', idActividad = " + actividad.IdActividad + ", idEstablecimiento = " + establecimiento.IdEstablecimiento + ", correo = '" + correo + "' " +
                           "WHERE idEmpresa = " + idEmpresa + ";";
             try
             {

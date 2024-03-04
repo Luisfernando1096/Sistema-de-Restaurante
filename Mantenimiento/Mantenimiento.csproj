@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLS\Actividad.cs" />
     <Compile Include="CLS\Ajuste_Stock.cs" />
     <Compile Include="CLS\Caja.cs" />
     <Compile Include="CLS\Cliente.cs" />
@@ -55,8 +56,10 @@
     <Compile Include="CLS\Cuenta.cs" />
     <Compile Include="CLS\Departamento.cs" />
     <Compile Include="CLS\Direccion.cs" />
+    <Compile Include="CLS\Documento.cs" />
     <Compile Include="CLS\Egreso.cs" />
     <Compile Include="CLS\Empleado.cs" />
+    <Compile Include="CLS\Establecimiento.cs" />
     <Compile Include="CLS\IngredienteProducto.cs" />
     <Compile Include="CLS\LogFile.cs" />
     <Compile Include="CLS\Mesa.cs" />

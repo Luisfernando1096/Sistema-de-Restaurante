@@ -1,5 +1,6 @@
 ﻿using Mantenimiento.CLS;
 using System;
+using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -20,6 +21,7 @@ namespace TPV.GUI
         private void ClientesGestion_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            CargarDocumentos();
         }
 
         private void CargarDatos()
@@ -37,6 +39,22 @@ namespace TPV.GUI
             lblRegistros.Text = datos.List.Count.ToString() + " Registros Encontrados";
         }
 
+        private void CargarDocumentos()
+        {
+            try
+            {
+                DataTable doc = DataManager.DBConsultas.Documentos();
+
+                cmbTDoc.DataSource = doc;
+                cmbTDoc.DisplayMember = "tipoDocumento";
+                cmbTDoc.ValueMember = "idDocumento";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private void Limpiar()
         {
             txtIdCliente.Text = "";
@@ -48,7 +66,7 @@ namespace TPV.GUI
             txtRegContable.Text = "";
             txtCodActividad.Text = "";
             txtDesActividad.Text = "";
-            txtTipoDoc.Text = "";
+            cmbTDoc.SelectedIndex = 0;
             txtDireccion.Tag = "";
         }
 
@@ -74,7 +92,7 @@ namespace TPV.GUI
             txtRegContable.Text = dgvClientes.CurrentRow.Cells["regContable"].Value.ToString();
             txtCodActividad.Text = dgvClientes.CurrentRow.Cells["codActividad"].Value.ToString();
             txtDesActividad.Text = dgvClientes.CurrentRow.Cells["desActividad"].Value.ToString();
-            txtTipoDoc.Text = dgvClientes.CurrentRow.Cells["tipoDocumento"].Value.ToString();
+            cmbTDoc.SelectedValue = dgvClientes.CurrentRow.Cells["idDocumento"].Value.ToString();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -164,8 +182,12 @@ namespace TPV.GUI
             String nit = txtNit.Text.ToString();
             String codActividad = txtCodActividad.Text.ToString();
             String desActividad = txtDesActividad.Text.ToString();
-            String tipoDoc = txtTipoDoc.Text.ToString();
 
+            Documento doc = new Documento
+            {
+                IdDocumento = Int32.Parse(cmbTDoc.SelectedValue.ToString())
+            };
+            
             String regContable = txtRegContable.Text.ToString();
             Cliente cliente = new Cliente();
             
@@ -177,7 +199,7 @@ namespace TPV.GUI
             cliente.NIT = nit;
             cliente.Direccion = direccion;
             cliente.DesActividad = desActividad;
-            cliente.TipoDocumento = tipoDoc;
+            cliente.TipoDocumento = doc;
             
 
             if (txtIdCliente.Text.Equals(""))
@@ -234,7 +256,7 @@ namespace TPV.GUI
             {
                 camposVacios++;
             }
-            if (txtTipoDoc.Text.Equals(""))
+            if (cmbTDoc.Text.Equals(""))
             {
                 camposVacios++;
             }

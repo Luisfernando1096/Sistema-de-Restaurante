@@ -31,9 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +53,7 @@
     <Compile Include="CLS\dteJson.cs" />
     <Compile Include="CLS\emisor.cs" />
     <Compile Include="CLS\extension.cs" />
+    <Compile Include="CLS\GenerarDTE.cs" />
     <Compile Include="CLS\identificacion.cs" />
     <Compile Include="CLS\otrosDocumentos.cs" />
     <Compile Include="CLS\pagos.cs" />
@@ -56,6 +61,19 @@
     <Compile Include="CLS\resumen.cs" />
     <Compile Include="CLS\ventaTercero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfiguracionManager\ConfiguracionManager.csproj">
+      <Project>{ec3f4bba-3f7f-432d-ac18-b2222adc87ab}</Project>
+      <Name>ConfiguracionManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
+      <Project>{1A5BDFB4-366E-47FA-90DA-72FB5E6048F3}</Project>
+      <Name>Mantenimiento</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

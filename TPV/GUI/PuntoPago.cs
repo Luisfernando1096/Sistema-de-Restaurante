@@ -6,6 +6,8 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using Humanizer;
 using System.Collections.Generic;
+using FacturacionElectronica.CLS;
+using Mantenimiento.CLS;
 
 namespace TPV.GUI
 {
@@ -1090,6 +1092,18 @@ namespace TPV.GUI
             if (activarFactura)
             {
                 //Lleva factura
+                //Generar JSON
+                //Aqui se guardara el JSON como prueba
+                string path = @"C:\Users\fruiz\OneDrive\Escritorio\Respaldos\factura.json";
+
+                GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles());
+
+                dteJson dte = generarDTE.GenerarFactura();
+
+                generarDTE.SerializarFactura(dte, path);
+                //Termina generacion de JSON
+
+                //Lleva factura
                 Boolean generar = false;
                 //Obtener la ultima factura y crear una nueva
                 if (actualFactura.Rows.Count > 0)
@@ -1110,7 +1124,7 @@ namespace TPV.GUI
 
                     if (generar)
                     {
-                        Mantenimiento.CLS.Tiraje_Factura tiraje = new Mantenimiento.CLS.Tiraje_Factura();
+                        Tiraje_Factura tiraje = new Tiraje_Factura();
                         if (siguiente != 0)
                         {
                             tiraje.IdTiraje = idTiraje;
@@ -1133,10 +1147,12 @@ namespace TPV.GUI
                 {
                     if (ObtenerPagosAnteriores() > 1)
                     {
+                        //Facturar con muchos pagos
                         ElegirFactura(serie, siguiente);
                     }
                     else
                     {
+                        //Facturar con un pago
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
                             Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
@@ -1147,6 +1163,9 @@ namespace TPV.GUI
                             Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
                             GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);// se envia el nFactura y la serie que corresponde
                         }
+
+                        //Generar JSON
+
                     }
                     
                 }
@@ -1190,9 +1209,7 @@ namespace TPV.GUI
                         }
                     }
                 }
-            }
-            if (activarTicket)
-            {
+            }else {
                 //Lleva ticket
                 if (pagoEfectivo)
                 {
@@ -1313,6 +1330,57 @@ namespace TPV.GUI
                 Close();
             }
             
+        }
+
+        private List<PedidoDetalle> ListaDetalles()
+        {
+            DataTable detalles = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            List<PedidoDetalle> lst = new List<PedidoDetalle>();
+
+            foreach (DataRow item in detalles.Rows)
+            {
+                PedidoDetalle pd = new PedidoDetalle();
+                pd.Nombre = item["nombre"].ToString();
+                pd.Cantidad = Int32.Parse(item["cantidad"].ToString());
+                pd.Precio = Double.Parse(item["precio"].ToString());
+                pd.SubTotal = Double.Parse(item["subTotal"].ToString());
+
+                lst.Add(pd);
+            }
+
+            return lst;
+        }
+
+        private List<PagoCombinado> ListaPagos()
+        {
+            DataTable totalPagos = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
+
+            List<PagoCombinado> lst = new List<PagoCombinado>();
+
+            foreach (DataRow item in totalPagos.Rows)
+            {
+                PagoCombinado pc = new PagoCombinado();
+                if (item["formaPago"].Equals("EFECTIVO"))
+                {
+                    pc.IdCuenta = 1;
+                    pc.Monto = Double.Parse(item["monto"].ToString());
+                }
+                else if (item["formaPago"].Equals("TARJETA"))
+                {
+                    pc.IdCuenta = 2;
+                    pc.Monto = Double.Parse(item["monto"].ToString());
+                }
+                else if (item["formaPago"].Equals("BITCOIN"))
+                {
+                    pc.IdCuenta = 3;
+                    pc.Monto = Double.Parse(item["monto"].ToString());
+                }
+                lst.Add(pc);
+                
+            }
+
+            return lst;
+
         }
 
         private void ElegirFactura(string serie, int siguiente)

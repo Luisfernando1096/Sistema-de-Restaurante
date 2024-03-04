@@ -29,21 +29,10 @@ namespace TPV.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientesGestion));
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.desActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.regContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblRegistros = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -78,12 +67,25 @@ namespace TPV.GUI
             this.label10 = new System.Windows.Forms.Label();
             this.txtDesActividad = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtTipoDoc = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.cmbTDoc = new System.Windows.Forms.ComboBox();
+            this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valorEnNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.regContable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -94,8 +96,8 @@ namespace TPV.GUI
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -111,15 +113,17 @@ namespace TPV.GUI
             this.email,
             this.telefono,
             this.NIT,
+            this.valorEnNumero,
+            this.idDocumento,
             this.regContable});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClientes.Location = new System.Drawing.Point(8, 227);
             this.dgvClientes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvClientes.MultiSelect = false;
@@ -131,93 +135,6 @@ namespace TPV.GUI
             this.dgvClientes.Size = new System.Drawing.Size(1083, 258);
             this.dgvClientes.TabIndex = 7;
             this.dgvClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClientes_CellClick);
-            // 
-            // idCliente
-            // 
-            this.idCliente.DataPropertyName = "idCliente";
-            this.idCliente.HeaderText = "ID";
-            this.idCliente.Name = "idCliente";
-            this.idCliente.ReadOnly = true;
-            this.idCliente.Width = 40;
-            // 
-            // codActividad
-            // 
-            this.codActividad.DataPropertyName = "codActividad";
-            this.codActividad.HeaderText = "Codigo Actividad";
-            this.codActividad.Name = "codActividad";
-            this.codActividad.ReadOnly = true;
-            this.codActividad.Visible = false;
-            // 
-            // desActividad
-            // 
-            this.desActividad.DataPropertyName = "desActividad";
-            this.desActividad.HeaderText = "Descripcion Actividad";
-            this.desActividad.Name = "desActividad";
-            this.desActividad.ReadOnly = true;
-            this.desActividad.Visible = false;
-            // 
-            // tipoDocumento
-            // 
-            this.tipoDocumento.DataPropertyName = "tipoDocumento";
-            this.tipoDocumento.HeaderText = "Tipo Documento";
-            this.tipoDocumento.Name = "tipoDocumento";
-            this.tipoDocumento.ReadOnly = true;
-            this.tipoDocumento.Visible = false;
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Nombres";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Width = 250;
-            // 
-            // idDireccion
-            // 
-            this.idDireccion.DataPropertyName = "idDireccion";
-            this.idDireccion.HeaderText = "Id Direccion";
-            this.idDireccion.Name = "idDireccion";
-            this.idDireccion.ReadOnly = true;
-            this.idDireccion.Visible = false;
-            // 
-            // direccion
-            // 
-            this.direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.direccion.DataPropertyName = "direccion";
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            // 
-            // email
-            // 
-            this.email.DataPropertyName = "email";
-            this.email.HeaderText = "Email";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            this.email.Width = 200;
-            // 
-            // telefono
-            // 
-            this.telefono.DataPropertyName = "telefono";
-            this.telefono.HeaderText = "Telefono";
-            this.telefono.Name = "telefono";
-            this.telefono.ReadOnly = true;
-            // 
-            // NIT
-            // 
-            this.NIT.DataPropertyName = "NIT";
-            this.NIT.HeaderText = "Nit";
-            this.NIT.Name = "NIT";
-            this.NIT.ReadOnly = true;
-            this.NIT.Visible = false;
-            // 
-            // regContable
-            // 
-            this.regContable.DataPropertyName = "regContable";
-            this.regContable.HeaderText = "Reg. Contable";
-            this.regContable.Name = "regContable";
-            this.regContable.ReadOnly = true;
-            this.regContable.Visible = false;
             // 
             // statusStrip1
             // 
@@ -461,7 +378,7 @@ namespace TPV.GUI
             // 
             this.txtRegContable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRegContable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegContable.Location = new System.Drawing.Point(798, 110);
+            this.txtRegContable.Location = new System.Drawing.Point(709, 88);
             this.txtRegContable.Margin = new System.Windows.Forms.Padding(2);
             this.txtRegContable.Name = "txtRegContable";
             this.txtRegContable.Size = new System.Drawing.Size(142, 26);
@@ -471,7 +388,7 @@ namespace TPV.GUI
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(795, 87);
+            this.label7.Location = new System.Drawing.Point(706, 65);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(99, 20);
@@ -494,7 +411,7 @@ namespace TPV.GUI
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(439, 87);
+            this.textBox1.Location = new System.Drawing.Point(361, 84);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(183, 26);
@@ -505,7 +422,7 @@ namespace TPV.GUI
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(318, 90);
+            this.label9.Location = new System.Drawing.Point(240, 87);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(119, 20);
@@ -516,7 +433,7 @@ namespace TPV.GUI
             // 
             this.txtCodActividad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCodActividad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodActividad.Location = new System.Drawing.Point(649, 110);
+            this.txtCodActividad.Location = new System.Drawing.Point(563, 88);
             this.txtCodActividad.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodActividad.Name = "txtCodActividad";
             this.txtCodActividad.Size = new System.Drawing.Size(142, 26);
@@ -526,7 +443,7 @@ namespace TPV.GUI
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(646, 87);
+            this.label10.Location = new System.Drawing.Point(560, 65);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(116, 20);
@@ -555,21 +472,11 @@ namespace TPV.GUI
             this.label11.TabIndex = 45;
             this.label11.Text = "Descripcion Actividad: ";
             // 
-            // txtTipoDoc
-            // 
-            this.txtTipoDoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTipoDoc.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoDoc.Location = new System.Drawing.Point(947, 110);
-            this.txtTipoDoc.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTipoDoc.Name = "txtTipoDoc";
-            this.txtTipoDoc.Size = new System.Drawing.Size(142, 26);
-            this.txtTipoDoc.TabIndex = 48;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(944, 87);
+            this.label12.Location = new System.Drawing.Point(855, 64);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(111, 20);
@@ -615,12 +522,131 @@ namespace TPV.GUI
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(1048, 87);
+            this.label15.Location = new System.Drawing.Point(963, 65);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(14, 20);
             this.label15.TabIndex = 52;
             this.label15.Text = "*";
+            // 
+            // cmbTDoc
+            // 
+            this.cmbTDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTDoc.FormattingEnabled = true;
+            this.cmbTDoc.Items.AddRange(new object[] {
+            "DUI",
+            "NIT",
+            "OTRO",
+            "PASAPORTE",
+            "CARNET DE RESIDENTE"});
+            this.cmbTDoc.Location = new System.Drawing.Point(856, 87);
+            this.cmbTDoc.Name = "cmbTDoc";
+            this.cmbTDoc.Size = new System.Drawing.Size(233, 28);
+            this.cmbTDoc.TabIndex = 53;
+            // 
+            // idCliente
+            // 
+            this.idCliente.DataPropertyName = "idCliente";
+            this.idCliente.HeaderText = "ID";
+            this.idCliente.Name = "idCliente";
+            this.idCliente.ReadOnly = true;
+            this.idCliente.Width = 40;
+            // 
+            // codActividad
+            // 
+            this.codActividad.DataPropertyName = "codActividad";
+            this.codActividad.HeaderText = "Codigo Actividad";
+            this.codActividad.Name = "codActividad";
+            this.codActividad.ReadOnly = true;
+            this.codActividad.Visible = false;
+            // 
+            // desActividad
+            // 
+            this.desActividad.DataPropertyName = "desActividad";
+            this.desActividad.HeaderText = "Descripcion Actividad";
+            this.desActividad.Name = "desActividad";
+            this.desActividad.ReadOnly = true;
+            this.desActividad.Visible = false;
+            // 
+            // tipoDocumento
+            // 
+            this.tipoDocumento.DataPropertyName = "tipoDocumento";
+            this.tipoDocumento.HeaderText = "Tipo Documento";
+            this.tipoDocumento.Name = "tipoDocumento";
+            this.tipoDocumento.ReadOnly = true;
+            this.tipoDocumento.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Nombres";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 250;
+            // 
+            // idDireccion
+            // 
+            this.idDireccion.DataPropertyName = "idDireccion";
+            this.idDireccion.HeaderText = "Id Direccion";
+            this.idDireccion.Name = "idDireccion";
+            this.idDireccion.ReadOnly = true;
+            this.idDireccion.Visible = false;
+            // 
+            // direccion
+            // 
+            this.direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.direccion.DataPropertyName = "direccion";
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            // 
+            // email
+            // 
+            this.email.DataPropertyName = "email";
+            this.email.HeaderText = "Email";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            this.email.Width = 200;
+            // 
+            // telefono
+            // 
+            this.telefono.DataPropertyName = "telefono";
+            this.telefono.HeaderText = "Telefono";
+            this.telefono.Name = "telefono";
+            this.telefono.ReadOnly = true;
+            // 
+            // NIT
+            // 
+            this.NIT.DataPropertyName = "NIT";
+            this.NIT.HeaderText = "Nit";
+            this.NIT.Name = "NIT";
+            this.NIT.ReadOnly = true;
+            this.NIT.Visible = false;
+            // 
+            // valorEnNumero
+            // 
+            this.valorEnNumero.DataPropertyName = "valorEnNumero";
+            this.valorEnNumero.HeaderText = "Valor";
+            this.valorEnNumero.Name = "valorEnNumero";
+            this.valorEnNumero.ReadOnly = true;
+            this.valorEnNumero.Visible = false;
+            // 
+            // idDocumento
+            // 
+            this.idDocumento.DataPropertyName = "idDocumento";
+            this.idDocumento.HeaderText = "Id Doc";
+            this.idDocumento.Name = "idDocumento";
+            this.idDocumento.ReadOnly = true;
+            this.idDocumento.Visible = false;
+            // 
+            // regContable
+            // 
+            this.regContable.DataPropertyName = "regContable";
+            this.regContable.HeaderText = "Reg. Contable";
+            this.regContable.Name = "regContable";
+            this.regContable.ReadOnly = true;
+            this.regContable.Visible = false;
             // 
             // ClientesGestion
             // 
@@ -628,11 +654,11 @@ namespace TPV.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1102, 510);
+            this.Controls.Add(this.cmbTDoc);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtTipoDoc);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtDesActividad);
             this.Controls.Add(this.label11);
@@ -711,9 +737,12 @@ namespace TPV.GUI
         private System.Windows.Forms.Label label10;
         public System.Windows.Forms.TextBox txtDesActividad;
         private System.Windows.Forms.Label label11;
-        public System.Windows.Forms.TextBox txtTipoDoc;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cmbTDoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn codActividad;
         private System.Windows.Forms.DataGridViewTextBoxColumn desActividad;
@@ -724,9 +753,8 @@ namespace TPV.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn NIT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valorEnNumero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn regContable;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
     }
 }

@@ -13,7 +13,7 @@ namespace Mantenimiento.CLS
         String _telefono;
         String _email;
         String _NIT;
-        String _tipoDocumento;
+        Documento _tipoDocumento;
 
 
         public String IdCliente { get => _idCliente; set => _idCliente = value; }
@@ -25,13 +25,13 @@ namespace Mantenimiento.CLS
         public Direccion Direccion { get => _direccion; set => _direccion = value; }
         public string CodActividad { get => _codActividad; set => _codActividad = value; }
         public string DesActividad { get => _desActividad; set => _desActividad = value; }
-        public string TipoDocumento { get => _tipoDocumento; set => _tipoDocumento = value; }
+        public Documento TipoDocumento { get => _tipoDocumento; set => _tipoDocumento = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into cliente(nombre,idDireccion,email,telefono,NIT,regContable,codActividad,desActividad,tipoDocumento) values('" + _nombre + "'," + DireccionNull() + "," + EmailNull() + "," + TelefonoNull() + ",'" + _NIT + "'," + RegContNull() + "," + CodActividadNull() + "," + DescActividadNull() + ",'" + _tipoDocumento + "');";
+            sentencia = @"insert into cliente(nombre,idDireccion,email,telefono,NIT,regContable,codActividad,desActividad,idDocumento) values('" + _nombre + "'," + DireccionNull() + "," + EmailNull() + "," + TelefonoNull() + ",'" + _NIT + "'," + RegContNull() + "," + CodActividadNull() + "," + DescActividadNull() + ",'" + _tipoDocumento.IdDocumento + "');";
 
             try
             {
@@ -128,7 +128,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update cliente set nombre = '" + _nombre + "', idDireccion = " + DireccionNull() + ", email = " + EmailNull() + ", telefono = " + TelefonoNull() + ", NIT = '" + _NIT + "', regContable = " + RegContNull() + ", codActividad = " + CodActividadNull() + ", desActividad = " + DescActividadNull() + ", tipoDocumento = '" + _tipoDocumento + "' WHERE idCliente = " + _idCliente + ";";
+            sentencia = @"update cliente set nombre = '" + _nombre + "', idDireccion = " + DireccionNull() + ", email = " + EmailNull() + ", telefono = " + TelefonoNull() + ", NIT = '" + _NIT + "', regContable = " + RegContNull() + ", codActividad = " + CodActividadNull() + ", desActividad = " + DescActividadNull() + ", idoDocumento = '" + _tipoDocumento.IdDocumento + "' WHERE idCliente = " + _idCliente + ";";
 
             try
             {
