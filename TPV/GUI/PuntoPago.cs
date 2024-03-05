@@ -32,6 +32,7 @@ namespace TPV.GUI
         private bool pagoExacto;
         private bool pagoBtc;
         private String fechaPago = "";
+        private String referencia;
 
         public PuntoPago(ComandaGestion comandaGestion)
         {
@@ -766,6 +767,7 @@ namespace TPV.GUI
             if (ValidarExistenciaTicket()) return;
             if (!txtPagoRegistrar.Text.Equals("") && !txtPagoRegistrar.Text.Equals("0"))
             {
+                referencia = AgregarReferencia();
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
                 
                 //Registrar pago en cuenta
@@ -779,6 +781,21 @@ namespace TPV.GUI
             {
                 MessageBox.Show("Debe ingresar el pago a registrar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private String AgregarReferencia()
+        {
+            String refe = "";
+
+            Referencia f = new Referencia();
+            f.ShowDialog();
+
+            if (!f.txtNReferencia.Text.Equals(""))
+            {
+                refe = f.txtNReferencia.Text;
+            }
+
+            return refe;
         }
 
         private Double SumaMontos()
@@ -1022,7 +1039,8 @@ namespace TPV.GUI
                 return;
             }
             String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Mantenimiento.CLS.PagoCombinado pago = new Mantenimiento.CLS.PagoCombinado();
+            PagoCombinado pago = new PagoCombinado();
+            pago.Referencia = referencia;
             pago.FechaPago = fecha;
             if (terminar)
             {
@@ -1130,7 +1148,18 @@ namespace TPV.GUI
                 //Lleva factura
                 //Generar JSON
                 //Aqui se guardara el JSON como prueba
-                string path = @"C:\Users\fruiz\OneDrive\Escritorio\Respaldos\factura.json";
+
+                SaveFileDialog direccion = new SaveFileDialog();
+                direccion.Filter = "Archivo SQL (*.json)|*.json";
+                direccion.InitialDirectory = @"C:\Users\Fuentes\Desktop\REPORTES";
+                direccion.Title = "Selección de ruta";
+                string ruta = "";
+                if (direccion.ShowDialog() == DialogResult.OK)
+                {
+                    ruta = direccion.FileName;
+                }
+
+                string path = ruta;
 
                 GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles());
                 generarDTE.TotalLetras = totalLetras;
@@ -1400,16 +1429,19 @@ namespace TPV.GUI
                 {
                     pc.IdCuenta = 1;
                     pc.Monto = Double.Parse(item["monto"].ToString());
+                    pc.Referencia = item["referencia"].ToString();
                 }
                 else if (item["formaPago"].Equals("TARJETA"))
                 {
                     pc.IdCuenta = 2;
                     pc.Monto = Double.Parse(item["monto"].ToString());
+                    pc.Referencia = item["referencia"].ToString();
                 }
                 else if (item["formaPago"].Equals("BITCOIN"))
                 {
                     pc.IdCuenta = 3;
                     pc.Monto = Double.Parse(item["monto"].ToString());
+                    pc.Referencia = item["referencia"].ToString();
                 }
                 lst.Add(pc);
                 
@@ -1897,6 +1929,7 @@ namespace TPV.GUI
 
             if (!txtPagoRegistrar.Text.Equals("") && !txtPagoRegistrar.Text.Equals("0"))
             {
+                referencia = AgregarReferencia();
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
 
                 //Registrar pago en cuenta

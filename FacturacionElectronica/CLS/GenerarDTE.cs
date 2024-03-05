@@ -234,13 +234,13 @@ namespace FacturacionElectronica.CLS
                 {
                     p.codigo = "03";
                     p.montoPago = Double.Parse(item.Monto.ToString("0.00"));
-                    p.referencia = "";
+                    p.referencia = item.Referencia.ToString();
                 }
                 else if (item.IdCuenta == 3)
                 {
                     p.codigo = "11";
                     p.montoPago = Double.Parse(item.Monto.ToString("0.00"));
-                    p.referencia = "";
+                    p.referencia = item.Referencia.ToString();
                 }
                 p.plazo = null;
                 p.periodo = null;
