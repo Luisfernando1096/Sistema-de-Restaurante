@@ -42,6 +42,7 @@ namespace TPV.GUI
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.txtidPedido = new System.Windows.Forms.TextBox();
             this.idPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,6 +148,7 @@ namespace TPV.GUI
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idPedido,
+            this.referencia,
             this.nombre,
             this.mesa,
             this.idCuenta,
@@ -195,7 +197,15 @@ namespace TPV.GUI
             this.idPedido.HeaderText = "ID";
             this.idPedido.Name = "idPedido";
             this.idPedido.ReadOnly = true;
+            this.idPedido.Visible = false;
             this.idPedido.Width = 60;
+            // 
+            // referencia
+            // 
+            this.referencia.DataPropertyName = "referencia";
+            this.referencia.HeaderText = "Referencia";
+            this.referencia.Name = "referencia";
+            this.referencia.ReadOnly = true;
             // 
             // nombre
             // 
@@ -339,6 +349,7 @@ namespace TPV.GUI
         private System.Windows.Forms.ToolStripButton btnEditar;
         private System.Windows.Forms.ToolStripButton btnLimpiar;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPedido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn referencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCuenta;

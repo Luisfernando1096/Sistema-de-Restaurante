@@ -134,6 +134,12 @@
     <Compile Include="GUI\PuntoVenta.Designer.cs">
       <DependentUpon>PuntoVenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Referencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Referencia.Designer.cs">
+      <DependentUpon>Referencia.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\SeleccionSalonMesa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\PuntoVenta.resx">
       <DependentUpon>PuntoVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Referencia.resx">
+      <DependentUpon>Referencia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\SeleccionSalonMesa.resx">
       <DependentUpon>SeleccionSalonMesa.cs</DependentUpon>

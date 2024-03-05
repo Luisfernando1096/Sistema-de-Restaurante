@@ -377,7 +377,7 @@ namespace DataManager
                 DataTable resultado = new DataTable();
                 String sentencia;
 
-                sentencia = @"SELECT p.idPedido, p.idCliente, c.nombre, m.nombre as mesa, p.idMesero, e.nombres, p.fecha,
+                sentencia = @"SELECT p.idPedido, pc.referencia, p.idCliente, c.nombre, m.nombre as mesa, p.idMesero, e.nombres, p.fecha,
                                 ROUND((pc.monto - (((pc.monto)/(p.total + p.descuento)) * p.total)), 2) as descuento, 
                                 ROUND((pc.monto - (((pc.monto)/(p.total + p.iva)) * p.total)), 2) as iva,
                                 ROUND((pc.monto - (((pc.monto)/(p.total + p.propina)) * p.total)), 2) as propina,
@@ -1457,7 +1457,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT IF(c.idCuenta = 1,'EFECTIVO',IF(c.idCuenta = 2,'TARJETA','BITCOIN')) as formaPago, pc.monto FROM pago_combinado pc, cuenta c 
+                String sentencia = @"SELECT IF(c.idCuenta = 1,'EFECTIVO',IF(c.idCuenta = 2,'TARJETA','BITCOIN')) as formaPago, pc.monto, pc.referencia FROM pago_combinado pc, cuenta c 
                                     WHERE idPedido = " + id + " AND c.idCuenta = pc.idCuenta; ";
                 DBOperacion operacion = new DBOperacion();
 

@@ -11,6 +11,7 @@ namespace Mantenimiento.CLS
         int idPagoCombinado;
         Double monto;
         String fechaPago;
+        String referencia;
         int idPedido;
         int idCuenta;
 
@@ -19,6 +20,7 @@ namespace Mantenimiento.CLS
         public string FechaPago { get => fechaPago; set => fechaPago = value; }
         public int IdPedido { get => idPedido; set => idPedido = value; }
         public int IdCuenta { get => idCuenta; set => idCuenta = value; }
+        public String Referencia { get => referencia; set => referencia = value; }
 
         public Boolean Insertar()
         {
@@ -26,7 +28,8 @@ namespace Mantenimiento.CLS
             {
                 Boolean resultado = false;
                 string sentencia;
-                sentencia = "INSERT INTO pago_combinado(monto, fechaPago, idPedido, idCuenta) VALUES(" + monto + ", '" + fechaPago + "', " + idPedido + ", " + idCuenta + ")";
+                
+                sentencia = "INSERT INTO pago_combinado(monto, fechaPago, referencia, idPedido, idCuenta) VALUES(" + monto + ", '" + fechaPago + "', '" + referencia + "', " + idPedido + ", " + idCuenta + ")";
 
                 DataManager.DBOperacion op = new DataManager.DBOperacion();
                 Int32 filasInsertadas = 0;
