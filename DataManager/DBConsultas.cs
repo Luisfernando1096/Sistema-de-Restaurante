@@ -1406,34 +1406,46 @@ namespace DataManager
                 string sentencia;
                 if (soloAbiertas)
                 {
-                    sentencia = @"SELECT
-                                    c.idCaja,
-                                    c.idCajero,
-                                    c.estado,
-                                    c.fechaApertura,
-                                    c.fechaCierre,
-                                    c.saldoInicial,
-                                    c.efectivo,
-                                    c.saldo,
-                                    e.nombres,
-                                    COALESCE(SUM(eg.cantidad), 0) AS cantidad
-                                FROM
-                                    caja c
-                                LEFT JOIN
-                                    empleado e ON c.idCajero = e.idEmpleado
-                                LEFT JOIN
-                                    egreso eg ON e.idEmpleado = eg.idUsuario AND eg.idCaja = c.idCaja AND c.estado = 1
-                                WHERE c.estado = 1
-                                GROUP BY
-                                    c.idCaja,  
-                                    c.idCajero,
-                                    c.estado,
-                                    c.fechaApertura,
-                                    c.fechaCierre,
-                                    c.saldoInicial,
-                                    c.efectivo,
-                                    c.saldo,
-                                    e.nombres;";
+                    sentencia = @"SELECT	COALESCE(
+										            CASE
+											            WHEN pc.idCuenta = 1 THEN 'EFECTIVO'
+											            WHEN pc.idCuenta = 2 THEN 'TARJETA'
+											            WHEN pc.idCuenta = 3 THEN 'BITCOIN'
+											            ELSE ''
+										            END,
+										            ''
+									            ) AS metodo_pago, 
+									            SUM(pc.monto) monto,
+                                                c.idCaja,
+                                                c.idCajero,
+                                                c.estado,
+                                                c.fechaApertura,
+                                                c.fechaCierre,
+                                                c.saldoInicial,
+                                                c.efectivo,
+                                                c.saldo,
+                                                e.nombres,
+                                                COALESCE(SUM(eg.cantidad), 0) AS cantidad
+                                            FROM
+                                                caja c
+                                            LEFT JOIN
+                                                empleado e ON c.idCajero = e.idEmpleado
+                                            LEFT JOIN
+                                                egreso eg ON e.idEmpleado = eg.idUsuario AND eg.idCaja = c.idCaja AND c.estado = 1
+								            LEFT JOIN
+									            pago_combinado pc ON pc.fechaPago >= c.fechaApertura
+                                            WHERE c.estado = 1
+                                            GROUP BY
+									            metodo_pago,
+                                                c.idCaja,  
+                                                c.idCajero,
+                                                c.estado,
+                                                c.fechaApertura,
+                                                c.fechaCierre,
+                                                c.saldoInicial,
+                                                c.efectivo,
+                                                c.saldo,
+                                                e.nombres;";
                 }
                 else
                 {

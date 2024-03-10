@@ -79,7 +79,8 @@ namespace Finanzas.GUI
 
             caja.IdCajero = Int32.Parse(txtCajero.Tag.ToString());
             caja.Estado = true;
-            caja.FechaApertura = dtpFecha.Text;
+            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            caja.FechaApertura = fecha;
             caja.SaldoInicial = Double.Parse(txtSaldoInicial.Text);
             caja.Efectivo = 0;
             caja.Saldo = Double.Parse(txtSaldoInicial.Text);

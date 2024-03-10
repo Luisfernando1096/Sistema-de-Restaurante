@@ -39,12 +39,7 @@ namespace TPV.GUI
         {
             if (txtNReferencia.Text.Equals(""))
             {
-                MessageBox.Show("Debe ingresar la cantidad de productos. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (Int32.Parse(txtNReferencia.Text) <= 0)
-            {
-                MessageBox.Show("Debe ingresar una cantidad valida. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe ingresar el valor de referencia. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             cerrarPorBoton = true;
