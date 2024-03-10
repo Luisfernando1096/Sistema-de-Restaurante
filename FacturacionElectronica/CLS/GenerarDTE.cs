@@ -12,19 +12,24 @@ namespace FacturacionElectronica.CLS
 {
     public class GenerarDTE
     {
-
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
         List<PagoCombinado> lstPago_Combinado = new List<PagoCombinado>();
         List<PedidoDetalle> lstPedido_Detalle = new List<PedidoDetalle>();
+        List<String> lstCliente = new List<String>();
+        receptor rec = new receptor();
+        direccion direc = new direccion();
+        string idDireccion = "";
         String totalLetras;
 
         public string TotalLetras { get => totalLetras; set => totalLetras = value; }
 
-        public GenerarDTE(List<PagoCombinado> lst, List<PedidoDetalle> lstPd)
+        public GenerarDTE(List<PagoCombinado> lst, List<PedidoDetalle> lstPd, List<String> lstC)
         {
             lstPago_Combinado = lst;
             lstPedido_Detalle = lstPd;
+            lstCliente = lstC;
+            AgregarReceptor();
         }
 
         public dteJson GenerarFactura()
@@ -32,7 +37,6 @@ namespace FacturacionElectronica.CLS
             dteJson nuevoJson = null;
             try
             {
-
                 nuevoJson = new dteJson
                 {
                     identificacion = new identificacion
@@ -77,21 +81,20 @@ namespace FacturacionElectronica.CLS
 
                     receptor = new receptor
                     {
-                        nrc = null,
-                        nombre = "SALVADOR CABAL",
-                        codActividad = "00069",
-                        descActividad = "ACTIVIDADES JURÍDICAS Y CONTABLES",
-                        direccion = new direccion
+                        nrc = rec.nrc,
+                        nombre = rec.nombre,
+                        codActividad = rec.codActividad,
+                        descActividad = (rec.descActividad == "") ? null : rec.descActividad,
+                        direccion = (idDireccion == "") ? null : new direccion
                         {
-                            departamento = "06",
-                            municipio = "14",
-                            complemento = "Dirección de Prueba 1, N°1234"
+                            departamento = direc.departamento,
+                            municipio = direc.municipio,
+                            complemento = direc.complemento
                         },
-                        telefono = "22444444",
-                        correo = "salvadorcabal@prueba.com",
-                        numDocumento = "054118871",
-                        tipoDocumento = "36"
-
+                        telefono = rec.telefono,
+                        correo = rec.correo,
+                        numDocumento = rec.numDocumento,
+                        tipoDocumento = rec.tipoDocumento
                     },
 
                     otrosDocumentos = null,
@@ -168,9 +171,31 @@ namespace FacturacionElectronica.CLS
                     double total = CalcularSubTotal();
                     return total * (porcentaje / 100);
                 }
-                
+
             }
             return 0;
+        }
+
+        private void AgregarReceptor() 
+        {
+            foreach (string clienteInfo in lstCliente)
+            {
+                string[] datosCliente = clienteInfo.Split(',');
+
+                // Acceder a los datos individuales
+                rec.nrc = null;     /*datosCliente[0].Trim()*/
+                rec.nombre = datosCliente[1].Trim();
+                rec.codActividad = datosCliente[2].Trim();
+                rec.descActividad = datosCliente[3].Trim();
+                idDireccion = datosCliente[4].Trim();
+                direc.departamento = datosCliente[5].Trim();
+                direc.municipio = datosCliente[6].Trim();
+                direc.complemento = datosCliente[7].Trim();
+                rec.telefono = datosCliente[8].Trim();
+                rec.correo = datosCliente[9].Trim();
+                rec.numDocumento = datosCliente[10].Trim();
+                rec.tipoDocumento = datosCliente[11].Trim();
+            }
         }
 
         private Double CalcularSubTotal()

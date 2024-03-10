@@ -1161,7 +1161,7 @@ namespace TPV.GUI
 
                 string path = ruta;
 
-                GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles());
+                GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles(), ListaClientes());
                 generarDTE.TotalLetras = totalLetras;
 
                 dteJson dte = generarDTE.GenerarFactura();
@@ -1397,6 +1397,30 @@ namespace TPV.GUI
             
         }
 
+        private List<string> ListaClientes()
+        {
+            DataTable detalle = DataManager.DBConsultas.ClienteDTE(int.Parse(lblCliente.Tag.ToString()));
+            List<string> lst = new List<string>();
+
+            foreach (DataRow item in detalle.Rows)
+            {
+                string clienteInfo = $"{item["nrc"]}, " +
+                    $"{item["nombre"]}," +
+                    $" {item["codActividad"]}," +
+                    $" {item["desActividad"]}," +
+                    $" {item["idDireccion"]}," +
+                    $" {item["departamento"]}," +
+                    $" {item["municipio"]}," +
+                    $" {item["complemento"]}, " +
+                    $"{item["telefono"]}," +
+                    $" {item["correo"]}," +
+                    $" {item["numDocumento"]}," +
+                    $" {item["tipoDocumento"]}";
+                lst.Add(clienteInfo);
+            }
+            return lst;
+        }
+
         private List<PedidoDetalle> ListaDetalles()
         {
             DataTable detalles = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
@@ -1412,7 +1436,6 @@ namespace TPV.GUI
 
                 lst.Add(pd);
             }
-
             return lst;
         }
 

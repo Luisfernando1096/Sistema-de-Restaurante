@@ -1337,6 +1337,32 @@ namespace DataManager
                 throw;
             }
         }
+
+        public static DataTable ClienteDTE(int idCliente)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT c.idCliente, c.regContable AS nrc , c.nombre, c.codActividad, c.desActividad,c.idDireccion, dep.codigo AS departamento, m.codigo AS municipio, d.complemento, c.telefono, 
+                                          c.email AS correo, c.NIT AS numDocumento, doc.valorEnNumero AS tipoDocumento
+                                          FROM
+                                          cliente c 
+                                          LEFT JOIN direccion d ON c.idDireccion = d.idDireccion 
+                                          LEFT JOIN municipio m ON d.idMunicipio = m.idMunicipio
+                                          LEFT JOIN departamento dep ON m.idDepartamento = dep.idDepartamento
+                                          LEFT JOIN documento doc ON c.idDocumento = doc.idDocumento 
+                                          WHERE c.idCliente = " + idCliente +";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
         public static DataTable IngredientesActivos()
         {
             try
