@@ -299,6 +299,10 @@ namespace Reportes.DAT {
             
             private global::System.Data.DataColumn columncantidad;
             
+            private global::System.Data.DataColumn columnmonto;
+            
+            private global::System.Data.DataColumn columnmetodo_pago;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public cajaDataTable() {
@@ -414,6 +418,22 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn montoColumn {
+                get {
+                    return this.columnmonto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn metodo_pagoColumn {
+                get {
+                    return this.columnmetodo_pago;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -449,7 +469,7 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public cajaRow AddcajaRow(int idCaja, int idCajero, bool estado, System.DateTime fechaApertura, System.DateTime fechaCierre, double saldoInicial, double efectivo, double saldo, string nombres, double cantidad) {
+            public cajaRow AddcajaRow(int idCaja, int idCajero, bool estado, System.DateTime fechaApertura, System.DateTime fechaCierre, double saldoInicial, double efectivo, double saldo, string nombres, double cantidad, double monto, string metodo_pago) {
                 cajaRow rowcajaRow = ((cajaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         idCaja,
@@ -461,7 +481,9 @@ namespace Reportes.DAT {
                         efectivo,
                         saldo,
                         nombres,
-                        cantidad};
+                        cantidad,
+                        monto,
+                        metodo_pago};
                 rowcajaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowcajaRow);
                 return rowcajaRow;
@@ -494,6 +516,8 @@ namespace Reportes.DAT {
                 this.columnsaldo = base.Columns["saldo"];
                 this.columnnombres = base.Columns["nombres"];
                 this.columncantidad = base.Columns["cantidad"];
+                this.columnmonto = base.Columns["monto"];
+                this.columnmetodo_pago = base.Columns["metodo_pago"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -519,6 +543,10 @@ namespace Reportes.DAT {
                 base.Columns.Add(this.columnnombres);
                 this.columncantidad = new global::System.Data.DataColumn("cantidad", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncantidad);
+                this.columnmonto = new global::System.Data.DataColumn("monto", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmonto);
+                this.columnmetodo_pago = new global::System.Data.DataColumn("metodo_pago", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmetodo_pago);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -821,6 +849,38 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public double monto {
+                get {
+                    try {
+                        return ((double)(this[this.tablecaja.montoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'monto\' de la tabla \'caja\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecaja.montoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string metodo_pago {
+                get {
+                    try {
+                        return ((string)(this[this.tablecaja.metodo_pagoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'metodo_pago\' de la tabla \'caja\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecaja.metodo_pagoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsidCajaNull() {
                 return this.IsNull(this.tablecaja.idCajaColumn);
             }
@@ -937,6 +997,30 @@ namespace Reportes.DAT {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetcantidadNull() {
                 this[this.tablecaja.cantidadColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsmontoNull() {
+                return this.IsNull(this.tablecaja.montoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetmontoNull() {
+                this[this.tablecaja.montoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ismetodo_pagoNull() {
+                return this.IsNull(this.tablecaja.metodo_pagoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setmetodo_pagoNull() {
+                this[this.tablecaja.metodo_pagoColumn] = global::System.Convert.DBNull;
             }
         }
         

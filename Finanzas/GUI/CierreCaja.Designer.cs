@@ -49,6 +49,15 @@ namespace Finanzas.GUI
             this.txtIdCaja = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCajas = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txtSaldoInicial = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSalidaEfectivo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSaldoCaja = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtEfectivoRecaudado = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.idCaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,15 +68,8 @@ namespace Finanzas.GUI
             this.efectivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtSaldoInicial = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtSalidaEfectivo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtSaldoCaja = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtEfectivoRecaudado = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metodo_pago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCajas)).BeginInit();
             this.SuspendLayout();
@@ -244,7 +246,9 @@ namespace Finanzas.GUI
             this.saldoInicial,
             this.efectivo,
             this.cantidad,
-            this.saldo});
+            this.saldo,
+            this.monto,
+            this.metodo_pago});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -263,84 +267,6 @@ namespace Finanzas.GUI
             this.dgvCajas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCajas.Size = new System.Drawing.Size(891, 181);
             this.dgvCajas.TabIndex = 50;
-            // 
-            // idCaja
-            // 
-            this.idCaja.DataPropertyName = "idCaja";
-            this.idCaja.HeaderText = "ID";
-            this.idCaja.Name = "idCaja";
-            this.idCaja.ReadOnly = true;
-            this.idCaja.Width = 50;
-            // 
-            // idCajero
-            // 
-            this.idCajero.DataPropertyName = "idCajero";
-            this.idCajero.HeaderText = "Id cajero";
-            this.idCajero.Name = "idCajero";
-            this.idCajero.ReadOnly = true;
-            this.idCajero.Visible = false;
-            // 
-            // nombres
-            // 
-            this.nombres.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombres.DataPropertyName = "nombres";
-            this.nombres.HeaderText = "Nombres";
-            this.nombres.Name = "nombres";
-            this.nombres.ReadOnly = true;
-            // 
-            // estado
-            // 
-            this.estado.DataPropertyName = "estado";
-            this.estado.HeaderText = "Abierta";
-            this.estado.Name = "estado";
-            this.estado.ReadOnly = true;
-            this.estado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.estado.Width = 50;
-            // 
-            // fechaApertura
-            // 
-            this.fechaApertura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.fechaApertura.DataPropertyName = "fechaApertura";
-            this.fechaApertura.HeaderText = "Fecha de Apertura";
-            this.fechaApertura.Name = "fechaApertura";
-            this.fechaApertura.ReadOnly = true;
-            // 
-            // fechaCierre
-            // 
-            this.fechaCierre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.fechaCierre.DataPropertyName = "fechaCierre";
-            this.fechaCierre.HeaderText = "Fecha de Cierre";
-            this.fechaCierre.Name = "fechaCierre";
-            this.fechaCierre.ReadOnly = true;
-            // 
-            // saldoInicial
-            // 
-            this.saldoInicial.DataPropertyName = "saldoInicial";
-            this.saldoInicial.HeaderText = "Saldo Inicial";
-            this.saldoInicial.Name = "saldoInicial";
-            this.saldoInicial.ReadOnly = true;
-            // 
-            // efectivo
-            // 
-            this.efectivo.DataPropertyName = "efectivo";
-            this.efectivo.HeaderText = "Efectivo";
-            this.efectivo.Name = "efectivo";
-            this.efectivo.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.DataPropertyName = "cantidad";
-            this.cantidad.HeaderText = "Egresos";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // saldo
-            // 
-            this.saldo.DataPropertyName = "saldo";
-            this.saldo.HeaderText = "Saldo";
-            this.saldo.Name = "saldo";
-            this.saldo.ReadOnly = true;
             // 
             // timer1
             // 
@@ -427,6 +353,100 @@ namespace Finanzas.GUI
             this.label7.TabIndex = 64;
             this.label7.Text = "Efectivo recaudado";
             // 
+            // idCaja
+            // 
+            this.idCaja.DataPropertyName = "idCaja";
+            this.idCaja.HeaderText = "ID";
+            this.idCaja.Name = "idCaja";
+            this.idCaja.ReadOnly = true;
+            this.idCaja.Width = 50;
+            // 
+            // idCajero
+            // 
+            this.idCajero.DataPropertyName = "idCajero";
+            this.idCajero.HeaderText = "Id cajero";
+            this.idCajero.Name = "idCajero";
+            this.idCajero.ReadOnly = true;
+            this.idCajero.Visible = false;
+            // 
+            // nombres
+            // 
+            this.nombres.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Nombres";
+            this.nombres.Name = "nombres";
+            this.nombres.ReadOnly = true;
+            // 
+            // estado
+            // 
+            this.estado.DataPropertyName = "estado";
+            this.estado.HeaderText = "Abierta";
+            this.estado.Name = "estado";
+            this.estado.ReadOnly = true;
+            this.estado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.estado.Width = 50;
+            // 
+            // fechaApertura
+            // 
+            this.fechaApertura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fechaApertura.DataPropertyName = "fechaApertura";
+            this.fechaApertura.HeaderText = "Fecha de Apertura";
+            this.fechaApertura.Name = "fechaApertura";
+            this.fechaApertura.ReadOnly = true;
+            // 
+            // fechaCierre
+            // 
+            this.fechaCierre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fechaCierre.DataPropertyName = "fechaCierre";
+            this.fechaCierre.HeaderText = "Fecha de Cierre";
+            this.fechaCierre.Name = "fechaCierre";
+            this.fechaCierre.ReadOnly = true;
+            // 
+            // saldoInicial
+            // 
+            this.saldoInicial.DataPropertyName = "saldoInicial";
+            this.saldoInicial.HeaderText = "Saldo Inicial";
+            this.saldoInicial.Name = "saldoInicial";
+            this.saldoInicial.ReadOnly = true;
+            // 
+            // efectivo
+            // 
+            this.efectivo.DataPropertyName = "efectivo";
+            this.efectivo.HeaderText = "Efectivo";
+            this.efectivo.Name = "efectivo";
+            this.efectivo.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Egresos";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // saldo
+            // 
+            this.saldo.DataPropertyName = "saldo";
+            this.saldo.HeaderText = "Saldo";
+            this.saldo.Name = "saldo";
+            this.saldo.ReadOnly = true;
+            // 
+            // monto
+            // 
+            this.monto.DataPropertyName = "monto";
+            this.monto.HeaderText = "Monto";
+            this.monto.Name = "monto";
+            this.monto.ReadOnly = true;
+            this.monto.Visible = false;
+            // 
+            // metodo_pago
+            // 
+            this.metodo_pago.DataPropertyName = "metodo_pago";
+            this.metodo_pago.HeaderText = "Forma Pago";
+            this.metodo_pago.Name = "metodo_pago";
+            this.metodo_pago.ReadOnly = true;
+            this.metodo_pago.Visible = false;
+            // 
             // CierreCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -479,16 +499,6 @@ namespace Finanzas.GUI
         public System.Windows.Forms.TextBox txtIdCaja;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvCajas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCaja;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCajero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaApertura;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaCierre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn saldoInicial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn efectivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn saldo;
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.TextBox txtSaldoInicial;
         private System.Windows.Forms.Label label2;
@@ -499,5 +509,17 @@ namespace Finanzas.GUI
         public System.Windows.Forms.TextBox txtEfectivoRecaudado;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCaja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCajero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaApertura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaCierre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn saldoInicial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn efectivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn saldo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn monto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn metodo_pago;
     }
 }
