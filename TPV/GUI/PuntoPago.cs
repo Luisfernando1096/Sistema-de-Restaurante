@@ -441,6 +441,7 @@ namespace TPV.GUI
             double propina = Math.Round(CalcularPropina(), 2);
             double descuento = Math.Round(CalcularDescuento(), 2);
             double iva = Math.Round(CalcularIva(), 2);
+            double exento = Math.Round(CalcularExento(), 2);
 
             if (cbPropina.Checked)
             {
@@ -450,22 +451,43 @@ namespace TPV.GUI
             else
             {
                 //Con propina
-                totalPagar = totalPagar + propina + iva;
+                totalPagar = totalPagar + propina;
             }
 
             if (cbDescuento.Checked)
             {
                 //Con descuento
-                totalPagar = totalPagar - descuento + iva;
+                totalPagar = totalPagar - descuento;
             }
             else
             {
                 //Sin descuento
                 descuento = 0;
             }
+
+            if (chkExento.Checked)
+            {
+                //Con descuento
+                totalPagar = totalPagar - exento;
+            }
+            else
+            {
+                //Sin descuento
+                exento = 0;
+            }
+            totalPagar += iva;
             totalPagar = totalPagar - SumaMontos();
             double cambio = Math.Round(CalcularCambio(totalPagar), 2);
-            ActualizarCampos(propina, descuento, totalPagar, iva, cambio);
+            ActualizarCampos(propina, descuento, totalPagar, iva, cambio, exento);
+        }
+
+        private double CalcularExento()
+        {
+            double resultado;
+
+            resultado = CalcularTotal() * 0.13;
+
+            return resultado;
         }
 
         private double CalcularIva()
@@ -485,7 +507,7 @@ namespace TPV.GUI
             return iva;
         }
 
-        private void ActualizarCampos(double propina, double descuento, double total, double iva, double cambio)
+        private void ActualizarCampos(double propina, double descuento, double total, double iva, double cambio, double exento)
         {
             lblPropina.Text = "$" + propina.ToString("0.00");
             lblPropina.Tag = propina;
@@ -495,8 +517,10 @@ namespace TPV.GUI
             lblCambio.Tag = cambio;
             lblIva.Text = "$" + iva.ToString("0.00");
             lblIva.Tag = iva;
+            lblExento.Text = "$" + exento.ToString("0.00");
+            lblExento.Tag = exento;
 
-            txtTotalPagar.Text = Math.Round(total, 2).ToString();
+            txtTotalPagar.Text = total.ToString("0.00");
             txtTotalPagar.Tag = Math.Round(total, 2);
 
         }
@@ -1966,6 +1990,16 @@ namespace TPV.GUI
             {
                 MessageBox.Show("Debe ingresar el pago a registrar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void chkExento_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkExento_Click(object sender, EventArgs e)
+        {
+            CalcularTodo();
         }
     }
 }

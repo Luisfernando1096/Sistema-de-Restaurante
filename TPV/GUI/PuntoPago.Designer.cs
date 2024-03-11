@@ -32,8 +32,8 @@ namespace TPV.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PuntoPago));
             this.lblMesa = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -117,6 +117,9 @@ namespace TPV.GUI
             this.btnCuentas = new System.Windows.Forms.Button();
             this.tFecha = new System.Windows.Forms.Timer(this.components);
             this.btnBtc = new System.Windows.Forms.Button();
+            this.chkExento = new System.Windows.Forms.CheckBox();
+            this.lble1 = new System.Windows.Forms.Label();
+            this.lblExento = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flpDinero.SuspendLayout();
@@ -203,8 +206,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -224,14 +227,14 @@ namespace TPV.GUI
             this.nombres,
             this.mesa,
             this.salon});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDatos.Location = new System.Drawing.Point(152, 140);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -239,7 +242,7 @@ namespace TPV.GUI
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(359, 336);
+            this.dgvDatos.Size = new System.Drawing.Size(359, 320);
             this.dgvDatos.TabIndex = 15;
             // 
             // cantidad
@@ -361,6 +364,7 @@ namespace TPV.GUI
             this.flpAcciones.Controls.Add(this.button4);
             this.flpAcciones.Controls.Add(this.button5);
             this.flpAcciones.Controls.Add(this.button6);
+            this.flpAcciones.Controls.Add(this.chkExento);
             this.flpAcciones.Controls.Add(this.cbPropina);
             this.flpAcciones.Controls.Add(this.cbDescuento);
             this.flpAcciones.Controls.Add(this.txtPorcentaje);
@@ -467,7 +471,7 @@ namespace TPV.GUI
             // 
             this.cbPropina.AutoSize = true;
             this.cbPropina.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPropina.Location = new System.Drawing.Point(3, 543);
+            this.cbPropina.Location = new System.Drawing.Point(3, 573);
             this.cbPropina.Name = "cbPropina";
             this.cbPropina.Size = new System.Drawing.Size(96, 24);
             this.cbPropina.TabIndex = 6;
@@ -480,7 +484,7 @@ namespace TPV.GUI
             // 
             this.cbDescuento.AutoSize = true;
             this.cbDescuento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbDescuento.Location = new System.Drawing.Point(3, 573);
+            this.cbDescuento.Location = new System.Drawing.Point(3, 603);
             this.cbDescuento.Name = "cbDescuento";
             this.cbDescuento.Size = new System.Drawing.Size(120, 24);
             this.cbDescuento.TabIndex = 7;
@@ -492,7 +496,7 @@ namespace TPV.GUI
             // txtPorcentaje
             // 
             this.txtPorcentaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje.Location = new System.Drawing.Point(3, 603);
+            this.txtPorcentaje.Location = new System.Drawing.Point(3, 633);
             this.txtPorcentaje.Name = "txtPorcentaje";
             this.txtPorcentaje.Size = new System.Drawing.Size(119, 26);
             this.txtPorcentaje.TabIndex = 9;
@@ -503,7 +507,7 @@ namespace TPV.GUI
             // lblPorcentaje
             // 
             this.lblPorcentaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentaje.Location = new System.Drawing.Point(3, 632);
+            this.lblPorcentaje.Location = new System.Drawing.Point(3, 662);
             this.lblPorcentaje.Name = "lblPorcentaje";
             this.lblPorcentaje.Size = new System.Drawing.Size(120, 67);
             this.lblPorcentaje.TabIndex = 9;
@@ -678,7 +682,7 @@ namespace TPV.GUI
             // 
             this.lblIva.AutoSize = true;
             this.lblIva.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIva.Location = new System.Drawing.Point(254, 508);
+            this.lblIva.Location = new System.Drawing.Point(256, 477);
             this.lblIva.Name = "lblIva";
             this.lblIva.Size = new System.Drawing.Size(59, 23);
             this.lblIva.TabIndex = 35;
@@ -689,7 +693,7 @@ namespace TPV.GUI
             // 
             this.lblPropina.AutoSize = true;
             this.lblPropina.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPropina.Location = new System.Drawing.Point(254, 528);
+            this.lblPropina.Location = new System.Drawing.Point(256, 498);
             this.lblPropina.Name = "lblPropina";
             this.lblPropina.Size = new System.Drawing.Size(59, 23);
             this.lblPropina.TabIndex = 34;
@@ -700,7 +704,7 @@ namespace TPV.GUI
             // 
             this.lblDescuento.AutoSize = true;
             this.lblDescuento.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescuento.Location = new System.Drawing.Point(254, 548);
+            this.lblDescuento.Location = new System.Drawing.Point(256, 518);
             this.lblDescuento.Name = "lblDescuento";
             this.lblDescuento.Size = new System.Drawing.Size(59, 23);
             this.lblDescuento.TabIndex = 33;
@@ -711,7 +715,7 @@ namespace TPV.GUI
             // 
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldo.Location = new System.Drawing.Point(254, 488);
+            this.lblSaldo.Location = new System.Drawing.Point(256, 456);
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(59, 23);
             this.lblSaldo.TabIndex = 32;
@@ -722,7 +726,7 @@ namespace TPV.GUI
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(156, 508);
+            this.label9.Location = new System.Drawing.Point(158, 477);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 20);
             this.label9.TabIndex = 31;
@@ -732,7 +736,7 @@ namespace TPV.GUI
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(156, 528);
+            this.label11.Location = new System.Drawing.Point(158, 498);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 20);
             this.label11.TabIndex = 30;
@@ -742,7 +746,7 @@ namespace TPV.GUI
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(156, 548);
+            this.label12.Location = new System.Drawing.Point(158, 518);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 20);
             this.label12.TabIndex = 29;
@@ -752,7 +756,7 @@ namespace TPV.GUI
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(156, 490);
+            this.label13.Location = new System.Drawing.Point(158, 458);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 20);
             this.label13.TabIndex = 28;
@@ -1054,7 +1058,7 @@ namespace TPV.GUI
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(158, 570);
+            this.label8.Location = new System.Drawing.Point(158, 542);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 20);
             this.label8.TabIndex = 60;
@@ -1064,7 +1068,7 @@ namespace TPV.GUI
             // 
             this.lblCambio.AutoSize = true;
             this.lblCambio.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCambio.Location = new System.Drawing.Point(254, 567);
+            this.lblCambio.Location = new System.Drawing.Point(257, 539);
             this.lblCambio.Name = "lblCambio";
             this.lblCambio.Size = new System.Drawing.Size(59, 23);
             this.lblCambio.TabIndex = 61;
@@ -1107,12 +1111,48 @@ namespace TPV.GUI
             this.btnBtc.UseVisualStyleBackColor = true;
             this.btnBtc.Click += new System.EventHandler(this.btnBtc_Click);
             // 
+            // chkExento
+            // 
+            this.chkExento.AutoSize = true;
+            this.chkExento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkExento.Location = new System.Drawing.Point(3, 543);
+            this.chkExento.Name = "chkExento";
+            this.chkExento.Size = new System.Drawing.Size(91, 24);
+            this.chkExento.TabIndex = 10;
+            this.chkExento.Text = "Exento Iva";
+            this.chkExento.UseVisualStyleBackColor = true;
+            this.chkExento.CheckedChanged += new System.EventHandler(this.chkExento_CheckedChanged);
+            this.chkExento.Click += new System.EventHandler(this.chkExento_Click);
+            // 
+            // lble1
+            // 
+            this.lble1.AutoSize = true;
+            this.lble1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lble1.Location = new System.Drawing.Point(159, 563);
+            this.lble1.Name = "lble1";
+            this.lble1.Size = new System.Drawing.Size(55, 20);
+            this.lble1.TabIndex = 64;
+            this.lble1.Text = "Exento:";
+            // 
+            // lblExento
+            // 
+            this.lblExento.AutoSize = true;
+            this.lblExento.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExento.Location = new System.Drawing.Point(257, 560);
+            this.lblExento.Name = "lblExento";
+            this.lblExento.Size = new System.Drawing.Size(59, 23);
+            this.lblExento.TabIndex = 65;
+            this.lblExento.Tag = "0";
+            this.lblExento.Text = "$0.00";
+            // 
             // PuntoPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
             this.ControlBox = false;
+            this.Controls.Add(this.lble1);
+            this.Controls.Add(this.lblExento);
             this.Controls.Add(this.btnBtc);
             this.Controls.Add(this.btnCuentas);
             this.Controls.Add(this.label8);
@@ -1263,5 +1303,8 @@ namespace TPV.GUI
         private DataGridViewTextBoxColumn salon;
         private Timer tFecha;
         private Button btnBtc;
+        private CheckBox chkExento;
+        private Label lble1;
+        public Label lblExento;
     }
 }
