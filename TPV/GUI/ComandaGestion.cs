@@ -1828,5 +1828,45 @@ namespace TPV.GUI
                 }
             }
         }
+
+        private void dgvDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CambioPrecioProducto f = new CambioPrecioProducto();
+            f.lblPrecio.Text = Double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()).ToString("0.00");
+            f.lblProducto.Text = dgvDatos.CurrentRow.Cells["nombre"].Value.ToString();
+            f.ShowDialog();
+
+            if (!f.txtPrecio.Text.Equals(""))
+            {
+                int idDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
+                int cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString());
+                int idProducto = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                int idPedido = Int32.Parse(dgvDatos.CurrentRow.Cells["idPedido"].Value.ToString());
+                double precioNuevo = Double.Parse(f.txtPrecio.Text);
+                double subTotal = cantidad*precioNuevo;
+
+                PedidoDetalle pd = new PedidoDetalle();
+                pd.IdDetalle = idDetalle;
+                pd.Cantidad = cantidad;
+                pd.Precio = precioNuevo;
+                pd.SubTotal = subTotal;
+                pd.IdPedido = idPedido;
+                pd.IdProducto = idProducto;
+
+                List<String> prod = new List<string>();
+                prod.Add(pd.ActualizarCompra(false));
+
+                DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
+                if (transaccion.EjecutarTransaccion(prod) < 0)
+                {
+                    MessageBox.Show("ERROR EN TRANSACCION AL CAMBIAR PRECIO, CONTACTE AL PROGRAMADOR.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("ACTUALIZADO CON EXITO.", "Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                }
+            }
+        }
     }
 }

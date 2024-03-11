@@ -72,6 +72,12 @@ namespace Mantenimiento.CLS
                             WHERE pe.idPedido=pd.idPedido AND pe.idPedido = (SELECT LAST_INSERT_ID()) AND pd.idProducto = " + idProducto + @"
                             AND pd.idDetalle = " + IdDetalle + ";";
             }
+            else if(!primerPedido && precio > 0)
+            {
+                sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @", pd.precio = " + precio + @" 
+                            WHERE pe.idPedido=pd.idPedido AND pe.idPedido = " + idPedido + @" AND pd.idProducto = " + idProducto + @"
+                            AND pd.idDetalle = " + IdDetalle + ";";
+            }
             else
             {
                 sentencia = @"UPDATE pedido_detalle pd, pedido pe SET  pd.cantidad = " + cantidad + @", pd.subTotal = " + subTotal + @" 

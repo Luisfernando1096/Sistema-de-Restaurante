@@ -68,6 +68,12 @@
     <Compile Include="GUI\AutorizarCambio.Designer.cs">
       <DependentUpon>AutorizarCambio.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\CambioPrecioProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CambioPrecioProducto.Designer.cs">
+      <DependentUpon>CambioPrecioProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\CantidadProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\AutorizarCambio.resx">
       <DependentUpon>AutorizarCambio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CambioPrecioProducto.resx">
+      <DependentUpon>CambioPrecioProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\CantidadProductos.resx">
       <DependentUpon>CantidadProductos.cs</DependentUpon>
