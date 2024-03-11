@@ -32,8 +32,8 @@ namespace TPV.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PuntoPago));
             this.lblMesa = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -65,6 +65,7 @@ namespace TPV.GUI
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.chkExento = new System.Windows.Forms.CheckBox();
             this.cbPropina = new System.Windows.Forms.CheckBox();
             this.cbDescuento = new System.Windows.Forms.CheckBox();
             this.txtPorcentaje = new System.Windows.Forms.TextBox();
@@ -117,7 +118,6 @@ namespace TPV.GUI
             this.btnCuentas = new System.Windows.Forms.Button();
             this.tFecha = new System.Windows.Forms.Timer(this.components);
             this.btnBtc = new System.Windows.Forms.Button();
-            this.chkExento = new System.Windows.Forms.CheckBox();
             this.lble1 = new System.Windows.Forms.Label();
             this.lblExento = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
@@ -206,8 +206,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -227,14 +227,14 @@ namespace TPV.GUI
             this.nombres,
             this.mesa,
             this.salon});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.Location = new System.Drawing.Point(152, 140);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -466,6 +466,19 @@ namespace TPV.GUI
             this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // chkExento
+            // 
+            this.chkExento.AutoSize = true;
+            this.chkExento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkExento.Location = new System.Drawing.Point(3, 543);
+            this.chkExento.Name = "chkExento";
+            this.chkExento.Size = new System.Drawing.Size(91, 24);
+            this.chkExento.TabIndex = 10;
+            this.chkExento.Text = "Exento Iva";
+            this.chkExento.UseVisualStyleBackColor = true;
+            this.chkExento.CheckedChanged += new System.EventHandler(this.chkExento_CheckedChanged);
+            this.chkExento.Click += new System.EventHandler(this.chkExento_Click);
             // 
             // cbPropina
             // 
@@ -1111,19 +1124,6 @@ namespace TPV.GUI
             this.btnBtc.UseVisualStyleBackColor = true;
             this.btnBtc.Click += new System.EventHandler(this.btnBtc_Click);
             // 
-            // chkExento
-            // 
-            this.chkExento.AutoSize = true;
-            this.chkExento.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkExento.Location = new System.Drawing.Point(3, 543);
-            this.chkExento.Name = "chkExento";
-            this.chkExento.Size = new System.Drawing.Size(91, 24);
-            this.chkExento.TabIndex = 10;
-            this.chkExento.Text = "Exento Iva";
-            this.chkExento.UseVisualStyleBackColor = true;
-            this.chkExento.CheckedChanged += new System.EventHandler(this.chkExento_CheckedChanged);
-            this.chkExento.Click += new System.EventHandler(this.chkExento_Click);
-            // 
             // lble1
             // 
             this.lble1.AutoSize = true;
@@ -1203,7 +1203,6 @@ namespace TPV.GUI
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.flpAcciones);
-            this.MaximumSize = new System.Drawing.Size(1386, 788);
             this.MinimumSize = new System.Drawing.Size(1364, 718);
             this.Name = "PuntoPago";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

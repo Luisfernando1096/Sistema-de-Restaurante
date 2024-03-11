@@ -1171,7 +1171,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton42});
             this.toolStrip11.Location = new System.Drawing.Point(3, 0);
             this.toolStrip11.Name = "toolStrip11";
-            this.toolStrip11.Size = new System.Drawing.Size(182, 82);
+            this.toolStrip11.Size = new System.Drawing.Size(151, 82);
             this.toolStrip11.TabIndex = 14;
             this.toolStrip11.Text = "toolStrip11";
             // 
@@ -1250,7 +1250,6 @@ namespace ServiceExpressDsk.GUI
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
-            this.MaximumSize = new System.Drawing.Size(1386, 785);
             this.MinimumSize = new System.Drawing.Size(1026, 588);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

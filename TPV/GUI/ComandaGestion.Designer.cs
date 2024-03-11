@@ -650,7 +650,6 @@ namespace TPV.GUI
             this.ClientSize = new System.Drawing.Size(1028, 609);
             this.ControlBox = false;
             this.Controls.Add(this.panelComanda);
-            this.MaximumSize = new System.Drawing.Size(1386, 786);
             this.MinimumSize = new System.Drawing.Size(1026, 590);
             this.Name = "ComandaGestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
