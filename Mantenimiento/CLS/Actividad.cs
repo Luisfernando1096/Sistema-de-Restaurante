@@ -8,11 +8,11 @@ namespace Mantenimiento.CLS
 {
     public class Actividad
     {
-        int idActividad, codigo;
+        string idActividad, codigo;
         String descripcion;
 
-        public int IdActividad { get => idActividad; set => idActividad = value; }
-        public int Codigo { get => codigo; set => codigo = value; }
+        public string IdActividad { get => idActividad; set => idActividad = value; }
+        public string Codigo { get => codigo; set => codigo = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
     }
 }

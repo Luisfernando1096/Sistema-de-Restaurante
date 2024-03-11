@@ -1430,8 +1430,8 @@ namespace TPV.GUI
             {
                 string clienteInfo = $"{item["nrc"]}, " +
                     $"{item["nombre"]}," +
-                    $" {item["codActividad"]}," +
-                    $" {item["desActividad"]}," +
+                    $" {item["codigo"]}," +
+                    $" {item["descripcion"]}," +
                     $" {item["idDireccion"]}," +
                     $" {item["departamento"]}," +
                     $" {item["municipio"]}," +

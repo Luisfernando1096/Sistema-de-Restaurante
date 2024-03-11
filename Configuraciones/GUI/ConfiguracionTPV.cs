@@ -665,7 +665,7 @@ namespace Configuraciones.GUI
 
                 Actividad act = new Actividad
                 {
-                    IdActividad = Int32.Parse(cmbActividad.SelectedValue.ToString())
+                    IdActividad = cmbActividad.SelectedValue.ToString()
                 };
                 empresa.Actividad = act;
 

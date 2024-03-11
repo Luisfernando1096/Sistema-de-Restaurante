@@ -410,14 +410,15 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT 
-                                            c.idCliente, c.regContable, c.nombre, c.codActividad, c.desActividad, c.telefono, c.email, c.NIT, doc.tipoDocumento, doc.valorEnNumero, doc.idDocumento, c.idDireccion,
+                                            c.idCliente, c.regContable, c.nombre, a.idActividad, a.codigo, a.descripcion, c.telefono, c.email, c.NIT, doc.tipoDocumento, doc.valorEnNumero, doc.idDocumento, c.idDireccion,
                                             CONCAT(IFNULL(CONCAT(de.nombre, ', '), ''), IFNULL(CONCAT(m.nombre, ', '), ''), IFNULL(d.complemento, '')) as direccion
                                         FROM 
                                             cliente c
                                             LEFT JOIN direccion d ON c.idDireccion = d.idDireccion
                                             LEFT JOIN municipio m ON m.idMunicipio = d.idMunicipio
                                             LEFT JOIN documento doc ON doc.idDocumento = c.idDocumento
-                                            LEFT JOIN departamento de ON de.idDepartamento = m.idDepartamento; ";
+                                            LEFT JOIN departamento de ON de.idDepartamento = m.idDepartamento
+                                            LEFT JOIN actividad a ON a.idActividad = c.idActividad; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1343,7 +1344,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT c.idCliente, c.regContable AS nrc , c.nombre, c.codActividad, c.desActividad,c.idDireccion, dep.codigo AS departamento, m.codigo AS municipio, d.complemento, c.telefono, 
+                String sentencia = @"SELECT c.idCliente, c.regContable AS nrc , c.nombre, a.codigo, a.descripcion, c.idDireccion, dep.codigo AS departamento, m.codigo AS municipio, d.complemento, c.telefono, 
                                           c.email AS correo, c.NIT AS numDocumento, doc.valorEnNumero AS tipoDocumento
                                           FROM
                                           cliente c 
@@ -1351,6 +1352,7 @@ namespace DataManager
                                           LEFT JOIN municipio m ON d.idMunicipio = m.idMunicipio
                                           LEFT JOIN departamento dep ON m.idDepartamento = dep.idDepartamento
                                           LEFT JOIN documento doc ON c.idDocumento = doc.idDocumento 
+                                          LEFT JOIN actividad a ON a.idActividad = c.idActividad
                                           WHERE c.idCliente = " + idCliente +";";
                 DBOperacion operacion = new DBOperacion();
 

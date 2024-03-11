@@ -29,8 +29,8 @@ namespace TPV.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientesGestion));
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -63,9 +63,6 @@ namespace TPV.GUI
             this.label8 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtCodActividad = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtDesActividad = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -73,9 +70,11 @@ namespace TPV.GUI
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbTDoc = new System.Windows.Forms.ComboBox();
+            this.cmbActividad = new System.Windows.Forms.ComboBox();
             this.idCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.desActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idActividad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,16 +95,17 @@ namespace TPV.GUI
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
+            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCliente,
-            this.codActividad,
-            this.desActividad,
+            this.codigo,
+            this.descripcion,
+            this.idActividad,
             this.tipoDocumento,
             this.nombre,
             this.idDireccion,
@@ -116,14 +116,14 @@ namespace TPV.GUI
             this.valorEnNumero,
             this.idDocumento,
             this.regContable});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClientes.Location = new System.Drawing.Point(8, 227);
             this.dgvClientes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvClientes.MultiSelect = false;
@@ -279,7 +279,7 @@ namespace TPV.GUI
             // 
             this.txtIdCliente.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIdCliente.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdCliente.Location = new System.Drawing.Point(14, 88);
+            this.txtIdCliente.Location = new System.Drawing.Point(89, 85);
             this.txtIdCliente.Name = "txtIdCliente";
             this.txtIdCliente.ReadOnly = true;
             this.txtIdCliente.Size = new System.Drawing.Size(95, 26);
@@ -289,7 +289,7 @@ namespace TPV.GUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 65);
+            this.label1.Location = new System.Drawing.Point(10, 87);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 20);
             this.label1.TabIndex = 24;
@@ -378,7 +378,7 @@ namespace TPV.GUI
             // 
             this.txtRegContable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRegContable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegContable.Location = new System.Drawing.Point(709, 88);
+            this.txtRegContable.Location = new System.Drawing.Point(696, 167);
             this.txtRegContable.Margin = new System.Windows.Forms.Padding(2);
             this.txtRegContable.Name = "txtRegContable";
             this.txtRegContable.Size = new System.Drawing.Size(142, 26);
@@ -388,7 +388,7 @@ namespace TPV.GUI
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(706, 65);
+            this.label7.Location = new System.Drawing.Point(693, 144);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(99, 20);
@@ -400,7 +400,7 @@ namespace TPV.GUI
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(114, 90);
+            this.label8.Location = new System.Drawing.Point(88, 65);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(98, 20);
@@ -429,54 +429,22 @@ namespace TPV.GUI
             this.label9.TabIndex = 41;
             this.label9.Text = "Filtrar por nombre:";
             // 
-            // txtCodActividad
-            // 
-            this.txtCodActividad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCodActividad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodActividad.Location = new System.Drawing.Point(563, 88);
-            this.txtCodActividad.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCodActividad.Name = "txtCodActividad";
-            this.txtCodActividad.Size = new System.Drawing.Size(142, 26);
-            this.txtCodActividad.TabIndex = 44;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(560, 65);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(116, 20);
-            this.label10.TabIndex = 43;
-            this.label10.Text = "Codigo Actividad:";
-            // 
-            // txtDesActividad
-            // 
-            this.txtDesActividad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDesActividad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesActividad.Location = new System.Drawing.Point(681, 169);
-            this.txtDesActividad.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDesActividad.Multiline = true;
-            this.txtDesActividad.Name = "txtDesActividad";
-            this.txtDesActividad.Size = new System.Drawing.Size(408, 48);
-            this.txtDesActividad.TabIndex = 46;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(678, 146);
+            this.label11.Location = new System.Drawing.Point(563, 87);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(147, 20);
+            this.label11.Size = new System.Drawing.Size(72, 20);
             this.label11.TabIndex = 45;
-            this.label11.Text = "Descripcion Actividad: ";
+            this.label11.Text = "Actividad: ";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(855, 64);
+            this.label12.Location = new System.Drawing.Point(850, 140);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(111, 20);
@@ -522,7 +490,7 @@ namespace TPV.GUI
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(963, 65);
+            this.label15.Location = new System.Drawing.Point(958, 140);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(14, 20);
@@ -540,10 +508,20 @@ namespace TPV.GUI
             "OTRO",
             "PASAPORTE",
             "CARNET DE RESIDENTE"});
-            this.cmbTDoc.Location = new System.Drawing.Point(856, 87);
+            this.cmbTDoc.Location = new System.Drawing.Point(854, 166);
             this.cmbTDoc.Name = "cmbTDoc";
             this.cmbTDoc.Size = new System.Drawing.Size(233, 28);
             this.cmbTDoc.TabIndex = 53;
+            // 
+            // cmbActividad
+            // 
+            this.cmbActividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbActividad.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbActividad.FormattingEnabled = true;
+            this.cmbActividad.Location = new System.Drawing.Point(633, 82);
+            this.cmbActividad.Name = "cmbActividad";
+            this.cmbActividad.Size = new System.Drawing.Size(454, 28);
+            this.cmbActividad.TabIndex = 60;
             // 
             // idCliente
             // 
@@ -553,21 +531,29 @@ namespace TPV.GUI
             this.idCliente.ReadOnly = true;
             this.idCliente.Width = 40;
             // 
-            // codActividad
+            // codigo
             // 
-            this.codActividad.DataPropertyName = "codActividad";
-            this.codActividad.HeaderText = "Codigo Actividad";
-            this.codActividad.Name = "codActividad";
-            this.codActividad.ReadOnly = true;
-            this.codActividad.Visible = false;
+            this.codigo.DataPropertyName = "codigo";
+            this.codigo.HeaderText = "Codigo Actividad";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            this.codigo.Visible = false;
             // 
-            // desActividad
+            // descripcion
             // 
-            this.desActividad.DataPropertyName = "desActividad";
-            this.desActividad.HeaderText = "Descripcion Actividad";
-            this.desActividad.Name = "desActividad";
-            this.desActividad.ReadOnly = true;
-            this.desActividad.Visible = false;
+            this.descripcion.DataPropertyName = "descripcion";
+            this.descripcion.HeaderText = "Descripcion Actividad";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            this.descripcion.Visible = false;
+            // 
+            // idActividad
+            // 
+            this.idActividad.DataPropertyName = "idActividad";
+            this.idActividad.HeaderText = "IdActividad";
+            this.idActividad.Name = "idActividad";
+            this.idActividad.ReadOnly = true;
+            this.idActividad.Visible = false;
             // 
             // tipoDocumento
             // 
@@ -654,16 +640,14 @@ namespace TPV.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1102, 510);
+            this.Controls.Add(this.cmbActividad);
             this.Controls.Add(this.cmbTDoc);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.txtDesActividad);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtCodActividad);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -733,9 +717,6 @@ namespace TPV.GUI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label9;
-        public System.Windows.Forms.TextBox txtCodActividad;
-        private System.Windows.Forms.Label label10;
-        public System.Windows.Forms.TextBox txtDesActividad;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button1;
@@ -743,9 +724,11 @@ namespace TPV.GUI
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbTDoc;
+        private System.Windows.Forms.ComboBox cmbActividad;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codActividad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn desActividad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idActividad;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDireccion;

@@ -20,8 +20,27 @@ namespace TPV.GUI
 
         private void ClientesGestion_Load(object sender, EventArgs e)
         {
+            CargarActividades();
             CargarDatos();
             CargarDocumentos();
+            cmbActividad.SelectedIndex = -1;
+            cmbTDoc.SelectedIndex = -1;
+        }
+
+        private void CargarActividades()
+        {
+            try
+            {
+                DataTable doc = DataManager.DBConsultas.Actividades();
+
+                cmbActividad.DataSource = doc;
+                cmbActividad.DisplayMember = "descripcion";
+                cmbActividad.ValueMember = "idActividad";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void CargarDatos()
@@ -64,9 +83,8 @@ namespace TPV.GUI
             txtNit.Text = "";
             txtDireccion.Text = "";
             txtRegContable.Text = "";
-            txtCodActividad.Text = "";
-            txtDesActividad.Text = "";
-            cmbTDoc.SelectedIndex = 0;
+            cmbActividad.SelectedIndex = -1;
+            cmbTDoc.SelectedIndex = -1;
             txtDireccion.Tag = "";
         }
 
@@ -90,8 +108,15 @@ namespace TPV.GUI
             txtDireccion.Tag = dgvClientes.CurrentRow.Cells["idDireccion"].Value.ToString();
             txtDireccion.Text = dgvClientes.CurrentRow.Cells["direccion"].Value.ToString();
             txtRegContable.Text = dgvClientes.CurrentRow.Cells["regContable"].Value.ToString();
-            txtCodActividad.Text = dgvClientes.CurrentRow.Cells["codActividad"].Value.ToString();
-            txtDesActividad.Text = dgvClientes.CurrentRow.Cells["desActividad"].Value.ToString();
+            if (!dgvClientes.CurrentRow.Cells["idActividad"].Value.ToString().Equals(""))
+            {
+                cmbActividad.SelectedValue = dgvClientes.CurrentRow.Cells["idActividad"].Value.ToString();
+            }
+            else
+            {
+                cmbActividad.SelectedIndex = -1;
+            }
+            
             cmbTDoc.SelectedValue = dgvClientes.CurrentRow.Cells["idDocumento"].Value.ToString();
         }
 
@@ -105,11 +130,6 @@ namespace TPV.GUI
             if (txtNit.Text.Length != 14 && txtNit.Text.Length != 9)
             {
                 MessageBox.Show("¡El nit debe tener 14 digitos o especificar dui con 9!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if (txtDesActividad.Text.Length >= 1 && txtDesActividad.Text.Length < 5)
-            {
-                MessageBox.Show("¡La descripcion de la actividad debe tener mas de 5 caracteres!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (txtTelefono.Text.Length > 0)
@@ -127,12 +147,7 @@ namespace TPV.GUI
                     MessageBox.Show("El correo electrónico no es válido.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                
-            }
-            if (txtCodActividad.Text.Length >= 1 && (txtCodActividad.Text.Length < 5 || txtCodActividad.Text.Length > 6))
-            {
-                MessageBox.Show("¡El codigo de la actividad debe tener entre 5 y 6 caracteres!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+
             }
             Direccion direccion = null;
             if (!txtDireccion.Tag.ToString().Equals(""))
@@ -142,7 +157,7 @@ namespace TPV.GUI
                 {
                     IdDireccion = txtDireccion.Tag.ToString()
                 };
-                
+
             }
             else if (txtDireccion.Tag.ToString().Equals("") && complemento != null)
             {
@@ -180,25 +195,33 @@ namespace TPV.GUI
             String telefono = txtTelefono.Text.ToString();
             String email = txtEmail.Text.ToString();
             String nit = txtNit.Text.ToString();
-            String codActividad = txtCodActividad.Text.ToString();
-            String desActividad = txtDesActividad.Text.ToString();
+
+            String idActividad = "";
+
+            if (cmbActividad.SelectedIndex != -1)
+            {
+                idActividad = cmbActividad.SelectedValue.ToString();
+            }
 
             Documento doc = new Documento
             {
                 IdDocumento = Int32.Parse(cmbTDoc.SelectedValue.ToString())
             };
-            
+
             String regContable = txtRegContable.Text.ToString();
             Cliente cliente = new Cliente();
-            
+
             cliente.RegContable = regContable;
             cliente.Nombre = nombres;
-            cliente.CodActividad = codActividad;
+            Actividad actividad = new Actividad
+            {
+                IdActividad = idActividad
+            };
+            cliente.Actividad = actividad;
             cliente.Telefono = telefono;
             cliente.Email = email;
             cliente.NIT = nit;
             cliente.Direccion = direccion;
-            cliente.DesActividad = desActividad;
             cliente.TipoDocumento = doc;
             
 

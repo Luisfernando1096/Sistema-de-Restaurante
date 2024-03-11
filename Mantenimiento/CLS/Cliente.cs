@@ -7,8 +7,7 @@ namespace Mantenimiento.CLS
         String _idCliente;
         String _regContable;
         String _nombre;
-        String _codActividad;
-        String _desActividad;
+        Actividad _actividad;
         Direccion _direccion;
         String _telefono;
         String _email;
@@ -23,15 +22,14 @@ namespace Mantenimiento.CLS
         public string NIT { get => _NIT; set => _NIT = value; }
         public string RegContable { get => _regContable; set => _regContable = value; }
         public Direccion Direccion { get => _direccion; set => _direccion = value; }
-        public string CodActividad { get => _codActividad; set => _codActividad = value; }
-        public string DesActividad { get => _desActividad; set => _desActividad = value; }
         public Documento TipoDocumento { get => _tipoDocumento; set => _tipoDocumento = value; }
+        public Actividad Actividad { get => _actividad; set => _actividad = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into cliente(nombre,idDireccion,email,telefono,NIT,regContable,codActividad,desActividad,idDocumento) values('" + _nombre + "'," + DireccionNull() + "," + EmailNull() + "," + TelefonoNull() + ",'" + _NIT + "'," + RegContNull() + "," + CodActividadNull() + "," + DescActividadNull() + ",'" + _tipoDocumento.IdDocumento + "');";
+            sentencia = @"insert into cliente(nombre,idDireccion,email,telefono,NIT,regContable,idActividad,idDocumento) values('" + _nombre + "'," + DireccionNull() + "," + EmailNull() + "," + TelefonoNull() + ",'" + _NIT + "'," + RegContNull() + "," + ActividadNull() + ",'" + _tipoDocumento.IdDocumento + "');";
 
             try
             {
@@ -100,27 +98,15 @@ namespace Mantenimiento.CLS
             }
         }
 
-        private String CodActividadNull()
+        private String ActividadNull()
         {
-            if (_codActividad == null || _codActividad.Equals(""))
+            if (_actividad.IdActividad == null || _actividad.IdActividad.Equals(""))
             {
                 return "NULL";
             }
             else
             {
-                return "'" + _codActividad + "'";
-            }
-        }
-
-        private String DescActividadNull()
-        {
-            if (_desActividad == null || _desActividad.Equals(""))
-            {
-                return "NULL";
-            }
-            else
-            {
-                return "'" + _desActividad + "'";
+                return _actividad.IdActividad;
             }
         }
 
@@ -128,7 +114,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update cliente set nombre = '" + _nombre + "', idDireccion = " + DireccionNull() + ", email = " + EmailNull() + ", telefono = " + TelefonoNull() + ", NIT = '" + _NIT + "', regContable = " + RegContNull() + ", codActividad = " + CodActividadNull() + ", desActividad = " + DescActividadNull() + ", idoDocumento = '" + _tipoDocumento.IdDocumento + "' WHERE idCliente = " + _idCliente + ";";
+            sentencia = @"update cliente set nombre = '" + _nombre + "', idDireccion = " + DireccionNull() + ", email = " + EmailNull() + ", telefono = " + TelefonoNull() + ", NIT = '" + _NIT + "', regContable = " + RegContNull() + ", idActividad = " + ActividadNull() + ", idDocumento = '" + _tipoDocumento.IdDocumento + "' WHERE idCliente = " + _idCliente + ";";
 
             try
             {

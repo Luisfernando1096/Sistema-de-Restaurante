@@ -83,7 +83,7 @@ namespace FacturacionElectronica.CLS
                     {
                         nrc = rec.nrc,
                         nombre = rec.nombre,
-                        codActividad = rec.codActividad,
+                        codActividad = (rec.codActividad == "") ? null : rec.codActividad,
                         descActividad = (rec.descActividad == "") ? null : rec.descActividad,
                         direccion = (idDireccion == "") ? null : new direccion
                         {
@@ -92,7 +92,7 @@ namespace FacturacionElectronica.CLS
                             complemento = direc.complemento
                         },
                         telefono = rec.telefono,
-                        correo = rec.correo,
+                        correo = (rec.correo == "") ? null : rec.correo,
                         numDocumento = rec.numDocumento,
                         tipoDocumento = rec.tipoDocumento
                     },
