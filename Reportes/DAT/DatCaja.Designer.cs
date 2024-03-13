@@ -299,9 +299,11 @@ namespace Reportes.DAT {
             
             private global::System.Data.DataColumn columncantidad;
             
-            private global::System.Data.DataColumn columnmonto;
+            private global::System.Data.DataColumn columnmonto_tarjeta;
             
-            private global::System.Data.DataColumn columnmetodo_pago;
+            private global::System.Data.DataColumn columnmonto_efectivo;
+            
+            private global::System.Data.DataColumn columnmonto_bitcoin;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -418,17 +420,25 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn montoColumn {
+            public global::System.Data.DataColumn monto_tarjetaColumn {
                 get {
-                    return this.columnmonto;
+                    return this.columnmonto_tarjeta;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn metodo_pagoColumn {
+            public global::System.Data.DataColumn monto_efectivoColumn {
                 get {
-                    return this.columnmetodo_pago;
+                    return this.columnmonto_efectivo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn monto_bitcoinColumn {
+                get {
+                    return this.columnmonto_bitcoin;
                 }
             }
             
@@ -469,7 +479,7 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public cajaRow AddcajaRow(int idCaja, int idCajero, bool estado, System.DateTime fechaApertura, System.DateTime fechaCierre, double saldoInicial, double efectivo, double saldo, string nombres, double cantidad, double monto, string metodo_pago) {
+            public cajaRow AddcajaRow(int idCaja, int idCajero, bool estado, System.DateTime fechaApertura, System.DateTime fechaCierre, double saldoInicial, double efectivo, double saldo, string nombres, double cantidad, double monto_tarjeta, double monto_efectivo, double monto_bitcoin) {
                 cajaRow rowcajaRow = ((cajaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         idCaja,
@@ -482,8 +492,9 @@ namespace Reportes.DAT {
                         saldo,
                         nombres,
                         cantidad,
-                        monto,
-                        metodo_pago};
+                        monto_tarjeta,
+                        monto_efectivo,
+                        monto_bitcoin};
                 rowcajaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowcajaRow);
                 return rowcajaRow;
@@ -516,8 +527,9 @@ namespace Reportes.DAT {
                 this.columnsaldo = base.Columns["saldo"];
                 this.columnnombres = base.Columns["nombres"];
                 this.columncantidad = base.Columns["cantidad"];
-                this.columnmonto = base.Columns["monto"];
-                this.columnmetodo_pago = base.Columns["metodo_pago"];
+                this.columnmonto_tarjeta = base.Columns["monto_tarjeta"];
+                this.columnmonto_efectivo = base.Columns["monto_efectivo"];
+                this.columnmonto_bitcoin = base.Columns["monto_bitcoin"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -543,10 +555,12 @@ namespace Reportes.DAT {
                 base.Columns.Add(this.columnnombres);
                 this.columncantidad = new global::System.Data.DataColumn("cantidad", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncantidad);
-                this.columnmonto = new global::System.Data.DataColumn("monto", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmonto);
-                this.columnmetodo_pago = new global::System.Data.DataColumn("metodo_pago", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmetodo_pago);
+                this.columnmonto_tarjeta = new global::System.Data.DataColumn("monto_tarjeta", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmonto_tarjeta);
+                this.columnmonto_efectivo = new global::System.Data.DataColumn("monto_efectivo", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmonto_efectivo);
+                this.columnmonto_bitcoin = new global::System.Data.DataColumn("monto_bitcoin", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmonto_bitcoin);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -849,33 +863,49 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double monto {
+            public double monto_tarjeta {
                 get {
                     try {
-                        return ((double)(this[this.tablecaja.montoColumn]));
+                        return ((double)(this[this.tablecaja.monto_tarjetaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'monto\' de la tabla \'caja\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'monto_tarjeta\' de la tabla \'caja\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablecaja.montoColumn] = value;
+                    this[this.tablecaja.monto_tarjetaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string metodo_pago {
+            public double monto_efectivo {
                 get {
                     try {
-                        return ((string)(this[this.tablecaja.metodo_pagoColumn]));
+                        return ((double)(this[this.tablecaja.monto_efectivoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'metodo_pago\' de la tabla \'caja\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'monto_efectivo\' de la tabla \'caja\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablecaja.metodo_pagoColumn] = value;
+                    this[this.tablecaja.monto_efectivoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public double monto_bitcoin {
+                get {
+                    try {
+                        return ((double)(this[this.tablecaja.monto_bitcoinColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'monto_bitcoin\' de la tabla \'caja\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecaja.monto_bitcoinColumn] = value;
                 }
             }
             
@@ -1001,26 +1031,38 @@ namespace Reportes.DAT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsmontoNull() {
-                return this.IsNull(this.tablecaja.montoColumn);
+            public bool Ismonto_tarjetaNull() {
+                return this.IsNull(this.tablecaja.monto_tarjetaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetmontoNull() {
-                this[this.tablecaja.montoColumn] = global::System.Convert.DBNull;
+            public void Setmonto_tarjetaNull() {
+                this[this.tablecaja.monto_tarjetaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismetodo_pagoNull() {
-                return this.IsNull(this.tablecaja.metodo_pagoColumn);
+            public bool Ismonto_efectivoNull() {
+                return this.IsNull(this.tablecaja.monto_efectivoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmetodo_pagoNull() {
-                this[this.tablecaja.metodo_pagoColumn] = global::System.Convert.DBNull;
+            public void Setmonto_efectivoNull() {
+                this[this.tablecaja.monto_efectivoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ismonto_bitcoinNull() {
+                return this.IsNull(this.tablecaja.monto_bitcoinColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setmonto_bitcoinNull() {
+                this[this.tablecaja.monto_bitcoinColumn] = global::System.Convert.DBNull;
             }
         }
         

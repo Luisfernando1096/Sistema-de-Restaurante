@@ -21,8 +21,16 @@ namespace FacturacionElectronica.CLS
         direccion direc = new direccion();
         string idDireccion = "";
         String totalLetras;
+        double propina;
+        double exento;
+        double iva;
+        double descuento;
 
         public string TotalLetras { get => totalLetras; set => totalLetras = value; }
+        public double Propina { get => propina; set => propina = value; }
+        public double Exento { get => exento; set => exento = value; }
+        public double Iva { get => iva; set => iva = value; }
+        public double Descuento { get => descuento; set => descuento = value; }
 
         public GenerarDTE(List<PagoCombinado> lst, List<PedidoDetalle> lstPd, List<String> lstC)
         {
@@ -105,24 +113,24 @@ namespace FacturacionElectronica.CLS
 
                     resumen = new resumen
                     {
-                        totalNoSuj = 0,
-                        totalExenta = 0,
+                        totalNoSuj = propina,
+                        totalExenta = exento,
                         totalGravada = Double.Parse(CalcularSubTotal().ToString("0.00")),
                         subTotalVentas = Double.Parse(CalcularSubTotal().ToString("0.00")),
-                        descuNoSuj = 0,
-                        descuExenta = 0,
+                        descuNoSuj = propina,
+                        descuExenta = exento,
                         descuGravada = 0,
                         porcentajeDescuento = 0,
-                        totalDescu = 0,
+                        totalDescu = descuento + exento,
                         tributos = null,
                         subTotal = Double.Parse(CalcularSubTotal().ToString("0.00")),
-                        ivaRete1 = 0,
+                        ivaRete1 = iva,
                         reteRenta = 0,
                         montoTotalOperacion = Double.Parse(CalcularTotalPagar().ToString("0.00")),
                         totalNoGravado = 0,
                         totalPagar = Double.Parse(CalcularTotalPagar().ToString("0.00")),
                         totalLetras = totalLetras,
-                        totalIva = 0,
+                        totalIva = iva,
                         saldoFavor = 0,
                         condicionOperacion = 1,
                         pagos = AgregarPagos(),
@@ -156,24 +164,9 @@ namespace FacturacionElectronica.CLS
         {
             Double total;
 
-            total = Math.Round(CalcularSubTotal(), 2) + Math.Round(CalcularPropina(), 2);
+            total = Math.Round(CalcularSubTotal(), 2) + iva + propina - descuento - exento;
 
             return total;
-        }
-
-        private double CalcularPropina()
-        {
-            if (oConfiguracion != null)
-            {
-                if (Boolean.Parse(oConfiguracion.IncluirPropina))
-                {
-                    double porcentaje = Double.Parse(oConfiguracion.Propina);
-                    double total = CalcularSubTotal();
-                    return total * (porcentaje / 100);
-                }
-
-            }
-            return 0;
         }
 
         private void AgregarReceptor() 

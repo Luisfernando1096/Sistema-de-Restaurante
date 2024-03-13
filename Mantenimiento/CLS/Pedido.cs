@@ -15,6 +15,7 @@ namespace Mantenimiento.CLS
         double descuento;
         double iva;
         double propina;
+        double exento;
         double totalPago;
         double saldo;
         int idTiraje;
@@ -43,6 +44,7 @@ namespace Mantenimiento.CLS
         public double Efectivo { get => efectivo; set => efectivo = value; }
         public double Credito { get => credito; set => credito = value; }
         public double Btc { get => btc; set => btc = value; }
+        public double Exento { get => exento; set => exento = value; }
 
         public String Insertar(Boolean conMesero)
         {
@@ -171,12 +173,12 @@ namespace Mantenimiento.CLS
             string sentencia;
             if (nFactura != null)
             {
-                sentencia = @"UPDATE pedido SET iva = " + iva + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + ", fecha = '" + Fecha + "', idTiraje = " + IdTiraje + " " +
+                sentencia = @"UPDATE pedido SET iva = " + iva + ", exento = " + exento + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", nFactura = '" + nFactura + "', saldo = " + saldo + ", fecha = '" + Fecha + "', idTiraje = " + IdTiraje + " " +
                                 "WHERE idPedido = " + idPedido + ";";
             }
             else
             {
-                sentencia = @"UPDATE pedido SET iva = " + iva + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", saldo = " + saldo + ", fecha = '" + Fecha + "' " +
+                sentencia = @"UPDATE pedido SET iva = " + iva + ", exento = " + exento + ", total = " + total + ", totalPago = " + totalPago + ", descuento = " + descuento + ", propina = " + propina + ", cancelado = " + cancelado + ", saldo = " + saldo + ", fecha = '" + Fecha + "' " +
                                 "WHERE idPedido = " + idPedido + ";";
             }
 

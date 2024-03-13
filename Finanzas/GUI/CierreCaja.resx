@@ -166,15 +166,15 @@
   <data name="btnEditar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHjSURBVGhD7ZjPSsNAEMb3oF4UQZ/Bf3cvHkQ9iAcfxAcQ
-        1AdR9B0ExZPEbNogBU89tNltFR9CET0pqLvpRJJmNKWZbTeyP/ighd3Zb9Od7EyZw+Fw/BNqnV34VEG4
-        3GOe/IBvFSIMJxiPTlggv2JVCk/OM1/Wf8xXagN+Z1GZf8iYr8wGamJHPf3nnPlKbKCXrO+oeS1riZNV
-        HKOm07KSRjTHAhGghofTm9I9xDxiXrQCKxkglAu9xVAjlLpTx3MdViWCd7ZV0CdkMTPyWp9qvTN2LqfA
-        QQmKktWkuLiN75hSjHMDsaJG+V9i1Ecor1NwUoLRJXFeOif87ho4KQH9a3Rw6VqLBMqL7KY1rXqHDTX+
-        IjcfU629DDMJoC4luNxH42QkDmE0EdTFHJeXaKxEvvRhJCGU5bQfbebipKXXMQJVQxPKmUyMfnmtVxhp
-        AIqW8vpxNmM4p/YLjDRImaaeiy3cOMjYEepn2L9VAnGFGk9kJImp4OIANZ2WHmMV+iKLj03Bk0/Eu0sw
-        c4xgxgaSKmGsADVXIF3M1aNViDBmMINF0rWXNWAG/xRFQ0MJavJXhfEtbxW40azipl4dm2ZzEmZZBGY4
-        I/W2sSZhMdJmdXGm21R9w+pLyor3vMPhcDiqCWPfGXom4Pq2LacAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHkSURBVGhD7ZjPSgMxEMZzUC+KoM/gv7sXD6IexIMP4gMI
+        6oMo+g6C4snWzbaLFDwVajdpFR9CKXpSUJPtVHa7o1u6kzYr+cEHLSSTL21mM7PM4XA4/gmV1i58KiBc
+        7rGS/IBvBSIIJhgPT5gvvyIVirKcZ56s/pgv1Aa81qIy/5gwX5gNVMSOOu8vKfOF2EA3Wd9R81rWEiWr
+        OEZNx2UltXCO+cJHDQ+nN6UHiHnEyuEKrGSAQC50F0ONUOpOHc91WJUI3tpWQZ+Rxcyo1PhU652xczkF
+        DnKQlawmxcVtdMfkYpwbiBTW8v8Toz5CaZ2CkxyMLonT0jnhtdfASQ7oH6ODS9daJFBeZDf306p32FDj
+        L1LzMVWayzCTAOpSgst9NE5C4hBGE0FdzHF5icbqyZMejCSEspz2ws1UnLj0OkagamgCOZOI0a9S4xVG
+        GoCipbx+mk0YTqnZgZEGydPUc7GFGwcZO0L9DPtaxRdXqPGejCQxFVwcoKbj0mOsQl9k0bHJ+OV74u0l
+        mDlGMGMDSZUwVoCay5Au5qrhKkQYM5jBLOnayxowg3+KoqGhBDX5q4L8LSU1uNGkoqZeHZt6fRJmWQRm
+        OCH1tLEmYTHiZnVxpttUfcPqS8qK57zD4XA4iglj37lUJswzt46xAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnSalir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -236,10 +236,13 @@
   <metadata name="saldo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="monto.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="monto_efectivo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="metodo_pago.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="monto_tarjeta.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="monto_bitcoin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

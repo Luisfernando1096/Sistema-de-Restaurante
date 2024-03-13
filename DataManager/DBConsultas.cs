@@ -1408,17 +1408,7 @@ namespace DataManager
                 string sentencia;
                 if (soloAbiertas)
                 {
-                    sentencia = @"SELECT
-                                        COALESCE(
-                                            CASE
-                                                WHEN pc.idCuenta = 1 THEN 'EFECTIVO'
-                                                WHEN pc.idCuenta = 2 THEN 'TARJETA'
-                                                WHEN pc.idCuenta = 3 THEN 'BITCOIN'
-                                                ELSE ''
-                                            END,
-                                            ''
-                                        ) AS metodo_pago, 
-                                        SUM(pc.monto) AS monto,
+                    sentencia = @"SELECT 									
                                         c.idCaja,
                                         c.idCajero,
                                         c.estado,
@@ -1426,30 +1416,24 @@ namespace DataManager
                                         c.fechaCierre,
                                         c.saldoInicial,
                                         c.efectivo,
-                                        SUM((IF(pc.idCuenta = 1, pc.monto, 0))-COALESCE(eg.cantidad, 0)) AS saldo,
                                         e.nombres,
-                                        COALESCE(SUM(eg.cantidad), 0) AS cantidad
-                                    FROM
-                                        caja c
-                                    LEFT JOIN
-                                        empleado e ON c.idCajero = e.idEmpleado
-                                    LEFT JOIN
-                                        egreso eg ON e.idEmpleado = eg.idUsuario AND eg.idCaja = c.idCaja AND c.estado = 1
-                                    LEFT JOIN
-                                        pago_combinado pc ON pc.fechaPago >= c.fechaApertura
-                                    WHERE
-                                        c.estado = 1
-                                    GROUP BY
-                                        metodo_pago,
-                                        c.idCaja,  
-                                        c.idCajero,
-                                        c.estado,
-                                        c.fechaApertura,
-                                        c.fechaCierre,
-                                        c.saldoInicial,
-                                        c.efectivo,
-                                        e.nombres
-                                        ORDER BY saldo DESC;";
+											IFNULL((SELECT SUM(IF(pc.idCuenta = 1, pc.monto, 0)) 
+											 FROM pago_combinado pc 
+											 WHERE pc.fechaPago >= c.fechaApertura), 0) AS monto_efectivo,
+											
+											IFNULL((SELECT SUM(IF(pc.idCuenta = 2, pc.monto, 0)) 
+											 FROM pago_combinado pc 
+											 WHERE pc.fechaPago >= c.fechaApertura), 0) AS monto_tarjeta,
+											
+											IFNULL((SELECT SUM(IF(pc.idCuenta = 3, pc.monto, 0)) 
+											 FROM pago_combinado pc 
+											 WHERE pc.fechaPago >= c.fechaApertura), 0) AS monto_bitcoin,
+											 IFNULL((c.saldoInicial + (SELECT SUM(IF(pc.idCuenta = 1, pc.monto, 0)) 
+											 FROM pago_combinado pc 
+											 WHERE pc.fechaPago >= c.fechaApertura) - (SELECT SUM(eg.cantidad) FROM egreso eg WHERE eg.idCaja = c.idCaja)), 0) as saldo,
+											 IFNULL((SELECT SUM(eg.cantidad) FROM egreso eg WHERE eg.idCaja = c.idCaja), 0) as cantidad
+										FROM caja c, empleado e
+										WHERE c.idCajero=e.idEmpleado AND c.estado = 1;";
                 }
                 else
                 {
@@ -1479,7 +1463,9 @@ namespace DataManager
                                 c.saldoInicial,
                                 c.efectivo,
                                 c.saldo,
-                                e.nombres;";
+                                e.nombres
+                            ORDER BY 
+                                c.estado DESC;";
                 }
 
                 DBOperacion operacion = new DBOperacion();

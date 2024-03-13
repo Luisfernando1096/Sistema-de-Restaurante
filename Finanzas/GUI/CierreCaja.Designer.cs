@@ -68,8 +68,9 @@ namespace Finanzas.GUI
             this.efectivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.metodo_pago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monto_efectivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monto_tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monto_bitcoin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCajas)).BeginInit();
             this.SuspendLayout();
@@ -247,8 +248,9 @@ namespace Finanzas.GUI
             this.efectivo,
             this.cantidad,
             this.saldo,
-            this.monto,
-            this.metodo_pago});
+            this.monto_efectivo,
+            this.monto_tarjeta,
+            this.monto_bitcoin});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -431,21 +433,29 @@ namespace Finanzas.GUI
             this.saldo.Name = "saldo";
             this.saldo.ReadOnly = true;
             // 
-            // monto
+            // monto_efectivo
             // 
-            this.monto.DataPropertyName = "monto";
-            this.monto.HeaderText = "Monto";
-            this.monto.Name = "monto";
-            this.monto.ReadOnly = true;
-            this.monto.Visible = false;
+            this.monto_efectivo.DataPropertyName = "monto_efectivo";
+            this.monto_efectivo.HeaderText = "Monto Efectivo";
+            this.monto_efectivo.Name = "monto_efectivo";
+            this.monto_efectivo.ReadOnly = true;
+            this.monto_efectivo.Visible = false;
             // 
-            // metodo_pago
+            // monto_tarjeta
             // 
-            this.metodo_pago.DataPropertyName = "metodo_pago";
-            this.metodo_pago.HeaderText = "Forma Pago";
-            this.metodo_pago.Name = "metodo_pago";
-            this.metodo_pago.ReadOnly = true;
-            this.metodo_pago.Visible = false;
+            this.monto_tarjeta.DataPropertyName = "monto_tarjeta";
+            this.monto_tarjeta.HeaderText = "Monto Tarjeta";
+            this.monto_tarjeta.Name = "monto_tarjeta";
+            this.monto_tarjeta.ReadOnly = true;
+            this.monto_tarjeta.Visible = false;
+            // 
+            // monto_bitcoin
+            // 
+            this.monto_bitcoin.DataPropertyName = "monto_bitcoin";
+            this.monto_bitcoin.HeaderText = "Monto Bitcoin";
+            this.monto_bitcoin.Name = "monto_bitcoin";
+            this.monto_bitcoin.ReadOnly = true;
+            this.monto_bitcoin.Visible = false;
             // 
             // CierreCaja
             // 
@@ -519,7 +529,8 @@ namespace Finanzas.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn efectivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn saldo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn monto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn metodo_pago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn monto_efectivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn monto_tarjeta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn monto_bitcoin;
     }
 }

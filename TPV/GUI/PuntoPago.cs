@@ -19,7 +19,7 @@ namespace TPV.GUI
         ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
         ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         DataTable actualFactura;
-        private Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
+        private Pedido pedido = new Pedido();
         private bool hasEnteredNumber = false; // Variable para controlar si se ha ingresado un número
         private bool escritoUnPunto = false; //Variable para verificar si se ha ingresado un punto
         private bool activarFactura = false;
@@ -1123,11 +1123,13 @@ namespace TPV.GUI
             fechaPago = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             int siguiente = 0, idTiraje = 0;
             String serie = string.Empty;
+            Double iva = Double.Parse(lblIva.Tag.ToString()), propina = Double.Parse(lblPropina.Tag.ToString()), exento = Double.Parse(lblExento.Tag.ToString()), descuento = Double.Parse(lblDescuento.Tag.ToString()), total = Double.Parse(lblSaldo.Tag.ToString());
             pedido.IdPedido = Int32.Parse(lblTicket.Text);
-            pedido.Total = Double.Parse(lblSaldo.Tag.ToString());
-            pedido.Descuento = Double.Parse(lblDescuento.Tag.ToString());
-            pedido.Propina = Double.Parse(lblPropina.Tag.ToString());
-            pedido.Iva = Double.Parse(lblIva.Tag.ToString());
+            pedido.Total = total;
+            pedido.Descuento = descuento;
+            pedido.Propina = propina;
+            pedido.Iva = iva;
+            pedido.Exento = exento;
             pedido.Cancelado = true;
             pedido.Fecha = fechaPago;
 
@@ -1152,11 +1154,11 @@ namespace TPV.GUI
                 totalStr = totalPagar.ToString().Trim();
                 String totalLetras = "";
                 // Convierte la cadena a un número decimal
-                if (decimal.TryParse(totalStr, out decimal total))
+                if (decimal.TryParse(totalStr, out decimal total2))
                 {
                     // Dividir la parte entera y la parte decimal
-                    int parteEntera = (int)Math.Truncate(total);
-                    int parteDecimal = (int)((total - parteEntera) * 100);
+                    int parteEntera = (int)Math.Truncate(total2);
+                    int parteDecimal = (int)((total2 - parteEntera) * 100);
 
                     // Convierte cada parte a palabras utilizando Humanizer
                     string parteEnteraEnLetras = parteEntera.ToWords().ToUpper();
@@ -1187,6 +1189,10 @@ namespace TPV.GUI
 
                 GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles(), ListaClientes());
                 generarDTE.TotalLetras = totalLetras;
+                generarDTE.Propina = propina;
+                generarDTE.Iva = iva;
+                generarDTE.Exento = exento;
+                generarDTE.Descuento = descuento;
 
                 dteJson dte = generarDTE.GenerarFactura();
 
