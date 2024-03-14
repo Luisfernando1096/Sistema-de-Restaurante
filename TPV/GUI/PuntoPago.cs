@@ -884,7 +884,7 @@ namespace TPV.GUI
                 AumentarCuenta();
 
                 //Aqui insertar en la tabla pagos combinados
-                TerminarPago(true);
+                TerminarPago();
                 
             }
         }
@@ -947,7 +947,7 @@ namespace TPV.GUI
             else
             {
                 //Culminamos el pago
-                TerminarPago(false);
+                TerminarPago();
             }
 
         }
@@ -956,7 +956,7 @@ namespace TPV.GUI
         {
             //Proceso para agregar el efectivo cancelado
             DataTable cuenta = null;
-            Mantenimiento.CLS.Cuenta oCuenta = new Mantenimiento.CLS.Cuenta();
+            Cuenta oCuenta = new Cuenta();
             if (pagoTarjeta)
             {
                 cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
@@ -964,6 +964,7 @@ namespace TPV.GUI
             else if (pagoEfectivo || pagoExacto)
             {
                 cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
+                ActualizarCaja();
             }
             else if (pagoBtc)
             {
@@ -985,12 +986,11 @@ namespace TPV.GUI
             }
         }
 
-        private void TerminarPago(bool actualizar)
+        private void TerminarPago()
         {
             HacerPago(Int32.Parse(lblTicket.Text), true);
             RegistrarPago();
             ActualizarCuentaYMesa(false);
-            ActualizarCaja(actualizar);
 
             CalcularTodo();
             txtPagoRegistrar.Text = "0";
@@ -1082,28 +1082,28 @@ namespace TPV.GUI
 
         }
 
-        private void ActualizarCaja(Boolean exacto)
+        private void ActualizarCaja()
         {
             //Sucedera algo en caja programar aqui
             DataTable caja = DataManager.DBConsultas.CajaAbierta();
             if (caja.Rows.Count > 0)
             {
-                Mantenimiento.CLS.Caja cajaActualizar = new Mantenimiento.CLS.Caja();
+                Caja cajaActualizar = new Caja();
                 foreach (DataRow item in caja.Rows)
                 {
                     cajaActualizar.IdCaja = Int32.Parse(item["idCaja"].ToString());
                     cajaActualizar.IdCajero = Int32.Parse(item["idCajero"].ToString());
                     cajaActualizar.Estado = true;
                     cajaActualizar.SaldoInicial = Double.Parse(item["saldoInicial"].ToString());
-                    if (exacto)
+                    if (pagoExacto)
                     {
-                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + SumaMontos();
-                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + SumaMontos();
+                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
+                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
                     }
                     else
                     {
-                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + SumaMontos();
-                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + SumaMontos();
+                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
+                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
                     }
                 }
                 if (!cajaActualizar.Actualizar())

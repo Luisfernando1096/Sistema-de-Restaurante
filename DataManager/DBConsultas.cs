@@ -595,8 +595,10 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT IFNULL(SUM(monto), 0) as sumaMonto FROM pago_combinado
-                                    WHERE idPedido = " + idPedido + "; ";
+                String sentencia;
+
+                sentencia = @"SELECT IFNULL(SUM(monto), 0) as sumaMonto FROM pago_combinado
+                                WHERE idPedido = " + idPedido + "; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -1428,9 +1430,9 @@ namespace DataManager
 											IFNULL((SELECT SUM(IF(pc.idCuenta = 3, pc.monto, 0)) 
 											 FROM pago_combinado pc 
 											 WHERE pc.fechaPago >= c.fechaApertura), 0) AS monto_bitcoin,
-											 IFNULL((c.saldoInicial + (SELECT SUM(IF(pc.idCuenta = 1, pc.monto, 0)) 
-											 FROM pago_combinado pc 
-											 WHERE pc.fechaPago >= c.fechaApertura) - (SELECT SUM(eg.cantidad) FROM egreso eg WHERE eg.idCaja = c.idCaja)), 0) as saldo,
+                                             
+									    c.saldo,
+                                             
 											 IFNULL((SELECT SUM(eg.cantidad) FROM egreso eg WHERE eg.idCaja = c.idCaja), 0) as cantidad
 										FROM caja c, empleado e
 										WHERE c.idCajero=e.idEmpleado AND c.estado = 1;";
@@ -1532,7 +1534,9 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 string sentencia = @"SELECT c.idCaja, c.idCajero, c.estado, c.fechaApertura, c.fechaCierre,
-                                     c.saldoInicial, c.efectivo, c.saldo, e.nombres FROM caja c, empleado e WHERE c.idCajero = e.idEmpleado AND c.estado = 1; ";
+                                     c.saldoInicial, c.efectivo, IFNULL((SELECT SUM(IF(pc.idCuenta = 1, pc.monto, 0)) 
+											 FROM pago_combinado pc 
+											 WHERE pc.fechaPago >= c.fechaApertura), 0) - IFNULL((SELECT SUM(eg.cantidad) FROM egreso eg WHERE eg.idCaja = c.idCaja), 0) + c.saldoInicial as saldo, e.nombres FROM caja c, empleado e WHERE c.idCajero = e.idEmpleado AND c.estado = 1; ";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
