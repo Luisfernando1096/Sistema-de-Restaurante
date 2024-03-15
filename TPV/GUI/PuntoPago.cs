@@ -352,7 +352,7 @@ namespace TPV.GUI
         {
             if (!escritoUnPunto)
             {
-                if (!txtPagoRegistrar.Text.Equals("0"))
+                if (!txtPagoRegistrar.Text.Equals(""))
                 {
                     txtPagoRegistrar.Text += btnPunto.Text;
                     escritoUnPunto = true;
