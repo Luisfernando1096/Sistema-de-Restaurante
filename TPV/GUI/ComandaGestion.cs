@@ -1468,46 +1468,48 @@ namespace TPV.GUI
                 separar.lblMesa.Text = "#Mesa: " + lblMesa.Tag;
                 separar.lblTicket.Tag = lblTicket.Text;
                 separar.lblTicket.Text = "#Pedido: " + lblTicket.Text;
-                separar.ShowDialog();
-                DataTable dt = DataManager.DBConsultas.UltimoPedidoDeMesa(int.Parse(lblMesa.Tag.ToString()));
-                int idPedidoInsertado = Convert.ToInt32(dt.Rows[0]["IdPedido"]);
-                if (dt.Rows.Count > 0)
+                if (separar.ShowDialog().Equals(DialogResult.OK))
                 {
-                    if (separar.cerrar)
+                    DataTable dt = DataManager.DBConsultas.UltimoPedidoDeMesa(int.Parse(lblMesa.Tag.ToString()));
+                    int idPedidoInsertado = Convert.ToInt32(dt.Rows[0]["IdPedido"]);
+                    if (dt.Rows.Count > 0)
                     {
-                        listaIdProductos = separar.listaIdProductos;
-                        ModificarLista(int.Parse(lblTicket.Text), listaIdProductos, idPedidoInsertado);
+                        if (separar.cerrar)
+                        {
+                            listaIdProductos = separar.listaIdProductos;
+                            ModificarLista(int.Parse(lblTicket.Text), listaIdProductos, idPedidoInsertado);
+                        }
                     }
-                }
-                CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                if (idPedidoSiguiente > 0)
-                {
                     CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-                }
-                else
-                {
+                    if (idPedidoSiguiente > 0)
+                    {
+                        CargarProductosPorMesayIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+                    }
+                    else
+                    {
+                        CargarPedidos(lblMesa.Tag.ToString());
+                    }
+
+                    //AQUI MODIFICAR EL TOTAL DEL PEDIDO
+                    //Vamos a actualizar el total del pedido
+                    Pedido pedido2 = new Pedido
+                    {
+                        IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
+                        IdPedido = Int32.Parse(lblTicket.Text.ToString())
+                    };
+                    double total = CalcularTotal();
+
+                    //Actualizamos el total en el pedido recien insertado
+                    List<String> actualizarTotal = new List<string>();
+                    actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+
+                    DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
+                    if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
+                    {
+                        MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
+                    }
                     CargarPedidos(lblMesa.Tag.ToString());
                 }
-
-                //AQUI MODIFICAR EL TOTAL DEL PEDIDO
-                //Vamos a actualizar el total del pedido
-                Pedido pedido2 = new Pedido
-                {
-                    IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
-                    IdPedido = Int32.Parse(lblTicket.Text.ToString())
-                };
-                double total = CalcularTotal();
-
-                //Actualizamos el total en el pedido recien insertado
-                List<String> actualizarTotal = new List<string>();
-                actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
-
-                DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
-                if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
-                {
-                    MessageBox.Show("ERROR EN TRANSACCION AL ACTUALIZAR TOTAL DE PEDIDO, CONTACTE AL PROGRAMADOR.");
-                }
-                CargarPedidos(lblMesa.Tag.ToString());
             }
         }
 

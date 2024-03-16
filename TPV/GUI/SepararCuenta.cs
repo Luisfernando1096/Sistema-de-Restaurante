@@ -479,6 +479,7 @@ namespace TPV.GUI
                 if (transaccion1.EjecutarTransaccion(lstSeparar) > 0)
                 {
                     //lblTicket.Text = idPedidoInsertado.ToString(); //Debo colocar el id del pedido
+                    DialogResult = DialogResult.OK;
                     cerrar = true;
                 }
                 else

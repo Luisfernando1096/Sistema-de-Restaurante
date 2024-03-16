@@ -109,6 +109,7 @@ namespace TPV.GUI
             this.Name = "PuntoVenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuntoVenta";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PuntoVenta_FormClosing);
             this.Load += new System.EventHandler(this.PuntoVenta_Load);
             this.flpSalones.ResumeLayout(false);
             this.flpMesas.ResumeLayout(false);

@@ -253,5 +253,10 @@ namespace TPV.GUI
         {
             Close();
         }
+
+        private void PuntoVenta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }

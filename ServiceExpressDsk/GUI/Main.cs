@@ -10,16 +10,12 @@ namespace ServiceExpressDsk.GUI
 {
     public partial class Main : Form
     {
-        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
-        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
-        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         SessionManager.Session oUsuario = SessionManager.Session.Instancia;
         private bool tpv;
         private bool cerrar;
         private int idPedidoSiguiente = 0;
         Server myServer = new Server();
 
-        public static emisor Emisor { get; private set; }
 
         public Main()
         {
@@ -201,7 +197,11 @@ namespace ServiceExpressDsk.GUI
                     this.Hide();
                     TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
                     f.ShowDialog();
-                    this.Show();
+                    cerrar = f.cerrarSesion;
+                    if (!cerrar)
+                    {
+                        this.Show();
+                    }
 
                 }
                 else if (oUsuario.IdRol.ToString().Equals("3"))
