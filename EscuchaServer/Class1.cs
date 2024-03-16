@@ -397,7 +397,7 @@ public class Server
                     }
                     else
                     {
-                        MessageBox.Show($"No se encontró una impresora asociada al grupo: {kvp.Key}, se recomienda revisar los nombres de los grupos para evitar fallas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show($"No se encontró una impresora asociada al grupo: {kvp.Key}, se recomienda revisar los nombres de los grupos para evitar fallas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
