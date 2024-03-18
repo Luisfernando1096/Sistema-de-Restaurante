@@ -1174,6 +1174,7 @@ namespace TPV.GUI
                 //Lleva factura
                 //Generar JSON
                 //Aqui se guardara el JSON como prueba
+                /*
 
                 SaveFileDialog direccion = new SaveFileDialog();
                 direccion.Filter = "Archivo SQL (*.json)|*.json";
@@ -1197,6 +1198,8 @@ namespace TPV.GUI
                 dteJson dte = generarDTE.GenerarFactura();
 
                 generarDTE.SerializarFactura(dte, path);
+
+                */
                 //Termina generacion de JSON
 
                 //Lleva factura
