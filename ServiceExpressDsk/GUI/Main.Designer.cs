@@ -112,6 +112,7 @@ namespace ServiceExpressDsk.GUI
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton41 = new System.Windows.Forms.ToolStripButton();
+            this.tsMesaYMeseros = new System.Windows.Forms.ToolStripButton();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -241,11 +242,12 @@ namespace ServiceExpressDsk.GUI
             this.tpvPuntoPago,
             this.tpvClientes,
             this.tpvTickets,
-            this.tpvAnular});
+            this.tpvAnular,
+            this.tsMesaYMeseros});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(659, 82);
+            this.toolStrip1.Size = new System.Drawing.Size(814, 82);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -1238,6 +1240,17 @@ namespace ServiceExpressDsk.GUI
             this.toolStripButton41.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton41.Click += new System.EventHandler(this.toolStripButton41_Click);
             // 
+            // tsMesaYMeseros
+            // 
+            this.tsMesaYMeseros.Image = ((System.Drawing.Image)(resources.GetObject("tsMesaYMeseros.Image")));
+            this.tsMesaYMeseros.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsMesaYMeseros.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsMesaYMeseros.Name = "tsMesaYMeseros";
+            this.tsMesaYMeseros.Size = new System.Drawing.Size(155, 79);
+            this.tsMesaYMeseros.Text = "Mesas Ocupadas";
+            this.tsMesaYMeseros.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsMesaYMeseros.Click += new System.EventHandler(this.tsMesaYMeseros_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1424,6 +1437,7 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.ToolStripButton toolStripButton23;
         private System.Windows.Forms.ToolStripButton toolStripButton24;
         private System.Windows.Forms.ToolStripButton toolStripButton25;
+        public System.Windows.Forms.ToolStripButton tsMesaYMeseros;
     }
 }
 

@@ -26,6 +26,29 @@ namespace DataManager
 
         }
 
+        public static object MesasOcupadasConMeseroySalon()
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT upper(s.nombre) as salon, upper(m.nombre) as mesa, upper(COALESCE(e.nombres, 'Sin asignar')) as mesero
+                                        FROM pedido p
+                                        INNER JOIN mesa m ON p.idMesa = m.idMesa
+                                        INNER JOIN salon s ON s.idSalon = m.idSalon
+                                        LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
+                                        WHERE p.cancelado = 0;";
+                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable Departamentos()
         {
             try

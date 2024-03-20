@@ -54,20 +54,18 @@ namespace ServiceExpressDsk.GUI
             // txtClave
             // 
             this.txtClave.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClave.Location = new System.Drawing.Point(382, 104);
-            this.txtClave.Margin = new System.Windows.Forms.Padding(4);
+            this.txtClave.Location = new System.Drawing.Point(48, 88);
             this.txtClave.Name = "txtClave";
-            this.txtClave.Size = new System.Drawing.Size(187, 30);
+            this.txtClave.Size = new System.Drawing.Size(174, 26);
             this.txtClave.TabIndex = 1;
             this.txtClave.UseSystemPasswordChar = true;
             // 
             // btnIngresar
             // 
             this.btnIngresar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresar.Location = new System.Drawing.Point(381, 160);
-            this.btnIngresar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIngresar.Location = new System.Drawing.Point(48, 134);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(188, 34);
+            this.btnIngresar.Size = new System.Drawing.Size(174, 28);
             this.btnIngresar.TabIndex = 2;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
@@ -76,10 +74,9 @@ namespace ServiceExpressDsk.GUI
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(683, 13);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(50, 168);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 109);
+            this.pictureBox1.Size = new System.Drawing.Size(172, 166);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -89,10 +86,9 @@ namespace ServiceExpressDsk.GUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(378, 76);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(46, 66);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 24);
+            this.label1.Size = new System.Drawing.Size(84, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Digite el pin:";
             // 
@@ -101,9 +97,10 @@ namespace ServiceExpressDsk.GUI
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(68, 421);
+            this.label2.Location = new System.Drawing.Point(108, 349);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(255, 16);
+            this.label2.Size = new System.Drawing.Size(194, 14);
             this.label2.TabIndex = 5;
             this.label2.Text = "Si deseas cambiar tu Pin de seguridad,";
             // 
@@ -114,9 +111,10 @@ namespace ServiceExpressDsk.GUI
             this.lblContaseña.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblContaseña.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblContaseña.ForeColor = System.Drawing.Color.Blue;
-            this.lblContaseña.Location = new System.Drawing.Point(314, 421);
+            this.lblContaseña.Location = new System.Drawing.Point(297, 349);
+            this.lblContaseña.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblContaseña.Name = "lblContaseña";
-            this.lblContaseña.Size = new System.Drawing.Size(86, 16);
+            this.lblContaseña.Size = new System.Drawing.Size(67, 14);
             this.lblContaseña.TabIndex = 6;
             this.lblContaseña.Text = "haz clic aquí";
             this.lblContaseña.Click += new System.EventHandler(this.lblContaseña_Click);
@@ -124,10 +122,9 @@ namespace ServiceExpressDsk.GUI
             // btnC
             // 
             this.btnC.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnC.Location = new System.Drawing.Point(259, 331);
-            this.btnC.Margin = new System.Windows.Forms.Padding(4);
+            this.btnC.Location = new System.Drawing.Point(369, 275);
             this.btnC.Name = "btnC";
-            this.btnC.Size = new System.Drawing.Size(85, 75);
+            this.btnC.Size = new System.Drawing.Size(60, 60);
             this.btnC.TabIndex = 71;
             this.btnC.Text = "c";
             this.btnC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -137,10 +134,9 @@ namespace ServiceExpressDsk.GUI
             // btn0
             // 
             this.btn0.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn0.Location = new System.Drawing.Point(163, 331);
-            this.btn0.Margin = new System.Windows.Forms.Padding(4);
+            this.btn0.Location = new System.Drawing.Point(302, 275);
             this.btn0.Name = "btn0";
-            this.btn0.Size = new System.Drawing.Size(85, 75);
+            this.btn0.Size = new System.Drawing.Size(60, 60);
             this.btn0.TabIndex = 70;
             this.btn0.Text = "0";
             this.btn0.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -150,10 +146,9 @@ namespace ServiceExpressDsk.GUI
             // btnPunto
             // 
             this.btnPunto.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPunto.Location = new System.Drawing.Point(68, 331);
-            this.btnPunto.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPunto.Location = new System.Drawing.Point(236, 275);
             this.btnPunto.Name = "btnPunto";
-            this.btnPunto.Size = new System.Drawing.Size(85, 75);
+            this.btnPunto.Size = new System.Drawing.Size(60, 60);
             this.btnPunto.TabIndex = 69;
             this.btnPunto.Text = "<";
             this.btnPunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -163,10 +158,9 @@ namespace ServiceExpressDsk.GUI
             // btn1
             // 
             this.btn1.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn1.Location = new System.Drawing.Point(259, 245);
-            this.btn1.Margin = new System.Windows.Forms.Padding(4);
+            this.btn1.Location = new System.Drawing.Point(369, 211);
             this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(85, 75);
+            this.btn1.Size = new System.Drawing.Size(60, 60);
             this.btn1.TabIndex = 68;
             this.btn1.Text = "1";
             this.btn1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -176,10 +170,9 @@ namespace ServiceExpressDsk.GUI
             // btn2
             // 
             this.btn2.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn2.Location = new System.Drawing.Point(163, 245);
-            this.btn2.Margin = new System.Windows.Forms.Padding(4);
+            this.btn2.Location = new System.Drawing.Point(302, 211);
             this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(85, 75);
+            this.btn2.Size = new System.Drawing.Size(60, 60);
             this.btn2.TabIndex = 67;
             this.btn2.Text = "2";
             this.btn2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -189,10 +182,9 @@ namespace ServiceExpressDsk.GUI
             // btn3
             // 
             this.btn3.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3.Location = new System.Drawing.Point(68, 245);
-            this.btn3.Margin = new System.Windows.Forms.Padding(4);
+            this.btn3.Location = new System.Drawing.Point(236, 211);
             this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(85, 75);
+            this.btn3.Size = new System.Drawing.Size(60, 60);
             this.btn3.TabIndex = 66;
             this.btn3.Text = "3";
             this.btn3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -202,10 +194,9 @@ namespace ServiceExpressDsk.GUI
             // btn4
             // 
             this.btn4.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn4.Location = new System.Drawing.Point(259, 161);
-            this.btn4.Margin = new System.Windows.Forms.Padding(4);
+            this.btn4.Location = new System.Drawing.Point(369, 149);
             this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(85, 75);
+            this.btn4.Size = new System.Drawing.Size(60, 60);
             this.btn4.TabIndex = 65;
             this.btn4.Text = "4";
             this.btn4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -215,10 +206,9 @@ namespace ServiceExpressDsk.GUI
             // btn5
             // 
             this.btn5.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn5.Location = new System.Drawing.Point(163, 160);
-            this.btn5.Margin = new System.Windows.Forms.Padding(4);
+            this.btn5.Location = new System.Drawing.Point(302, 148);
             this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(85, 75);
+            this.btn5.Size = new System.Drawing.Size(60, 60);
             this.btn5.TabIndex = 64;
             this.btn5.Text = "5";
             this.btn5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -228,10 +218,9 @@ namespace ServiceExpressDsk.GUI
             // btn6
             // 
             this.btn6.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn6.Location = new System.Drawing.Point(68, 160);
-            this.btn6.Margin = new System.Windows.Forms.Padding(4);
+            this.btn6.Location = new System.Drawing.Point(236, 148);
             this.btn6.Name = "btn6";
-            this.btn6.Size = new System.Drawing.Size(85, 75);
+            this.btn6.Size = new System.Drawing.Size(60, 60);
             this.btn6.TabIndex = 63;
             this.btn6.Text = "6";
             this.btn6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -241,10 +230,9 @@ namespace ServiceExpressDsk.GUI
             // btn7
             // 
             this.btn7.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn7.Location = new System.Drawing.Point(259, 76);
-            this.btn7.Margin = new System.Windows.Forms.Padding(4);
+            this.btn7.Location = new System.Drawing.Point(369, 84);
             this.btn7.Name = "btn7";
-            this.btn7.Size = new System.Drawing.Size(85, 75);
+            this.btn7.Size = new System.Drawing.Size(60, 60);
             this.btn7.TabIndex = 62;
             this.btn7.Text = "7";
             this.btn7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -254,10 +242,9 @@ namespace ServiceExpressDsk.GUI
             // btn8
             // 
             this.btn8.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn8.Location = new System.Drawing.Point(163, 76);
-            this.btn8.Margin = new System.Windows.Forms.Padding(4);
+            this.btn8.Location = new System.Drawing.Point(302, 84);
             this.btn8.Name = "btn8";
-            this.btn8.Size = new System.Drawing.Size(85, 75);
+            this.btn8.Size = new System.Drawing.Size(60, 60);
             this.btn8.TabIndex = 61;
             this.btn8.Text = "8";
             this.btn8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -267,10 +254,9 @@ namespace ServiceExpressDsk.GUI
             // btn9
             // 
             this.btn9.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn9.Location = new System.Drawing.Point(68, 76);
-            this.btn9.Margin = new System.Windows.Forms.Padding(4);
+            this.btn9.Location = new System.Drawing.Point(236, 84);
             this.btn9.Name = "btn9";
-            this.btn9.Size = new System.Drawing.Size(85, 75);
+            this.btn9.Size = new System.Drawing.Size(60, 60);
             this.btn9.TabIndex = 60;
             this.btn9.Text = "9";
             this.btn9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -279,10 +265,10 @@ namespace ServiceExpressDsk.GUI
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(828, 519);
+            this.ClientSize = new System.Drawing.Size(466, 390);
             this.Controls.Add(this.btnC);
             this.Controls.Add(this.btn0);
             this.Controls.Add(this.btnPunto);
@@ -301,7 +287,6 @@ namespace ServiceExpressDsk.GUI
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtClave);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

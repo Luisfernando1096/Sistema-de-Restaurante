@@ -116,6 +116,12 @@
     <Compile Include="GUI\FacturasCargar.Designer.cs">
       <DependentUpon>FacturasCargar.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\MesasOcupadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MesasOcupadas.Designer.cs">
+      <DependentUpon>MesasOcupadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\MeserosSeleccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FacturasCargar.resx">
       <DependentUpon>FacturasCargar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MesasOcupadas.resx">
+      <DependentUpon>MesasOcupadas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MeserosSeleccion.resx">
       <DependentUpon>MeserosSeleccion.cs</DependentUpon>

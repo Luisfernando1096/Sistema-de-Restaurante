@@ -645,6 +645,10 @@ namespace ServiceExpressDsk.GUI
             
         }
 
-        
+        private void tsMesaYMeseros_Click(object sender, EventArgs e)
+        {
+            TPV.GUI.MesasOcupadas f = new TPV.GUI.MesasOcupadas();
+            f.ShowDialog();
+        }
     }
 }
