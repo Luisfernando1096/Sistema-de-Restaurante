@@ -1154,92 +1154,127 @@ namespace TPV.GUI
             punto_venta.Close();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void DisminuirProducto() 
         {
-            //Actualizamos el total en el pedido recien insertado
-            List<String> eliminacion = new List<string>();
+            List<String> eliminacion = new List<string>();  //Actualizamos el total en el pedido recien insertado
+            PedidoDetalle pedidoDetalle = new PedidoDetalle();  //Programando boton de disminuir
 
-            //Programando boton de disminuir
-            PedidoDetalle pedidoDetalle = new PedidoDetalle();
-            if (dgvDatos.Rows.Count > 0)
+            if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                int idDetall = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
+                int idPed = Int32.Parse(lblTicket.Text.ToString());
+                int idPro = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                double precio = double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString());
+                String fecha = dgvDatos.CurrentRow.Cells["fecha"].Value.ToString();
+                pedidoDetalle.IdDetalle = idDetall;
+                pedidoDetalle.IdPedido = idPed;
+                pedidoDetalle.IdProducto = idPro;
+                pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
+                pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
+
+                CompararLista(idPed, idPro, idDetall, precio, fecha);
+
+                if (pedidoDetalle.Cantidad != 0)
                 {
-                    int idDetall = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
-                    int idPed = Int32.Parse(lblTicket.Text.ToString());
-                    int idPro = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
-                    double precio = double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString());
-                    String fecha = dgvDatos.CurrentRow.Cells["fecha"].Value.ToString();
-                    pedidoDetalle.IdDetalle = idDetall;
-                    pedidoDetalle.IdPedido = idPed;
-                    pedidoDetalle.IdProducto = idPro;
-                    pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
-                    pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
+                    //Actualizamos el total en el pedido recien insertado
+                    List<String> actualizarTotal = new List<string>();
+                    actualizarTotal.Add(pedidoDetalle.ActualizarCompra(false));
 
-                    CompararLista(idPed, idPro, idDetall, precio, fecha);
+                    EliminarPedidoOActualizarDetalle(false, actualizarTotal, 0);
+                }
+                else
+                {
+                    //Se eliminara el producto
+                    eliminacion.Add(pedidoDetalle.Eliminar());
 
-                    if (pedidoDetalle.Cantidad != 0)
+                    if (dgvDatos.Rows.Count == 1)
                     {
-                        //Actualizamos el total en el pedido recien insertado
-                        List<String> actualizarTotal = new List<string>();
-                        actualizarTotal.Add(pedidoDetalle.ActualizarCompra(false));
+                        Pedido pedido = new Pedido
+                        {
+                            IdPedido = Int32.Parse(lblTicket.Text)
+                        };
+                        eliminacion.Add(pedido.Eliminar());
+                    }
+                    EliminarPedidoOActualizarDetalle(true, eliminacion, 1);
+                }
 
-                        EliminarPedidoOActualizarDetalle(false, actualizarTotal, 0);
+                if (dgvDatos.Rows.Count == 0)
+                {
+                    lstDetalle.Clear();
+                    DataTable dt = DataManager.DBConsultas.Pedidos(lblMesa.Tag.ToString());
+
+                    // Verificar si hay filas en el DataTable
+                    if (dt.Rows.Count > 0)
+                    {
+                        // Tomar el IDPedido de la primera fila (índice 0)
+                        int idPedidoSeleccionado = Convert.ToInt32(dt.Rows[0]["idPedido"]);
+
+                        // Puedes asignar este IDPedido a donde sea necesario, por ejemplo, a un TextBox
+                        lblTicket.Text = idPedidoSeleccionado.ToString();
                     }
                     else
                     {
-                        //Se eliminara el producto
-                        eliminacion.Add(pedidoDetalle.Eliminar());
-
-                        if (dgvDatos.Rows.Count == 1)
-                        {
-                            Pedido pedido = new Pedido
-                            {
-                                IdPedido = Int32.Parse(lblTicket.Text)
-                            };
-                            eliminacion.Add(pedido.Eliminar());
-                        }
-                        EliminarPedidoOActualizarDetalle(true, eliminacion, 1);
+                        btnCuentas.Visible = false;
                     }
+                }
+                if (lstDetalle.Count > 0)
 
-                    if (dgvDatos.Rows.Count == 0)
+                {
+                    // Actualiza la cantidad solo para el IdPedido e IdProducto actual
+                    foreach (var item in lstDetalle.ToList())
                     {
-                        lstDetalle.Clear();
-                        DataTable dt = DataManager.DBConsultas.Pedidos(lblMesa.Tag.ToString());
-
-                        // Verificar si hay filas en el DataTable
-                        if (dt.Rows.Count > 0)
+                        if (item.IdPedido == idPed && item.IdProducto == idPro && item.Cantidad > 0)
                         {
-                            // Tomar el IDPedido de la primera fila (índice 0)
-                            int idPedidoSeleccionado = Convert.ToInt32(dt.Rows[0]["idPedido"]);
-
-                            // Puedes asignar este IDPedido a donde sea necesario, por ejemplo, a un TextBox
-                            lblTicket.Text = idPedidoSeleccionado.ToString();
-                        }
-                        else
-                        {
-                            btnCuentas.Visible = false;
-                        }
-                    }
-                    if (lstDetalle.Count > 0)
-                    
-                    {
-                        // Actualiza la cantidad solo para el IdPedido e IdProducto actual
-                        foreach (var item in lstDetalle.ToList())
-                        {
-                            if (item.IdPedido == idPed && item.IdProducto == idPro && item.Cantidad > 0)
+                            item.Cantidad--;
+                            if (item.Cantidad == 0)
                             {
-                                item.Cantidad--;
-                                if (item.Cantidad == 0)
-                                {
-                                    lstDetalle.Remove(item);
-                                }
+                                lstDetalle.Remove(item);
                             }
                         }
                     }
+                }
 
-                    DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
-                    ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
+                DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
+                ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
+            }
+        }
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            bool autorizar = bool.Parse(oConfiguracion.AutorizarDescProp);
+
+            if (dgvDatos.Rows.Count > 0)
+            {
+                if (autorizar)
+                {
+                    AutorizarCambio f = new AutorizarCambio();
+                    f.ShowDialog();
+                    int pin = Int32.Parse(f.txtPin.Text);
+                    if (pin != 0)
+                    {
+                        DataTable filas = DataManager.DBConsultas.IniciarSesion(pin.ToString());
+                        if (filas.Rows.Count > 0)
+                        {
+                            //Codigo para mostrar la interfaz y autorizar
+                            if (Int32.Parse(filas.Rows[0]["idRol"].ToString()) == 1)
+                            {
+                                DisminuirProducto();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No tiene permiso para esta accion!");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Pin incorrecto, intentelo nuevamente!");
+                        }
+                    }
+                }
+                else
+                {
+                    DisminuirProducto();
                 }
             }
         }
