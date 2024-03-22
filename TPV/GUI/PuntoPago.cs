@@ -928,21 +928,22 @@ namespace TPV.GUI
 
             if (Double.Parse(txtPagoRegistrar.Text) < Double.Parse(txtTotalPagar.Text))
             {
-                //Enviar mensaje que 
+                /*//Enviar mensaje que 
                 if (MessageBox.Show("¿Desea continuar pagando? Si presiona 'No' se creara una cuenta por cobrar.", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //Proceso para pagar combinado
-                    HacerPago(Int32.Parse(lblTicket.Text), false);
-                    CalcularTodo();
-                    txtPagoRegistrar.Text = "0";
-                    escritoUnPunto = false;
+                    
                 }
                 else
                 {
                     //Se creara una cuenta por cobrar
                     //RegistrarPago();
                     
-                }
+                }*/
+                //Proceso para pagar combinado
+                HacerPago(Int32.Parse(lblTicket.Text), false);
+                CalcularTodo();
+                txtPagoRegistrar.Text = "0";
+                escritoUnPunto = false;
             } 
             else
             {

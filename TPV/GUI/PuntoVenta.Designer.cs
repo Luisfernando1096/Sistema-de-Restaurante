@@ -100,12 +100,12 @@ namespace TPV.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1248, 658);
             this.ControlBox = false;
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.flpMesas);
             this.Controls.Add(this.flpSalones);
-            this.MinimumSize = new System.Drawing.Size(1364, 718);
+            this.MinimumSize = new System.Drawing.Size(1264, 697);
             this.Name = "PuntoVenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuntoVenta";
