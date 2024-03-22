@@ -146,7 +146,7 @@ namespace TPV.GUI
             {
                 double porcentaje = Double.Parse(oConfiguracion.Propina);
                 double total = CalcularTotal();
-                return (total * (porcentaje / 100));
+                return total - (total / (1 + (porcentaje / 100)));
             }
             return 0;
         }
@@ -157,7 +157,7 @@ namespace TPV.GUI
             if (!txtPorcentaje.Text.Equals(""))
             {
                 //Calculamos el descuento
-                return (total * (double.Parse(txtPorcentaje.Text.ToString()) / 100));
+                return (total - (total / (1 + (Double.Parse(txtPorcentaje.Text.ToString()) / 100))));
             }
             return 0;
         }
@@ -485,7 +485,7 @@ namespace TPV.GUI
         {
             double resultado;
 
-            resultado = CalcularTotal() * 0.13;
+            resultado = CalcularTotal() - (CalcularTotal() / 1.13);
 
             return resultado;
         }
@@ -496,7 +496,7 @@ namespace TPV.GUI
             bool incluirIva = bool.Parse(oConfiguracion.IncluirImpuesto);
             if (incluirIva)
             {
-                iva = Double.Parse(lblSaldo.Tag.ToString()) * (Double.Parse(oConfiguracion.Iva) / 100);
+                iva = CalcularTotal() - (CalcularTotal() / (1 + (Double.Parse(oConfiguracion.Iva) / 100)));
 
             }
             else
