@@ -62,7 +62,9 @@
             this.lblNIT = new System.Windows.Forms.Label();
             this.txtNIT = new System.Windows.Forms.TextBox();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.idEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -345,6 +347,7 @@
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idEmpleado,
+            this.activo,
             this.nombres,
             this.apellidos,
             this.telefono,
@@ -373,6 +376,16 @@
             this.dgvDatos.Size = new System.Drawing.Size(918, 222);
             this.dgvDatos.TabIndex = 30;
             // 
+            // chkActivo
+            // 
+            this.chkActivo.AutoSize = true;
+            this.chkActivo.Location = new System.Drawing.Point(695, 189);
+            this.chkActivo.Name = "chkActivo";
+            this.chkActivo.Size = new System.Drawing.Size(56, 17);
+            this.chkActivo.TabIndex = 31;
+            this.chkActivo.Text = "Activo";
+            this.chkActivo.UseVisualStyleBackColor = true;
+            // 
             // idEmpleado
             // 
             this.idEmpleado.DataPropertyName = "idEmpleado";
@@ -380,6 +393,13 @@
             this.idEmpleado.Name = "idEmpleado";
             this.idEmpleado.ReadOnly = true;
             this.idEmpleado.Width = 25;
+            // 
+            // activo
+            // 
+            this.activo.DataPropertyName = "activo";
+            this.activo.HeaderText = "Activo";
+            this.activo.Name = "activo";
+            this.activo.ReadOnly = true;
             // 
             // nombres
             // 
@@ -418,6 +438,7 @@
             this.DUI.HeaderText = "DUI";
             this.DUI.Name = "DUI";
             this.DUI.ReadOnly = true;
+            this.DUI.Visible = false;
             this.DUI.Width = 70;
             // 
             // NIT
@@ -426,6 +447,7 @@
             this.NIT.HeaderText = "NIT";
             this.NIT.Name = "NIT";
             this.NIT.ReadOnly = true;
+            this.NIT.Visible = false;
             this.NIT.Width = 70;
             // 
             // sueldoBase
@@ -457,6 +479,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 450);
+            this.Controls.Add(this.chkActivo);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.txtNIT);
             this.Controls.Add(this.lblNIT);
@@ -524,7 +547,9 @@
         private System.Windows.Forms.Label lblNIT;
         private System.Windows.Forms.TextBox txtNIT;
         private System.Windows.Forms.DataGridView dgvDatos;
+        private System.Windows.Forms.CheckBox chkActivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEmpleado;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn activo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellidos;
         private System.Windows.Forms.DataGridViewTextBoxColumn telefono;

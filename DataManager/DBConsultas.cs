@@ -12,8 +12,8 @@ namespace DataManager
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT r.idRol, r.rol, u.idUsuario, e.idEmpleado, e.nombres
                                     FROM rol r, usuario u, empleado e
-                                    WHERE u.idRol=r.idRol AND u.pinCode=MD5('" + pClave + "') AND u.idUsuario=e.idEmpleado;";
-                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+                                    WHERE u.idRol=r.idRol AND e.activo = 1 AND u.pinCode=MD5('" + pClave + "') AND u.idUsuario=e.idEmpleado;";
+                DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
                 return resultado;
@@ -1048,7 +1048,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT idEmpleado,nombres,apellidos,telefono,email,DUI,NIT,sueldoBase,comision,direccion FROM empleado;";
+                String sentencia = @"SELECT idEmpleado,nombres,apellidos,telefono,email,DUI,NIT,sueldoBase,comision,direccion,activo FROM empleado;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

@@ -15,6 +15,7 @@ namespace Mantenimiento.CLS
         double sueldoBase;
         double comision;
         String regContable;
+        Boolean activo;
 
         public int IdEmpleado { get => idEmpleado; set => idEmpleado = value; }
         public string Nombres { get => nombres; set => nombres = value; }
@@ -27,12 +28,13 @@ namespace Mantenimiento.CLS
         public double SueldoBase { get => sueldoBase; set => sueldoBase = value; }
         public double Comision { get => comision; set => comision = value; }
         public string RegContable { get => regContable; set => regContable = value; }
+        public bool Activo { get => activo; set => activo = value; }
 
         public Boolean Insertar()
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"insert into empleado(nombres,apellidos,direccion,email,telefono,DUI,NIT,sueldoBase,comision,regContable) values('" + nombres + "','" + apellidos + "','" + direccion + "','" + email + "','" + telefono + "','" + dui + "','" + nit + "'," + sueldoBase + "," + comision + ",'" + regContable + "');";
+            sentencia = @"insert into empleado(nombres,apellidos,direccion,email,telefono,DUI,NIT,sueldoBase,comision,regContable,activo) values('" + nombres + "','" + apellidos + "','" + direccion + "','" + email + "','" + telefono + "','" + dui + "','" + nit + "','" + sueldoBase + "','" + comision + "','" + regContable + "', " + activo + ");";
 
             try
             {
@@ -57,7 +59,7 @@ namespace Mantenimiento.CLS
         {
             Boolean resultado = false;
             string sentencia;
-            sentencia = @"update empleado set nombres = '" + nombres + "', apellidos = '" + apellidos + "', direccion = '" + direccion + "', email = '" + email + "', telefono = '" + telefono + "', DUI = '" + dui + "', NIT = '" + nit + "', SueldoBase = " + sueldoBase + ", Comision = " + comision + " Where idEmpleado = " + idEmpleado + ";";
+            sentencia = @"update empleado set nombres = '" + nombres + "', apellidos = '" + apellidos + "', direccion = '" + direccion + "', email = '" + email + "', telefono = '" + telefono + "', DUI = '" + dui + "', NIT = '" + nit + "', SueldoBase = '" + sueldoBase + "', Comision = '" + comision + "', regContable = '" + regContable + "', activo = " + activo + " Where idEmpleado = " + idEmpleado + ";";
 
             try
             {

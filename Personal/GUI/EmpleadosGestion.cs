@@ -57,6 +57,9 @@ namespace Personal.GUI
                 Epl.Comision = Convert.ToDouble(txtComision.Text);
                 Epl.Direccion = txtDireccion.Text.ToString();
                 Epl.Nit = txtNIT.Text.ToString();
+                Epl.Activo = chkActivo.Checked;
+                String regg = "12323455";
+                Epl.RegContable = regg;
                 if (Epl.Actualizar())
                 {
                     MessageBox.Show("Actualizacion Exitosa");
@@ -92,6 +95,7 @@ namespace Personal.GUI
                 Epl.Comision = Convert.ToDouble(txtComision.Text);
                 String regg = "12323455";
                 Epl.RegContable = regg;
+                Epl.Activo = chkActivo.Checked;
 
                 if (Epl.Insertar())
                 {
@@ -167,6 +171,8 @@ namespace Personal.GUI
             txtComision.Text = dgvDatos.CurrentRow.Cells["comision"].Value.ToString();
             txtDireccion.Text = dgvDatos.CurrentRow.Cells["comision"].Value.ToString();
             txtNIT.Text = dgvDatos.CurrentRow.Cells["NIT"].Value.ToString();
+            chkActivo.Checked = Boolean.Parse(dgvDatos.CurrentRow.Cells["activo"].Value.ToString());
+
         }
     }
 }
