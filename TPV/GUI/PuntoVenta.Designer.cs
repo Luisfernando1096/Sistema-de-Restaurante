@@ -43,9 +43,9 @@ namespace TPV.GUI
             // 
             this.flpSalones.AutoScroll = true;
             this.flpSalones.Controls.Add(this.btnSalon);
-            this.flpSalones.Location = new System.Drawing.Point(12, 74);
+            this.flpSalones.Location = new System.Drawing.Point(12, 72);
             this.flpSalones.Name = "flpSalones";
-            this.flpSalones.Size = new System.Drawing.Size(1357, 160);
+            this.flpSalones.Size = new System.Drawing.Size(1224, 160);
             this.flpSalones.TabIndex = 0;
             // 
             // btnSalon
@@ -61,9 +61,9 @@ namespace TPV.GUI
             // 
             this.flpMesas.AutoScroll = true;
             this.flpMesas.Controls.Add(this.btnMesa);
-            this.flpMesas.Location = new System.Drawing.Point(12, 284);
+            this.flpMesas.Location = new System.Drawing.Point(12, 281);
             this.flpMesas.Name = "flpMesas";
-            this.flpMesas.Size = new System.Drawing.Size(1357, 261);
+            this.flpMesas.Size = new System.Drawing.Size(1224, 261);
             this.flpMesas.TabIndex = 1;
             // 
             // btnMesa
@@ -100,7 +100,7 @@ namespace TPV.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1248, 658);
+            this.ClientSize = new System.Drawing.Size(1248, 681);
             this.ControlBox = false;
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.flpMesas);
