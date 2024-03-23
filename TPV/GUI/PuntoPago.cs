@@ -146,7 +146,7 @@ namespace TPV.GUI
             {
                 double porcentaje = Double.Parse(oConfiguracion.Propina);
                 double total = CalcularTotal();
-                return total - (total / (1 + (porcentaje / 100)));
+                return (total * (1 + (porcentaje / 100))) - total;
             }
             return 0;
         }
