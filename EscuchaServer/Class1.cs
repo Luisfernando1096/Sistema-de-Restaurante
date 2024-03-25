@@ -46,30 +46,26 @@ public class Server
                 string puerto = xmlDoc.SelectSingleNode("/Configuracion/Puerto").InnerText;
                 if (ipv4Address.ToString().Equals(ipLocal))
                 {
-                    try
-                    {
-                        tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
-                        tcpListener.Start();
-                        isServerRunning = true;
-                        listenerThread = Task.Run(() => ListenForClientsAsync());
-                        Console.WriteLine("Servidor iniciado. Esperando conexiones...");
-
-                    }
-                    catch (SocketException ex)
-                    {
-                        MessageBox.Show("El servidor no se pudo iniciar. El puerto está ocupado.", "Error de puerto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    isServerRunning = true;
+                    tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
+                    listenerThread = new Thread(new ThreadStart(ListenForClients));
+                    listenerThread.Start();
+                    Console.WriteLine("Servidor iniciado. Esperando conexiones...");
                 }
                 else
                 {
-                    MessageBox.Show("El servidor no se pudo iniciar. Verifique la dirección IP.", "IP incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El servidor no se pudo iniciar verifique la direccion Ip.", "Ip incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
             }
             else
             {
-                MessageBox.Show("El servidor no se pudo iniciar. Verifique establecer puerto e IP.", "IP o puerto no configurado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El servidor no se pudo iniciar verifique establecer puerto e Ip.", "Ip null", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
+
+
     }
 
     public void StopServer()
