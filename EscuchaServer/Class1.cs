@@ -11,14 +11,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
 public class Server
 {
     private TcpListener tcpListener;
-    private Task listenerThread;
+    private Thread listenerThread;
     private bool isServerRunning;
     ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
     ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
@@ -47,45 +46,41 @@ public class Server
                 string puerto = xmlDoc.SelectSingleNode("/Configuracion/Puerto").InnerText;
                 if (ipv4Address.ToString().Equals(ipLocal))
                 {
-                    try
-                    {
-                        tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
-                        tcpListener.Start();
-                        isServerRunning = true;
-                        listenerThread = Task.Run(() => ListenForClientsAsync());
-                        Console.WriteLine("Servidor iniciado. Esperando conexiones...");
-
-                    }
-                    catch (SocketException ex)
-                    {
-                        MessageBox.Show("El servidor no se pudo iniciar. El puerto está ocupado.", "Error de puerto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    isServerRunning = true;
+                    tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
+                    listenerThread = new Thread(new ThreadStart(ListenForClients));
+                    listenerThread.Start();
+                    Console.WriteLine("Servidor iniciado. Esperando conexiones...");
                 }
                 else
                 {
-                    MessageBox.Show("El servidor no se pudo iniciar. Verifique la dirección IP.", "IP incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El servidor no se pudo iniciar verifique la direccion Ip.", "Ip incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
             }
             else
             {
-                MessageBox.Show("El servidor no se pudo iniciar. Verifique establecer puerto e IP.", "IP o puerto no configurado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El servidor no se pudo iniciar verifique establecer puerto e Ip.", "Ip null", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
+
+
     }
 
-    public async Task StopServer()
+    public void StopServer()
     {
         if (isServerRunning)
         {
             isServerRunning = false;
             tcpListener.Stop();
-            await listenerThread; // Esperar a que la tarea del escuchador termine
+            listenerThread.Join(); // Esperar a que el hilo del escuchador termine
             Console.WriteLine("Servidor detenido.");
         }
+
     }
 
-
-    private async Task ListenForClientsAsync()
+    private void ListenForClients()
     {
         tcpListener.Start();
 
@@ -93,24 +88,15 @@ public class Server
         {
             try
             {
-                TcpClient client = await tcpListener.AcceptTcpClientAsync();
+                TcpClient client = tcpListener.AcceptTcpClient();
 
-                // Procesa la solicitud del cliente en el ThreadPool
-                await Task.Run(() => HandleClient(client));
-            }
-            catch (ObjectDisposedException)
-            {
-                // Se lanza cuando el TcpListener se ha cerrado
-                break;
-            }
-            catch (SocketException ex) when (ex.SocketErrorCode == SocketError.Interrupted)
-            {
-                // Se lanza cuando se ha interrumpido la operación de aceptación de clientes
-                break;
+                // Procesa la solicitud del cliente en un hilo separado
+                var clientThread = new Thread(() => HandleClient(client));
+                clientThread.Start();
             }
             catch (SocketException ex)
             {
-                // Manejar otras excepciones de Socket
+                // Manejar la excepción de Socket
                 if (isServerRunning)
                 {
                     Console.WriteLine($"Error de Socket: {ex.Message}");
@@ -123,7 +109,6 @@ public class Server
     {
         try
         {
-            using (client)
             using (StreamReader reader = new StreamReader(client.GetStream()))
             {
                 // Leer todas las líneas del encabezado HTTP
@@ -137,97 +122,108 @@ public class Server
                 // Extraer el cuerpo del mensaje (JSON)
                 string contenido = reader.ReadToEnd();
 
-                // Procesar la solicitud
-                ProcessRequest(headerBuilder.ToString(), contenido);
+                // Comprobar si la solicitud es POST
+                if (headerBuilder.ToString().StartsWith("POST"))
+                {
+                    // Extraer la ruta de la solicitud
+                    string[] tokens = headerBuilder.ToString().Split(' ');
+                    string ruta = tokens[1];
+
+                    // Comprobar si la solicitud está en la ruta de notificación esperada
+                    if (ruta.StartsWith("/notificar"))
+                    {
+                        // Procesar la solicitud solo si está en la ruta '/notificar'
+                        Console.WriteLine($"Solicitud POST en la ruta '/notificar'.");
+
+                        // Imprimir el contenido para ayudar a diagnosticar el problema
+                        Console.WriteLine($"Contenido recibido: {contenido}");
+
+                        try
+                        {
+                            // Intentar deserializar la solicitud como una lista de objetos
+                            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
+
+                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
+                            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
+
+                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            ImprimirComandaActual(listaObjetos);
+
+                        }
+                        catch (JsonException ex)
+                        {
+                            // Imprimir detalles completos de la excepción
+                            Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
+                        }
+                    }
+                    else if (ruta.StartsWith("/comandaCompleta"))
+                    {
+                        //MessageBox.Show("Generando comanda completa");
+                        // Procesar la solicitud solo si está en la ruta '/comanda'
+                        Console.WriteLine($"Solicitud POST en la ruta '/comandaCompleta'.");
+                        // Imprimir el contenido para ayudar a diagnosticar el problema
+                        Console.WriteLine($"Contenido recibido: {contenido}");
+
+                        try
+                        {
+                            // Intentar deserializar la solicitud como una lista de objetos
+                            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
+
+                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
+                            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
+
+                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            ImprimirComandaCompleta(listaObjetos);
+
+                        }
+                        catch (JsonException ex)
+                        {
+                            // Imprimir detalles completos de la excepción
+                            Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
+                        }
+                    }
+                    else if (ruta.StartsWith("/datosPrecuenta"))
+                    {
+                        //MessageBox.Show("Generando comanda completa");
+                        // Procesar la solicitud solo si está en la ruta '/comanda'
+                        Console.WriteLine($"Solicitud POST en la ruta '/datosPrecuenta'.");
+                        // Imprimir el contenido para ayudar a diagnosticar el problema
+                        Console.WriteLine($"Contenido recibido: {contenido}");
+
+                        try
+                        {
+                            // Intentar deserializar la solicitud como una lista de objetos
+                            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
+
+                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
+                            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
+
+                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            ImprimirPrecuenta(listaObjetos);
+
+                        }
+                        catch (JsonException ex)
+                        {
+                            // Imprimir detalles completos de la excepción
+                            Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
+                        }
+                    }
+                    {
+                        Console.WriteLine("Solicitud no reconocida.");
+                    }
+                }
             }
         }
         catch (Exception ex)
         {
-            // Manejar excepciones
-            Console.WriteLine($"Error al manejar la solicitud: {ex.Message}");
+            // Manejar otras excepciones
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        finally
+        {
+            client.Close();
         }
     }
-
-    private void ProcessRequest(string header, string body)
-    {
-        // Identificar la ruta de la solicitud
-        string ruta = GetRequestPath(header);
-
-        // Procesar la solicitud según la ruta
-        switch (ruta)
-        {
-            case "/notificar":
-                HandleNotification(body);
-                break;
-            case "/comandaCompleta":
-                HandleCompleteOrder(body);
-                break;
-            case "/datosPrecuenta":
-                HandlePrebillData(body);
-                break;
-            default:
-                Console.WriteLine("Ruta de solicitud no reconocida.");
-                break;
-        }
-    }
-
-    private string GetRequestPath(string header)
-    {
-        string[] tokens = header.Split(' ');
-        return tokens.Length > 1 ? tokens[1] : "";
-    }
-
-    private void HandleNotification(string body)
-    {
-        try
-        {
-            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(body);
-            Console.WriteLine($"Solicitud POST en la ruta '/notificar'.");
-            Console.WriteLine($"Contenido recibido: {body}");
-            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
-            // Procesar la notificación según sea necesario
-            ImprimirComandaActual(listaObjetos);
-        }
-        catch (JsonException ex)
-        {
-            Console.WriteLine($"Error al deserializar la lista de objetos: {ex.Message}");
-        }
-    }
-
-    private void HandleCompleteOrder(string body)
-    {
-        try
-        {
-            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(body);
-            Console.WriteLine($"Solicitud POST en la ruta '/comandaCompleta'.");
-            Console.WriteLine($"Contenido recibido: {body}");
-            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
-            // Procesar la orden completa según sea necesario
-            ImprimirComandaCompleta(listaObjetos);
-        }
-        catch (JsonException ex)
-        {
-            Console.WriteLine($"Error al deserializar la lista de objetos: {ex.Message}");
-        }
-    }
-
-    private void HandlePrebillData(string body)
-    {
-        try
-        {
-            List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(body);
-            Console.WriteLine($"Solicitud POST en la ruta '/datosPrecuenta'.");
-            Console.WriteLine($"Contenido recibido: {body}");
-            Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
-            // Procesar los datos de precuenta según sea necesario
-            ImprimirPrecuenta(listaObjetos);
-        }
-        catch (JsonException ex)
-        {
-            Console.WriteLine($"Error al deserializar la lista de objetos: {ex.Message}");
-        }
-    }
-
 
     private void ImprimirPrecuenta(List<PedidoDetalle> listaObjetos)
     {
