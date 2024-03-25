@@ -1617,7 +1617,7 @@ namespace TPV.GUI
             List<DataTable> lstFacturas = new List<DataTable>();
 
             int totalFilas = datos.Rows.Count;
-            int filasPorCopia = 20;
+            int filasPorCopia = 28;
 
             for (int i = 0; i < totalFilas; i += filasPorCopia)
             {
