@@ -383,6 +383,12 @@ public class Server
                                 { "BAR", oConfiguracion.ImpresoraBar },
                                 { "GRUPO1", oConfiguracion.ImpresoraGrupoUno },
                                 { "GRUPO2", oConfiguracion.ImpresoraGrupoDos },
+                                { "JUGOS", oConfiguracion.ImpresoraGrupoDos },
+                                { "COCTELES", oConfiguracion.ImpresoraGrupoDos },
+                                { "BARRA", oConfiguracion.ImpresoraBar },
+                                { "HELADOS", oConfiguracion.ImpresoraGrupoDos },
+                                { "COMIDA", oConfiguracion.ImpresoraGrupoDos },
+                                { "ATRAS", oConfiguracion.ImpresoraGrupoDos },
                             };
 
                     if (impresorasPorGrupo.TryGetValue(kvp.Key, out string nombreImpresora))
