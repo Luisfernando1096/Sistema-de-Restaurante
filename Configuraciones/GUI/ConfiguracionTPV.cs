@@ -506,35 +506,35 @@ namespace Configuraciones.GUI
 
                 if (cmbComandasTickets.Text != string.Empty)
                 {
-                    config.PrinterComanda = cmbComandasTickets.Text.Replace("\\\\", "\\\\\\\\");
+                    config.PrinterComanda = cmbComandasTickets.Text.Replace("\\", "\\\\");
                 }
                 if (cmbInformes.Text != string.Empty)
                 {
-                    config.PrinterInformes = cmbInformes.Text.Replace("\\\\", "\\\\\\\\");
+                    config.PrinterInformes = cmbInformes.Text.Replace("\\", "\\\\");
                 }
                 if (cmbFacturas.Text != string.Empty)
                 {
-                    config.PrinterFactura = cmbFacturas.Text.Replace("\\\\", "\\\\\\\\");
+                    config.PrinterFactura = cmbFacturas.Text.Replace("\\", "\\\\");
                 }
                 if (cmbAppMovil.Text != string.Empty)
                 {
-                    config.ImpresoraAppMovil = cmbAppMovil.Text.Replace("\\\\", "\\\\\\\\");
+                    config.ImpresoraAppMovil = cmbAppMovil.Text.Replace("\\", "\\\\");
                 }
                 if (cmbCocina.Text != string.Empty)
                 {
-                    config.ImpresoraCocina = cmbCocina.Text.Replace("\\\\", "\\\\\\\\");
+                    config.ImpresoraCocina = cmbCocina.Text.Replace("\\", "\\\\");
                 }
                 if (cmbBar.Text != string.Empty)
                 {
-                    config.ImpresoraBar = cmbBar.Text.Replace("\\\\", "\\\\\\\\");
+                    config.ImpresoraBar = cmbBar.Text.Replace("\\", "\\\\");
                 }
                 if (cmbUno.Text != string.Empty)
                 {
-                    config.ImpresoraGrupoUno = cmbUno.Text.Replace("\\\\", "\\\\\\\\");
+                    config.ImpresoraGrupoUno = cmbUno.Text.Replace("\\", "\\\\");
                 }
                 if (cmbDos.Text != string.Empty)
                 {
-                    config.ImpresoraGrupoDos = cmbDos.Text.Replace("\\\\", "\\\\\\\\");
+                    config.ImpresoraGrupoDos = cmbDos.Text.Replace("\\", "\\\\");
                 }
                 if (config.Actualizar())
                 {
