@@ -35,6 +35,7 @@ namespace TPV.GUI
             f.lblMesa.Tag = botonMesa.Tag.ToString();
             this.Hide();
             f.ShowDialog();
+            punto_venta.cerrarSesion = f.cerrarSesion;
             cambiarMesa = f.cambiarMesa;
             idPedidoCambio = f.lblTicket.Text;
             idMesaAnterior = f.lblMesa.Tag.ToString();
@@ -148,6 +149,7 @@ namespace TPV.GUI
                         f.lblTicket.Text = primerPedidoID.ToString();
                         f.CargarPedidos(botonMesa.Tag.ToString());
                         f.ShowDialog();
+                        punto_venta.cerrarSesion = f.cerrarSesion;
                         cambiarMesa = f.cambiarMesa;
                         idPedidoCambio = f.lblTicket.Text;
                         idMesaAnterior = f.lblMesa.Tag.ToString();

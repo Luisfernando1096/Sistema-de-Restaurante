@@ -81,7 +81,11 @@ namespace Personal.GUI
 
         private void btnEnrolar_Click(object sender, EventArgs e)
         {
-            HacerVisiblesCampos();
+            if (dgtUsuarioSin.Rows.Count > 0)
+            {
+                HacerVisiblesCampos();
+            }
+            
         }
 
         private void HacerVisiblesCampos()
@@ -155,12 +159,16 @@ namespace Personal.GUI
 
         private void btnDesEnrolar_Click(object sender, EventArgs e)
         {
-            Mantenimiento.CLS.Usuario usuario = new Mantenimiento.CLS.Usuario();
-            usuario.IdUsuario = Int32.Parse(dgtUsuariosRol.CurrentRow.Cells["idEmpleadoRol"].Value.ToString());
-            usuario.Eliminar();
-            OcultarCampos();
-            CargarUsuarionSin();
-            CargarUsuarioRol();
+            if (dgtUsuariosRol.Rows.Count > 0)
+            {
+                Mantenimiento.CLS.Usuario usuario = new Mantenimiento.CLS.Usuario();
+                usuario.IdUsuario = Int32.Parse(dgtUsuariosRol.CurrentRow.Cells["idEmpleadoRol"].Value.ToString());
+                usuario.Eliminar();
+                OcultarCampos();
+                CargarUsuarionSin();
+                CargarUsuarioRol();
+            }
+            
         }
     }
 }

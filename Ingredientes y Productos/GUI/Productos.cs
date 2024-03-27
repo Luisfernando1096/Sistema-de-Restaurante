@@ -334,7 +334,7 @@ namespace Ingredientes_y_Productos.GUI
         {
             try
             {
-                if (txtNombre.Text != "" & cmbFamilia.SelectedIndex != 0 && cmbUnidad.SelectedIndex != 0)
+                if (txtNombre.Text != "" & cmbFamilia.SelectedIndex != 0 && cmbUnidad.SelectedIndex != 0 && txtPrecio.Text != "")
                 {
                     Mantenimiento.CLS.Producto mantenimiento = new Mantenimiento.CLS.Producto();
                     mantenimiento.Foto = SeleccionarImg;
@@ -343,9 +343,32 @@ namespace Ingredientes_y_Productos.GUI
                     mantenimiento.IdUnidad = int.Parse(cmbUnidad.SelectedValue.ToString());
                     mantenimiento.Descripcion = txtDescripcion.Text;
                     mantenimiento.Precio = double.Parse(txtPrecio.Text);
-                    mantenimiento.Costo = double.Parse(txtCosto.Text);
-                    mantenimiento.Stock = int.Parse(txtStock.Text);
-                    mantenimiento.StockMinimo = int.Parse(txtStockMinimo.Text);
+                    if (!txtCosto.Text.Equals(""))
+                    {
+                        mantenimiento.Costo = double.Parse(txtCosto.Text);
+                    }
+                    else
+                    {
+                        mantenimiento.Costo = 0;
+                    }
+
+                    if (!txtStock.Text.Equals(""))
+                    {
+                        mantenimiento.Stock = int.Parse(txtStock.Text);
+                    }
+                    else
+                    {
+                        mantenimiento.Stock = 0;
+                    }
+
+                    if (!txtStockMinimo.Text.Equals(""))
+                    {
+                        mantenimiento.StockMinimo = int.Parse(txtStockMinimo.Text);
+                    }
+                    else
+                    {
+                        mantenimiento.StockMinimo = 0;
+                    }
 
                     mantenimiento.ConIngrediente = chBoxConIngrediente.Checked ? 1 : 0;
                     mantenimiento.Inventariable = chBoxInventariable.Checked ? 1 : 0;

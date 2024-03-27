@@ -29,7 +29,7 @@ namespace TPV.GUI
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
         int idPedidoSiguiente = 0;
-        String idMesa = "0";
+        public String idMesa = "0";
         public bool cerrarSesion;
         public bool tpv;
         public bool borrarData;

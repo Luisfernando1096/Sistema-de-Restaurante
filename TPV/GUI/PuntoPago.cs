@@ -158,7 +158,7 @@ namespace TPV.GUI
             if (!txtPorcentaje.Text.Equals(""))
             {
                 //Calculamos el descuento
-                return (total - (total / (1 + (Double.Parse(txtPorcentaje.Text.ToString()) / 100))));
+                return ((total * (1 + (Double.Parse(txtPorcentaje.Text.ToString()) / 100))) - total);
             }
             return 0;
         }
@@ -177,6 +177,7 @@ namespace TPV.GUI
                     comandaGestion.lblTicket.Text = lblTicket.Text;
                     comandaGestion.lblMesa.Text = lblMesa.Text;
                     comandaGestion.lblMesa.Tag = lblMesa.Tag.ToString();
+                    comandaGestion.idMesa = lblMesa.Tag.ToString();
                     comandaGestion.ActualizarLabelsRetroceder(Int32.Parse(lblTicket.Text), false);
                 }
 
