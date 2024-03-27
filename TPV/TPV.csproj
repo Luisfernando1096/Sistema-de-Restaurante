@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLS\PrinterClass.cs" />
     <Compile Include="GUI\AgregarCuentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,7 +179,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CLS\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

@@ -701,7 +701,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM familia WHERE activo = 1;";
+                String sentencia = @"SELECT f.idFamilia, f.activo, f.familia, f.grupoPrinter FROM familia f WHERE activo = 1 ORDER BY f.familia;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -719,7 +719,7 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT * FROM salon;";
+                String sentencia = @"SELECT idSalon, nombre, fondo, nMesas FROM salon ORDER BY nombre;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -740,7 +740,7 @@ namespace DataManager
                 String sentencia = @"SELECT p.idProducto, p.nombre, p.descripcion, p.precio, p.costo, p.inventariable, 
                                     p.conIngrediente, p.stock, p.stockMinimo, p.activo, s.idFamilia, s.familia, s.grupoPrinter, p.foto 
                                     FROM producto p, familia s
-                                    WHERE p.idFamilia=s.idFamilia AND p.idFamilia=" + idfamilia + " AND p.activo=1;";
+                                    WHERE p.idFamilia=s.idFamilia AND p.idFamilia=" + idfamilia + " AND p.activo=1 ORDER BY p.nombre;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);

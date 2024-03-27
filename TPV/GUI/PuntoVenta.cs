@@ -98,6 +98,9 @@ namespace TPV.GUI
                 flpSalones.ScrollControlIntoView(btnSalon);
 
             }
+
+            // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
+            flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
         }
 
         private void BotonSalon_Click(object sender, EventArgs e)
@@ -136,6 +139,8 @@ namespace TPV.GUI
                 flpMesas.Controls.Add(btnMesa);
                 flpMesas.ScrollControlIntoView(btnMesa);
             }
+            // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
+            flpMesas.VerticalScroll.Value = flpMesas.VerticalScroll.Minimum;
         }
 
         private void BotonMesa_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using Humanizer;
 using System.Collections.Generic;
 using FacturacionElectronica.CLS;
 using Mantenimiento.CLS;
+using TPV.CLS;
 
 namespace TPV.GUI
 {
@@ -639,6 +640,17 @@ namespace TPV.GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //Establecer una impresora predeterminada
+            try
+            {
+                PrinterClass.SetDefaultPrinter(oConfiguracion.PrinterFactura);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo predeterminar la impresora.");
+                throw;
+            }
+            
             //Obtener la ultima factura y crear una nueva
             if (actualFactura.Rows.Count > 0)
             {
