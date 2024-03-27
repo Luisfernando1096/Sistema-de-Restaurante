@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -44,82 +45,6 @@ namespace Finanzas.GUI
                 throw;
             }
         }
-        
-        //private void FiltrarDatosDgv() 
-        //{
-        //    try
-        //    {
-        //        string dateStringDesde = txtDesde.Text;
-        //        string dateStringHasta = txtHasta.Text;
-        //        dgvDatosCaja.CurrentCell = null;
-        //        if (rbNinguno.Checked == true)
-        //        {
-        //            if (txtDesde.Text == string.Empty && txtHasta.Text == string.Empty)
-        //            {
-        //                CargarDatos();
-        //            }
-        //            else if (txtDesde.Text != string.Empty && txtHasta.Text == string.Empty)
-        //            {
-        //                DateTime datoString;
-
-        //                if (DateTime.TryParse(txtDesde.Text, out datoString))
-        //                {
-        //                    foreach (DataGridViewRow item in dgvDatos.Rows)
-        //                    {
-        //                        item.Visible = false;
-
-        //                        DateTime datoCells = Convert.ToDateTime(item.Cells["fecha"].Value.ToString());
-
-        //                        if (datoString <= datoCells)
-        //                        {
-        //                            item.Visible = true;
-        //                        }
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    // La conversión falló, txtDesde.Text no es una fecha válida.
-        //                    MessageBox.Show("Error en el formato de fecha");
-        //                }
-        //            }
-        //            else if (txtDesde.Text == string.Empty && txtHasta.Text != string.Empty)
-        //            {
-        //                DateTime datoString;
-
-        //                if (DateTime.TryParse(txtHasta.Text, out datoString))
-        //                {
-        //                    foreach (DataGridViewRow item in dgvDatos.Rows)
-        //                    {
-        //                        item.Visible = false;
-
-        //                        DateTime datoCells = Convert.ToDateTime(item.Cells["fecha"].Value.ToString());
-
-        //                        if (datoString >= datoCells)
-        //                        {
-        //                            item.Visible = true;
-        //                        }
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    // La conversión falló, txtHasta.Text no es una fecha válida.
-        //                    MessageBox.Show("Error en el formato de fecha");
-        //                }
-        //            }
-
-        //        }
-        //        else if (true)
-        //        {
-
-        //        }
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
 
         private void FiltrarDatos()
         {
@@ -440,5 +365,44 @@ namespace Finanzas.GUI
             Limpiar();
             FiltrarDatos();
         }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            ImprimirEgresos(datos1);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            ImprimirEgresos(datos);
+        }
+
+        private void ImprimirEgresos(BindingSource dt)
+        {
+            // Supongamos que tienes un BindingSource llamado myBindingSource
+            DataTable dataTable = null;
+
+            // Verifica si la DataSource del BindingSource es un DataTable
+            if (dt.DataSource is DataTable)
+            {
+                // Si lo es, castea la DataSource a un DataTable
+                dataTable = (DataTable)dt.DataSource;
+            }
+            else if (dt.DataSource is DataView)
+            {
+                // Si la DataSource es un DataView, obtén la tabla subyacente
+                DataView dataView = (DataView)dt.DataSource;
+                dataTable = dataView.Table;
+            }
+
+            // Ahora tienes tu DataTable de nuevo
+
+
+            //Programar reporte de compras
+            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
+            Reportes.REP.RepEgresos rep = new Reportes.REP.RepEgresos();
+            f.GenerarReporte(rep, dataTable, "", "", "");
+            f.Show();
+        }
+
     }
 }

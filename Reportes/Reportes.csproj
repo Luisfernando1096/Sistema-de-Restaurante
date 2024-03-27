@@ -80,6 +80,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAT\DatEgresos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatEgresos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DAT\DatIngredientes.cs">
       <DependentUpon>DatIngredientes.xsd</DependentUpon>
     </Compile>
@@ -207,6 +212,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RepComprasProveedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="REP\RepEgresos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepEgresos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="REP\RepFactura.cs">
@@ -440,6 +451,17 @@
     <None Include="DAT\DatComprasProveedorComprobante.xss">
       <DependentUpon>DatComprasProveedorComprobante.xsd</DependentUpon>
     </None>
+    <None Include="DAT\DatEgresos.xsc">
+      <DependentUpon>DatEgresos.xsd</DependentUpon>
+    </None>
+    <None Include="DAT\DatEgresos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatEgresos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAT\DatEgresos.xss">
+      <DependentUpon>DatEgresos.xsd</DependentUpon>
+    </None>
     <None Include="DAT\DatIngredientes.xsc">
       <DependentUpon>DatIngredientes.xsd</DependentUpon>
     </None>
@@ -577,6 +599,10 @@
     <EmbeddedResource Include="REP\RepComprasProveedor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComprasProveedor.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REP\RepEgresos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepEgresos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="REP\RepFactura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

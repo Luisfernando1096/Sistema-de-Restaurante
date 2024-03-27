@@ -29,9 +29,9 @@ namespace Finanzas.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Egresos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tanConsultas = new System.Windows.Forms.TabPage();
             this.dgvDatosCaja = new System.Windows.Forms.DataGridView();
             this.idEgreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -174,8 +174,8 @@ namespace Finanzas.GUI
             // fecha
             // 
             this.fecha.DataPropertyName = "fecha";
-            dataGridViewCellStyle3.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha.DefaultCellStyle = dataGridViewCellStyle5;
             this.fecha.HeaderText = "Fecha";
             this.fecha.MinimumWidth = 6;
             this.fecha.Name = "fecha";
@@ -336,6 +336,7 @@ namespace Finanzas.GUI
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(155, 54);
             this.toolStripButton1.Text = "Ver informe";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // groupBox4
             // 
@@ -437,6 +438,7 @@ namespace Finanzas.GUI
             this.idEgreso1.HeaderText = "ID";
             this.idEgreso1.MinimumWidth = 6;
             this.idEgreso1.Name = "idEgreso1";
+            this.idEgreso1.ReadOnly = true;
             this.idEgreso1.Width = 70;
             // 
             // idCaja1
@@ -445,6 +447,7 @@ namespace Finanzas.GUI
             this.idCaja1.HeaderText = "idCaja";
             this.idCaja1.MinimumWidth = 6;
             this.idCaja1.Name = "idCaja1";
+            this.idCaja1.ReadOnly = true;
             this.idCaja1.Width = 70;
             // 
             // Usuario1
@@ -453,13 +456,14 @@ namespace Finanzas.GUI
             this.Usuario1.HeaderText = "Usuario";
             this.Usuario1.MinimumWidth = 6;
             this.Usuario1.Name = "Usuario1";
+            this.Usuario1.ReadOnly = true;
             this.Usuario1.Width = 175;
             // 
             // fecha1
             // 
             this.fecha1.DataPropertyName = "fecha";
-            dataGridViewCellStyle4.Format = "yyyy-MM-dd HH:mm:ss";
-            this.fecha1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Format = "yyyy-MM-dd HH:mm:ss";
+            this.fecha1.DefaultCellStyle = dataGridViewCellStyle6;
             this.fecha1.HeaderText = "Fecha";
             this.fecha1.MinimumWidth = 6;
             this.fecha1.Name = "fecha1";
@@ -472,6 +476,7 @@ namespace Finanzas.GUI
             this.cantidad1.HeaderText = "Cantidad";
             this.cantidad1.MinimumWidth = 6;
             this.cantidad1.Name = "cantidad1";
+            this.cantidad1.ReadOnly = true;
             this.cantidad1.Width = 125;
             // 
             // descripcion1
@@ -481,6 +486,7 @@ namespace Finanzas.GUI
             this.descripcion1.HeaderText = "Descripcion/justifiacion";
             this.descripcion1.MinimumWidth = 6;
             this.descripcion1.Name = "descripcion1";
+            this.descripcion1.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -676,6 +682,7 @@ namespace Finanzas.GUI
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(126, 59);
             this.toolStripButton6.Text = "Imprimir";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // toolStripSeparator8
             // 
@@ -700,6 +707,7 @@ namespace Finanzas.GUI
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1028, 535);
             this.tabControl1.TabIndex = 2;
+            //this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // Egresos
