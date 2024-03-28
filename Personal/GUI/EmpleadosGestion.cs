@@ -44,79 +44,102 @@ namespace Personal.GUI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (EdicionMode)
+            if (!txtNombres.Text.Equals("") && !txtApellidos.Text.Equals(""))
             {
-                Mantenimiento.CLS.Empleado Epl = new Mantenimiento.CLS.Empleado();
-                Epl.IdEmpleado = int.Parse(txtIdEmpleado.Text);
-                Epl.Nombres = txtNombres.Text.ToString();
-                Epl.Apellidos = txtApellidos.Text.ToString();
-                Epl.Telefono = txtTelefono.Text.ToString();
-                Epl.Email = txtEmail.Text.ToString();
-                Epl.Dui = txtDUI.Text.ToString();
-                Epl.SueldoBase = Convert.ToDouble(txtSueldoBase.Text);
-                Epl.Comision = Convert.ToDouble(txtComision.Text);
-                Epl.Direccion = txtDireccion.Text.ToString();
-                Epl.Nit = txtNIT.Text.ToString();
-                Epl.Activo = chkActivo.Checked;
-                String regg = "12323455";
-                Epl.RegContable = regg;
-                if (Epl.Actualizar())
+                if (EdicionMode)
                 {
-                    MessageBox.Show("Actualizacion Exitosa");
-                    txtIdEmpleado.Clear();
-                    txtNombres.Clear();
-                    txtApellidos.Clear();
-                    txtDireccion.Clear();
-                    txtEmail.Clear();
-                    txtTelefono.Clear();
-                    txtDUI.Clear();
-                    txtNIT.Clear();
-                    txtSueldoBase.Clear();
-                    txtComision.Clear();
-                    CargarDatos();
-                    EdicionMode = false;
+                    Mantenimiento.CLS.Empleado Epl = new Mantenimiento.CLS.Empleado();
+                    Epl.IdEmpleado = int.Parse(txtIdEmpleado.Text);
+                    Epl.Nombres = txtNombres.Text.ToString();
+                    Epl.Apellidos = txtApellidos.Text.ToString();
+                    Epl.Telefono = txtTelefono.Text.ToString();
+                    Epl.Email = txtEmail.Text.ToString();
+                    Epl.Dui = txtDUI.Text.ToString();
+                    Epl.SueldoBase = Convert.ToDouble(txtSueldoBase.Text);
+                    Epl.Comision = Convert.ToDouble(txtComision.Text);
+                    Epl.Direccion = txtDireccion.Text.ToString();
+                    Epl.Nit = txtNIT.Text.ToString();
+                    Epl.Activo = chkActivo.Checked;
+                    String regg = "12323455";
+                    Epl.RegContable = regg;
+                    if (Epl.Actualizar())
+                    {
+                        MessageBox.Show("Actualizacion Exitosa");
+                        txtIdEmpleado.Clear();
+                        txtNombres.Clear();
+                        txtApellidos.Clear();
+                        txtDireccion.Clear();
+                        txtEmail.Clear();
+                        txtTelefono.Clear();
+                        txtDUI.Clear();
+                        txtNIT.Clear();
+                        txtSueldoBase.Clear();
+                        txtComision.Clear();
+                        CargarDatos();
+                        EdicionMode = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Actualizacion Fallida");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Actualizacion Fallida");
+                    Mantenimiento.CLS.Empleado Epl = new Mantenimiento.CLS.Empleado();
+                    Epl.Nombres = txtNombres.Text.ToString();
+                    Epl.Apellidos = txtApellidos.Text.ToString();
+                    Epl.Direccion = txtDireccion.Text.ToString();
+                    Epl.Email = txtEmail.Text.ToString();
+                    Epl.Telefono = txtTelefono.Text.ToString();
+                    Epl.Dui = txtDUI.Text.ToString();
+                    Epl.Nit = txtNIT.Text.ToString();
+                    if (txtSueldoBase.Text.Equals(""))
+                    {
+                        Epl.SueldoBase = 0;
+                    }
+                    else
+                    {
+                        Epl.SueldoBase = Convert.ToDouble(txtSueldoBase.Text);
+                    }
+
+                    if (txtSueldoBase.Text.Equals(""))
+                    {
+                        Epl.Comision = 0;
+                    }
+                    else
+                    {
+                        Epl.Comision = Convert.ToDouble(txtComision.Text);
+                    }
+
+                    String regg = "12323455";
+                    Epl.RegContable = regg;
+                    Epl.Activo = chkActivo.Checked;
+
+                    if (Epl.Insertar())
+                    {
+                        MessageBox.Show("RegistroExitoso");
+                        txtIdEmpleado.Clear();
+                        txtNombres.Clear();
+                        txtApellidos.Clear();
+                        txtDireccion.Clear();
+                        txtEmail.Clear();
+                        txtTelefono.Clear();
+                        txtDUI.Clear();
+                        txtNIT.Clear();
+                        txtSueldoBase.Clear();
+                        txtComision.Clear();
+                        CargarDatos();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("RegistoFracaso");
+                    }
                 }
             }
             else
             {
-                Mantenimiento.CLS.Empleado Epl = new Mantenimiento.CLS.Empleado();
-                Epl.Nombres = txtNombres.Text.ToString();
-                Epl.Apellidos = txtApellidos.Text.ToString();
-                Epl.Direccion = txtDireccion.Text.ToString();
-                Epl.Email = txtEmail.Text.ToString();
-                Epl.Telefono = txtTelefono.Text.ToString();
-                Epl.Dui = txtDUI.Text.ToString();
-                Epl.Nit = txtNIT.Text.ToString();
-                Epl.SueldoBase = Convert.ToDouble(txtSueldoBase.Text);
-                Epl.Comision = Convert.ToDouble(txtComision.Text);
-                String regg = "12323455";
-                Epl.RegContable = regg;
-                Epl.Activo = chkActivo.Checked;
-
-                if (Epl.Insertar())
-                {
-                    MessageBox.Show("RegistroExitoso");
-                    txtIdEmpleado.Clear();
-                    txtNombres.Clear();
-                    txtApellidos.Clear();
-                    txtDireccion.Clear();
-                    txtEmail.Clear();
-                    txtTelefono.Clear();
-                    txtDUI.Clear();
-                    txtNIT.Clear();
-                    txtSueldoBase.Clear();
-                    txtComision.Clear();
-                    CargarDatos();
-
-                }
-                else
-                {
-                    MessageBox.Show("RegistoFracaso");
-                }
+                MessageBox.Show("Debe rellenar los campos al menos de nombre y apellido");
             }
         }
 

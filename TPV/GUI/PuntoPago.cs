@@ -51,8 +51,30 @@ namespace TPV.GUI
                 dgvDatos.DataSource = datos;
                 dgvDatos.AutoGenerateColumns = false;
 
-                lblTicket.Text = dgvDatos.Rows[0].Cells["idPedido"].Value.ToString();//Accedemos a la primera posicion de la tabla
-                lblTicket.Tag = Int32.Parse(dgvDatos.Rows[0].Cells["idPedido"].Value.ToString());
+                if (dgvDatos.Rows.Count > 0)
+                {
+                    lblTicket.Text = dgvDatos.Rows[0].Cells["idPedido"].Value.ToString();//Accedemos a la primera posicion de la tabla
+                    lblTicket.Tag = Int32.Parse(dgvDatos.Rows[0].Cells["idPedido"].Value.ToString());
+                }
+                else
+                {
+                    List<String> lst = new List<string>();
+                    Mesa mesa = new Mesa();
+                    mesa.IdMesa = Int32.Parse(id);
+                    mesa.Disponible = true;
+                    lst.Add(mesa.ActualizarEstado());
+
+                    DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+
+                    operacion.EjecutarTransaccion(lst);
+
+                    lblTicket.Text = "";
+                    lblMesero.Text = "";
+                    lblMesero.Tag = "";
+                    lblCliente.Text = "";
+                    lblCliente.Tag = "";
+                }
+
             }
             catch (Exception)
             {
@@ -196,37 +218,45 @@ namespace TPV.GUI
         {
             SeleccionSalonMesa f = new SeleccionSalonMesa();
             f.ShowDialog();
-            if (SeleccionSalonMesa.idMesa > 0)
+            if (f.cerrarPorBoton)
             {
-                CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
-                CargarPedidosEnMesa(SeleccionSalonMesa.idMesa.ToString());
-                lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
-                lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()), false);
-                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                if (SeleccionSalonMesa.idMesa > 0)
                 {
-                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                    CargarProductosPorMesa(SeleccionSalonMesa.idMesa.ToString());
+
+                    CargarPedidosEnMesa(SeleccionSalonMesa.idMesa.ToString());
+                    lblMesa.Text = SeleccionSalonMesa.Mesa.ToString();
+                    lblMesa.Tag = SeleccionSalonMesa.idMesa.ToString();
+                    if (!lblTicket.Text.Equals(""))
+                    {
+                        DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(lblTicket.Text.ToString()), false);
+                        if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                        {
+                            lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                            lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                        }
+                        else
+                        {
+                            lblMesero.Text = "";
+                            lblMesero.Tag = "";
+                        }
+                        if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                        {
+                            lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                            lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                        }
+                        else
+                        {
+                            lblCliente.Text = "";
+                            lblCliente.Tag = "";
+                        }
+                    }
+                    lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
+                    lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
+                    CalcularTodo();
                 }
-                else
-                {
-                    lblMesero.Text = "";
-                    lblMesero.Tag = "";
-                }
-                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                {
-                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                }
-                else
-                {
-                    lblCliente.Text = "";
-                    lblCliente.Tag = "";
-                }
+                    
             }
-            lblSaldo.Text = "$" + CalcularTotal().ToString("0.00");
-            lblSaldo.Tag = Math.Round(CalcularTotal(), 2);
-            CalcularTodo();
         }
 
         private void btn9_Click(object sender, EventArgs e)
@@ -572,6 +602,10 @@ namespace TPV.GUI
             if (seEncuentra == 0)
             {
                 escritoUnPunto = false;
+            }
+            if (txtPagoRegistrar.Text.Equals(""))
+            {
+                txtPagoRegistrar.Text = "0";
             }
         }
 
@@ -939,7 +973,7 @@ namespace TPV.GUI
             
             pedido.TotalPago = totalPago;
 
-            if (Double.Parse(txtPagoRegistrar.Text) < Double.Parse(txtTotalPagar.Text))
+            if (Double.Parse(lblCambio.Tag.ToString()) < 0)
             {
                 /*//Enviar mensaje que 
                 if (MessageBox.Show("¿Desea continuar pagando? Si presiona 'No' se creara una cuenta por cobrar.", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1016,10 +1050,10 @@ namespace TPV.GUI
             List<String> lstPago = new List<string>();
             if (!cortesia)
             {
-                if (datosEnMesa.Rows.Count == 1 && Double.Parse(txtPagoRegistrar.Text) >= Double.Parse(txtTotalPagar.Text))
+                if (datosEnMesa.Rows.Count == 1 && Double.Parse(lblCambio.Tag.ToString()) >= 0)
                 {
                     //Actualizar estado de la mesa
-                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+                    Mesa mesa = new Mesa
                     {
                         IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
                         Disponible = true
@@ -1034,7 +1068,7 @@ namespace TPV.GUI
                 if (datosEnMesa.Rows.Count == 1)
                 {
                     //Actualizar estado de la mesa
-                    Mantenimiento.CLS.Mesa mesa = new Mantenimiento.CLS.Mesa
+                    Mesa mesa = new Mesa
                     {
                         IdMesa = Int32.Parse(lblMesa.Tag.ToString()),
                         Disponible = true

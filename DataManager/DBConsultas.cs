@@ -312,7 +312,7 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT e.idEmpleado, e.nombres FROM empleado e, rol r, usuario u 
-                                     WHERE e.idEmpleado=u.idUsuario AND u.idRol=r.idRol AND r.idRol=2;";
+                                     WHERE e.idEmpleado=u.idUsuario AND u.idRol=r.idRol AND r.idRol=2 AND e.activo = 1;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
