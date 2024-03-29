@@ -57,6 +57,12 @@
     <Compile Include="GUI\AgregarCuentas.Designer.cs">
       <DependentUpon>AgregarCuentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\AgregarPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\AgregarPedido.Designer.cs">
+      <DependentUpon>AgregarPedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\AnularFactura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\AgregarCuentas.resx">
       <DependentUpon>AgregarCuentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\AgregarPedido.resx">
+      <DependentUpon>AgregarPedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\AnularFactura.resx">
       <DependentUpon>AnularFactura.cs</DependentUpon>

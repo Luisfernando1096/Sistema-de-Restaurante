@@ -44,7 +44,6 @@ namespace TPV.GUI
 
         public ComandaGestion(PuntoVenta punto_venta)
         {
-
             InitializeComponent();
             AjustarPosicionBoton();
             this.punto_venta = punto_venta;
@@ -977,7 +976,24 @@ namespace TPV.GUI
                     {
                         BorrarPedidosVacios(lblMesa.Tag.ToString());
                         ImprimirComandaActual();
-                        Close();
+                        if (oUsuario.Rol.Equals("Mesero"))
+                        {
+                            AgregarPedido pd = new AgregarPedido();
+                            pd.ShowDialog();
+                            if (pd.seleccion.Equals("SI"))
+                            {
+                                this.Close();
+                            }
+                            else if (pd.seleccion.Equals("NO"))
+                            {
+                                this.Close();
+                                CerrarSesion();
+                            }
+                        }
+                        else
+                        {
+                            this.Close();
+                        }
                     }
                     else
                     {
@@ -995,7 +1011,6 @@ namespace TPV.GUI
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -1474,14 +1489,17 @@ namespace TPV.GUI
             DialogResult result = MessageBox.Show("Se cerrara la sesion, ¿esta seguro que desea cerrar sesion?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                cerrarSesion = true;
-                punto_venta.cerrarSesion = true;
-                punto_venta.Close();
-                this.Close();
+                CerrarSesion();
             }
-
         }
 
+        private void CerrarSesion() 
+        {
+            cerrarSesion = true;
+            punto_venta.cerrarSesion = true;
+            punto_venta.Close();
+            this.Close();
+        }
         private void ComandaGestion_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (cerrarSesion)
@@ -1490,6 +1508,15 @@ namespace TPV.GUI
                 punto_venta.cerrarSesion = true;
                 punto_venta.Close();
 
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form.Name == "Main")
+                    {
+                        SendKeys.Send("{Enter}");
+                        form.Close();
+                        return;
+                    }
+                }
             }
             tFecha.Stop();
         }
