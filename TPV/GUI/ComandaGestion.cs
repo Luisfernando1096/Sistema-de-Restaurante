@@ -465,11 +465,19 @@ namespace TPV.GUI
                         // Asigna la imagen redimensionada al botón
                         btnProducto.Image = imagenRedimensionada;
                         btnProducto.TextImageRelation = TextImageRelation.ImageAboveText;
+                        btnProducto.TextAlign = ContentAlignment.BottomCenter;
                     }
-
+                    else
+                    {
+                        btnProducto.TextAlign = ContentAlignment.MiddleCenter;
+                        btnProducto.Font = new Font(btnProducto.Font.FontFamily, 11, FontStyle.Bold);
+                    }
                 }
-
-                btnProducto.TextAlign = ContentAlignment.BottomCenter;
+                else
+                {
+                    btnProducto.TextAlign = ContentAlignment.MiddleCenter;
+                    btnProducto.Font = new Font(btnProducto.Font.FontFamily, 11, FontStyle.Bold);
+                }
                 btnProducto.Size = new Size(Int32.Parse(AnchoProducto), Int32.Parse(AltoProducto));
                 btnProducto.Margin = new Padding(Int32.Parse(SeparadorProducto));
                 btnProducto.Click += BotonProducto_Click;
