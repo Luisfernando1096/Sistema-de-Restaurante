@@ -71,5 +71,30 @@ namespace Mantenimiento.CLS
                 throw;
             }
         }
+
+        public Boolean Eliminar()
+        {
+            try
+            {
+                Boolean resultado = false;
+                string sentencia;
+                sentencia = "DELETE FROM pago_combinado " +
+                    "WHERE idPagoCombinado = " + idPagoCombinado + ";";
+
+                DataManager.DBOperacion op = new DataManager.DBOperacion();
+                Int32 filasInsertadas = 0;
+                filasInsertadas = op.EjecutarSentencia(sentencia);
+                if (filasInsertadas > 0)
+                {
+                    resultado = true;
+                }
+                return resultado;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

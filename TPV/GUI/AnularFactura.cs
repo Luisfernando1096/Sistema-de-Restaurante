@@ -128,12 +128,14 @@ namespace TPV.GUI
                     }
                     else
                     {
-                        //Vamos actualizar caja
+                        //Vamos actualizar caja, primero a traer lo que se pago en efectivo para descontar eso en caja.
+                        Double totalEfectivo = CalcularEfectivo(Int32.Parse(txtNumeroPedido.Text));
 
-                        caja.Saldo = saldo - Double.Parse(txtTotales.Text);
-                        caja.Efectivo = efectivo - Double.Parse(txtTotales.Text);
+                        caja.Saldo = saldo - totalEfectivo;
+                        caja.Efectivo = efectivo - totalEfectivo;
                         if (caja.Actualizar())
                         {
+                            
                             MessageBox.Show("Factura anulada con exito.", "¡Realizado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
@@ -153,6 +155,30 @@ namespace TPV.GUI
                 MessageBox.Show("Verifique que haya una caja abierta.", "¡Informacion!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             Limpiar();
+        }
+
+        private double CalcularEfectivo(int idPedido)
+        {
+            Double res = 0;
+            Mantenimiento.CLS.PagoCombinado pc = null;
+
+            DataTable pagos = DataManager.DBConsultas.PagosEfectivo(idPedido);
+            foreach  (DataRow item in pagos.Rows)
+            {
+                res += Double.Parse(item["sumaPagos"].ToString());
+                pc = new Mantenimiento.CLS.PagoCombinado()
+                {
+                    IdPagoCombinado = Int32.Parse(item["idPagoCombinado"].ToString())
+                };
+
+                if (!pc.Eliminar())
+                {
+                    MessageBox.Show("No se pudo eliminar el pago, contacte al programador.", "¡Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            
+            return res;
+            
         }
     }
 }

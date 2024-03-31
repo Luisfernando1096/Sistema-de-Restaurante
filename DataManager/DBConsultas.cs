@@ -191,6 +191,25 @@ namespace DataManager
             }
         }
 
+        public static DataTable PagosEfectivo(int idPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT pc.idPagoCombinado, SUM(pc.monto) AS sumaPagos FROM pedido p, pago_combinado pc
+                                    WHERE pc.idPedido = p.idPedido AND p.idPedido = " + idPedido + " AND pc.idCuenta = 1 GROUP BY pc.idPagoCombinado;";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable TFactura()
         {
             try
