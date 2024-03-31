@@ -49,13 +49,31 @@ namespace DataManager
             }
         }
 
+        public static DataTable PagoOtraForma(int idPagoCombinado)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT pc.monto FROM pago_combinado pc WHERE pc.idPagoCombinado = " + idPagoCombinado + ";";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
         public static DataTable Departamentos()
         {
             try
             {
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT idDepartamento, nombre FROM departamento;";
-                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+                DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
                 return resultado;
@@ -179,7 +197,26 @@ namespace DataManager
             {
                 DataTable resultado = new DataTable();
                 String sentencia = @"SELECT idTiraje, tipoFactura, serie, inicio, fin, actual, activo FROM tiraje_factura WHERE activo = true and tipoFactura = '" + Tipo + "'; ";
-                DataManager.DBOperacion operacion = new DataManager.DBOperacion();
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return new DataTable();
+                throw;
+            }
+        }
+
+        public static DataTable PagosEfectivo(int idPedido)
+        {
+            try
+            {
+                DataTable resultado = new DataTable();
+                String sentencia = @"SELECT pc.idPagoCombinado, SUM(pc.monto) AS sumaPagos FROM pedido p, pago_combinado pc
+                                    WHERE pc.idPedido = p.idPedido AND p.idPedido = " + idPedido + " AND pc.idCuenta = 1 GROUP BY pc.idPagoCombinado;";
+                DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
                 return resultado;
