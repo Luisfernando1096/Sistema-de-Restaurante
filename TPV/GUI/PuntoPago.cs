@@ -1150,8 +1150,16 @@ namespace TPV.GUI
                     }
                     else
                     {
-                        cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
-                        cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
+                        if (Double.Parse(lblCambio.Tag.ToString()) > 0)
+                        {
+                            cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString()) - (Double.Parse(lblCambio.Tag.ToString()));
+                            cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString()) - (Double.Parse(lblCambio.Tag.ToString()));
+                        }
+                        else
+                        {
+                            cajaActualizar.Saldo = Double.Parse(item["saldo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
+                            cajaActualizar.Efectivo = Double.Parse(item["efectivo"].ToString()) + Double.Parse(txtPagoRegistrar.Text.ToString());
+                        }
                     }
                 }
                 if (!cajaActualizar.Actualizar())

@@ -16,6 +16,43 @@ namespace ServiceExpressDsk.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (chkProbarConexion.Checked)
+            {
+                //Probar conexion
+                GuardarDatos();
+
+                try
+                {
+                    DataManager.DBConexion cn = new DataManager.DBConexion();
+                    if (cn.Conectar())
+                    {
+                        MessageBox.Show("Conexion establecida con exito.", "Conexion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cn.Desconectar();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se conecto a la base de datos, verifique que los campos sean correctos.", "Conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+            else
+            {
+                GuardarDatos();
+                Close();
+            }
+            
+
+        }
+
+        private void GuardarDatos()
+        {
             string servidor = txtServidorBD.Text.Trim();
             string baseDeDatos = txtBaseDatos.Text.Trim();
             string usuario = txtUsuarioBD.Text.Trim();
@@ -80,8 +117,6 @@ namespace ServiceExpressDsk.GUI
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
             }
-            Close();
-
         }
 
         private bool ValidariP()
@@ -97,6 +132,7 @@ namespace ServiceExpressDsk.GUI
 
         private void CadenaConexion_Load(object sender, EventArgs e)
         {
+            chkProbarConexion.Checked = true;
             string archivoConfiguracion = "configuracion.xml";
 
             if (File.Exists(archivoConfiguracion))

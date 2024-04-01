@@ -31,6 +31,7 @@ namespace ServiceExpressDsk.GUI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CadenaConexion));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnIpAutomatica = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPuerto = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,7 +47,7 @@ namespace ServiceExpressDsk.GUI
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnIpAutomatica = new System.Windows.Forms.Button();
+            this.chkProbarConexion = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +73,16 @@ namespace ServiceExpressDsk.GUI
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de conexion";
+            // 
+            // btnIpAutomatica
+            // 
+            this.btnIpAutomatica.Location = new System.Drawing.Point(15, 173);
+            this.btnIpAutomatica.Name = "btnIpAutomatica";
+            this.btnIpAutomatica.Size = new System.Drawing.Size(198, 33);
+            this.btnIpAutomatica.TabIndex = 17;
+            this.btnIpAutomatica.Text = "Ip Automatica";
+            this.btnIpAutomatica.UseVisualStyleBackColor = true;
+            this.btnIpAutomatica.Click += new System.EventHandler(this.btnIpAutomatica_Click);
             // 
             // label7
             // 
@@ -224,15 +235,16 @@ namespace ServiceExpressDsk.GUI
     "uadamente, use este espacio sabiamente.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnIpAutomatica
+            // chkProbarConexion
             // 
-            this.btnIpAutomatica.Location = new System.Drawing.Point(15, 173);
-            this.btnIpAutomatica.Name = "btnIpAutomatica";
-            this.btnIpAutomatica.Size = new System.Drawing.Size(198, 33);
-            this.btnIpAutomatica.TabIndex = 17;
-            this.btnIpAutomatica.Text = "Ip Automatica";
-            this.btnIpAutomatica.UseVisualStyleBackColor = true;
-            this.btnIpAutomatica.Click += new System.EventHandler(this.btnIpAutomatica_Click);
+            this.chkProbarConexion.AutoSize = true;
+            this.chkProbarConexion.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkProbarConexion.Location = new System.Drawing.Point(40, 323);
+            this.chkProbarConexion.Name = "chkProbarConexion";
+            this.chkProbarConexion.Size = new System.Drawing.Size(170, 24);
+            this.chkProbarConexion.TabIndex = 4;
+            this.chkProbarConexion.Text = "Probar conexion y salir.";
+            this.chkProbarConexion.UseVisualStyleBackColor = true;
             // 
             // CadenaConexion
             // 
@@ -241,6 +253,7 @@ namespace ServiceExpressDsk.GUI
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(660, 378);
+            this.Controls.Add(this.chkProbarConexion);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
@@ -254,6 +267,7 @@ namespace ServiceExpressDsk.GUI
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -276,5 +290,6 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtPuerto;
         private System.Windows.Forms.Button btnIpAutomatica;
+        private System.Windows.Forms.CheckBox chkProbarConexion;
     }
 }
