@@ -404,8 +404,38 @@ namespace Configuraciones.GUI
         {
             try
             {
-                Mantenimiento.CLS.Configuracion config = new Mantenimiento.CLS.Configuracion();
-                config.IdConfiguracion = 1;
+                Configuracion config = new Configuracion();
+                //Acceder al archivo de configuracion para obtener que pc es
+                int idConf = 1;
+
+                string archivo = "configuracion.xml";
+
+                if (File.Exists(archivo))
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(archivo);
+
+
+                    if (xmlDoc.SelectSingleNode("/Configuracion/Pc") != null)
+                    {
+                        string pc = xmlDoc.SelectSingleNode("/Configuracion/Pc").InnerText;
+                        if (pc.Equals("Principal"))
+                        {
+                            idConf = 1;
+                        }
+                        else if (pc.Equals("Cliente 1"))
+                        {
+                            idConf = 2;
+                        }
+                        else if (pc.Equals("Cliente 2"))
+                        {
+                            idConf = 3;
+                        }
+
+                    }
+
+                }
+                config.IdConfiguracion = idConf;
 
                 //Propina
                 if (checkActivarPropina.Checked)
@@ -590,8 +620,23 @@ namespace Configuraciones.GUI
                         writer.WriteEndDocument();
                     }
                     MessageBox.Show("¡Cambios actualizados exitosamente!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    oConfiguracion.ObtenerConfiguracion();
-                    Close();
+                    if (oConfiguracion.ObtenerConfiguracion())
+                    {
+                        Close();
+                    }
+                    else
+                    {
+                        //No obtuve la configuracion hay que agregarla
+                        config.Insertar();
+                        if (oConfiguracion.ObtenerConfiguracion())
+                        {
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrio un error al obtener la configuración.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
             }
             catch (Exception)

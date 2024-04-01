@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace ServiceExpressDsk.GUI
 {
@@ -38,7 +40,76 @@ namespace ServiceExpressDsk.GUI
             if (oSesion.IniciarSesion(txtClave.Text))
             {
                 autorizado = true;
-                oConfiguracion.ObtenerConfiguracion();
+                if (oConfiguracion.ObtenerConfiguracion())
+                {
+                    Close();
+                }
+                else
+                {
+                    //Acceder al archivo de configuracion para obtener que pc es
+                    int idConf = 1;
+
+                    string archivo = "configuracion.xml";
+
+                    if (File.Exists(archivo))
+                    {
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.Load(archivo);
+
+
+                        if (xmlDoc.SelectSingleNode("/Configuracion/Pc") != null)
+                        {
+                            string pc = xmlDoc.SelectSingleNode("/Configuracion/Pc").InnerText;
+                            if (pc.Equals("Principal"))
+                            {
+                                idConf = 1;
+                            }
+                            else if (pc.Equals("Cliente 1"))
+                            {
+                                idConf = 2;
+                            }
+                            else if (pc.Equals("Cliente 2"))
+                            {
+                                idConf = 3;
+                            }
+
+                        }
+
+                    }
+                    //No obtuve la configuracion hay que agregarla
+                    Mantenimiento.CLS.Configuracion config = new Mantenimiento.CLS.Configuracion();
+                    config.IdConfiguracion = idConf;
+                    config.ControlStock = 1;
+                    config.IncluirPropina = 1;
+                    config.Propina = 10.00;
+                    config.IncluirImpuesto = 0;
+                    config.Iva = 0;
+                    config.MesaVIP = 0;
+                    config.AutorizarDescProp = 0;
+                    config.PrinterComanda = "Microsoft Print to PDF";
+                    config.PrinterFactura = "Microsoft Print to PDF";
+                    config.PrinterInformes = "Microsoft Print to PDF";
+                    config.AlertaCaja = 1;
+                    config.Multisesion = 1;
+                    config.NumSesiones = 100;
+                    config.MuchosProductos = 0;
+                    config.ImprimirDosTicketsPago = 0;
+                    config.ImpresoraAppMovil = "Microsoft Print to PDF";
+                    config.FacturaElectronica = 0;
+                    config.ImpresoraCocina = "Microsoft Print to PDF";
+                    config.ImpresoraBar = "Microsoft Print to PDF";
+                    config.ImpresoraGrupoUno = "Microsoft Print to PDF";
+                    config.ImpresoraGrupoDos = "Microsoft Print to PDF";
+                    config.Insertar();
+                    if (oConfiguracion.ObtenerConfiguracion())
+                    {
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocurrio un error al obtener la configuración.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
                 oEmpresa.ObtenerConfiguracion();
                 oTicket.ObtenerConfiguracion();
                 Close();

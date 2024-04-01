@@ -12,6 +12,8 @@ namespace ServiceExpressDsk.GUI
         public CadenaConexion()
         {
             InitializeComponent();
+            cmbPc.SelectedIndex = 0;
+            chkProbarConexion.Checked = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,13 +55,6 @@ namespace ServiceExpressDsk.GUI
 
         private void GuardarDatos()
         {
-            string servidor = txtServidorBD.Text.Trim();
-            string baseDeDatos = txtBaseDatos.Text.Trim();
-            string usuario = txtUsuarioBD.Text.Trim();
-            string contraseña = txtContraseniaBD.Text.Trim();
-            string ipLocal = txtIpLocal.Text.Trim();
-            string puerto = txtPuerto.Text.Trim();
-
             if (txtServidorBD.Text.Equals(""))
             {
                 MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -90,12 +85,21 @@ namespace ServiceExpressDsk.GUI
                 MessageBox.Show("Favor llenar todos los campos.", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
             //Validar la ip
             if (!ValidariP())
             {
                 MessageBox.Show("La ip no es valida, por favor escriba una ip valida", "Validacion de campos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            string servidor = txtServidorBD.Text.Trim();
+            string baseDeDatos = txtBaseDatos.Text.Trim();
+            string usuario = txtUsuarioBD.Text.Trim();
+            string contraseña = txtContraseniaBD.Text.Trim();
+            string ipLocal = txtIpLocal.Text.Trim();
+            string puerto = txtPuerto.Text.Trim();
+            string pc = cmbPc.SelectedItem.ToString().Trim();
 
             string archivoConfiguracion = "configuracion.xml";
 
@@ -113,6 +117,7 @@ namespace ServiceExpressDsk.GUI
                 writer.WriteElementString("Contraseña", contraseña);
                 writer.WriteElementString("IpLocal", ipLocal);
                 writer.WriteElementString("Puerto", puerto);
+                writer.WriteElementString("Pc", pc);
 
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
@@ -132,7 +137,6 @@ namespace ServiceExpressDsk.GUI
 
         private void CadenaConexion_Load(object sender, EventArgs e)
         {
-            chkProbarConexion.Checked = true;
             string archivoConfiguracion = "configuracion.xml";
 
             if (File.Exists(archivoConfiguracion))
@@ -170,9 +174,13 @@ namespace ServiceExpressDsk.GUI
                     string puerto = xmlDoc.SelectSingleNode("/Configuracion/Puerto").InnerText;
                     txtPuerto.Text = puerto;
                 }
-                
+                if (xmlDoc.SelectSingleNode("/Configuracion/Pc") != null)
+                {
+                    string pc = xmlDoc.SelectSingleNode("/Configuracion/Pc").InnerText;
+                    cmbPc.SelectedItem = pc;
+                }
 
-                
+
             }
         }
 

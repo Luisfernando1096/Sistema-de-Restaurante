@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace ServiceExpressDsk.GUI
 {
@@ -20,8 +21,29 @@ namespace ServiceExpressDsk.GUI
         public Main()
         {
             InitializeComponent();
-            // Iniciar el servidor
-            myServer.StartServer();
+
+            //Acceder al archivo de configuracion para obtener que pc es
+            string archivoConfiguracion = "configuracion.xml";
+
+            if (File.Exists(archivoConfiguracion))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(archivoConfiguracion);
+
+
+                if (xmlDoc.SelectSingleNode("/Configuracion/Pc") != null)
+                {
+                    string pc = xmlDoc.SelectSingleNode("/Configuracion/Pc").InnerText;
+                    if (pc.Equals("Principal"))
+                    {
+                        // Iniciar el servidor
+                        myServer.StartServer();
+                    }
+
+                }
+
+
+            }
 
             // Aquí puedes hacer otras cosas en tu aplicación, ya que el servidor se está ejecutando en un hilo separado
         }

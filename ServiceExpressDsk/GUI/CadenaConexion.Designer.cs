@@ -48,11 +48,15 @@ namespace ServiceExpressDsk.GUI
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.chkProbarConexion = new System.Windows.Forms.CheckBox();
+            this.cmbPc = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.cmbPc);
             this.groupBox1.Controls.Add(this.btnIpAutomatica);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtPuerto);
@@ -69,7 +73,7 @@ namespace ServiceExpressDsk.GUI
             this.groupBox1.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(25, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(602, 222);
+            this.groupBox1.Size = new System.Drawing.Size(602, 233);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de conexion";
@@ -200,7 +204,7 @@ namespace ServiceExpressDsk.GUI
             this.btnGuardar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(329, 293);
+            this.btnGuardar.Location = new System.Drawing.Point(330, 314);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(140, 73);
             this.btnGuardar.TabIndex = 1;
@@ -215,7 +219,7 @@ namespace ServiceExpressDsk.GUI
             this.btnCancelar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(504, 293);
+            this.btnCancelar.Location = new System.Drawing.Point(505, 314);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(123, 73);
             this.btnCancelar.TabIndex = 2;
@@ -239,12 +243,36 @@ namespace ServiceExpressDsk.GUI
             // 
             this.chkProbarConexion.AutoSize = true;
             this.chkProbarConexion.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkProbarConexion.Location = new System.Drawing.Point(40, 323);
+            this.chkProbarConexion.Location = new System.Drawing.Point(41, 360);
             this.chkProbarConexion.Name = "chkProbarConexion";
             this.chkProbarConexion.Size = new System.Drawing.Size(170, 24);
             this.chkProbarConexion.TabIndex = 4;
             this.chkProbarConexion.Text = "Probar conexion y salir.";
             this.chkProbarConexion.UseVisualStyleBackColor = true;
+            // 
+            // cmbPc
+            // 
+            this.cmbPc.DisplayMember = "1,2,3";
+            this.cmbPc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPc.FormattingEnabled = true;
+            this.cmbPc.Items.AddRange(new object[] {
+            "Principal",
+            "Cliente 1",
+            "Cliente 2"});
+            this.cmbPc.Location = new System.Drawing.Point(423, 188);
+            this.cmbPc.Name = "cmbPc";
+            this.cmbPc.Size = new System.Drawing.Size(145, 31);
+            this.cmbPc.TabIndex = 18;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(316, 193);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 20);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Definir PC:";
             // 
             // CadenaConexion
             // 
@@ -252,7 +280,7 @@ namespace ServiceExpressDsk.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(660, 378);
+            this.ClientSize = new System.Drawing.Size(659, 397);
             this.Controls.Add(this.chkProbarConexion);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCancelar);
@@ -291,5 +319,7 @@ namespace ServiceExpressDsk.GUI
         private System.Windows.Forms.TextBox txtPuerto;
         private System.Windows.Forms.Button btnIpAutomatica;
         private System.Windows.Forms.CheckBox chkProbarConexion;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbPc;
     }
 }

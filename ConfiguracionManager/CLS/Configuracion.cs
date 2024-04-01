@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.IO;
+using System.Xml;
 
 namespace ConfiguracionManager.CLS
 {
@@ -70,8 +72,39 @@ namespace ConfiguracionManager.CLS
             try
             {
                 DataTable datosConfiguracion = new DataTable();
-                datosConfiguracion = DataManager.DBConsultas.Configuraciones();
-                if (datosConfiguracion.Rows.Count == 1)
+
+                //Acceder al archivo de configuracion para obtener que pc es
+                int idConf = 1;
+
+                string archivoConfiguracion = "configuracion.xml";
+
+                if (File.Exists(archivoConfiguracion))
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(archivoConfiguracion);
+
+                    
+                    if (xmlDoc.SelectSingleNode("/Configuracion/Pc") != null)
+                    {
+                        string pc = xmlDoc.SelectSingleNode("/Configuracion/Pc").InnerText;
+                        if (pc.Equals("Principal"))
+                        {
+                            idConf = 1;
+                        }else if (pc.Equals("Cliente 1"))
+                        {
+                            idConf = 2;
+                        }
+                        else if (pc.Equals("Cliente 2"))
+                        {
+                            idConf = 3;
+                        }
+                        
+                    }
+
+                }
+
+                datosConfiguracion = DataManager.DBConsultas.Configuraciones(idConf);
+                if (datosConfiguracion.Rows.Count > 0)
                 {
                     controlStock = datosConfiguracion.Rows[0]["controlStock"].ToString();
                     incluirPropina = datosConfiguracion.Rows[0]["incluirPropina"].ToString();

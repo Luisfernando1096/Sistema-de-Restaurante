@@ -671,15 +671,16 @@ namespace DataManager
             }
         }
 
-        public static DataTable Configuraciones()
+        public static DataTable Configuraciones(int idConf)
         {
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = "SELECT * FROM configuracion;";
+                String sentencia = "SELECT idConfiguracion, controlStock, incluirPropina, propina, incluirImpuesto, iva, mesaVIP, autorizarDescProp, printerComanda, printerFactura, printerInformes, alertaCaja, multisesion, numSesiones, muchosProductos, imprimirDosTicketsPago, impresoraAppMovil, facturaElectronica, impresoraCocina, impresoraBar, impresoraGrupoUno, impresoraGrupoDos FROM configuracion WHERE idConfiguracion = " + idConf + ";";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
+
                 return resultado;
             }
             catch (Exception)
