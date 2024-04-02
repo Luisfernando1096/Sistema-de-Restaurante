@@ -70,7 +70,6 @@ namespace Salones.GUI
             {
                 // Obtener los datos
                 DataTable salon = DataManager.DBConsultas.Salones();
-
                 // Crear un nuevo DataTable con la estructura
                 DataTable dt = salon.Clone();
 
@@ -81,6 +80,7 @@ namespace Salones.GUI
                 cmbSalones.DataSource = dt;
                 cmbSalones.DisplayMember = "nombre";
                 cmbSalones.ValueMember = "idSalon";
+
             }
             catch (Exception)
             {

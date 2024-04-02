@@ -30,15 +30,18 @@ namespace TPV.GUI
 
         private void bttCuentaUnica_Click(object sender, EventArgs e)
         {
-            ComandaGestion f = new ComandaGestion(punto_venta);
-            f.lblMesa.Text = botonMesa.Text.ToString();
-            f.lblMesa.Tag = botonMesa.Tag.ToString();
-            this.Hide();
-            f.ShowDialog();
-            punto_venta.cerrarSesion = f.cerrarSesion;
-            cambiarMesa = f.cambiarMesa;
-            idPedidoCambio = f.lblTicket.Text;
-            idMesaAnterior = f.lblMesa.Tag.ToString();
+            using (ComandaGestion f = new ComandaGestion(punto_venta))
+            {
+                f.lblMesa.Text = botonMesa.Text.ToString();
+                f.lblMesa.Tag = botonMesa.Tag.ToString();
+                this.Hide();
+                f.ShowDialog();
+                punto_venta.cerrarSesion = f.cerrarSesion;
+                cambiarMesa = f.cambiarMesa;
+                idPedidoCambio = f.lblTicket.Text;
+                idMesaAnterior = f.lblMesa.Tag.ToString();
+            }
+                
         }
 
         private void AgregarCuentas_Load(object sender, EventArgs e)
@@ -53,114 +56,120 @@ namespace TPV.GUI
 
         private void bttVariasCuentas_Click_1(object sender, EventArgs e)
         {
-            ComandaGestion f = new ComandaGestion(punto_venta);
-            int primerPedidoID = 0;
-            CantidadSeparar cantidadSeparar = new CantidadSeparar();
-            cantidadSeparar.ShowDialog();
-            int cantidad = 0;
-            int idMesa = int.Parse(botonMesa.Tag.ToString());
-            String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
-            List<String> lstPedido = new List<string>();
-
-            if (!cantidadSeparar.txtCantidad.Text.Equals("") && cantidadSeparar.cerrarPorBoton)
+            using (ComandaGestion f = new ComandaGestion(punto_venta))
             {
-                cantidad = int.Parse(cantidadSeparar.txtCantidad.Text);
-                if (cantidad > 1)
+                int primerPedidoID = 0;
+                using (CantidadSeparar cantidadSeparar = new CantidadSeparar())
                 {
-                    int idMesero = 0;
-                    if (oUsuario.IdRol.Equals("2"))
-                    {
-                        idMesero = Int32.Parse(oUsuario.IdUsuario);
-                    }
+                    cantidadSeparar.ShowDialog();
+                    int cantidad = 0;
+                    int idMesa = int.Parse(botonMesa.Tag.ToString());
+                    String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
+                    List<String> lstPedido = new List<string>();
 
-                    if (idMesero > 0)
+                    if (!cantidadSeparar.txtCantidad.Text.Equals("") && cantidadSeparar.cerrarPorBoton)
                     {
-                        for (int i = 0; i < cantidad; i++)
+                        cantidad = int.Parse(cantidadSeparar.txtCantidad.Text);
+                        if (cantidad > 1)
                         {
-                            Pedido pedido = new Pedido
+                            int idMesero = 0;
+                            if (oUsuario.IdRol.Equals("2"))
                             {
-                                IdMesa = idMesa,
-                                IdMesero = idMesero,
-                                Cancelado = false,
-                                Fecha = fecha,
-                                Listo = false,
-                                Total = 0,
-                                Descuento = 0,
-                                Iva = 0,
-                                Propina = 0,
-                                TotalPago = 0,
-                                Saldo = 0,
-                                NFactura = "0",
-                                Anular = false,
-                                Efectivo = 0,
-                                Credito = 0,
-                                Btc = 0
-                            };
+                                idMesero = Int32.Parse(oUsuario.IdUsuario);
+                            }
 
-                            lstPedido.Add(pedido.Insertar(true));
+                            if (idMesero > 0)
+                            {
+                                for (int i = 0; i < cantidad; i++)
+                                {
+                                    Pedido pedido = new Pedido
+                                    {
+                                        IdMesa = idMesa,
+                                        IdMesero = idMesero,
+                                        Cancelado = false,
+                                        Fecha = fecha,
+                                        Listo = false,
+                                        Total = 0,
+                                        Descuento = 0,
+                                        Iva = 0,
+                                        Propina = 0,
+                                        TotalPago = 0,
+                                        Saldo = 0,
+                                        NFactura = "0",
+                                        Anular = false,
+                                        Efectivo = 0,
+                                        Credito = 0,
+                                        Btc = 0
+                                    };
+
+                                    lstPedido.Add(pedido.Insertar(true));
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < cantidad; i++)
+                                {
+                                    Pedido pedido = new Pedido
+                                    {
+                                        IdMesa = idMesa,
+                                        Cancelado = false,
+                                        Fecha = fecha,
+                                        Listo = false,
+                                        Total = 0,
+                                        Descuento = 0,
+                                        Iva = 0,
+                                        Propina = 0,
+                                        TotalPago = 0,
+                                        Saldo = 0,
+                                        NFactura = "0",
+                                        Anular = false,
+                                        Efectivo = 0,
+                                        Credito = 0,
+                                        Btc = 0
+                                    };
+
+                                    lstPedido.Add(pedido.Insertar(false));
+                                }
+                            }
+
+                            Mesa mesa = new Mesa
+                            {
+                                IdMesa = Int32.Parse(botonMesa.Tag.ToString()),
+                                Disponible = false
+                            };
+                            lstPedido.Add(mesa.ActualizarEstado());
+
+                            if (transaccion1.EjecutarTransaccion(lstPedido) > 0)
+                            {
+                                f.lblMesa.Text = botonMesa.Text.ToString();
+                                f.lblMesa.Tag = botonMesa.Tag.ToString();
+                                this.Close();
+
+                                // Obtener el ID del último pedido insertado
+                                int.TryParse(transaccion1.ConsultarScalar("SELECT LAST_INSERT_ID()").ToString(), out int ultimoPedidoID);
+                                primerPedidoID = ultimoPedidoID - (cantidad - 1);
+                                primerPedidoID = Math.Max(primerPedidoID, 1);
+
+                                f.lblTicket.Text = primerPedidoID.ToString();
+                                f.CargarPedidos(botonMesa.Tag.ToString());
+                                f.ShowDialog();
+                                punto_venta.cerrarSesion = f.cerrarSesion;
+                                cambiarMesa = f.cambiarMesa;
+                                idPedidoCambio = f.lblTicket.Text;
+                                idMesaAnterior = f.lblMesa.Tag.ToString();
+                                f.BorrarPedidosVacios(idMesaAnterior);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("El numero de cuentas debe ser mayor a 1 ", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-                    else
-                    {
-                        for (int i = 0; i < cantidad; i++)
-                        {
-                            Pedido pedido = new Pedido
-                            {
-                                IdMesa = idMesa,
-                                Cancelado = false,
-                                Fecha = fecha,
-                                Listo = false,
-                                Total = 0,
-                                Descuento = 0,
-                                Iva = 0,
-                                Propina = 0,
-                                TotalPago = 0,
-                                Saldo = 0,
-                                NFactura = "0",
-                                Anular = false,
-                                Efectivo = 0,
-                                Credito = 0,
-                                Btc = 0
-                            };
-
-                            lstPedido.Add(pedido.Insertar(false));
-                        }
-                    }
+                }
                     
-                    Mesa mesa = new Mesa
-                    {
-                        IdMesa = Int32.Parse(botonMesa.Tag.ToString()),
-                        Disponible = false
-                    };
-                    lstPedido.Add(mesa.ActualizarEstado());
-
-                    if (transaccion1.EjecutarTransaccion(lstPedido) > 0)
-                    {
-                        f.lblMesa.Text = botonMesa.Text.ToString();
-                        f.lblMesa.Tag = botonMesa.Tag.ToString();
-                        this.Close();
-
-                        // Obtener el ID del último pedido insertado
-                        int.TryParse(transaccion1.ConsultarScalar("SELECT LAST_INSERT_ID()").ToString(), out int ultimoPedidoID);
-                        primerPedidoID = ultimoPedidoID - (cantidad - 1);
-                        primerPedidoID = Math.Max(primerPedidoID, 1);
-
-                        f.lblTicket.Text = primerPedidoID.ToString();
-                        f.CargarPedidos(botonMesa.Tag.ToString());
-                        f.ShowDialog();
-                        punto_venta.cerrarSesion = f.cerrarSesion;
-                        cambiarMesa = f.cambiarMesa;
-                        idPedidoCambio = f.lblTicket.Text;
-                        idMesaAnterior = f.lblMesa.Tag.ToString();
-                        f.BorrarPedidosVacios(idMesaAnterior);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El numero de cuentas debe ser mayor a 1 ", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
+                
         }
     }
 }

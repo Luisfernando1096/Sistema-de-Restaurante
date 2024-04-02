@@ -394,14 +394,17 @@ namespace Finanzas.GUI
                 dataTable = dataView.Table;
             }
 
-            // Ahora tienes tu DataTable de nuevo
-
 
             //Programar reporte de compras
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            Reportes.REP.RepEgresos rep = new Reportes.REP.RepEgresos();
-            f.GenerarReporte(rep, dataTable, "", "", "");
-            f.Show();
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepEgresos rep = new Reportes.REP.RepEgresos())
+                {
+                    f.GenerarReporte(rep, dataTable, "", "", "");
+                    f.ShowDialog();
+                }
+            }
+                
         }
 
     }

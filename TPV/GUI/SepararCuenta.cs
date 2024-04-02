@@ -51,61 +51,63 @@ namespace TPV.GUI
             pasar = false;
             if (dgvSiguiente.CurrentRow != null)
             {
-                CantidadSeparar cantidadSeparar = new CantidadSeparar();
-                int cantidad = Int32.Parse(dgvSiguiente.CurrentRow.Cells["cantidadSiguiente"].Value.ToString());
-                int separar = 1, quedaran = 0;
-                Boolean seEncuentra = false;
-                int siguiente = 0;
-                int indiceSiguiente = -1; // Inicializar con un valor que indique que no se encontró ninguna coincidencia
-                int indiceActual = dgvSiguiente.CurrentRow.Index;
-                double precio = Double.Parse(dgvSiguiente.CurrentRow.Cells["precioSiguiente"].Value.ToString());
-
-                foreach (DataRow item in datosActual.Rows)
+                using (CantidadSeparar cantidadSeparar = new CantidadSeparar())
                 {
-                    // Comparar el dato actual con el siguiente
-                    if (dgvSiguiente.CurrentRow.Cells["idProductoSiguiente"].Value.ToString().Equals(item["idProducto"].ToString()))
+                    int cantidad = Int32.Parse(dgvSiguiente.CurrentRow.Cells["cantidadSiguiente"].Value.ToString());
+                    int separar = 1, quedaran = 0;
+                    Boolean seEncuentra = false;
+                    int siguiente = 0;
+                    int indiceSiguiente = -1; // Inicializar con un valor que indique que no se encontró ninguna coincidencia
+                    int indiceActual = dgvSiguiente.CurrentRow.Index;
+                    double precio = Double.Parse(dgvSiguiente.CurrentRow.Cells["precioSiguiente"].Value.ToString());
+
+                    foreach (DataRow item in datosActual.Rows)
                     {
-                        seEncuentra = true;
-                        indiceSiguiente = siguiente; // Almacena el índice de la fila en la que se encontró la coincidencia
-                        break; // Puedes salir del bucle una vez que encuentres la primera coincidencia si eso es lo que necesitas
+                        // Comparar el dato actual con el siguiente
+                        if (dgvSiguiente.CurrentRow.Cells["idProductoSiguiente"].Value.ToString().Equals(item["idProducto"].ToString()))
+                        {
+                            seEncuentra = true;
+                            indiceSiguiente = siguiente; // Almacena el índice de la fila en la que se encontró la coincidencia
+                            break; // Puedes salir del bucle una vez que encuentres la primera coincidencia si eso es lo que necesitas
+                        }
+                        siguiente++;
                     }
-                    siguiente++;
-                }
 
-                if (cantidad > 1)
-                {
-                    cantidadSeparar.lblInformacion.Text = "Seleccione la cantidad a separar entre 1 y " + cantidad;
-                    cantidadSeparar.ShowDialog();
-                }
-                else
-                {
-                    //Pasar y quitar
-                    ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
-                    PasarCompleto(indiceActual);
-                }
-
-                if (!cantidadSeparar.txtCantidad.Text.Equals("") && cantidadSeparar.cerrarPorBoton)
-                {
-
-                    separar = Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
-                    quedaran = cantidad - Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
-                    precio = Double.Parse(dgvSiguiente.CurrentRow.Cells["precioSiguiente"].Value.ToString());
-
-                    if (cantidad == Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()) && dgvSiguiente.Rows.Count >= 1)
+                    if (cantidad > 1)
                     {
-                        //Pasar y quitar todos
-                        ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
-                        PasarCompleto(indiceActual);
-                    }
-                    else if (cantidad > Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()))
-                    {
-                        //Pasar una parte
-                        ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                        cantidadSeparar.lblInformacion.Text = "Seleccione la cantidad a separar entre 1 y " + cantidad;
+                        cantidadSeparar.ShowDialog();
                     }
                     else
                     {
-                        MessageBox.Show("Ha definido una cantidad mayor y no se puede realizar.");
-                        return;
+                        //Pasar y quitar
+                        ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                        PasarCompleto(indiceActual);
+                    }
+
+                    if (!cantidadSeparar.txtCantidad.Text.Equals("") && cantidadSeparar.cerrarPorBoton)
+                    {
+
+                        separar = Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
+                        quedaran = cantidad - Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
+                        precio = Double.Parse(dgvSiguiente.CurrentRow.Cells["precioSiguiente"].Value.ToString());
+
+                        if (cantidad == Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()) && dgvSiguiente.Rows.Count >= 1)
+                        {
+                            //Pasar y quitar todos
+                            ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                            PasarCompleto(indiceActual);
+                        }
+                        else if (cantidad > Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()))
+                        {
+                            //Pasar una parte
+                            ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ha definido una cantidad mayor y no se puede realizar.");
+                            return;
+                        }
                     }
                 }
 
@@ -125,76 +127,78 @@ namespace TPV.GUI
             pasar = true;
             if (dgvActual.CurrentRow != null)
             {
-                CantidadSeparar cantidadSeparar = new CantidadSeparar();
-                int cantidad = Int32.Parse(dgvActual.CurrentRow.Cells["cantidad"].Value.ToString());
-                int separar = 1, quedaran = 0;
-                Boolean seEncuentra = false;
-                int siguiente = 0;
-                int indiceSiguiente = -1; // Inicializar con un valor que indique que no se encontró ninguna coincidencia
-                int indiceActual = dgvActual.CurrentRow.Index;
-                double precio = Double.Parse(dgvActual.CurrentRow.Cells["precio"].Value.ToString());
-                int idPLocal = Int32.Parse(dgvActual.CurrentRow.Cells["idProducto"].Value.ToString());
-                idPedido1 = idPLocal;
-
-                foreach (DataRow item in datosSiguiente.Rows)
+                using (CantidadSeparar cantidadSeparar = new CantidadSeparar())
                 {
-                    // Comparar el dato actual con el siguiente
-                    if (dgvActual.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item["idProductoSiguiente"].ToString()))
+                    int cantidad = Int32.Parse(dgvActual.CurrentRow.Cells["cantidad"].Value.ToString());
+                    int separar = 1, quedaran = 0;
+                    Boolean seEncuentra = false;
+                    int siguiente = 0;
+                    int indiceSiguiente = -1; // Inicializar con un valor que indique que no se encontró ninguna coincidencia
+                    int indiceActual = dgvActual.CurrentRow.Index;
+                    double precio = Double.Parse(dgvActual.CurrentRow.Cells["precio"].Value.ToString());
+                    int idPLocal = Int32.Parse(dgvActual.CurrentRow.Cells["idProducto"].Value.ToString());
+                    idPedido1 = idPLocal;
+
+                    foreach (DataRow item in datosSiguiente.Rows)
                     {
-                        seEncuentra = true;
-                        indiceSiguiente = siguiente; // Almacena el índice de la fila en la que se encontró la coincidencia
-                        break; // Puedes salir del bucle una vez que encuentres la primera coincidencia si eso es lo que necesitas
+                        // Comparar el dato actual con el siguiente
+                        if (dgvActual.CurrentRow.Cells["idProducto"].Value.ToString().Equals(item["idProductoSiguiente"].ToString()))
+                        {
+                            seEncuentra = true;
+                            indiceSiguiente = siguiente; // Almacena el índice de la fila en la que se encontró la coincidencia
+                            break; // Puedes salir del bucle una vez que encuentres la primera coincidencia si eso es lo que necesitas
+                        }
+                        siguiente++;
                     }
-                    siguiente++;
-                }
 
-                if (cantidad == 1 && dgvActual.Rows.Count == 1)
-                {
-                    MessageBox.Show("Debe haber mas de un producto en la comanda");
-                    return;
-                }
-                else if (cantidad > 1)
-                {
-                    cantidadSeparar.lblInformacion.Text = "Seleccione la cantidad a separar entre 1 y " + cantidad;
-                    cantidadSeparar.ShowDialog();
-                }
-                else
-                {
-                    //Pasar y quitar
-                    ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
-                    PasarCompleto(indiceActual);
-                }
-
-                if (!cantidadSeparar.txtCantidad.Text.Equals("") && cantidadSeparar.cerrarPorBoton)
-                {
-
-                    separar = Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
-                    CantidadLista = separar; ///Cantidad que se va separar
-                    listaIdProductos.Add(new Tuple<int, int>(idPedido1, CantidadLista));
-
-                    quedaran = cantidad - Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
-                    precio = Double.Parse(dgvActual.CurrentRow.Cells["precio"].Value.ToString());
-
-                    if (cantidad == Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()) && dgvActual.Rows.Count > 1)
+                    if (cantidad == 1 && dgvActual.Rows.Count == 1)
                     {
-                        //Pasar y quitar todos
-                        ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
-                        PasarCompleto(indiceActual);
-                    }
-                    else if (cantidad == Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()) && dgvActual.Rows.Count == 1)
-                    {
-                        MessageBox.Show("No puede pasar todos los productos");
+                        MessageBox.Show("Debe haber mas de un producto en la comanda");
                         return;
                     }
-                    else if (cantidad > Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()))
+                    else if (cantidad > 1)
                     {
-                        //Pasar una parte
-                        ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                        cantidadSeparar.lblInformacion.Text = "Seleccione la cantidad a separar entre 1 y " + cantidad;
+                        cantidadSeparar.ShowDialog();
                     }
                     else
                     {
-                        MessageBox.Show("Ha definido una cantidad mayor y no se puede realizar.");
-                        return;
+                        //Pasar y quitar
+                        ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                        PasarCompleto(indiceActual);
+                    }
+
+                    if (!cantidadSeparar.txtCantidad.Text.Equals("") && cantidadSeparar.cerrarPorBoton)
+                    {
+
+                        separar = Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
+                        CantidadLista = separar; ///Cantidad que se va separar
+                        listaIdProductos.Add(new Tuple<int, int>(idPedido1, CantidadLista));
+
+                        quedaran = cantidad - Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString());
+                        precio = Double.Parse(dgvActual.CurrentRow.Cells["precio"].Value.ToString());
+
+                        if (cantidad == Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()) && dgvActual.Rows.Count > 1)
+                        {
+                            //Pasar y quitar todos
+                            ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                            PasarCompleto(indiceActual);
+                        }
+                        else if (cantidad == Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()) && dgvActual.Rows.Count == 1)
+                        {
+                            MessageBox.Show("No puede pasar todos los productos");
+                            return;
+                        }
+                        else if (cantidad > Int32.Parse(cantidadSeparar.txtCantidad.Text.ToString()))
+                        {
+                            //Pasar una parte
+                            ModificarGeneral(seEncuentra, indiceSiguiente, separar, quedaran, indiceActual, precio);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ha definido una cantidad mayor y no se puede realizar.");
+                            return;
+                        }
                     }
                 }
 
@@ -426,7 +430,7 @@ namespace TPV.GUI
                 }
                 String fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 //Creamos un nuevo pedido y despues los detalles
-                Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
+                Pedido pedido = new Pedido
                 {
                     IdMesa = idMesa,
                     Cancelado = false,
@@ -446,13 +450,13 @@ namespace TPV.GUI
                 };
 
                 //Agregamos detalles al pedido
-                Mantenimiento.CLS.PedidoDetalle pedidoDetalle2;
+                PedidoDetalle pedidoDetalle2;
 
                 //Insertamos en la base de datos el pedido
                 lstSeparar.Add(pedido.Insertar(false));
                 foreach (DataRow siguiente in datosSiguiente.Rows)
                 {
-                    pedidoDetalle2 = new Mantenimiento.CLS.PedidoDetalle
+                    pedidoDetalle2 = new PedidoDetalle
                     {
                         IdDetalle = 0,
                         Cocinando = true,

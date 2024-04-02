@@ -90,6 +90,7 @@ namespace TPV.GUI
         private void ActualizarCaja(Double tEfectivo, Boolean aumentar)
         {
             DataTable datosCaja = DataManager.DBConsultas.CajaAbierta();
+            
             Mantenimiento.CLS.Caja caja = new Mantenimiento.CLS.Caja();
             if (datosCaja.Rows.Count == 1)
             {
@@ -131,7 +132,7 @@ namespace TPV.GUI
                         caja.Saldo = saldo - tEfectivo;
                         caja.Efectivo = efectivo - tEfectivo;
                     }
-                    
+
                     if (!caja.Actualizar())
                     {
                         MessageBox.Show("Ocurrio un error actualizar caja, contacte al programador.", "¡Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -148,6 +149,7 @@ namespace TPV.GUI
             {
                 MessageBox.Show("Verifique que haya una caja abierta.", "¡Informacion!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+                
         }
     }
 }

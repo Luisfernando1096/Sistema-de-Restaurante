@@ -12,7 +12,8 @@ namespace TPV.GUI
 {
     public partial class CambioPrecioProducto : Form
     {
-        private bool cerrarPorBoton = false;
+        public bool cerrarPorBoton;
+
         public CambioPrecioProducto()
         {
             InitializeComponent();

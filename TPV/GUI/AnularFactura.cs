@@ -14,30 +14,34 @@ namespace TPV.GUI
 
         private void btnCargarFactura_Click(object sender, EventArgs e)
         {
-            FacturasCargar f = new FacturasCargar();
-            f.ShowDialog();
-            DataGridViewRow datos = f.datosEnviar;
-            if (datos != null)
+            using (FacturasCargar f = new FacturasCargar())
             {
-                txtCliente.Text = datos.Cells["nombre"].Value.ToString();
-                txtNumeroFactura.Text = datos.Cells["nFactura"].Value.ToString();
-                txtNumeroPedido.Text = datos.Cells["idPedido"].Value.ToString();
-                txtFecha.Text = datos.Cells["fecha"].Value.ToString();
-                txtDescuento.Text = datos.Cells["descuento"].Value.ToString();
-                txtPropina.Text = datos.Cells["propina"].Value.ToString();
-                txtSumas.Text = datos.Cells["total"].Value.ToString();
-                txtTotales.Text = datos.Cells["totalPago"].Value.ToString();
-                txtIva.Text = datos.Cells["iva"].Value.ToString();
-                lblSerie.Text = datos.Cells["serie"].Value.ToString();
+                f.ShowDialog();
+                DataGridViewRow datos = f.datosEnviar;
 
-                LlenarDetalle();
-                btnAnular.Enabled = true;
+                if (datos != null)
+                {
+                    txtCliente.Text = datos.Cells["nombre"].Value.ToString();
+                    txtNumeroFactura.Text = datos.Cells["nFactura"].Value.ToString();
+                    txtNumeroPedido.Text = datos.Cells["idPedido"].Value.ToString();
+                    txtFecha.Text = datos.Cells["fecha"].Value.ToString();
+                    txtDescuento.Text = datos.Cells["descuento"].Value.ToString();
+                    txtPropina.Text = datos.Cells["propina"].Value.ToString();
+                    txtSumas.Text = datos.Cells["total"].Value.ToString();
+                    txtTotales.Text = datos.Cells["totalPago"].Value.ToString();
+                    txtIva.Text = datos.Cells["iva"].Value.ToString();
+                    lblSerie.Text = datos.Cells["serie"].Value.ToString();
+
+                    LlenarDetalle();
+                    btnAnular.Enabled = true;
+                }
+                else
+                {
+                    btnAnular.Enabled = false;
+                    Limpiar();
+                }
             }
-            else
-            {
-                btnAnular.Enabled = false;
-                Limpiar();
-            }
+                
         }
 
         private void LlenarDetalle()
@@ -91,7 +95,9 @@ namespace TPV.GUI
             Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido();
             pedido.IdPedido = Int32.Parse(txtNumeroPedido.Text);
             pedido.Anular = true;
+
             DataTable datosCaja = DataManager.DBConsultas.CajaAbierta();
+            
             Mantenimiento.CLS.Caja caja = new Mantenimiento.CLS.Caja();
             if (datosCaja.Rows.Count == 1)
             {
@@ -135,7 +141,7 @@ namespace TPV.GUI
                         caja.Efectivo = efectivo - totalEfectivo;
                         if (caja.Actualizar())
                         {
-                            
+
                             MessageBox.Show("Factura anulada con exito.", "¡Realizado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
@@ -154,6 +160,7 @@ namespace TPV.GUI
             {
                 MessageBox.Show("Verifique que haya una caja abierta.", "¡Informacion!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+                
             Limpiar();
         }
 

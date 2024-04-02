@@ -139,6 +139,7 @@ namespace TPV.GUI
                 flpMesas.Controls.Add(btnMesa);
                 flpMesas.ScrollControlIntoView(btnMesa);
             }
+                
             // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
             flpMesas.VerticalScroll.Value = flpMesas.VerticalScroll.Minimum;
         }
@@ -164,7 +165,7 @@ namespace TPV.GUI
                 mesa.Disponible = false;
                 mesa.IdMesa = Int32.Parse(botonMesa.Tag.ToString());
                 lstCambioMesa.Add(mesa.ActualizarEstado());
-                
+
                 if (datosEnMesa.Rows.Count == 1)
                 {
                     //Hacer disponible la mesa anterior
@@ -178,78 +179,87 @@ namespace TPV.GUI
                 DataManager.DBOperacion transaccion1 = new DataManager.DBOperacion();
                 if (transaccion1.EjecutarTransaccion(lstCambioMesa) > 0)
                 {
-                    
+
                 }
                 else
                 {
                     MessageBox.Show("ERROR EN TRANSACCION AL CAMBIAR DE MESA, CONTACTE AL PROGRAMADOR.");
                 }
             }
+                
 
             DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(idMesa, 0);
-            ComandaGestion f = new ComandaGestion(this);
-            f.borrarData = false;
-
-            if (productoEnMesas.Rows.Count > 0)
+            using (ComandaGestion f = new ComandaGestion(this))
             {
-                //Asignamos datos al futuro formulario a abrir.
-                f.CargarProductosPorMesa(idMesa);
-                f.CargarPedidosEnMesa(idMesa);
-                f.CargarListaPedidos(idMesa);
+                f.borrarData = false;
 
-                //Agregando datos mesero y cliente si los hay
-                DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()), false);
-                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                if (productoEnMesas.Rows.Count > 0)
                 {
-                    f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                    f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                    //Asignamos datos al futuro formulario a abrir.
+                    f.CargarProductosPorMesa(idMesa);
+                    f.CargarPedidosEnMesa(idMesa);
+                    f.CargarListaPedidos(idMesa);
+
+                    //Agregando datos mesero y cliente si los hay
+                    DataTable pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(productoEnMesas.Rows[0][0].ToString()), false);
+                    if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                    {
+                        f.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                        f.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                    }
+                    if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                    {
+                        f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                        f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                    }
+                    f.lblMesa.Text = botonMesa.Text.ToString();
+                    f.lblMesa.Tag = botonMesa.Tag.ToString();
+
+
+                    f.ShowDialog();
                 }
-                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                else
                 {
-                    f.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                    f.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                    using (AgregarCuentas ag = new AgregarCuentas(botonMesa, this))
+                    {
+                        ag.ShowDialog();
+
+                        f.cambiarMesa = ag.cambiarMesa;
+                        if (ag.idPedidoCambio != string.Empty && ag.idPedidoCambio != null)
+                        {
+                            idPedidoCambioMesa = int.Parse(ag.idPedidoCambio);
+                        }
+                        if (ag.idMesaAnterior != string.Empty && ag.idMesaAnterior != null)
+                        {
+                            idMesaAnterior = int.Parse(ag.idMesaAnterior);
+                        }
+                    }
+                        
                 }
-                f.lblMesa.Text = botonMesa.Text.ToString();
-                f.lblMesa.Tag = botonMesa.Tag.ToString();
 
-
-                f.ShowDialog();
-            }
-            else
-            {
-                AgregarCuentas ag = new AgregarCuentas(botonMesa, this);
-                ag.ShowDialog();
-
-                f.cambiarMesa = ag.cambiarMesa;
-                if (ag.idPedidoCambio != string.Empty && ag.idPedidoCambio != null)
+                cambiarMesa = f.cambiarMesa;
+                if (!f.lblTicket.Text.ToString().Equals(""))
                 {
-                    idPedidoCambioMesa = int.Parse(ag.idPedidoCambio);
+                    idPedidoCambioMesa = Int32.Parse(f.lblTicket.Text.ToString());
                 }
-                if (ag.idMesaAnterior != string.Empty && ag.idMesaAnterior != null)
+                if (f.lblMesa.Tag != null)
                 {
-                    idMesaAnterior = int.Parse(ag.idMesaAnterior);
+                    idMesaAnterior = Int32.Parse(f.lblMesa.Tag.ToString());
                 }
-            }
+                this.Close();
 
-            cambiarMesa = f.cambiarMesa;
-            if (!f.lblTicket.Text.ToString().Equals(""))
-            {
-                idPedidoCambioMesa = Int32.Parse(f.lblTicket.Text.ToString());
-            }
-            if (f.lblMesa.Tag != null)
-            {
-                idMesaAnterior = Int32.Parse(f.lblMesa.Tag.ToString());
-            }
-            this.Close();
-
-            //Si no di click en el formulario anterior a ir a administracion
-            if (!admin && !cerrarSesion)
-            {
-                PuntoVenta f2 = new PuntoVenta(); // Crea una nueva instancia del formulario
-                f2.cambiarMesa = cambiarMesa;
-                f2.idPedidoCambioMesa = idPedidoCambioMesa;
-                f2.idMesaAnterior = idMesaAnterior;
-                f2.ShowDialog(); // Muestra el nuevo formulario
+                //Si no di click en el formulario anterior a ir a administracion
+                if (!admin && !cerrarSesion)
+                {
+                    using (PuntoVenta f2 = new PuntoVenta()) {
+                        // Crea una nueva instancia del formulario
+                        f2.cambiarMesa = cambiarMesa;
+                        f2.idPedidoCambioMesa = idPedidoCambioMesa;
+                        f2.idMesaAnterior = idMesaAnterior;
+                        f2.ShowDialog(); // Muestra el nuevo formulario
+                    }
+                        
+                }
             }
 
         }

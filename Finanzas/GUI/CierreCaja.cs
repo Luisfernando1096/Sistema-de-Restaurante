@@ -111,15 +111,21 @@ namespace Finanzas.GUI
                     if (caja.Actualizar())
                     {
                         MessageBox.Show("¡Se cerro la caja exitosamente!", "Cierre", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja();
-                        rep.SetDataSource(info);
-                        rep.SetParameterValue("Titulo", "Corte de Caja");
-                        rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
 
-                        f.crvVisor.ReportSource = rep;
-                        f.Show();
+                        using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+                        {
+                            using (Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja())
+                            {
+                                rep.SetDataSource(info);
+                                rep.SetParameterValue("Titulo", "Corte de Caja");
+                                rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+
+                                f.crvVisor.ReportSource = rep;
+                                f.ShowDialog();
+                            }
+                                
+                        }
+                            
                     }
                     else
                     {
@@ -157,14 +163,19 @@ namespace Finanzas.GUI
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             DataTable info = DataManager.DBConsultas.Cajas(true);
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja();
-            rep.SetDataSource(info);
-            rep.SetParameterValue("Titulo", "Estado de Caja");
-            rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja())
+                {
+                    rep.SetDataSource(info);
+                    rep.SetParameterValue("Titulo", "Estado de Caja");
+                    rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
 
-            f.crvVisor.ReportSource = rep;
-            f.Show();
+                    f.crvVisor.ReportSource = rep;
+                    f.ShowDialog();
+                }
+            }
+            
         }
     }
 }

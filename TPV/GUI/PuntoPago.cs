@@ -1309,13 +1309,17 @@ namespace TPV.GUI
                         //Facturar con un pago
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
-                            Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
-                            GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);// se envia el nFactura y la serie que corresponde
+                            using (Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica())
+                            {
+                                GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);
+                            }
                         }
                         else
                         {
-                            Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                            GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);// se envia el nFactura y la serie que corresponde
+                            using (Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura())
+                            {
+                                GenerarFactura(oReporte, serie, siguiente, "TARJETA", false);
+                            }
                         }
 
                         //Generar JSON
@@ -1333,13 +1337,17 @@ namespace TPV.GUI
                     {
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
-                            Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
-                            GenerarFactura(oReporte, serie, siguiente, "BITCOIN", false);// se envia el nFactura y la serie que corresponde
+                            using (Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica())
+                            {
+                                GenerarFactura(oReporte, serie, siguiente, "BITCOIN", false);
+                            }
                         }
                         else
                         {
-                            Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                            GenerarFactura(oReporte, serie, siguiente, "BITCOIN", false);// se envia el nFactura y la serie que corresponde
+                            using (Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura())
+                            {
+                                GenerarFactura(oReporte, serie, siguiente, "BITCOIN", false);
+                            }
                         }
                     }
                 }
@@ -1353,13 +1361,17 @@ namespace TPV.GUI
                     {
                         if (Boolean.Parse(oConfiguracion.FacturaElectronica))
                         {
-                            Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica();
-                            GenerarFactura(oReporte, serie, siguiente, "EFECTIVO", false);// se envia el nFactura y la serie que corresponde
+                            using (Reportes.REP.RepFacturaElectronica oReporte = new Reportes.REP.RepFacturaElectronica())
+                            {
+                                GenerarFactura(oReporte, serie, siguiente, "EFECTIVO", false);
+                            }
                         }
                         else
                         {
-                            Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura();
-                            GenerarFactura(oReporte, serie, siguiente, "EFECTIVO", false);// se envia el nFactura y la serie que corresponde
+                            using (Reportes.REP.RepFactura oReporte = new Reportes.REP.RepFactura())
+                            {
+                                GenerarFactura(oReporte, serie, siguiente, "EFECTIVO", false);
+                            }
                         }
                     }
                 }
@@ -1371,14 +1383,17 @@ namespace TPV.GUI
                     {
                         if (ObtenerPagosAnteriores() > 1)
                         {
-                            Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado();
-                            GenerarTicket(oReporte, true);
+                            using (Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado())
+                            {
+                                GenerarTicket(oReporte, true);
+                            }
                         }
                         else
                         {
-                            // Cargar los datos en un DataTable
-                            Reportes.REP.RepPagoEfectivo oReporte = new Reportes.REP.RepPagoEfectivo();
-                            GenerarTicket(oReporte, false);
+                            using (Reportes.REP.RepPagoEfectivo oReporte = new Reportes.REP.RepPagoEfectivo())
+                            {
+                                GenerarTicket(oReporte, false);
+                            }
                         }
 
                     }
@@ -1395,14 +1410,17 @@ namespace TPV.GUI
                     {
                         if (ObtenerPagosAnteriores() > 1)
                         {
-                            Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado();
-                            GenerarTicket(oReporte, true);
+                            using (Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado())
+                            {
+                                GenerarTicket(oReporte, true);
+                            }
                         }
                         else
                         {
-                            // Cargar los datos en un DataTable
-                            Reportes.REP.RepPagoTarjeta oReporte = new Reportes.REP.RepPagoTarjeta();
-                            GenerarTicket(oReporte, false);
+                            using (Reportes.REP.RepPagoTarjeta oReporte = new Reportes.REP.RepPagoTarjeta())
+                            {
+                                GenerarTicket(oReporte, false);
+                            }
                         }
 
                     }
@@ -1420,14 +1438,17 @@ namespace TPV.GUI
                     {
                         if (ObtenerPagosAnteriores() > 1)
                         {
-                            Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado();
-                            GenerarTicket(oReporte, true);
+                            using (Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado())
+                            {
+                                GenerarTicket(oReporte, true);
+                            }
                         }
                         else
                         {
-                            // Cargar los datos en un DataTable
-                            Reportes.REP.RepPagoBtc oReporte = new Reportes.REP.RepPagoBtc();
-                            GenerarTicket(oReporte, false);
+                            using (Reportes.REP.RepPagoBtc oReporte = new Reportes.REP.RepPagoBtc())
+                            {
+                                GenerarTicket(oReporte, false);
+                            }
                         }
 
                     }
@@ -1443,10 +1464,10 @@ namespace TPV.GUI
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        // Cargar los datos en un DataTable
-                        Reportes.REP.RepPagoCortesia oReporte = new Reportes.REP.RepPagoCortesia();
-                        GenerarTicket(oReporte, false);
-
+                        using (Reportes.REP.RepPagoCortesia oReporte = new Reportes.REP.RepPagoCortesia())
+                        {
+                            GenerarTicket(oReporte, false);
+                        }
                     }
                     else
                     {
@@ -1461,8 +1482,10 @@ namespace TPV.GUI
                     if (dgvDatos.Rows.Count > 0)
                     {
                         // Cargar los datos en un DataTable
-                        Reportes.REP.RepPagoExacto oReporte = new Reportes.REP.RepPagoExacto();
-                        GenerarTicket(oReporte, false);
+                        using (Reportes.REP.RepPagoExacto oReporte = new Reportes.REP.RepPagoExacto())
+                        {
+                            GenerarTicket(oReporte, false);
+                        }
 
                     }
                     else
@@ -1567,13 +1590,19 @@ namespace TPV.GUI
         {
             if (Boolean.Parse(oConfiguracion.FacturaElectronica))
             {
-                Reportes.REP.RepFacturaElectronicaMuchosPagos oReporte = new Reportes.REP.RepFacturaElectronicaMuchosPagos();
-                GenerarFactura(oReporte, serie, siguiente, "", true);// se envia el nFactura y la serie que corresponde
+                using (Reportes.REP.RepFacturaElectronicaMuchosPagos oReporte = new Reportes.REP.RepFacturaElectronicaMuchosPagos())
+                {
+                    GenerarFactura(oReporte, serie, siguiente, "", true);// se envia el nFactura y la serie que corresponde
+                }
+                    
             }
             else
             {
-                Reportes.REP.RepFacturaMuchosPagos oReporte = new Reportes.REP.RepFacturaMuchosPagos();
-                GenerarFactura(oReporte, serie, siguiente, "", true);// se envia el nFactura y la serie que corresponde
+                using (Reportes.REP.RepFacturaMuchosPagos oReporte = new Reportes.REP.RepFacturaMuchosPagos())
+                {
+                    GenerarFactura(oReporte, serie, siguiente, "", true);// se envia el nFactura y la serie que corresponde
+                }
+                    
             }
         }
 
@@ -1653,11 +1682,10 @@ namespace TPV.GUI
         {
             if (dgvDatos.Rows.Count > 0)
             {
-                // Cargar los datos en un DataTable
-
-                Reportes.REP.RepImprimirPuntoPago oReporte = new Reportes.REP.RepImprimirPuntoPago();
-                GenerarTicket(oReporte, false);
-
+                using (Reportes.REP.RepImprimirPuntoPago oReporte = new Reportes.REP.RepImprimirPuntoPago())
+                {
+                    GenerarTicket(oReporte, false);
+                }
             }
             else
             {
@@ -1866,7 +1894,6 @@ namespace TPV.GUI
                     {
                         oReporte.PrintToPrinter(1, false, 0, 0);
                     }
-                    
 
                     // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
                     /*this.Invoke((MethodInvoker)delegate

@@ -230,8 +230,11 @@ public class Server
         if (listaObjetos.Count > 0)
         {
             // Cargar los datos en un DataTable
-            RepImprimirPrecuenta oReporte = new RepImprimirPrecuenta();
-            GenerarPrecuenta(oReporte, listaObjetos);
+            using (RepImprimirPrecuenta oReporte = new RepImprimirPrecuenta())
+            {
+                GenerarPrecuenta(oReporte, listaObjetos);
+            }
+                
         }
     }
 
@@ -323,8 +326,11 @@ public class Server
         if (listaObjetos.Count > 0)
         {
             // Cargar los datos en un DataTable
-            RepComandaParcial oReporte = new RepComandaParcial();
-            GenerarComandaParcial(oReporte, listaObjetos);
+            using (RepComandaParcial oReporte = new RepComandaParcial())
+            {
+                GenerarComandaParcial(oReporte, listaObjetos);
+            }
+                
         }
 
     }
@@ -333,9 +339,10 @@ public class Server
     {
         if (listaObjetos.Count > 0)
         {
-            // Cargar los datos en un DataTable
-            RepComandaCompleta oReporte = new RepComandaCompleta();
-            GenerarComandaCompleta(oReporte, listaObjetos);
+            using (RepComandaCompleta oReporte = new RepComandaCompleta())
+            {
+                GenerarComandaCompleta(oReporte, listaObjetos);
+            }
         }
 
     }
@@ -366,7 +373,6 @@ public class Server
             oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
             oReporte.SetParameterValue("Slogan", oEmpresa.Slogan);
             oReporte.SetParameterValue("Salon", detallesDelGrupo[0].Salon);
-            oReporte.SetParameterValue("Grupo", kvp.Key.ToString());
 
 
             oReporte.SetParameterValue("Mesero", detallesDelGrupo[0].Mesero);
@@ -401,6 +407,7 @@ public class Server
 
                         oReporte.PrintOptions.PrinterName = settings.PrinterName;
                         oReporte.PrintToPrinter(1, false, 0, 0);
+
                     }
                     else
                     {

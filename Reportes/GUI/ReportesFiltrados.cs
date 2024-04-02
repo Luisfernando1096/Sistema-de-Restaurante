@@ -6,9 +6,6 @@ namespace Reportes.GUI
 {
     public partial class ReportesFiltrados : Form
     {
-        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
-        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
-        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
         public ReportesFiltrados()
         {
             InitializeComponent();
@@ -33,7 +30,7 @@ namespace Reportes.GUI
             {
                 pbInicio.Visible = false;
                 dtpInicio.Value = DateTime.Now;
-                MessageBox.Show("Debe seleccionar un rango de fecha valido.");
+                MessageBox.Show("Debe seleccionar un rango de fecha valido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             pbInicio.Visible = true;
@@ -45,7 +42,7 @@ namespace Reportes.GUI
             {
                 pbFin.Visible = false;
                 dtpFin.Value = DateTime.Now;
-                MessageBox.Show("Debe seleccionar un rango de fecha valido.");
+                MessageBox.Show("Debe seleccionar un rango de fecha valido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             pbFin.Visible = true;
@@ -73,33 +70,46 @@ namespace Reportes.GUI
                     if (cmbTipoCompras.SelectedIndex == 0)
                     {
                         //Programar reporte de compras
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
-                        REP.RepCompras rep = new REP.RepCompras();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepCompras rep = new REP.RepCompras())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
+                            
                     }
                     else if (cmbTipoCompras.SelectedIndex == 1)
                     {
                         //Programar reporte compras / proveedor
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
-                        REP.RepComprasProveedor rep = new REP.RepComprasProveedor();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepComprasProveedor rep = new REP.RepComprasProveedor())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
+                            
                     }
                     else if (cmbTipoCompras.SelectedIndex == 2)
                     {
-                        //Programar reporte compras / comprobante
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
-                        REP.RepComprasComprobante rep = new REP.RepComprasComprobante();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepComprasComprobante rep = new REP.RepComprasComprobante())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepComprasProveedorComprobante(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Debe seleccionar un tipo de reporte.");
+                        MessageBox.Show("Debe seleccionar un tipo de reporte.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
                 }
@@ -109,49 +119,65 @@ namespace Reportes.GUI
                     if (cmbTipoVetas.SelectedIndex == 0)
                     {
                         //Ventas
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
-                        REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
+                            
                     }
                     else if (cmbTipoVetas.SelectedIndex == 1)
                     {
-                        //Ventas Resumen
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
-                        REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasResumenPorPeriodo rep = new REP.RepVentasResumenPorPeriodo())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
                     }
                     else if (cmbTipoVetas.SelectedIndex == 2)
                     {
-                        //Ventas / Mesero
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
-                        REP.RepVentasMesero rep = new REP.RepVentasMesero();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
-
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasMesero rep = new REP.RepVentasMesero())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
                     }
                     else if (cmbTipoVetas.SelectedIndex == 3)
                     {
-                        //Ventas / Mesero Resumen
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
-                        REP.RepVentasMeseroResumen rep = new REP.RepVentasMeseroResumen();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
-
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasMeseroResumen rep = new REP.RepVentasMeseroResumen())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepResumenVentasPorPeriodo(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                        }
                     }
                     else if (cmbTipoVetas.SelectedIndex == 4)
                     {
-                        //Ventas Facturadas
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepVentasFacturadas(inicio, fin);
-                        REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasPorPeriodo rep = new REP.RepVentasPorPeriodo())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepVentasFacturadas(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                                
+                        }
                     }
                     else if (cmbTipoVetas.SelectedIndex == 5)
                     {
@@ -166,33 +192,51 @@ namespace Reportes.GUI
                     else if (cmbTipoVetas.SelectedIndex == 7)
                     {
                         //Ventas Productos Agrupados
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(inicio, fin);
-                        REP.RepVentasAgrupadoPorProducto rep = new REP.RepVentasAgrupadoPorProducto();
-                        f.GenerarReporte(rep, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasAgrupadoPorProducto rep = new REP.RepVentasAgrupadoPorProducto())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProducto(inicio, fin);
+                                f.GenerarReporte(rep, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                                
+                        }
+                            
                     }
                     else if (cmbTipoVetas.SelectedIndex == 8)
                     {
                         //Ventas Productos Resumen
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas();
-                        DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(inicio, fin);
-                        f.GenerarReporte(oReporte, datos, inicio, fin, "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepVentasPorFechas oReporte = new REP.RepVentasPorFechas())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepVentasAgrupadasPorProductoResumen(inicio, fin);
+                                f.GenerarReporte(oReporte, datos, inicio, fin, "");
+                                f.ShowDialog();
+                            }
+                                
+                        }
+                            
                     }
                     else if (cmbTipoVetas.SelectedIndex == 9)
                     {
                         //Productos Eliminados
-                        Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                        REP.RepProductosEliminadosDePedido oReporte = new REP.RepProductosEliminadosDePedido();
-                        DataTable datos = DataManager.DBConsultas.RepProductosEliminadosDePedidos((inicio + " 00:00:00"), (fin + " 23:59:59"));
-                        f.GenerarReporte(oReporte, datos, "", "", "");
-                        f.Show();
+                        using (VisorGeneral f = new VisorGeneral())
+                        {
+                            using (REP.RepProductosEliminadosDePedido oReporte = new REP.RepProductosEliminadosDePedido())
+                            {
+                                DataTable datos = DataManager.DBConsultas.RepProductosEliminadosDePedidos((inicio + " 00:00:00"), (fin + " 23:59:59"));
+                                f.GenerarReporte(oReporte, datos, "", "", "");
+                                f.ShowDialog();
+                            }
+                                
+                        }
+                            
                     }
                     else
                     {
-                        MessageBox.Show("Debe seleccionar un tipo de reporte.");
+                        MessageBox.Show("Debe seleccionar un tipo de reporte.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else if (valor.Equals("propinas"))
@@ -204,96 +248,9 @@ namespace Reportes.GUI
             }
             else
             {
-                MessageBox.Show("Debe seleccionar la fecha inicial.");
+                MessageBox.Show("Debe seleccionar la fecha inicial.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-        //private void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
-        //{
-        //    oReporte.SetDataSource(datos);
-        //    if (!f.Equals(""))
-        //    {
-        //        // Convertir la cadena a DateTime
-        //        if (DateTime.TryParse(f, out DateTime fecha))
-        //        {
-        //            // Formatear la fecha
-        //            string fechaFormateada = fecha.ToString("dd-MM-yyyy");
-
-        //            oReporte.SetParameterValue("Fecha", fechaFormateada);
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("La cadena no es un formato de fecha válido.");
-        //        }
-
-        //    }
-        //    if (!fi.Equals(""))
-        //    {
-        //        // Convertir la cadena a DateTime
-        //        if (DateTime.TryParse(fi, out DateTime fecha))
-        //        {
-        //            // Formatear la fecha
-        //            string fechaFormateada = fecha.ToString("dd-MM-yyyy");
-
-        //            oReporte.SetParameterValue("fInicio", fechaFormateada);
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("La cadena no es un formato de fecha válido.");
-        //        }
-        //    }
-        //    if (!ff.Equals(""))
-        //    {
-        //        // Convertir la cadena a DateTime
-        //        if (DateTime.TryParse(ff, out DateTime fecha))
-        //        {
-        //            // Formatear la fecha
-        //            string fechaFormateada = fecha.ToString("dd-MM-yyyy");
-
-        //            oReporte.SetParameterValue("fFin", fechaFormateada);
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("La cadena no es un formato de fecha válido.");
-        //        }
-        //    }
-        //    oReporte.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
-        //    if (Boolean.Parse(oTicket.ShowSaludo))
-        //    {
-        //        oReporte.SetParameterValue("Footer", oTicket.Footer3);
-        //    }
-        //    else
-        //    {
-        //        oReporte.SetParameterValue("Footer", "");
-        //    }
-
-        //    if (oReporte != null)
-        //    {
-        //        try
-        //        {
-        //            // Imprimir el informe en la impresora seleccionada
-        //            PrinterSettings settings = new PrinterSettings
-        //            {
-        //                PrinterName = oConfiguracion.PrinterInformes
-        //            };
-
-        //            oReporte.PrintOptions.PrinterName = settings.PrinterName;
-        //            oReporte.PrintToPrinter(1, false, 0, 0);
-
-        //            // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-        //            this.Invoke((MethodInvoker)delegate {
-        //                MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-        //            this.Invoke((MethodInvoker)delegate {
-        //                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            });
-        //        }
-        //    }
-        //}
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
@@ -310,33 +267,49 @@ namespace Reportes.GUI
             if (cmbVerInforme.SelectedIndex == 0)
             {
                 //Productos con stock minimo
-                Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                Reportes.REP.RepProductoSinStock oReporte = new Reportes.REP.RepProductoSinStock();
-                DataTable datos = DataManager.DBConsultas.ProductosSinStock();
-                oReporte.SetDataSource(datos);
-                f.GenerarReporte(oReporte, datos, "", "", "");
-                f.Show();
+                using (VisorGeneral f = new VisorGeneral())
+                {
+                    using (REP.RepProductoSinStock oReporte = new REP.RepProductoSinStock())
+                    {
+                        DataTable datos = DataManager.DBConsultas.ProductosSinStock();
+                        oReporte.SetDataSource(datos);
+                        f.GenerarReporte(oReporte, datos, "", "", "");
+                        f.ShowDialog();
+                    }
+                }
+                
+                    
             }
             else if (cmbVerInforme.SelectedIndex == 1)
             {
                 //Ingredientes sin stock 
-                Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                Reportes.REP.RepIngredientes oReporte = new Reportes.REP.RepIngredientes();
-                DataTable datos = DataManager.DBConsultas.IngredientesSinStock();
-                oReporte.SetDataSource(datos);
-                f.GenerarReporte(oReporte, datos, "", "", "");
-                f.Show();
+                using (VisorGeneral f = new VisorGeneral())
+                {
+                    using (REP.RepIngredientes oReporte = new REP.RepIngredientes())
+                    {
+                        DataTable datos = DataManager.DBConsultas.IngredientesSinStock();
+                        oReporte.SetDataSource(datos);
+                        f.GenerarReporte(oReporte, datos, "", "", "");
+                        f.ShowDialog();
+                    }
+                }
+                
 
             }
             else if (cmbVerInforme.SelectedIndex == 2)
             {
                 //Productos con stock minimo
-                Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-                Reportes.REP.RepProductoStockMinimo oReporte = new Reportes.REP.RepProductoStockMinimo();
-                DataTable datos = DataManager.DBConsultas.ProductosStockMinimo();
-                oReporte.SetDataSource(datos);
-                f.GenerarReporte(oReporte, datos, "", "", "");
-                f.Show();
+                using (VisorGeneral f = new VisorGeneral())
+                {
+                    using (REP.RepProductoStockMinimo oReporte = new REP.RepProductoStockMinimo())
+                    {
+                        DataTable datos = DataManager.DBConsultas.ProductosStockMinimo();
+                        oReporte.SetDataSource(datos);
+                        f.GenerarReporte(oReporte, datos, "", "", "");
+                        f.ShowDialog();
+                    }
+                }
+                    
             }
            
         }

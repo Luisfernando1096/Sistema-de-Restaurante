@@ -32,10 +32,10 @@ namespace TPV.GUI
             try
             {
                 DataTable doc = DataManager.DBConsultas.Actividades();
-
                 cmbActividad.DataSource = doc;
                 cmbActividad.DisplayMember = "descripcion";
                 cmbActividad.ValueMember = "idActividad";
+
             }
             catch (Exception)
             {
@@ -63,10 +63,10 @@ namespace TPV.GUI
             try
             {
                 DataTable doc = DataManager.DBConsultas.Documentos();
-
                 cmbTDoc.DataSource = doc;
                 cmbTDoc.DisplayMember = "tipoDocumento";
                 cmbTDoc.ValueMember = "idDocumento";
+
             }
             catch (Exception)
             {
@@ -318,7 +318,7 @@ namespace TPV.GUI
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             //Codigo para filtrar clientes por nombre
-            MessageBox.Show("Hola estoy escribiendo");
+            MessageBox.Show("Esta en proceso");
         }
 
         private void DgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -327,7 +327,7 @@ namespace TPV.GUI
             {
                 if (idPedido != 0)
                 {
-                    Mantenimiento.CLS.Pedido pedido = new Mantenimiento.CLS.Pedido
+                    Pedido pedido = new Pedido
                     {
                         IdPedido = idPedido,
                         IdCliente = Int32.Parse(dgvClientes.CurrentRow.Cells["idCliente"].Value.ToString())
@@ -345,18 +345,20 @@ namespace TPV.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Mantenimiento.GUI.fr f = new Mantenimiento.GUI.fr();
-            if (f.ShowDialog() == DialogResult.OK) 
+            using (Mantenimiento.GUI.fr f = new Mantenimiento.GUI.fr())
             {
-                txtDireccion.Tag = "";
-                complemento = f.txtComplemento.Text;
-                txtDireccion.Text = f.cmbDepartamento.Text + ", " + f.cmbMunicipio.Text + ", " + f.txtComplemento.Text; //Direccion
-
-                municipio = new Municipio
+                if (f.ShowDialog() == DialogResult.OK)
                 {
-                    IdMunicipio = f.cmbMunicipio.SelectedValue.ToString()
-                };
-                
+                    txtDireccion.Tag = "";
+                    complemento = f.txtComplemento.Text;
+                    txtDireccion.Text = f.cmbDepartamento.Text + ", " + f.cmbMunicipio.Text + ", " + f.txtComplemento.Text; //Direccion
+
+                    municipio = new Municipio
+                    {
+                        IdMunicipio = f.cmbMunicipio.SelectedValue.ToString()
+                    };
+
+                }
             } 
 
         }

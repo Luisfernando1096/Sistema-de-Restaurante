@@ -24,6 +24,7 @@ namespace TPV.GUI
             try
             {
                 salones = DataManager.DBConsultas.Salones();
+                
                 if (salones.Rows.Count > 0)
                 {
                     cmbSalon.DataSource = salones;
@@ -33,7 +34,7 @@ namespace TPV.GUI
                 else
                 {
                     MessageBox.Show("Al parecer no hay salones, o no se pudo conectar con la base de datos, verifique que este estable la conexion.");
-                }
+                    } 
                 
             }
             catch (Exception)
@@ -64,6 +65,7 @@ namespace TPV.GUI
                         flpMesas.ScrollControlIntoView(btnMesa);
                     }
                 }
+                    
             }
             
         }

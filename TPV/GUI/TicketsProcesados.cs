@@ -61,21 +61,25 @@ namespace TPV.GUI
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(txtidPedido.Text));
-            
-            if (datos2.Rows.Count > 1)
+            if (!txtidPedido.Text.Equals(""))
             {
-                //Imprimir ticket
-                Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado();
-                GenerarTicket(oReporte, true);
+                DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(txtidPedido.Text));
+                if (datos2.Rows.Count > 1)
+                {
+                    using (Reportes.REP.RepTicketPagoCombinado oReporte = new Reportes.REP.RepTicketPagoCombinado())
+                    {
+                        GenerarTicket(oReporte, true);
+                    }
+                }
+                else
+                {
+                    using (Reportes.REP.RepTicket oReporte = new Reportes.REP.RepTicket())
+                    {
+                        GenerarTicket(oReporte, false);
+                    }
+                }
             }
-            else
-            {
-                //Imprimir ticket
-                Reportes.REP.RepTicket oReporte = new Reportes.REP.RepTicket();
-                GenerarTicket(oReporte, false);
-            }
-            
+
         }
 
         private void GenerarTicket(ReportClass oReporte, Boolean pc)
@@ -89,7 +93,6 @@ namespace TPV.GUI
             if (pc)
             {
                 DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(txtidPedido.Text));
-
                 foreach (DataRow item in datos2.Rows)
                 {
                     if (item["formaPago"].ToString().Equals("EFECTIVO"))
@@ -105,6 +108,7 @@ namespace TPV.GUI
                         btc = Double.Parse(item["monto"].ToString());
                     }
                 }
+
                 oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
                 oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
                 oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
@@ -129,11 +133,6 @@ namespace TPV.GUI
                     oReporte.PrintOptions.PrinterName = settings.PrinterName;
                     oReporte.PrintToPrinter(1, false, 0, 0);
 
-                    // Muestra un mensaje de éxito en el hilo de la interfaz de usuario
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        MessageBox.Show($"Finalizado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    });
                 }
                 catch (Exception ex)
                 {
@@ -144,6 +143,7 @@ namespace TPV.GUI
                     });
                 }
             }
+                
         }
 
         private void txtidPedido_KeyPress(object sender, KeyPressEventArgs e)
@@ -159,24 +159,27 @@ namespace TPV.GUI
         {
             if (dgvClientes.Rows.Count > 0)
             {
-                EditarTicket f = new EditarTicket();
-                f.lblTicket.Text = dgvClientes.CurrentRow.Cells["idPedido"].Value.ToString(); ;
-                f.lblTicket.Tag = dgvClientes.CurrentRow.Cells["idPagoCombinado"].Value.ToString();
+                using (EditarTicket f = new EditarTicket())
+                {
+                    f.lblTicket.Text = dgvClientes.CurrentRow.Cells["idPedido"].Value.ToString(); ;
+                    f.lblTicket.Tag = dgvClientes.CurrentRow.Cells["idPagoCombinado"].Value.ToString();
 
-                if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
-                {
-                    f.rbEfectivo.Checked = true;
-                } else if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("2"))
-                {
-                    f.rbTarjeta.Checked = true;
+                    if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
+                    {
+                        f.rbEfectivo.Checked = true;
+                    }
+                    else if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("2"))
+                    {
+                        f.rbTarjeta.Checked = true;
+                    }
+                    else
+                    {
+                        f.rbBtc.Checked = true;
+                    }
+
+                    f.ShowDialog();
                 }
-                else
-                {
-                    f.rbBtc.Checked = true;
-                }
-
-                f.ShowDialog();
-
+                    
                 CargarDatos();
             }
             else

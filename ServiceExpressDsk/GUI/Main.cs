@@ -216,14 +216,7 @@ namespace ServiceExpressDsk.GUI
                 else if (oUsuario.IdRol.ToString().Equals("2"))
                 {
                     //Mesero
-                    this.Hide();
-                    TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
-                    f.ShowDialog();
-                    cerrar = f.cerrarSesion;
-                    if (!cerrar)
-                    {
-                        this.Show();
-                    }
+                    IrPuntoVenta();
 
                 }
                 else if (oUsuario.IdRol.ToString().Equals("3"))
@@ -250,17 +243,40 @@ namespace ServiceExpressDsk.GUI
             //timer1.Start();
         }
 
-
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void IrPuntoVenta()
         {
+            // Oculta la ventana actual
             this.Hide();
-            TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
-            f.ShowDialog();
-            cerrar = f.cerrarSesion;
+
+            // Crea una nueva instancia de la ventana PuntoVenta
+            using (TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta())
+            {
+                // Muestra la ventana PuntoVenta como un diálogo modal
+                f.ShowDialog();
+
+                // Obtiene el estado de cierre de la ventana PuntoVenta
+                cerrar = f.cerrarSesion;
+            }
+
+            // Si no se debe cerrar la sesión, muestra nuevamente la ventana actual
             if (!cerrar)
             {
                 this.Show();
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IrPuntoVenta();
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier excepción que ocurra durante la ejecución del código
+                MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -271,233 +287,278 @@ namespace ServiceExpressDsk.GUI
         private void CargarPuntoPago()
         {
             this.Hide();
-            TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta();
-            f.Hide();
-            TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f)
+            using (TPV.GUI.PuntoVenta f = new TPV.GUI.PuntoVenta())
             {
-                borrarData = true
-            };
-            f2.Hide();
-            TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago(f2);
-            f3.ShowDialog();
-
-            if (f3.lblMesa.Tag != null)
-            {
-
-                if (!f3.lblTicket.Text.Equals("") && f2.datos == null)
+                f.Hide();
+                using (TPV.GUI.ComandaGestion f2 = new TPV.GUI.ComandaGestion(f))
                 {
-                    DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
-
-                    if (productoEnMesas.Rows.Count > 0)
+                    f2.borrarData = true;
+                    f2.Hide();
+                    using (TPV.GUI.PuntoPago f3 = new TPV.GUI.PuntoPago(f2))
                     {
-                        idPedidoSiguiente = f3.idPedidoSiguiente;
-                        DataTable pedido;
-                        //Aqui cargamos los datos en datagrid 
-                        if (idPedidoSiguiente > 0)
-                        {
-                            f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), idPedidoSiguiente);
-                            f2.lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
-                            pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente, false);
-                        }
-                        else
-                        {
-                            f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
-                            f2.lblTicket.Text = f3.lblTicket.Text;//Accedemos a la primera posicion de la tabla
-                            pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f3.lblTicket.Text), false);
-                        }
+                        f3.ShowDialog();
 
-                        f2.CargarPedidosEnMesa(f3.lblMesa.Tag.ToString());
-
-                        if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                        if (f3.lblMesa.Tag != null)
                         {
-                            f2.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                            f2.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
-                        }
-                        else
-                        {
-                            f2.lblMesero.Text = "";
-                            f2.lblMesero.Tag = "";
-                        }
-                        if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-                        {
-                            f2.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                            f2.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-                        }
-                        else
-                        {
-                            f2.lblCliente.Text = "";
-                            f2.lblCliente.Tag = "";
-                        }
-                    }
-                    f2.lblMesa.Text = f3.lblMesa.Text.ToString();
-                    f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
-                }
 
-
-            }
-
-            //Si Se presiona click en cerrar sesion
-            cerrar = f2.cerrarSesion;
-            tpv = f2.tpv;
-            if (!cerrar)
-            {
-                cerrar = f.cerrarSesion;
-            }
-
-            if (cerrar)
-            {
-                Close();
-            }
-            else
-            {
-                if (!tpv)
-                {
-                    f2.ShowDialog();
-                    cerrar = f2.cerrarSesion;
-                }
-
-                if (!cerrar)
-                {
-                    if (!f.admin)
-                    {
-                        f.cambiarMesa = f2.cambiarMesa;
-                        if (f2.lblMesa.Tag != null)
-                        {
-                            f.idMesaAnterior = Int32.Parse(f2.lblMesa.Tag.ToString());
-                            if (!f2.lblTicket.Text.Equals(""))
+                            if (!f3.lblTicket.Text.Equals("") && f2.datos == null)
                             {
-                                f.idPedidoCambioMesa = int.Parse(f2.lblTicket.Text);
+                                DataTable productoEnMesas = DataManager.DBConsultas.ProductosEnMesaConIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
+                                if (productoEnMesas.Rows.Count > 0)
+                                {
+                                    idPedidoSiguiente = f3.idPedidoSiguiente;
+                                    DataTable pedido;
+                                    //Aqui cargamos los datos en datagrid 
+                                    if (idPedidoSiguiente > 0)
+                                    {
+                                        f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), idPedidoSiguiente);
+                                        f2.lblTicket.Text = idPedidoSiguiente.ToString();//Accedemos a la primera posicion de la tabla
+                                        pedido = DataManager.DBConsultas.PedidoPorId(idPedidoSiguiente, false);
+                                    }
+                                    else
+                                    {
+                                        f2.CargarProductosPorMesayIdPedido(f3.lblMesa.Tag.ToString(), Int32.Parse(f3.lblTicket.Text));
+                                        f2.lblTicket.Text = f3.lblTicket.Text;//Accedemos a la primera posicion de la tabla
+                                        pedido = DataManager.DBConsultas.PedidoPorId(Int32.Parse(f3.lblTicket.Text), false);
+                                    }
+
+                                    f2.CargarPedidosEnMesa(f3.lblMesa.Tag.ToString());
+
+                                    if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+                                    {
+                                        f2.lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                                        f2.lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+                                    }
+                                    else
+                                    {
+                                        f2.lblMesero.Text = "";
+                                        f2.lblMesero.Tag = "";
+                                    }
+                                    if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                                    {
+                                        f2.lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                                        f2.lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+                                    }
+                                    else
+                                    {
+                                        f2.lblCliente.Text = "";
+                                        f2.lblCliente.Tag = "";
+                                    }
+                                }
+                                f2.lblMesa.Text = f3.lblMesa.Text.ToString();
+                                f2.lblMesa.Tag = f3.lblMesa.Tag.ToString();
+
+                            }
+
+
+                        }
+
+                        //Si Se presiona click en cerrar sesion
+                        cerrar = f2.cerrarSesion;
+                        tpv = f2.tpv;
+                        if (!cerrar)
+                        {
+                            cerrar = f.cerrarSesion;
+                        }
+
+                        if (cerrar)
+                        {
+                            Close();
+                        }
+                        else
+                        {
+                            if (!tpv)
+                            {
+                                f2.ShowDialog();
+                                cerrar = f2.cerrarSesion;
+                            }
+
+                            if (!cerrar)
+                            {
+                                if (!f.admin)
+                                {
+                                    f.cambiarMesa = f2.cambiarMesa;
+                                    if (f2.lblMesa.Tag != null)
+                                    {
+                                        f.idMesaAnterior = Int32.Parse(f2.lblMesa.Tag.ToString());
+                                        if (!f2.lblTicket.Text.Equals(""))
+                                        {
+                                            f.idPedidoCambioMesa = int.Parse(f2.lblTicket.Text);
+                                        }
+                                    }
+
+                                    f.ShowDialog();
+                                    cerrar = f.cerrarSesion;
+                                }
+
+                                if (!cerrar)
+                                {
+                                    this.Show();
+                                }
                             }
                         }
-
-                        f.ShowDialog();
-                        cerrar = f.cerrarSesion;
-                    }
-
-                    if (!cerrar)
-                    {
-                        this.Show();
                     }
                 }
+                
             }
+            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            TPV.GUI.TicketsProcesados f = new TPV.GUI.TicketsProcesados();
-            f.ShowDialog();
+            using (TPV.GUI.TicketsProcesados f = new TPV.GUI.TicketsProcesados())
+            {
+                f.ShowDialog();
+            } 
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            TPV.GUI.AnularFactura f = new TPV.GUI.AnularFactura();
-            f.ShowDialog();
+            using (TPV.GUI.AnularFactura f = new TPV.GUI.AnularFactura())
+            {
+                f.ShowDialog();
+            }
+                
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos())
+            {
+                f.ShowDialog();
+            } 
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.BuscarProducto f = new Ingredientes_y_Productos.GUI.BuscarProducto();
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.BuscarProducto f = new Ingredientes_y_Productos.GUI.BuscarProducto())
+            {
+                f.ShowDialog();
+            } 
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes())
+            {
+                f.ShowDialog();
+            }  
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.BuscarIngrediente f = new Ingredientes_y_Productos.GUI.BuscarIngrediente();
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.BuscarIngrediente f = new Ingredientes_y_Productos.GUI.BuscarIngrediente())
+            {
+                f.ShowDialog();
+            } 
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes();
-            f.tabControl1.SelectedIndex = 1;
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.Ingredientes f = new Ingredientes_y_Productos.GUI.Ingredientes())
+            {
+                f.tabControl1.SelectedIndex = 1;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
-            f.tabControl1.SelectedIndex = 1;
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos())
+            {
+                f.tabControl1.SelectedIndex = 1;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos();
-            f.tabControl1.SelectedIndex = 2;
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.Productos f = new Ingredientes_y_Productos.GUI.Productos())
+            {
+                f.tabControl1.SelectedIndex = 2;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            Ingredientes_y_Productos.GUI.AjusteStock f = new Ingredientes_y_Productos.GUI.AjusteStock();
-            f.tabControl1.SelectedIndex = 2;
-            f.ShowDialog();
+            using (Ingredientes_y_Productos.GUI.AjusteStock f = new Ingredientes_y_Productos.GUI.AjusteStock())
+            {
+                f.tabControl1.SelectedIndex = 2;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton10_Click(object sender, EventArgs e)
         {
-            Compras.GUI.Compras f = new Compras.GUI.Compras();
-            f.ShowDialog();
+            using (Compras.GUI.Compras f = new Compras.GUI.Compras())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton11_Click(object sender, EventArgs e)
         {
-            Compras.GUI.Proveedores f = new Compras.GUI.Proveedores();
-            f.ShowDialog();
+            using (Compras.GUI.Proveedores f = new Compras.GUI.Proveedores())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton12_Click(object sender, EventArgs e)
         {
-            Compras.GUI.BuscarProveedor f = new Compras.GUI.BuscarProveedor();
-            f.ShowDialog();
+            using (Compras.GUI.BuscarProveedor f = new Compras.GUI.BuscarProveedor())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            Compras.GUI.TipoComprobante f = new Compras.GUI.TipoComprobante();
-            f.ShowDialog();
+            using (Compras.GUI.TipoComprobante f = new Compras.GUI.TipoComprobante())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton17_Click(object sender, EventArgs e)
         {
-            Finanzas.GUI.Egresos f = new Finanzas.GUI.Egresos();
-            f.ShowDialog();
+            using (Finanzas.GUI.Egresos f = new Finanzas.GUI.Egresos())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)
         {
-            Finanzas.GUI.AdministrarCuentas f = new Finanzas.GUI.AdministrarCuentas();
-            f.ShowDialog();
+            using (Finanzas.GUI.AdministrarCuentas f = new Finanzas.GUI.AdministrarCuentas())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton19_Click(object sender, EventArgs e)
         {
-            Personal.GUI.EmpleadosGestion f = new Personal.GUI.EmpleadosGestion();
-            f.ShowDialog();
+            using (Personal.GUI.EmpleadosGestion f = new Personal.GUI.EmpleadosGestion())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton20_Click(object sender, EventArgs e)
         {
-            Personal.GUI.RolesGestion f = new Personal.GUI.RolesGestion();
-            f.ShowDialog();
+            using (Personal.GUI.RolesGestion f = new Personal.GUI.RolesGestion())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton21_Click(object sender, EventArgs e)
         {
-            Personal.GUI.Asignar_roles f = new Personal.GUI.Asignar_roles();
-            f.ShowDialog();
+            using (Personal.GUI.Asignar_roles f = new Personal.GUI.Asignar_roles())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton41_Click(object sender, EventArgs e)
@@ -507,8 +568,10 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton15_Click(object sender, EventArgs e)
         {
-            Salones.GUI.SalonesMesas f = new Salones.GUI.SalonesMesas();
-            f.ShowDialog();
+            using (Salones.GUI.SalonesMesas f = new Salones.GUI.SalonesMesas())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripContainer3_TopToolStripPanel_Click(object sender, EventArgs e)
@@ -518,148 +581,201 @@ namespace ServiceExpressDsk.GUI
 
         private void toolStripButton14_Click(object sender, EventArgs e)
         {
-            Finanzas.GUI.ApuertaraCaja f = new Finanzas.GUI.ApuertaraCaja();
-            f.ShowDialog();
+            using (Finanzas.GUI.ApuertaraCaja f = new Finanzas.GUI.ApuertaraCaja())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton16_Click(object sender, EventArgs e)
         {
-            Finanzas.GUI.CierreCaja f = new Finanzas.GUI.CierreCaja();
-            f.ShowDialog();
+            using (Finanzas.GUI.CierreCaja f = new Finanzas.GUI.CierreCaja())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton35_Click(object sender, EventArgs e)
         {
-            Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV();
-            f.tabControl1.SelectedIndex = 0;
-            f.ShowDialog();
+            using (Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV())
+            {
+                f.tabControl1.SelectedIndex = 0;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton36_Click(object sender, EventArgs e)
         {
-            Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV();
-            f.tabControl1.SelectedIndex = 1;
-            f.ShowDialog();
+            using (Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV())
+            {
+                f.tabControl1.SelectedIndex = 1;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton37_Click(object sender, EventArgs e)
         {
-            Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV();
-            f.tabControl1.SelectedIndex = 2;
-            f.ShowDialog();
+            using (Configuraciones.GUI.ConfiguracionTPV f = new Configuraciones.GUI.ConfiguracionTPV())
+            {
+                f.tabControl1.SelectedIndex = 2;
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton23_Click(object sender, EventArgs e)
         {
-            Personal.GUI.Permisos f = new Personal.GUI.Permisos();
-            f.ShowDialog();
+            using (Personal.GUI.Permisos f = new Personal.GUI.Permisos())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton32_Click(object sender, EventArgs e)
         {
-            Respaldos.GUI.Respaldo f = new Respaldos.GUI.Respaldo();
-            f.ShowDialog();
+            using (Respaldos.GUI.Respaldo f = new Respaldos.GUI.Respaldo())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton33_Click(object sender, EventArgs e)
         {
-            Respaldos.GUI.Restauracion f = new Respaldos.GUI.Restauracion();
-            f.ShowDialog();
+            using (Respaldos.GUI.Restauracion f = new Respaldos.GUI.Restauracion())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton34_Click(object sender, EventArgs e)
         {
-            Respaldos.GUI.Vaciar f = new Respaldos.GUI.Vaciar();
-            f.ShowDialog();
+            using (Respaldos.GUI.Vaciar f = new Respaldos.GUI.Vaciar())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton26_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados();
-            f.ShowDialog();
+            using (Reportes.GUI.ReportesFiltrados f = new Reportes.GUI.ReportesFiltrados())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton27_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            Reportes.REP.RepStockProducto oReporte = new Reportes.REP.RepStockProducto();
-            DataTable datos = DataManager.DBConsultas.VerProductos();
-            oReporte.SetDataSource(datos);
-            f.GenerarReporte(oReporte, datos, "", "", "");
-            f.Show();
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepStockProducto oReporte = new Reportes.REP.RepStockProducto())
+                {
+                    DataTable datos = DataManager.DBConsultas.VerProductos();
+                    oReporte.SetDataSource(datos);
+                    f.GenerarReporte(oReporte, datos, "", "", "");
+                    f.ShowDialog();
+                }
+                    
+            }
         }
 
         private void toolStripButton31_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            Reportes.REP.RepProveedores oReporte = new Reportes.REP.RepProveedores();
-            DataTable datos = DataManager.DBConsultas.Proveedor();
-            oReporte.SetDataSource(datos);
-            f.GenerarReporte(oReporte, datos, "", "", "");
-            f.Show();
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepProveedores oReporte = new Reportes.REP.RepProveedores())
+                {
+                    DataTable datos = DataManager.DBConsultas.Proveedor();
+                    oReporte.SetDataSource(datos);
+                    f.GenerarReporte(oReporte, datos, "", "", "");
+                    f.ShowDialog();
+                }
+                    
+            }
         }
 
         private void toolStripButton28_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            Reportes.REP.RepClientes oReporte = new Reportes.REP.RepClientes();
-            DataTable datos = DataManager.DBConsultas.Clientes();
-            oReporte.SetDataSource(datos);
-            f.GenerarReporte(oReporte, datos, "", "", "");
-            f.Show();
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepClientes oReporte = new Reportes.REP.RepClientes())
+                {
+                    DataTable datos = DataManager.DBConsultas.Clientes();
+                    oReporte.SetDataSource(datos);
+                    f.GenerarReporte(oReporte, datos, "", "", "");
+                    f.ShowDialog();
+                }
+                    
+            }
         }
 
         private void toolStripButton29_Click(object sender, EventArgs e)
         {
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            String fechaBD = DateTime.Now.ToString("yyyy/MM/dd");
-            String fechaREP = DateTime.Now.ToString("dd/MM/yyyy");
-
-            DataTable datos = DataManager.DBConsultas.RepVentasDiarias(fechaBD);
-            Reportes.REP.RepVentasDiarias rep = new Reportes.REP.RepVentasDiarias();
-            f.GenerarReporte(rep, datos, "", "", fechaREP);
-            f.Show();
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepVentasDiarias rep = new Reportes.REP.RepVentasDiarias())
+                {
+                    String fechaBD = DateTime.Now.ToString("yyyy/MM/dd");
+                    String fechaREP = DateTime.Now.ToString("dd/MM/yyyy");
+                    DataTable datos = DataManager.DBConsultas.RepVentasDiarias(fechaBD);
+                    f.GenerarReporte(rep, datos, "", "", fechaREP);
+                    f.ShowDialog();
+                }
+                    
+            }
         }
 
         private void tpvClientes_Click(object sender, EventArgs e)
         {
-            TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion();
-            f.ShowDialog();
+            using (TPV.GUI.ClientesGestion f = new TPV.GUI.ClientesGestion())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton22_Click(object sender, EventArgs e)
         {
-            Personal.GUI.Comandos f = new Personal.GUI.Comandos();
-            f.ShowDialog();
+            using (Personal.GUI.Comandos f = new Personal.GUI.Comandos())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton39_Click(object sender, EventArgs e)
         {
-            Configuraciones.GUI.TirajeFactura f = new Configuraciones.GUI.TirajeFactura();
-            f.ShowDialog();
+            using (Configuraciones.GUI.TirajeFactura f = new Configuraciones.GUI.TirajeFactura())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton40_Click(object sender, EventArgs e)
         {
-            Configuraciones.GUI.AdministrarFactura f = new Configuraciones.GUI.AdministrarFactura();
-            f.ShowDialog();
+            using (Configuraciones.GUI.AdministrarFactura f = new Configuraciones.GUI.AdministrarFactura())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton30_Click(object sender, EventArgs e)
         {
-            //Ingredientes sin stock 
-            Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral();
-            Reportes.REP.RepIngredientes oReporte = new Reportes.REP.RepIngredientes();
-            DataTable datos = DataManager.DBConsultas.RepIngredientes();
-            oReporte.SetDataSource(datos);
-            f.GenerarReporte(oReporte, datos, "", "", "");
-            f.Show();
+            using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
+            {
+                using (Reportes.REP.RepIngredientes oReporte = new Reportes.REP.RepIngredientes())
+                {
+                    DataTable datos = DataManager.DBConsultas.RepIngredientes();
+                    oReporte.SetDataSource(datos);
+                    f.GenerarReporte(oReporte, datos, "", "", "");
+                    f.ShowDialog();
+                }
+                    
+            }
         }
 
         private void toolStripButton38_Click(object sender, EventArgs e)
         {
-            Configuraciones.GUI.Recomendada f = new Configuraciones.GUI.Recomendada();
-            f.ShowDialog();
+            using (Configuraciones.GUI.Recomendada f = new Configuraciones.GUI.Recomendada())
+            {
+                f.ShowDialog();
+            }
         }
 
         private void toolStripButton42_Click(object sender, EventArgs e)
@@ -669,8 +785,10 @@ namespace ServiceExpressDsk.GUI
 
         private void tsMesaYMeseros_Click(object sender, EventArgs e)
         {
-            TPV.GUI.MesasOcupadas f = new TPV.GUI.MesasOcupadas();
-            f.ShowDialog();
+            using (TPV.GUI.MesasOcupadas f = new TPV.GUI.MesasOcupadas())
+            {
+                f.ShowDialog();
+            }
         }
     }
 }

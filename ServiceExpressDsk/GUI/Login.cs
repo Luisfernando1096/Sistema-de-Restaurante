@@ -130,8 +130,11 @@ namespace ServiceExpressDsk.GUI
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            CadenaConexion cadenaConexion = new CadenaConexion();
-            cadenaConexion.ShowDialog();
+            using (CadenaConexion cadenaConexion = new CadenaConexion())
+            {
+                cadenaConexion.ShowDialog();
+            }
+                
         }
 
         private void Login_KeyDown(object sender, KeyEventArgs e)
@@ -145,10 +148,13 @@ namespace ServiceExpressDsk.GUI
 
         private void lblContaseña_Click(object sender, EventArgs e)
         {
-            CambioContraseña f = new CambioContraseña();
-            this.Hide();
-            f.FormClosed += (s, args) => this.Show();
-            f.ShowDialog();
+            using (CambioContraseña f = new CambioContraseña())
+            {
+                this.Hide();
+                f.FormClosed += (s, args) => this.Show();
+                f.ShowDialog();
+            }
+                
         }
 
         private void btn9_Click(object sender, EventArgs e)
