@@ -22,29 +22,11 @@ namespace Mantenimiento.CLS
         public int IdCuenta { get => idCuenta; set => idCuenta = value; }
         public String Referencia { get => referencia; set => referencia = value; }
 
-        public Boolean Insertar()
+        public String Insertar()
         {
-            try
-            {
-                Boolean resultado = false;
-                string sentencia;
-                
-                sentencia = "INSERT INTO pago_combinado(monto, fechaPago, referencia, idPedido, idCuenta) VALUES(" + monto + ", '" + fechaPago + "', '" + referencia + "', " + idPedido + ", " + idCuenta + ")";
-
-                DataManager.DBOperacion op = new DataManager.DBOperacion();
-                Int32 filasInsertadas = 0;
-                filasInsertadas = op.EjecutarSentencia(sentencia);
-                if (filasInsertadas > 0)
-                {
-                    resultado = true;
-                }
-                return resultado;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            string sentencia;
+            sentencia = "INSERT INTO pago_combinado(monto, fechaPago, referencia, idPedido, idCuenta) VALUES(" + monto + ", '" + fechaPago + "', '" + referencia + "', " + idPedido + ", " + idCuenta + ")";
+            return sentencia;
         }
 
         public Boolean CambiarFormaPago()

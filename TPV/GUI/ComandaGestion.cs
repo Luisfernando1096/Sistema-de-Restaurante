@@ -1137,45 +1137,49 @@ namespace TPV.GUI
             int longitud = lstDetalle.Count;
             //Obtengo el pedido que estaba abierto en el punto de pago.
             DataTable pedido = DataManager.DBConsultas.PedidoPorId(id, primerPedido);
-            if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
+            if (pedido.Rows.Count > 0)
             {
-                lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
-                lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
-                
-                if (longitud > 0)
+                if (!pedido.Rows[0]["nombres"].ToString().Equals(""))
                 {
-                    for (int i = 0; i < longitud; i++)
+                    lblMesero.Text = pedido.Rows[0]["nombres"].ToString();
+                    lblMesero.Tag = int.Parse(pedido.Rows[0]["idMesero"].ToString());
+
+                    if (longitud > 0)
                     {
-                        lstDetalle[i].Mesero = pedido.Rows[0]["nombres"].ToString();
+                        for (int i = 0; i < longitud; i++)
+                        {
+                            lstDetalle[i].Mesero = pedido.Rows[0]["nombres"].ToString();
+                        }
+
                     }
-                    
+                }
+                else
+                {
+                    lblMesero.Text = "";
+                    lblMesero.Tag = "";
+                }
+                if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
+                {
+                    lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
+                    lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
+
+                    if (longitud > 0)
+                    {
+                        for (int i = 0; i < longitud; i++)
+                        {
+                            lstDetalle[i].Cliente = pedido.Rows[0]["nombre"].ToString();
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    lblCliente.Text = "";
+                    lblCliente.Tag = "";
                 }
             }
-            else
-            {
-                lblMesero.Text = "";
-                lblMesero.Tag = "";
-            }
-            if (!pedido.Rows[0]["nombre"].ToString().Equals(""))
-            {
-                lblCliente.Text = pedido.Rows[0]["nombre"].ToString();
-                lblCliente.Tag = int.Parse(pedido.Rows[0]["idCliente"].ToString());
-
-                if (longitud > 0)
-                {
-                    for (int i = 0; i < longitud; i++)
-                    {
-                        lstDetalle[i].Cliente = pedido.Rows[0]["nombre"].ToString();
-                    }
-
-                }
-
-            }
-            else
-            {
-                lblCliente.Text = "";
-                lblCliente.Tag = "";
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

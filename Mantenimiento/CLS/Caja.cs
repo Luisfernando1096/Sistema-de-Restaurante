@@ -95,6 +95,37 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
+        public String ActualizarConTransaccion()
+        {
+            string sentencia;
+            if (_FechaCierre != null)
+            {
+                if (_FechaApertura != null)
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", fechaApertura ='" + _FechaApertura + "', fechaCierre ='" + _FechaCierre + "', saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+                else
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+
+            }
+            else
+            {
+                if (_FechaApertura != null)
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", fechaApertura ='" + _FechaApertura + "', saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+                else
+                {
+                    sentencia = @"update caja set idCajero = " + _idCajero + ", estado = " + _Estado + ", saldoInicial = " + _SaldoInicial + ", efectivo = " + _Efectivo + ", saldo = " + _Saldo + " where idCaja =" + _idCaja + ";";
+                }
+
+            }
+
+            return sentencia;
+        }
+
         public Boolean ActualizarCierre()
         {
             Boolean resultado = false;

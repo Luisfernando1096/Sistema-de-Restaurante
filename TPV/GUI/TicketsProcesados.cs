@@ -85,7 +85,15 @@ namespace TPV.GUI
         private void GenerarTicket(ReportClass oReporte, Boolean pc)
         {
             DataTable datos = DataManager.DBConsultas.ImprimirTicket(Int32.Parse(txtidPedido.Text));
-            oReporte.SetDataSource(datos);
+            try
+            {
+                oReporte.SetDataSource(datos);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error Procesar ticket: {ex.Message}, se ha alcanzado limite maximo, puede cerrar el sistema y volver a iniciar. Notifique al programador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             Double efectivo = 0;
             Double tarjeta = 0;
@@ -139,7 +147,7 @@ namespace TPV.GUI
                     // Manejo de excepciones: muestra un mensaje de error en caso de problemas
                     this.Invoke((MethodInvoker)delegate
                     {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Error al imprimir: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     });
                 }
             }
