@@ -64,6 +64,14 @@ namespace Mantenimiento.CLS
             return resultado;
         }
 
+        public String ActualizarConTransaccion()
+        {
+            string sentencia;
+            sentencia = @"update cuenta set nombreCuenta = '" + nombreCuenta + "', numero = '" + numero + "', saldo = " + saldo + " where idCuenta = " + idCuenta + ";";
+
+            return sentencia;
+        }
+
         public Boolean Eliminar()
         {
             Boolean resultado = false;

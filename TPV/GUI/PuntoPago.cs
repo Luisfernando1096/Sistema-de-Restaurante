@@ -32,6 +32,7 @@ namespace TPV.GUI
         private bool pagoCortesia;
         private bool pagoExacto;
         private bool pagoBtc;
+        Boolean ocurrioError = false;
         private String fechaPago = "";
         private String referencia;
 
@@ -806,6 +807,7 @@ namespace TPV.GUI
 
         private void btnEfectivo_Click(object sender, EventArgs e)
         {
+            List<String> lstPago = new List<string>();
             pagoEfectivo = true;
             pagoBtc = false;
             pagoTarjeta = false;
@@ -817,10 +819,12 @@ namespace TPV.GUI
             {
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
                 //Registrar pago en cuenta
-                AumentarCuenta();
+                if (AumentarCuenta(lstPago))
+                {
+                    //Aqui insertar en la tabla pagos combinados
+                    ProcesarPago(lstPago);
+                }
 
-                //Aqui insertar en la tabla pagos combinados
-                ProcesarPago();
             }
             else
             {
@@ -830,6 +834,7 @@ namespace TPV.GUI
 
         private void btnTarjeta_Click(object sender, EventArgs e)
         {
+            List<String> lstPago = new List<string>();
             pagoEfectivo = false;
             pagoBtc = false;
             pagoTarjeta = true;
@@ -840,12 +845,13 @@ namespace TPV.GUI
             {
                 referencia = AgregarReferencia();
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
-                
-                //Registrar pago en cuenta
-                AumentarCuenta();
 
-                //Aqui insertar en la tabla pagos combinados
-                ProcesarPago();
+                //Registrar pago en cuenta
+                if (AumentarCuenta(lstPago))
+                {
+                    //Aqui insertar en la tabla pagos combinados
+                    ProcesarPago(lstPago);
+                }
                 
             }
             else
@@ -907,6 +913,7 @@ namespace TPV.GUI
             }
             else
             {
+                List<String> lstPago = new List<string>();
                 txtPagoRegistrar.Text = txtTotalPagar.Text;
                 pagoEfectivo = false;
                 pagoTarjeta = false;
@@ -926,18 +933,20 @@ namespace TPV.GUI
                 {
                     pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
                 }
-                
-                //Registrar pago en cuenta
-                AumentarCuenta();
 
-                //Aqui insertar en la tabla pagos combinados
-                TerminarPago();
+                //Registrar pago en cuenta
+                if (AumentarCuenta(lstPago))
+                {
+                    //Aqui insertar en la tabla pagos combinados
+                    TerminarPago(lstPago);
+                }
                 
             }
         }
 
         private void btnCortesia_Click(object sender, EventArgs e)
         {
+            List<String> lstPago = new List<string>();
             if (SumaMontos() > 0)
             {
                 MessageBox.Show("No se puede hacer el pago cortesia porque ya inicio el pago combinado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -953,13 +962,13 @@ namespace TPV.GUI
                 pedido.Saldo = 0.00;
                 pedido.TotalPago = Double.Parse(txtTotalPagar.Text);
                 //Aqui insertar en la tabla pagos combinados
-                RegistrarPago();
-                ActualizarCuentaYMesa(true);
+                ActualizarCuentaYMesa(true, lstPago);
+                RegistrarPago(lstPago);
             }
             
         }
 
-        private void ProcesarPago()
+        private void ProcesarPago(List<string> lstPago)
         {
             Double totalPago;
             if (SumaMontos() > 1)
@@ -987,67 +996,90 @@ namespace TPV.GUI
                     
                 }*/
                 //Proceso para pagar combinado
-                HacerPago(Int32.Parse(lblTicket.Text), false);
-                CalcularTodo();
-                txtPagoRegistrar.Text = "0";
-                escritoUnPunto = false;
+                HacerPago(Int32.Parse(lblTicket.Text), false, lstPago);
+
+                DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
+                if (transaccion.EjecutarTransaccion(lstPago) > 0)
+                {
+                    MessageBox.Show("Pago efectuado, puede continuar con el siguiente.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CalcularTodo();
+                    txtPagoRegistrar.Text = "0";
+                    escritoUnPunto = false;
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo completar el pago, intentelo nuevamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
             } 
             else
             {
                 //Culminamos el pago
-                TerminarPago();
+                TerminarPago(lstPago);
             }
 
         }
 
-        private void AumentarCuenta()
+        private Boolean AumentarCuenta(List<string> lstPago)
         {
+            Boolean continuar = false;
             //Proceso para agregar el efectivo cancelado
             DataTable cuenta = null;
             Cuenta oCuenta = new Cuenta();
             if (pagoTarjeta)
             {
                 cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("2");
+                continuar = true;
             }
             else if (pagoEfectivo || pagoExacto)
             {
                 cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("1");
-                ActualizarCaja();
+                continuar = ActualizarCaja(lstPago);
             }
             else if (pagoBtc)
             {
                 cuenta = DataManager.DBConsultas.ObtenerCuentaPorId("3");
+                continuar = true;
             }
-
-            if (cuenta != null)
+            if (continuar)
             {
-                int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
-                String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
-                String numero = cuenta.Rows[0]["numero"].ToString();
-                Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
-                oCuenta.IdCuenta = idCuenta;
-                oCuenta.NombreCuenta = nombreCuenta;
-                oCuenta.Numero = numero;
-                oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
+                if (cuenta.Rows.Count > 0)
+                {
+                    int idCuenta = Int32.Parse(cuenta.Rows[0]["idCuenta"].ToString());
+                    String nombreCuenta = cuenta.Rows[0]["nombreCuenta"].ToString();
+                    String numero = cuenta.Rows[0]["numero"].ToString();
+                    Double saldo = Double.Parse(cuenta.Rows[0]["saldo"].ToString());
+                    oCuenta.IdCuenta = idCuenta;
+                    oCuenta.NombreCuenta = nombreCuenta;
+                    oCuenta.Numero = numero;
+                    oCuenta.Saldo = saldo + Double.Parse(txtPagoRegistrar.Text.ToString());
 
-                oCuenta.ActualizarSinTransaccion();
+                    lstPago.Add(oCuenta.ActualizarConTransaccion());
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Al parecer hay problema al obtener una cuenta, verifique la conexion con la base de datos.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
             }
+            else
+            {
+                return false;
+            }
+            
         }
 
-        private void TerminarPago()
+        private void TerminarPago(List<string> lstPago)
         {
-            HacerPago(Int32.Parse(lblTicket.Text), true);
-            RegistrarPago();
-            ActualizarCuentaYMesa(false);
+            HacerPago(Int32.Parse(lblTicket.Text), true, lstPago);
+            ActualizarCuentaYMesa(false, lstPago);
+            RegistrarPago(lstPago);
 
-            CalcularTodo();
-            txtPagoRegistrar.Text = "0";
-            escritoUnPunto = false;
         }
 
-        private void ActualizarCuentaYMesa(Boolean cortesia)
+        private void ActualizarCuentaYMesa(Boolean cortesia, List<string> lstPago)
         {
-            List<String> lstPago = new List<string>();
             if (!cortesia)
             {
                 if (datosEnMesa.Rows.Count == 1 && Double.Parse(lblCambio.Tag.ToString()) >= 0)
@@ -1059,7 +1091,6 @@ namespace TPV.GUI
                         Disponible = true
                     };
                     lstPago.Add(mesa.ActualizarEstado());
-
                 }
 
             }
@@ -1077,22 +1108,10 @@ namespace TPV.GUI
 
                 }
             }
-
-            DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
-            if (transaccion.EjecutarTransaccion(lstPago) < 0)
-            {
-                MessageBox.Show("Ocurrio un error al hacer el pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                CalcularTodo();
-                txtPagoRegistrar.Text = "0";
-                escritoUnPunto = false;
-            }
             
         }
 
-        private void HacerPago(int idP, bool terminar)
+        private void HacerPago(int idP, bool terminar, List<string> lstPago)
         {
             int idC;
             if (pagoBtc)
@@ -1126,11 +1145,11 @@ namespace TPV.GUI
             pago.IdPedido = idP;
             pago.IdCuenta = idC;
 
-            pago.Insertar();
+            lstPago.Add(pago.Insertar());
 
         }
 
-        private void ActualizarCaja()
+        private Boolean ActualizarCaja(List<string> lstPago)
         {
             //Sucedera algo en caja programar aqui
             DataTable caja = DataManager.DBConsultas.CajaAbierta();
@@ -1162,20 +1181,24 @@ namespace TPV.GUI
                         }
                     }
                 }
-                if (!cajaActualizar.Actualizar())
-                {
-                    MessageBox.Show("Ocurrio un error al actualizar caja, contacte al programador.");
-                }
+                lstPago.Add(cajaActualizar.ActualizarConTransaccion());
+                return true;
             }
             else
             {
-                MessageBox.Show("No se encontro caja abierta, el pago no se registro en caja.");
+                if(DialogResult.Yes == MessageBox.Show("No se encontro caja abierta, el pago no se registrara en caja, ¿Continuar?.", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        private void RegistrarPago()
+        private void RegistrarPago(List<string> lstPago)
         {
-            List<String> lstPago = new List<string>();
             fechaPago = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             int siguiente = 0, idTiraje = 0;
             String serie = string.Empty;
@@ -1299,7 +1322,7 @@ namespace TPV.GUI
 
                 if (pagoTarjeta && generar)
                 {
-                    if (ObtenerPagosAnteriores() > 1)
+                    if (ObtenerPagosAnteriores() > 0)
                     {
                         //Facturar con muchos pagos
                         ElegirFactura(serie, siguiente);
@@ -1329,7 +1352,7 @@ namespace TPV.GUI
                 }
                 else if (pagoBtc && generar)
                 {
-                    if (ObtenerPagosAnteriores() > 1)
+                    if (ObtenerPagosAnteriores() > 0)
                     {
                         ElegirFactura(serie, siguiente);
                     }
@@ -1353,7 +1376,7 @@ namespace TPV.GUI
                 }
                 else if (generar && (pagoEfectivo || pagoExacto))
                 {
-                    if (ObtenerPagosAnteriores() > 1)
+                    if (ObtenerPagosAnteriores() > 0)
                     {
                         ElegirFactura(serie, siguiente);
                     }
@@ -1381,7 +1404,7 @@ namespace TPV.GUI
                 {
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        if (ObtenerPagosAnteriores() > 1)
+                        if (ObtenerPagosAnteriores() > 0)
                         {
                             using (Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado())
                             {
@@ -1394,6 +1417,7 @@ namespace TPV.GUI
                             {
                                 GenerarTicket(oReporte, false);
                             }
+                            
                         }
 
                     }
@@ -1408,7 +1432,7 @@ namespace TPV.GUI
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        if (ObtenerPagosAnteriores() > 1)
+                        if (ObtenerPagosAnteriores() > 0)
                         {
                             using (Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado())
                             {
@@ -1436,7 +1460,7 @@ namespace TPV.GUI
                     //MessageBox.Show("Imprimir el ticket Tarjeta");
                     if (dgvDatos.Rows.Count > 0)
                     {
-                        if (ObtenerPagosAnteriores() > 1)
+                        if (ObtenerPagosAnteriores() > 0)
                         {
                             using (Reportes.REP.RepPagoCombinado oReporte = new Reportes.REP.RepPagoCombinado())
                             {
@@ -1498,6 +1522,24 @@ namespace TPV.GUI
 
             lstPago.Add(pedido.ActualizarPedidoPagado());
 
+            if (ocurrioError)
+            {
+                if (DialogResult.Yes == MessageBox.Show("¿Desea finalizar el pago?, no se le generara el ticket o factura de pago.", "Informacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    RealizarPago(lstPago);
+                }
+                
+            }
+            else
+            {
+                RealizarPago(lstPago);
+            }
+            
+            
+        }
+
+        private void RealizarPago(List<string> lstPago)
+        {
             DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
             if (transaccion.EjecutarTransaccion(lstPago) > 0)
             {
@@ -1506,7 +1548,10 @@ namespace TPV.GUI
                 comandaGestion.Close();
                 Close();
             }
-            
+            else
+            {
+                MessageBox.Show("No se pudo completar el pago, intentelo nuevamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private List<string> ListaClientes()
@@ -1718,34 +1763,24 @@ namespace TPV.GUI
 
             foreach (DataTable item in lstFacturas)
             {
-                oReporte.SetDataSource(item);
+                try
+                {
+                    oReporte.SetDataSource(item);
+                }
+                catch (Exception ex)
+                {
+                    ocurrioError = true;
+                    MessageBox.Show($"Error cargar factura: {ex.Message}, se ha alcanzado limite maximo, puede cerrar el sistema y volver a iniciar. Notifique al programador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 Double totalPagar = 0;
-                Double efectivo = 0;
-                Double tarjeta = 0;
-                Double btc = 0;
+                
                 if (pc)
                 {
                     DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
 
-                    foreach (DataRow item2 in datos2.Rows)
-                    {
-                        if (item2["formaPago"].ToString().Equals("EFECTIVO"))
-                        {
-                            efectivo = Double.Parse(item2["monto"].ToString());
-                        }
-                        else if (item2["formaPago"].ToString().Equals("TARJETA"))
-                        {
-                            tarjeta = Double.Parse(item2["monto"].ToString());
-                        }
-                        else if (item2["formaPago"].ToString().Equals("BITCOIN"))
-                        {
-                            btc = Double.Parse(item2["monto"].ToString());
-                        }
-                        totalPagar += Double.Parse(item2["monto"].ToString());
-                    }
-                    oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
-                    oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
-                    oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
+                    
+                    totalPagar = AgregarPagosCombinados(datos2, oReporte);
                 }
                 else
                 {
@@ -1805,47 +1840,80 @@ namespace TPV.GUI
                     catch (Exception ex)
                     {
                         // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        });
+                        ocurrioError = true;
+                        MessageBox.Show($"Error al imprimir: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
             }
             
         }
 
-        private void GenerarTicket(ReportClass oReporte, Boolean pc)
+        private Double AgregarPagosCombinados(DataTable datos2, ReportClass oReporte)
         {
-            DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
-            oReporte.SetDataSource(datos);
             Double totalPagar = 0;
             Double efectivo = 0;
             Double tarjeta = 0;
             Double btc = 0;
+            foreach (DataRow item2 in datos2.Rows)
+            {
+                if (item2["formaPago"].ToString().Equals("EFECTIVO"))
+                {
+                    efectivo = Double.Parse(item2["monto"].ToString());
+                }
+                else if (item2["formaPago"].ToString().Equals("TARJETA"))
+                {
+                    tarjeta = Double.Parse(item2["monto"].ToString());
+                }
+                else if (item2["formaPago"].ToString().Equals("BITCOIN"))
+                {
+                    btc = Double.Parse(item2["monto"].ToString());
+                }
+                totalPagar += Double.Parse(item2["monto"].ToString());
+            }
+            if (pagoEfectivo)
+
+            {
+                efectivo += Double.Parse(txtPagoRegistrar.Text) - Double.Parse(lblCambio.Tag.ToString());
+            }
+            else if (pagoTarjeta)
+            {
+                tarjeta += Double.Parse(txtPagoRegistrar.Text) - Double.Parse(lblCambio.Tag.ToString());
+            }
+            else if (pagoBtc)
+            {
+                btc += Double.Parse(txtPagoRegistrar.Text) - Double.Parse(lblCambio.Tag.ToString());
+            }
+            totalPagar += Double.Parse(txtPagoRegistrar.Text) - Double.Parse(lblCambio.Tag.ToString());
+            oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
+            oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
+            oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
+
+            return totalPagar;
+        }
+
+        private void GenerarTicket(ReportClass oReporte, Boolean pc)
+        {
+            DataTable datos = DataManager.DBConsultas.ProductosEnMesaConIdPedido(lblMesa.Tag.ToString(), Int32.Parse(lblTicket.Text));
+            try
+            {
+                oReporte.SetDataSource(datos);
+            }
+            catch (Exception ex)
+            {
+                ocurrioError = true;
+                MessageBox.Show($"Error al cargar ticket pago: {ex.Message}, se ha alcanzado limite maximo, puede cerrar el sistema y volver a iniciar. Notifique al programador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            Double totalPagar = 0;
+
             if (pc)
             {
                 DataTable datos2 = DataManager.DBConsultas.PagosRealizados(Int32.Parse(lblTicket.Text));
 
-                foreach (DataRow item in datos2.Rows)
-                {
-                    if (item["formaPago"].ToString().Equals("EFECTIVO"))
-                    {
-                        efectivo = Double.Parse(item["monto"].ToString());
-                    }
-                    else if (item["formaPago"].ToString().Equals("TARJETA"))
-                    {
-                        tarjeta = Double.Parse(item["monto"].ToString());
-                    }
-                    else if (item["formaPago"].ToString().Equals("BITCOIN"))
-                    {
-                        btc = Double.Parse(item["monto"].ToString());
-                    }
-                    totalPagar += Double.Parse(item["monto"].ToString());
-                }
-                oReporte.SetParameterValue("PagoEfectivo", "EFECTIVO: $   " + efectivo.ToString("0.00"));
-                oReporte.SetParameterValue("PagoTarjeta", "TARJETA:  $   " + tarjeta.ToString("0.00"));
-                oReporte.SetParameterValue("PagoBtc", "BITCOIN:  $   " + btc.ToString("0.00"));
+                
+                totalPagar = AgregarPagosCombinados(datos2, oReporte);
             }
             else
             {
@@ -1903,11 +1971,9 @@ namespace TPV.GUI
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de excepciones: muestra un mensaje de error en caso de problemas
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    });
+                    ocurrioError = true;
+                    MessageBox.Show($"Error al generar ticket: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
         }
@@ -2058,6 +2124,7 @@ namespace TPV.GUI
 
         private void btnBtc_Click(object sender, EventArgs e)
         {
+            List<String> lstPago = new List<string>();
             pagoEfectivo = false;
             pagoBtc = true;
             pagoTarjeta = false;
@@ -2072,10 +2139,11 @@ namespace TPV.GUI
                 pedido.Saldo = Double.Parse(lblCambio.Tag.ToString()) * (-1);
 
                 //Registrar pago en cuenta
-                AumentarCuenta();
-
-                //Aqui insertar en la tabla pagos combinados
-                ProcesarPago();
+                if (AumentarCuenta(lstPago))
+                {
+                    //Aqui insertar en la tabla pagos combinados
+                    ProcesarPago(lstPago);
+                }
                 
             }
             else
