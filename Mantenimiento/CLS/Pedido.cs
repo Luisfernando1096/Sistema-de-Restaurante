@@ -185,5 +185,11 @@ namespace Mantenimiento.CLS
             return sentencia;
         }
 
+        public String EliminarTabla()
+        {
+            string sentencia;
+            sentencia = @"DELETE FROM pedido";
+            return sentencia;
+        }
     }
 }

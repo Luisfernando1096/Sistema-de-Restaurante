@@ -111,6 +111,10 @@
       <Project>{934c2225-957e-419b-923c-694542bab3fa}</Project>
       <Name>DataManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
+      <Project>{1a5bdfb4-366e-47fa-90da-72fb5e6048f3}</Project>
+      <Name>Mantenimiento</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

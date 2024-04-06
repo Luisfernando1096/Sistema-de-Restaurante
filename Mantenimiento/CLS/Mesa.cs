@@ -133,5 +133,15 @@ namespace Mantenimiento.CLS
 
             return sentencia;
         }
+
+        public String ActualizarMesas()
+        {
+            string sentencia;
+
+            sentencia = @"UPDATE mesa SET disponible = true";
+
+            return sentencia;
+
+        }
     }
 }

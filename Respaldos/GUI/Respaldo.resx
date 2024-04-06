@@ -775,11 +775,8 @@
 </value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>¿Porque respaldar la base de datos  respaldar la base de datos es una práctica proactiva que nos permite mitigar riesgos y garantizar la continuidad de nuestras operaciones frente a eventos imprevistos. Al adoptar esta medida preventiva, aseguramos la protección de nuestros datos críticos y la capacidad de responder de manera efectiva ante cualquier contratiempo.
-
-
-
-
+    <value>¿Porque respaldar la base de datos? 
+respaldar la base de datos es una práctica proactiva que nos permite mitigar riesgos y garantizar la continuidad de nuestras operaciones frente a eventos imprevistos. Al adoptar esta medida preventiva, aseguramos la protección de nuestros datos críticos y la capacidad de responder de manera efectiva ante cualquier contratiempo.
 
 Te recomendamos que realices una copia de seguridad(respaldo) de forma periodica</value>
   </data>

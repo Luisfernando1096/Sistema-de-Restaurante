@@ -31,10 +31,10 @@ namespace Respaldos.GUI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restauracion));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.bntRestaurar = new System.Windows.Forms.ToolStripButton();
             this.bntRespaldo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.bntRestaurar = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -53,15 +53,25 @@ namespace Respaldos.GUI
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bntRestaurar,
             this.bntRespaldo,
             this.toolStripSeparator1,
-            this.btnSalir,
-            this.bntRestaurar});
+            this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1099, 60);
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // bntRestaurar
+            // 
+            this.bntRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("bntRestaurar.Image")));
+            this.bntRestaurar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.bntRestaurar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bntRestaurar.Name = "bntRestaurar";
+            this.bntRestaurar.Size = new System.Drawing.Size(168, 57);
+            this.bntRestaurar.Text = "Restaurar";
+            this.bntRestaurar.Click += new System.EventHandler(this.bntRestaurar_Click);
             // 
             // bntRespaldo
             // 
@@ -88,16 +98,6 @@ namespace Respaldos.GUI
             this.btnSalir.Size = new System.Drawing.Size(112, 57);
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // bntRestaurar
-            // 
-            this.bntRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("bntRestaurar.Image")));
-            this.bntRestaurar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.bntRestaurar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bntRestaurar.Name = "bntRestaurar";
-            this.bntRestaurar.Size = new System.Drawing.Size(168, 57);
-            this.bntRestaurar.Text = "Restaurar";
-            this.bntRestaurar.Click += new System.EventHandler(this.bntRestaurar_Click);
             // 
             // groupBox3
             // 
@@ -149,14 +149,13 @@ namespace Respaldos.GUI
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(285, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(614, 163);
+            this.label1.Size = new System.Drawing.Size(699, 163);
             this.label1.TabIndex = 0;
-            this.label1.Text = "¡Advertencia! Realice los respaldos periodicamente. \r\n\r\n\r\n\r\n\r\n\r\nAntes de realizar" +
-    " una restauracion se recomienda realizar una copia de seguridad de la informacio" +
-    "n actual";
+            this.label1.Text = "Realice los respaldos periodicamente. \r\n\r\n\r\nAntes de realizar una restauracion se" +
+    " recomienda realizar una copia de seguridad de la informacion actual";
             // 
             // Restauracion
             // 

@@ -73,7 +73,7 @@ namespace DataManager
                     filasAfectadas = -1;
                 }
                 finally
-                {
+                {   
                     base.Desconectar();
                 }
             }
@@ -136,9 +136,10 @@ namespace DataManager
             return resultado;
         }
 
-        public TimeSpan Respaldo(string ruta)
+        public (bool, TimeSpan) Respaldo(string ruta)
         {
             Stopwatch stopwatch = new Stopwatch();
+            bool respaldoExitoso = false;
 
             try
             {
@@ -156,6 +157,7 @@ namespace DataManager
                     try
                     {
                         bk.ExportToFile(ruta);
+                        respaldoExitoso = true;
                     }
                     catch (Exception e)
                     {
@@ -173,12 +175,14 @@ namespace DataManager
                 Console.WriteLine($"Error al generar el respaldo: {ex.Message}");
                 Console.WriteLine($"Trace de la Pila: {ex.StackTrace}");
             }
-            return stopwatch.Elapsed;
+            return (respaldoExitoso, stopwatch.Elapsed);
         }
-        public TimeSpan RestaurarRespaldo(string ruta)
+
+
+        public (bool, TimeSpan) RestaurarRespaldo(string ruta)
         {
             Stopwatch stopwatch = new Stopwatch();
-
+            bool restauracionExitosa = false;
             try
             {
                 MySqlConnection conexion = new MySqlConnection();
@@ -195,9 +199,11 @@ namespace DataManager
                     try
                     {
                         bk.ImportFromFile(ruta);
+                        restauracionExitosa = true;
                     }
                     catch (Exception e)
                     {
+                        restauracionExitosa = false;
                         String Mensaje = e.Message;
                     }
 
@@ -206,13 +212,70 @@ namespace DataManager
 
                     base.Desconectar();
                 }
+                else
+                {
+                    restauracionExitosa = false;
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al restaurar el respaldo: {ex.Message}");
                 Console.WriteLine($"Trace de la Pila: {ex.StackTrace}");
+                // En caso de error, la restauración no fue exitosa
+                restauracionExitosa = false;
             }
-            return stopwatch.Elapsed;
+            return (restauracionExitosa, stopwatch.Elapsed);
+        }
+
+        public bool EjecutarScript(List<string> sentencias)
+        {
+            bool resultado = false;
+            int comandosEjecutados = 0;
+            MySqlCommand comando = new MySqlCommand();
+            MySqlTransaction transaction = null;
+
+            if (base.Conectar())
+            {
+                comando.Connection = base.conexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                try
+                {
+                    transaction = base.conexion.BeginTransaction();
+                    comando.Transaction = transaction;
+
+                    foreach (string sentencia in sentencias)
+                    {
+                        comando.CommandText = sentencia;
+                        int resultadoSentencia = comando.ExecuteNonQuery();
+                        if (resultadoSentencia >= 0) // Aquí puedes ajustar la condición según tus necesidades
+                        {
+                            comandosEjecutados++;
+                        }
+                    }
+
+                    if (comandosEjecutados == sentencias.Count)
+                    {
+                        transaction.Commit();
+                        resultado = true;
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Rollback(); // Revertir la transacción en caso de error
+                    }
+                }
+                finally
+                {
+                    base.Desconectar();
+                }
+            }
+            return resultado;
         }
     }
 }

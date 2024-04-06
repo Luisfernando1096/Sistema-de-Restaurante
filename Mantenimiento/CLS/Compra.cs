@@ -111,5 +111,11 @@ namespace Mantenimiento.CLS
 
             return resultado;
         }
+        public String EliminarTabla()
+        {
+            string sentencia;
+            sentencia = @"DELETE FROM compra";
+            return sentencia;
+        }
     }
 }

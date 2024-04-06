@@ -78,5 +78,12 @@ namespace Mantenimiento.CLS
                 throw;
             }
         }
+
+        public String EliminarTabla()
+        {
+            string sentencia;
+            sentencia = @"DELETE FROM pago_combinado";
+            return sentencia;
+        }
     }
 }
