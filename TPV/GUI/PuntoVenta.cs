@@ -1,16 +1,19 @@
 ﻿using System;
+using ConfiguracionManager.CLS;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using System.Threading.Tasks;
 
 namespace TPV.GUI
 {
 
     public partial class PuntoVenta : Form
     {
+        ConfiguracionManager.CLS.Salon oSalon = ConfiguracionManager.CLS.Salon.Instancia;
         public bool cambiarMesa = false;
         public int idPedidoCambioMesa = 0;
         public int idMesaAnterior = 0;
@@ -81,27 +84,36 @@ namespace TPV.GUI
             }
         }
 
-        private void PuntoVenta_Load(object sender, EventArgs e)
+
+        private async void PuntoVenta_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Maximized;
-            DataTable salones = DataManager.DBConsultas.Salones();
-            // Crear y agregar botones al FlowLayoutPanel para cada salon
-            foreach (DataRow salon in salones.Rows)
+            await Task.Run(() =>
             {
-                btnSalon = new Button();
-                btnSalon.Text = salon["nombre"].ToString().ToUpper();
-                btnSalon.Tag = salon["idSalon"].ToString().ToUpper();
-                btnSalon.Size = new Size(Int32.Parse(AnchoSalon), Int32.Parse(AltoSalon));//Establecer ancho y alto
-                btnSalon.Margin = new Padding(Int32.Parse(SeparadorSalon));//Establecer margen
-                btnSalon.Click += BotonSalon_Click;
-                flpSalones.Controls.Add(btnSalon);
-                flpSalones.ScrollControlIntoView(btnSalon);
+                List<Button> botones = new List<Button>();
 
-            }
+                foreach (Salon item in oSalon.ListaSalones)
+                {
+                    Button btnSalon = new Button
+                    {
+                        Text = item.Nombre.ToUpper(),
+                        Tag = item.IdSalon.ToString().ToUpper(),
+                        Size = new Size(Int32.Parse(AnchoSalon), Int32.Parse(AltoSalon)),
+                        Margin = new Padding(Int32.Parse(SeparadorSalon))
+                    };
+                    btnSalon.Click += BotonSalon_Click;
 
-            // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
-            flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
+                    botones.Add(btnSalon);
+                }
+
+                flpSalones.BeginInvoke((Action)(() =>
+                {
+                    flpSalones.Controls.AddRange(botones.ToArray());
+                    flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
+                }));
+            });
         }
+
 
         private void BotonSalon_Click(object sender, EventArgs e)
         {

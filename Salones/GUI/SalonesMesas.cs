@@ -8,6 +8,7 @@ namespace Salones.GUI
     public partial class SalonesMesas : Form
     {
         BindingSource datos = new BindingSource();
+        ConfiguracionManager.CLS.Salon oSalon = ConfiguracionManager.CLS.Salon.Instancia;
         public SalonesMesas()
         {
             InitializeComponent();
@@ -278,6 +279,7 @@ namespace Salones.GUI
                         }
                     }
                 }
+                oSalon.ObtenerSalon();
             }
             catch (Exception)
             {

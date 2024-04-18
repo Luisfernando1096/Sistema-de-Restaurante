@@ -61,6 +61,7 @@ namespace Respaldos.GUI
                     if (restauracionExitosa)
                     {
                         progressBarHelper.ActualizarProgressBar(duracionRespaldo, progressBar1, false);
+                        
                     }
                     else
                     {

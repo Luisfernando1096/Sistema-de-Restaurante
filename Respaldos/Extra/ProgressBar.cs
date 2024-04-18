@@ -7,6 +7,7 @@ namespace Respaldos.Extra
     {
         public void ActualizarProgressBar(TimeSpan duracion, System.Windows.Forms.ProgressBar progressBar, bool error)
         {
+            ConfiguracionManager.CLS.Salon oSalon = ConfiguracionManager.CLS.Salon.Instancia;
             if (error)
             {
                 DialogResult result = MessageBox.Show("Ocurrió un error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -20,6 +21,7 @@ namespace Respaldos.Extra
                 int progreso = (int)((duracion.TotalMilliseconds / 100) * 100);
                 progreso = Math.Max(0, Math.Min(progreso, 100));
                 progressBar.Value = progreso;
+                oSalon.ObtenerSalon();
             }
         }
     }
