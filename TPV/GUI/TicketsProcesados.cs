@@ -175,14 +175,23 @@ namespace TPV.GUI
                     if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("1"))
                     {
                         f.rbEfectivo.Checked = true;
+                        f.rbEfectivo.Tag = 1;
+                        f.rbBtc.Tag = 0;
+                        f.rbTarjeta.Tag = 0;
                     }
                     else if (dgvClientes.CurrentRow.Cells["idCuenta"].Value.ToString().Equals("2"))
                     {
                         f.rbTarjeta.Checked = true;
+                        f.rbEfectivo.Tag = 0;
+                        f.rbBtc.Tag = 0;
+                        f.rbTarjeta.Tag = 1;
                     }
                     else
                     {
                         f.rbBtc.Checked = true;
+                        f.rbEfectivo.Tag = 0;
+                        f.rbBtc.Tag = 1;
+                        f.rbTarjeta.Tag = 0;
                     }
 
                     f.ShowDialog();

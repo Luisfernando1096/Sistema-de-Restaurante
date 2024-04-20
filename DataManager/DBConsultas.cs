@@ -1594,10 +1594,9 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                string sentencia = @"SELECT c.idCaja, c.idCajero, c.estado, c.fechaApertura, c.fechaCierre,
-                                     c.saldoInicial, c.efectivo, IFNULL((SELECT SUM(IF(pc.idCuenta = 1, pc.monto, 0)) 
-											 FROM pago_combinado pc 
-											 WHERE pc.fechaPago >= c.fechaApertura), 0) - IFNULL((SELECT SUM(eg.cantidad) FROM egreso eg WHERE eg.idCaja = c.idCaja), 0) + c.saldoInicial as saldo, e.nombres FROM caja c, empleado e WHERE c.idCajero = e.idEmpleado AND c.estado = 1; ";
+                string sentencia = @"SELECT c.idCaja, c.idCajero, c.estado, c.fechaApertura, c.fechaCierre, c.saldoInicial, c.efectivo, c.saldo 
+                                     FROM caja c, empleado e 
+                                     WHERE c.idCajero = e.idEmpleado AND c.estado = 1;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
