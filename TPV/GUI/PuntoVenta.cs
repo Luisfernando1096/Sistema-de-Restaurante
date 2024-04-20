@@ -85,33 +85,25 @@ namespace TPV.GUI
         }
 
 
-        private async void PuntoVenta_Load(object sender, EventArgs e)
+        private void PuntoVenta_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Maximized;
-            await Task.Run(() =>
+            // Crear y agregar botones al FlowLayoutPanel para cada salon
+            foreach (Salon salon in oSalon.ListaSalones)
             {
-                List<Button> botones = new List<Button>();
+                btnSalon = new Button();
+                btnSalon.Text = salon.Nombre.ToUpper();
+                btnSalon.Tag = salon.IdSalon.ToString();
+                btnSalon.Size = new Size(Int32.Parse(AnchoSalon), Int32.Parse(AltoSalon));//Establecer ancho y alto
+                btnSalon.Margin = new Padding(Int32.Parse(SeparadorSalon));//Establecer margen
+                btnSalon.Click += BotonSalon_Click;
+                flpSalones.Controls.Add(btnSalon);
+                //flpSalones.ScrollControlIntoView(btnSalon);
 
-                foreach (Salon item in oSalon.ListaSalones)
-                {
-                    Button btnSalon = new Button
-                    {
-                        Text = item.Nombre.ToUpper(),
-                        Tag = item.IdSalon.ToString().ToUpper(),
-                        Size = new Size(Int32.Parse(AnchoSalon), Int32.Parse(AltoSalon)),
-                        Margin = new Padding(Int32.Parse(SeparadorSalon))
-                    };
-                    btnSalon.Click += BotonSalon_Click;
+            }
 
-                    botones.Add(btnSalon);
-                }
-
-                flpSalones.BeginInvoke((Action)(() =>
-                {
-                    flpSalones.Controls.AddRange(botones.ToArray());
-                    flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
-                }));
-            });
+            // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
+            //flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
         }
 
 
@@ -149,11 +141,11 @@ namespace TPV.GUI
                 btnMesa.Size = new Size(Int32.Parse(AnchoMesa), Int32.Parse(AltoMesa));
                 btnMesa.Click += BotonMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
-                flpMesas.ScrollControlIntoView(btnMesa);
+                //flpMesas.ScrollControlIntoView(btnMesa);
             }
                 
             // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
-            flpMesas.VerticalScroll.Value = flpMesas.VerticalScroll.Minimum;
+            //flpMesas.VerticalScroll.Value = flpMesas.VerticalScroll.Minimum;
         }
 
         private void BotonMesa_Click(object sender, EventArgs e)

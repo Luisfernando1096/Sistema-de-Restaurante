@@ -40,26 +40,49 @@ namespace FacturacionElectronica.CLS
             AgregarReceptor();
         }
 
-        public dteJson GenerarFactura()
+        public dteJson GenerarFactura(Boolean normal, int nfactura, String fech, String cGeneracion)
         {
+            DateTime fecha = DateTime.Parse(fech);
+            
             dteJson nuevoJson = null;
             try
             {
+                int tModelo = 1;
+                int tOperacion = 1;
+                int? tContingencia = null;
+                String mContingencia = null;
+
+                
+                String ambiente = "00";
+                String tDte = "01";
+                string c1 = "DTE" + "-";
+                string c2 = tDte + "-";
+                string c3 = "12345678" + "-";
+                String nControl = c1 + c2 + c3 + nfactura.ToString("000000000000000");
+                if (!normal)
+                {
+                    tModelo = 2;
+                    tOperacion = 2;
+                    tContingencia = 2;
+                    mContingencia = "No disponibilidad de sistema del MH.";
+                }
+
                 nuevoJson = new dteJson
                 {
+                    
                     identificacion = new identificacion
                     {
                         version = 1,
-                        ambiente = "00",
-                        tipoDte = "01",
-                        numeroControl = "DTE-01-12345678-000000000000001",
-                        codigoGeneracion = "C6A9868C-028D-421B-A9A0-36274CECC2C7",
-                        tipoModelo = 1,
-                        tipoOperacion = 1,
-                        tipoContingencia = null,
-                        motivoContin = null,
-                        fecEmi = "2022-11-28",
-                        horEmi = "10:19:44",
+                        ambiente = ambiente,
+                        tipoDte = tDte,
+                        numeroControl = nControl,
+                        codigoGeneracion = cGeneracion,
+                        tipoModelo = tModelo,
+                        tipoOperacion = tOperacion,
+                        tipoContingencia = tContingencia,
+                        motivoContin = mContingencia,
+                        fecEmi = fecha.ToString("yyyy-MM-dd"),
+                        horEmi = fecha.ToString("HH:mm:ss"),
                         tipoMoneda = "USD"
                     },
                     documentoRelacionado = null,
@@ -278,7 +301,6 @@ namespace FacturacionElectronica.CLS
                     String FacturaJson = JsonConvert.SerializeObject(dte, Formatting.Indented);
 
                     File.WriteAllText(path, FacturaJson);
-                    MessageBox.Show("Se guardo el JSON.");
                 }
                 catch (Exception e)
                 {

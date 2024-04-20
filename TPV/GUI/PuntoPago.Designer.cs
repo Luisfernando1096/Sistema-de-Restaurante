@@ -32,8 +32,8 @@ namespace TPV.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PuntoPago));
             this.lblMesa = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -120,9 +120,14 @@ namespace TPV.GUI
             this.btnBtc = new System.Windows.Forms.Button();
             this.lble1 = new System.Windows.Forms.Label();
             this.lblExento = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.lblConexionRed = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblConexionGreen = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bgwPago = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.flpAcciones.SuspendLayout();
             this.flpDinero.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblMesa
@@ -206,8 +211,8 @@ namespace TPV.GUI
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -226,14 +231,14 @@ namespace TPV.GUI
             this.nombres,
             this.mesa,
             this.salon});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDatos.Location = new System.Drawing.Point(140, 139);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
@@ -1146,12 +1151,46 @@ namespace TPV.GUI
             this.lblExento.Tag = "0";
             this.lblExento.Text = "$0.00";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblConexionRed,
+            this.lblConexionGreen});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 656);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1248, 25);
+            this.toolStrip1.TabIndex = 66;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // lblConexionRed
+            // 
+            this.lblConexionRed.Image = ((System.Drawing.Image)(resources.GetObject("lblConexionRed.Image")));
+            this.lblConexionRed.Name = "lblConexionRed";
+            this.lblConexionRed.Size = new System.Drawing.Size(98, 20);
+            this.lblConexionRed.Text = "Desconectado";
+            this.lblConexionRed.Visible = false;
+            // 
+            // lblConexionGreen
+            // 
+            this.lblConexionGreen.Image = ((System.Drawing.Image)(resources.GetObject("lblConexionGreen.Image")));
+            this.lblConexionGreen.Name = "lblConexionGreen";
+            this.lblConexionGreen.Size = new System.Drawing.Size(81, 20);
+            this.lblConexionGreen.Text = "Conectado";
+            this.lblConexionGreen.Visible = false;
+            // 
+            // bgwPago
+            // 
+            this.bgwPago.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwPago_DoWork);
+            this.bgwPago.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwPago_RunWorkerCompleted);
+            // 
             // PuntoPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 681);
             this.ControlBox = false;
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lble1);
             this.Controls.Add(this.lblExento);
             this.Controls.Add(this.btnBtc);
@@ -1207,12 +1246,16 @@ namespace TPV.GUI
             this.Name = "PuntoPago";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuntoPago";
+            this.Activated += new System.EventHandler(this.PuntoPago_Activated);
+            this.Deactivate += new System.EventHandler(this.PuntoPago_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PuntoPago_FormClosing);
             this.Load += new System.EventHandler(this.PuntoPago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.flpAcciones.ResumeLayout(false);
             this.flpAcciones.PerformLayout();
             this.flpDinero.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1305,5 +1348,9 @@ namespace TPV.GUI
         private CheckBox chkExento;
         private Label lble1;
         public Label lblExento;
+        private ToolStrip toolStrip1;
+        private ToolStripStatusLabel lblConexionRed;
+        private ToolStripStatusLabel lblConexionGreen;
+        private System.ComponentModel.BackgroundWorker bgwPago;
     }
 }

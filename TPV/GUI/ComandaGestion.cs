@@ -1048,6 +1048,11 @@ namespace TPV.GUI
         private void tFecha_Tick(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString();
+            if (!bgwConexion.IsBusy)
+            {
+                // Inicia el BackgroundWorker si no está ocupado
+                bgwConexion.RunWorkerAsync();
+            }
         }
 
         private void btnPagar_Click(object sender, EventArgs e)
@@ -1530,6 +1535,7 @@ namespace TPV.GUI
         }
         private void ComandaGestion_FormClosing(object sender, FormClosingEventArgs e)
         {
+            tFecha.Stop();
             if (cerrarSesion)
             {
                 punto_venta.tpv = true;
@@ -1546,7 +1552,6 @@ namespace TPV.GUI
                     }
                 }
             }
-            tFecha.Stop();
         }
 
         private void btnExtras_Click(object sender, EventArgs e)
@@ -1972,6 +1977,56 @@ namespace TPV.GUI
                         }
                     }
                 }
+            }
+        }
+
+        private void ComandaGestion_Deactivate(object sender, EventArgs e)
+        {
+            tFecha.Stop();
+        }
+
+        private void ComandaGestion_Activated(object sender, EventArgs e)
+        {
+            tFecha.Start();
+        }
+
+        private void tConexion_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void bgwConexion_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                DataManager.DBConexion cn = new DataManager.DBConexion();
+                if (cn.Conectar())
+                {
+                    e.Result = true;
+                    cn.Desconectar();
+                }
+                else
+                {
+                    e.Result = false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void bgwConexion_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if ((bool)e.Result)
+            {
+                lblConexionRed.Visible = false;
+                lblConexionGreen.Visible = true;
+            }
+            else
+            {
+                lblConexionGreen.Visible = false;
+                lblConexionRed.Visible = true;
             }
         }
     }

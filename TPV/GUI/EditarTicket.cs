@@ -28,7 +28,7 @@ namespace TPV.GUI
             int idPagoCombinado = Int32.Parse(lblTicket.Tag.ToString());
             int idCuenta;
             
-            if (rbEfectivo.Checked)
+            if (rbEfectivo.Checked && rbEfectivo.Tag.ToString().Equals("0"))
             {
                 idCuenta = 1;
                 //Vamos a aumentar el saldo y efectivo en caja
@@ -44,17 +44,17 @@ namespace TPV.GUI
                     ActualizarCaja(tEfectivo, true);
                 }
             }
-            else if (rbTarjeta.Checked)
+            else if (rbTarjeta.Checked && rbTarjeta.Tag.ToString().Equals("0"))
             {
                 idCuenta = 2;
             }
-            else if(rbBtc.Checked)
+            else if(rbBtc.Checked && rbBtc.Tag.ToString().Equals("0") )
             {
                 idCuenta = 3;
             }
             else
             {
-                MessageBox.Show("Ocurrio un error, parece que no ha seleccionado opcion.", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se puede seleccionar la misma forma de pago.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -119,7 +119,7 @@ namespace TPV.GUI
                     saldo = Double.Parse(item["saldo"].ToString());
                     efectivo = Double.Parse(item["efectivo"].ToString());
                 }
-                if (efectivo >= tEfectivo && saldo >= tEfectivo)
+                if ((efectivo >= tEfectivo && saldo >= tEfectivo) || aumentar)
                 {
                     //Vamos actualizar caja, primero a traer lo que se pago en efectivo para descontar eso en caja.
                     if (aumentar)
