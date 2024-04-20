@@ -112,20 +112,36 @@ namespace Finanzas.GUI
                     {
                         MessageBox.Show("¡Se cerro la caja exitosamente!", "Cierre", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        SeleccionReporte pd = new SeleccionReporte();
+                        pd.ShowDialog();
                         using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
                         {
-                            using (Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja())
+                            if (pd.seleccion == 1)
                             {
-                                rep.SetDataSource(info);
-                                rep.SetParameterValue("Titulo", "Corte de Caja");
-                                rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                                using (Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja())
+                                {
+                                    rep.SetDataSource(info);
+                                    rep.SetParameterValue("Titulo", "Estado de Caja");
+                                    rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
 
-                                f.crvVisor.ReportSource = rep;
-                                f.ShowDialog();
+                                    f.crvVisor.ReportSource = rep;
+                                    f.ShowDialog();
+                                }
                             }
-                                
+                            else if (pd.seleccion == 2)
+                            {
+                                using (Reportes.REP.RepCierreCajaPequeño rep = new Reportes.REP.RepCierreCajaPequeño())
+                                {
+                                    rep.SetDataSource(info);
+                                    rep.SetParameterValue("Titulo", "Estado de Caja");
+                                    rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+
+                                    f.crvVisor.ReportSource = rep;
+                                    f.ShowDialog();
+                                }
+                            }
                         }
-                            
+
                     }
                     else
                     {
@@ -163,19 +179,35 @@ namespace Finanzas.GUI
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             DataTable info = DataManager.DBConsultas.Cajas(true);
+            SeleccionReporte pd = new SeleccionReporte();
+            pd.ShowDialog();
             using (Reportes.GUI.VisorGeneral f = new Reportes.GUI.VisorGeneral())
             {
-                using (Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja())
+                if (pd.seleccion == 1)
                 {
-                    rep.SetDataSource(info);
-                    rep.SetParameterValue("Titulo", "Estado de Caja");
-                    rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+                    using (Reportes.REP.RepCierreCaja rep = new Reportes.REP.RepCierreCaja())
+                    {
+                        rep.SetDataSource(info);
+                        rep.SetParameterValue("Titulo", "Estado de Caja");
+                        rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
 
-                    f.crvVisor.ReportSource = rep;
-                    f.ShowDialog();
+                        f.crvVisor.ReportSource = rep;
+                        f.ShowDialog();
+                    }
                 }
-            }
-            
+                else if (pd.seleccion == 2)
+                {
+                    using (Reportes.REP.RepCierreCajaPequeño rep = new Reportes.REP.RepCierreCajaPequeño())
+                    {
+                        rep.SetDataSource(info);
+                        rep.SetParameterValue("Titulo", "Estado de Caja");
+                        rep.SetParameterValue("Empresa", oEmpresa.NombreEmpresa);
+
+                        f.crvVisor.ReportSource = rep;
+                        f.ShowDialog();
+                    }
+                }
+            }   
         }
     }
 }
