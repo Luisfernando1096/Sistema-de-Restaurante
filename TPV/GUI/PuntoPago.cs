@@ -108,8 +108,8 @@ namespace TPV.GUI
 
         private void PuntoPago_Load(object sender, EventArgs e)
         {
-            actualFactura = DataManager.DBConsultas.ObtenerTirajeActual(Boolean.Parse(oConfiguracion.IncluirImpuesto));
             tFecha.Start();
+            actualFactura = DataManager.DBConsultas.ObtenerTirajeActual(Boolean.Parse(oConfiguracion.IncluirImpuesto));
             WindowState = FormWindowState.Maximized;
             // Creamos un Panel para envolver el FlowLayoutPanel
             Panel panelWrapper = new Panel
@@ -1211,6 +1211,13 @@ namespace TPV.GUI
             pedido.Exento = exento;
             pedido.Cancelado = true;
             pedido.Fecha = fechaPago;
+            String totalLetras = "";
+
+            /*
+            //Aqui se almacenan los pedidos y datos del cliente
+            List<PedidoDetalle> lstPd = ListaDetalles();
+            List<String> lstCli = ListaClientes();
+            */
 
             if (activarFactura)
             {
@@ -1231,7 +1238,6 @@ namespace TPV.GUI
                 }
 
                 totalStr = totalPagar.ToString().Trim();
-                String totalLetras = "";
                 // Convierte la cadena a un número decimal
                 if (decimal.TryParse(totalStr, out decimal total2))
                 {
@@ -1250,37 +1256,7 @@ namespace TPV.GUI
                 {
                     Console.WriteLine("La entrada no es un número válido.");
                 }
-                //Lleva factura
-                //Generar JSON
-                //Aqui se guardara el JSON como prueba
-                /*
-
-                SaveFileDialog direccion = new SaveFileDialog();
-                direccion.Filter = "Archivo SQL (*.json)|*.json";
-                direccion.InitialDirectory = @"C:\Users\Fuentes\Desktop\REPORTES";
-                direccion.Title = "Selección de ruta";
-                string ruta = "";
-                if (direccion.ShowDialog() == DialogResult.OK)
-                {
-                    ruta = direccion.FileName;
-                }
-
-                string path = ruta;
-
-                GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), ListaDetalles(), ListaClientes());
-                generarDTE.TotalLetras = totalLetras;
-                generarDTE.Propina = propina;
-                generarDTE.Iva = iva;
-                generarDTE.Exento = exento;
-                generarDTE.Descuento = descuento;
-
-                dteJson dte = generarDTE.GenerarFactura();
-
-                generarDTE.SerializarFactura(dte, path);
-
-                */
-                //Termina generacion de JSON
-
+                
                 //Lleva factura
                 Boolean generar = false;
                 //Obtener la ultima factura y crear una nueva
@@ -1534,8 +1510,47 @@ namespace TPV.GUI
             {
                 RealizarPago(lstPago);
             }
-            
-            
+
+            /*
+            SaveFileDialog direccion = new SaveFileDialog();
+            direccion.Filter = "Archivo SQL (*.json)|*.json";
+            direccion.InitialDirectory = @"C:\Users\Fuentes\Desktop\REPORTES";
+            direccion.Title = "Selección de ruta";
+            string ruta = "";
+            if (direccion.ShowDialog() == DialogResult.OK)
+            {
+                ruta = direccion.FileName;
+            }
+
+            string path = ruta;
+
+
+
+            GenerarDTE generarDTE = new GenerarDTE(ListaPagos(), lstPd, lstCli);
+            generarDTE.TotalLetras = totalLetras;
+            generarDTE.Propina = propina;
+            generarDTE.Iva = iva;
+            generarDTE.Exento = exento;
+            generarDTE.Descuento = descuento;
+
+            String cGeneracion = DataManager.DBConsultas.CodigoGeneracion();
+
+            dteJson dte;
+            //Se completo exitosamente la factura?
+            Boolean terminoExitosamente = false;
+            if (terminoExitosamente)
+            {
+                dte = generarDTE.GenerarFactura(terminoExitosamente, Int32.Parse(pedido.NFactura), pedido.Fecha, cGeneracion);
+                MessageBox.Show("Se emitio la factura correctamente.", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                dte = generarDTE.GenerarFactura(terminoExitosamente, Int32.Parse(pedido.NFactura), pedido.Fecha, cGeneracion);
+                MessageBox.Show("Ocurrio un error al emitir factura, se enviara por contingencia.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            generarDTE.SerializarFactura(dte, path);
+            //Termina generacion de JSON
+            */
         }
 
         private void RealizarPago(List<string> lstPago)
@@ -1543,6 +1558,7 @@ namespace TPV.GUI
             DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
             if (transaccion.EjecutarTransaccion(lstPago) > 0)
             {
+
                 //IRa tpv
                 comandaGestion.tpv = true;
                 comandaGestion.Close();
@@ -1981,6 +1997,11 @@ namespace TPV.GUI
         private void tFecha_Tick(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString();
+            if (!bgwPago.IsBusy)
+            {
+                // Inicia el BackgroundWorker si no está ocupado
+                bgwPago.RunWorkerAsync();
+            }
         }
 
         private void PuntoPago_FormClosing(object sender, FormClosingEventArgs e)
@@ -2160,6 +2181,56 @@ namespace TPV.GUI
         private void chkExento_Click(object sender, EventArgs e)
         {
             CalcularTodo();
+        }
+
+        private void bgwPago_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                DataManager.DBConexion cn = new DataManager.DBConexion();
+                if (cn.Conectar())
+                {
+                    e.Result = true;
+                    cn.Desconectar();
+                }
+                else
+                {
+                    e.Result = false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void bgwPago_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if ((bool)e.Result)
+            {
+                lblConexionRed.Visible = false;
+                lblConexionGreen.Visible = true;
+            }
+            else
+            {
+                lblConexionGreen.Visible = false;
+                lblConexionRed.Visible = true;
+            }
+        }
+
+        private void tConexion_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PuntoPago_Deactivate(object sender, EventArgs e)
+        {
+            tFecha.Stop();
+        }
+
+        private void PuntoPago_Activated(object sender, EventArgs e)
+        {
+            tFecha.Start();
         }
     }
 }

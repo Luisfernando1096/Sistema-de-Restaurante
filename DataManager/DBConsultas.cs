@@ -2385,6 +2385,25 @@ namespace DataManager
             }
         }
 
+        public static String CodigoGeneracion()
+        {
+            try
+            {
+                DataTable resultado;
+                String sentencia = @"SELECT UPPER(uuid());";
+                DBOperacion operacion = new DBOperacion();
+
+                resultado = operacion.Consultar(sentencia);
+
+                return resultado.Rows[0][0].ToString();
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+        }
+
     }
 
 }
