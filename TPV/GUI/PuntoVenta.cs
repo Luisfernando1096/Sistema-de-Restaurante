@@ -95,12 +95,12 @@ namespace TPV.GUI
                 btnSalon.Margin = new Padding(Int32.Parse(SeparadorSalon));//Establecer margen
                 btnSalon.Click += BotonSalon_Click;
                 flpSalones.Controls.Add(btnSalon);
-                flpSalones.ScrollControlIntoView(btnSalon);
+                //flpSalones.ScrollControlIntoView(btnSalon);
 
             }
 
             // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
-            flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
+            //flpSalones.VerticalScroll.Value = flpSalones.VerticalScroll.Minimum;
         }
 
         private void BotonSalon_Click(object sender, EventArgs e)
@@ -137,11 +137,11 @@ namespace TPV.GUI
                 btnMesa.Size = new Size(Int32.Parse(AnchoMesa), Int32.Parse(AltoMesa));
                 btnMesa.Click += BotonMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
-                flpMesas.ScrollControlIntoView(btnMesa);
+                //flpMesas.ScrollControlIntoView(btnMesa);
             }
                 
             // Ajustar la posición de desplazamiento para que los botones más recientes estén en la parte superior
-            flpMesas.VerticalScroll.Value = flpMesas.VerticalScroll.Minimum;
+            //flpMesas.VerticalScroll.Value = flpMesas.VerticalScroll.Minimum;
         }
 
         private void BotonMesa_Click(object sender, EventArgs e)

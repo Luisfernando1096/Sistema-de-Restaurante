@@ -796,8 +796,8 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT m.idMesa, m.numero, m.nombre, m.capacidad, m.disponible, s.idSalon, s.nombre FROM mesa m, salon s
-                                        WHERE m.idSalon=s.idSalon AND m.idSalon=" + salon + ";";
+                String sentencia = @"SELECT m.idMesa, m.nombre, m.disponible FROM mesa m
+                                        WHERE m.idSalon=" + salon + ";";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
