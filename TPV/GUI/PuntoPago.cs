@@ -698,14 +698,7 @@ namespace TPV.GUI
                     }
                     else
                     {
-                        if (activarFactura)
-                        {
-                            activarFactura = false;
-                            btnFactura.BackColor = Color.White;
-                            activarTicket = true;
-                            btnTicket.BackColor = Color.CadetBlue;
-                        }
-                        else
+                        if (!activarFactura)
                         {
                             activarFactura = true;
                             btnFactura.BackColor = Color.CadetBlue;
@@ -724,20 +717,14 @@ namespace TPV.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (activarTicket)
-            {
-                activarTicket = false;
-                btnTicket.BackColor = Color.White;
-                activarFactura = true;
-                btnFactura.BackColor = Color.CadetBlue;
-            }
-            else
+            if (!activarTicket)
             {
                 activarTicket = true;
                 btnTicket.BackColor = Color.CadetBlue;
                 activarFactura = false;
                 btnFactura.BackColor = Color.White;
             }
+
         }
 
         private void cbPropina_Click_1(object sender, EventArgs e)
