@@ -1939,12 +1939,12 @@ namespace TPV.GUI
         {
             using (CambioPrecioProducto f = new CambioPrecioProducto())
             {
+                f.lblPrecio.Text = Double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()).ToString("0.00");
+                f.lblProducto.Text = dgvDatos.CurrentRow.Cells["nombre"].Value.ToString();
+                f.ShowDialog();
                 if (f.cerrarPorBoton)
                 {
-                    f.lblPrecio.Text = Double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()).ToString("0.00");
-                    f.lblProducto.Text = dgvDatos.CurrentRow.Cells["nombre"].Value.ToString();
-                    f.ShowDialog();
-
+                    
                     if (!f.txtPrecio.Text.Equals(""))
                     {
                         int idDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
