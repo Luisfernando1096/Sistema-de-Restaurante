@@ -25,7 +25,7 @@ public class Server
 
     public void StartServer()
     {
-        //OBETNER IP AUTOMATICAMENTE
+        // Obtener IP automáticamente
         string hostName = Dns.GetHostName();
         // Inicializar la variable
         IPAddress[] localIPs = Dns.GetHostAddresses(hostName);
@@ -46,27 +46,40 @@ public class Server
                 string puerto = xmlDoc.SelectSingleNode("/Configuracion/Puerto").InnerText;
                 if (ipv4Address.ToString().Equals(ipLocal))
                 {
-                    isServerRunning = true;
-                    tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
-                    listenerThread = new Thread(new ThreadStart(ListenForClients));
-                    listenerThread.Start();
-                    Console.WriteLine("Servidor iniciado. Esperando conexiones...");
+                    try
+                    {
+                        tcpListener = new TcpListener(IPAddress.Parse(ipLocal), Int32.Parse(puerto));
+                        tcpListener.Start(); // Intentar iniciar el listener
+
+                        isServerRunning = true;
+                        listenerThread = new Thread(new ThreadStart(ListenForClients));
+                        listenerThread.Start();
+                        Console.WriteLine("Servidor iniciado. Esperando conexiones...");
+                    }
+                    catch (SocketException ex)
+                    {
+                        if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
+                        {
+                            MessageBox.Show("El puerto está ocupado. No se puede iniciar el servidor.", "Puerto ocupado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Error al iniciar el servidor: {ex.Message}", "Error del servidor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("El servidor no se pudo iniciar verifique la direccion Ip.", "Ip incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El servidor no se pudo iniciar. Verifique la dirección IP.", "IP incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
             }
             else
             {
-                MessageBox.Show("El servidor no se pudo iniciar verifique establecer puerto e Ip.", "Ip null", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El servidor no se pudo iniciar. Establezca el puerto y la IP en el archivo de configuración.", "Configuración incompleta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
-
-
     }
+
 
     public void StopServer()
     {

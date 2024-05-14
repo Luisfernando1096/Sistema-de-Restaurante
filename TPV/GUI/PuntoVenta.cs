@@ -33,8 +33,6 @@ namespace TPV.GUI
         {   
             
             InitializeComponent();
-            flpSalones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            flpMesas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             AjustarPosicionBoton();
             CargarDimensiones();
         }

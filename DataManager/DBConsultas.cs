@@ -36,7 +36,9 @@ namespace DataManager
                                         INNER JOIN mesa m ON p.idMesa = m.idMesa
                                         INNER JOIN salon s ON s.idSalon = m.idSalon
                                         LEFT JOIN empleado e ON e.idEmpleado = p.idMesero
-                                        WHERE p.cancelado = 0;";
+                                        WHERE p.cancelado = 0 
+                                        AND m.disponible = 0
+                                        AND p.totalPago <= 0;";
                 DataManager.DBOperacion operacion = new DataManager.DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -507,6 +509,7 @@ namespace DataManager
                                         pe.idMesa = " + idMesa + @"
                                         AND pe.cancelado = 0
                                         AND m.disponible = 0
+                                        AND pe.totalPago <= 0
                                     GROUP BY
                                         pe.idPedido desc limit 1;";
                 DBOperacion operacion = new DBOperacion();
@@ -815,8 +818,8 @@ namespace DataManager
             try
             {
                 DataTable resultado = new DataTable();
-                String sentencia = @"SELECT m.idMesa, m.numero, m.nombre, m.capacidad, m.disponible, s.idSalon, s.nombre FROM mesa m, salon s
-                                        WHERE m.idSalon=s.idSalon AND m.idSalon=" + salon + " AND m.disponible = 0;";
+                String sentencia = @"SELECT m.idMesa, m.numero, m.nombre, m.capacidad, m.disponible, s.idSalon, s.nombre FROM mesa m, salon s, pedido p
+                                        WHERE p.idMesa = m.idMesa AND m.idSalon=s.idSalon AND m.idSalon=" + salon + " AND m.disponible = 0 AND p.totalPago <= 0;";
                 DBOperacion operacion = new DBOperacion();
 
                 resultado = operacion.Consultar(sentencia);
@@ -848,6 +851,7 @@ namespace DataManager
                                         pe.idMesa = " + idMesa + @"
                                         AND pe.cancelado = 0
                                         AND m.disponible = 0
+                                        AND pe.totalPago <= 0
                                     GROUP BY
                                         pd.idPedido;";
                 DBOperacion operacion = new DBOperacion();
@@ -877,6 +881,7 @@ namespace DataManager
                                         pe.idMesa = " + idMesa + @"
                                         AND pe.cancelado = 0
                                         AND m.disponible = 0
+                                        AND pe.totalPago <= 0
                                     GROUP BY
                                         pe.idPedido;";
                 DBOperacion operacion = new DBOperacion();
@@ -1256,6 +1261,7 @@ namespace DataManager
                                         AND pe.idPedido = " + idPedido + @"
 										AND pe.cancelado = 0 
 										AND m.disponible = 0
+                                        AND pe.totalPago <= 0
                                         ORDER BY pe.fecha ASC
                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
                                 ORDER BY 
@@ -1300,6 +1306,7 @@ namespace DataManager
 										WHERE pe.idMesa = " + idMesa + @"
 										AND pe.cancelado = 0 
 										AND m.disponible = 0
+                                        AND pe.totalPago <= 0
                                         ORDER BY pe.fecha ASC
                                         LIMIT 1) AS pe ON pd.idPedido = pe.idPedido
                                 ORDER BY 

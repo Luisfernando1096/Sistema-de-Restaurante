@@ -509,6 +509,7 @@ namespace TPV.GUI
                 exento = 0;
             }
             totalPagar += iva;
+
             totalPagar = totalPagar - SumaMontos();
             double cambio = Math.Round(CalcularCambio(totalPagar), 2);
             ActualizarCampos(propina, descuento, totalPagar, iva, cambio, exento);
@@ -1984,11 +1985,6 @@ namespace TPV.GUI
         private void tFecha_Tick(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString();
-            if (!bgwPago.IsBusy)
-            {
-                // Inicia el BackgroundWorker si no está ocupado
-                bgwPago.RunWorkerAsync();
-            }
         }
 
         private void PuntoPago_FormClosing(object sender, FormClosingEventArgs e)
@@ -2168,46 +2164,6 @@ namespace TPV.GUI
         private void chkExento_Click(object sender, EventArgs e)
         {
             CalcularTodo();
-        }
-
-        private void bgwPago_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            try
-            {
-                DataManager.DBConexion cn = new DataManager.DBConexion();
-                if (cn.Conectar())
-                {
-                    e.Result = true;
-                    cn.Desconectar();
-                }
-                else
-                {
-                    e.Result = false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void bgwPago_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            if ((bool)e.Result)
-            {
-                lblConexionRed.Visible = false;
-                lblConexionGreen.Visible = true;
-            }
-            else
-            {
-                lblConexionGreen.Visible = false;
-                lblConexionRed.Visible = true;
-            }
-        }
-
-        private void tConexion_Tick(object sender, EventArgs e)
-        {
-            
         }
 
         private void PuntoPago_Deactivate(object sender, EventArgs e)

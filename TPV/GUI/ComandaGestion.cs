@@ -16,13 +16,12 @@ namespace TPV.GUI
     public partial class ComandaGestion : Form
     {
         public List<PedidoDetalle> lstDetalle = new List<PedidoDetalle>();
-        private Dictionary<string, List<PedidoDetalle>> miDiccionario = new Dictionary<string, List<PedidoDetalle>>();
+        private readonly Dictionary<string, List<PedidoDetalle>> miDiccionario = new Dictionary<string, List<PedidoDetalle>>();
         public List<Tuple<int, int>> listaIdProductos = new List<Tuple<int, int>>();
-
-        PuntoVenta punto_venta;
-        SessionManager.Session oUsuario = SessionManager.Session.Instancia;
-        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
-        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        readonly PuntoVenta punto_venta;
+        readonly SessionManager.Session oUsuario = SessionManager.Session.Instancia;
+        readonly ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        readonly ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
 
         public BindingSource datos = new BindingSource();
         DataTable datosEnMesa = new DataTable();
@@ -229,7 +228,6 @@ namespace TPV.GUI
             {
                 Boolean existePedido = false;
                 Boolean existeProducto = false;
-                Boolean existeDiccionario = false;
                 // Paso 1: Buscar en lstDetalle
                 var detalleEspecifico = lstDetalle.FirstOrDefault(det => det.IdPedido == idPedidoEspecifico && det.IdProducto == idProductoEspecifico);
 
@@ -241,7 +239,6 @@ namespace TPV.GUI
                     String idPedidoClave = idPedidoEspecifico.ToString();
                     if (miDiccionario.ContainsKey(idPedidoClave))
                     {
-                        existeDiccionario = true;
                         // Paso 3: Buscar el idProductoEspecifico en lstDetalle (no en los detalles del diccionario)
                         var productoEnDetalles = lstDetalle.Any(det => det.IdPedido == idPedidoEspecifico && det.IdProducto == idProductoEspecifico);
                         if (productoEnDetalles)
@@ -254,7 +251,7 @@ namespace TPV.GUI
                         //Console.WriteLine($"Paso 2: IdPedido {idPedidoEspecifico} no encontrado en el diccionario.");
                     }
                 }
-                InsertarLogDetalles(existePedido, existeProducto, idProductoEspecifico, idPedidoEspecifico, idDetalle, precio, fecha, existeDiccionario);
+                InsertarLogDetalles(existePedido, existeProducto, idProductoEspecifico, idPedidoEspecifico, idDetalle, precio, fecha);
             }
             catch (Exception ex)
             {
@@ -262,19 +259,7 @@ namespace TPV.GUI
             }
         }
 
-        public void VerListaDetalle() 
-        {
-            foreach (var detalle in lstDetalle)
-            {
-                // Accede a las propiedades del objeto detalle y muestra los datos
-                Console.WriteLine($"IdPedido: {detalle.IdPedido}, idProducto: {detalle.IdProducto}, Nombre: {detalle.Nombre}, Cantidad: {detalle.Cantidad}, Mesa: {detalle.Mesa}, fecha: {detalle.Fecha}, Grupo: {detalle.Grupo} ");
-                // Reemplaza "OtroDato" con el nombre real de otras propiedades que puedan tener tus objetos
-            }
-            Console.WriteLine($"----------------------------------------------------------------------------- ");
-
-        }
-
-        private void InsertarLogDetalles(Boolean existeP,Boolean existePro,int idProductoI, int idPedidoI, int idDetalle, double precio, String fechaPedido, Boolean existeDiccionario) 
+        private void InsertarLogDetalles(Boolean existeP,Boolean existePro,int idProductoI, int idPedidoI, int idDetalle, double precio, String fechaPedido) 
         {
             if (!existeP)
             {
@@ -282,43 +267,37 @@ namespace TPV.GUI
                 {
                     String fechaMod = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     String fechaPed = DateTime.Parse(fechaPedido).ToString("yyyy-MM-dd HH:mm:ss");
-                    PedidoDetalleLog log = new PedidoDetalleLog();
-                    log.IdDetalle = idDetalle;
-                    log.Cocinando = false;
-                    log.Extras = "";
-                    log.HoraEntregado = fechaMod;
-                    log.HoraPedido = fechaPed;
-                    log.IdCocinero = 0;
-                    log.IdProducto = idProductoI;
-                    log.IdPedido = idPedidoI;
-                    log.Cantidad = 1;
-                    log.Precio = precio;
-                    log.SubTotal = log.Cantidad * log.Precio;
-                    log.Grupo = "";
-                    log.UsuarioDelete = oUsuario.IdUsuario;
-                    log.FechaDelete = fechaMod;
-
-                    if (log.Insertar())
+                    PedidoDetalleLog log = new PedidoDetalleLog
                     {
+                        IdDetalle = idDetalle,
+                        Cocinando = false,
+                        Extras = "",
+                        HoraEntregado = fechaMod,
+                        HoraPedido = fechaPed,
+                        IdCocinero = 0,
+                        IdProducto = idProductoI,
+                        IdPedido = idPedidoI,
+                        Cantidad = 1,
+                        Precio = precio,
+                        SubTotal = (1 * precio),
+                        Grupo = "",
+                        UsuarioDelete = oUsuario.IdUsuario,
+                        FechaDelete = fechaMod
+                    };
 
-                    }
-                    else
+                    if (!log.Insertar())
                     {
                         log.IdDetalle = idDetalle;
                         DataTable dt = DataManager.DBConsultas.ObtenerCantidadLog(idDetalle);
                         if (dt.Rows.Count > 0)
-                            {
-                                int cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
-                                log.Cantidad = cantidad + 1;
-                                log.Grupo = "2";
-                                log.SubTotal = log.Cantidad * log.Precio;
-                                log.FechaDelete = fechaMod;
-                            }
-                        if (log.ModificarRegistro())
                         {
-
+                            int cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+                            log.Cantidad = cantidad + 1;
+                            log.Grupo = "2";
+                            log.SubTotal = log.Cantidad * log.Precio;
+                            log.FechaDelete = fechaMod;
                         }
-                            
+                        log.ModificarRegistro();
                     }
                 }
             }
@@ -502,7 +481,7 @@ namespace TPV.GUI
             return total;
         }
 
-        private double CalcularSubTotal(int cantidad, int id, double precio)
+        private double CalcularSubTotal(int cantidad, double precio)
         {
 
             double subTotal;
@@ -513,7 +492,7 @@ namespace TPV.GUI
         private void BotonProducto_Click(object sender, EventArgs e)
         {
             Button botonProducto = (Button)sender;
-            int cantidad;
+            int cantidad = 1;
             //Actualizar al final el datagrid
             if (bool.Parse(oConfiguracion.MuchosProductos))
             {
@@ -538,7 +517,6 @@ namespace TPV.GUI
             }
             else
             {
-                cantidad = 1;
                 if (dgvDatos.Rows.Count == 0 && lblTicket.Text != string.Empty)
                 {
                     AgregarOtrosProductos(botonProducto, cantidad);
@@ -598,15 +576,17 @@ namespace TPV.GUI
                 pedidoDetalle.Cantidad = cantidad;
                 DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
                 pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
-                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
+                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, double.Parse(precio.Rows[0]["precio"].ToString()));
                 pedidoDetalle.Grupo = "0";
                 pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
                 if (oUsuario.IdRol.Equals("2") && !btnCuentas.Visible)
                 {
                     //Entro un mesero
-                    Pedido pedido3 = new Pedido();
-                    pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
+                    Pedido pedido3 = new Pedido
+                    {
+                        IdMesero = int.Parse(oUsuario.IdUsuario)
+                    };
                     primerProductoEnPedido.Add(pedido3.ActualizarMesero(true));
                 }
                 //Insertamos el detalle del pedido
@@ -716,7 +696,7 @@ namespace TPV.GUI
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.IdProducto = Int32.Parse(aux[0].ToString());
                     pedidoDetalle.Cantidad = cantidad;
-                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, idProducto, precio);
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, precio);
 
                     yaHayProductoEnPedido.Add(pedidoDetalle.ActualizarCompra(false));
                     
@@ -734,7 +714,7 @@ namespace TPV.GUI
                     pedidoDetalle.IdPedido = Int32.Parse(lblTicket.Text.ToString());
                     pedidoDetalle.Cantidad = cantidad;
                     pedidoDetalle.Precio = double.Parse(productoNuevo.Rows[0]["precio"].ToString());
-                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(productoNuevo.Rows[0]["precio"].ToString()));
+                    pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, double.Parse(productoNuevo.Rows[0]["precio"].ToString()));
                     pedidoDetalle.Grupo = "0";
                     pedidoDetalle.Usuario = oUsuario.IdUsuario;
                     yaHayProductoEnPedido.Add(pedidoDetalle.Insertar(false));
@@ -768,16 +748,19 @@ namespace TPV.GUI
                 };
 
                 //Iniciamos las transacciones si no hay productos
-                List<String> primerProductoEnPedido = new List<string>();
-
-                //Insertamos en la base de datos el pedido
-                primerProductoEnPedido.Add(pedido.Insertar(false));
+                List<String> primerProductoEnPedido = new List<string>
+                {
+                    //Insertamos en la base de datos el pedido
+                    pedido.Insertar(false)
+                };
                 //Se agregara el mesero tambien si entro un mesero
                 if (oUsuario.IdRol.Equals("2") && !btnCuentas.Visible)
                 {
                     //Entro un mesero
-                    Pedido pedido3 = new Pedido();
-                    pedido3.IdMesero = Int32.Parse(oUsuario.IdUsuario);
+                    Pedido pedido3 = new Pedido
+                    {
+                        IdMesero = Int32.Parse(oUsuario.IdUsuario)
+                    };
                     primerProductoEnPedido.Add(pedido3.ActualizarMesero(true));
                 }
                 if (lstDetalle.Count == 0)
@@ -798,9 +781,8 @@ namespace TPV.GUI
                 };
                 
                 pedidoDetalle.Cantidad = cantidad;
-                DataTable precio = DataManager.DBConsultas.ObtenerPrecioDeProducto(Int32.Parse(aux[0].ToString()));
-                pedidoDetalle.Precio = double.Parse(precio.Rows[0]["precio"].ToString());
-                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, Int32.Parse(aux[0].ToString()), double.Parse(precio.Rows[0]["precio"].ToString()));
+                pedidoDetalle.Precio = double.Parse(productoNuevo.Rows[0]["precio"].ToString());
+                pedidoDetalle.SubTotal = CalcularSubTotal(cantidad, double.Parse(productoNuevo.Rows[0]["precio"].ToString()));
                 pedidoDetalle.Grupo = "0";
                 pedidoDetalle.Usuario = oUsuario.IdUsuario;
                 //pedidoDetalle.Fecha = null;
@@ -839,8 +821,10 @@ namespace TPV.GUI
                         double total = CalcularTotal();
 
                         //Actualizamos el total en el pedido recien insertado
-                        List<String> actualizarTotal = new List<string>();
-                        actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+                        List<String> actualizarTotal = new List<string>
+                        {
+                            pedido2.ActualizarTotal(total, false)
+                        };
 
                         DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
                         if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
@@ -875,8 +859,10 @@ namespace TPV.GUI
                     double total = CalcularTotal();
 
                     //Actualizamos el total en el pedido recien insertado
-                    List<String> actualizarTotal = new List<string>();
-                    actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+                    List<String> actualizarTotal = new List<string>
+                    {
+                        pedido2.ActualizarTotal(total, false)
+                    };
 
                     DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
                     if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
@@ -1048,11 +1034,6 @@ namespace TPV.GUI
         private void tFecha_Tick(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString();
-            if (!bgwConexion.IsBusy)
-            {
-                // Inicia el BackgroundWorker si no está ocupado
-                bgwConexion.RunWorkerAsync();
-            }
         }
 
         private void btnPagar_Click(object sender, EventArgs e)
@@ -1194,88 +1175,99 @@ namespace TPV.GUI
             punto_venta.Close();
         }
 
-        private void DisminuirProducto() 
+        private void DisminuirProducto()
         {
-            List<String> eliminacion = new List<string>();  //Actualizamos el total en el pedido recien insertado
-            PedidoDetalle pedidoDetalle = new PedidoDetalle();  //Programando boton de disminuir
-
-            if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            int id = Int32.Parse(lblTicket.Text);
+            DataTable totalPagos = DataManager.DBConsultas.TotalPagos(id);
+            if (Double.Parse(totalPagos.Rows[0]["sumaMonto"].ToString()) > 0)
             {
-                int idDetall = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
-                int idPed = Int32.Parse(lblTicket.Text.ToString());
-                int idPro = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
-                double precio = double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString());
-                String fecha = dgvDatos.CurrentRow.Cells["fecha"].Value.ToString();
-                pedidoDetalle.IdDetalle = idDetall;
-                pedidoDetalle.IdPedido = idPed;
-                pedidoDetalle.IdProducto = idPro;
-                pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
-                pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString()), double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
+                MessageBox.Show("Debe terminar el pago combinado que ha comenzado!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                List<String> eliminacion = new List<string>();  //Actualizamos el total en el pedido recien insertado
+                PedidoDetalle pedidoDetalle = new PedidoDetalle();  //Programando boton de disminuir
 
-                CompararLista(idPed, idPro, idDetall, precio, fecha);
-
-                if (pedidoDetalle.Cantidad != 0)
+                if (MessageBox.Show("¿Esta seguro que desea disminuir?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //Actualizamos el total en el pedido recien insertado
-                    List<String> actualizarTotal = new List<string>();
-                    actualizarTotal.Add(pedidoDetalle.ActualizarCompra(false));
+                    int idDetall = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
+                    int idPed = Int32.Parse(lblTicket.Text.ToString());
+                    int idPro = Int32.Parse(dgvDatos.CurrentRow.Cells["idProducto"].Value.ToString());
+                    double precio = double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString());
+                    String fecha = dgvDatos.CurrentRow.Cells["fecha"].Value.ToString();
+                    pedidoDetalle.IdDetalle = idDetall;
+                    pedidoDetalle.IdPedido = idPed;
+                    pedidoDetalle.IdProducto = idPro;
+                    pedidoDetalle.Cantidad = Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1;
+                    pedidoDetalle.SubTotal = CalcularSubTotal(Int32.Parse(dgvDatos.CurrentRow.Cells["cantidad"].Value.ToString()) - 1, double.Parse(dgvDatos.CurrentRow.Cells["precio"].Value.ToString()));
 
-                    EliminarPedidoOActualizarDetalle(false, actualizarTotal, 0);
-                }
-                else
-                {
-                    //Se eliminara el producto
-                    eliminacion.Add(pedidoDetalle.Eliminar());
+                    CompararLista(idPed, idPro, idDetall, precio, fecha);
 
-                    if (dgvDatos.Rows.Count == 1)
+                    if (pedidoDetalle.Cantidad != 0)
                     {
-                        Pedido pedido = new Pedido
-                        {
-                            IdPedido = Int32.Parse(lblTicket.Text)
-                        };
-                        eliminacion.Add(pedido.Eliminar());
-                    }
-                    EliminarPedidoOActualizarDetalle(true, eliminacion, 1);
-                }
-
-                if (dgvDatos.Rows.Count == 0)
-                {
-                    lstDetalle.Clear();
-                    DataTable dt = DataManager.DBConsultas.Pedidos(lblMesa.Tag.ToString());
-
-                    // Verificar si hay filas en el DataTable
-                    if (dt.Rows.Count > 0)
+                        //Actualizamos el total en el pedido recien insertado
+                        List<String> actualizarTotal = new List<string>
                     {
-                        // Tomar el IDPedido de la primera fila (índice 0)
-                        int idPedidoSeleccionado = Convert.ToInt32(dt.Rows[0]["idPedido"]);
+                        pedidoDetalle.ActualizarCompra(false)
+                    };
 
-                        // Puedes asignar este IDPedido a donde sea necesario, por ejemplo, a un TextBox
-                        lblTicket.Text = idPedidoSeleccionado.ToString();
+                        EliminarPedidoOActualizarDetalle(false, actualizarTotal, 0);
                     }
                     else
                     {
-                        btnCuentas.Visible = false;
-                    }
-                }
-                if (lstDetalle.Count > 0)
+                        //Se eliminara el producto
+                        eliminacion.Add(pedidoDetalle.Eliminar());
 
-                {
-                    // Actualiza la cantidad solo para el IdPedido e IdProducto actual
-                    foreach (var item in lstDetalle.ToList())
-                    {
-                        if (item.IdPedido == idPed && item.IdProducto == idPro && item.Cantidad > 0)
+                        if (dgvDatos.Rows.Count == 1)
                         {
-                            item.Cantidad--;
-                            if (item.Cantidad == 0)
+                            Pedido pedido = new Pedido
                             {
-                                lstDetalle.Remove(item);
+                                IdPedido = Int32.Parse(lblTicket.Text)
+                            };
+                            eliminacion.Add(pedido.Eliminar());
+                        }
+                        EliminarPedidoOActualizarDetalle(true, eliminacion, 1);
+                    }
+
+                    if (dgvDatos.Rows.Count == 0)
+                    {
+                        lstDetalle.Clear();
+                        DataTable dt = DataManager.DBConsultas.Pedidos(lblMesa.Tag.ToString());
+
+                        // Verificar si hay filas en el DataTable
+                        if (dt.Rows.Count > 0)
+                        {
+                            // Tomar el IDPedido de la primera fila (índice 0)
+                            int idPedidoSeleccionado = Convert.ToInt32(dt.Rows[0]["idPedido"]);
+
+                            // Puedes asignar este IDPedido a donde sea necesario, por ejemplo, a un TextBox
+                            lblTicket.Text = idPedidoSeleccionado.ToString();
+                        }
+                        else
+                        {
+                            btnCuentas.Visible = false;
+                        }
+                    }
+                    if (lstDetalle.Count > 0)
+
+                    {
+                        // Actualiza la cantidad solo para el IdPedido e IdProducto actual
+                        foreach (var item in lstDetalle.ToList())
+                        {
+                            if (item.IdPedido == idPed && item.IdProducto == idPro && item.Cantidad > 0)
+                            {
+                                item.Cantidad--;
+                                if (item.Cantidad == 0)
+                                {
+                                    lstDetalle.Remove(item);
+                                }
                             }
                         }
                     }
-                }
 
-                DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
-                ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
+                    DataTable productoNuevo = DataManager.DBConsultas.ObtenerPrecioDeProducto(pedidoDetalle.IdProducto);
+                    ActualizarStockProductosIngredientes(pedidoDetalle.IdProducto.ToString(), 1, productoNuevo, false);
+                }
             }
         }
 
@@ -1345,7 +1337,7 @@ namespace TPV.GUI
                     {
                         contador++;
                         pd.IdPedido = idPedido;
-                        lista.Add(pd.Eliminar()) ;
+                        lista.Add(pd.Eliminar());
                     }
                 }
                 transaccion.EjecutarTransaccion(lista);
@@ -1432,8 +1424,10 @@ namespace TPV.GUI
                 double total = CalcularTotal();
 
                 //Actualizamos el total en el pedido recien insertado
-                List<String> actualizarTotal = new List<string>();
-                actualizarTotal.Add(pedido3.ActualizarTotal(total, false));
+                List<String> actualizarTotal = new List<string>
+                {
+                    pedido3.ActualizarTotal(total, false)
+                };
 
                 DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
                 if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
@@ -1595,8 +1589,10 @@ namespace TPV.GUI
                     double total = CalcularTotal();
 
                     //Actualizamos el total en el pedido recien insertado
-                    List<String> actualizarTotal = new List<string>();
-                    actualizarTotal.Add(pedido2.ActualizarTotal(total, false));
+                    List<String> actualizarTotal = new List<string>
+                    {
+                        pedido2.ActualizarTotal(total, false)
+                    };
 
                     DataManager.DBOperacion transaccion3 = new DataManager.DBOperacion();
                     if (transaccion3.EjecutarTransaccion(actualizarTotal) < 0)
@@ -1638,7 +1634,7 @@ namespace TPV.GUI
                                     }
                                     else if (Cantidad < item.Cantidad)
                                     {
-                                        item.Cantidad = item.Cantidad - Cantidad ;
+                                        item.Cantidad -= Cantidad ;
                                         agregarElemento = true;
                                     }
                                     break; // Se encontró el detalle, salimos del bucle
@@ -1681,7 +1677,7 @@ namespace TPV.GUI
                         }
                         else if (Cantidad < item.Cantidad)
                         {
-                            item.Cantidad = item.Cantidad - Cantidad;
+                            item.Cantidad -= Cantidad;
                             agregarElemento = true;
                         }
                         break; // Se encontró el detalle, salimos del bucle
@@ -1724,7 +1720,6 @@ namespace TPV.GUI
                 Grupo = Grupo,
             };
             lstDetalle.Add(pDetalle);
-            //VerListaDetalle();
         }
 
         private void btnCuentas_Click(object sender, EventArgs e)
@@ -1943,8 +1938,7 @@ namespace TPV.GUI
                 f.lblProducto.Text = dgvDatos.CurrentRow.Cells["nombre"].Value.ToString();
                 f.ShowDialog();
                 if (f.cerrarPorBoton)
-                {
-                    
+                {   
                     if (!f.txtPrecio.Text.Equals(""))
                     {
                         int idDetalle = Int32.Parse(dgvDatos.CurrentRow.Cells["idDetalle"].Value.ToString());
@@ -1954,16 +1948,20 @@ namespace TPV.GUI
                         double precioNuevo = Double.Parse(f.txtPrecio.Text);
                         double subTotal = cantidad * precioNuevo;
 
-                        PedidoDetalle pd = new PedidoDetalle();
-                        pd.IdDetalle = idDetalle;
-                        pd.Cantidad = cantidad;
-                        pd.Precio = precioNuevo;
-                        pd.SubTotal = subTotal;
-                        pd.IdPedido = idPedido;
-                        pd.IdProducto = idProducto;
+                        PedidoDetalle pd = new PedidoDetalle
+                        {
+                            IdDetalle = idDetalle,
+                            Cantidad = cantidad,
+                            Precio = precioNuevo,
+                            SubTotal = subTotal,
+                            IdPedido = idPedido,
+                            IdProducto = idProducto
+                        };
 
-                        List<String> prod = new List<string>();
-                        prod.Add(pd.ActualizarCompra(false));
+                        List<String> prod = new List<string>
+                        {
+                            pd.ActualizarCompra(false)
+                        };
 
                         DataManager.DBOperacion transaccion = new DataManager.DBOperacion();
                         if (transaccion.EjecutarTransaccion(prod) < 0)
@@ -1990,44 +1988,5 @@ namespace TPV.GUI
             tFecha.Start();
         }
 
-        private void tConexion_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void bgwConexion_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            try
-            {
-                DataManager.DBConexion cn = new DataManager.DBConexion();
-                if (cn.Conectar())
-                {
-                    e.Result = true;
-                    cn.Desconectar();
-                }
-                else
-                {
-                    e.Result = false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void bgwConexion_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            if ((bool)e.Result)
-            {
-                lblConexionRed.Visible = false;
-                lblConexionGreen.Visible = true;
-            }
-            else
-            {
-                lblConexionGreen.Visible = false;
-                lblConexionRed.Visible = true;
-            }
-        }
     }
 }

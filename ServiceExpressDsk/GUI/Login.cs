@@ -8,11 +8,11 @@ namespace ServiceExpressDsk.GUI
     public partial class Login : Form
     {
         Boolean autorizado = false;
-        SessionManager.Session oSesion = SessionManager.Session.Instancia;
-        ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
-        ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
-        ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
-        ConfiguracionManager.CLS.Salon oSalon = ConfiguracionManager.CLS.Salon.Instancia;
+        readonly SessionManager.Session oSesion = SessionManager.Session.Instancia;
+        readonly ConfiguracionManager.CLS.Configuracion oConfiguracion = ConfiguracionManager.CLS.Configuracion.Instancia;
+        readonly ConfiguracionManager.CLS.Empresa oEmpresa = ConfiguracionManager.CLS.Empresa.Instancia;
+        readonly ConfiguracionManager.CLS.Ticket oTicket = ConfiguracionManager.CLS.Ticket.Instancia;
+        readonly ConfiguracionManager.CLS.Salon oSalon = ConfiguracionManager.CLS.Salon.Instancia;
 
         public bool Autorizado { get => autorizado; }
         public Login()
@@ -79,29 +79,31 @@ namespace ServiceExpressDsk.GUI
 
                     }
                     //No obtuve la configuracion hay que agregarla
-                    Mantenimiento.CLS.Configuracion config = new Mantenimiento.CLS.Configuracion();
-                    config.IdConfiguracion = idConf;
-                    config.ControlStock = 1;
-                    config.IncluirPropina = 1;
-                    config.Propina = 10.00;
-                    config.IncluirImpuesto = 0;
-                    config.Iva = 0;
-                    config.MesaVIP = 0;
-                    config.AutorizarDescProp = 0;
-                    config.PrinterComanda = "Microsoft Print to PDF";
-                    config.PrinterFactura = "Microsoft Print to PDF";
-                    config.PrinterInformes = "Microsoft Print to PDF";
-                    config.AlertaCaja = 1;
-                    config.Multisesion = 1;
-                    config.NumSesiones = 100;
-                    config.MuchosProductos = 0;
-                    config.ImprimirDosTicketsPago = 0;
-                    config.ImpresoraAppMovil = "Microsoft Print to PDF";
-                    config.FacturaElectronica = 0;
-                    config.ImpresoraCocina = "Microsoft Print to PDF";
-                    config.ImpresoraBar = "Microsoft Print to PDF";
-                    config.ImpresoraGrupoUno = "Microsoft Print to PDF";
-                    config.ImpresoraGrupoDos = "Microsoft Print to PDF";
+                    Mantenimiento.CLS.Configuracion config = new Mantenimiento.CLS.Configuracion
+                    {
+                        IdConfiguracion = idConf,
+                        ControlStock = 1,
+                        IncluirPropina = 1,
+                        Propina = 10.00,
+                        IncluirImpuesto = 0,
+                        Iva = 0,
+                        MesaVIP = 0,
+                        AutorizarDescProp = 0,
+                        PrinterComanda = "Microsoft Print to PDF",
+                        PrinterFactura = "Microsoft Print to PDF",
+                        PrinterInformes = "Microsoft Print to PDF",
+                        AlertaCaja = 1,
+                        Multisesion = 1,
+                        NumSesiones = 100,
+                        MuchosProductos = 0,
+                        ImprimirDosTicketsPago = 0,
+                        ImpresoraAppMovil = "Microsoft Print to PDF",
+                        FacturaElectronica = 0,
+                        ImpresoraCocina = "Microsoft Print to PDF",
+                        ImpresoraBar = "Microsoft Print to PDF",
+                        ImpresoraGrupoUno = "Microsoft Print to PDF",
+                        ImpresoraGrupoDos = "Microsoft Print to PDF"
+                    };
                     config.Insertar();
                     if (oConfiguracion.ObtenerConfiguracion())
                     {
@@ -124,11 +126,6 @@ namespace ServiceExpressDsk.GUI
                 txtClave.Focus();
                 txtClave.SelectAll();
             }
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
