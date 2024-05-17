@@ -360,9 +360,17 @@ namespace Configuraciones.GUI
             {
                 DataTable doc = DataManager.DBConsultas.Establecimientoss();
 
-                cmbEstablecimiento.DataSource = doc;
-                cmbEstablecimiento.DisplayMember = "establecimiento";
-                cmbEstablecimiento.ValueMember = "idEstablecimiento";
+                if (doc.Rows.Count > 0)
+                {
+                    cmbEstablecimiento.DataSource = doc;
+                    cmbEstablecimiento.DisplayMember = "establecimiento";
+                    cmbEstablecimiento.ValueMember = "idEstablecimiento";
+                }
+                else
+                {
+                    MessageBox.Show("Al parecer no se logro traer informacion de la base de datos, verifique la conexion con la base de datos.", "Error en conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
             catch (Exception)
             {
@@ -376,9 +384,17 @@ namespace Configuraciones.GUI
             {
                 DataTable doc = DataManager.DBConsultas.Actividades();
 
-                cmbActividad.DataSource = doc;
-                cmbActividad.DisplayMember = "descripcion";
-                cmbActividad.ValueMember = "idActividad";
+                if(doc.Rows.Count > 0)
+                {
+                    cmbActividad.DataSource = doc;
+                    cmbActividad.DisplayMember = "descripcion";
+                    cmbActividad.ValueMember = "idActividad";
+                }
+                else
+                {
+                    MessageBox.Show("Al parecer no se logro traer informacion de la base de datos, verifique la conexion con la base de datos.", "Error en conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             catch (Exception)
             {
