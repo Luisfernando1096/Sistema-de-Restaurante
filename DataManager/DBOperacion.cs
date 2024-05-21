@@ -26,7 +26,11 @@ namespace DataManager
                     String Mensaje = e.Message;
                     filasAfectadas = -1;
                 }
-                base.Desconectar();
+                finally
+                {
+                    base.Desconectar();
+                }
+                
             }
             return filasAfectadas;
         }
@@ -101,7 +105,10 @@ namespace DataManager
                 {
                     Resultado = new DataTable();
                 }
-                base.Desconectar();
+                finally
+                {
+                    base.Desconectar();
+                }
             }
             return Resultado;
         }
@@ -129,8 +136,11 @@ namespace DataManager
                 {
                     resultado = null;
                 }
+                finally
+                {
+                    base.Desconectar();
+                }
 
-                base.Desconectar();
             }
 
             return resultado;
@@ -163,11 +173,14 @@ namespace DataManager
                     {
                         String Mensaje = e.Message;
                     }
+                    finally
+                    {
+                        base.Desconectar();
+                    }
 
                     // Detiene el cronómetro
                     stopwatch.Stop();
 
-                    base.Desconectar();
                 }
             }
             catch (Exception ex)
@@ -206,11 +219,14 @@ namespace DataManager
                         restauracionExitosa = false;
                         String Mensaje = e.Message;
                     }
+                    finally
+                    {
+                        base.Desconectar();
+                    }
 
                     // Detiene el cronómetro
                     stopwatch.Stop();
 
-                    base.Desconectar();
                 }
                 else
                 {
