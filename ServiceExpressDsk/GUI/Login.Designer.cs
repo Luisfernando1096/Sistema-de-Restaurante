@@ -158,7 +158,7 @@ namespace ServiceExpressDsk.GUI
             // btn1
             // 
             this.btn1.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn1.Location = new System.Drawing.Point(369, 211);
+            this.btn1.Location = new System.Drawing.Point(236, 84);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(60, 60);
             this.btn1.TabIndex = 68;
@@ -170,7 +170,7 @@ namespace ServiceExpressDsk.GUI
             // btn2
             // 
             this.btn2.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn2.Location = new System.Drawing.Point(302, 211);
+            this.btn2.Location = new System.Drawing.Point(302, 84);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(60, 60);
             this.btn2.TabIndex = 67;
@@ -182,7 +182,7 @@ namespace ServiceExpressDsk.GUI
             // btn3
             // 
             this.btn3.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3.Location = new System.Drawing.Point(236, 211);
+            this.btn3.Location = new System.Drawing.Point(368, 84);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(60, 60);
             this.btn3.TabIndex = 66;
@@ -194,7 +194,7 @@ namespace ServiceExpressDsk.GUI
             // btn4
             // 
             this.btn4.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn4.Location = new System.Drawing.Point(369, 149);
+            this.btn4.Location = new System.Drawing.Point(236, 148);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(60, 60);
             this.btn4.TabIndex = 65;
@@ -218,7 +218,7 @@ namespace ServiceExpressDsk.GUI
             // btn6
             // 
             this.btn6.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn6.Location = new System.Drawing.Point(236, 148);
+            this.btn6.Location = new System.Drawing.Point(368, 148);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(60, 60);
             this.btn6.TabIndex = 63;
@@ -230,7 +230,7 @@ namespace ServiceExpressDsk.GUI
             // btn7
             // 
             this.btn7.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn7.Location = new System.Drawing.Point(369, 84);
+            this.btn7.Location = new System.Drawing.Point(236, 211);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(60, 60);
             this.btn7.TabIndex = 62;
@@ -242,7 +242,7 @@ namespace ServiceExpressDsk.GUI
             // btn8
             // 
             this.btn8.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn8.Location = new System.Drawing.Point(302, 84);
+            this.btn8.Location = new System.Drawing.Point(302, 211);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(60, 60);
             this.btn8.TabIndex = 61;
@@ -254,7 +254,7 @@ namespace ServiceExpressDsk.GUI
             // btn9
             // 
             this.btn9.Font = new System.Drawing.Font("Arial", 19.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn9.Location = new System.Drawing.Point(236, 84);
+            this.btn9.Location = new System.Drawing.Point(368, 211);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(60, 60);
             this.btn9.TabIndex = 60;

@@ -931,7 +931,7 @@ namespace TPV.GUI
             // btn9
             // 
             this.btn9.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn9.Location = new System.Drawing.Point(765, 271);
+            this.btn9.Location = new System.Drawing.Point(937, 443);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(80, 80);
             this.btn9.TabIndex = 48;
@@ -943,7 +943,7 @@ namespace TPV.GUI
             // btn8
             // 
             this.btn8.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn8.Location = new System.Drawing.Point(851, 271);
+            this.btn8.Location = new System.Drawing.Point(853, 443);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(80, 80);
             this.btn8.TabIndex = 49;
@@ -955,7 +955,7 @@ namespace TPV.GUI
             // btn7
             // 
             this.btn7.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn7.Location = new System.Drawing.Point(937, 271);
+            this.btn7.Location = new System.Drawing.Point(767, 443);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(80, 80);
             this.btn7.TabIndex = 50;
@@ -967,7 +967,7 @@ namespace TPV.GUI
             // btn4
             // 
             this.btn4.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn4.Location = new System.Drawing.Point(937, 357);
+            this.btn4.Location = new System.Drawing.Point(767, 357);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(80, 80);
             this.btn4.TabIndex = 53;
@@ -991,7 +991,7 @@ namespace TPV.GUI
             // btn6
             // 
             this.btn6.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn6.Location = new System.Drawing.Point(765, 357);
+            this.btn6.Location = new System.Drawing.Point(937, 357);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(80, 80);
             this.btn6.TabIndex = 51;
@@ -1003,7 +1003,7 @@ namespace TPV.GUI
             // btn1
             // 
             this.btn1.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn1.Location = new System.Drawing.Point(939, 443);
+            this.btn1.Location = new System.Drawing.Point(767, 271);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(80, 80);
             this.btn1.TabIndex = 56;
@@ -1015,7 +1015,7 @@ namespace TPV.GUI
             // btn2
             // 
             this.btn2.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn2.Location = new System.Drawing.Point(853, 443);
+            this.btn2.Location = new System.Drawing.Point(853, 271);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(80, 80);
             this.btn2.TabIndex = 55;
@@ -1027,7 +1027,7 @@ namespace TPV.GUI
             // btn3
             // 
             this.btn3.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3.Location = new System.Drawing.Point(767, 443);
+            this.btn3.Location = new System.Drawing.Point(937, 271);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(80, 80);
             this.btn3.TabIndex = 54;
