@@ -123,6 +123,7 @@ public class Server
         try
         {
             using (StreamReader reader = new StreamReader(client.GetStream()))
+            using (StreamWriter writer = new StreamWriter(client.GetStream()))
             {
                 // Leer todas las líneas del encabezado HTTP
                 StringBuilder headerBuilder = new StringBuilder();
@@ -132,8 +133,24 @@ public class Server
                     headerBuilder.AppendLine(line);
                 }
 
-                // Extraer el cuerpo del mensaje (JSON)
-                string contenido = reader.ReadToEnd();
+                // Extraer la longitud del contenido del encabezado Content-Length
+                string headers = headerBuilder.ToString();
+                int contentLength = GetContentLength(headers);
+
+                // Leer el cuerpo del mensaje (JSON) en función de la longitud del contenido
+                char[] buffer = new char[contentLength];
+                int totalRead = 0;
+                while (totalRead < contentLength)
+                {
+                    int bytesRead = reader.Read(buffer, totalRead, contentLength - totalRead);
+                    if (bytesRead == 0)
+                    {
+                        // Se ha alcanzado el final del flujo antes de leer todo el contenido
+                        break;
+                    }
+                    totalRead += bytesRead;
+                }
+                string contenido = new string(buffer);
 
                 // Comprobar si la solicitud es POST
                 if (headerBuilder.ToString().StartsWith("POST"))
@@ -142,88 +159,73 @@ public class Server
                     string[] tokens = headerBuilder.ToString().Split(' ');
                     string ruta = tokens[1];
 
+                    bool success = false;
+
                     // Comprobar si la solicitud está en la ruta de notificación esperada
                     if (ruta.StartsWith("/notificar"))
                     {
-                        // Procesar la solicitud solo si está en la ruta '/notificar'
                         Console.WriteLine($"Solicitud POST en la ruta '/notificar'.");
-
-                        // Imprimir el contenido para ayudar a diagnosticar el problema
                         Console.WriteLine($"Contenido recibido: {contenido}");
 
                         try
                         {
-                            // Intentar deserializar la solicitud como una lista de objetos
                             List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
-
-                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
                             Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
 
-                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            // Realizar acciones específicas
                             ImprimirComandaActual(listaObjetos);
-
+                            success = true;
                         }
                         catch (JsonException ex)
                         {
-                            // Imprimir detalles completos de la excepción
                             Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
                         }
                     }
                     else if (ruta.StartsWith("/comandaCompleta"))
                     {
-                        //MessageBox.Show("Generando comanda completa");
-                        // Procesar la solicitud solo si está en la ruta '/comanda'
                         Console.WriteLine($"Solicitud POST en la ruta '/comandaCompleta'.");
-                        // Imprimir el contenido para ayudar a diagnosticar el problema
                         Console.WriteLine($"Contenido recibido: {contenido}");
 
                         try
                         {
-                            // Intentar deserializar la solicitud como una lista de objetos
                             List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
-
-                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
                             Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
 
-                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            // Realizar acciones específicas
                             ImprimirComandaCompleta(listaObjetos);
-
+                            success = true;
                         }
                         catch (JsonException ex)
                         {
-                            // Imprimir detalles completos de la excepción
                             Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
                         }
                     }
                     else if (ruta.StartsWith("/datosPrecuenta"))
                     {
-                        //MessageBox.Show("Generando comanda completa");
-                        // Procesar la solicitud solo si está en la ruta '/comanda'
                         Console.WriteLine($"Solicitud POST en la ruta '/datosPrecuenta'.");
-                        // Imprimir el contenido para ayudar a diagnosticar el problema
                         Console.WriteLine($"Contenido recibido: {contenido}");
 
                         try
                         {
-                            // Intentar deserializar la solicitud como una lista de objetos
                             List<PedidoDetalle> listaObjetos = JsonConvert.DeserializeObject<List<PedidoDetalle>>(contenido);
-
-                            // Si la deserialización tiene éxito, trabajar con la lista de objetos
                             Console.WriteLine($"Lista de objetos recibida. Cantidad: {listaObjetos.Count}");
 
-                            // Aquí puedes realizar acciones específicas para la lista de objetos como imprimir una comanda
+                            // Realizar acciones específicas
                             ImprimirPrecuenta(listaObjetos);
-
+                            success = true;
                         }
                         catch (JsonException ex)
                         {
-                            // Imprimir detalles completos de la excepción
                             Console.WriteLine($"Error al deserializar la lista de objetos: {ex}");
                         }
                     }
+                    else
                     {
                         Console.WriteLine("Solicitud no reconocida.");
                     }
+
+                    // Enviar la respuesta
+                    EnviarRespuesta(writer, success);
                 }
             }
         }
@@ -236,6 +238,35 @@ public class Server
         {
             client.Close();
         }
+    }
+
+    private void EnviarRespuesta(StreamWriter writer, bool success)
+    {
+        writer.WriteLine("HTTP/1.1 200 OK");
+        writer.WriteLine("Content-Type: application/json");
+        writer.WriteLine($"Content-Length: {(success ? 4 : 5)}");
+        writer.WriteLine();
+        writer.WriteLine(success ? "true" : "false");
+        writer.Flush();
+    }
+
+    private int GetContentLength(string headers)
+    {
+        int contentLength = 0;
+        using (StringReader reader = new StringReader(headers))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line.StartsWith("Content-Length:", StringComparison.OrdinalIgnoreCase))
+                {
+                    string lengthStr = line.Substring("Content-Length:".Length).Trim();
+                    int.TryParse(lengthStr, out contentLength);
+                    break;
+                }
+            }
+        }
+        return contentLength;
     }
 
     private void ImprimirPrecuenta(List<PedidoDetalle> listaObjetos)
