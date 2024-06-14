@@ -14,6 +14,7 @@ namespace Reportes.GUI
         public VisorGeneral()
         {
             InitializeComponent();
+
         }
 
         public void GenerarReporte(ReportClass oReporte, DataTable datos, string fi, string ff, string f)
